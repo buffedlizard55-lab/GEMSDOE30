@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-03T23:43:28+00:00",
+  "generated_utc": "2026-10-03T23:45:23+00:00",
   "runner": "GitHub Actions (general internet access); the agent sandbox cannot reach these hosts",
   "drivendata_contacted": false,
   "grid_source_note": "Derived rasters use the hash-pinned owner-mirror competition grid. Those bytes are owner-mirrored, not organizer-authenticated; alignment is verified, labels are never learnt from.",
@@ -114,8 +114,8 @@
     },
     "sgmc_cover": {
       "path": "data/external/derived_sgmc_cover_100m_u8.tif",
-      "bytes": 397299,
-      "sha256": "40ef32e3b7e4891b61b88d9e1e83edfc0d062ad78b7b1a279ee6147bc88971fe",
+      "bytes": 397222,
+      "sha256": "ab28e20e595d55985f71a319e95ac57be168619828dd43c0a65a3f9e9d4a6632",
       "ok": true,
       "class_table": {
         "0": "pre-Cenozoic bedrock / undivided / unmapped",
@@ -150,11 +150,11 @@
       ],
       "per_class": {
         "0": {
-          "pixels": 709867,
+          "pixels": 725388,
           "description": "pre-Cenozoic bedrock / undivided / unmapped",
-          "on_catalogue_pixels": 3438,
-          "fraction_within_300m_of_catalogue": 0.03590250004578322,
-          "median_distance_to_catalogue_px": 73.06161783043132
+          "on_catalogue_pixels": 3454,
+          "fraction_within_300m_of_catalogue": 0.03542242220714983,
+          "median_distance_to_catalogue_px": 76.0
         },
         "1": {
           "pixels": 861370,
@@ -164,11 +164,11 @@
           "median_distance_to_catalogue_px": 49.64876634922564
         },
         "2": {
-          "pixels": 3488213,
+          "pixels": 3676907,
           "description": "Neogene-Tertiary basin fill and volcanics",
-          "on_catalogue_pixels": 21468,
-          "fraction_within_300m_of_catalogue": 0.04385741352377277,
-          "median_distance_to_catalogue_px": 111.07204868912791
+          "on_catalogue_pixels": 21485,
+          "fraction_within_300m_of_catalogue": 0.04165022395181602,
+          "median_distance_to_catalogue_px": 127.8632081562167
         },
         "3": {
           "pixels": 4253836,
@@ -178,11 +178,11 @@
           "median_distance_to_catalogue_px": 71.17583859709698
         },
         "4": {
-          "pixels": 2965874,
+          "pixels": 2761659,
           "description": "playa / lake bed / evaporite / salt flat",
-          "on_catalogue_pixels": 9638,
-          "fraction_within_300m_of_catalogue": 0.023812542272530796,
-          "median_distance_to_catalogue_px": 416.4432734202046
+          "on_catalogue_pixels": 9605,
+          "fraction_within_300m_of_catalogue": 0.02543978094326635,
+          "median_distance_to_catalogue_px": 410.7578362003578
         }
       },
       "confound_note": "Per-class distance-to-catalogue statistics are the confound check: if a concealment class is simply 'far from the catalogue' its apparent value would be an artefact, which is why the experiment uses a count- and distance-matched control (H-34-01 preregistration)."
@@ -261,7 +261,7 @@
   },
   "errors": {},
   "stage": "completed",
-  "updated_utc": "2026-10-03T23:43:59+00:00",
+  "updated_utc": "2026-10-03T23:46:01+00:00",
   "python": "3.11.16",
   "imports": {
     "numpy": "2.4.6",
@@ -959,6 +959,12 @@
             "rows": 30763
           }
         ]
+      },
+      "class4_term_counts": {
+        "lake": 3358,
+        "evaporite": 930,
+        "lake deposit": 70,
+        "<water label>": 36
       }
     },
     "sgmc_cover:CA_geol_poly.shp": {
@@ -994,11 +1000,11 @@
         "GENERALIZE"
       ],
       "class_counts": {
-        "0": 1634,
+        "0": 2020,
         "1": 407,
-        "2": 504,
+        "2": 1205,
         "3": 1516,
-        "4": 6404
+        "4": 5317
       },
       "unit_table": {
         "files": [
@@ -1040,6 +1046,17 @@
             "rows": 10465
           }
         ]
+      },
+      "class4_term_counts": {
+        "lake": 3951,
+        "evaporite": 1250,
+        "<water label>": 1080,
+        "salina": 664,
+        "playa": 579,
+        "lake bed": 518,
+        "lake deposit": 180,
+        "saline": 129,
+        "lacustrine": 61
       }
     },
     "gdr_qfaults_v2:qfaults_ingenious_nad83conus117_2023-06-27.shp": {
