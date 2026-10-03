@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-03T23:33:27+00:00",
+  "generated_utc": "2026-10-03T23:41:21+00:00",
   "runner": "GitHub Actions (general internet access); the agent sandbox cannot reach these hosts",
   "drivendata_contacted": false,
   "grid_source_note": "Derived rasters use the hash-pinned owner-mirror competition grid. Those bytes are owner-mirrored, not organizer-authenticated; alignment is verified, labels are never learnt from.",
@@ -92,6 +92,50 @@
       "pixels_off_catalogue_gt_300m": 61664,
       "fraction_within_300m_of_catalogue": 0.24938223515234142
     },
+    "sgmc_concealed": {
+      "path": "data/external/derived_sgmc_concealed_100m_u8.tif",
+      "bytes": 85930,
+      "sha256": "7c9660ccccb18d6a31fe22c318f62b6d2d1ea79ea3bd3405f17ad4bdab96693a",
+      "ok": true,
+      "feature_count_in_grid": 1279,
+      "layers": [
+        {
+          "layer": "NV_structure.shp",
+          "rows": 54602
+        },
+        {
+          "layer": "CA_structure.shp",
+          "rows": 31145
+        }
+      ],
+      "pixels_in_footprint": 5750,
+      "pixels_off_catalogue_gt_300m": 4002,
+      "fraction_within_300m_of_catalogue": 0.304
+    },
+    "sgmc_cover": {
+      "ok": false,
+      "reason": "no mapped polygon cells",
+      "layers": [
+        {
+          "archive": "sgmc_nv.zip",
+          "polygon_layers": [
+            "NV_geol_poly.shp"
+          ],
+          "used": [
+            "NV_geol_poly.shp"
+          ]
+        },
+        {
+          "archive": "sgmc_ca.zip",
+          "polygon_layers": [
+            "CA_geol_poly.shp"
+          ],
+          "used": [
+            "CA_geol_poly.shp"
+          ]
+        }
+      ]
+    },
     "gdr_qfaults_v2": {
       "path": "data/external/derived_gdr_qfaults_v2_100m_u8.tif",
       "bytes": 191289,
@@ -135,13 +179,15 @@
     }
   },
   "errors": {
+    "sgmc_cover:NV_geol_poly.shp": "no age column; columns: STATE, ORIG_LABEL, SGMC_LABEL, UNIT_LINK, REF_ID, GENERALIZE, SRC_URL, URL, geometry",
+    "sgmc_cover:CA_geol_poly.shp": "no age column; columns: STATE, ORIG_LABEL, SGMC_LABEL, UNIT_LINK, REF_ID, GENERALIZE, SRC_URL, URL, geometry",
     "gdr_paleo:Paleo_geothermal_final.shp": "AttributeError(\"module 'pyogrio' has no attribute 'read_raw'\")",
     "gdr_volcanics:great_basin_flows.shp": "AttributeError(\"module 'pyogrio' has no attribute 'read_raw'\")",
     "gdr_volcanics:great_basin_vents.shp": "AttributeError(\"module 'pyogrio' has no attribute 'read_raw'\")",
     "gdr_2m_probes:2m_temperature_probe_n83geo.shp": "AttributeError(\"module 'pyogrio' has no attribute 'read_raw'\")"
   },
   "stage": "completed",
-  "updated_utc": "2026-10-03T23:33:41+00:00",
+  "updated_utc": "2026-10-03T23:41:40+00:00",
   "python": "3.11.16",
   "imports": {
     "numpy": "2.4.6",
@@ -164,6 +210,102 @@
     ],
     "footprint_pixels": 5167373,
     "catalogue_pixels": 60988
+  },
+  "archives": {
+    "sgmc": {
+      "sgmc_nv.zip": [
+        {
+          "name": "NV_geol_poly.dbf",
+          "bytes": 10675050
+        },
+        {
+          "name": "NV_geol_poly.prj",
+          "bytes": 256
+        },
+        {
+          "name": "NV_geol_poly.shp",
+          "bytes": 71184300
+        },
+        {
+          "name": "NV_geol_poly.shx",
+          "bytes": 246204
+        },
+        {
+          "name": "NV_lith.csv",
+          "bytes": 62743
+        },
+        {
+          "name": "NV_ref.csv",
+          "bytes": 5594
+        },
+        {
+          "name": "NV_structure.dbf",
+          "bytes": 53619453
+        },
+        {
+          "name": "NV_structure.prj",
+          "bytes": 256
+        },
+        {
+          "name": "NV_structure.shp",
+          "bytes": 9375712
+        },
+        {
+          "name": "NV_structure.shx",
+          "bytes": 436916
+        },
+        {
+          "name": "NV_units.csv",
+          "bytes": 72937
+        }
+      ],
+      "sgmc_ca.zip": [
+        {
+          "name": "CA_geol_poly.dbf",
+          "bytes": 3642109
+        },
+        {
+          "name": "CA_geol_poly.prj",
+          "bytes": 256
+        },
+        {
+          "name": "CA_geol_poly.shp",
+          "bytes": 22632884
+        },
+        {
+          "name": "CA_geol_poly.shx",
+          "bytes": 83820
+        },
+        {
+          "name": "CA_lith.csv",
+          "bytes": 85697
+        },
+        {
+          "name": "CA_ref.csv",
+          "bytes": 75491
+        },
+        {
+          "name": "CA_structure.dbf",
+          "bytes": 30584679
+        },
+        {
+          "name": "CA_structure.prj",
+          "bytes": 256
+        },
+        {
+          "name": "CA_structure.shp",
+          "bytes": 4421536
+        },
+        {
+          "name": "CA_structure.shx",
+          "bytes": 249260
+        },
+        {
+          "name": "CA_units.csv",
+          "bytes": 101209
+        }
+      ]
+    }
   },
   "inventory_attributes": {
     "sgmc_faults:NV_structure.shp": {
@@ -282,6 +424,255 @@
       }
     },
     "sgmc_faults:CA_structure.shp": {
+      "rows": 31145,
+      "fields": {
+        "STATE": {
+          "dtype": "str",
+          "n_unique": 1,
+          "top_values": {
+            "CA": 31145
+          }
+        },
+        "DESCRIPT": {
+          "dtype": "str",
+          "n_unique": 22,
+          "top_values": {
+            "Fault, sense of displacement unknown or undefined, certain": 19735,
+            "Fault, sense of displacement unknown or undefined, approximate": 5380,
+            "Fault, sense of displacement unknown or undefined, concealed": 2528,
+            "Thrust fault, certain, (teeth on right from origin)": 981,
+            "Anticline, certain": 454,
+            "Anticline, concealed": 367,
+            "Syncline, certain": 320,
+            "Undefined type; generic line symbol; (see MISC column)": 309,
+            "Normal fault, certain, (U/D designated in source)": 303,
+            "Thrust fault, approximate, (teeth on right from origin)": 293,
+            "Syncline, concealed": 137,
+            "Normal fault, approximate, (U/D designated in source)": 111,
+            "Fault, sense of displacement unknown or undefined, inferred or queried": 78,
+            "Right lateral fault, certain": 48,
+            "Normal fault, concealed, (U/D designated in source)": 44,
+            "Thrust fault, concealed, (teeth on right from origin)": 26,
+            "Left lateral fault, certain": 11,
+            "Right lateral fault, approximate": 8,
+            "Right lateral fault, concealed": 5,
+            "Normal fault, inferred or queried, (U/D designated in source)": 4,
+            "Left lateral fault, approximate": 2,
+            "Monocline, certain": 1
+          }
+        },
+        "MISC": {
+          "dtype": "str",
+          "n_unique": 8,
+          "top_values": {
+            "scratch boundary": 304,
+            "south plunge": 75,
+            "east plunge": 42,
+            "north plunge": 28,
+            "double plunge": 26,
+            "west plunge": 22,
+            "structural discontinuity": 4,
+            "ephemeral water boundary": 1
+          }
+        },
+        "REF_ID": {
+          "dtype": "str",
+          "n_unique": 1,
+          "top_values": {
+            "CA294": 31145
+          }
+        },
+        "SRC_URL": {
+          "dtype": "str",
+          "n_unique": 1,
+          "top_values": {
+            "ftp://ftp.consrv.ca.gov/pub/dmg/rgmp/Published_GIS_Data/GDM_002_GMC_750k_v2/": 31145
+          }
+        },
+        "GEOM": {
+          "dtype": "str",
+          "n_unique": 31138,
+          "top_values": {
+            "0105000020CE13000001000000010200000002000000280F0BB5739641C1647FD9DDCD994041FC3A": 2,
+            "0105000020CE13000001000000010200000002000000A813D04472D63CC160BA49BC5D123A41782D": 2,
+            "0105000020CE1300000100000001020000001300000008341106DD093FC1083D9B45D95A364108F0": 2,
+            "0105000020CE1300000100000001020000000800000090ED7CCF650A3EC1E895B2DC7094334168F7": 2,
+            "0105000020CE1300000100000001020000000300000098FF90367AA841C1B8AF034FA86F4241F05A": 2,
+            "0105000020CE1300000100000001020000000F000000B0E1E95DDAA641C104098A2707E2414144B6": 2,
+            "0105000020CE13000001000000010200000009000000141DC98D28A341C174029AB82B5B42413C2C": 2,
+            "0105000020CE13000001000000010200000006000000C84B3781DE2A40C1A8DFBE2E7A603D41B025": 1,
+            "0105000020CE1300000100000001020000000F000000F085C934A6ED3FC1B0E1E9B5C53C3941204A": 1,
+            "0105000020CE13000001000000010200000005000000CC7F48EFA83D40C1B059F54997F438417012": 1,
+            "0105000020CE13000001000000010200000007000000A0ABADF8F40340C188416065A55F3841AC8B": 1,
+            "0105000020CE1300000100000001020000000500000098FF904E11F73BC1682BF6D7236E394140BD": 1,
+            "0105000020CE1300000100000001020000000700000074E09C617F4A40C1B0E1E91532F3384170F0": 1,
+            "0105000020CE13000001000000010200000008000000049A08DB57A340C1F09E3CCCB9423841E458": 1,
+            "0105000020CE13000001000000010200000024000000F8065F980D8640C150499D30D7AD3741306E": 1,
+            "0105000020CE13000001000000010200000004000000506B9A17CA2940C1B0E1E9C5995B3D4108CE": 1,
+            "0105000020CE130000010000000102000000030000006007CE79ED113CC1808CB95B321D3441888E": 1,
+            "0105000020CE13000001000000010200000008000000D0915C06D5B740C170E7FB599BB6394154C1": 1,
+            "0105000020CE1300000100000001020000000800000074E09C19FFEF40C17CA52C331354414134C4": 1,
+            "0105000020CE1300000100000001020000000B00000050FC18ABE89940C1A05E2913FF0D41413845": 1,
+            "0105000020CE130000010000000102000000090000005CFE43E2521E40C1A8F1D22D3DE53C4124DB": 1,
+            "0105000020CE130000010000000102000000080000004CF38E2338B040C1B49DEF3F9FAC4041B88D": 1,
+            "0105000020CE13000001000000010200000011000000907EFBDA7B6240C1A84E40832D6D38414057": 1,
+            "0105000020CE1300000100000001020000000D0000005C8FC215085C40C1100BB5B6ABDD3741A4DF": 1,
+            "0105000020CE130000010000000102000000050000001C7C61AA052941C1F063CCAD4C653E419C77": 1
+          }
+        },
+        "WEB_GEOM": {
+          "dtype": "str",
+          "n_unique": 31138,
+          "top_values": {
+            "0105000020110F000001000000010200000002000000FF34BC3800376AC1D767FD5223555241F7E0": 2,
+            "0105000020110F00000100000001020000000200000046D66EE769F168C1852543988EAA5041E186": 2,
+            "0105000020110F000001000000010200000013000000D5C3F0DD702469C1E92B38DA0BD24E41C601": 2,
+            "0105000020110F000001000000010200000008000000F77C756EA3E668C19DCC6276F3574D41865A": 2,
+            "0105000020110F000001000000010200000003000000432D5436DE696AC1062295471A785341E4D0": 2,
+            "0105000020110F00000100000001020000000F00000063B56B5B715B6AC14F0F8454C91E5341E10B": 2,
+            "0105000020110F0000010000000102000000090000008E47C3FE21666AC1FF350FF91F6C5341F7DC": 2,
+            "0105000020110F000001000000010200000006000000A1B92410159B69C19E24F909A9675141C9DF": 1,
+            "0105000020110F00000100000001020000000F0000009E858996786169C1A854D2DEAC315041E92F": 1,
+            "0105000020110F000001000000010200000005000000344F5C52F37369C12BC6D163A41150413DCB": 1,
+            "0105000020110F000001000000010200000007000000B1F12AFC0B5D69C1120AD35DB7DC4F41C362": 1,
+            "0105000020110F000001000000010200000005000000EAC773DEA5C968C1D6F0B13D50885041DD9A": 1,
+            "0105000020110F000001000000010200000007000000B74259A4BC7769C1DB71530E480F5041BB5D": 1,
+            "0105000020110F000001000000010200000008000000918F0E10638B69C17EFD447C969B4F411005": 1,
+            "0105000020110F0000010000000102000000240000008CCEB0E3F77C69C1C7F186CB4B4D4F41F7D2": 1,
+            "0105000020110F0000010000000102000000040000002B940AB18C9A69C1146745E759665141F93D": 1,
+            "0105000020110F000001000000010200000003000000CB346BF452A168C1CB0C8CC0E1E74D4142CE": 1,
+            "0105000020110F0000010000000102000000080000001DF64C841EA069C1119DA1A71B385041F1CF": 1,
+            "0105000020110F0000010000000102000000080000008075F84FAF136AC1BFEB491EADE75241E961": 1,
+            "0105000020110F00000100000001020000000B000000E768E01CE1F169C1476377BF21CB5241BE51": 1,
+            "0105000020110F000001000000010200000009000000ACAB0E8E339269C16A3A5F843F445141E450": 1,
+            "0105000020110F00000100000001020000000800000082F1CFAA39F069C1C1C121493F8A524183AB": 1,
+            "0105000020110F000001000000010200000011000000C04CC70BBE7969C1D759F7B24EC84F412E1E": 1,
+            "0105000020110F00000100000001020000000D0000001D9D8962577269C104B79862FB754F41F6B9": 1,
+            "0105000020110F000001000000010200000005000000720D3BF78DF469C136E129E9988C514112D0": 1
+          }
+        },
+        "SYMBOL": {
+          "dtype": "int64",
+          "n_unique": 3
+        }
+      }
+    },
+    "sgmc_concealed:NV_structure.shp": {
+      "rows": 54602,
+      "fields": {
+        "STATE": {
+          "dtype": "str",
+          "n_unique": 1,
+          "top_values": {
+            "NV": 54602
+          }
+        },
+        "DESCRIPT": {
+          "dtype": "str",
+          "n_unique": 12,
+          "top_values": {
+            "Fault, sense of displacement unknown or undefined, certain": 37797,
+            "Fault, sense of displacement unknown or undefined, approximate": 9893,
+            "Thrust fault, certain, (teeth on right from origin)": 3610,
+            "Fault, sense of displacement unknown or undefined, concealed": 2180,
+            "Thrust fault, approximate, (teeth on right from origin)": 521,
+            "Fault, sense of displacement unknown or undefined, inferred or queried": 302,
+            "Scarp": 250,
+            "Thrust fault, concealed, (teeth on right from origin)": 34,
+            "Thrust fault, inferred or queried, (teeth on right from origin)": 10,
+            "Right lateral fault, certain": 3,
+            "Left lateral fault, certain": 1,
+            "Right lateral fault, inferred or queried": 1
+          }
+        },
+        "MISC": {
+          "dtype": "object",
+          "n_unique": 0,
+          "top_values": {}
+        },
+        "REF_ID": {
+          "dtype": "str",
+          "n_unique": 1,
+          "top_values": {
+            "NV001": 54602
+          }
+        },
+        "SRC_URL": {
+          "dtype": "str",
+          "n_unique": 1,
+          "top_values": {
+            "https://pubs.usgs.gov/ds/2007/249/": 54602
+          }
+        },
+        "GEOM": {
+          "dtype": "str",
+          "n_unique": 54595,
+          "top_values": {
+            "0105000020CE13000001000000010200000002000000189E5EB9EB0038C140BD52665C943E4128A0": 2,
+            "0105000020CE13000001000000010200000005000000686FF085F16E38C1905CFEA3641C3D410868": 2,
+            "0105000020CE13000001000000010200000002000000B8270FAB92413BC180D0B379FFE63F4130BB": 2,
+            "0105000020CE130000010000000102000000020000008095432B6DF43AC160984CF514333F4118FB": 2,
+            "0105000020CE1300000100000001020000000200000090B96B6974D93AC138234A73B75B4041E04F": 2,
+            "0105000020CE13000001000000010200000002000000D8A3706D42DD3AC1FCEDEBB0B01840413892": 2,
+            "0105000020CE13000001000000010200000002000000904AEAA411A53BC1D8A3709D7CB43F4138B4": 2,
+            "0105000020CE13000001000000010200000002000000885AD3AC8A343AC1384547A2D0803D414894": 1,
+            "0105000020CE13000001000000010200000008000000C03923EAE1563AC18051496D66B03D41C8C3": 1,
+            "0105000020CE1300000100000001020000000900000008F9A0F748023BC1C8E53FA462D63C41887C": 1,
+            "0105000020CE1300000100000001020000000300000078BE9F9A1E3E3AC108341156C3AA3C4138EF": 1,
+            "0105000020CE1300000100000001020000000200000000000010B5533AC190E4F21F2FAA3C414872": 1,
+            "0105000020CE1300000100000001020000000A000000E0BE0EDC8D2E3BC18026C2461A843D4150AF": 1,
+            "0105000020CE1300000100000001020000000200000020B9FC7725323BC11848500C6CE83C417046": 1,
+            "0105000020CE13000001000000010200000002000000C0C1171625AA3AC16032554036093D41D8A3": 1,
+            "0105000020CE13000001000000010200000002000000B07BF24063D63AC1102DB23DEBCE3C4138CD": 1,
+            "0105000020CE13000001000000010200000002000000580E2D32B54B3AC118AE47C16C163D4188B0": 1,
+            "0105000020CE13000001000000010200000005000000C0EC9E9C791A3AC138EF3825D81C3D41C8DC": 1,
+            "0105000020CE13000001000000010200000005000000D0B359F55FB13AC1E8839EADFD373D417078": 1,
+            "0105000020CE13000001000000010200000006000000285C8F12FC0A3BC1B01C5AA4084B3D41383C": 1,
+            "0105000020CE13000001000000010200000006000000C0D32B85CDE73AC150FC18D3877B3C4160CC": 1,
+            "0105000020CE130000010000000102000000020000007824973F48653AC1F07C3F759DAD3C41E804": 1,
+            "0105000020CE13000001000000010200000007000000688863CD88CD3AC130BB270F77B63D41F85C": 1,
+            "0105000020CE130000010000000102000000020000003880B7F0A4CC39C1186A4D83179F3D41B8AF": 1,
+            "0105000020CE1300000100000001020000000600000000917E2B5F913AC1984C15CC03513D414869": 1
+          }
+        },
+        "WEB_GEOM": {
+          "dtype": "str",
+          "n_unique": 54595,
+          "top_values": {
+            "0105000020110F00000100000001020000000200000085F4D210505668C1953D816778605241E10C": 2,
+            "0105000020110F000001000000010200000005000000D37C30DCEC5B68C15F2D8A1A66E35141AA28": 2,
+            "0105000020110F0000010000000102000000020000007B68FC7E85E768C1FCE717E075935241DA54": 2,
+            "0105000020110F000001000000010200000002000000D89E7CFDAAD468C17043FA9731605241EA90": 2,
+            "0105000020110F000001000000010200000002000000952DB40C60DE68C1C052EA3028DD52415CFB": 2,
+            "0105000020110F000001000000010200000002000000A3D46F7E1CDA68C1C333E9D83AB25241CF94": 2,
+            "0105000020110F000001000000010200000002000000AE3450BC99F568C1F1A0C5654E7C5241710E": 2,
+            "0105000020110F0000010000000102000000020000008825F74B09A768C14082ACEB67E551413305": 1,
+            "0105000020110F0000010000000102000000080000000A50A81317AE68C1DDFD794AEDF15141615F": 1,
+            "0105000020110F00000100000001020000000900000012D0F2029AC168C1208F9153A7A25141FF29": 1,
+            "0105000020110F000001000000010200000003000000781F38C451A168C19DCF6D7052A25141C8D8": 1,
+            "0105000020110F0000010000000102000000020000007D59C0D7B0A468C1038EE7BAB6A05141BFEB": 1,
+            "0105000020110F00000100000001020000000A000000288689D49CCE68C118DEA13F6BD55141449E": 1,
+            "0105000020110F000001000000010200000002000000ABC89144BCC968C1409C8E5BF5A4514190E7": 1,
+            "0105000020110F0000010000000102000000020000000DD5E0DD80B568C1D9D210355AB851412048": 1,
+            "0105000020110F00000100000001020000000200000081D8C8CA74BA68C139D5ADCC52A35141FA7B": 1,
+            "0105000020110F000001000000010200000002000000729704F515A768C1D0C87570C8C251411E66": 1,
+            "0105000020110F00000100000001020000000500000072FA6CBF8A9F68C17B714D460CC85141FE54": 1,
+            "0105000020110F0000010000000102000000050000009D0706233FB868C1CC1F18FA5DC65141B855": 1,
+            "0105000020110F000001000000010200000006000000DF371CCE03C768C1AA0C3B392AC651417E68": 1,
+            "0105000020110F000001000000010200000006000000A19734BF53BA68C1D31E5967678851413649": 1,
+            "0105000020110F0000010000000102000000020000007BECA8FE90A768C1F23339BE9BA05141DC51": 1,
+            "0105000020110F000001000000010200000007000000CEC315FA0FC168C143F23AC4C0EB5141C504": 1,
+            "0105000020110F0000010000000102000000020000008994C71C9D9768C10AF4C5F8C0F551418720": 1,
+            "0105000020110F000001000000010200000006000000FA9CD4F20FB468C1C14FEBA54CD051413A54": 1
+          }
+        },
+        "SYMBOL": {
+          "dtype": "int64",
+          "n_unique": 2
+        }
+      }
+    },
+    "sgmc_concealed:CA_structure.shp": {
       "rows": 31145,
       "fields": {
         "STATE": {
