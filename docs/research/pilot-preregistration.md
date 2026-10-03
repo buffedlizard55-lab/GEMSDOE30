@@ -1,0 +1,33 @@
+# Real-data pilot preregistration — 2026-10-03
+
+Frozen before feature implementation or scores. This supplements (not rewrites) the earlier unrun hypothesis register. Primary target: **unmapped faults**, not geothermal vents themselves ([official task](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/)). Physical mechanisms below are hypotheses, not verified discoveries or quantified DTI forecasts.
+
+## Ranked candidates
+
+| Rank / cost | Layers and exact signature | Why an uncatalogued fault? / confounder | Novelty boundary / expected improvement |
+|---|---|---|---|
+| 1 / low | `geod_dilaterate`, `cond_surf`, `depth_to_base_surf`: positive dilation multiplied by 100–500 m persistent conductance gradient; conductance/base-depth gradient axial alignment | Opening strain plus a conductive transition could localize buried fluid pathways absent from surface mapping; sediment/clay contacts and smooth interpolated fields can mimic it | Prior GEMSDOE25 code has scalar strain and independent conductivity/depth gradients, not this joint persistent/axial interaction. Highest runnable expected upside, **gain unknown and potentially negative** |
+| 2 / low–medium | `deq_n100a15`, `ieq_n100a15`, `geod_shearrate`: multiscale structure-tensor anisotropy of both seismicity surfaces, weighted by shear | Coherent seismic fabric may locate buried active strands; catalogue smoothing/completeness or swarms may dominate | Prior C family has scalars and strain gradients, not joint axial seismicity fabric. Lower expected localization than rank 1; gain unknown |
+| 3 / medium | `rtp`, `tmi_vg`, `cond_surf`: signed cross-strike magnetic-gradient reversal paired with a conductive edge, with 100–500 m scale persistence | A demagnetized alteration corridor could cross a buried fault, rather than just duplicate catalogue geometry; lithologic boundaries are a strong alternative explanation | Prior A has tilt, analytic signal and ridges; D has gradients. Proposed signed cross-field alteration corridor is not in the inspected family registry. Gain unknown; previous conjunction score 0.0782 warns against simplistic multiplication |
+| 4 / high, blocked | Official GDR 1391 **2 m probe and paleo-geothermal deposit** layers: detrended local temperature residual aligned with sinter/tufa deposit corridors, not isotropic hot-well distance | Independent upflow evidence may identify blind permeability; surface heating, non-fault heat, relict deposits are confounders | Prior code inspected uses well/spring distance/KDE/geothermometers, not these exact probe/deposit sublayers. Highest external-data upside but unproven obtainability: catalog reachable, direct archive TLS fails here. **Not viable until bytes/schema/coverage/license checked** |
+
+Official layer categories: [DrivenData](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/). External sources and CC BY 4.0: [GDR 1391](https://gdr.openei.org/submissions/1391), [probe ZIP](https://gdr.openei.org/files/1391/2m_temperature_probe_INGENIOUS_regional_data.zip), [deposit ZIP](https://gdr.openei.org/files/1391/paleo_geothermal_regional.zip). Catalog access is not archive access. Existing band aliases may be ambiguous; stop if the exact names are absent.
+
+Novelty audit: inspected pinned [family code](https://github.com/buffedlizard55-lab/GEMSDOE25/blob/b8327057ee54fd321c587e8d9dc55226ea7ddfbd/src/gems25/families.py), `features.py`, and `h30.py`; no claim of exhaustive novelty across every historic project.
+
+## Frozen experiment
+
+- Restore owner mirrors with immutable refs, byte sizes, SHA-256. Check exact CRS/transform/shape and labels. Record any template labels; use **footprint only**. No organizer-authentication claim.
+- New **comparable pilot baseline**, not the archived GEMSDOE25 best. A small pointwise network (1×1 convolutions 22→24→1) is deliberately CPU-runnable and equal capacity across arms. It cannot exploit long-range geometry like a U-Net.
+- Arms: R = raw 19 + 3 zero channels, regional loss; G = same, combined loss; H = raw 19 + 3 rank-1 interaction channels, combined loss. H tests the top runnable hypothesis, not the blocked external-data candidate.
+- Same initialization, sample order, training-fold-only robust scaling, AdamW budget. Fixed seed 30; four quadrants, **800 m training exclusion** (500 m feature neighbourhood + 300 m metric radius). Features never use labels. No catalogue geometry channels or public-score tuning.
+- 3 epochs × 40 steps, batch 2, patch 64. Dense probabilities evaluated directly; **no threshold/spacing selection** from held-out labels. Fixed metric R=300 m, α=.2 β=.8. Score pooled stitched OOF once, keeping seams; isolated quadrant diagnostics separately. Distance-bin near-miss profiles reported for R/G/H.
+- Screen: H must improve pooled DTI over **max(R,G)** by at least .002 and improve at least 3/4 quadrant diagnostics. R/G near-miss changes tested independently; no implication that H succeeds when G improves.
+- A screen pass triggers a fresh-seed confirmation (31 and 32), frozen settings. Each must meet the same gate. No pass → **no new model candidate, no slot**. Even a pilot pass is **not slot approval**: require a matched full-capacity existing-best comparator and an independent fault-component holdout before publication as recommended.
+- D2.8 and dense H19-5 masks are audited as historical reference bytes only, not scored on full public catalogue as if it were new-fault holdout. Their old proxy best is not comparable to these pilot arms.
+
+Signed-distance boundary loss is not identical to this metric. We preserve the existing exact triangular-kernel DTI term combined with regional loss; [Kervadec et al.](https://proceedings.mlr.press/v102/kervadec19a.html) motivate the combination but their medical results cannot be transferred numerically.
+
+### Pre-score methodological amendment
+
+Before any arm is fitted: add **C**, a generic context control (conductance gradient at 3×3 and 9×9 smooth scales; base-depth gradient at 9×9). H uses the same context, with positive dilation and squared gradient-axis alignment interactions. H must beat max(R,G,C); otherwise a context advantage could masquerade as geological corroboration. Box-filter support plus one derivative pixel is exactly 500 m, covered by 800 m exclusion. Missing derived values are imputed to zero after fold-local scaling; **all arms score the identical full labelled footprint**, no candidate-specific mask trimming. No interpolation or label imputation is performed. The preregistered seeds/budget/gates remain fixed. Fresh-seed confirmation estimates stability but is not an independent geographic validation.

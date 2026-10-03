@@ -27,3 +27,6 @@ __pycache__/
 .venv/
 venv/
 .DS_Store
+
+# Small audited reference deliverable, not training data
+!docs/downloads/*.tif
