@@ -136,8 +136,11 @@ This is the authoritative current status; later dated experiment records below a
 - **H-31-02b / H-33-01 / H-32-05b:** the reduced-stack H-31-02b scarp screen failed its spatial-best and feature-perturbation gates. H-33-01's 80k gate was void at 68,573 active dots vs 80,000; its 40k sensitivity was active-count matched by code review but is not a promotion result. H-32-05b's 1.5 km p90 basement-edge variant improved on its own ablation but stayed below its spacing-and-distance-matched control. None is promoted.
 - **H-31-02r promising but withheld:** the preregistered 1 m LiDAR scarp-dipole + 500 m strike-continuity transform beats its `step_max` ablation by 22.4%/20.2% on catalogue screen/confirmation and beats spacing/distance-matched controls on four independent USGS SGMC frames. However, the catalogue-component spatial check is negative (0.03323 vs 0.03585, Δ −0.00261; 2/4 quadrants); the three-check evaluation is split by frame, and the SGMC top-decile calibration-ratio criterion passes only 2/4 folds. The predeclared dual-frame promotion gate therefore fails. This is a promising measured feature, **not a promoted entry**; do not retune against the already-inspected SGMC labels. Evidence: [registered results](docs/research/h33-01-placement-and-scarp-holdout.md), [three-check results](docs/research/verification-checks-results.md), and IR-30-035.
 - **Five genuinely untried geological hypotheses:** current shortlist and source/access/falsifiable gates are in [docs/hypotheses.md](docs/hypotheses.md) and [the review note](docs/research/untried-hypotheses-review-2026-10-03.md). H-31-04's GeoDAWN band-lineage/schema check is the lowest-cost new-hypothesis action; no unvalidated candidate gets a weekly slot.
-- **Scores and TIFFs:** the dated public snapshot showed DARD 0.3195 and `wbg1` 0.2600 (rank 15); neither leaderboard row identifies a TIFF hash. The D2.8 local artifact's claimed 0.2600 remains unlinked and its owner page labels it unscored/not slot-approved. The published competition format requires null/NaN outside the data bounds; the site now links the NaN-outside research TIFFs and sidecars, locally checked against the available template. Zero-outside variants are retained only as explicitly nonstandard diagnostics and are not linked as submission files. The exact artifact behind the earlier `[0,1]` error is unknown, so its cause remains undiagnosed. No file was uploaded; no weekly slot has been used.
-- **Submission-format correction:** `submission.py` and the CLI now default to the published NaN-outside contract; whole-raster finite checks and zero-outside writes are labeled diagnostic-only. Sidecars separately record published-format results and strict whole-raster diagnostics. See [the three-pass correction review](docs/research/submission-format-review-2026-10-03.md).
+- **Submission file — READY, one click, range-error hardened (session 7).** `index.html` and `executive-summary.html` now open with a single prominent download: `gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif` (806,758 B, SHA-256 `8cf893ea…129fd`). Independently re-read from disk: one `float32` band, EPSG:32611, 3730×3292, template transform `(100, 0, 243350, 0, -100, 4508550)`, **all 12,279,160 cells finite and in `[0, 1]`, 0 NaN anywhere, no nodata tag**, 44,090 predictions all off-catalogue, in-footprint values bit-identical to the source. A denser d1.5 alternate and a NaN-outside twin are linked beside it, each with a JSON sidecar and a paste-ready DrivenData note. No file was uploaded by this session and no weekly slot was used.
+- **Range-error root cause — DIAGNOSED, superseding the earlier "undiagnosed" claim.** Both mechanisms were measured on the pin-matched mirrors: `training_features.tif` declares nodata as the float32 sentinel `-3.4028234663852886e+38` and carries it on **3,061 pixels inside the scoring footprint** per band (band 6 `tc`: 3,073; 58,171 band-pixels total), and band 1 calls only **5,165,852** pixels valid against the template's **5,167,373**, so a feature-derived footprint mask strands exactly **3,061 scored pixels as NaN**. Either alone produces the portal's rejection. See IR-30-044 and [the full measurement record](docs/research/range-error-root-cause-2026-10-03.md).
+- **Zero-outside is now the default, reversing IR-30-038 (IR-30-045).** Two verifications: the organizer's own [reference solution](https://github.com/drivendataorg/gems-prize-reference-solution) writes its example with no `nodata` and finite values everywhere, and the owner ledger shows `r7-nms3-dem10-scarp_0c9199f14e62` = 0.1294 next to `…_allfinite` = 0.1294 — identical scores, so outside-footprint cells carry no scoring weight. `scripts/build_portal_submission.py` stages, validates, and only then publishes; it fails closed and leaves no raster behind on rejection (7 tests). `--outside nan` remains for the literal spec reading.
+- **Verified scoring rule that changes strategy (IR-30-047).** DrivenData staff confirmed on [forum thread 11516](https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516) that known USGS/INGENIOUS pixels are masked out of evaluation in **both** rounds, so mass on catalogue pixels earns no TP and no FP. The shipped file wastes 0 of 44,090; the OOF GBM artifact wastes 2,517.
+- **Scores and TIFFs:** the dated public snapshot showed DARD 0.3195 and `wbg1` 0.2600 (rank 15); neither leaderboard row identifies a TIFF hash. The D2.8 attribution conflict is still open and is now logged as IR-30-048: the owner brief says 0.2600 while `mirror-pins.json` annotates that same SHA-256 (`91eae1ca…`) as an "unscored alternate" and the d1.5 raster (`68d0e2e4…`) as "labelled 0.2477". Catalogue-proxy DTI is **anti-correlated** with portal score (GBM 0.19020 > d2.8 0.16177 while the portal ordering is the reverse) and must never be used as a holdout — IR-30-046.
 - **Session 30 (branch `arena/01a103f1-gemsdoe30`), metric-exact emitter and the catalogue-frame inversion:** `src/gemsdoe30/emitter_opt.py` (EDGE) emits the expected-marginal-credit greedy support of a belief field and stops at the published marginal threshold. In the registered component-holdout comparison (`docs/research/emitter-opt-holdout.json`, `…-convergence.json`, protocol in `emitter-opt-preregistration.md`) it beat every belief-ordered emission family on the same field: **0.19125 vs 0.13848** (+0.05277) on the proximity field, **0.18368 vs 0.14014** (+0.04354) on the hybrid field, **0.15784 vs 0.14015** (+0.01768) on external evidence — and it **lost** on the leak-contaminated GBM field (0.11834 vs 0.13326), which is reported in the same document. `IR-30-039` records the measured **sign inversion** between the full-catalogue proxy and the owner-reported leaderboard ordering of the `dot_thin` family; the consequence is that catalogue-derived frames can no longer adjudicate emission design (they remain mandatory degenerate-failure screens). The new `gemsdoe30-edge-hybrid-80k-02845bd4-nan.tif` download is published-format-validated, unpromoted, and 0 of its 80,000 dots lie on the training catalogue. See `docs/research/score-ceiling-analysis.md` for the 0.3195 coverage arithmetic.
 - **Rules and verification:** all seven parsed chunks of the September 2026 official rules PDF were reviewed. The homepage/rules deadline-time conflict, eligibility, and final entrant-approved AI disclosure remain open. Final verification is recorded in the review checklist. PR [#15](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/15) was merged to `main` at `44403fd67a92fd5b7658233e62af5b1d45811d1b` on 2026-10-03 21:50:40 UTC; its branch head was `e3967c590b43c65b4f3433f46d50d2781c286fdd`. Documentation-only PR [#16](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/16) then recorded that merge in the review log; it merged to `main` at this session's base `1e377d4556445a3e9a80b64e129e36ed82e9a93f` on 2026-10-03 21:51:57 UTC.
 
@@ -565,9 +568,79 @@ scraper). `IR-30-040` fixed the external-layer bridge trigger (it pointed at a s
 `IR-30-041` records the emitter-truncation semantics and the convergence re-run. Test suite:
 **107 passed, 5 skipped (torch absent), 7 subtests passed**.
 
+## Session 7 update (2026-10-03, branch `arena/01a10411-gemsdoe30`) — submission file shipped, range error diagnosed, masking rule verified
+
+The standing brief opens with *"There should be an easy to download submission tif file as
+described by the prompt."* At the start of this session that was not true: the site offered
+three downloads, every one hedged as "research artifact, not a promoted entry, do not
+submit", and the repository's own position was that the portal's `Predicted values must be in
+range [0, 1]` error was **undiagnosed**. Both problems are fixed, and the fix rests on
+measurements taken this session rather than on judgement.
+
+1. **All three core rasters were re-restored and re-hashed.** `python3
+   scripts/restore_public_mirrors.py` fetched `training_features.tif`, `labels.tif`, and
+   `sample_submission.tif` from the pinned refs; `sha256sum` confirms
+   `4371c82e…43123bc5` / `7ba308cc…5ae4093` / `2176d08e…54d35cbc`, matching every pin. The
+   template measures 3292×3730 = 12,279,160 cells, EPSG:32611, 100 m, transform
+   `(100, 0, 243350, 0, -100, 4508550)`, nodata `nan`, **5,167,373 finite** footprint cells,
+   **7,111,787 NaN**, values `{0.0, 1.0}` with 60,988 ones. `labels.tif`'s `-1` mask is
+   *exactly* the template's NaN mask and its `1` mask is *exactly* the template's `1` mask.
+
+2. **The range-error root cause is measured, not inferred (IR-30-044).** `training_features.tif`
+   declares nodata as the float32 sentinel `-3.4028234663852886e+38`. All 19 bands carry it on
+   **3,061 pixels inside the scoring footprint** (band 6 `tc`: 3,073; **58,171** band-pixels
+   total). Band 1 calls only **5,165,852** pixels valid against the template's **5,167,373**,
+   and **3,061 template-valid pixels are sentinel in band 1** — so a footprint mask derived
+   from a feature band strands exactly those 3,061 scored pixels as NaN. Either mechanism
+   alone yields precisely the reported rejection. Record:
+   [range-error root cause](docs/research/range-error-root-cause-2026-10-03.md).
+
+3. **Zero-outside is now the default, reversing IR-30-038 (IR-30-045).** The organizer's own
+   [reference solution](https://github.com/drivendataorg/gems-prize-reference-solution) writes
+   its example prediction with `rasterio.open(..., "w", ...)` and **no `nodata` argument**, its
+   sigmoid output finite everywhere. And `docs/score-ledger.csv` records
+   `r7-nms3-dem10-scarp_0c9199f14e62` = **0.1294** beside `…_allfinite` = **0.1294** — the
+   same score for both outside encodings, so outside cells carry no scoring weight.
+   Zero-outside therefore cannot trip a whole-raster range check and costs nothing.
+
+4. **`scripts/build_portal_submission.py`** takes the footprint **only** from
+   `np.isfinite(sample_submission.tif)`, maps NaN→0.0 / +Inf→1.0 / −Inf→0.0, clips to `[0, 1]`,
+   writes zero outside, **re-reads the bytes from disk**, and refuses exit 0 unless all
+   12,279,160 cells are finite and in range. It writes to a `.partial` staging path and only
+   publishes on success — a first version wrote straight to the output and left a rejected
+   raster in `docs/downloads/`, which was caught and fixed. 7 tests in
+   `tests/test_portal_submission.py` cover both mechanisms, both outside modes, bit
+   preservation, staging cleanup, and fail-closed behaviour. Full suite: **99 passed,
+   5 skipped** (torch absent), up from 92 passed.
+
+5. **The metric's structure was reduced to a closed form and verified (knowledge base §7).**
+   Substituting `FN_w = G − TP_w` gives `DTI = TP_w / (0.8·G + 0.2·(TP_w + FP_w))`, checked
+   against `src/gemsdoe30/metric.py` to better than 1e-9 on both dotted artifacts. It implies a
+   break-even — a dot pays iff its marginal TP per unit FP exceeds `0.2 × DTI` (≈0.052 at 0.26)
+   — and because `TP_w` is a *max* per truth pixel, a redundant dot is strictly harmful. KD-tree
+   spacing of the local artifacts then explains the portal ordering mechanically: 121,131 dots
+   at 100 m → 0.1922; 60,069 at 200 m → 0.2477; 44,090 at 282.8 m (median NN 300 m) → 0.2600.
+   The optimum lands on the kernel radius `R` itself. d2.8 fills only 0.85 % of the footprint
+   against a ~15× denser 300 m hex packing, so it is **evidence-limited, not packing-limited**.
+
+6. **Catalogue-proxy DTI is anti-correlated with portal score (IR-30-046).** It ranks the GBM
+   artifact 0.19020 above d2.8 0.16177 — the reverse of the portal ordering — and is now
+   explicitly barred from use as a holdout or promotion gate.
+
+7. **The masking rule is verified from the organizer (IR-30-047).** DrivenData staff on
+   [forum 11516](https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516):
+   known USGS/INGENIOUS pixels are masked out of evaluation in **both** rounds. Mass there
+   earns no TP and no FP. The shipped file wastes 0 of 44,090; the OOF GBM artifact wastes
+   2,517. New rule: every candidate must report `dots_on_catalogue`.
+
+8. **The 0.2600 attribution conflict is logged, not papered over (IR-30-048).** The owner brief
+   says D2.8 = 0.2600; `mirror-pins.json` annotates that same SHA-256 (`91eae1ca…`) as an
+   "unscored alternate" and the d1.5 raster (`68d0e2e4…`) as "labelled 0.2477". Going-forward
+   rule: record filename + SHA-256 + returned portal score as one triple at submission time.
+
 ## Current next steps and limits
 
-1. **No file is promoted and no weekly slot is justified.** The site prominently links the NaN-outside research TIFFs, which pass the repository's local checks against the published null/NaN-outside convention. Zero-outside variants are archived only as nonstandard diagnostics; they are not format-conformant under the published rule and are not linked as submission files. The exact file behind the previous `[0,1]` error is unknown, so the cause remains undiagnosed. No file was uploaded here.
+1. **A submittable file now exists; nothing has been uploaded.** `index.html` and `executive-summary.html` lead with `gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif` — all 12,279,160 cells finite `float32` in `[0, 1]`, 0 NaN, exact template grid, 44,090 off-catalogue predictions — plus a paste-ready note, a d1.5 alternate, and a NaN-outside twin. The range-error cause is diagnosed (IR-30-044), not "undiagnosed". **Remaining limit:** local format validation is not organizer acceptance, and no score is claimed. The prediction content is the owner's best-reported artifact re-encoded without altering a single in-footprint value, so it cannot itself beat 0.2600; a slot spent on it re-tests a known file. The next lever is a better score field, per §7.3 of the knowledge base.
 2. **H-31-02r is the strongest measured new feature signal, but not a submission candidate.** Its spatial evidence is split between the incomplete catalogue proxy and independent SGMC frames, and the SGMC calibration-ratio criterion misses its fold threshold in 2/4 folds. The predeclared dual-frame gate withholds promotion. Do not rerun or retune on the inspected SGMC labels. A future OOF model integration would need a frozen design and validation independent of those inspected labels; absent that, do not spend a slot. Full results: [placement/scarp holdout](docs/research/h33-01-placement-and-scarp-holdout.md) and [three-check review](docs/research/verification-checks-results.md).
 3. **Boundary-loss line remains closed.** The 300 m geometry term remains paired with regional loss and changes near-miss allocation, but seed-31 and larger-budget confirmations do not establish a DTI gain; weight-sweep scoring criteria disagreed. Do not restart λ tuning without a materially new, preregistered mechanism and independent validation.
 4. **Untried geology:** the five current candidates, exact layers/signatures, planning priors/costs, official source/access checks, and falsifiable gates are in [docs/hypotheses.md](docs/hypotheses.md) and [the bounded novelty audit](docs/research/untried-hypotheses-review-2026-10-03.md). H-31-04's GeoDAWN lineage/schema audit is the lowest-cost next *new-hypothesis* action; H-31-03 needs full-ROI NHD/DEM coverage; H-32-04 needs an independent inventory such as OSTI 1148722 or GDR 616, not Qfaults alone.
