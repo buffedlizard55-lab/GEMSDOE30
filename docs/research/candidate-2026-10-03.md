@@ -1,8 +1,8 @@
 # Candidate file build record — 2026-10-03 (un-promoted research artifact)
 
-**File:** `docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13.tif`
+**File:** `docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.tif`
 **SHA-256:** `f5d137b9c010873f0b4fc11e841d923f359d33c7272ded0da9ac9b7c1efc7cc2`
-**Manifest:** `docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13.json`
+**Manifest:** `docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.json`
 **Status:** format-validated locally (11/11 checks); **not holdout-promoted**; no competition score
 claimed; no submission slot used or recommended.
 

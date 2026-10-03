@@ -64,3 +64,55 @@ treated as **owner-reported prior work, not independently verified and not compe
 These inform (but never replace) this repository's own holdout evidence; where the two disagree, the
 local measured result and the official sources win. Cross-check recorded in
 [`hypotheses.md`](hypotheses.md).
+
+## Addendum — 2026-10-03 second session verification (all read this session)
+
+### Official rules PDF read line-by-line (fetch tool, chunks 0–3 of 7)
+
+[`https://docs.nlr.gov/docs/fy26osti/96647.pdf`](https://docs.nlr.gov/docs/fy26osti/96647.pdf) —
+"Geologic Enhanced Mapping System (GEMS) Prize Official Rules, September 2026". The host
+`docs.nlr.gov` is the prize administrator's domain (National Laboratory of the Rockies), not a
+typo for NREL (a `docs.nrel.gov` fetch failed). Verified facts:
+
+| Rules claim | Section | Use in this project |
+| --- | --- | --- |
+| Training labels "obtained from the INGENIOUS project's Great Basin Regional Dataset Compilation" (DOI [10.15121/1881483](https://doi.org/10.15121/1881483)) | §3.3 + footnote 4 | catalogue provenance; what the metric masks |
+| Label universe also includes "newly identified faults labeled by geology experts at [NLR] and USGS" and the USGS Quaternary Fault and Fold Database | §2 | hidden-test population definition |
+| Feature data = GeoDAWN (DOI [10.5066/P93LGLVQ](https://doi.org/10.5066/P93LGLVQ)) + USGS 1 m DEM; "instructions … for downloading USGS DEM elevation data at 1-m resolution" | §2, §3.3 | 3DEP external-data plan |
+| Metric "penalizes false negatives … more than false positives" | §3.6.1 | α=0.2/β=0.8 reading |
+| "up to three [submissions] per week"; exactly one final submission chosen without private-score knowledge; evaluated in both prize rounds | §3.4, §3.6.2 | slot discipline |
+| Finalists submit "complete code assets and documentation" that reproduce results | §3.5 | repository auditability |
+| Generative-AI use must be disclosed in the narrative | §3.2 | `ai-disclosure-draft.md` |
+| Phase 1 = $50,000 split equally among top 5 (private withheld subset); Phase 2 = $250,000 (1st $100k … 5th $15k) on the expert-updated label set | §1.1 | Phase-2 realism strategy |
+| Deadline "5:00 p.m. ET on the … deadline date" (Appendix A.1) | A.1 | deadline-discrepancy irregularity |
+| Eligibility: U.S. citizens/permanent residents; U.S. entities/academics; FFRDC/DOE/FCOC/MFTRP exclusions; under-18 ineligible; certification under penalty of perjury | §1.3 | entrant must verify eligibility before any entry |
+
+### Leaderboard snapshot read 2026-10-03 (one-time research read; no monitoring)
+
+[`Leaderboard`](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/):
+rank 1 **DARD 0.3195** (12 submissions), rank 2 nchuzhoy 0.3128, rank 3 alexoktaba 0.3042,
+rank 4 Batik Shirt Brothers 0.2998, rank 5 xiaofanhu 0.2941, …, rank 15 **wbg1 0.2600**
+(9 submissions). Rows are participants' best public DW-Tversky scores — no filenames or hashes.
+Recorded in `score-ledger.csv` with `evidence_class=official-snapshot`.
+
+### DOE/OSTI geothermal structural literature (fetched 2026-10-03)
+
+| Source | Verified content used |
+| --- | --- |
+| [Faulds et al., Structural investigations of Great Basin geothermal fields (OSTI 1110517)](https://www.osti.gov/servlets/purl/1110517) | step-overs/terminations/intersections host most systems; Quaternary faults dominate; exploration should target those geometries |
+| [Faulds, Structural inventory of 426 systems (OSTI 1148722)](https://www.osti.gov/dataexplorer/biblio/dataset/1148722) | step-overs/relay ramps ~32 %; ~39 % blind (up to 75 % of resources); Quaternary faults near most systems |
+| [Faulds et al., Discovering new geothermal systems (OSTI 1724109)](https://www.osti.gov/servlets/purl/1724109) | outflow can surface km from source; linear tufa towers mark the blind Pyramid Lake system along dextral-normal faults |
+| [GDR 616 Nevada Play Fairway data](https://gdr.openei.org/submissions/616) | free structural/strain/seismicity/spring/favorability layers |
+| [GDR 1486 GBCGE subsurface database](https://gdr.openei.org/submissions/1486) | NBMG/UNR well+spring+structural-setting database (provenance of the local wellspring mirror) |
+
+### Corrections to earlier rows in this file
+
+* The row "The TIFF bytes were not downloaded or independently inspected in this sandbox" is
+  **superseded**: the D2.8 NaN variant and the GEMSDOE25 zeros variant were downloaded via the
+  GitHub API on 2026-10-03 and inspected pixel-by-pixel (see
+  `docs/downloads/gems24-h25-1-…-zeros.json`; in-footprint bytes identical; 0/1 binary;
+  44,090 dots; NaN/0 outside conventions characterized). Score attribution remains unresolved.
+* The GEMSDOE25 landing page (fetched 2026-10-03) states its own range-error root-cause
+  inference — "The earlier range error was caused by NaNs inside the footprint (inferred from
+  the file; the portal validator is not public)" — and publishes a zeros-outside fallback. This
+  corroborates this repository's `[0, 1]` portal-safe fix, independently arrived at.

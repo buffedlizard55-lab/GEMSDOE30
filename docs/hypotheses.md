@@ -176,3 +176,44 @@ The rasters are present locally from owner mirrors (SHA-256 verified; **not orga
 5. **First un-promoted candidate built (2026-10-03).** The four out-of-fold surfaces from the metric-emission experiment were stitched into a full-grid OOF surface and emitted with the adaptive Poisson-disk rule (radius 5 px, gamma 1) that the protocol selected in 4/4 leave-one-fold-out folds: 90,358 dots, median spacing 2.83 px, 17.7 % within 300 m of the catalogue (2.1× base rate). It passes all local format checks and is published with a paste-ready note that states it is **not holdout-promoted** (adaptive − uniform +0.0025 < the frozen +0.005 gate).
 
 The runnable ordering now is: (1) H-31-01 paired-termination refinement (component-pair statistics), (2) a larger-budget boundary-weight sweep **only if** the loss line is retried, (3) emission work only against calibrated surfaces or an explicit FP budget, (4) H-31-02/03 external-data arms once a transfer path off this sandbox exists. The code includes the spatial-fold builder and evaluation CLIs so every protocol above is reproducible against the prepared arrays.
+
+---
+
+## H-32 register (2026-10-03 second session) — five candidates not tried in this repository
+
+Required brief format: each entry names the exact layers, the physical signature, why it can
+catch a fault **missing from the USGS/INGENIOUS catalogue** rather than one already in it, and
+how it differs from anything already implemented in this repo or on the inspected owner sites.
+Ranking is by expected DTI improvement and implementation cost. The science base behind these
+is [`docs/research/geothermal-vents-knowledge.md`](research/geothermal-vents-knowledge.md)
+(official DOE/OSTI literature + measured local data). A rules-PDF fact discovered this session
+shapes all five: the scored test labels are **expert-new faults** beyond the INGENIOUS catalogue
+(rules §2, §3.3), and the Phase-2 label set will be revised by expert review of submissions
+(thread 11527) — so candidates target structures experts can confirm.
+
+| Rank | ID / candidate | Layers / physical signature | Why it can catch an un-catalogued fault | Difference from everything implemented/inspected | Expected ΔDTI (planning prior) | Implementation cost | Validation path |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **1** | **H-32-01 Geothermal-discharge corridor** (hot-spring cluster alignment) | `gdr_wellspring_in_footprint.csv` (`temp_c`, thermal class; 512 cells ≥ 60 °C, 256 ≥ 100 °C) + `cond_surf`, `depth_to_base_surf`, `det_elev_slope` competition bands. Signature: alignment corridors through hot-spring clusters (pair segments 2–8 km) and 1 km discharge haloes — a relational corridor transform, not a scalar heat field. | Hot springs discharge along permeable fault zones; measured: only 11.6 % of spring rows sit within 300 m of the catalogue and the median hot cell is 1.4 km from any catalogue pixel (Faulds: outflow surfaces km from the source structure) — i.e. most discharge sites demand a conduit the catalogue does not contain. The scored population is exactly young permeable structure. | Owner thermal work (h19-4 "thermal-pop", 15GEMSDOE "conj_alteration_mag") uses temperature/alteration as scalar emission fields. No repo/owner work tests spring-cluster *alignment corridors* or geothermometer-ranked discharge as a conduit prior. The repo's H-31-01 paired geometry used catalogue terminations; this pairs independent discharge points. | **+0.005 … +0.030** | **Low** — data already local | **Running now** (preregistered: `h32-01-preregistration.md`; component holdout with proximity-matched controls) |
+| **2** | **H-32-04 Un-catalogued Qfaults trace completion** | `gdr_qfaults_traces.csv` (slip rate, recency <15 ka/<130 ka, slip sense, length) + catalogue geometry for masking. Signature: kinematically consistent gap-extension corridors between Qfaults traces (matching slip sense ± rate) that lie >300 m from catalogue pixels. | Rules §2: labels derive from Qfaults + expert new faults, but measured 45 % of in-footprint Qfaults centroids sit >300 m from any catalogue pixel — those traces are literally "fault pixels not already captured by USGS/INGENIOUS" (thread 11536), and Quaternary faults are the primary control on geothermal systems (Faulds). | h18-4 (owner, 0.036) predicted USGS *geologic-map* faults; nothing tested the Quaternary subset with kinematic weighting and gap extension. **Circularity warning:** catalogue holdout cannot validate this (hidden components ⊂ catalogue); needs an independent fault map. | **+0.005 … +0.025 conditional** | **Medium** | Independent validation sources named: [OSTI 1148722](https://www.osti.gov/dataexplorer/biblio/dataset/1148722) structural inventory and [GDR 616](https://gdr.openei.org/submissions/616) play-fairway structural layers — pages verified 2026-10-03; archive retrieval pending. Viable only with one of those. |
+| **3** | **H-32-05 Buried range-front pinch-out edges** | `depth_to_base_surf`, `iso_grav_anom_hg`, `tmi_hg` competition bands. Signature: edge/ridge transforms (structure-tensor, Laplacian) of the *basement-depth surface* — a fault displacing basin fill shows as a sharp gradient in depth-to-basement even where the surface trace is buried and unmappable. | Faults buried under Quaternary alluvium have no scarp for lidar mapping and are systematically absent from expression-based catalogues (Qfaults requires surface evidence); their displacement persists in the basement surface and gravity/magnetic gradients. | The repo and all owner sites use `depth_to_base_surf` only as a plain model band; no edge/curvature transform of the basement surface exists anywhere in the inspected code/sites (H-31-05 curvatures the *strain* field, not the basement surface). | **+0.002 … +0.015** | **Low-medium** — local bands | Catalogue-component holdout (runnable now, after H-32-01 concludes) |
+| **4** | **H-32-03 Geothermometer discordance upflow zoning** | wellspring `geothermquartz_c`, `geothermchalc_c`, `geothermcat_c` + `cond_surf`. Signature: sites where cation ≫ quartz temperature (steam-loss upflow) or chalcedony ≪ quartz (mixing) — non-equilibrium chemistry marks the upflow conduit, then corridor geometry along local lineaments. | Deep upflow through a fault needs no surface expression (39–75 % of Great Basin systems are blind — Faulds); chemistry discordance is a direct sample of deep fluid pathways the catalogue cannot contain. | No repo/owner work uses spring chemistry at all (only temperature counts). | **+0.001 … +0.012** | **Low** — local CSV | Catalogue-component holdout (power limited: ~1k chemistry sites) |
+| **5** | **H-32-02 Volcanic-vent feeder alignment** | `gdr_volcanic_vents_in_footprint.csv` (21 vents: 20 basalt, 1 rhyolite) + `tmi_hg`, `mag_anom`, `rtp` magnetic edges. Signature: strike-aligned vent chains (2+ vents, 2–8 km) extended along co-located magnetic lineaments (dike swarms). | Measured: **0 of 21 vents lie within 300 m of a catalogue fault** (median 2.2 km) — the structures that fed these eruptions are unmapped in the catalogue; cinder-vent alignments are classic surface expressions of feeder fissures (and linear tufa/vent chains mark the blind Pyramid Lake system — Faulds). | No inspected repo/owner page uses volcanic vents in any form. Contrarian and nearly free. | **+0.001 … +0.010** (low power: n = 21) | **Low** — local CSV | Catalogue-component holdout (power-limited; report as pilot) |
+
+**Ranking rationale (Maximize P(Win)):** rank 1 has the strongest independent physics, measured
+2.3× near-catalogue enrichment, the largest usable point set (12,570 spring cells), and is
+runnable now; rank 2 has the highest conditional ceiling but cannot be validated against the
+catalogue proxy at all, so it is gated on external inventory acquisition; ranks 3–5 are cheap
+local transforms with modest priors, ordered by signal richness. **None of these priors is a
+forecast; only a preregistered holdout pass can promote a candidate.**
+
+**Status (measured 2026-10-03): H-32-01 ran its preregistered gate and FAILED — not promoted.**
+Pooled ΔDTI (spring − proximity-matched control) was **−0.01494** (screen, split 31) and
+**−0.01537** (confirmation, split 41) at the primary budget, with **0 of 4** quadrants positive;
+spring zones earned ~3× less hidden credit per emitted pixel than matched random (0.0122 vs
+0.0320). Every arm (300 m/1 km/2 km haloes, 2–8 km pair corridors), every budget (5k/15k/45k)
+and both splits agree. Mechanism and limitations:
+[`docs/research/h32-01-vent-corridor-holdout.md`](research/h32-01-vent-corridor-holdout.md) ·
+raw [`h32-01-vent-corridor-holdout.json`](research/h32-01-vent-corridor-holdout.json). The
+catalogue proxy cannot clear H-32-04 (circularity) and did not clear H-32-01; the next runnable
+candidates are **H-32-05 (buried pinch-out edges)** and the H-31-02 reduced matched-filter
+scarp arm. No submission slot is justified.

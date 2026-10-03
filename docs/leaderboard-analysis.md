@@ -30,13 +30,21 @@ This is a plausible mechanism for a higher score from a dotted raster; it **does
 
 Exact-pixel regional losses assign nearly identical penalties to different non-overlapping shifts. The GEMS geometry term in `src/gemsdoe30/losses.py` adds a distance-transform false-positive weight and a local max over the exact 300 m triangular kernel, so a prediction 100 m away is treated more favorably than one 200 m or 400 m away. This term is combined with regional soft-Tversky rather than replacing it. It is Kervadec-inspired, not a verbatim reproduction of the medical-image surface loss.
 
-The synthetic probe establishes only that the implemented objective has the intended toy geometry. Whether this improves actual fault discovery must be tested with paired, spatially blocked models using the same labels, seeds, folds, training budget, and exact metric. The current holdout baseline and comparison are unknown because the required competition data are absent.
+The synthetic probe establishes only that the implemented objective has the intended toy geometry. The paired real-data ablation has now run at two seeds on buffered spatial folds (owner-mirror data restored 2026-10-03): the seed-30 screen was positive (pooled DTI 0.062042 → 0.063990) but the fresh-seed-31 confirmation did not replicate (Δ +0.000115, 2/4 folds), so the boundary term is **not promoted** even though its near-miss behaviour reproduced (partial-distance truth coverage 1,889 → 724). Evidence: `research/loss-ablation-holdout.md`, `research/loss-ablation-holdout-seed31.json`.
+
+## Prize phases change what "winning" means (rules §1.1, verified 2026-10-03)
+
+The official rules split the $300,000 pool into **Phase 1** ($50,000, split *equally* among the top five on a private withheld subset of expert-new faults) and **Phase 2** ($250,000: $100k/$70k/$40k/$25k/$15k) judged on the **updated label set that experts create by reviewing Phase-1 submissions** (community thread 11527). Three strategic consequences, all consistent with the observed leaderboard:
+
+1. Phase 1 rewards *generalization* (one final submission is chosen without private-score knowledge, §3.6.2) — public-LB spikes are noise; the frozen holdout discipline is the right proxy.
+2. Phase 2 rewards **expert-confirmable geometry**: traces a geology panel will map when they revise the region. Thin, strike-consistent, literature-consistent dotted traces (the D2.8 family's shape) are more confirmable than dense probability fields — a mechanism for the dotted family's reported rise from 0.1922 → 0.2600 that does not require leaderboard exploitation.
+3. Equal Phase-1 splits reduce the value of rank-1 gaming; top-5 private performance is the Phase-1 target, and the Phase-2 pool is 5× larger — invest in *real* fault geometry for the final selected entry.
 
 ## Bottom line
 
 - We **cannot verify** the score-to-file link for the D2.8 artifact from the available evidence.
 - We **cannot claim** that this repository currently produces a TIFF that scores above 0.26 or above 0.3195.
-- The metric supports two falsifiable levers: (i) better spatial ranking of new-fault evidence, and (ii) calibration/emission that avoids redundant probability while preserving 300 m coverage. The boundary-loss experiment tests the first model-training lever; a separate, preregistered emission sweep is needed for the second.
+- The metric supports two falsifiable levers: (i) better spatial ranking of new-fault evidence, and (ii) calibration/emission that avoids redundant probability while preserving 300 m coverage. The boundary-loss experiment tested the first model-training lever (screen positive, confirmation negative); the emission sweep tested the second (thin, do not flood); the H-32 register adds independent geothermal-observation levers.
 - Do not spend a weekly slot until an exact candidate beats the current comparable holdout best, survives confirmation, and passes the exact template/file audit.
 
 ## Source trail

@@ -14,11 +14,19 @@ def main() -> int:
     parser.add_argument("submission", type=Path)
     parser.add_argument("--template", type=Path, default=Path("data/raw/sample_submission.tif"))
     parser.add_argument("--json", type=Path, default=None, help="optional path for a machine-readable receipt")
+    parser.add_argument(
+        "--portal-safe",
+        action="store_true",
+        help=(
+            "require the upload-safe convention: every cell finite and in [0, 1], "
+            "0.0 outside the template footprint (use this before any portal upload)"
+        ),
+    )
     args = parser.parse_args()
     try:
         from gemsdoe30.submission import validate_submission_file
 
-        report = validate_submission_file(args.submission, args.template)
+        report = validate_submission_file(args.submission, args.template, portal_safe=args.portal_safe)
         payload = report.to_dict()
         text = json.dumps(payload, indent=2)
         print(text)
