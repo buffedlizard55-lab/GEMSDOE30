@@ -1,0 +1,496 @@
+{
+  "folds": [
+    {
+      "fold": 0,
+      "fold_isolated_baseline_dti": 0.06427204470185571,
+      "fold_isolated_candidate_dti": 0.06525488317718368,
+      "fold_isolated_delta_dti": 0.0009828384753279712,
+      "heldout_valid_pixels": 2449030,
+      "heldout_truth_pixels": 29319,
+      "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+    },
+    {
+      "fold": 1,
+      "fold_isolated_baseline_dti": 0.04577783773463057,
+      "fold_isolated_candidate_dti": 0.04776045764885577,
+      "fold_isolated_delta_dti": 0.0019826199142251935,
+      "heldout_valid_pixels": 1366431,
+      "heldout_truth_pixels": 12596,
+      "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+    },
+    {
+      "fold": 2,
+      "fold_isolated_baseline_dti": 0.07838198870711223,
+      "fold_isolated_candidate_dti": 0.0817298403256854,
+      "fold_isolated_delta_dti": 0.003347851618573164,
+      "heldout_valid_pixels": 564135,
+      "heldout_truth_pixels": 9473,
+      "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+    },
+    {
+      "fold": 3,
+      "fold_isolated_baseline_dti": 0.07219216136928037,
+      "fold_isolated_candidate_dti": 0.07129382580293477,
+      "fold_isolated_delta_dti": -0.0008983355663456094,
+      "heldout_valid_pixels": 787777,
+      "heldout_truth_pixels": 9600,
+      "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+    }
+  ],
+  "pooled_baseline": {
+    "tp_weight": 38178.077814467775,
+    "fp_weight": 2794669.042204611,
+    "fn_weight": 22809.922185532218,
+    "dti": 0.06204187586712654
+  },
+  "pooled_candidate": {
+    "tp_weight": 39800.421186603606,
+    "fp_weight": 2826124.6927729156,
+    "fn_weight": 21187.578813396394,
+    "dti": 0.06399034387555431
+  },
+  "pooled_delta_dti": 0.0019484680084277742,
+  "aggregation": "exact full-grid DTI on the stitched out-of-fold mosaic; cross-quadrant kernel interactions retained",
+  "scope": "catalogue-derived spatial proxy; not private-test truth or a competition score",
+  "near_miss_profiles": {
+    "complete_oof_grid": {
+      "regional": {
+        "heldout_truth_pixels": 60988,
+        "best_credit_distance_bins": {
+          "exact_0m": 60908,
+          "near_0_to_100m": 0,
+          "100_to_200m": 80,
+          "200_to_300m": 0,
+          "no_positive_credit": 0
+        },
+        "false_positive_cost_by_distance": [
+          {
+            "distance_bin": "0_to_100m",
+            "pixels": 60988,
+            "probability_mass": 38175.55358741153,
+            "weighted_false_positive_mass": 0.0
+          },
+          {
+            "distance_bin": "100_to_200m",
+            "pixels": 176003,
+            "probability_mass": 110302.99033290287,
+            "weighted_false_positive_mass": 41394.46534125357
+          },
+          {
+            "distance_bin": "200_to_300m",
+            "pixels": 169333,
+            "probability_mass": 105652.42335716123,
+            "weighted_false_positive_mass": 80871.04625753177
+          },
+          {
+            "distance_bin": "300m_or_more",
+            "pixels": 4761049,
+            "probability_mass": 2672403.5306058256,
+            "weighted_false_positive_mass": 2672403.5306058256
+          }
+        ],
+        "note": "a changed profile is evidence about proxy error allocation, not new-fault truth"
+      },
+      "combined": {
+        "heldout_truth_pixels": 60988,
+        "best_credit_distance_bins": {
+          "exact_0m": 60948,
+          "near_0_to_100m": 0,
+          "100_to_200m": 35,
+          "200_to_300m": 5,
+          "no_positive_credit": 0
+        },
+        "false_positive_cost_by_distance": [
+          {
+            "distance_bin": "0_to_100m",
+            "pixels": 60988,
+            "probability_mass": 39797.628211438656,
+            "weighted_false_positive_mass": 0.0
+          },
+          {
+            "distance_bin": "100_to_200m",
+            "pixels": 176003,
+            "probability_mass": 114685.76053196844,
+            "weighted_false_positive_mass": 43041.9212414711
+          },
+          {
+            "distance_bin": "200_to_300m",
+            "pixels": 169333,
+            "probability_mass": 109363.58694540709,
+            "weighted_false_positive_mass": 83725.19695174282
+          },
+          {
+            "distance_bin": "300m_or_more",
+            "pixels": 4761049,
+            "probability_mass": 2699357.5745797013,
+            "weighted_false_positive_mass": 2699357.5745797013
+          }
+        ],
+        "note": "a changed profile is evidence about proxy error allocation, not new-fault truth"
+      },
+      "scope": "complete stitched OOF grid; cross-quadrant kernel interactions retained"
+    },
+    "fold_isolated_diagnostics": [
+      {
+        "fold": 0,
+        "regional": {
+          "heldout_truth_pixels": 29319,
+          "best_credit_distance_bins": {
+            "exact_0m": 29307,
+            "near_0_to_100m": 0,
+            "100_to_200m": 12,
+            "200_to_300m": 0,
+            "no_positive_credit": 0
+          },
+          "false_positive_cost_by_distance": [
+            {
+              "distance_bin": "0_to_100m",
+              "pixels": 29319,
+              "probability_mass": 20166.27539120242,
+              "weighted_false_positive_mass": 0.0
+            },
+            {
+              "distance_bin": "100_to_200m",
+              "pixels": 85889,
+              "probability_mass": 59386.339568686206,
+              "weighted_false_positive_mass": 22291.276688802987
+            },
+            {
+              "distance_bin": "200_to_300m",
+              "pixels": 82253,
+              "probability_mass": 56631.24771067221,
+              "weighted_false_positive_mass": 43289.08555628409
+            },
+            {
+              "distance_bin": "300m_or_more",
+              "pixels": 2251569,
+              "probability_mass": 1365812.3099892926,
+              "weighted_false_positive_mass": 1365812.3099892926
+            }
+          ],
+          "note": "a changed profile is evidence about proxy error allocation, not new-fault truth"
+        },
+        "combined": {
+          "heldout_truth_pixels": 29319,
+          "best_credit_distance_bins": {
+            "exact_0m": 29319,
+            "near_0_to_100m": 0,
+            "100_to_200m": 0,
+            "200_to_300m": 0,
+            "no_positive_credit": 0
+          },
+          "false_positive_cost_by_distance": [
+            {
+              "distance_bin": "0_to_100m",
+              "pixels": 29319,
+              "probability_mass": 20735.191857986152,
+              "weighted_false_positive_mass": 0.0
+            },
+            {
+              "distance_bin": "100_to_200m",
+              "pixels": 85889,
+              "probability_mass": 60895.514129922725,
+              "weighted_false_positive_mass": 22857.831063306025
+            },
+            {
+              "distance_bin": "200_to_300m",
+              "pixels": 82253,
+              "probability_mass": 57916.21440160833,
+              "weighted_false_positive_mass": 44274.18717466689
+            },
+            {
+              "distance_bin": "300m_or_more",
+              "pixels": 2251569,
+              "probability_mass": 1383641.4791416475,
+              "weighted_false_positive_mass": 1383641.4791416475
+            }
+          ],
+          "note": "a changed profile is evidence about proxy error allocation, not new-fault truth"
+        },
+        "scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+      },
+      {
+        "fold": 1,
+        "regional": {
+          "heldout_truth_pixels": 12596,
+          "best_credit_distance_bins": {
+            "exact_0m": 12596,
+            "near_0_to_100m": 0,
+            "100_to_200m": 0,
+            "200_to_300m": 0,
+            "no_positive_credit": 0
+          },
+          "false_positive_cost_by_distance": [
+            {
+              "distance_bin": "0_to_100m",
+              "pixels": 12596,
+              "probability_mass": 7218.854534961283,
+              "weighted_false_positive_mass": 0.0
+            },
+            {
+              "distance_bin": "100_to_200m",
+              "pixels": 37451,
+              "probability_mass": 21417.293303940445,
+              "weighted_false_positive_mass": 8055.102451411436
+            },
+            {
+              "distance_bin": "200_to_300m",
+              "pixels": 38049,
+              "probability_mass": 21791.491564251482,
+              "weighted_false_positive_mass": 16708.411151737673
+            },
+            {
+              "distance_bin": "300m_or_more",
+              "pixels": 1278335,
+              "probability_mass": 706099.7207151535,
+              "weighted_false_positive_mass": 706099.7207151535
+            }
+          ],
+          "note": "a changed profile is evidence about proxy error allocation, not new-fault truth"
+        },
+        "combined": {
+          "heldout_truth_pixels": 12596,
+          "best_credit_distance_bins": {
+            "exact_0m": 12596,
+            "near_0_to_100m": 0,
+            "100_to_200m": 0,
+            "200_to_300m": 0,
+            "no_positive_credit": 0
+          },
+          "false_positive_cost_by_distance": [
+            {
+              "distance_bin": "0_to_100m",
+              "pixels": 12596,
+              "probability_mass": 6921.468658942729,
+              "weighted_false_positive_mass": 0.0
+            },
+            {
+              "distance_bin": "100_to_200m",
+              "pixels": 37451,
+              "probability_mass": 20589.05365131423,
+              "weighted_false_positive_mass": 7749.835307092533
+            },
+            {
+              "distance_bin": "200_to_300m",
+              "pixels": 38049,
+              "probability_mass": 20867.46363479644,
+              "weighted_false_positive_mass": 16012.26445258749
+            },
+            {
+              "distance_bin": "300m_or_more",
+              "pixels": 1278335,
+              "probability_mass": 643534.8537174826,
+              "weighted_false_positive_mass": 643534.8537174826
+            }
+          ],
+          "note": "a changed profile is evidence about proxy error allocation, not new-fault truth"
+        },
+        "scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+      },
+      {
+        "fold": 2,
+        "regional": {
+          "heldout_truth_pixels": 9473,
+          "best_credit_distance_bins": {
+            "exact_0m": 9473,
+            "near_0_to_100m": 0,
+            "100_to_200m": 0,
+            "200_to_300m": 0,
+            "no_positive_credit": 0
+          },
+          "false_positive_cost_by_distance": [
+            {
+              "distance_bin": "0_to_100m",
+              "pixels": 9473,
+              "probability_mass": 5084.378798522055,
+              "weighted_false_positive_mass": 0.0
+            },
+            {
+              "distance_bin": "100_to_200m",
+              "pixels": 26657,
+              "probability_mass": 14219.04652874358,
+              "weighted_false_positive_mass": 5356.28007630727
+            },
+            {
+              "distance_bin": "200_to_300m",
+              "pixels": 24309,
+              "probability_mass": 12904.421393543482,
+              "weighted_false_positive_mass": 9961.079993415533
+            },
+            {
+              "distance_bin": "300m_or_more",
+              "pixels": 503696,
+              "probability_mass": 266039.6240879358,
+              "weighted_false_positive_mass": 266039.6240879358
+            }
+          ],
+          "note": "a changed profile is evidence about proxy error allocation, not new-fault truth"
+        },
+        "combined": {
+          "heldout_truth_pixels": 9473,
+          "best_credit_distance_bins": {
+            "exact_0m": 9473,
+            "near_0_to_100m": 0,
+            "100_to_200m": 0,
+            "200_to_300m": 0,
+            "no_positive_credit": 0
+          },
+          "false_positive_cost_by_distance": [
+            {
+              "distance_bin": "0_to_100m",
+              "pixels": 9473,
+              "probability_mass": 6134.293210528791,
+              "weighted_false_positive_mass": 0.0
+            },
+            {
+              "distance_bin": "100_to_200m",
+              "pixels": 26657,
+              "probability_mass": 17076.028050210327,
+              "weighted_false_positive_mass": 6426.198915776331
+            },
+            {
+              "distance_bin": "200_to_300m",
+              "pixels": 24309,
+              "probability_mass": 15417.362291783094,
+              "weighted_false_positive_mass": 11886.412787882731
+            },
+            {
+              "distance_bin": "300m_or_more",
+              "pixels": 503696,
+              "probability_mass": 312939.7684611706,
+              "weighted_false_positive_mass": 312939.7684611706
+            }
+          ],
+          "note": "a changed profile is evidence about proxy error allocation, not new-fault truth"
+        },
+        "scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+      },
+      {
+        "fold": 3,
+        "regional": {
+          "heldout_truth_pixels": 9600,
+          "best_credit_distance_bins": {
+            "exact_0m": 9557,
+            "near_0_to_100m": 0,
+            "100_to_200m": 43,
+            "200_to_300m": 0,
+            "no_positive_credit": 0
+          },
+          "false_positive_cost_by_distance": [
+            {
+              "distance_bin": "0_to_100m",
+              "pixels": 9600,
+              "probability_mass": 5706.044862725772,
+              "weighted_false_positive_mass": 0.0
+            },
+            {
+              "distance_bin": "100_to_200m",
+              "pixels": 25879,
+              "probability_mass": 15209.07435504999,
+              "weighted_false_positive_mass": 5663.711481004266
+            },
+            {
+              "distance_bin": "200_to_300m",
+              "pixels": 24466,
+              "probability_mass": 14175.77753853565,
+              "weighted_false_positive_mass": 10792.516958282295
+            },
+            {
+              "distance_bin": "300m_or_more",
+              "pixels": 727832,
+              "probability_mass": 334672.5975400845,
+              "weighted_false_positive_mass": 334672.5975400845
+            }
+          ],
+          "note": "a changed profile is evidence about proxy error allocation, not new-fault truth"
+        },
+        "combined": {
+          "heldout_truth_pixels": 9600,
+          "best_credit_distance_bins": {
+            "exact_0m": 9586,
+            "near_0_to_100m": 0,
+            "100_to_200m": 13,
+            "200_to_300m": 1,
+            "no_positive_credit": 0
+          },
+          "false_positive_cost_by_distance": [
+            {
+              "distance_bin": "0_to_100m",
+              "pixels": 9600,
+              "probability_mass": 6006.6744839809835,
+              "weighted_false_positive_mass": 0.0
+            },
+            {
+              "distance_bin": "100_to_200m",
+              "pixels": 25879,
+              "probability_mass": 16054.87471572496,
+              "weighted_false_positive_mass": 5980.242574165498
+            },
+            {
+              "distance_bin": "200_to_300m",
+              "pixels": 24466,
+              "probability_mass": 15011.018196223304,
+              "weighted_false_positive_mass": 11430.292968288495
+            },
+            {
+              "distance_bin": "300m_or_more",
+              "pixels": 727832,
+              "probability_mass": 359463.2916651927,
+              "weighted_false_positive_mass": 359463.2916651927
+            }
+          ],
+          "note": "a changed profile is evidence about proxy error allocation, not new-fault truth"
+        },
+        "scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+      }
+    ]
+  },
+  "decision": "screen-positive only; exact full-grid OOF delta is positive and at least 3/4 isolated fold diagnostics improve; fresh-seed confirmation and exact-file audit still required",
+  "positive_fold_count": 3,
+  "fold_consistency_scope": "quadrant-isolated diagnostic scores; not used as the pooled DTI",
+  "data_scope": "out-of-fold, spatially held-out known-catalogue proxy; private expert labels are unavailable",
+  "training_recipes": {
+    "regional": {
+      "loss_mode": "regional",
+      "boundary_weight": 0.0,
+      "seed": 30,
+      "epochs": 2,
+      "steps_per_epoch": 20,
+      "batch_size": 2,
+      "patch_size": 192,
+      "learning_rate": 0.001,
+      "base_channels": 24,
+      "pixel_size_x_m": 100.0,
+      "pixel_size_y_m": 100.0,
+      "metric_radius_m": 300.0,
+      "metric_alpha": 0.2,
+      "metric_beta": 0.8,
+      "weight_decay": 0.0001,
+      "optimizer": "AdamW",
+      "patch_radius_halo_pixels": 3
+    },
+    "combined": {
+      "loss_mode": "combined",
+      "boundary_weight": 0.5,
+      "seed": 30,
+      "epochs": 2,
+      "steps_per_epoch": 20,
+      "batch_size": 2,
+      "patch_size": 192,
+      "learning_rate": 0.001,
+      "base_channels": 24,
+      "pixel_size_x_m": 100.0,
+      "pixel_size_y_m": 100.0,
+      "metric_radius_m": 300.0,
+      "metric_alpha": 0.2,
+      "metric_beta": 0.8,
+      "weight_decay": 0.0001,
+      "optimizer": "AdamW",
+      "patch_radius_halo_pixels": 3
+    }
+  },
+  "oof_manifest_sha256": {
+    "regional_array": "71704ea8b64696a3f6fffeada9184fad992812b421f421db849738b7b9a2690c",
+    "combined_array": "56ea553f897f025094617798bdf31b13f0fe5dc4c6766af872523d8cf9fac626"
+  }
+}

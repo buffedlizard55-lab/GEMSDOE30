@@ -1,5 +1,144 @@
 # Ranked geological hypotheses — preregistration candidates
 
+**Status of this file:** the section *New register (2026-10-03 session)* below is the current,
+data-available register. The older four-candidate register further down is retained verbatim as
+project history; it was written when no competition raster was present locally and its "blocked"
+status statements are superseded by the data restoration recorded in `README.md` and
+`docs/research/data-audit.json`.
+
+**Promotion rule (unchanged):** no weekly submission slot may be proposed for a hypothesis whose
+feature data are not obtained and checksummed, whose recipe and thresholds are not frozen before the
+run, whose holdout gate does not pass on a buffered spatial holdout, and whose exact candidate
+GeoTIFF does not pass the template audit. A catalogue-derived holdout is a **necessary but biased**
+proxy: the official metric masks catalogue pixels, so a catalogue holdout can reward exactly the
+predictions the competition ignores (measured in `docs/research/emission-anatomy.json`).
+
+---
+
+## New register (2026-10-03 session)
+
+Design context that makes these hypotheses different from the earlier four: the official clarifications
+read this session establish that (i) known USGS/INGENIOUS pixels are masked out of scoring
+([thread 11516](https://community.drivendata.org/t/11516)), (ii) "new fault" means *any fault pixel not
+already captured by USGS/INGENIOUS* and **may include newly mapped geometry of an existing fault
+system** ([thread 11536](https://community.drivendata.org/t/11536)), and (iii) the organizers will not
+describe the test faults' sources, types or coverage
+([thread 11527](https://community.drivendata.org/t/11527)). The metric's marginal algebra
+(`docs/research/why-d28-scored-026.md`) then says false-positive mass is cheap (λ ≈ 0.055 at the
+reported 0.26 operating point) while **coverage of the hidden trace is everything**. Each hypothesis
+below is therefore judged mostly on whether it can raise coverage of *unmapped* geometry.
+
+| Rank | Candidate | Layers / physical signature | Why it can catch a fault absent from USGS/INGENIOUS | Difference from all inspected prior work | Expected ΔDTI prior and cost | Official source, access status (checked 2026-10-03) | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **1** | **H-31-01 Relay-ramp / step-over connector completion** | Competition bands `det_elev`, `det_elev_slope`, `tmi_hg`, `tc`, `cond_surf`, `depth_to_base_surf` + LiDAR scarp channels (`step_max`, `cross_max`, `strike`) + **catalogue geometry used only as geometry**. Signature: *pairs* of sub-parallel lineament terminations (azimuth within ~20°, separation 0.3–3 km, along-strike overlap) and the connector between them. | Extensional step-overs and relay ramps are where short, oblique breaching strands live; mapping campaigns record the two long boundary strands and routinely omit the short connector. Staff explicitly ruled that this counts as a new fault. Credit here is at the *unmasked* pixels between mapped strands, i.e. exactly the unclaimed domain. | Prior registers test scalar fields (thermal points, strain×conductance, seismicity density, 3-D temperature) or, on the owner's public sites, multiline *density* corroboration and ridge-top gap closure. None of them pair lineament **terminations** or test along-strike overlap geometry; this is a relational, second-order feature. Closest neighbour to disclose: GEMSDOE27 "topo-gap-closure" (owner-reported 0.2449), which bridges gaps in a scalar ridge surface without pairing constraints. | **+0.005 … +0.030** planning prior, moderate confidence; **medium cost** — all inputs are already local (SHA-256 pinned), CPU-feasible. | Competition raster via authorized session or the pinned owner mirror (not organizer-authenticated); LiDAR-derived scarp features derive from USGS 3DEP 1 m DEM, described by USGS as **public domain**. No new external transfer needed. | **Run 2026-10-03: component holdout did not beat its proximity control (see "Measured outcome" below). Not promoted as tested; the paired-termination refinement is the next step.** |
+| **2** | **H-31-02 Matched-filter scarp bank + along-strike continuity tracking on official USGS 3DEP 1 m DEM** | USGS 3DEP 1 m DEM tiles (public domain). Signature: oriented, scale-selected step matched filters for 0.5–5 m scarps, followed by a continuity tracker that links scarp segments across gaps at a fixed strike tolerance. | Short, discontinuous scarps of minor faults are systematically absent from field-mapped Quaternary compilations and are invisible at 100 m. The competition itself supplies 1 m DEM links, which is evidence the organizers expect fine-scale topography to carry signal. | The local owner-derived `lidar_scarp_features_u8.tif` stack (12 channels) already contains first-order scarp statistics, and the owner's public LiDAR attempt scored 0.1461. No matched filter (orientation × step height) and no segment-continuity linker has been implemented in either codebase. | **+0.005 … +0.040** planning prior (highest ceiling, lowest confidence); **high cost**: ~700–1,200 tiles at ~275–287 MB each (tens to ~200 GB) if raw DEMs are used; a reduced version applies the new transform to the already-local 12-channel scarp stack at low cost. | **[Obtainability verified]** `https://tnmaccess.nationalmap.gov/api/v1/products?datasets=Digital%20Elevation%20Model%20(DEM)%201%20meter&bbox=-119,38.5,-118.5,39` returned **32 products** for a test bbox inside the GeoDAWN region with direct GeoTIFF URLs on `prd-tnm.s3.amazonaws.com` and the statement "All 3DEP products are public domain." Caveat: **this sandbox cannot open `prd-tnm` / `tnmaccess` / USGS hosts directly** (TLS EOF; see IR-30-019); the platform page fetcher can read them, so the transfer must run off-sandbox. | **Registered; raw-DEM arm blocked by sandbox egress and volume; reduced arm runnable now.** |
+| **3** | **H-31-03 Drainage-response faults: channel offsets, beheaded channels and knickpoint alignment** | USGS National Hydrography Dataset flowlines + USGS 3DEP DEM (1 m or 10 m). Signature: strike-aligned knickpoint chains and left/right-lateral channel offsets across a candidate trace. | Fluvial geomorphology records deformation where the scarp itself is eroded, buried or too subdued to map; a fault-trace compilation is not a drainage analysis, so the two inventories disagree by construction. | The repository uses no hydrology layer at all, and no inspected owner page reports a flowline-based transform. | **+0.002 … +0.020**; **medium-high cost** (tile download, hydrological conditioning, flowline extraction, DEM–flowline registration). | **[Obtainability not yet verified]** `tnmaccess.nationalmap.gov` exposes NHD products through the same public TNM API used above; the specific NHD query and the local transfer have **not** been executed. Treat as conditional. | **Registered, not run; source check incomplete — must be completed before promotion.** |
+| **4** | **H-31-04 Radiometric alteration unmixing along lineaments** | GeoDAWN K, Th, U and total count (`geodawn_rad_u8.tif`, 4 bands) and the ratio stack (`geodawn_extensions_u8.tif`: Th/K, U/K, U/Th, TMI upward-continued 150 m). Signature: ratio-space alteration anomaly (K-enrichment with U mobilisation) tested for *along-lineament coherence*, not raw band magnitude. | Fault-controlled fluid pathways produce clay/illite (± K) and uranium alteration haloes that can be detected radiometrically even where the surface trace is unmapped; the catalogue is independent of the radiometric grid. | Both this repository and the owner use radiometric bands as ordinary model features. An explicit three-endmember unmixing (K–Th–U) combined with a lineament-coherence test is not implemented in either. Beware: K/Th ratios are dominated by lithology, so a lithology-stratified null is required. | **+0.001 … +0.012**; **low cost** — the rasters are already local. | USGS GeoDAWN data release, DOI [10.5066/P93LGLVQ](https://doi.org/10.5066/P93LGLVQ) (public-domain USGS data per the catalog record). Local copies are owner-derived quantisations, not organizer-authenticated. | **Registered, not run; cheapest arm to add.** |
+| **5** | **H-31-05 Curvature (second-derivative) strain-ridge detector** | `geod_dilaterate`, `geod_shearrate`, `geod_2ndinv` competition bands. Signature: Laplacian/structure-tensor ridge of the *strain* field rather than the strain value itself. | Interpolated strain grids are smooth; the edge structure that localises a fault zone may be sharper in the derivative than in the field. | The registered strain×conductance hypothesis and the owner's strain/scalar family both used the fields themselves; the owner's public pages report those families performing poorly. This is a cheap transform test, ranked last deliberately. | **−0.002 … +0.006** (the repository's own pilot already failed a strain-interaction screen; that prior is honoured here); **very low cost**. | Competition raster only; no external transfer. | **Registered, lowest priority; a negative result is the base-rate expectation.** |
+
+**Nominal "index" forecast for beating the leader:** the metric algebra in
+`docs/research/why-d28-scored-026.md` says the public leader (0.3195) corresponds to ≈27 % weighted
+coverage of the hidden set at negligible false-positive mass. Ranks 1–2 are the only candidates here
+whose plausible coverage gain (+5–15 percentage points on their targeted geometry) is large enough to
+move that number materially. **No score is forecast or promised; the priors above are experiment-
+planning ranges, not measurements.**
+
+**Instantiated validation for rank 1 (this session):** hide-and-recover **component holdout** — a
+deterministic subset of catalogue components is removed from training and used as stand-in truth, the
+mapped remainder is masked exactly as the organizer masks known faults, and the connector feature must
+raise the masked-domain DTI on the hidden components over the same-run no-connector control. This is
+the design the previous session's review demanded ("catalogue geometry must hide held-out
+components"); the quadrant proxy alone cannot test a feature whose target *is* between mapped strands.
+
+**Measured outcome (2026-10-03, real data).** The harness `scripts/relay_connector_holdout.py` ran to
+completion (`docs/research/relay-connector-holdout.json`) on the real catalogue. Design: the 3,199
+8-connected catalogue components were split into hidden/known halves by centroid within 3.2 km tiles;
+connector map = the 1,500 m dilation of *known* traces that contains ≥ 2 distinct known components,
+minus everything within 300 m of a known trace; controls were (a) `zone_all`, the whole near-known
+annulus minus the same 300 m band, and (b) `random_near`, count-matched draws from that same annulus;
+every arm was scored with the exact masked distance-weighted Tversky on the hidden half only. At a
+matched 15,000-pixel emission budget (means of 8 paired draws): connector zone **0.0485** DTI,
+`random_near` **0.0480**, `zone_all` **0.0491**, far-field random **0.0214**. Credit per emitted pixel:
+connector **0.0640**, `random_near` **0.0632**, `zone_all` **0.0626**, far random **0.0277**.
+
+Reading: the connector geometry carried **+1.2 %** credit per pixel over a proximity-matched control —
+far too small to separate from draw noise, and below the whole-annulus control. The dominant effect is
+the generic proximity prior (~2.3× per-pixel credit for any pixel near mapped traces versus far field),
+not the second-order terminal-pair geometry that H-31-01 claimed. A methodological caveat, recorded so
+the test is not over-read either way: the connector pool (1,110,061 px) is 94 % of the entire near-known
+annulus (1,178,995 px), so "connector" and "proximity-matched control" draw from nearly the same support
+and the matched-budget comparison is intrinsically weak. A first version of the harness with a 102 km
+checkerboard split produced the same non-result from the opposite direction (it separated whole fault
+zones regionally), which is itself a reminder that the split must interleave at the fault-zone scale.
+
+Verdict: **H-31-01 is not promoted as instantiated.** The surviving refinement is the paired-termination
+constraint — require two *distinct* mapped strands with azimuth within ~20°, along-strike overlap, and a
+0.3–3 km gap — tested with component-pair (not pixel-pool) statistics, before any feature is added to a
+training arm.
+
+### Measured outcome — metric-algebra emission holdout (2026-10-03, real data)
+
+The preregistered emission experiment (`docs/research/metric-emission-preregistration.md`,
+`scripts/metric_emission_holdout.py`) has now been run to completion on the real grid, all four
+held-out quadrants, every rule choosing its own operating point, parameters selected
+leave-one-fold-out. Raw output: `docs/research/metric-emission-holdout-results.json`; write-up:
+`docs/research/metric-emission-holdout-results.md`.
+
+**Registered gate: FAILED — no family promoted.** Pooled cross-validated proxy DTI: `uniform`
+(Poisson-disk thinning) **0.18675**, `adaptive` **0.18927**, `dense` **0.13455**, `metric` (greedy
+marginal rule) **0.13313**. The metric rule needed **≥ +0.005** versus both `dense` and `uniform`;
+it came out **−0.0014** versus dense and **−0.0536** versus uniform, and was below uniform in every
+fold. `adaptive` − `uniform` = +0.0025, positive but under the threshold — not promoted either.
+
+Mechanism, recorded because it matters for the next attempt: the greedy rule was **truncated by the
+candidate-pool cap**, not by its own stopping criterion — it emitted exactly 120,000 pixels per fold
+(the pool limit) at only 0.033–0.043 credit per emitted pixel, while uniform thinning emitted 3–6×
+fewer pixels at 2.4–4.7× the credit per pixel. On a pointwise-GBM belief surface, the estimated
+marginal credit stays above λ ≈ 0.055·cost for far more pixels than the surface can actually
+deliver against the sparse catalogue truth. This corroborates the earlier count-matched pilot's
+null, and matches the owner's public evidence (their best artifacts are sparse dotted masks with
+median spacing ≈ 2.2–3.0 px, i.e. near the 300 m kernel radius — coherent with "thin, do not
+flood"). The natural follow-ups are (a) calibrating the belief surface before applying the marginal
+rule, and (b) replacing the pool cap with an explicit FP-budget cap.
+
+---
+
+
+
+### Cross-check against the owner's own 2026-10-02/03 findings (owner-reported, unverified)
+
+Before freezing the five new candidates, their families were checked against the owner's own
+GEMSDOE25 knowledge documents (fetched 2026-10-03 via the GitHub API; **owner-reported, not
+independently verified, not competition receipts**). These change the confidence ordering and stop
+one line of work:
+
+* **Relay/termination geometry is already twice-dead.** The owner's preregistered H30-1 paired relay ×
+  terrain factorial *screened positive* (mean paired gain +0.004078, 4/4 folds, draws 6–7) and then
+  **failed its fresh-draw confirmation** (−0.001275, 1/4 folds) → registered verdict "Stop this
+  candidate." Our independent H-31-01 component holdout also failed to separate connector geometry
+  from a proximity-matched control (+1.2 % credit/px). Do not build further on the relay-connector
+  family unless a genuinely new observable is added; treat both results as one convergent negative.
+* **DEM curvature / scarp descriptors (the owner's factor B) carry the effect**: +0.0253 on the
+  catalogue-hide-and-recover proxy, 4/4 folds, and the owner's factor analysis attributes ~14 % of the
+  effect energy to B (vs 80 % to catalogue geometry E, which is partly proxy-flattering). This is the
+  strongest external corroboration for **H-31-02** (3DEP 1 m matched-filter scarps) being the right
+  family — and the reason it is the top-ranked new candidate despite its transfer cost. Our own
+  H-31-05 curvature detector is a weaker echo of the same family.
+* **Thermal / geochemical evidence (factor D) is small but consistent** (+0.0044, 4/4) — supportive
+  context for **H-31-04** (radiometric K–Th–U unmixing), which stays cheap and second-tier.
+* **Potential-field gradients (A) were inert** (−0.0027, 1/4) and **strain/seismicity (C) was
+  consistently negative** (−0.0109, 0/4) on the owner's proxy; this *deprioritizes* strain-derivative
+  ideas (including parts of H-31-05) and is consistent with our own pilot's strain findings.
+  H-31-02/03's DEM-based families are unaffected.
+* **Emission geometry (owner's frozen sweeps, exploratory + confirmatory draws):** score-ordered dots
+  at ~2.4 px spacing with total positive share ≈2.45–3.5 % beat score-blind `dot_thin` at equal pixel
+  count (+0.0034–0.0037, 4/4) and the joint add-on surface (X1+X2+X3, each weak alone) passed both
+  replicates (+0.0050, +0.0038) — but its predicted best corner B+E did **not** replicate, i.e. their
+  own surface selection was partly screen-overfit. Our metric-emission gate failed in the same
+  direction: thin, score-ranked dots beat both dense emission and the greedy marginal rule. Any
+  future emission work here should therefore use **score-ordered thinning at a fixed small share,
+  with the thinning radius and share chosen leave-one-fold-out**, not a marginal-rule greedy emitter.
+
 **Status:** planning register only. None has been run in this checkout. The current tree contains the general modelling/tooling scaffold but no competition data or prior project feature manifests. The novelty comparison uses the publicly readable GEMSDOE24–27 pages and the user-supplied summary, not an exhaustive audit of every historical repository. Treat “not found in inspected summaries” as a bounded claim, not proof that no competitor has tried it.
 
 **Promotion rule:** no weekly slot is available to a hypothesis until its feature data are obtained and checksummed, the recipe and thresholds are frozen, it beats the current same-run spatial-holdout best in a buffered spatial validation with a fresh-seed confirmation, and the exact candidate GeoTIFF passes the template audit. A positive catalogue-derived holdout is necessary but not sufficient evidence for hidden, expert-mapped faults.
@@ -28,4 +167,11 @@ The DTI intervals above are deliberately broad, non-negative *planning priors*, 
 
 ## Current result
 
-The required feature rasters, label raster, and sample template are absent from this checkout. Consequently **rank 1 was not validated**, the current spatial-holdout best cannot be measured, and no hypothesis can be promoted or used to justify a weekly submission slot in this session. The code includes a spatial-fold builder and an evaluation CLI so the protocol is reproducible once authorized data are placed locally.
+The rasters are present locally from owner mirrors (SHA-256 verified; **not organizer-authenticated**; the template irregularity — it contains labels — is recorded in `docs/research/data-audit.json`). Four real-data holdout experiments have now run, and **nothing is promoted; no weekly submission slot is justified**:
+
+1. **Four-arm spatial pilot** — failed its frozen promotion gate (the interaction arm H lost to the context control C by 0.000065 against a required +0.002; `docs/research/pilot-results.json`).
+2. **Paired regional-vs-boundary loss ablation** — the seed-30 screen was positive (pooled DTI 0.062042 → 0.063990, Δ +0.001948, 3/4 folds; partial-distance-only truth pixels 80 → 40), but the **fresh-seed 31 confirmation did not replicate the gain** (Δ +0.000115, 2/4 folds, sign-flipping folds) even though the near-miss conversion reproduced (1,889 → 724). Verdict: the geometry term changes near-miss allocation as designed but does not reliably raise the proxy DTI at this budget. `docs/research/loss-ablation-holdout.md` + `loss-ablation-holdout-seed31.json`.
+3. **Preregistered metric-algebra emission holdout** — the frozen gate **failed**: pooled cross-validated proxy DTI uniform 0.18675, adaptive 0.18927, dense 0.13455, metric 0.13313; the greedy metric rule needed ≥ +0.005 over both dense and uniform and came out −0.0014 / −0.0536 (below uniform in every fold); adaptive − uniform = +0.0025 is under the threshold. The greedy rule was pool-cap-truncated at 120,000 px/fold at 0.033–0.043 credit/px, versus uniform thinning's 3–6× fewer pixels at 2.4–4.7× the credit — "thin, do not flood". `docs/research/metric-emission-holdout-results.md`.
+4. **H-31-01 relay-connector component holdout** — connector geometry earned +1.2 % credit per pixel over a proximity-matched control and fell below the whole near-known annulus, so it is **not promoted as tested**; the dominant effect is the generic proximity prior (~2.3× far-field). The surviving refinement is the paired-termination constraint. `docs/research/relay-connector-holdout.json`.
+
+The runnable ordering now is: (1) H-31-01 paired-termination refinement (component-pair statistics), (2) a larger-budget boundary-weight sweep **only if** the loss line is retried, (3) emission work only against calibrated surfaces or an explicit FP budget, (4) H-31-02/03 external-data arms once a transfer path off this sandbox exists. The code includes the spatial-fold builder and evaluation CLIs so every protocol above is reproducible against the prepared arrays.

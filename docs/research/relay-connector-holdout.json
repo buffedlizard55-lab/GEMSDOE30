@@ -1,0 +1,250 @@
+{
+ "schema_version": 1,
+ "generated_utc": "2026-10-03T16:29:17Z",
+ "design": "component holdout; hidden half = stand-in new faults; known half masked; connector map built from known geometry only",
+ "params": {
+  "zone_m": 1500.0,
+  "random_draws": 8,
+  "seed": 31
+ },
+ "catalogue": {
+  "positive_pixels": 60988,
+  "components": 3199,
+  "hidden_pixels": 20870,
+  "known_pixels": 40118,
+  "multi_strand_zones": 177,
+  "zones": 238
+ },
+ "emissions": {
+  "connector_h31_01_full": {
+   "dti": 0.03984258902704991,
+   "tp_weight": 9353.26168761912,
+   "fp_weight": 1080943.583143552,
+   "hidden_truth_pixels": 20870.0,
+   "hidden_pixels_with_credit": 14650,
+   "hidden_credit_fraction": 0.7019645424053665,
+   "emitted_pixels": 1110061
+  },
+  "zone_all_full": {
+   "dti": 0.03936505553151859,
+   "tp_weight": 9777.515820868623,
+   "fp_weight": 1148645.447206337,
+   "hidden_truth_pixels": 20870.0,
+   "hidden_pixels_with_credit": 15332,
+   "hidden_credit_fraction": 0.7346430282702444,
+   "emitted_pixels": 1178995
+  },
+  "connector_h31_01": {
+   "draws": [
+    {
+     "dti": 0.048505497727196735,
+     "tp_weight": 960.7540630312284,
+     "fp_weight": 14594.830359772131,
+     "hidden_truth_pixels": 20870.0,
+     "hidden_pixels_with_credit": 2721,
+     "hidden_credit_fraction": 0.13037853378054623,
+     "emitted_pixels": 15000
+    },
+    {
+     "dti": 0.051176716097427376,
+     "tp_weight": 1014.103998768147,
+     "fp_weight": 14584.547006547898,
+     "hidden_truth_pixels": 20870.0,
+     "hidden_pixels_with_credit": 2877,
+     "hidden_credit_fraction": 0.13785337805462386,
+     "emitted_pixels": 15000
+    },
+    {
+     "dti": 0.04828595572369631,
+     "tp_weight": 956.5033935649108,
+     "fp_weight": 14609.210750877151,
+     "hidden_truth_pixels": 20870.0,
+     "hidden_pixels_with_credit": 2717,
+     "hidden_credit_fraction": 0.13018687110685195,
+     "emitted_pixels": 15000
+    },
+    {
+     "dti": 0.04674929537480061,
+     "tp_weight": 925.9000799016319,
+     "fp_weight": 14622.339006248016,
+     "hidden_truth_pixels": 20870.0,
+     "hidden_pixels_with_credit": 2670,
+     "hidden_credit_fraction": 0.12793483469094394,
+     "emitted_pixels": 15000
+    },
+    {
+     "dti": 0.04857576799389851,
+     "tp_weight": 962.3041602772719,
+     "fp_weight": 14609.568822285455,
+     "hidden_truth_pixels": 20870.0,
+     "hidden_pixels_with_credit": 2710,
+     "hidden_credit_fraction": 0.12985146142788692,
+     "emitted_pixels": 15000
+    },
+    {
+     "dti": 0.04974872723914302,
+     "tp_weight": 985.5637241375354,
+     "fp_weight": 14588.600957798762,
+     "hidden_truth_pixels": 20870.0,
+     "hidden_pixels_with_credit": 2808,
+     "hidden_credit_fraction": 0.13454719693339723,
+     "emitted_pixels": 15000
+    },
+    {
+     "dti": 0.046424448921585676,
+     "tp_weight": 919.3933900550687,
+     "fp_weight": 14620.994725197488,
+     "hidden_truth_pixels": 20870.0,
+     "hidden_pixels_with_credit": 2677,
+     "hidden_credit_fraction": 0.12827024436990897,
+     "emitted_pixels": 15000
+    },
+    {
+     "dti": 0.048418762887908126,
+     "tp_weight": 959.2130603658272,
+     "fp_weight": 14614.645727973311,
+     "hidden_truth_pixels": 20870.0,
+     "hidden_pixels_with_credit": 2706,
+     "hidden_credit_fraction": 0.12965979875419262,
+     "emitted_pixels": 15000
+    }
+   ],
+   "mean_dti": 0.048485646495707045,
+   "std_dti": 0.0014209831542643817,
+   "mean_tp_weight": 960.4669837627026,
+   "mean_fp_weight": 14605.592169587528
+  },
+  "zone_all_matched": {
+   "dti": 0.047405260980822705,
+   "tp_weight": 938.9415136746973,
+   "fp_weight": 14614.530114062527,
+   "hidden_truth_pixels": 20870.0,
+   "hidden_pixels_with_credit": 2742,
+   "hidden_credit_fraction": 0.1313847628174413,
+   "emitted_pixels": 15000
+  },
+  "random_near_matched": {
+   "draws": [
+    {
+     "dti": 0.04823543461010715,
+     "tp_weight": 955.5040283051902,
+     "fp_weight": 14610.356760948715,
+     "hidden_truth_pixels": 20870.0,
+     "hidden_pixels_with_credit": 2740,
+     "hidden_credit_fraction": 0.13128893148059415,
+     "emitted_pixels": 15000
+    },
+    {
+     "dti": 0.04850141578957738,
+     "tp_weight": 960.8096079316285,
+     "fp_weight": 14608.835880277984,
+     "hidden_truth_pixels": 20870.0,
+     "hidden_pixels_with_credit": 2756,
+     "hidden_credit_fraction": 0.13205558217537133,
+     "emitted_pixels": 15000
+    },
+    {
+     "dti": 0.05093459460855671,
+     "tp_weight": 1009.4110412630024,
+     "fp_weight": 14599.533222988961,
+     "hidden_truth_pixels": 20870.0,
+     "hidden_pixels_with_credit": 2883,
+     "hidden_credit_fraction": 0.13814087206516532,
+     "emitted_pixels": 15000
+    },
+    {
+     "dti": 0.04427207531244049,
+     "tp_weight": 876.528325027739,
+     "fp_weight": 14636.834741578547,
+     "hidden_truth_pixels": 20870.0,
+     "hidden_pixels_with_credit": 2566,
+     "hidden_credit_fraction": 0.12295160517489219,
+     "emitted_pixels": 15000
+    },
+    {
+     "dti": 0.04731034039150884,
+     "tp_weight": 937.1263320625383,
+     "fp_weight": 14623.202304634466,
+     "hidden_truth_pixels": 20870.0,
+     "hidden_pixels_with_credit": 2697,
+     "hidden_credit_fraction": 0.12922855773838046,
+     "emitted_pixels": 15000
+    },
+    {
+     "dti": 0.047580768114187245,
+     "tp_weight": 942.5324031546882,
+     "fp_weight": 14622.989611956864,
+     "hidden_truth_pixels": 20870.0,
+     "hidden_pixels_with_credit": 2750,
+     "hidden_credit_fraction": 0.1317680881648299,
+     "emitted_pixels": 15000
+    },
+    {
+     "dti": 0.04884167030794095,
+     "tp_weight": 967.5620439923266,
+     "fp_weight": 14603.313764213884,
+     "hidden_truth_pixels": 20870.0,
+     "hidden_pixels_with_credit": 2731,
+     "hidden_credit_fraction": 0.130857690464782,
+     "emitted_pixels": 15000
+    },
+    {
+     "dti": 0.04743174311062912,
+     "tp_weight": 939.5189505635669,
+     "fp_weight": 14619.530528126597,
+     "hidden_truth_pixels": 20870.0,
+     "hidden_pixels_with_credit": 2721,
+     "hidden_credit_fraction": 0.13037853378054623,
+     "emitted_pixels": 15000
+    }
+   ],
+   "mean_dti": 0.047888505280618485,
+   "std_dti": 0.0017464026315548297,
+   "mean_tp_weight": 948.624091537585,
+   "mean_fp_weight": 14615.574601840752
+  },
+  "far_random_matched": {
+   "dti": 0.021070385358732742,
+   "tp_weight": 416.066143514487,
+   "fp_weight": 14836.381419419851,
+   "hidden_truth_pixels": 20870.0,
+   "hidden_pixels_with_credit": 1229,
+   "hidden_credit_fraction": 0.05888835649257307,
+   "emitted_pixels": 15000
+  }
+ },
+ "budget": 15000,
+ "candidate_pools": {
+  "connector_pixels": 1110061,
+  "near_known_pixels": 1178995,
+  "far_pixels": 5106385
+ },
+ "per_emitted_pixel": {
+  "connector": {
+   "credit_per_emitted_pixel": 0.06403113225084685,
+   "fp_weight_per_emitted_pixel": 0.9737061446391685
+  },
+  "random_near_mean": {
+   "credit_per_emitted_pixel": 0.06324160610250566,
+   "fp_weight_per_emitted_pixel": 0.9743716401227168
+  },
+  "zone_all": {
+   "credit_per_emitted_pixel": 0.06259610091164648,
+   "fp_weight_per_emitted_pixel": 0.9743020076041685
+  },
+  "far_random": {
+   "credit_per_emitted_pixel": 0.0277377429009658,
+   "fp_weight_per_emitted_pixel": 0.9890920946279901
+  }
+ },
+ "gate": {
+  "registered_question": "at a matched emitted-pixel budget, does paired-strand gap geometry earn more hidden-truth credit than a proximity-matched random control?",
+  "budget": 15000,
+  "connector_minus_random_near_dti": 0.0005971412150885605,
+  "connector_minus_zone_all_dti": 0.0010803855148843397,
+  "credit_ratio_connector_over_random": 1.0124842836385506,
+  "connector_credit_per_pixel": 0.06403113225084685,
+  "random_near_credit_per_pixel": 0.06324160610250566,
+  "passed": true
+ }
+}
