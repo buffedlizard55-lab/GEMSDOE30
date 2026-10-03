@@ -201,7 +201,7 @@ a different emission schedule.
 holdout [MEASURED].** Catalogue-proxy DTI ranks the GBM artifact (0.19020) *above* d2.8
 (0.16177), the reverse of the portal ordering. Expected, given 7.1: the real test set is
 expert-labelled faults absent from the catalogue, and catalogue pixels are masked out of
-scoring. Recorded as `IR-30-041`.
+scoring. Recorded as `IR-30-046`.
 
 **No-hallucination statement:** every number in §1–§3 and §7 is either quoted from a source in
 this register, measured in this checkout with the command listed, or explicitly tagged
