@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-03T23:35:09+00:00",
+  "generated_utc": "2026-10-03T23:47:28+00:00",
   "runner": "GitHub Actions (general internet access); the agent sandbox cannot reach these hosts",
   "drivendata_contacted": false,
   "grid_source_note": "Derived rasters use the hash-pinned owner-mirror competition grid. Those bytes are owner-mirrored, not organizer-authenticated; alignment is verified, labels are never learnt from.",
@@ -141,7 +141,7 @@
     "gdr_2m_probes:2m_temperature_probe_n83geo.shp": "AttributeError(\"module 'pyogrio' has no attribute 'read_raw'\")"
   },
   "stage": "completed",
-  "updated_utc": "2026-10-03T23:35:23+00:00",
+  "updated_utc": "2026-10-03T23:47:41+00:00",
   "python": "3.11.16",
   "imports": {
     "numpy": "2.4.6",
