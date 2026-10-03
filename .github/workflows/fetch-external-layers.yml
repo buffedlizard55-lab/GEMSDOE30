@@ -19,7 +19,11 @@ on:
   push:
     branches:
       - main
-      - arena/01a102a1-gemsdoe30
+      # Any Arena session branch: the previous single-branch trigger
+      # (arena/01a102a1-gemsdoe30) never matched later sessions, so a change to
+      # the fetch script on a fresh branch would not have re-run the bridge.
+      # See docs/irregularities.md IR-30-040.
+      - "arena/**"
     paths:
       - ".github/workflows/fetch-external-layers.yml"
       - "scripts/fetch_external_layers.py"
