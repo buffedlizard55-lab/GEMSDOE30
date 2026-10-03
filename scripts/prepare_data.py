@@ -13,7 +13,16 @@ import argparse
 import hashlib
 import json
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
+
+
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def _dependencies():
@@ -140,20 +149,49 @@ def prepare(features_path: Path, labels_path: Path, template_path: Path, output_
         if empty_channels:
             raise ValueError(f"feature channels have no finite values inside the template footprint: {empty_channels}")
 
+        transform_gdal = [float(value) for value in transform.to_gdal()]
+        valid_mask_sha256 = hashlib.sha256(np.packbits(footprint).tobytes()).hexdigest()
+        feature_band_names = [
+            description or f"band_{index + 1}"
+            for index, description in enumerate(features.descriptions)
+        ]
+        source_files = {
+            "training_features": {"path": str(features_path), "sha256": _sha256_file(features_path)},
+            "labels": {"path": str(labels_path), "sha256": _sha256_file(labels_path)},
+            "sample_submission": {"path": str(template_path), "sha256": _sha256_file(template_path)},
+        }
+        signature_payload = {
+            "source_file_sha256": {name: row["sha256"] for name, row in source_files.items()},
+            "shape_hw": [height, width],
+            "feature_channels": channels,
+            "feature_band_names": feature_band_names,
+            "epsg": epsg,
+            "transform_gdal": transform_gdal,
+            "valid_mask_sha256": valid_mask_sha256,
+            "label_values_observed": sorted(label_encodings),
+        }
+        dataset_signature = hashlib.sha256(
+            json.dumps(signature_payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        ).hexdigest()
         manifest = {
-            "schema_version": 2,
+            "schema_version": 3,
+            "prepared_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "features_path": str(features_path),
             "labels_path": str(labels_path),
             "template_path": str(template_path),
+            "source_files": source_files,
+            "dataset_signature": dataset_signature,
             "feature_array": "features_raw.npy",
             "shape_hw": [height, width],
             "feature_channels": channels,
+            "feature_band_names": feature_band_names,
+            "feature_dtypes": list(features.dtypes),
             "finite_feature_pixels_by_channel": [int(count) for count in finite_feature_counts],
             "epsg": epsg,
-            "transform_gdal": [float(value) for value in transform.to_gdal()],
+            "transform_gdal": transform_gdal,
             "pixel_size_m": [abs(transform.a), abs(transform.e)],
             "template_valid_pixels": int(footprint.sum()),
-            "valid_mask_sha256": hashlib.sha256(np.packbits(footprint).tobytes()).hexdigest(),
+            "valid_mask_sha256": valid_mask_sha256,
             "label_valid_pixels": int(label_valid_out.sum()),
             "positive_label_pixels": int(labels_out.sum()),
             "label_values_observed": sorted(label_encodings),
