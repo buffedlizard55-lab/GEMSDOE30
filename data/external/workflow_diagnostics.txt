@@ -1,5 +1,5 @@
-run: 37138854308  ref: arena/01a102a1-gemsdoe30  sha: d697301a18126aeb1069e52b4e5693ede7e21373
-date: 2026-10-03T16:59:21Z
+run: 37138926461  ref: arena/01a102a1-gemsdoe30  sha: 16934b5860b16ffb525ca3321cdb463a6d33c351
+date: 2026-10-03T17:00:29Z
 pwd: /home/runner/work/GEMSDOE30/GEMSDOE30
 python: Python 3.11.16
 Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (26.2.1)
@@ -38,19 +38,19 @@ Collecting python-dateutil>=2.8.2 (from pandas)
 Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas)
   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
 Downloading numpy-2.4.6-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.9 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.9/16.9 MB 89.8 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.9/16.9 MB 135.6 MB/s  0:00:00
 Downloading scipy-1.17.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.3 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.3/35.3 MB 366.7 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.3/35.3 MB 153.9 MB/s  0:00:00
 Downloading rasterio-1.4.4-cp311-cp311-manylinux_2_28_x86_64.whl (35.9 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.9/35.9 MB 187.1 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.9/35.9 MB 115.2 MB/s  0:00:00
 Downloading pyogrio-0.13.0-cp311-abi3-manylinux_2_28_x86_64.whl (33.3 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 33.3/33.3 MB 194.0 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 33.3/33.3 MB 153.8 MB/s  0:00:00
 Downloading shapely-2.1.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (3.1 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 190.0 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 148.6 MB/s  0:00:00
 Downloading pyproj-3.7.2-cp311-cp311-manylinux_2_28_x86_64.whl (9.5 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.5/9.5 MB 167.9 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.5/9.5 MB 143.0 MB/s  0:00:00
 Downloading pandas-3.0.6-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (11.1 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.1/11.1 MB 370.8 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.1/11.1 MB 160.7 MB/s  0:00:00
 Downloading click-8.5.0-py3-none-any.whl (125 kB)
 Downloading cligj-0.7.2-py3-none-any.whl (7.1 kB)
 Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
@@ -65,31 +65,22 @@ Installing collected packages: six, pyparsing, packaging, numpy, click, certifi,
 
 Successfully installed affine-3.0.1 attrs-26.1.0 certifi-2026.7.22 click-8.5.0 click-plugins-1.1.1.2 cligj-0.7.2 numpy-2.4.6 packaging-26.3 pandas-3.0.6 pyogrio-0.13.0 pyparsing-3.3.3 pyproj-3.7.2 python-dateutil-2.9.0.post0 rasterio-1.4.4 scipy-1.17.1 shapely-2.1.2 six-1.17.0
 imports ok 1.4.4 0.13.0
---- fetch_external_layers.py start 16:59:37 ---
+--- fetch_external_layers.py start 17:00:43 ---
 [fetch] grid_labels: 425830 bytes
 [fetch] grid_template: 1599597 bytes
+[fetch] sgmc_nv: 69056094 bytes
+[fetch] sgmc_ca: 24977406 bytes
 Traceback (most recent call last):
-  File "rasterio/_base.pyx", line 311, in rasterio._base.DatasetBase.__init__
-  File "rasterio/_base.pyx", line 222, in rasterio._base.open_dataset
-  File "rasterio/_err.pyx", line 359, in rasterio._err.exc_wrap_pointer
-rasterio._err.CPLE_OpenFailedError: /tmp/gems_ext_d3qo1x_7/grid/grid_labels.tif: No such file or directory
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py", line 367, in <module>
+  File "/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py", line 374, in <module>
     code = main()
            ^^^^^^
-  File "/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py", line 178, in main
-    with rasterio.open(grid_dir / "grid_labels.tif") as dataset:
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/rasterio/env.py", line 463, in wrapper
-    return f(*args, **kwds)
-           ^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/rasterio/__init__.py", line 356, in open
-    dataset = DatasetReader(path, driver=driver, sharing=sharing, **kwargs)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "rasterio/_base.pyx", line 313, in rasterio._base.DatasetBase.__init__
-rasterio.errors.RasterioIOError: /tmp/gems_ext_d3qo1x_7/grid/grid_labels.tif: No such file or directory
+  File "/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py", line 351, in main
+    rasterise_linework(sgmc_paths, "sgmc_faults")
+  File "/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py", line 232, in rasterise_linework
+    gdf = pyogrio.read_dataframe(shapefile)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/pyogrio/geopandas.py", line 361, in read_dataframe
+    raise ImportError("geopandas is required to use pyogrio.read_dataframe()")
+ImportError: geopandas is required to use pyogrio.read_dataframe()
 
 wrote data/external/external_receipt.json

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-03T16:59:37+00:00",
+  "generated_utc": "2026-10-03T17:00:43+00:00",
   "runner": "GitHub Actions (general internet access); the agent sandbox cannot reach these hosts",
   "drivendata_contacted": false,
   "grid_source_note": "Derived rasters use the hash-pinned owner-mirror competition grid. Those bytes are owner-mirrored, not organizer-authenticated; alignment is verified, labels are never learnt from.",
@@ -15,18 +15,53 @@
       "bytes": 1599597,
       "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
       "ok": true
+    },
+    "sgmc_nv": {
+      "url": "https://mrdata.usgs.gov/geology/state/shp/NV.zip",
+      "bytes": 69056094,
+      "sha256": "3b333ac025e59aae7f0d827db45ba32c425cf867eb341561a788af1de186b76b",
+      "ok": true,
+      "licence": "US Government work / public domain (USGS Mineral Resources Program)",
+      "what": "USGS State Geologic Map Compilation, Nevada state geological map package",
+      "landing": "https://mrdata.usgs.gov/geology/state/"
+    },
+    "sgmc_ca": {
+      "url": "https://mrdata.usgs.gov/geology/state/shp/CA.zip",
+      "bytes": 24977406,
+      "sha256": "78765ba4428df9f25a84f86e0b2529bd0508fc8a2cf65d2f41a830e82bccfd58",
+      "ok": true,
+      "licence": "US Government work / public domain (USGS Mineral Resources Program)",
+      "what": "USGS State Geologic Map Compilation, California state geological map package",
+      "landing": "https://mrdata.usgs.gov/geology/state/"
     }
   },
   "derived": {},
   "errors": {},
   "stage": "failed",
-  "updated_utc": "2026-10-03T16:59:38+00:00",
+  "updated_utc": "2026-10-03T17:00:43+00:00",
   "python": "3.11.16",
   "imports": {
     "numpy": "2.4.6",
     "rasterio": "1.4.4",
     "shapely": "2.1.2"
   },
-  "fatal": "RasterioIOError('/tmp/gems_ext_d3qo1x_7/grid/grid_labels.tif: No such file or directory')",
-  "trace": "Traceback (most recent call last):\n  File \"rasterio/_base.pyx\", line 311, in rasterio._base.DatasetBase.__init__\n  File \"rasterio/_base.pyx\", line 222, in rasterio._base.open_dataset\n  File \"rasterio/_err.pyx\", line 359, in rasterio._err.exc_wrap_pointer\nrasterio._err.CPLE_OpenFailedError: /tmp/gems_ext_d3qo1x_7/grid/grid_labels.tif: No such file or directory\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py\", line 367, in <module>\n    code = main()\n           ^^^^^^\n  File \"/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py\", line 178, in main\n    with rasterio.open(grid_dir / \"grid_labels.tif\") as dataset:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/rasterio/env.py\", line 463, in wrapper\n    return f(*args, **kwds)\n           ^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/rasterio/__init__.py\", line 356, in open\n    dataset = DatasetReader(path, driver=driver, sharing=sharing, **kwargs)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"rasterio/_base.pyx\", line 313, in rasterio._base.DatasetBase.__init__\nrasterio.errors.RasterioIOError: /tmp/gems_ext_d3qo1x_7/grid/grid_labels.tif: No such file or directory\n"
+  "grid": {
+    "shape": [
+      3730,
+      3292
+    ],
+    "crs": "EPSG:32611",
+    "transform": [
+      243350.0,
+      100.0,
+      0.0,
+      4508550.0,
+      0.0,
+      -100.0
+    ],
+    "footprint_pixels": 5167373,
+    "catalogue_pixels": 60988
+  },
+  "fatal": "ImportError('geopandas is required to use pyogrio.read_dataframe()')",
+  "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py\", line 374, in <module>\n    code = main()\n           ^^^^^^\n  File \"/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py\", line 351, in main\n    rasterise_linework(sgmc_paths, \"sgmc_faults\")\n  File \"/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py\", line 232, in rasterise_linework\n    gdf = pyogrio.read_dataframe(shapefile)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/pyogrio/geopandas.py\", line 361, in read_dataframe\n    raise ImportError(\"geopandas is required to use pyogrio.read_dataframe()\")\nImportError: geopandas is required to use pyogrio.read_dataframe()\n"
 }
