@@ -39,3 +39,27 @@
 - Shell HTTPS transfer attempts to the public GEMSDOE25/GEMSDOE27 TIFF hosts, Dropbox, and three direct GDR 1391 ZIP URLs failed with TLS connection errors (`SSL_ERROR_SYSCALL` for the GDR host). The web-page tool could retrieve the GDR catalog text and resource links but did not provide the archive bytes. Therefore no owner-hosted TIFF's pixel values/geotransform/checksum/score receipt, and no GDR archive checksum/schema/alignment, are independently verified in this checkout.
 - The public GDR and USGS catalog pages exposed license/access statements and archive/DOI links. Actual binary downloads, checksums, spatial alignment, and license compatibility with every proposed use remain explicit preconditions for those external-data experiments.
 - Current leaderboard values are snapshots only. DrivenData's Terms of Use prohibit automated monitoring/copying, so no scheduled scraper is included. The live leaderboard page is the source of record when reviewed through an authorized, permitted route.
+
+## Owner-side knowledge documents (fetched 2026-10-03, owner-reported only)
+
+The following documents were fetched from the public GitHub mirror
+`github.com/buffedlizard55-lab/GEMSDOE25` → `knowledge/` via the GitHub API on 2026-10-03 and are
+treated as **owner-reported prior work, not independently verified and not competition receipts**:
+
+* `12_h30_relay_factorial_outcomes_2026-10-03.md` — H30-1 paired relay × terrain factorial: screen
+  +0.004078 (4/4 folds) PASS → fresh-draw confirmation −0.001275 (1/4 folds) FAIL → "Stop this
+  candidate"; no full-data TIFF or slot.
+* `07_findings_2026-10-02.md` — fractional factorial 2^(5−1) (E catalogue +0.0610 4/4; B DEM
+  curvature/scarp +0.0253 4/4; D thermal/geochemical +0.0044 4/4; A potential field −0.0027 1/4;
+  C strain/seismicity −0.0109 0/4); add-on conjunction X1+X2+X3 passing both replicates (+0.0050,
+  +0.0038); emission sweeps selecting score-ordered ≈2.4 px dots at ≈2.45–3.5 % share; the root-cause
+  inference that the reported "[0,1]" portal error came from a file that was NaN over roughly 2.34 M
+  of the 5.17 M footprint pixels.
+* Related docs listed but not yet read in full: `09_preregistered_hypotheses_2026-10-02.md`,
+  `10_preregistered_h28_live_anchored_emission_design_2026-10-02.md`,
+  `current_project_brief_2026-10-03.md`, `03_hypotheses_ranked_2026-10-02.md`,
+  `06_geothermal_research_digest_2026-10-02.md`, `owner_brief_verbatim.txt`.
+
+These inform (but never replace) this repository's own holdout evidence; where the two disagree, the
+local measured result and the official sources win. Cross-check recorded in
+[`hypotheses.md`](hypotheses.md).

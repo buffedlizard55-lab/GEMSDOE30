@@ -1,6 +1,116 @@
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
-> **Complete persistent project brief — read this section before every project session.** These are the standing scope, scientific, operational, and integrity requirements from the project request—not a session-status summary. Preserve every acceptance criterion when changing this brief. Keep `docs/score-ledger.csv`, `docs/irregularities.md`, and the linked official sources in sync when updating claims.
+> **Complete persistent project brief — read the literal owner brief in the section *Read first — owner brief (verbatim)* and this section before every project session.** These are the standing scope, scientific, operational, and integrity requirements from the project request—not a session-status summary. Preserve every acceptance criterion when changing this brief. Keep `docs/score-ledger.csv`, `docs/irregularities.md`, and the linked official sources in sync when updating claims.
+
+## Read first — owner brief (verbatim)
+
+<details>
+<summary><b>Literal owner brief (click to expand; re-read at the start of every session)</b></summary>
+
+> **Objective and standing request.** Review the repo. There should be an easy to download
+> submission tif file as described by the prompt. Read the entire prompt.
+>
+> **Metric-shaped loss.** Train against a loss shaped like the metric's own geometry. The
+> competition scores within a 300 m kernel, not by exact pixel overlap — but plain cross-entropy
+> or Dice optimizes for exact overlap, a different target than what's actually being rewarded.
+> Kervadec, Bouchtiba, Desrosiers, Granger, Dolz, and Ben Ayed's boundary loss (2018) was built
+> for precisely this kind of mismatch on other severely unbalanced segmentation problems:
+> instead of summing over regions — which the paper shows produces loss contributions differing
+> by orders of magnitude between a rare positive class and the dominant background — it computes
+> a distance metric over contours, rewarding proximity to the true boundary, and the paper reports
+> measurable gains in both accuracy and training stability under exactly this kind of imbalance.
+> Implement a version using a distance transform built on the actual 300 m kernel radius, combine
+> it with the existing regional loss rather than replacing it (as the original paper recommends),
+> and check on holdout that it changes which near-misses the model is willing to make — it should
+> start rewarding a prediction that lands close to, not exactly on, a held-out fault, since that's
+> the credit the real metric already gives.
+>
+> **Highest-score study (the core question).** WE NEED TO STUDY, ANALYZE, AND UNDERSTAND THE
+> HIGHEST SCORE FROM THE GEMSDOE SITE WHERE THE SUBMISSION TIF IS DOWNLOADED FROM WHICH IS
+> `https://buffedlizard55-lab.github.io/GEMSDOE25/` — `dotted-h19-5-d2-8-20261002-e56ea318af89-nan: 0.2600`.
+> Why and how did this get the highest score and are we able to generate a submission that scores
+> higher than 0.26? Answer using PhD-level experience, knowledge and judgement. The leaderboard is
+> `https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/`.
+> **0.3195 is the highest score right now**, so design a new strategy, research, testing, analysis
+> and submission system that is unique and can score higher than 0.3195.
+>
+> **Hypotheses before implementation.** Generate 3–5 candidate geological hypotheses we haven't
+> tried yet, each naming: the specific layer(s) involved, the physical signature being targeted
+> (e.g. an edge-detection or curvature transform), why it should catch a fault missing from the
+> USGS/INGENIOUS catalogue rather than one already in it, and how it differs from anything already
+> implemented in this repo. Rank them by expected DTI improvement and implementation cost.
+> Validate the top candidate on our spatially-blocked holdout set before touching a weekly
+> submission slot — do not spend a submission slot on an idea that hasn't beaten the current
+> holdout best. If a candidate can't be validated without new external data, name the specific
+> free, official source needed and check it's obtainable before proposing the idea as viable.
+>
+> **Integrity and verification.** Work line by line verifying from official verified trusted
+> sources, provide links for manual review. There should be no manual input, work on your own to
+> complete tasks. Flag any irregularities for review. No hallucinations. Verify no hallucinations.
+> The goal of this project is to get a full list that follows our requirements.
+>
+> **Deep research.** We need to start doing heavy and deep research into the part of the project
+> that matters most: the scientific discovery of geothermal vents. Store all information and
+> knowledge gathered from official verified sources. Think outside the box but stay grounded in
+> proper scientific research; we are aiming for a top prize that many others compete for, so it is
+> important to be contrarian but smart. Find data sources others overlook. Do deep research and
+> critical thinking and come up with new hypotheses to test.
+>
+> **Site and submission.** The site should be able to generate a TIF file required for submission:
+> as easy as clicking a file to submit into the competition. This must be obvious at the very
+> beginning of the site / in the executive summary. *(A previous attempt returned the portal error
+> "Predicted values must be in range [0, 1]".)* Give it a unique name and a short comment to help
+> tell submissions apart (e.g. "clustering with k=25"). Create an executive-summary subpage that
+> explains exactly how to make a submission. Include a clean, user-friendly, simple GitHub Pages
+> site with all relevant information in an easy-to-read format with official verified links, kept
+> up to date automatically instead of by manual checking.
+>
+> **Competition facts to respect.** Overview and problem description
+> `https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/`; about page
+> `page/968`; data tab `/data/`; rules PDF `https://docs.nlr.gov/docs/fy26osti/96647.pdf`;
+> reference solution `https://github.com/drivendataorg/gems-prize-reference-solution`; GDR 1391
+> `https://gdr.openei.org/submissions/1391`.
+>
+> **Reported submission history supplied by the owner** (all owner/user-reported and unverified;
+> retained in `docs/score-ledger.csv`): GEMSDOE `gems-submission-20260925T001403Z-7f00890a` 0.1563;
+> 6GEMSDOE `gems6_hgb88-topk03_33cec71ff0` 0.0286; GEMSDOE3 `pindrop-v4-nodes-20260925T152420Z-f347b70daa`
+> 0.1193, `pindrop-v4-discovery-20260925T152423Z-37f9d5b855` 0.0830, `pindrop-v4-ridge-20260925T152422Z-4e03fc9705`
+> 0.1152; GEMSDOE2 `gemsdoe2-dual-family-union-20260925T160406Z-f68e590f` 0.1560; GEMSDOE4
+> `gems-submission-20260926T163915Z-237f0063` 0.0343; 5GEMSDOE `gems-submission-20260926T175114Z-7f00890a`
+> 0.1563; 7GEMSDOE `lidarscarp-ridge-top2pct-36c3a3f341c8` 0.1461; 8GEMSDOE `Hedge-v2_submission` 0.1563;
+> GEMSDOE9 `2314b599` 0.0107; 11GEMSDOE `gems-structural-area06-v1` 0.0202; 12GEMSDOE
+> `r7-nms3-dem10-scarp_0c9199f14e62` 0.1294 (and `_allfinite` 0.1294); 15GEMSDOE
+> `gems-tso1-20260929T005627Z-conj_alteration_mag` 0.0782; 14GEMSDOE
+> `GEMS_r5-geom-horse-ensemble_20260929T154852Z_ccbe1de0_site_e96e942f` 0.0020; 17GEMSDOE
+> `17GEMSDOE_F-ensemble-2pct_20260930T050626Z` 0.0187; 18GEMSDOE `H19-C_20260930T212401Z_c11e495e` 0.0297;
+> 19GEMSDOE `h19-4-multiline-corroborated-openness-thermal-pop-20260930-691e4dfa-nan` 0.1894,
+> `h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan` 0.1922; GEMSDOE10
+> `h16-continuation-20260927T065521077735Z-3431b83c7c` 0.0461, `h20-dem10-scarp-thin-20260927T155223039488Z-ffc91a1686` 0.0921,
+> `H25-ctx-ridge-20260927T232947704150Z-6452ae1d00` 0.1280, `h28-dotted-ridge-20260928T020256236880Z-6452ae1d00` 0.1839;
+> 13GEMSDOE `20261001_r13-lattice-s5_v2_nan-outside` 0.0904; 16GEMSDOE
+> `h16-1-topo-geophys-baseline-ridges-20260930-df20f65e-nan` 0.1855, `h18-3a-topo-geophys-x-complexity-prior-20260930-c502dfab-nan` 0.0976,
+> `h18-4-usgs-geologic-map-faults-gap-20260930-aef8f42c-nan` 0.0360; GEMSDOE21 `h19-4-reference-20260930-691e4dfa` 0.1894;
+> 20GEMSDOE `h20-1-sarnnpu-powerlaw-pi0363-tilt-wingcrack-20260930-be0e8f6b-nan` 0.1890,
+> `h20-5-continuous-pu-proxy-unverified-20260930-824ce73a-nan` 0.1859; GEMSDOE22
+> `h23-a-dti-optimal-emission-6pct-20261002-e2ec4b49-nan` 0.1002, `h23-b-dti-optimal-emission-10pct-20261002-86176698-nan` 0.0748;
+> GEMSDOE23 `h30-arrangement-matched-habitat-20261002-0d4e02e8-nan` 0.1352; GEMSDOE24
+> `h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan` 0.2477; GEMSDOE25
+> `dotted-h19-5-d2-8-20261002-e56ea318af89-nan` 0.2600; GEMSDOE26
+> `dilcond-oof-v1-20261003-47629f496133-nan` 0.1223; GEMSDOE27
+> `topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan` 0.2449; 28–33GEMSDOE scores not yet supplied.
+>
+> **Core values.** *Maximize P(Win)* — weigh tradeoffs, assess risk, choose the path that
+> maximizes the probability of winning. *Own the Outcome* — own results end to end, act without
+> waiting for permission, treat failure and success as signals. Work in three cumulative passes:
+> implement and verify; review for bugs, missing requirements and edge cases; re-check the whole
+> implementation against the original request and fix what remains. Then open a pull request from
+> `arena/01a10289-gemsdoe30` and merge it to `main`, and state what work remains and what limits it.
+
+The distilled, non-negotiable acceptance criteria that follow from this brief are in
+**Mission and non-negotiable requirements** below; if the two ever disagree, the literal brief above
+wins and the distilled list must be corrected.
+
+</details>
 
 ## Mission and non-negotiable requirements
 
@@ -21,16 +131,44 @@ Read the standing brief above every session. On 2026-10-03 we autonomously resto
 
 A preregistered four-arm CPU pilot ran all four 800 m-buffered spatial folds. See [protocol](docs/research/pilot-preregistration.md), [complete results](docs/research/pilot-results.json), [data audit](docs/research/data-audit.json). The top runnable strain/conductance interaction **failed its screen** against the same-run context control. No model candidate promoted; no competition slot used. This limited pointwise pilot is not a full-capacity U-Net or a comparison against the archived best.
 
-The D2.8 historical research TIFF is now a **local one-click download** on the site, independently format-checked against the mirrored template. It remains score-attribution-unverified and not slot-approved. 25 tests pass in this session. Previous status text below describes the baseline, not today's restored state.
+The D2.8 historical research TIFF is now a **local one-click download** on the site, independently format-checked against the mirrored template. It remains score-attribution-unverified and not slot-approved. 44 tests pass on this image (torch 2.14.1 and scipy 1.17.1 installed). Previous status text below describes the baseline, not today's restored state.
 
 Later on 2026-10-03 the metric-aware emission line was exercised end to end: `src/gemsdoe30/emission.py` gained a masked-domain scorer fix and a count-matched candidate pool, `tests/test_emission.py` (19 tests) passes, and `scripts/emission_holdout.py` ran three count-matched arms on the four 300 m-buffered quadrants. **All three arms failed their registered gate** (adaptive minus uniform pooled ΔDTI +0.0008 to +0.0016, positive in only 1–2 of 4 folds): uniform Poisson-disk thinning stays the default, no candidate promoted, no slot used. Suite now collects 44 tests; 39 pass on this image and 5 torch-gated tests skip. Numbers: [emission-holdout-results.json](docs/research/emission-holdout-results.json). The owner-artifact audit in [artifact-structure.json](docs/research/artifact-structure.json) also records that catalogue-proxy DTI ordering is *inverted* relative to the owner-reported leaderboard ordering, consistent with the official rule that the Initial Prize Round scores only the private set of new expert-labelled faults.
 
+Later still on 2026-10-03 three more real-data experiments completed. **(1) Paired regional-vs-boundary
+loss ablation** — four 300 m-buffered spatial quadrants, identical recipes except the loss, screen
+budget (2 × 20 steps, seed 30): pooled exact full-grid OOF DTI **0.062042 → 0.063990** (Δ **+0.001948**,
++3.14 % relative), 3/4 folds positive, fold 3 regressing −0.0009; the number of catalogue-truth pixels
+left on partial-distance credit halved (80 → 40). **Confirmed only in part.** The fresh-seed confirmation (seed 31, identical protocol) reproduced the
+behavioural effect — partial-distance truth coverage fell 1,889 → 724 — but **not** the DTI gain:
+pooled ΔDTI **+0.000115** with only **2/4** folds positive (folds 0 and 3 flip sign versus the screen),
+against the required 3/4. Verdict: **the boundary term changes near-miss allocation as designed but
+does not reliably raise the proxy DTI at this budget; not promoted, no candidate file, no slot.**
+Evidence: [loss-ablation-holdout.md](docs/research/loss-ablation-holdout.md),
+[loss-ablation-holdout.json](docs/research/loss-ablation-holdout.json),
+[seed-31 confirmation](docs/research/loss-ablation-holdout-seed31.json). **(2) Preregistered
+metric-algebra emission holdout** — the registered gate **failed**: pooled cross-validated proxy DTI
+`uniform` 0.18675, `adaptive` 0.18927, `dense` 0.13455, `metric` (greedy marginal rule) 0.13313; the
+metric rule needed ≥ +0.005 versus both dense and uniform and came out −0.0014 and −0.0536, below
+uniform in every fold, and adaptive's +0.0025 edge over uniform is under the threshold. No emission
+family promoted. Mechanism: the greedy rule hit its candidate-pool cap (exactly 120,000 px per fold)
+at 0.033–0.043 credit/px while uniform thinning emitted 3–6× fewer pixels at 2.4–4.7× the credit —
+"thin, don't flood" again, matching the owner's sparse dotted masks. Evidence:
+[metric-emission-holdout-results.md](docs/research/metric-emission-holdout-results.md) +
+[metric-emission-holdout-results.json](docs/research/metric-emission-holdout-results.json).
+**(3) H-31-01 relay-connector component holdout** — the connector geometry earned only **+1.2 %**
+credit per emitted pixel over a proximity-matched control and fell below the unrestricted near-known
+annulus, so the hypothesis is **not promoted as tested**; the dominant effect is the generic proximity
+prior (~2.3× far-field). Evidence:
+[relay-connector-holdout.json](docs/research/relay-connector-holdout.json). No GEMSDOE30 submission
+TIFF exists, no slot has been used, and **no score is claimed** for any of this work.
+
 ## Current verified state — 2026-10-03
 
-- The recorded baseline commit for this checkout already contains the model/loss, tests, training/inference/validation scripts, and site scaffold. The Git history available here is shallow/grafted to that commit, so earlier claims about a prior README-only state cannot be independently verified from this repository. At the start of this review there were **no competition rasters, sample template, checkpoints, real holdout predictions, or generated GEMSDOE30 TIFFs**; real-data training remains blocked.
+- The recorded baseline commit for this checkout already contains the model/loss, tests, training/inference/validation scripts, and site scaffold. The Git history available here is shallow/grafted to that commit, so earlier claims about a prior README-only state cannot be independently verified from this repository. At the start of this review there were **no competition rasters, sample template, checkpoints, real holdout predictions, or generated GEMSDOE30 TIFFs**. The rasters have since been restored from SHA-256-pinned owner mirrors (not organizer-authenticated) and real-data training, OOF prediction, stitching and scoring all run locally; what remains blocked is organizer-authenticated data and the hidden expert labels.
 - The DrivenData data page redirects an unauthenticated visitor to its login page. No DrivenData credentials/session or competition rasters are available here, and the shell cannot retrieve the public owner-mirror TIFFs in this environment. The safe data preflight is `bash scripts/download_competition_data.sh`; it reports missing inputs and does **not** attempt a login bypass.
 - The official leaderboard was read on **2026-10-03**: the displayed leader was **DARD, 0.3195**. It is a live, changeable public score; it is not private-test performance. The supplied claim that the linked GEMSDOE25 D2.8 TIFF scored 0.2600 is **not authenticated to that exact file**: the GEMSDOE25 landing page currently describes that TIFF as unscored/not slot-approved, while the public leaderboard contains a 0.2600 row for participant `wbg1` at rank 15. See [analysis](docs/leaderboard-analysis.md) and [irregularities](docs/irregularities.md).
-- The 300 m loss geometry and spatial-holdout pipeline are implemented. **23 tests pass** with NumPy, SciPy, rasterio, PyTorch, and pytest installed; the geometry term matches the independent metric on a masked grid, and a seam regression test confirms the pooled OOF score keeps 100 m near-miss credit across quadrants. Review fixed quadrant-component pooling, prevents fold-specific checkpoints from being relabeled across OOF folds, and checks prediction/checkpoint hashes and experiment recipes. A disposable synthetic 64×64 smoke passed paired four-fold training/inference, OOF stitching/evaluation, full-fit inference, and exact-template TIFF validation. **All are software/synthetic checks only. No real spatial holdout has run, no score gain is claimed, and no new GEMSDOE30 TIFF has been produced.**
+- The 300 m loss geometry and spatial-holdout pipeline are implemented. **44 tests pass** with NumPy, SciPy, rasterio, PyTorch, and pytest installed; the geometry term matches the independent metric on a masked grid, and a seam regression test confirms the pooled OOF score keeps 100 m near-miss credit across quadrants. Review fixed quadrant-component pooling, prevents fold-specific checkpoints from being relabeled across OOF folds, and checks prediction/checkpoint hashes and experiment recipes. A disposable synthetic 64×64 smoke passed paired four-fold training/inference, OOF stitching/evaluation, full-fit inference, and exact-template TIFF validation. Real-data spatial holdouts have now run (four-arm pilot, metric-emission holdout, paired loss ablation) and are recorded above; the loss screen is positive but unconfirmed, and **no candidate file has been promoted, no score is claimed, and no GEMSDOE30 TIFF has been produced.**
 - The site exposes a one-click link to the pre-existing GEMSDOE25 research TIFF, clearly labeled external, unscored, and not slot-approved. It is not represented as this repository's model output or as an approved competition submission. A genuine GEMSDOE30 download will be generated only after data placement, training, holdout promotion, and exact-template validation.
 
 ## Start here
@@ -100,9 +238,9 @@ Later on 2026-10-03 the metric-aware emission line was exercised end to end: `sr
 
 ## Current next steps and limits
 
-1. Obtain the authorized competition package and template, then verify byte-level provenance and feature/label semantics. This is the current hard blocker to real training/holdout testing.
-2. Run the registered regional-vs-boundary ablation on spatial blocks; report all folds, seeds, pooled DTI, near-miss histograms, and failure cases. The 0.5 geometry weight is an initial test setting, not a tuned or established optimum.
+1. The seed-31 confirmation **did not replicate** the seed-30 loss screen (ΔDTI +0.0001, 2/4 folds). Do not promote the boundary loss on this evidence. If it is retried, use a larger training budget and a boundary-weight sweep before any fresh-seed test, and score emitted masks rather than dense probability surfaces. The remaining hard blocker is organizer-authenticated data and the hidden expert labels, not local rasters.
+2. The registered regional-vs-boundary ablation has now run on spatial blocks at two seeds, with all folds, pooled DTI and near-miss histograms reported (screen positive, confirmation negative). The 0.5 geometry weight is an untuned test setting; the loss remains **not promoted**.
 3. Test the leading geothermal-evidence hypothesis only if its exact GDR archives are downloaded, checksummed, licensed, aligned, and separately ablated. Catalog-page visibility is not proof that a ZIP has been retrieved.
-4. Build and validate an exact-grid TIFF only from a promoted model. No artifact can be honestly produced from this checkout today because its competition template and prediction inputs are absent.
+4. Build and validate an exact-grid TIFF only from a promoted model. The template and prediction inputs are now present locally (owner mirrors), but no model has passed the frozen promotion rule, so no GEMSDOE30 candidate file exists yet. The site's download remains the clearly-labelled external GEMSDOE25 D2.8 research TIFF plus the submission guide.
 5. Refresh the leaderboard snapshot by a permitted method. DrivenData's Terms of Use prohibit robots/spiders/automatic access for monitoring or copying, so this project does not scrape it; this limitation prevents an autonomous continuously updated leaderboard feed. The official site remains the manual source of live values.
 6. Confirm any deadline discrepancy in the competition homepage versus the September 2026 rules PDF with the organizer; see [irregularities](docs/irregularities.md).

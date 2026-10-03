@@ -21,7 +21,7 @@
     </div>
   </header>
 
-  <main><section class="section callout"><h2>New: data restored and real spatial pilot completed</h2><p><a href="docs/research/pilot-results.json">Full measured results: no promotion, no slot</a></p><p>Owner-mirror rasters are now locally SHA-256 verified. They are not organizer-authenticated. The reference D2.8 download passes our exact mirrored-template checks; it is not a new GEMSDOE30 model or slot-approved.</p><p><a href="docs/research/pilot-preregistration.md">Frozen four-arm hypothesis experiment (screen failed)</a> · <a href="docs/research/data-audit.json">Template irregularity</a> · <a href="docs/research/reference-validation.json">File validation</a></p></section>
+  <main><section class="section callout"><h2>New: three real-data holdout experiments completed — no candidate promoted, no slot used</h2><p><b>Loss:</b> the 300 m boundary-aware arm beat its regional control on the seed-30 screen (pooled DTI 0.0620 → 0.0640, Δ +0.0019, 3/4 folds; near-miss-only truth 80 → 40 px), but the <b>fresh-seed (31) confirmation did not replicate the gain</b> (Δ +0.0001, 2/4 folds, sign-flipping folds) even though the near-miss conversion reproduced (1,889 → 724). <b>Not promoted — no candidate, no slot.</b> <a href="docs/research/loss-ablation-holdout.md">Evidence</a> · <a href="docs/research/loss-ablation-holdout-seed31.json">seed-31 JSON</a></p><p><b>Emission:</b> the preregistered metric-greedy rule <b>failed</b> its gate (pooled proxy DTI 0.133 vs 0.187 for uniform Poisson-disk thinning); thin, do not flood. <a href="docs/research/metric-emission-holdout-results.md">Registered result</a></p><p><b>H-31-01 relay connector:</b> not promoted — +1.2 % over a proximity-matched control. <a href="docs/research/relay-connector-holdout.json">JSON</a></p><p>Owner-mirror rasters are locally SHA-256 verified and <b>not organizer-authenticated</b>. The D2.8 download below is an external research artifact, format-checked against the mirrored template; it is not a GEMSDOE30 model or a slot-approved file.</p><p><a href="docs/research/pilot-preregistration.md">Frozen pilot preregistration (failed screen)</a> · <a href="docs/research/data-audit.json">Template irregularity</a> · <a href="docs/research/reference-validation.json">File validation</a> · <a href="docs/status.json">Status feed (JSON)</a></p></section>
     <section class="hero" aria-labelledby="page-title">
       <div>
         <span class="eyebrow">DOE GEMS · Northwestern Great Basin</span>
@@ -43,7 +43,7 @@
         <p class="fine-print">This is the official public leaderboard snapshot, not a score from this repository and not the private evaluation.</p>
         <div class="divider"></div>
         <strong>Why no file?</strong>
-        <p class="fine-print">The competition raster package and sample template are absent. The data page redirects unauthenticated visitors to login; we will not fabricate a grid or bypass access controls.</p>
+        <p class="fine-print">The feature, label, and template rasters are present from owner mirrors (locally SHA-256 verified, <b>not organizer-authenticated</b>; the template itself contains labels, so only its footprint is used). No model arm has yet cleared the frozen spatial-holdout gate, so nothing here is promoted as a GEMSDOE30 submission.</p>
       </aside>
     </section>
 
@@ -66,7 +66,7 @@
           <span class="eyebrow">What this project is doing</span>
           <h2 id="research-title">Fit the model to the score, test the geology.</h2>
         </div>
-        <p>Metric/loss, training, OOF stitching, and safe file-building plumbing passed disposable synthetic smoke tests. There are still no real-data results; synthetic checks are not holdout evidence.</p>
+        <p>Metric/loss, training, OOF stitching, and safe file-building plumbing passed disposable synthetic smoke tests. Real-data spatial holdouts have since run on owner-mirror rasters: the four-arm pilot failed its frozen screen, the paired loss ablation screened positive on seed 30 but <b>failed its fresh-seed (31) confirmation</b>, and the metric-emission gate failed. Screen results are not competition scores and synthetic checks are not holdout evidence.</p>
       </div>
       <div class="grid three">
         <article class="card">
@@ -117,7 +117,7 @@
     <section class="section" aria-labelledby="next-title">
       <div class="callout">
         <h2 id="next-title">Next gate: data → paired holdout → exact file</h2>
-        <p>Competition inputs are still the hard blocker. Once authorized data are placed locally, run the regional and combined arms on identical buffered spatial folds, compare pooled DTI and distance-to-fault error profiles, confirm with fresh seeds, then build a unique TIFF and short note. A synthetic probe or favorable in-sample result is not enough.</p>
+        <p>Inputs are now local from owner mirrors (not organizer-authenticated). The gate is unchanged and now half-cleared: the paired loss screen is positive (Δ +0.0019, 3/4 folds) but <b>must be confirmed with a fresh seed</b> before any candidate file is built; a synthetic probe, a screen, or a favorable in-sample result is not enough.</p>
         <div class="actions">
           <a class="button" href="executive-summary.html">Open submission guide</a>
           <a class="button secondary" href="docs/irregularities.html">Review blockers & irregularities</a>
