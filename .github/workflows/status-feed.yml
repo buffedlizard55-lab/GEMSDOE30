@@ -36,6 +36,13 @@ on:
 permissions:
   contents: write
 
+# Two workflows can be triggered by the same push (this one and
+# fetch-external-layers).  Serialise this one per branch so its `git push` can
+# never race another workflow's push (the failure mode that produced IR-30-043).
+concurrency:
+  group: status-feed-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   feed:
     runs-on: ubuntu-latest
@@ -71,11 +78,16 @@ jobs:
         run: |
           set -x
           shopt -s nullglob
-          for file in docs/downloads/*-nan.tif docs/downloads/*.tif; do
+          mkdir -p docs/research/format-checks
+          for file in docs/downloads/*.tif; do
             [ -f "$file" ] || continue
+            # NOTE: receipts go to docs/research/format-checks/, never over the
+            # provenance sidecar next to the TIFF (IR-30-042: an earlier version
+            # of this workflow wrote the validation payload over every sidecar,
+            # destroying hashes, run names and notes).
             python scripts/validate_submission.py "$file" \
               --template data/raw/sample_submission.tif \
-              --json "${file%.tif}.json" \
+              --json "docs/research/format-checks/$(basename "${file%.tif}").json" \
               && echo "OK $file" || echo "::warning file=$file::local format check failed or template missing"
           done
 
@@ -84,10 +96,12 @@ jobs:
           set -x
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f docs/status.json docs/downloads/*.json
+          git add -f docs/status.json docs/research/format-checks
           if git diff --cached --quiet; then
             echo "status feed unchanged"
           else
             git commit -m "status feed: regenerate from artifacts [skip ci]"
-            git push origin HEAD:${{ github.ref_name }}
+            # Rebase first: a sibling workflow may have pushed since checkout.
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push origin "HEAD:${GITHUB_REF_NAME}"
           fi

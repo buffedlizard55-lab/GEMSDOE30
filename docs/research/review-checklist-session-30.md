@@ -30,6 +30,8 @@ updates.
 | `.github/workflows/fetch-external-layers.yml` triggered only on `main` plus a stale branch name, so the bridge could not re-run from this session's branch | Workflow file inspection | Trigger broadened to `main` + `"arena/**"`; recorded as IR-30-040 |
 | `build_edge_candidate.py` silently clamped a requested `--keep` to the sweep's accepted count | Default-path test run (`--field proximity` with a 2,000-dot cap) | Explicit warning printed on clamping and on diagnostic-scale emissions |
 | Mistaken expectation that a 41 × 41 grid contains a cell beyond a 3 km cutoff from its centre | `tests/test_fields.py` failure | Test corrected to a 2 km cutoff (the true maximum distance is 2.83 km); the field code was not changed to match a wrong test |
+| The new status-feed workflow wrote its validation payloads over the provenance sidecars next to every TIFF, destroying hashes/notes on its first run | PR check run `692faeb` diffstat (1,312 deletions across 7 sidecars) | Sidecars restored from `4a5ebcf`; receipts now written to `docs/research/format-checks/`; recorded as IR-30-042 |
+| Two workflows triggered by the same push raced on `git push`; the second (fetch-external-layers) failed in its commit step | PR check runs: status-feed succeeded at 23:27:30, fetch failed after all other steps were green | Both workflows now serialise per ref with `concurrency` and `git pull --rebase` before pushing; the receipt print is guarded; recorded as IR-30-043 |
 
 None of these fixes changed a published result; the two holdout runs whose numbers are reported were
 produced by the post-fix code.

@@ -32,6 +32,12 @@ on:
 permissions:
   contents: write
 
+# Serialise per branch so this workflow's push cannot race the status-feed
+# workflow's push (IR-30-043).
+concurrency:
+  group: fetch-external-layers-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   fetch:
     runs-on: ubuntu-latest
@@ -76,7 +82,11 @@ jobs:
         run: |
           set -x
           ls -la data/external || true
-          head -c 3000 data/external/external_receipt.json || true
+          if [ -f data/external/external_receipt.json ]; then
+            head -c 3000 data/external/external_receipt.json
+          else
+            echo "::warning::canonical receipt absent; committing whatever the run produced"
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -f data/external
@@ -85,5 +95,6 @@ jobs:
             echo "nothing staged"
           else
             git commit -m "external layers: official USGS SGMC / GDR 100 m rasters + receipt [skip ci]"
-            git push origin HEAD:${{ github.ref_name }}
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
