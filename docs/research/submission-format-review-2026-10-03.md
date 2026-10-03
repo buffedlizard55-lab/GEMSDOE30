@@ -42,7 +42,7 @@ All six retain the expected one-band float32, EPSG:32611, 3730×3292, 100 m grid
 - Confirmed that a NaN-outside TIFF passes the default published-format check and fails only the optional whole-array finite diagnostic. No diagnostic name or help text claims actual portal behavior.
 - Confirmed that the builder refuses zero outside without an explicit nonstandard acknowledgement and that the legacy conversion script also fails closed without acknowledgement.
 - Rechecked source/output identity for the three archived zero copies: all preserve in-footprint values; no claim is made about organizer acceptance.
-- Static-site link audit: 8 HTML pages, 162 local `href`/`src` references, 9 download attributes, 40 Markdown pages, and 275 inline Markdown links. Local targets and HTML fragments resolve; every HTML download attribute matches its linked basename; no zero-outside TIFF is linked.
+- Static-site link audit: 8 HTML pages, 162 local `href`/`src` references, 9 download attributes, 40 Markdown pages, and 279 inline Markdown links. Local targets and HTML fragments resolve; every HTML download attribute matches its linked basename; no zero-outside TIFF is linked.
 - The exact historical error file is still unavailable; the earlier hypothesis that outside NaNs caused the error remains unverified and is not stated as a diagnosis.
 
 ### Pass 3 — full-brief re-check
@@ -54,4 +54,7 @@ All six retain the expected one-band float32, EPSG:32611, 3730×3292, 100 m grid
 
 ## PR / merge verification
 
-To be updated only after the assigned branch's actual GitHub operations are checked. This review does not claim a new PR or merge.
+- Opened PR [#17](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/17), **Align submission tooling with published GEMS raster format**, from `arena/01a103c1-gemsdoe30` to `main`.
+- Before merging, GitHub reported the PR `CLEAN` / `MERGEABLE`, no review decision was pending, and no status checks were reported. Repository checks confirmed `viewerPermission=ADMIN`, `main.protected=false`, no repository rulesets, and merge-commit strategy enabled. No branch-protection bypass was needed or used.
+- Merged via the normal merge method on **2026-10-03 22:23:40 UTC**. Merge commit: `20406e6342098fb4b8caf517af8e9d1395d16289`. The repository is configured not to delete merged branches; `arena/01a103c1-gemsdoe30` remains on the remote at PR head `ee1aab2227e2e8a9a48134d8674e71b4fc7fa783`.
+- The merge changes documentation, local format tooling, manifests/status, and site copy only. It did not upload a competition file, spend a weekly slot, promote a candidate, authenticate the owner mirrors, or diagnose the unknown historical error.
