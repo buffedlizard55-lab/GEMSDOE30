@@ -247,9 +247,20 @@ field ranks pixels, but *where* a fixed emission budget is placed relative to ma
 The next registered experiment should therefore be a placement-policy test, not another detector.
 No submission slot is justified by any candidate in this register.
 
+**Status (measured 2026-10-03, fifth session): the placement-policy test ran — H-33-01 — and
+the line is CLOSED with a negative result.** At the frozen gate budget the arms were
+capacity-collapsed (IR-30-032) and the gate was voided by design guard, so the registered
+verdict is *not promoted*; the count-matched sensitivity run at 40,000 dots is the substantive
+evidence: whole-domain score-first thinning (0.07608) beats every band-stratified arm
+(0.0721–0.0725) and beats blind random by +35 %, while pure proximity ranking is catastrophic
+(0.03660). Stratified placement never earns more per dot than spending the budget wherever the
+model score is highest. Full numbers: [h33-01-placement-policy-holdout.md](research/h33-01-placement-policy-holdout.md).
+The next registered experiment must change the lever — score-field quality on the learning side
+(or a dense/dot hybrid), not placement geometry.
+
 ---
 
-## H-33 register & Session 5 spacing-matched holdout results (2026-10-03)
+## H-33 register & spacing-matched scarp/basement holdout results (2026-10-03)
 
 Preregistration frozen before execution in
 [`docs/research/h33-01-placement-and-scarp-preregistration.md`](research/h33-01-placement-and-scarp-preregistration.md);
@@ -258,7 +269,7 @@ harness `scripts/placement_and_scarp_holdout.py`; verification suite
 [`docs/research/h33-01-placement-and-scarp-holdout.md`](research/h33-01-placement-and-scarp-holdout.md)
 and [`docs/research/verification-checks-results.md`](research/verification-checks-results.md).
 
-### Methodological discovery (`IR-30-031`) — 6.38× clumping confounder in legacy top-N holdouts
+### Methodological discovery (`IR-30-033`) — 6.38× clumping confounder in legacy top-N holdouts
 
 Audit of `scripts/basement_edge_holdout.py` and `scripts/vent_corridor_holdout.py` revealed that
 `top_n_emission(score, mask, 15000)` emitted **un-thinned** contiguous blobs (`median_nn_px = 1.0 px`,
@@ -274,6 +285,5 @@ Poisson-disk spacing.
 | ID / Hypothesis | Layers & Physical Signature | Catalogue Screen / Confirm DTI | Unclustered SGMC (s31 / s41) | 5 km Clustered SGMC (s31 / s41) | Verdict |
 | --- | --- | --- | --- | --- | --- |
 | **H-33-01 Placement-Policy Decomposition** (`policy_near_splay`, `policy_powerlaw_hedge` vs `policy_uniform_domain`) | Distance-from-catalogue bands (`300–1,500 m` near-splay, `1,500–5,000 m` stepover, `> 5,000 m` far-basin) + `60/25/15 %` power-law hedge | Near-splay: **`0.07234` / `0.07434`** (**2.7×** uniform `0.02674` / `0.02694`; **18.6×** far-basin `0.00389`). Hedge: **`0.05604` / `0.04656`** (`+0.02930` / `+0.01962`, `4/4` quadrants) | Hedge **`0.03200` / `0.03030`** vs uniform `0.02787` / `0.02719` (`+0.00413` / `+0.00311`, `3/4` quadrants) | Hedge `0.01022` / `0.01760` vs uniform `0.01297` / `0.01128` (`−0.00274` s31, `+0.00632` s41) | **Structural mechanism proven; hedge not promoted** (split sign on 5 km clustered SGMC seed 31) |
-| **H-31-02r 1 m LiDAR Scarp Dipole + 500 m Strike Continuity** (`scarp_dipole_continuity` vs `step_max_only` & `scarp_matched_control`) | `data/raw/external/lidar_scarp_features_u8.tif` (`step_max`, `lapneg_max`, `lappos_max`, `coh100`, `strike`, `lidar_valid`) + `det_elev_slope` fallback | **`0.03323` / `0.03066`** — beats `step_max_only` (`0.02715` / `0.02551`, **+22.4 % / +20.2 %**, transform clause **PASS**), trails dispersed `scarp_matched_control` (`0.03585` / `0.03070`) | **`0.05913` / `0.05308`** vs control `0.03178` / `0.02903` (**+86.1 % / +82.8 %**, `4/4` quadrants) | **`0.02916` / `0.01652`** vs control `0.01522` / `0.01029` (**+91.6 % / +60.5 %**, `3/4` quadrants) | **Passes on independent SGMC fault inventory (+86 % to +92 %)** + Check 2 (`slope = 0.9009`) + Check 3 (`97.2 %` topographic dependence); **withheld from slot promotion** because catalogue proxy Δ is `−0.00261` (`IR-30-033`) |
-| **H-32-05b 1.5 km Coherent Basement Step Ridge (`p90` gate)** (`basement_step_ridge_p90` vs `basement_ungated_poisson` & `basement_matched_control`) | `depth_to_base_surf`, `iso_grav_anom_hg`, `tmi_hg` with 1.5 km (`15 × 15 px`) structure-tensor `p90` gate (`coherence ≥ 0.6545`, selecting **10.00 %** of footprint vs `99.65 %` in `IR-30-029`) | **`0.02574` / `0.02933`** — beats ungated Poisson (`0.02380` / `0.02566`) and un-thinned legacy (`0.00373` / `0.00526`), trails `basement_matched_control` (`0.03660` / `0.03655`, `0/4` quadrants) | `0.02798` / `0.02431` vs control `0.03382` / `0.03025` (`−0.00585` / `−0.00594`) | `0.01247` / `0.01071` vs control `0.01760` / `0.01222` (`−0.00513` / `−0.00150`) | **Falsified (`promoted = false`)** — fixing both `IR-30-029` (`p90` gate) and `IR-30-031` (Poisson spacing) raises DTI `6.9×`, but the basement step family still sits below distance-matched random |
-
+| **H-31-02r 1 m LiDAR Scarp Dipole + 500 m Strike Continuity** (`scarp_dipole_continuity` vs `step_max_only` & `scarp_matched_control`) | `data/raw/external/lidar_scarp_features_u8.tif` (`step_max`, `lapneg_max`, `lappos_max`, `coh100`, `strike`, `lidar_valid`) + `det_elev_slope` fallback | **`0.03323` / `0.03066`** — beats `step_max_only` (`0.02715` / `0.02551`, **+22.4 % / +20.2 %**, transform clause **PASS**), trails dispersed `scarp_matched_control` (`0.03585` / `0.03070`) | **`0.05913` / `0.05308`** vs control `0.03178` / `0.02903` (**+86.1 % / +82.8 %**, `4/4` quadrants) | **`0.02916` / `0.01652`** vs control `0.01522` / `0.01029` (**+91.6 % / +60.5 %**, `3/4` quadrants) | **Passes on independent SGMC fault inventory (+86 % to +92 %)** + Check 2 (`slope = 0.9009`) + Check 3 (`97.2 %` topographic dependence); **withheld from slot promotion** because catalogue proxy Δ is `−0.00261` (`IR-30-035`) |
+| **H-32-05b 1.5 km Coherent Basement Step Ridge (`p90` gate)** (`basement_step_ridge_p90` vs `basement_ungated_poisson` & `basement_matched_control`) | `depth_to_base_surf`, `iso_grav_anom_hg`, `tmi_hg` with 1.5 km (`15 × 15 px`) structure-tensor `p90` gate (`coherence ≥ 0.6545`, selecting **10.00 %** of footprint vs `99.65 %` in `IR-30-029`) | **`0.02574` / `0.02933`** — beats ungated Poisson (`0.02380` / `0.02566`) and un-thinned legacy (`0.00373` / `0.00526`), trails `basement_matched_control` (`0.03660` / `0.03655`, `0/4` quadrants) | `0.02798` / `0.02431` vs control `0.03382` / `0.03025` (`−0.00585` / `−0.00594`) | `0.01247` / `0.01071` vs control `0.01760` / `0.01222` (`−0.00513` / `−0.00150`) | **Falsified (`promoted = false`)** — fixing both `IR-30-029` (`p90` gate) and `IR-30-033` (Poisson spacing) raises DTI `6.9×`, but the basement step family still sits below distance-matched random |

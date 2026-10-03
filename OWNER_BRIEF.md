@@ -327,6 +327,41 @@ session.** Both were re-checked from scratch rather than trusted:
    fixed emission budget is placed relative to mapped structure**, not which scalar field ranks the
    pixels. The next registered experiment should be a placement-policy test, not a new detector.
 
+### Session 5 (2026-10-03, this branch `arena/01a10330-gemsdoe30`) — emitter-order fix, score ledger, H-33-01 run to verdict
+
+1. **IR-30-031: real library bug found and fixed.** `poisson_disk_select`/`adaptive_disk_select`
+   documented a descending-score greedy but built `np.lexsort((-values, rows, cols))` — and
+   `np.lexsort` keys on the **last** array, so visits were column-major (raster order), not
+   score-first. Fixed at all three occurrences, regression tests added (`ScoreFirstVisitOrderTests`,
+   `OrderedSelectionTests`, plus a `max_kept` prefix-equivalence test), and the affected-artifact
+   caveat recorded in [docs/irregularities.md](docs/irregularities.md). Historical *relative*
+   conclusions stand (arms and controls shared the same rule); prior absolute numbers are now
+   labelled "measured under raster-order visiting".
+2. **H-33-01 (placement policy) — preregistered, run, decided.** Frozen design in
+   [h33-01-preregistration.md](docs/research/h33-01-preregistration.md) before any score was seen;
+   harness `scripts/placement_policy_holdout.py` (tests: `tests/test_placement_policy.py`).
+   The gate-budget screen (80,000 dots) hit a capacity wall — the 0.4-thresholded, 4 px-thinned
+   pools hold only 68,573 dots, so every quota arm collapsed to the same union; the harness
+   **voided** the gate instead of adjudicating a non-count-matched comparison, and the registered
+   verdict is **not promoted** (IR-30-032 records the design undercount and the new pre-flight
+   capacity rule). The count-matched 40 k sensitivity run is the substantive evidence:
+   whole-domain score-first thinning **0.07608** beats blind random **+35 %** and beats **every**
+   band-stratified arm (0.0721–0.0725), while pure proximity ranking is catastrophic (0.03660).
+   Verdict: **the placement-policy line is closed** — placement is exhausted as a lever; the next
+   registered experiment must improve the score field itself. Full numbers:
+   [h33-01-placement-policy-holdout.md](docs/research/h33-01-placement-policy-holdout.md) ·
+   [JSON](docs/research/h33-01-placement-policy-holdout.json).
+3. **Regional OOF mosaic regenerated post-fix and verified**: `runs/oof/regional-oof.npy`,
+   5,167,373 finite pixels (= template count), range [0, 1], mean 0.23551, 23.67 % > 0.4,
+   scope sidecar matches the frozen 4-fold plan.
+4. **Score ledger refreshed** with dated `official-snapshot` rows (2026-10-03 manual read, twice,
+   consistent): leader DARD **0.3195**; `wbg1` 0.2600 at rank 15 confirmed; a rank-19 row of
+   0.2449 numerically equals the owner-reported GEMSDOE27 score — recorded as coincidence, not
+   attribution. No GEMSDOE30 file has been scored; target **> 0.3195** is not yet reached.
+5. Full suite: **80 passed + 11 subtests, 0 skipped**. Portal-safe download validation re-run
+   (12/12 on all three `-zeros.tif`). Provenance re-verified: published D2.8 copy and restored
+   labels/template match their SHA-256 pins byte-for-byte; every download manifest self-verifies.
+
 ## Current verified state — 2026-10-03
 
 - The recorded baseline commit for this checkout already contains the model/loss, tests, training/inference/validation scripts, and site scaffold. The Git history available here is shallow/grafted to that commit, so earlier claims about a prior README-only state cannot be independently verified from this repository. At the start of this review there were **no competition rasters, sample template, checkpoints, real holdout predictions, or generated GEMSDOE30 TIFFs**. The rasters have since been restored from SHA-256-pinned owner mirrors (not organizer-authenticated) and real-data training, OOF prediction, stitching and scoring all run locally; what remains blocked is organizer-authenticated data and the hidden expert labels.
@@ -412,17 +447,18 @@ session.** Both were re-checked from scratch rather than trusted:
 
 Later on 2026-10-03 a first GEMSDOE30 candidate file was built and published for download: a **4-fold out-of-fold GBM surface** (each pixel predicted by a model that never saw its quadrant; fold models from the metric-emission experiment) emitted with the LOFO-selected adaptive Poisson-disk rule (radius 5 px, gamma 1, pool 480k) → 90,358 dots, median nearest-neighbour spacing 2.83 px, 17.7 % within 300 m of the catalogue (2.1× the 8.6 % base rate). Local format validation passes all 11 checks (5,167,373 in-footprint values in [0,1], NaN outside, EPSG:32611, 100 m, template transform preserved). **It is not holdout-promoted** — its family beat uniform by only +0.0025 against a required +0.005 — and the site labels it accordingly with a paste-ready note. Artifacts: [candidate TIFF](docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.tif), [manifest](docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.json), [build record](docs/research/candidate-2026-10-03.md).
 
-## Session 5 update (2026-10-03) — Placement-policy decomposition (`H-33-01`), 1 m LiDAR scarp dipole (`H-31-02r`), 1.5 km coherent basement step ridge (`H-32-05b`), and three-check verification
+## Session 6 update (2026-10-03, branch `arena/01a10349-gemsdoe30`) — 1 m LiDAR scarp dipole (`H-31-02r`), 1.5 km coherent basement step ridge (`H-32-05b`), 6.38× clumping audit (`IR-30-033`), and three-check verification
 
-Following the Session 4 next steps above, we preregistered
+Following the Session 4–5 next steps above, we preregistered
 ([`docs/research/h33-01-placement-and-scarp-preregistration.md`](docs/research/h33-01-placement-and-scarp-preregistration.md))
 and executed (`scripts/placement_and_scarp_holdout.py` and `scripts/run_verification_checks.py`)
-the placement-policy test (`H-33-01`), the reduced 1 m LiDAR scarp dipole + 500 m strike
-continuity arm (`H-31-02r`), the 1.5 km `p90` coherent basement step ridge re-test (`H-32-05b`),
-and the full three-check verification protocol across both the **Catalogue Component-Holdout Proxy**
-and the **Independent USGS SGMC Fault Inventory** (both unclustered and 5 km clustered frames):
+the spacing-matched placement-policy decomposition (`H-33-01`), the reduced 1 m LiDAR scarp dipole +
+500 m strike continuity arm (`H-31-02r`), the 1.5 km `p90` coherent basement step ridge re-test
+(`H-32-05b`), and the full three-check verification protocol across both the **Catalogue
+Component-Holdout Proxy** and the **Independent USGS SGMC Fault Inventory** (both unclustered and
+5 km clustered frames):
 
-1. **Methodological discovery (`IR-30-031`) — 6.38× clumping confounder in legacy top-N holdouts:**
+1. **Methodological discovery (`IR-30-033`) — 6.38× clumping confounder in legacy top-N holdouts:**
    `scripts/basement_edge_holdout.py` and `scripts/vent_corridor_holdout.py` emitted un-thinned
    `top_n_emission` blobs (`median_nn_px = 1.0 px`, `99.95 % ≤ 3 px`) while scoring them against
    dispersed `random_near_matched` dots (`median_nn_px = 5.10–8.94 px`). Under the 300 m (`3 px`)
@@ -451,7 +487,7 @@ and the **Independent USGS SGMC Fault Inventory** (both unclustered and 5 km clu
      permuting unrelated `iso_grav_anom_hg` retains **100.0 %**; `4/4` quadrants positive).
    * Trails the dispersed control on the incomplete **Catalogue Component Proxy** (`0.03323` vs
      `0.03585`, `−0.00261`) because real bedrock/range-front scarps outside the Quaternary
-     compilation are penalized as false positives by the catalogue proxy (`IR-30-033`). Per our
+     compilation are penalized as false positives by the catalogue proxy (`IR-30-035`). Per our
      pre-stated dual-frame gate, it is **withheld from automatic submission-slot promotion**.
    * Full evidence: [`docs/research/h33-01-placement-and-scarp-holdout.md`](docs/research/h33-01-placement-and-scarp-holdout.md) ·
      [`docs/research/verification-checks-results.md`](docs/research/verification-checks-results.md).
@@ -465,9 +501,9 @@ and the **Independent USGS SGMC Fault Inventory** (both unclustered and 5 km clu
 ## Current next steps and limits
 
 1. **Upload path is fixed — use it.** The portal-safe `-zeros.tif` variants are the primary downloads for all three published TIFFs (GBM candidate, measured variant, external D2.8) and the site's submission guide walks through the upload with paste-ready notes. The scientific gates are unchanged: **no candidate is holdout-promoted**; submitting an un-promoted file is the owner's decision, and the file's note must say exactly that.
-2. **Session 5 executed the placement-policy (`H-33-01`), 1 m LiDAR scarp dipole (`H-31-02r`), and `p90` basement step ridge (`H-32-05b`) holdouts on both unclustered and 5 km clustered frames.** Because `H-31-02r` achieves a **+86.1 % to +91.6 %** gain on the independent USGS SGMC fault inventory and passes Check 2 (`slope = 0.9009`) and Check 3 (`97.2 %` topographic dependence), the highest-leverage next step is to **append the 1 m LiDAR scarp dipole and 500 m strike-persistence channels into the 4-fold OOF neural/GBM feature stack** so the learned model combines 1 m scarp sharpness with near-splay (`300–1,500 m`) structural proximity priors. H-32-04 still requires retrieving OSTI 1148722 / GDR 616 off-sandbox.
+2. **Sessions 5 & 6 executed the placement-policy (`H-33-01`), 1 m LiDAR scarp dipole (`H-31-02r`), and `p90` basement step ridge (`H-32-05b`) holdouts across unclustered and 5 km clustered frames.** At count-matched budgets on the OOF model surface (`h33-01-placement-policy-holdout.md`), whole-domain score-first emission (`0.07608`) beats band-stratified placement (`0.0721–0.0725`), proving that post-hoc placement quotas cannot substitute for score-field quality. Meanwhile, `H-31-02r` achieves a **+86.1 % to +91.6 %** gain on the independent USGS SGMC fault inventory and passes Check 2 (`slope = 0.9009`) and Check 3 (`97.2 %` topographic dependence). Therefore, the highest-leverage next step is to **append the 1 m LiDAR scarp dipole and 500 m strike-persistence channels into the 4-fold OOF neural/GBM feature stack** so the learned model combines 1 m scarp sharpness with near-splay (`300–1,500 m`) structural proximity priors. H-32-04 still requires retrieving OSTI 1148722 / GDR 616 off-sandbox.
 3. **Boundary loss remains not promoted — and its retry criterion has been executed.** The recorded retry (larger budget + preregistered boundary-weight sweep + emitted-mask scoring) ran as a fold-0 screen ([loss-weight-sweep.md](docs/research/loss-weight-sweep.md), 2026-10-03): dense scoring prefers plain `regional` at every weight; emitted-mask scoring prefers `combined-100` by only +0.0010 on one fold — the scorings disagree, so no weight is selected for confirmation and the line stays closed. The near-miss behavioural effect the brief asked for *is* demonstrated (partial-distance truth coverage 1,889 → 724); the metric gain is not. Future candidates must pass the executable three-check verification suite (`src/gemsdoe30/verification.py` and `scripts/run_verification_checks.py`).
 4. **Build/validate rule unchanged:** an exact-grid, holdout-promoted candidate only after its family beats the same-run best by the frozen margin with fresh-seed confirmation. Both published un-promoted candidates — the GBM surface (`…aedb3d13-nan.tif`, SHA-256 `f5d137b9…c7cc2`, 90,358 dots) and the measured SGMC-hedge variant (`…ac08b41e.tif`, SHA-256 `fed5232e…66da`, 85,526 dots) — plus their portal-safe variants are research artifacts with honest notes.
 5. **Feed:** `scripts/build_status.py` keeps `docs/status.json` current automatically. The leaderboard itself can only be refreshed by dated manual reads (DrivenData ToS prohibit automated monitoring) — recorded in `docs/score-ledger.csv` with `evidence_class=official-snapshot`.
 6. **Limits that only the owner/organizer can lift:** organizer-authenticated data (IR-30-001); the hidden expert labels (the real target); score-to-file attribution for the D2.8 artifact (IR-30-002); entrant eligibility under rules §1.3 (IR-30-020); the deadline-time discrepancy (IR-30-008); final AI-disclosure narrative sign-off.
-7. **Spacing-and-distance-matched controls are now enforced (`IR-30-031`):** any emitter or feature holdout in this repository must match both emitted dot count (`N`), Poisson-disk spacing (`r = 3.0 px`), and distance-from-catalogue profile across both unclustered and 5 km clustered evaluation frames (`scripts/placement_and_scarp_holdout.py`).
+7. **Spacing-, capacity-, and distance-matched controls are now enforced (`IR-30-032`, `IR-30-033`):** any emitter or feature holdout in this repository must (a) count realised pool capacities before fixing a gate budget (`IR-30-032`), and (b) match emitted dot count (`N`), Poisson-disk spacing (`r = 3.0 px`), and distance-from-catalogue profile across both unclustered and 5 km clustered evaluation frames (`IR-30-033`, `scripts/placement_and_scarp_holdout.py`).

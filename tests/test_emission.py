@@ -3,7 +3,8 @@
 The suite pins the algebra (binary emission optimality, the marginal-inclusion
 threshold), the 300 m kernel geometry, the masked-domain semantics (prediction
 mass outside the scored domain must not radiate credit into it) and the two
-selection rules used by the emission tooling.
+selection rules used by the emission tooling, including the acceptance-order
+variant that lets an arm take a top-N prefix of a thinned set.
 """
 
 from __future__ import annotations
@@ -20,6 +21,7 @@ from gemsdoe30.emission import (
     kernel_credit,
     marginal_inclusion_ratio,
     poisson_disk_select,
+    poisson_disk_select_ordered,
     required_coverage_multiplier,
     required_fp_reduction,
 )
@@ -200,6 +202,84 @@ class SelectionTests(unittest.TestCase):
         self.assertAlmostEqual(credit_retention(exact, reference), 1.0)
         self.assertAlmostEqual(credit_retention(adjacent, reference), 2.0 / 3.0, places=6)
         self.assertAlmostEqual(credit_retention(far, reference), 0.0)
+
+
+class ScoreFirstVisitOrderTests(unittest.TestCase):
+    """Regression for the visit-order defect (see docs/irregularities.md IR-30-031).
+
+    A score of 0.99 must win its column-major-excluded pixel against 0.10 neighbours
+    in *both* thinning rules.  The pre-fix ``np.lexsort((-values, rows, cols))`` keyed
+    the visit order on the column index instead, keeping low-score pixels first.
+    """
+
+    def test_poisson_select_keeps_the_global_peak_first(self) -> None:
+        # 2x2 block mutually exclusive at radius 1.5 (all pairs <= sqrt(2) apart);
+        # the peak sits at (1, 0), which column-major visiting would reach second.
+        score = np.array([[0.10, 0.11],
+                          [0.99, 0.12]], dtype=np.float32)
+        kept = poisson_disk_select(score, 1.5)
+        self.assertTrue(kept[1, 0])
+        self.assertEqual(int(kept.sum()), 1)
+
+    def test_adaptive_select_keeps_the_global_peak_first(self) -> None:
+        score = np.array([[0.10, 0.11],
+                          [0.99, 0.12]], dtype=np.float32)
+        kept = adaptive_disk_select(score, 1.5, gamma=0.0)
+        self.assertTrue(kept[1, 0])
+        self.assertEqual(int(kept.sum()), 1)
+
+
+class OrderedSelectionTests(unittest.TestCase):
+    """``poisson_disk_select_ordered`` must agree with ``poisson_disk_select`` on the kept
+    set, emit in descending-score order, and let a prefix realise exact budgeting."""
+
+    def setUp(self) -> None:
+        rng = np.random.default_rng(7)
+        self.score = rng.random((24, 31)).astype(np.float32)
+
+    def test_kept_set_matches_mask_rule(self) -> None:
+        mask = poisson_disk_select(self.score, 2.5)
+        rows, cols = poisson_disk_select_ordered(self.score, 2.5)
+        kept2 = np.zeros_like(mask)
+        kept2[rows, cols] = True
+        np.testing.assert_array_equal(mask, kept2)
+
+    def test_order_is_descending_by_score(self) -> None:
+        rows, cols = poisson_disk_select_ordered(self.score, 3.0)
+        values = self.score[rows, cols]
+        self.assertTrue(np.all(np.diff(values) <= 1e-9))
+
+    def test_prefix_is_top_n_of_kept(self) -> None:
+        rows, cols = poisson_disk_select_ordered(self.score, 3.0)
+        n = 5
+        prefix_values = self.score[rows[:n], cols[:n]]
+        all_values = np.sort(self.score[rows, cols])[::-1]
+        np.testing.assert_allclose(prefix_values, all_values[:n])
+
+    def test_mask_and_limit_paths_agree_with_mask_rule(self) -> None:
+        big = np.arange(400, dtype=np.float32).reshape(20, 20)
+        mask = np.ones((20, 20), dtype=bool)
+        mask[:5] = False
+        kept_mask = poisson_disk_select(big, 2.0, threshold=None, mask=mask, limit=300)
+        rows, cols = poisson_disk_select_ordered(big, 2.0, threshold=None, mask=mask, limit=300)
+        kept_prefix = np.zeros_like(kept_mask)
+        kept_prefix[rows, cols] = True
+        np.testing.assert_array_equal(kept_mask, kept_prefix)
+
+    def test_max_kept_returns_acceptance_prefix(self) -> None:
+        full_rows, full_cols = poisson_disk_select_ordered(self.score, 3.0)
+        for keep in (1, 6, 40, len(full_rows), len(full_rows) + 100):
+            rows, cols = poisson_disk_select_ordered(self.score, 3.0, max_kept=keep)
+            expected = min(keep, len(full_rows))
+            self.assertEqual(len(rows), expected)
+            np.testing.assert_array_equal(rows, full_rows[:expected])
+            np.testing.assert_array_equal(cols, full_cols[:expected])
+
+    def test_empty_mask_returns_empty_order(self) -> None:
+        rows, cols = poisson_disk_select_ordered(self.score, 2.0, mask=np.zeros_like(
+            self.score, dtype=bool))
+        self.assertEqual(rows.size, 0)
+        self.assertEqual(cols.size, 0)
 
 
 if __name__ == "__main__":
