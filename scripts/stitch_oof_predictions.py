@@ -10,6 +10,14 @@ import sys
 from pathlib import Path
 
 
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data-dir", type=Path, default=Path("data/processed"))
@@ -21,7 +29,7 @@ def main() -> int:
     try:
         import numpy as np
 
-        from gemsdoe30.cv import spatial_quadrant_masks
+        from gemsdoe30.cv import spatial_quadrant_masks, validate_checkpoint_fold
 
         valid_path = args.data_dir / "valid.npy"
         prepared_manifest_path = args.data_dir / "manifest.json"
@@ -31,6 +39,15 @@ def main() -> int:
         prepared_manifest = json.loads(prepared_manifest_path.read_text(encoding="utf-8"))
         if prepared_manifest.get("shape_hw") != list(valid.shape):
             raise ValueError("prepared manifest shape does not match valid.npy")
+        if prepared_manifest.get("schema_version") != 3:
+            raise ValueError("prepared manifest lacks source-file provenance; rerun scripts/prepare_data.py")
+        dataset_signature = prepared_manifest.get("dataset_signature")
+        if not isinstance(dataset_signature, str) or len(dataset_signature) != 64:
+            raise ValueError("prepared manifest is missing the source-bound dataset signature")
+        try:
+            int(dataset_signature, 16)
+        except ValueError as exc:
+            raise ValueError("prepared dataset signature is not a hexadecimal SHA-256") from exc
         mask_sha256 = hashlib.sha256(np.packbits(valid).tobytes()).hexdigest()
         if prepared_manifest.get("valid_mask_sha256") != mask_sha256:
             raise ValueError("valid.npy does not match the footprint checksum in manifest.json")
@@ -42,6 +59,7 @@ def main() -> int:
             "epsg": prepared_manifest.get("epsg"),
             "transform_gdal": transform_gdal,
             "valid_mask_sha256": mask_sha256,
+            "dataset_signature": dataset_signature,
         }
         mosaic = np.full(valid.shape, np.nan, dtype=np.float32)
         fold_receipts = []
@@ -58,6 +76,25 @@ def main() -> int:
                 raise ValueError(f"fold {fold} sidecar identifies fold {sidecar.get('fold')}")
             if sidecar.get("prediction_scope") != "held-out quadrant only; NaN elsewhere":
                 raise ValueError(f"fold {fold} input is not marked as a held-out-only prediction array")
+            recorded_output = sidecar.get("output_file")
+            if not isinstance(recorded_output, str) or Path(recorded_output).resolve() != path.resolve():
+                raise ValueError(f"fold {fold} sidecar names a different prediction array")
+            prediction_sha = sidecar.get("prediction_sha256")
+            if not isinstance(prediction_sha, str) or prediction_sha != _sha256_file(path):
+                raise ValueError(f"fold {fold} prediction array checksum does not match its sidecar")
+            checkpoint_sha = sidecar.get("checkpoint_sha256")
+            if not isinstance(checkpoint_sha, str) or len(checkpoint_sha) != 64:
+                raise ValueError(f"fold {fold} sidecar is missing a full checkpoint SHA-256")
+            try:
+                int(checkpoint_sha, 16)
+            except ValueError as exc:
+                raise ValueError(f"fold {fold} has a malformed checkpoint SHA-256") from exc
+            try:
+                validate_checkpoint_fold(sidecar.get("checkpoint_fold"), fold)
+            except ValueError as exc:
+                raise ValueError(f"fold {fold} checkpoint/fold provenance mismatch: {exc}") from exc
+            if sidecar.get("fold_buffer_m") != 300.0:
+                raise ValueError(f"fold {fold} sidecar does not record the required 300 m training-exclusion buffer")
             if sidecar.get("grid_signature") != grid_signature:
                 raise ValueError(f"fold {fold} prediction grid does not match prepared data")
             recipe = sidecar.get("training_recipe")
@@ -87,6 +124,7 @@ def main() -> int:
                     "fold": fold,
                     "input": str(path),
                     "run_name": sidecar.get("run_name"),
+                    "checkpoint_fold": sidecar.get("checkpoint_fold"),
                     "checkpoint_sha256": sidecar.get("checkpoint_sha256"),
                     "finite_heldout_pixels": int(np.isfinite(values[fold_mask]).sum()),
                 }
@@ -99,12 +137,19 @@ def main() -> int:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         np.save(args.output, mosaic)
         manifest = {
-            "output_file": str(args.output),
+            "schema_version": 1,
+            "output_file": args.output.name,
+            "output_sha256": _sha256_file(args.output),
             "shape": list(mosaic.shape),
             "valid_pixels": int(valid.sum()),
             "grid_signature": grid_signature,
             "training_recipe": expected_recipe,
             "folds": fold_receipts,
+            "holdout_protocol": {
+                "split": "four equal raster quadrants; row-major fold index",
+                "training_exclusion_buffer_m": 300.0,
+                "metric_radius_m": 300.0,
+            },
             "scope": "four-fold out-of-fold predictions for known-catalogue spatial proxy",
             "not_a_score": True,
         }

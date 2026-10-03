@@ -214,6 +214,19 @@ def _distance_weighted_tversky_numpy(
             raise ValueError("valid_mask shape differs from prediction")
         if np.any(valid & ~np.isfinite(labels)):
             raise ValueError("truth must be finite on valid pixels")
+    # Spatial-fold masks are typically a quarter of the full raster. Crop to the
+    # smallest rectangle containing scored cells before allocating the neighborhood
+    # arrays; pixels outside the mask cannot contribute to any metric term.
+    active_rows = np.flatnonzero(valid.any(axis=1))
+    active_cols = np.flatnonzero(valid.any(axis=0))
+    if active_rows.size and active_cols.size:
+        y0, y1 = int(active_rows[0]), int(active_rows[-1]) + 1
+        x0, x1 = int(active_cols[0]), int(active_cols[-1]) + 1
+        if (y0, y1, x0, x1) != (0, pred.shape[0], 0, pred.shape[1]):
+            pred = pred[y0:y1, x0:x1]
+            labels = labels[y0:y1, x0:x1]
+            valid = valid[y0:y1, x0:x1]
+
     if np.any(~np.isfinite(pred[valid])) or np.any((pred[valid] < 0.0) | (pred[valid] > 1.0)):
         raise ValueError("prediction must be finite and in [0, 1] on valid pixels")
     if np.any(~np.isin(labels[valid], (0.0, 1.0))):

@@ -28,6 +28,44 @@ class BoundaryLossTests(unittest.TestCase):
         self.assertLess(float(results[2]["boundary"]), float(results[3]["boundary"]))
         self.assertAlmostEqual(float(results[1]["regional"]), float(results[2]["regional"]), places=5)
 
+    def test_geometry_term_matches_reference_metric_on_full_scored_grid(self) -> None:
+        import torch
+
+        from gemsdoe30.losses import GEMSBoundaryAwareLoss
+        from gemsdoe30.metric import distance_weighted_tversky
+
+        logits = torch.linspace(-2.5, 2.5, 15 * 17, dtype=torch.float64).reshape(1, 1, 15, 17)
+        target = torch.zeros_like(logits)
+        target[0, 0, 4, 5] = 1.0
+        target[0, 0, 10, 11] = 1.0
+        valid = torch.ones_like(target, dtype=torch.bool)
+        valid[0, 0, 0, :] = False
+        valid[0, 0, :, 0] = False
+        probabilities = torch.sigmoid(logits)
+
+        criterion = GEMSBoundaryAwareLoss(boundary_weight=1.0, epsilon=1e-7)
+        parts = criterion(logits, target, valid, return_components=True)
+        reference = distance_weighted_tversky(
+            probabilities[0, 0].numpy(),
+            target[0, 0].numpy(),
+            valid[0, 0].numpy(),
+        )
+        self.assertAlmostEqual(float(parts["boundary"]), 1.0 - reference.score, places=10)
+
+    def test_nonfinite_loss_parameters_are_rejected(self) -> None:
+        import math
+
+        from gemsdoe30.losses import GEMSBoundaryAwareLoss
+
+        for kwargs in (
+            {"radius_m": math.nan},
+            {"pixel_size_x_m": math.inf},
+            {"boundary_weight": math.nan},
+            {"epsilon": math.inf},
+        ):
+            with self.subTest(kwargs=kwargs), self.assertRaises(ValueError):
+                GEMSBoundaryAwareLoss(**kwargs)
+
     def test_combined_loss_has_finite_gradient(self) -> None:
         import torch
 

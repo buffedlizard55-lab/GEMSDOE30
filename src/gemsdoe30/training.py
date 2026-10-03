@@ -139,6 +139,8 @@ def train_one_arm(
     *,
     loss_mode: str,
     output_path: str | Path,
+    dataset_signature: str,
+    fold: int | None = None,
     seed: int = 17,
     epochs: int = 5,
     steps_per_epoch: int = 100,
@@ -158,6 +160,14 @@ def train_one_arm(
 
     if loss_mode not in {"regional", "combined"}:
         raise ValueError("loss_mode must be 'regional' or 'combined'")
+    if fold not in (None, 0, 1, 2, 3):
+        raise ValueError("fold must be 0, 1, 2, 3, or None for a full-label fit")
+    if not isinstance(dataset_signature, str) or len(dataset_signature) != 64:
+        raise ValueError("dataset_signature must be a full SHA-256 string")
+    try:
+        int(dataset_signature, 16)
+    except ValueError as exc:
+        raise ValueError("dataset_signature must be hexadecimal SHA-256") from exc
     if epochs < 1 or steps_per_epoch < 1 or batch_size < 1:
         raise ValueError("epochs, steps_per_epoch, and batch_size must be positive")
     if learning_rate <= 0 or boundary_weight < 0:
@@ -234,6 +244,8 @@ def train_one_arm(
     checkpoint = {
         "state_dict": model.state_dict(),
         "in_channels": int(features.shape[0]),
+        "fold": fold,
+        "dataset_signature": dataset_signature,
         "base_channels": 24,
         "feature_stats": feature_stats,
         "normalization_note": "fit on training-fold feature pixels only; held-out pixels excluded",
@@ -248,6 +260,8 @@ def train_one_arm(
         "batch_size": batch_size,
         "patch_size": patch_size,
         "learning_rate": learning_rate,
+        "weight_decay": 1e-4,
+        "optimizer": "AdamW",
         "history": history,
         "training_note": "validation and leaderboard scores are not included; evaluate on frozen spatial folds",
     }

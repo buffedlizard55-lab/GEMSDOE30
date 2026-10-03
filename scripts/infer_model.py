@@ -11,6 +11,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data-dir", type=Path, default=Path("data/processed"))
@@ -30,7 +38,7 @@ def main() -> int:
         import rasterio
         import torch
 
-        from gemsdoe30.cv import spatial_quadrant_masks
+        from gemsdoe30.cv import spatial_quadrant_masks, validate_checkpoint_fold
         from gemsdoe30.model import SmallUNet
         from gemsdoe30.normalization import normalize_feature_block
         from gemsdoe30.submission import valid_template_mask, write_submission_file
@@ -51,6 +59,18 @@ def main() -> int:
         device_name = args.device or ("cuda" if torch.cuda.is_available() else "cpu")
         device = torch.device(device_name)
         checkpoint = torch.load(args.checkpoint, map_location=device)
+        if "fold" not in checkpoint:
+            raise ValueError("checkpoint is missing explicit fold provenance; retrain it before inference")
+        validate_checkpoint_fold(checkpoint.get("fold"), args.fold)
+        dataset_signature = prepared_manifest.get("dataset_signature")
+        if not isinstance(dataset_signature, str) or len(dataset_signature) != 64:
+            raise ValueError("prepared manifest is missing source-file provenance; rerun scripts/prepare_data.py")
+        try:
+            int(dataset_signature, 16)
+        except ValueError as exc:
+            raise ValueError("prepared dataset signature is not a hexadecimal SHA-256") from exc
+        if checkpoint.get("dataset_signature") != dataset_signature:
+            raise ValueError("checkpoint was trained from a different prepared dataset signature")
         features = np.load(feature_path, mmap_mode="r")
         valid = np.load(valid_path, mmap_mode="r").astype(bool, copy=False)
         if features.ndim != 3 or features.shape[1:] != valid.shape:
@@ -87,6 +107,7 @@ def main() -> int:
                 "epsg": template.crs.to_epsg(),
                 "transform_gdal": actual_transform,
                 "valid_mask_sha256": valid_mask_sha256,
+                "dataset_signature": dataset_signature,
             }
 
         fold_mask = None
@@ -130,7 +151,7 @@ def main() -> int:
         expected_mask = fold_mask if fold_mask is not None else valid
         if not np.all(np.isfinite(predictions[expected_mask])):
             raise ValueError("inference left NaN/Inf predictions inside the requested valid area")
-        model_sha = hashlib.sha256(args.checkpoint.read_bytes()).hexdigest()
+        model_sha = _sha256_file(args.checkpoint)
         timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
         run_name = f"GEMSDOE30_{checkpoint['loss_mode']}_R300m_{timestamp}_{model_sha[:8]}"
         training_recipe = {
@@ -143,6 +164,14 @@ def main() -> int:
             "patch_size": int(checkpoint["patch_size"]),
             "learning_rate": float(checkpoint["learning_rate"]),
             "base_channels": int(checkpoint.get("base_channels", 24)),
+            "pixel_size_x_m": 100.0,
+            "pixel_size_y_m": 100.0,
+            "metric_radius_m": float(checkpoint["radius_m"]),
+            "metric_alpha": float(checkpoint["alpha"]),
+            "metric_beta": float(checkpoint["beta"]),
+            "weight_decay": float(checkpoint.get("weight_decay", 1e-4)),
+            "optimizer": checkpoint.get("optimizer", "AdamW"),
+            "patch_radius_halo_pixels": 3,
         }
 
         if args.predictions_only:
@@ -151,6 +180,7 @@ def main() -> int:
                 raise ValueError("--predictions-only output must end in .npy")
             output.parent.mkdir(parents=True, exist_ok=True)
             np.save(output, predictions)
+            prediction_sha = _sha256_file(output)
             manifest = {
                 "run_name": run_name,
                 "checkpoint": str(args.checkpoint),
@@ -158,7 +188,11 @@ def main() -> int:
                 "checkpoint_loss_mode": checkpoint["loss_mode"],
                 "training_recipe": training_recipe,
                 "fold": args.fold,
+                "checkpoint_fold": checkpoint["fold"],
+                "dataset_signature": dataset_signature,
+                "fold_buffer_m": 300.0,
                 "output_file": str(output),
+                "prediction_sha256": prediction_sha,
                 "grid_signature": grid_signature,
                 "prediction_scope": "held-out quadrant only; NaN elsewhere",
                 "status": "OOF research array; not a submission TIFF",
@@ -177,6 +211,8 @@ def main() -> int:
             )
             manifest["model_sha256"] = model_sha
             manifest["checkpoint_loss_mode"] = checkpoint["loss_mode"]
+            manifest["checkpoint_fold"] = checkpoint["fold"]
+            manifest["dataset_signature"] = dataset_signature
             manifest["training_recipe"] = training_recipe
             manifest["grid_signature"] = grid_signature
             manifest["submission_gate"] = "format-valid only; spatial holdout promotion is separate"

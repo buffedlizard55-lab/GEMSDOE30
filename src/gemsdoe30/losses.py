@@ -13,7 +13,7 @@ from __future__ import annotations
 import math
 from typing import Any
 
-from .metric import DEFAULT_ALPHA, DEFAULT_BETA, DEFAULT_RADIUS_M
+from .metric import DEFAULT_ALPHA, DEFAULT_BETA, DEFAULT_EPSILON, DEFAULT_RADIUS_M
 
 try:  # Training dependencies are optional for the lightweight metric utilities.
     import numpy as np
@@ -71,9 +71,21 @@ else:
             beta: float = DEFAULT_BETA,
             regional_weight: float = 1.0,
             boundary_weight: float = 0.5,
-            epsilon: float = 1e-6,
+            epsilon: float = DEFAULT_EPSILON,
         ) -> None:
             super().__init__()
+            parameters = (
+                pixel_size_x_m,
+                pixel_size_y_m,
+                radius_m,
+                alpha,
+                beta,
+                regional_weight,
+                boundary_weight,
+                epsilon,
+            )
+            if not all(math.isfinite(float(value)) for value in parameters):
+                raise ValueError("loss parameters must be finite")
             if pixel_size_x_m <= 0 or pixel_size_y_m <= 0 or radius_m <= 0:
                 raise ValueError("pixel sizes and radius_m must be positive")
             if alpha < 0 or beta < 0:
@@ -127,6 +139,7 @@ else:
                 raise RuntimeError("SciPy is required for the 300 m EDT boundary term") from exc
 
             distances = []
+            distance_dtype = np.float64 if labels.dtype == torch.float64 else np.float32
             for batch_index in range(labels.shape[0]):
                 positive = (
                     (labels[batch_index, 0].detach().cpu().numpy() >= 0.5)
@@ -138,8 +151,8 @@ else:
                         sampling=(self.pixel_size_y_m, self.pixel_size_x_m),
                     )
                 else:
-                    d = np.full(positive.shape, np.inf, dtype=np.float32)
-                distances.append(np.minimum(d / self.radius_m, 1.0).astype(np.float32))
+                    d = np.full(positive.shape, np.inf, dtype=distance_dtype)
+                distances.append(np.minimum(d / self.radius_m, 1.0).astype(distance_dtype, copy=False))
             stacked = np.stack(distances, axis=0)[:, None, :, :]
             return torch.as_tensor(stacked, device=labels.device, dtype=labels.dtype)
 

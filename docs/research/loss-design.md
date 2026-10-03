@@ -27,7 +27,7 @@ On the challenge's 100 m square grid, a unit-probability prediction one cell (10
 
 ## Implemented objective
 
-The checkout was empty apart from the README, so there was no existing regional loss to extend. This implementation adds a regional soft-Tversky control and a GEMS-specific geometry term:
+The training scaffold's regional control is soft-Tversky. This implementation keeps that regional term and adds a GEMS-specific geometry term for the paired ablation:
 
 \[
  L_{regional}=1-\frac{TP_{pixel}+\epsilon}{TP_{pixel}+0.2FP_{pixel}+0.8FN_{pixel}+\epsilon},
@@ -50,9 +50,10 @@ This repository does **not** claim to reproduce their signed-distance surface lo
 
 ## What is tested today
 
-- Unit tests check the 300 m kernel, the official weighted-count arithmetic example (`TPw=3`, `FPw=1.89`, `FNw=2` gives 0.60), exact alignment, fractional 100/200 m near misses, 300 m cutoff, footprint masking, and invalid probability rejection.
+- Unit tests check the 300 m kernel, the official weighted-count arithmetic example (`TPw=3`, `FPw=1.89`, `FNw=2` gives 0.60), exact alignment, fractional 100/200 m near misses, the 300 m cutoff, footprint masking, and invalid probability rejection.
+- The optional gradient suite compares the differentiable EDT/kernel loss directly against the independent full-grid metric implementation on a masked raster; it also tests finite gradients and non-finite parameter rejection.
+- `tests/test_cv.py` places an OOF prediction 100 m across a quadrant seam: the exact whole-grid score retains its 2/3 credit, while the quadrant-isolated diagnostics correctly show why they must not be pooled. The OOF evaluator also rejects a changed array whose hash no longer matches its sidecar.
 - `scripts/loss_geometry_probe.py` compares regional and metric geometry losses for a single-pixel synthetic translation. The regional loss ties non-overlapping shifts; the combined objective orders the 100 m miss ahead of the 200 m and farther misses.
-- Optional `tests/test_optional_loss.py` exercises differentiability and distance ordering if PyTorch and SciPy are installed.
 - A disposable 64×64 synthetic pipeline smoke passed data preparation, both loss arms across four folds, OOF inference/stitching/evaluation, full-data fit, GeoTIFF writing, and exact-template format validation. This checks software plumbing only.
 
 **Not tested:** training on GEMS rasters, change in real held-out near misses, improvement over a real spatial-holdout baseline, competition score, or private-test/generalization performance. No competition data or template were in this checkout.
@@ -61,7 +62,7 @@ This repository does **not** claim to reproduce their signed-distance surface lo
 
 1. Use identical model, initial weights, train/validation spatial folds, patch draws, optimizer steps, and seeds for the regional and combined arms.
 2. Split in buffered spatial blocks and hold entire spatial areas/components out. Training labels must not enter the held-out fold's distance transform. The code accepts a `valid_mask` for labels and a separate `loss_mask` so an input halo can support the 300 m transform while only core pixels contribute to loss.
-3. Score full held-out blocks with the exact metric implementation. Pool `TPw`, `FPw`, and `FNw` across folds before taking DTI; do not average fold ratios as though that were the organizer's pooled score.
+3. Score the complete stitched OOF mosaic once with the exact metric implementation and the full label-valid footprint. This preserves 300 m true-positive and false-positive interactions across quadrant boundaries. Fold-isolated DTI values are heterogeneity diagnostics only; do not sum their components or treat them as the exact pooled score.
 4. Report each fold and seed, pooled score, metric components, exact-pixel overlap diagnostics, and the distance profile of held-out truth credit and false-positive mass. The explicit behavioral test is whether the combined model reduces missed/low-credit truth at 100–200 m relative to the exact-overlap control without creating excessive far-field FP mass.
 5. Pre-register the confirmation gate and minimum gain. A single positive screen is not promotion. No candidate is eligible for a weekly slot until confirmation and exact-file audit pass.
 

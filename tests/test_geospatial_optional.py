@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import tempfile
 import unittest
@@ -135,6 +136,15 @@ class GeoTiffTests(unittest.TestCase):
             self.assertEqual(manifest["feature_channels"], 2)
             self.assertEqual(manifest["transform_gdal"], [float(value) for value in transform.to_gdal()])
             self.assertEqual(len(manifest["valid_mask_sha256"]), 64)
+            self.assertEqual(set(manifest["source_files"]), {"training_features", "labels", "sample_submission"})
+            self.assertTrue(all(len(row["sha256"]) == 64 for row in manifest["source_files"].values()))
+            self.assertTrue(
+                all(
+                    row["sha256"] == hashlib.sha256(Path(row["path"]).read_bytes()).hexdigest()
+                    for row in manifest["source_files"].values()
+                )
+            )
+            self.assertEqual(len(manifest["dataset_signature"]), 64)
             self.assertEqual(int(processed_labels.sum()), 1)
             self.assertEqual(int(processed_valid.sum()), 71)
             raw_features = np.load(output_dir / "features_raw.npy")

@@ -1,7 +1,7 @@
 {
   "as_of_utc_date": "2026-10-03",
   "project": "GEMSDOE30",
-  "checkout_status": "scaffold added; original checkout contained only README.md",
+  "checkout_status": "research and training scaffold present at the recorded baseline commit; shallow/grafted history prevents verification of earlier checkout states",
   "competition_data": {
     "present": false,
     "access": "competition data page redirected unauthenticated request to DrivenData login",
@@ -47,10 +47,16 @@
     }
   },
   "verification": {
-    "unit_tests": "18 passed with NumPy, SciPy, rasterio, and PyTorch installed",
+    "unit_tests": "23 passed with NumPy 2.4.6, SciPy 1.17.1, rasterio 1.4.4, PyTorch 2.14.1, and pytest 9.1.1 installed in an ignored local virtual environment",
     "synthetic_geometry_probe": "passed; 100/200/300/400 m translations only",
-    "synthetic_pipeline_smoke": "passed on disposable 64x64 grid through paired four-fold OOF and full-fit GeoTIFF validation",
+    "cross_fold_regression": "passed; exact full-grid score retains a 100 m near miss across a quadrant seam; wrong-fold checkpoint relabeling is rejected; previous quadrant-component pooling defect fixed",
+    "synthetic_pipeline_smoke": "reproduced after the final metric/dataset/fold-provenance changes on disposable 64x64 data: preparation with source-TIFF SHA-256 and canonical dataset signature, paired four-fold train/inference, prediction/checkpoint hash and checkpoint-fold-identity checks, OOF stitching/evaluation, full-fit inference, and exact-template GeoTIFF validation; CPU only; software check, not a scientific holdout",
     "scientific_holdout": "not run; real competition labels/features/template unavailable",
     "score_gain_claimed": false
+  },
+  "three_pass_review": {
+    "pass_1_implementation_and_verification": "metric-aware loss, pooled full-grid OOF aggregation, and provenance checks implemented; unit tests and synthetic pipeline smoke passed",
+    "pass_2_bug_and_edge_case_review": "fixed cross-quadrant kernel loss from separate pooling; added source-raster and dataset signatures, checkpoint/fold identity, inference-array/checkpoint SHA-256, recipe, mask, grid, and parameter validation",
+    "pass_3_full_brief_recheck": "source and rules claims bounded; four hypotheses remain unrun; exact data/template access and real holdout are blocked; external TIFF is clearly marked unscored/not slot-approved; no local submission or score gain is claimed"
   }
 }

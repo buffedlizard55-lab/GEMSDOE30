@@ -9,6 +9,7 @@ checkpoint, not a submission and not a leaderboard score.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -40,7 +41,8 @@ def main() -> int:
         label_path = args.data_dir / "labels.npy"
         valid_path = args.data_dir / "valid.npy"
         label_valid_path = args.data_dir / "label_valid.npy"
-        required = (feature_path, label_path, valid_path, label_valid_path)
+        prepared_manifest_path = args.data_dir / "manifest.json"
+        required = (feature_path, label_path, valid_path, label_valid_path, prepared_manifest_path)
         missing = [str(path) for path in required if not path.is_file()]
         if missing:
             raise FileNotFoundError(f"prepared arrays missing: {', '.join(missing)}; run scripts/prepare_data.py")
@@ -49,6 +51,21 @@ def main() -> int:
         labels = np.load(label_path, mmap_mode="r")
         valid = np.load(valid_path, mmap_mode="r").astype(bool, copy=False)
         label_valid = np.load(label_valid_path, mmap_mode="r").astype(bool, copy=False)
+        prepared_manifest = json.loads(prepared_manifest_path.read_text(encoding="utf-8"))
+        if prepared_manifest.get("schema_version") != 3:
+            raise ValueError("prepared manifest lacks source-file provenance; rerun scripts/prepare_data.py")
+        if prepared_manifest.get("shape_hw") != list(valid.shape):
+            raise ValueError("prepared manifest shape does not match valid.npy")
+        mask_sha256 = hashlib.sha256(np.packbits(valid).tobytes()).hexdigest()
+        if prepared_manifest.get("valid_mask_sha256") != mask_sha256:
+            raise ValueError("valid.npy does not match the prepared manifest checksum")
+        dataset_signature = prepared_manifest.get("dataset_signature")
+        if not isinstance(dataset_signature, str) or len(dataset_signature) != 64:
+            raise ValueError("prepared manifest is missing the source-bound dataset signature")
+        try:
+            int(dataset_signature, 16)
+        except ValueError as exc:
+            raise ValueError("prepared dataset signature is not a hexadecimal SHA-256") from exc
         if args.fold == "all":
             train_mask = valid & label_valid
             validation_note = "full-label fit; no holdout claim"
@@ -64,6 +81,8 @@ def main() -> int:
             train_mask,
             loss_mode=args.loss,
             output_path=args.output,
+            dataset_signature=dataset_signature,
+            fold=None if args.fold == "all" else int(args.fold),
             seed=args.seed,
             epochs=args.epochs,
             steps_per_epoch=args.steps_per_epoch,
@@ -75,6 +94,7 @@ def main() -> int:
         )
         run = {
             "checkpoint": str(args.output),
+            "dataset_signature": dataset_signature,
             "fold": args.fold,
             "loss": args.loss,
             "seed": args.seed,
