@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-03T23:41:21+00:00",
+  "generated_utc": "2026-10-03T23:43:28+00:00",
   "runner": "GitHub Actions (general internet access); the agent sandbox cannot reach these hosts",
   "drivendata_contacted": false,
   "grid_source_note": "Derived rasters use the hash-pinned owner-mirror competition grid. Those bytes are owner-mirrored, not organizer-authenticated; alignment is verified, labels are never learnt from.",
@@ -113,8 +113,21 @@
       "fraction_within_300m_of_catalogue": 0.304
     },
     "sgmc_cover": {
-      "ok": false,
-      "reason": "no mapped polygon cells",
+      "path": "data/external/derived_sgmc_cover_100m_u8.tif",
+      "bytes": 397299,
+      "sha256": "40ef32e3b7e4891b61b88d9e1e83edfc0d062ad78b7b1a279ee6147bc88971fe",
+      "ok": true,
+      "class_table": {
+        "0": "pre-Cenozoic bedrock / undivided / unmapped",
+        "1": "Mesozoic-Paleogene indurated units",
+        "2": "Neogene-Tertiary basin fill and volcanics",
+        "3": "Quaternary surficial cover",
+        "4": "playa / lake bed / evaporite / salt flat"
+      },
+      "nodata": 255,
+      "footprint_pixels": 5167373,
+      "mapped_pixels_in_footprint": 5167373,
+      "fraction_of_footprint_mapped": 1.0,
       "layers": [
         {
           "archive": "sgmc_nv.zip",
@@ -134,7 +147,45 @@
             "CA_geol_poly.shp"
           ]
         }
-      ]
+      ],
+      "per_class": {
+        "0": {
+          "pixels": 709867,
+          "description": "pre-Cenozoic bedrock / undivided / unmapped",
+          "on_catalogue_pixels": 3438,
+          "fraction_within_300m_of_catalogue": 0.03590250004578322,
+          "median_distance_to_catalogue_px": 73.06161783043132
+        },
+        "1": {
+          "pixels": 861370,
+          "description": "Mesozoic-Paleogene indurated units",
+          "on_catalogue_pixels": 5006,
+          "fraction_within_300m_of_catalogue": 0.043716405261385934,
+          "median_distance_to_catalogue_px": 49.64876634922564
+        },
+        "2": {
+          "pixels": 3488213,
+          "description": "Neogene-Tertiary basin fill and volcanics",
+          "on_catalogue_pixels": 21468,
+          "fraction_within_300m_of_catalogue": 0.04385741352377277,
+          "median_distance_to_catalogue_px": 111.07204868912791
+        },
+        "3": {
+          "pixels": 4253836,
+          "description": "Quaternary surficial cover",
+          "on_catalogue_pixels": 21438,
+          "fraction_within_300m_of_catalogue": 0.03757408607195952,
+          "median_distance_to_catalogue_px": 71.17583859709698
+        },
+        "4": {
+          "pixels": 2965874,
+          "description": "playa / lake bed / evaporite / salt flat",
+          "on_catalogue_pixels": 9638,
+          "fraction_within_300m_of_catalogue": 0.023812542272530796,
+          "median_distance_to_catalogue_px": 416.4432734202046
+        }
+      },
+      "confound_note": "Per-class distance-to-catalogue statistics are the confound check: if a concealment class is simply 'far from the catalogue' its apparent value would be an artefact, which is why the experiment uses a count- and distance-matched control (H-34-01 preregistration)."
     },
     "gdr_qfaults_v2": {
       "path": "data/external/derived_gdr_qfaults_v2_100m_u8.tif",
@@ -157,10 +208,15 @@
       "bytes": 70221,
       "sha256": "d6a3609bd7943fa5f1126a3cc688441aeceee261a76cd6a90a206830400066a4",
       "ok": true,
-      "feature_count_in_grid": 402,
+      "feature_count_in_grid": 804,
       "layers": [
         {
           "file": "Paleo_geothermal_final.csv",
+          "rows": 709,
+          "used": true
+        },
+        {
+          "file": "Paleo_geothermal_final.shp",
           "rows": 709,
           "used": true
         }
@@ -168,26 +224,44 @@
       "pixels_in_footprint": 244
     },
     "gdr_volcanics": {
-      "ok": false,
-      "reason": "no features in grid",
-      "layers": []
+      "path": "data/external/derived_gdr_volcanics_100m_u8.tif",
+      "bytes": 72349,
+      "sha256": "c219bd644e6f7a4071dc429e29b909a2296967b0657bf456bb6675413ee76cb2",
+      "ok": true,
+      "feature_count_in_grid": 941,
+      "layers": [
+        {
+          "file": "great_basin_flows.shp",
+          "rows": 5281,
+          "used": true
+        },
+        {
+          "file": "great_basin_vents.shp",
+          "rows": 1514,
+          "used": true
+        }
+      ],
+      "pixels_in_footprint": 6776
     },
     "gdr_2m_probes": {
-      "ok": false,
-      "reason": "no features in grid",
-      "layers": []
+      "path": "data/external/derived_gdr_2m_probes_100m_u8.tif",
+      "bytes": 78021,
+      "sha256": "7ac3cfdf2412f7f8a8b82d928115888c510f106f0254fb0b3988448db2f3b6ec",
+      "ok": true,
+      "feature_count_in_grid": 3439,
+      "layers": [
+        {
+          "file": "2m_temperature_probe_n83geo.shp",
+          "rows": 3800,
+          "used": true
+        }
+      ],
+      "pixels_in_footprint": 2700
     }
   },
-  "errors": {
-    "sgmc_cover:NV_geol_poly.shp": "no age column; columns: STATE, ORIG_LABEL, SGMC_LABEL, UNIT_LINK, REF_ID, GENERALIZE, SRC_URL, URL, geometry",
-    "sgmc_cover:CA_geol_poly.shp": "no age column; columns: STATE, ORIG_LABEL, SGMC_LABEL, UNIT_LINK, REF_ID, GENERALIZE, SRC_URL, URL, geometry",
-    "gdr_paleo:Paleo_geothermal_final.shp": "AttributeError(\"module 'pyogrio' has no attribute 'read_raw'\")",
-    "gdr_volcanics:great_basin_flows.shp": "AttributeError(\"module 'pyogrio' has no attribute 'read_raw'\")",
-    "gdr_volcanics:great_basin_vents.shp": "AttributeError(\"module 'pyogrio' has no attribute 'read_raw'\")",
-    "gdr_2m_probes:2m_temperature_probe_n83geo.shp": "AttributeError(\"module 'pyogrio' has no attribute 'read_raw'\")"
-  },
+  "errors": {},
   "stage": "completed",
-  "updated_utc": "2026-10-03T23:41:40+00:00",
+  "updated_utc": "2026-10-03T23:43:59+00:00",
   "python": "3.11.16",
   "imports": {
     "numpy": "2.4.6",
@@ -804,6 +878,168 @@
           "dtype": "int64",
           "n_unique": 3
         }
+      }
+    },
+    "sgmc_cover:NV_geol_poly.shp": {
+      "rows": 30763,
+      "age_column": "SGMC_LABEL",
+      "age_top_values": {
+        "Tt2;0": 2649,
+        "Ts3;0": 2180,
+        "Qal;0": 1479,
+        "Tba;0": 1373,
+        "Tt3;0": 1188,
+        "Tr3;0": 1092,
+        "Dc;0": 918,
+        "Ta2;0": 863,
+        "Ta3;0": 723,
+        "QToa;0": 696,
+        "Ta1;0": 686,
+        "MDcl;0": 653,
+        "OCAc;0": 652,
+        "PAMcl;0": 633,
+        "PPAc;0": 633,
+        "Dcd;0": 565,
+        "SOc;0": 550,
+        "CAZq;0": 545,
+        "QTg;0": 535,
+        "CAc;0": 519
+      },
+      "text_columns_used": [
+        "STATE",
+        "ORIG_LABEL",
+        "UNIT_LINK",
+        "REF_ID",
+        "GENERALIZE"
+      ],
+      "class_counts": {
+        "0": 7604,
+        "1": 3827,
+        "2": 13379,
+        "3": 2095,
+        "4": 3858
+      },
+      "unit_table": {
+        "files": [
+          {
+            "file": "NV_units.csv",
+            "rows": 102,
+            "used": true,
+            "key_column": "orig_label",
+            "text_columns": [
+              "state",
+              "map_sym1",
+              "map_sym2",
+              "unit_link",
+              "prov_no",
+              "province",
+              "unit_name",
+              "unit_age",
+              "unitdesc",
+              "strat_unit",
+              "unit_com",
+              "map_ref",
+              "rocktype1",
+              "rocktype2",
+              "rocktype3",
+              "unit_ref",
+              "map_symb2"
+            ]
+          }
+        ],
+        "key_column": "orig_label",
+        "rows": 102,
+        "matched_keys": 0,
+        "keys": 102,
+        "joins": [
+          {
+            "layer": "NV_geol_poly.shp",
+            "join_column": "ORIG_LABEL",
+            "matched_rows": 18805,
+            "rows": 30763
+          }
+        ]
+      }
+    },
+    "sgmc_cover:CA_geol_poly.shp": {
+      "rows": 10465,
+      "age_column": "SGMC_LABEL",
+      "age_top_values": {
+        "Qoa;0": 1287,
+        "water;0": 1080,
+        "grMZ3;0": 650,
+        "QPOc;0": 545,
+        "Q;0": 518,
+        "m;0": 343,
+        "Tv16;0": 309,
+        "MI;0": 263,
+        "gb2;0": 237,
+        "Tvp9;0": 205,
+        "um3;0": 196,
+        "Qg;0": 189,
+        "pCA2;0": 180,
+        "Tc;0": 180,
+        "Tv17;0": 167,
+        "um2;0": 162,
+        "PO;0": 158,
+        "MZv1;0": 142,
+        "KJf1;0": 134,
+        "Ku1;0": 134
+      },
+      "text_columns_used": [
+        "STATE",
+        "ORIG_LABEL",
+        "UNIT_LINK",
+        "REF_ID",
+        "GENERALIZE"
+      ],
+      "class_counts": {
+        "0": 1634,
+        "1": 407,
+        "2": 504,
+        "3": 1516,
+        "4": 6404
+      },
+      "unit_table": {
+        "files": [
+          {
+            "file": "CA_units.csv",
+            "rows": 198,
+            "used": true,
+            "key_column": "orig_label",
+            "text_columns": [
+              "state",
+              "map_sym1",
+              "map_sym2",
+              "unit_link",
+              "prov_no",
+              "province",
+              "unit_name",
+              "unit_age",
+              "unitdesc",
+              "strat_unit",
+              "unit_com",
+              "map_ref",
+              "rocktype1",
+              "rocktype2",
+              "rocktype3",
+              "unit_ref",
+              "map_symb2"
+            ]
+          }
+        ],
+        "key_column": "orig_label",
+        "rows": 198,
+        "matched_keys": 0,
+        "keys": 66,
+        "joins": [
+          {
+            "layer": "CA_geol_poly.shp",
+            "join_column": "ORIG_LABEL",
+            "matched_rows": 9178,
+            "rows": 10465
+          }
+        ]
       }
     },
     "gdr_qfaults_v2:qfaults_ingenious_nad83conus117_2023-06-27.shp": {
