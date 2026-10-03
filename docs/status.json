@@ -1,7 +1,7 @@
 {
   "as_of_utc_date": "2026-10-03",
   "project": "GEMSDOE30",
-  "checkout_status": "working branch arena/01a10289-gemsdoe30; baseline commit 92bc4b1; local data restored from SHA-256-pinned owner mirrors; prepared arrays and OOF research artifacts are local-only (Git-ignored)",
+  "checkout_status": "working branch arena/01a10289-gemsdoe30; PRs #5 and #6 merged to main; local data restored from SHA-256-pinned owner mirrors; prepared arrays and OOF research artifacts are local-only (Git-ignored); published candidate + manifests are committed under docs/downloads/",
   "competition_data": {
     "present": true,
     "access": "immutable SHA-256 verified owner mirrors via GitHub API",
@@ -99,10 +99,10 @@
   },
   "three_pass_review": {
     "as_of_utc_date": "2026-10-03",
-    "pass_1_implement_and_verify": "metric-emission holdout re-run to completion (4 folds, report.json + committed copies); paired regional-vs-boundary loss ablation re-run at seed 31 through train -> infer -> stitch (hash-gated) -> evaluate; site/doc refresh for both outcomes; 44 tests + 11 subtests pass; HTML link and tag balance checks pass.",
-    "pass_2_bugs_and_edge_cases": "sha256 sidecar re-verification on every OOF array before stitching; sidecar/checkpoint/fold-receipt checks; metric-emission 'metric' arm pool-cap truncation identified and documented; stale 'no data / no GEMSDOE30 result' claims swept from index.html and executive-summary.html (grep-verified zero hits); status.json + hypotheses.html regenerated; docs numbers cross-checked against report.json and both holdout JSONs (all PASS).",
-    "pass_3_vs_original_request": "brief item check recorded in the session summary: D2.8 0.26 attribution analysis (why-d28-scored-026.md), 5 new preregistered hypotheses with owner cross-check, holdout validation before any slot (both new lines failed; nothing promoted), free official source named and obtainability checked for 3DEP 1 m DEM, site one-click download + unique name + paste-ready note + [0,1] NaN fix guidance present, README carries the standing brief.",
-    "not_done": "no promoted candidate file; H-31-01 paired-termination refinement and H-31-02/03 external-data arms not run (transfer path off sandbox required); owner knowledge docs read partially; PR/merge pending at the time of writing."
+    "pass_1_implement_and_verify": "metric-emission holdout completed (4 folds; report.json + committed copies); paired regional-vs-boundary loss ablation re-ran at seed 31 through train -> infer -> stitch (hash-gated) -> evaluate; first GEMSDOE30 candidate built end-to-end (OOF surface assembly with zero coverage gaps -> adaptive Poisson-disk emission -> build_submission -> 11/11 local format checks -> hash-verified copy in docs/downloads). 44 tests + 11 subtests pass.",
+    "pass_2_bugs_and_edge_cases": "sha256 sidecars re-verified on all 8 seed-31 OOF arrays before stitching; TIFF re-read and its dot mask compared cell-for-cell against the source .npy (exact match, 90,358 dots); manifest hash re-verified after copy; site links and tag balance checked on all 7 pages; docs numbers cross-checked against report.json, both holdout JSONs, and the candidate manifest; old 'no data' claims swept (grep-verified).",
+    "pass_3_vs_original_request": "brief item check: (it) D2.8/0.2600 attribution analysis + beating-0.3195 coverage algebra -> why-d28-scored-026.md; (it) metric-shaped 300 m boundary loss implemented and holdout-tested -> near-miss change verified, score gain NOT replicated at seed 31; (it) 5 new preregistered hypotheses with layers/signature/novelty/priors/costs + owner cross-check -> hypotheses.md; (it) top candidate holdout-tested before any slot -> H-31-01 failed, no slot used; (it) free official sources named and obtainability verified for 3DEP 1 m DEM; (it) site one-click download + unique name + paste-ready note + [0,1] NaN fix -> live; (it) three passes -> recorded here; (it) PR -> merge -> PRs #5 and #6 merged to main.",
+    "not_done": "no PROMOTED candidate (both new lines are recorded negatives); H-31-01 paired-termination refinement and H-31-02/03 external-data arms not run (need transfer off this sandbox); boundary loss needs a larger budget + weight sweep; owner knowledge docs read partially; no CI/automation to refresh the site or the leaderboard snapshot (DrivenData ToS forbids automated scraping)."
   },
   "latest_pilot": {
     "results": "research/pilot-results.json",
