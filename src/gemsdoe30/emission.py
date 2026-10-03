@@ -166,8 +166,14 @@ def candidate_pool(score: Any, mask: Any, limit: int) -> tuple[Any, Any]:
     return rows, cols
 
 
-def _select(score: Any, radii: Any, rows: Any, cols: Any) -> Any:
-    """Shared greedy kernel: keep a candidate when its cell is not yet blocked."""
+def _select(score: Any, radii: Any, rows: Any, cols: Any,
+            max_kept: int | None = None) -> Any:
+    """Shared greedy kernel: keep a candidate when its cell is not yet blocked.
+
+    ``max_kept`` (optional) stops the sweep once that many pixels have been kept, so a
+    caller can request just the first K accepted pixels of the visit order without
+    scanning the whole candidate pool.  The accepted prefix is unaffected by where the
+    sweep stops."""
 
     import numpy as np
 
@@ -192,10 +198,14 @@ def _select(score: Any, radii: Any, rows: Any, cols: Any) -> Any:
             offset_cache[key] = entry
         return entry
 
+    kept_count = 0
     for row, col, radius in zip(rows.tolist(), cols.tolist(), radii.tolist()):
         if blocked[row, col]:
             continue
         kept[row, col] = True
+        kept_count += 1
+        if max_kept is not None and kept_count >= int(max_kept):
+            break
         _, offsets = _disk(radius)
         for dy, dx in offsets:
             y, x = row + dy, col + dx
@@ -228,7 +238,7 @@ def poisson_disk_select(score: Any, radius_px: float, *, threshold: float | None
                                     int(limit or values.size))
     if rows.size == 0:
         return np.zeros(values.shape, dtype=bool)
-    order = np.lexsort((-values[rows, cols], rows, cols))
+    order = np.lexsort((cols, rows, -values[rows, cols]))
     radii = np.full(rows.size, float(radius_px), dtype=np.float32)
     return _select(values, radii, rows[order], cols[order])
 
@@ -262,7 +272,7 @@ def adaptive_disk_select(score: Any, radius_px: float, *, gamma: float = 1.0,
                                     int(limit or values.size))
     if rows.size == 0:
         return np.zeros(values.shape, dtype=bool)
-    order = np.lexsort((-values[rows, cols], rows, cols))
+    order = np.lexsort((cols, rows, -values[rows, cols]))
     rows, cols = rows[order], cols[order]
     lo = float(values[finite].min())
     hi = float(values[finite].max())
@@ -469,3 +479,41 @@ def metric_optimal_emission(
         "truth_mass": truth_mass,
         "surrogate_dti": achieved / denominator if denominator > 0.0 else 0.0,
     }
+
+
+def poisson_disk_select_ordered(score: Any, radius_px: float, *, threshold: float | None = None,
+                                mask: Any = None, limit: int | None = None,
+                                max_kept: int | None = None) -> tuple[Any, Any]:
+    """Same selection as :func:`poisson_disk_select`, but return the kept pixels **in acceptance
+    order** as ``(rows, cols)``.
+
+    Because candidates are visited in descending score order (ties by raster order), the
+    acceptance order is also descending by score; the prefix ``[:N]`` is therefore the exact
+    top-N-by-score subset of the kept set.  Emission budgeting uses this to realise "greedy
+    thinning, then take the N most confident accepted dots" without re-running the sweep.
+    """
+
+    import numpy as np
+
+    values = np.asarray(score, dtype=np.float32)
+    if values.ndim != 2:
+        raise ValueError("score must be two-dimensional")
+    if radius_px <= 0:
+        raise ValueError("radius_px must be positive")
+    floor = float(values.min()) if threshold is None else float(threshold)
+    if mask is None:
+        rows, cols = np.nonzero(np.isfinite(values) & (values > floor))
+    else:
+        rows, cols = candidate_pool(values, np.asarray(mask, dtype=bool) & np.isfinite(values),
+                                     int(limit or values.size))
+    if rows.size == 0:
+        return np.empty(0, dtype=np.int64), np.empty(0, dtype=np.int64)
+    order = np.lexsort((cols, rows, -values[rows, cols]))
+    rows, cols = rows[order], cols[order]
+    radii = np.full(rows.size, float(radius_px), dtype=np.float32)
+    # _select stops as soon as K pixels are kept; blocking decisions only ever depend on
+    # EARLIER visits, so the kept set is exactly the first K acceptances of the full sweep.
+    kept = _select(values, radii, rows, cols,
+                   max_kept=int(max_kept) if max_kept is not None else None)
+    accepted = np.nonzero(kept[rows, cols])[0]
+    return rows[accepted], cols[accepted]

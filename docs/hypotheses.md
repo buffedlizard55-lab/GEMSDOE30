@@ -246,3 +246,14 @@ remains untested.
 field ranks pixels, but *where* a fixed emission budget is placed relative to mapped structure.**
 The next registered experiment should therefore be a placement-policy test, not another detector.
 No submission slot is justified by any candidate in this register.
+
+**Status (measured 2026-10-03, fifth session): the placement-policy test ran — H-33-01 — and
+the line is CLOSED with a negative result.** At the frozen gate budget the arms were
+capacity-collapsed (IR-30-032) and the gate was voided by design guard, so the registered
+verdict is *not promoted*; the count-matched sensitivity run at 40,000 dots is the substantive
+evidence: whole-domain score-first thinning (0.07608) beats every band-stratified arm
+(0.0721–0.0725) and beats blind random by +35 %, while pure proximity ranking is catastrophic
+(0.03660). Stratified placement never earns more per dot than spending the budget wherever the
+model score is highest. Full numbers: [h33-01-placement-policy-holdout.md](research/h33-01-placement-policy-holdout.md).
+The next registered experiment must change the lever — score-field quality on the learning side
+(or a dense/dot hybrid), not placement geometry.

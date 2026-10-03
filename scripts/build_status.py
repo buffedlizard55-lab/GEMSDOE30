@@ -152,6 +152,20 @@ def main() -> int:
         }
     else:
         gates["loss_weight_sweep"] = {"evidence": None, "promoted": False, "decision": "not run yet"}
+    h33 = load_json(research / "h33-01-placement-policy-holdout.json") or {}
+    if h33:
+        gates["h33_01_placement_policy"] = {
+            "evidence": "docs/research/h33-01-placement-policy-holdout.json",
+            "verdict_doc": "docs/research/h33-01-placement-policy-holdout.md",
+            "preregistration": "docs/research/h33-01-preregistration.md",
+            "promoted": False,
+            "gate_pass": bool((h33.get("gates") or {}).get("pass", False)),
+            "gate_void_reason": h33.get("gates_void_reason"),
+            "capacity_collapse": bool((h33.get("capacity") or {}).get("gate_arms_collapse_identical")),
+            "decision": h33.get("decision", "not run yet"),
+        }
+    else:
+        gates["h33_01_placement_policy"] = {"evidence": None, "promoted": False, "decision": "not run yet"}
 
     # Data provenance.
     core_pins = load_json(research / "mirror-pins.json") or {}
