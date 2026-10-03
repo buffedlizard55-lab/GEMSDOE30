@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-03T18:23:43Z",
+  "design": "fold-0 boundary-weight screen; larger budget than the 2x20-step ablation screen; identical recipes across arms; scored densely and as uniform Poisson-disk emitted masks",
+  "params": {
+    "fold": 0,
+    "seed": 30,
+    "epochs": 2,
+    "steps_per_epoch": 50
+  },
+  "note": "fold-isolated diagnostics only; selection is not promotion; promotion still needs the 4-fold paired design + fresh-seed confirmation",
+  "arms": {
+    "regional": {
+      "loss": "regional",
+      "boundary_weight": 0.0,
+      "checkpoint": "/home/user/GEMSDOE30/runs/loss-weight-sweep/fold0-regional.pt",
+      "predictions": "/home/user/GEMSDOE30/runs/loss-weight-sweep/fold0-regional.npy",
+      "scores": {
+        "predictions": "runs/loss-weight-sweep/fold0-regional.npy",
+        "dense": {
+          "tp_weight": 17290.70125846099,
+          "fp_weight": 1049744.2152671036,
+          "fn_weight": 12028.298741539009,
+          "truth_pixels": 29319.0,
+          "scored_pixels": 2449030.0,
+          "dti": 0.0729989946777648
+        },
+        "emitted_uniform_dots": {
+          "tp_weight": 6168.705721337348,
+          "fp_weight": 49068.94466540672,
+          "fn_weight": 23150.29427866265,
+          "truth_pixels": 29319.0,
+          "scored_pixels": 2449030.0,
+          "dti": 0.17878891634054342,
+          "dot_radius_px": 3.0,
+          "candidate_pool": 480000,
+          "dots": 52498
+        }
+      }
+    },
+    "combined-025": {
+      "loss": "combined",
+      "boundary_weight": 0.25,
+      "checkpoint": "/home/user/GEMSDOE30/runs/loss-weight-sweep/fold0-combined-025.pt",
+      "predictions": "/home/user/GEMSDOE30/runs/loss-weight-sweep/fold0-combined-025.npy",
+      "scores": {
+        "predictions": "runs/loss-weight-sweep/fold0-combined-025.npy",
+        "dense": {
+          "tp_weight": 16805.892245182302,
+          "fp_weight": 1059447.3334858562,
+          "fn_weight": 12513.107754817698,
+          "truth_pixels": 29319.0,
+          "scored_pixels": 2449030.0,
+          "dti": 0.07040419238532523
+        },
+        "emitted_uniform_dots": {
+          "tp_weight": 5877.604120567441,
+          "fp_weight": 49265.636414806846,
+          "fn_weight": 23441.39587943256,
+          "truth_pixels": 29319.0,
+          "scored_pixels": 2449030.0,
+          "dti": 0.17044513426401856,
+          "dot_radius_px": 3.0,
+          "candidate_pool": 480000,
+          "dots": 52516
+        }
+      }
+    },
+    "combined-050": {
+      "loss": "combined",
+      "boundary_weight": 0.5,
+      "checkpoint": "/home/user/GEMSDOE30/runs/loss-weight-sweep/fold0-combined-050.pt",
+      "predictions": "/home/user/GEMSDOE30/runs/loss-weight-sweep/fold0-combined-050.npy",
+      "scores": {
+        "predictions": "/home/user/GEMSDOE30/runs/loss-weight-sweep/fold0-combined-050.npy",
+        "dense": {
+          "tp_weight": 16631.603278450202,
+          "fp_weight": 1084819.4637425398,
+          "fn_weight": 12687.396721549798,
+          "truth_pixels": 29319.0,
+          "scored_pixels": 2449030.0,
+          "dti": 0.06823350251462386
+        },
+        "emitted_uniform_dots": {
+          "tp_weight": 6024.306943822652,
+          "fp_weight": 49790.72521003106,
+          "fn_weight": 23294.693056177348,
+          "truth_pixels": 29319.0,
+          "scored_pixels": 2449030.0,
+          "dti": 0.17402134786655163,
+          "dot_radius_px": 3.0,
+          "candidate_pool": 480000,
+          "dots": 53163
+        }
+      }
+    },
+    "combined-100": {
+      "loss": "combined",
+      "boundary_weight": 1.0,
+      "checkpoint": "/home/user/GEMSDOE30/runs/loss-weight-sweep/fold0-combined-100.pt",
+      "predictions": "/home/user/GEMSDOE30/runs/loss-weight-sweep/fold0-combined-100.npy",
+      "scores": {
+        "predictions": "/home/user/GEMSDOE30/runs/loss-weight-sweep/fold0-combined-100.npy",
+        "dense": {
+          "tp_weight": 18190.132329672575,
+          "fp_weight": 1185979.4808447827,
+          "fn_weight": 11128.867670327425,
+          "truth_pixels": 29319.0,
+          "scored_pixels": 2449030.0,
+          "dti": 0.0688266401141106
+        },
+        "emitted_uniform_dots": {
+          "tp_weight": 6260.6770519167185,
+          "fp_weight": 50602.56163864666,
+          "fn_weight": 23058.32294808328,
+          "truth_pixels": 29319.0,
+          "scored_pixels": 2449030.0,
+          "dti": 0.17976066448250785,
+          "dot_radius_px": 3.0,
+          "candidate_pool": 480000,
+          "dots": 54068
+        }
+      }
+    }
+  },
+  "summary": {
+    "regional": {
+      "dense_dti": 0.0729989946777648,
+      "emitted_dti": 0.17878891634054342,
+      "dots": 52498
+    },
+    "combined-025": {
+      "dense_dti": 0.07040419238532523,
+      "emitted_dti": 0.17044513426401856,
+      "dots": 52516
+    },
+    "combined-050": {
+      "dense_dti": 0.06823350251462386,
+      "emitted_dti": 0.17402134786655163,
+      "dots": 53163
+    },
+    "combined-100": {
+      "dense_dti": 0.0688266401141106,
+      "emitted_dti": 0.17976066448250785,
+      "dots": 54068
+    }
+  },
+  "screen_selection": {
+    "best_dense": "regional",
+    "best_emitted": "combined-100",
+    "agrees": false,
+    "selected_for_confirmation": null
+  },
+  "scoring_note": "Scorer corrected during the run (2026-10-03): emission candidates are the top-K scored pixels (pool 480k) thinned at radius 3 px, and scoring is restricted to the fold-0 evaluated quadrant (truth 29,319 px; scored 2,449,030 px). The first two arms were re-scored from their saved predictions after the fix; a score-blind all-positive thinning lattice in the original scorer made emitted masks identical across arms and was replaced. All four arms are scored by the same corrected scorer."
+}

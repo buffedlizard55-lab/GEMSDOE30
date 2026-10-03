@@ -23,10 +23,55 @@ Last reviewed: **2026-10-03**. “Fixed” means the repository now mitigates th
 
 ## Escalation / next action
 
-The next session should start by running `bash scripts/download_competition_data.sh`. If the official files are still unavailable, do not fabricate a submission. Record which exact input is missing and continue only with source research, synthetic tests, and code review. Once files are placed, first execute the data-grid audit, then freeze spatial folds, then run the regional-vs-combined-loss comparison and the rank-1 hypothesis protocol. Do not spend any weekly slot on an unvalidated candidate.
+Data placement is no longer the blocker (owner mirrors restored and prepared; organizer
+authentication still open — IR-30-001). The current next actions are: (1) run the H-32-01
+vent-corridor holdout to its preregistered gate and record the verdict; (2) acquire the named
+free external archives (3DEP 1 m tiles for H-31-02, OSTI 1148722/GDR 616 for H-32-04
+validation, GDR 1391 ZIPs) off-sandbox, checksum and align them; (3) retry the boundary loss
+only with a larger budget and weight sweep per `loss-ablation-holdout.md`; (4) keep uploads on
+the portal-safe `-zeros.tif` convention (IR-30-019). Do not spend any weekly slot on an
+unvalidated candidate.
 
 ## Latest-session superseding evidence
 
 IR-30-001/004/006: owner mirrors now restored through GitHub API and hashes verified, real four-arm pilot completed; organizer authentication and official external archive transfer remain unresolved. IR-30-005: local historical D2.8 reference published, **no new promoted model output**. IR-30-NEW: mirrored sample template has 60,988 ones equal to catalogue labels; never use these template values for learning or output. See `research/session-review.md` and full results. Older absence claims are baseline history, superseded by this paragraph.
 
 IR-30-017 (new, Medium, **open — proxy truth vs scored truth**): the official problem page states that the Initial Prize Round is scored against a *private set of new expert-labelled faults*, not the public catalogue, and the owner-artifact audit shows catalogue-proxy DTI ordering inverted relative to the owner-reported leaderboard ordering (see `research/artifact-structure.json`). Implication: catalogue-based holdouts can only ever be a proxy and must not be used to rank submission candidates; report proxy and reported values in separate columns. IR-30-011 is the standing limitation for this. IR-30-018 (new, Low, **closed — no promotion**): the count-matched adaptive-vs-uniform emission experiment failed its gate in all three arms (`research/emission-holdout-results.json`); uniform Poisson-disk thinning stays the default and no slot was spent. IR-30-010 still stands: the implemented geometry term is metric-aligned and Kervadec-inspired, not a verbatim boundary loss.
+
+## 2026-10-03 second session additions
+
+| ID | Severity | Status | Observation / evidence | Action or consequence |
+| --- | --- | --- | --- | --- |
+| IR-30-019 | High | **Fixed — portal-safe convention** | The user's upload of a downloaded site file was rejected with "Predicted values must be in range [0, 1]". Measured this session: the official sample template itself encodes 7,111,787 NaN cells outside the footprint, and both published downloads matched that mask exactly — so a NaN-unaware elementwise range check fails any template-conformant file, including the official format. The GEMSDOE25 page independently infers the same root cause and ships a zeros-outside fallback (verified byte-level: finite 0.0 outside, `nodata=None`). | Portal-safe variants now published as the primary downloads (`-zeros.tif`; in-footprint bytes identical to the NaN copies; `validate_submission.py --portal-safe` checks all 12,279,160 cells finite in [0,1]). Upload instructions say explicitly: upload the `-zeros.tif` file. Organizer acceptance remains unverified (no upload is performed by this project). |
+| IR-30-020 | High | **Open — entrant eligibility** | Rules §1.3 (verified 2026-10-03): individuals must be U.S. citizens/permanent residents; entities U.S.-incorporated; certification is made under penalty of perjury at registration; FFRDC/DOE/FCOC/MFTRP exclusions apply. | The owner/operator must verify eligibility before any entry; this repository cannot certify it. Disclose generative-AI use in the narrative per §3.2 (`ai-disclosure-draft.md`). |
+| IR-30-021 | Medium | **Open — Qfaults circularity** | Rules §2/§3.3: training labels come from the INGENIOUS Great Basin compilation (which compiles USGS Quaternary faults); the scored test labels are expert-new faults. Measured: 55 % of in-footprint `gdr_qfaults_traces.csv` centroids lie within 300 m of catalogue truth. | Any Qfaults-derived hypothesis (H-32-04) cannot be validated on the catalogue-proxy holdout (it would re-test the masked catalogue); it needs an independent fault inventory (OSTI 1148722 / GDR 616) or a submission slot. Recorded in `hypotheses.md` H-32 register. |
+| IR-30-022 | Low | **Closed — rules URL verified** | The cited `https://docs.nlr.gov/docs/fy26osti/96647.pdf` is real: `docs.nlr.gov` is the prize administrator's domain (National Laboratory of the Rockies); the PDF serves the September 2026 official rules. A `docs.nrel.gov` variant does not resolve. | No action; citation retained as-is. |
+
+Superseding evidence: IR-30-012's "Fixed — range validation" status is **superseded** by IR-30-019: validating
+in-footprint values alone did not prevent the portal rejection, because the NaN *outside* convention the
+template itself uses is what an elementwise range check trips on. IR-30-004/005 remain open in their
+scientific sense (no promoted model) but the "no GEMSDOE30 TIFF" claim is superseded by the published,
+clearly-labelled un-promoted candidate (2026-10-03, prior session) and its portal-safe variant (this session).
+
+### IR-30-023 — Emission scorer degenerated to a score-blind lattice (found and fixed same day)
+- **Category:** methodological defect in experiment tooling (docs/research/loss-weight-sweep.md).
+- **What:** `scripts/score_sweep_arm.py`'s first version thinned an all-positive
+  probability surface at radius 3 px with no candidate pool. Every pixel is a
+  candidate, so the greedy radius packing produces the same geometric lattice
+  regardless of scores — two different fold-0 models emitted byte-identical
+  269,600-dot masks and identical DTI (0.179973894…). Cross-arm comparison made
+  the defect visible immediately.
+- **Evidence:** `runs/loss-weight-sweep/fold0-{regional,combined-025}-score.json`
+  pre-fix (identical emitted blocks) vs post-fix; reproducible in one command:
+  `poisson_disk_select(a, 3.0)` vs `poisson_disk_select(b, 3.0)` on any two
+  distinct all-positive surfaces.
+- **Resolution:** Fixed 2026-10-03. Candidates are now the top-480k scored
+  pixels (the real family's pool cap) and scoring is restricted to the evaluated
+  fold-quadrant. All four sweep arms re-scored with the corrected scorer before
+  any comparison; `docs/research/loss-weight-sweep.json` carries a
+  `scoring_note`. **Consequence:** the sweep's correct reading is
+  scorings-disagree / no-weight-selected (the flawed run would have "selected"
+  whichever arm the lattice tied on).
+- **Follow-up rule:** any emission experiment must verify that emitted masks
+  differ across score surfaces before interpreting them (cheap sanity assert:
+  two arms' dot masks must not be identical when their score surfaces differ).

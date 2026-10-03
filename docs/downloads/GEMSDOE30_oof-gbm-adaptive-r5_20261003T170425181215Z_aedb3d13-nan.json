@@ -2,13 +2,13 @@
   "schema_version": 1,
   "run_name": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13",
   "note": "GEMSDOE30 4-fold OOF GBM surface; adaptive Poisson-disk dots (500 m min spacing); proxy gate failed vs uniform - not holdout-promoted",
-  "output_file": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13.tif",
+  "output_file": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.tif",
   "output_sha256": "f5d137b9c010873f0b4fc11e841d923f359d33c7272ded0da9ac9b7c1efc7cc2",
   "prediction_array_sha256": "be95b5871d4d4664533cc3b5804b03d23be05581cdb3ca6189eaf45b9cd8c18f",
   "template_file": "data/raw/sample_submission.tif",
   "created_utc": "2026-10-03T17:04:26+00:00",
   "format_validation": {
-    "path": "outputs/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13.tif",
+    "path": "outputs/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.tif",
     "passed": true,
     "checks": [
       {

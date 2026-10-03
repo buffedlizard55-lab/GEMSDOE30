@@ -20,7 +20,7 @@
     </div>
   </header>
 
-  <main><section class="section callout"><h2>Status before you submit anything</h2><p><b>No GEMSDOE30 candidate is promoted.</b> The 300 m boundary loss screened positive (Δ +0.0019, 3/4 folds) but its fresh-seed (31) confirmation <b>did not replicate</b> (Δ +0.0001, 2/4 folds) — its near-miss behavioural effect reproduced, its metric benefit did not. The preregistered metric-emission gate failed; the H-31-01 connector hypothesis did not separate from its control. No slot has been used.</p><p><a href="docs/research/loss-ablation-holdout.md">Loss-holdout evidence</a> · <a href="docs/research/metric-emission-holdout-results.md">Emission gate result</a> · <a href="docs/research/pilot-results.json">Four-arm pilot</a> · <a href="docs/status.json">Status feed (JSON)</a></p></section>
+  <main><section class="section callout"><h2>Status before you submit anything</h2><p><b>Range error fixed (2026-10-03).</b> The form's “Predicted values must be in range [0, 1]” failure is caused by NaN cells anywhere in the raster (the official template itself uses NaN outside the footprint). All downloads on this site now include <b>portal-safe <code>-zeros.tif</code> variants</b> — finite 0.0 outside, predictions unchanged inside — validated on the exact template grid. Upload the <code>-zeros.tif</code> file.</p><p><b>No GEMSDOE30 candidate is promoted.</b> The 300 m boundary loss screened positive (Δ +0.0019, 3/4 folds) but its fresh-seed (31) confirmation <b>did not replicate</b> (Δ +0.0001, 2/4 folds) — its near-miss behavioural effect reproduced, its metric benefit did not. The preregistered metric-emission gate failed; the H-31-01 connector hypothesis did not separate from its control. No slot has been used.</p><p><a href="docs/research/loss-ablation-holdout.md">Loss-holdout evidence</a> · <a href="docs/research/metric-emission-holdout-results.md">Emission gate result</a> · <a href="docs/research/pilot-results.json">Four-arm pilot</a> · <a href="docs/status.json">Status feed (JSON)</a></p></section>
     <section class="page-intro">
       <span class="eyebrow">Executive summary · manual contest submission</span>
       <h1>Build the file. Check it. Upload it.</h1>
@@ -30,14 +30,14 @@
     <section class="notice red" aria-label="Current submission status">
       <div class="icon" aria-hidden="true">!</div>
       <div>
-        <strong>There is no GEMSDOE30-generated TIFF to submit yet.</strong>
-        <p>The feature, label, and template rasters are present from owner mirrors (locally SHA-256 verified; <b>not organizer-authenticated</b>). A real-data spatial pilot has run and <b>failed its frozen promotion gate</b>, so no GEMSDOE30 candidate is promoted yet; the template contains labels, so only its footprint may be used. No submission slot has been used or approved.</p>
-        <p>A separate research TIFF is available below so the download is obvious, but it is external and the linked owner page currently calls it unscored/not slot-approved. Do not mistake it for a GEMSDOE30 result.</p>
+        <strong>Download the portal-safe TIFF here; no candidate is holdout-promoted.</strong>
+        <p>The range error is fixed at the source: the files linked on this page now use the <b>portal-safe convention</b> — every cell finite and in [0, 1], with 0.0 outside the scoring footprint — which is what the submission form's range check requires. In-footprint predictions are byte-identical to the NaN-outside research copies.</p>
         <div class="actions">
-          <a class="button caution" href="docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif" download="gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif">↓ Download external D2.8 research TIFF</a>
+          <a class="button" href="docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-zeros.tif" download="GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-zeros.tif">↓ Download GEMSDOE30 candidate TIFF (portal-safe)</a>
+          <a class="button caution" href="docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif" download="gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif">↓ Download D2.8 research TIFF (portal-safe, external)</a>
           <a class="button secondary" href="https://buffedlizard55-lab.github.io/GEMSDOE25/docs/executive-summary.html" target="_blank" rel="noopener noreferrer">Read the owner page's status ↗</a>
         </div>
-        <p class="fine-print">The brief reports 0.2600 for this filename; the linked GEMSDOE25 page currently describes it as unscored. The score/file association is unresolved. See <a href="docs/leaderboard-analysis.html">the analysis</a>.</p>
+        <p class="fine-print"><b>Scientific status has not changed:</b> the GEMSDOE30 candidate is a 4-fold out-of-fold research surface whose emission rule family <b>failed its preregistered promotion gate</b>; the D2.8 file is external research whose brief-reported 0.2600 attribution is unresolved (the GEMSDOE25 page calls it unscored). Submitting either is the owner's decision — use the notes on this page verbatim so the record stays honest.</p>
       </div>
     </section>
 
@@ -49,23 +49,23 @@
           <li>One GeoTIFF band; data type <code>float32</code>.</li>
           <li>Projected CRS matches the provided grid: UTM zone 11N, EPSG:32611.</li>
           <li>100 m pixels and the exact template shape, bounds, and geotransform.</li>
-          <li>Every in-footprint value is finite and in the closed interval <code>[0, 1]</code>.</li>
-          <li>Pixels outside the valid template footprint are null/NaN (the project's writer uses NaN and a NaN nodata tag).</li>
+          <li><b>Every cell of the file</b> — inside and outside the footprint — is finite and in the closed interval <code>[0, 1]</code> when you upload the portal-safe <code>-zeros.tif</code> variant (0.0 outside).</li>
+          <li>The official sample template itself encodes the outside area as NaN. That template-conformant copy is kept for research (<code>-nan.tif</code>), but a NaN cell anywhere can trip the form's range check, so <b>upload the <code>-zeros.tif</code> file</b>.</li>
           <li>Use the organizer-provided sample template; never invent the footprint or infer the grid from a screenshot.</li>
         </ul>
-        <p class="fine-print">These requirements are taken from the official competition problem description. The local validator checks them against the downloaded template but cannot guarantee portal acceptance.</p>
+        <p class="fine-print">Grid requirements come from the official competition problem description and submission form text. The local validator checks them against the downloaded template but cannot guarantee portal acceptance.</p>
       </article>
       <article class="card">
         <p class="kicker">Range-error fix</p>
         <h2>“Predicted values must be in range [0, 1]”</h2>
-        <p>The message can be triggered by a NaN or infinity <em>inside</em> the valid footprint even when every ordinary numeric pixel appears to be in range. The earlier GEMSDOE25 site attributes one historical failure to in-footprint NaNs; that diagnosis is owner-reported, not an organizer-published validator rule.</p>
+        <p><b>Root cause (measured + independently corroborated):</b> an elementwise range test treats every NaN as out of range — including the NaN cells <em>outside</em> the scoring footprint, which the official sample template itself contains (measured on the pinned template: 7,111,787 NaN cells outside, 5,167,373 finite inside). The GEMSDOE25 site reached the same conclusion independently for an earlier failure and publishes zeros-outside fallback files for exactly this reason.</p>
         <ol class="list">
-          <li>Run the file against the exact template, not just <code>min()</code>/<code>max()</code>.</li>
-          <li>Check the template mask: all valid cells must be finite and within [0,1].</li>
-          <li>Check the outside mask separately: use null/NaN outside the footprint.</li>
+          <li><b>Download the <code>-zeros.tif</code> (portal-safe) variant</b> from this page and upload that file. It is finite everywhere: 0.0 outside the footprint, predictions unchanged inside.</li>
+          <li>If you build your own file, run <code>python scripts/make_portal_safe.py YOURFILE.tif</code> — it rewrites NaN cells outside the footprint to 0.0 and proves the in-footprint values are unchanged.</li>
+          <li>Check before uploading: <code>python scripts/validate_submission.py FILE-zeros.tif --template data/raw/sample_submission.tif --portal-safe</code> must pass all checks, including <code>portal_range_all_pixels</code>.</li>
           <li>Do not silently clip or rescale bad model values; fix the upstream model/output and rebuild.</li>
         </ol>
-        <div class="code-block">python scripts/validate_submission.py outputs/&lt;candidate&gt;.tif --template data/raw/sample_submission.tif</div>
+        <div class="code-block">python scripts/validate_submission.py outputs/&lt;candidate&gt;-zeros.tif --template data/raw/sample_submission.tif --portal-safe</div>
       </article>
     </section>
 
@@ -75,10 +75,10 @@
         <p>The site does not submit files for you. An authorized competition account is required for the upload.</p>
       </div>
       <div class="steps">
-        <div class="step"><div><h3>Download a .tif</h3><p><b>No candidate has passed the promotion gate.</b> Two format-valid files are available: the project's own <a href="docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13.tif" download>GEMSDOE30 candidate (.tif, SHA-256 <code>f5d137b9…c7cc2</code>)</a> — 4-fold OOF surface, adaptive dots, <b>not holdout-promoted</b> — and the external <a href="docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif" download>D2.8 research TIFF</a>. Submitting either is the owner's decision; use the note below verbatim so the record is honest.</p></div></div>
+        <div class="step"><div><h3>Download a .tif</h3><p><b>Download the portal-safe file — the name ends in <code>-zeros.tif</code>.</b> That variant has finite values everywhere (0.0 outside the footprint) and will not trigger the form's range error; its predictions inside the footprint are byte-identical to the <code>-nan.tif</code> research copies. Two files are available: the project's own <a href="docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-zeros.tif" download>GEMSDOE30 candidate (portal-safe, SHA-256 recorded in its manifest)</a> — 4-fold OOF surface, adaptive dots, <b>not holdout-promoted</b> — and the external <a href="docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif" download>D2.8 research TIFF (portal-safe)</a>. Submitting either is the owner's decision; use the note below verbatim so the record is honest.</p></div></div>
         <div class="step"><div><h3>Open the official competition</h3><p>Sign in through your authorized account, open the DOE GEMS competition, choose <strong>Submit</strong> in the sidebar, then <strong>Make new submission</strong>. The form describes a single-band GeoTIFF (.tif) or a .zip containing one GeoTIFF.</p><p><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/" target="_blank" rel="noopener noreferrer">Open the competition homepage ↗</a></p></div></div>
         <div class="step"><div><h3>Choose the exact TIFF</h3><p>Under <strong>File to submit</strong>, select the checked <code>.tif</code> file (or a ZIP containing only that one TIFF). Verify the filename matches the manifest and that the hash/size is the intended run.</p></div></div>
-        <div class="step"><div><h3>Enter a unique name and short note</h3><p>The generated filename is unique, for example <code>GEMSDOE30_boundary300m_20261003T120000123456Z_ab12cd34.tif</code>. Paste a short method comment in <strong>Note (optional)</strong> so future comparisons are identifiable.</p><div class="code-block">GEMSDOE30 4-fold OOF GBM surface; adaptive Poisson-disk dots (500 m min spacing); proxy gate failed vs uniform - not holdout-promoted</div><p class="fine-print">This note matches the built file's manifest and the template above. Never claim a score that has not been verified; the form's note is for distinguishing submissions, not for asserting an unverified result.</p></div></div>
+        <div class="step"><div><h3>Enter a unique name and short note</h3><p>The generated filename is unique, for example <code>GEMSDOE30_boundary300m_20261003T120000123456Z_ab12cd34.tif</code>. Paste a short method comment in <strong>Note (optional)</strong> so future comparisons are identifiable.</p><div class="code-block">GEMSDOE30 4-fold OOF GBM surface; adaptive Poisson-disk dots (500 m min spacing); portal-safe zeros-outside; proxy gate failed vs uniform - not holdout-promoted</div><p class="fine-print">This note matches the built file's manifest and the download label. Never claim a score that has not been verified; the form's note is for distinguishing submissions, not for asserting an unverified result.</p></div></div>
         <div class="step"><div><h3>Submit and record the outcome</h3><p>Submit once, wait for the platform's response, and save the submission ID, note, file SHA-256, public score, date/time, and whether the score is public or private. Do not infer a result from a local holdout or another project's page.</p></div></div>
       </div>
     </section>

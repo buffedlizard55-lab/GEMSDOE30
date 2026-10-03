@@ -112,12 +112,18 @@ wins and the distilled list must be corrected.
 
 </details>
 
+> **Branch note:** the brief above names the branch of the session in which it
+> was first recorded (`arena/01a10289-gemsdoe30`). Each Arena session is assigned
+> its own branch; work for this session happens on `arena/01a102bf-gemsdoe30`,
+> and pull requests are opened from whichever branch the session is assigned.
+> The brief's verbatim wording is preserved above unchanged.
+
 ## Mission and non-negotiable requirements
 
 1. **Objective and historical review:** build an auditable, scientifically grounded workflow to identify previously unmapped geological faults in the DOE GEMS / GeoDAWN region and pursue a result above the user-reported 0.3195 public-leader score. Study the reported GEMSDOE25 D2.8 result and historical submissions; authenticate score-to-file attribution using a submission receipt, ID, hash, or equivalent evidence rather than assuming a score belongs to a named TIFF. Treat public leaderboard snapshots as dynamic feedback, not the private test set or the final award decision. Develop a defensible path to improvement, but never promise a score or prize.
 2. **Metric-aware learning:** the official public metric is a distance-weighted Tversky index with a triangular 300 m support kernel on 100 m pixels, `alpha=0.2`, `beta=0.8`. Prefer training objectives that represent this geometry. Pair any distance/boundary term with a regional loss; compare them under a spatially blocked holdout and report how their near-miss behavior changes. A synthetic unit probe is not a real holdout result.
 3. **Submission first:** when a scientifically promoted candidate exists, make a single-band float32 GeoTIFF with probabilities in `[0,1]`, on the exact sample-template CRS, shape, bounds, and transform; put null/NaN only outside the valid footprint. Check for NaN/Inf *inside* the footprint, which can trigger the portal's “Predicted values must be in range [0, 1]” error. Make the download and the submission instructions obvious at the top of the site. Give every run a unique filename and a short paste-ready submission note.
-4. **No slot without evidence:** pre-register 3–5 genuinely distinct geological hypotheses. Each must state the exact layers, physical signature, why it could indicate a fault absent from USGS/INGENIOUS, what makes it different from prior work, likely DTI change and cost, official data source/license/access status, and a falsifiable holdout gate. Validate the leading candidate against the current spatial-holdout best, with confirmation, before spending a weekly submission slot. No holdout pass means no slot.
+4. **No slot without evidence:** pre-register 3–5 genuinely distinct geological hypotheses. Each must state the exact layers, physical signature, why it could indicate a fault absent from USGS/INGENIOUS, what makes it different from prior work, likely DTI change and cost, official data source/license/access status, and a falsifiable holdout gate. Validate the leading candidate against the current spatial-holdout best, with confirmation, before spending a weekly submission slot. No holdout pass means no slot. Beyond the private holdout, require **three types of verification**, each with a pre-stated promotion criterion — spatial block-validation, probability calibration, and feature-perturbation stability — plus a qualitative note showing where a learned change helps and where it fails; the standing protocol is [docs/research/verification-protocol.md](docs/research/verification-protocol.md).
 5. **Research and provenance:** use free, publicly accessible, official or otherwise authoritative data where allowed. Verify claims against the relevant official/primary source line by line where possible; store exact citations/URLs, access and licensing checks, source hashes, experiment protocols, results, and irregularities. Distinguish official facts from user-supplied claims, owner-mirror evidence, hypotheses, and model estimates. Record unavailable files, failed downloads, and other blockers. Never invent a score, source, file hash, access result, or holdout result.
 6. **Competition integrity:** respect the rules and source terms. Do not bypass the DrivenData login, collect or store account credentials, submit files, or consume competition slots on the user's behalf. Public leaderboard values are time-stamped snapshots; do not build a robot/spider that monitors DrivenData.
 7. **Autonomous execution and accountability:** complete what can be done without asking for manual input; identify hard blockers rather than disguising them. Review work in three cumulative passes: implement and verify; inspect bugs/edge cases; re-check against this brief and fix. Flag every unresolved irregularity.
@@ -162,6 +168,49 @@ annulus, so the hypothesis is **not promoted as tested**; the dominant effect is
 prior (~2.3× far-field). Evidence:
 [relay-connector-holdout.json](docs/research/relay-connector-holdout.json). No GEMSDOE30 submission
 TIFF exists, no slot has been used, and **no score is claimed** for any of this work.
+
+### Session 2 (later on 2026-10-03) — portal-safe fix, vent research base, H-32 register, H-32-01 gate
+
+1. **The portal "[0, 1]" rejection is root-caused and fixed.** Measured: the official sample template
+   itself encodes **7,111,787 NaN cells outside the footprint** and both published downloads matched
+   that mask exactly — so a NaN-unaware elementwise range check fails any template-conformant file.
+   The GEMSDOE25 page independently reached the same inference and ships a zeros-outside fallback
+   (byte-verified). This site now publishes **portal-safe `-zeros.tif` variants as the primary
+   downloads** (finite 0.0 outside; `nodata=None`; in-footprint bytes identical to the NaN copies;
+   all 12 strict checks pass including `portal_range_all_pixels` over 12,279,160 cells). New tooling:
+   `scripts/make_portal_safe.py`, `write_submission_file(outside_value=0.0)`,
+   `convert_to_portal_safe`, `validate_submission.py --portal-safe`, `tests/test_portal_safe.py`.
+   **Upload the `-zeros.tif` file.**
+2. **Verified knowledge base** (`docs/research/geothermal-vents-knowledge.md`): the official rules
+   PDF was read line-by-line — training labels = INGENIOUS Great Basin compilation (DOI
+   10.15121/1881483); **test labels = expert-new faults** (NLR/USGS, Qfaults + new); metric penalizes
+   FN > FP; 3 submissions/week, one final entry across both prize rounds; **Phase 1 $50k split equally
+   among top 5 on the private subset; Phase 2 $250k on the expert-revised label set**; finalists must
+   ship reproducible code; AI use must be disclosed; eligibility is U.S.-only with certification under
+   penalty of perjury (IR-30-020); deadline wording conflict confirmed in the PDF itself (IR-30-008).
+   DOE/OSTI Faulds literature verified: step-overs/relay ramps host ~32 % of Great Basin geothermal
+   systems, ~39 % of systems are blind (up to 75 % of resources), outflow can surface km from the
+   source structure. Local GDR data measured: 27,092 wellspring rows (512 hot cells ≥ 60 °C, 256 ≥
+   100 °C), 21 volcanic vents with **0 of 21 within 300 m of the catalogue**, 1,126 Qfaults traces
+   (55 % of in-footprint centroids within 300 m of catalogue — circularity warning IR-30-021).
+3. **Five never-tried H-32 hypotheses** registered and ranked (`docs/hypotheses.md` +
+   `docs/hypotheses.html`): discharge corridors (H-32-01), un-catalogued Qfaults completion
+   (H-32-04, validation-limited), buried pinch-out edges (H-32-05), geothermometer discordance
+   (H-32-03), vent feeder alignments (H-32-02).
+4. **H-32-01 ran its preregistered spatial component holdout and FAILED all three gate clauses** —
+   pooled ΔDTI spring − proximity-matched control **−0.01494** (screen) and **−0.01537**
+   (confirmation), **0/4** quadrants; spring zones earn ~3× less hidden credit per emitted pixel
+   than matched random (0.0122 vs 0.0320 at 15k px), consistently across 4 zone arms × 3 budgets ×
+   2 splits. Not promoted, no slot. Evidence:
+   [h32-01-vent-corridor-holdout.md](docs/research/h32-01-vent-corridor-holdout.md) +
+   [JSON](docs/research/h32-01-vent-corridor-holdout.json) +
+   [preregistration](docs/research/h32-01-preregistration.md). Review found and fixed an unused
+   `--confirm-threshold-c` flag; the supplementary ≥ 100 °C sensitivity run is recorded separately.
+5. **Status feed automation:** `scripts/build_status.py` regenerates `docs/status.json` from the
+   machine-readable artifacts (gate JSONs, download manifests, mirror pins, score ledger) — no more
+   hand-edited status. The score ledger gained `evidence_class`/`as_of_utc` columns and six
+   **official-snapshot** rows from the 2026-10-03 leaderboard read (DARD 0.3195 rank 1 … wbg1 0.2600
+   rank 15). Suite now collects **60 tests**, all passing on this image.
 
 ## Current verified state — 2026-10-03
 
@@ -236,13 +285,13 @@ TIFF exists, no slot has been used, and **no score is claimed** for any of this 
 - `docs/` — source ledger, reported-score ledger, hypothesis register, results interpretation, and irregularities.
 - `data/raw/`, `data/processed/`, `outputs/`, `runs/` — local-only data and outputs; ignored by Git.
 
-Later on 2026-10-03 a first GEMSDOE30 candidate file was built and published for download: a **4-fold out-of-fold GBM surface** (each pixel predicted by a model that never saw its quadrant; fold models from the metric-emission experiment) emitted with the LOFO-selected adaptive Poisson-disk rule (radius 5 px, gamma 1, pool 480k) → 90,358 dots, median nearest-neighbour spacing 2.83 px, 17.7 % within 300 m of the catalogue (2.1× the 8.6 % base rate). Local format validation passes all 11 checks (5,167,373 in-footprint values in [0,1], NaN outside, EPSG:32611, 100 m, template transform preserved). **It is not holdout-promoted** — its family beat uniform by only +0.0025 against a required +0.005 — and the site labels it accordingly with a paste-ready note. Artifacts: [candidate TIFF](docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13.tif), [manifest](docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13.json), [build record](docs/research/candidate-2026-10-03.md).
+Later on 2026-10-03 a first GEMSDOE30 candidate file was built and published for download: a **4-fold out-of-fold GBM surface** (each pixel predicted by a model that never saw its quadrant; fold models from the metric-emission experiment) emitted with the LOFO-selected adaptive Poisson-disk rule (radius 5 px, gamma 1, pool 480k) → 90,358 dots, median nearest-neighbour spacing 2.83 px, 17.7 % within 300 m of the catalogue (2.1× the 8.6 % base rate). Local format validation passes all 11 checks (5,167,373 in-footprint values in [0,1], NaN outside, EPSG:32611, 100 m, template transform preserved). **It is not holdout-promoted** — its family beat uniform by only +0.0025 against a required +0.005 — and the site labels it accordingly with a paste-ready note. Artifacts: [candidate TIFF](docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.tif), [manifest](docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.json), [build record](docs/research/candidate-2026-10-03.md).
 
 ## Current next steps and limits
 
-1. The seed-31 confirmation **did not replicate** the seed-30 loss screen (ΔDTI +0.0001, 2/4 folds). Do not promote the boundary loss on this evidence. If it is retried, use a larger training budget and a boundary-weight sweep before any fresh-seed test, and score emitted masks rather than dense probability surfaces. The remaining hard blocker is organizer-authenticated data and the hidden expert labels, not local rasters.
-2. The registered regional-vs-boundary ablation has now run on spatial blocks at two seeds, with all folds, pooled DTI and near-miss histograms reported (screen positive, confirmation negative). The 0.5 geometry weight is an untuned test setting; the loss remains **not promoted**.
-3. The leading external-data candidate is now **H-31-02 (matched-filter scarp bank on the free, public-domain USGS 3DEP 1 m DEM)** — corroborated by the owner's own factorial (DEM curvature/scarp factor B = +0.0253, 4/4 folds). Its obtainability is verified (32 overlapping 1 m tiles, ~275–287 MB each) but byte transfer must run off this sandbox. The GDR geothermal (and H-31-03 NHD) hypotheses stay conditional on archives being downloaded, checksummed, licensed, aligned, and separately ablated; catalog-page visibility is not proof that a ZIP has been retrieved.
-4. Build and validate an exact-grid TIFF only from a promoted model. **An un-promoted research candidate now exists** (`outputs/` and `docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13.tif`, SHA-256 `f5d137b9…c7cc2`, format checks pass, 90,358 adaptive dots, median spacing 2.83 px): a 4-fold out-of-fold surface emitted with the rule family that failed the preregistered gate by +0.0025 versus uniform. It is offered with a paste-ready note that says exactly that. Do not describe it as validated; the promotion rule still requires a family that beats the same-run best by the frozen margin with fresh-seed confirmation.
-5. Refresh the leaderboard snapshot by a permitted method. DrivenData's Terms of Use prohibit robots/spiders/automatic access for monitoring or copying, so this project does not scrape it; this limitation prevents an autonomous continuously updated leaderboard feed. The official site remains the manual source of live values.
-6. Confirm any deadline discrepancy in the competition homepage versus the September 2026 rules PDF with the organizer; see [irregularities](docs/irregularities.md).
+1. **Upload path is fixed — use it.** The portal-safe `-zeros.tif` variants are the primary downloads and the site's submission guide walks through the upload with paste-ready notes. The scientific gates are unchanged: **no candidate is holdout-promoted**; submitting an un-promoted file is the owner's decision, and the file's note must say exactly that.
+2. **H-32-01 (discharge corridors) is falsified on the proxy**; the next runnable local candidates are **H-32-05 (buried pinch-out edges on `depth_to_base_surf`/gravity/magnetic gradients)** and the **H-31-02 reduced matched-filter scarp arm** on the local 12-channel scarp stack (the raw 3DEP 1 m arm still needs the ~9 GB tile transfer off-sandbox). H-32-04 cannot be validated on the catalogue proxy at all (IR-30-021) and needs the OSTI 1148722 / GDR 616 inventories retrieved and checksummed first.
+3. **Boundary loss remains not promoted — and its retry criterion has now been executed.** The recorded retry (larger budget + preregistered boundary-weight sweep + emitted-mask scoring) ran as a fold-0 screen ([loss-weight-sweep.md](docs/research/loss-weight-sweep.md), 2026-10-03): dense scoring prefers plain `regional` at every weight; emitted-mask scoring prefers `combined-100` by only +0.0010 on one fold — the scorings disagree, so no weight is selected for confirmation and the line stays closed. The near-miss behavioural effect the brief asked for *is* demonstrated (partial-distance truth coverage 1,889 → 724); the metric gain is not. Any future loss work should start from the standing [verification-protocol.md](docs/research/verification-protocol.md) (three checks with pre-stated criteria) and a new mechanism, not more λ tuning.
+4. **Build/validate rule unchanged:** an exact-grid, holdout-promoted candidate only after its family beats the same-run best by the frozen margin with fresh-seed confirmation. The published un-promoted candidate (`docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_…`, SHA-256 `f5d137b9…c7cc2`, 90,358 dots) and its portal-safe variant are research artifacts with honest notes.
+5. **Feed:** `scripts/build_status.py` keeps `docs/status.json` current automatically. The leaderboard itself can only be refreshed by dated manual reads (DrivenData ToS prohibit automated monitoring) — recorded in `docs/score-ledger.csv` with `evidence_class=official-snapshot`.
+6. **Limits that only the owner/organizer can lift:** organizer-authenticated data (IR-30-001); the hidden expert labels (the real target); score-to-file attribution for the D2.8 artifact (IR-30-002); entrant eligibility under rules §1.3 (IR-30-020); the deadline-time discrepancy (IR-30-008); final AI-disclosure narrative sign-off.

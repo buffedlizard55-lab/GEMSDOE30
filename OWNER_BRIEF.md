@@ -17,7 +17,10 @@ Standing operational requirements distilled from it (see the README for the lite
    USGS/INGENIOUS catalogue rather than one already in it, and how it differs from prior work;
    rank by expected DTI improvement and implementation cost; validate the top candidate on the
    spatially blocked holdout before touching a submission slot; if new external data is needed,
-   name the free official source and prove it is obtainable.
+   name the free official source and prove it is obtainable. Beyond the holdout, require three
+   types of verification with pre-stated promotion criteria — spatial block-validation,
+   probability calibration, feature-perturbation stability — plus a qualitative note on where
+   the change helps and fails (docs/research/verification-protocol.md).
 4. Verify line by line against official, verified, trusted sources, and provide links for manual
    review. No manual input required of the owner: work autonomously. Flag every irregularity.
    No hallucinations — distinguish official facts, owner/user claims, local measurements,

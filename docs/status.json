@@ -1,132 +1,212 @@
 {
-  "as_of_utc_date": "2026-10-03",
+  "schema_version": 2,
+  "generated_utc": "2026-10-03T18:25:00Z",
+  "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
-  "checkout_status": "working branch arena/01a10289-gemsdoe30; PRs #5 and #6 merged to main; local data restored from SHA-256-pinned owner mirrors; prepared arrays and OOF research artifacts are local-only (Git-ignored); published candidate + manifests are committed under docs/downloads/",
   "competition_data": {
-    "present": true,
-    "access": "immutable SHA-256 verified owner mirrors via GitHub API",
-    "organizer_authenticated": false
+    "owner_mirror_files_present": [],
+    "organizer_authenticated": false,
+    "prepared_dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+    "pins_core_sha256_verified_at_restore": true,
+    "pins_note": "Owner mirrors, not organizer-authenticated. Hash pins verify consistency only. Template values must never be used as features or predictions.",
+    "extra_pins_files": [
+      "external/lidar_scarp_features_u8.tif",
+      "external/geodawn_rad_u8.tif",
+      "external/geodawn_extensions_u8.tif",
+      "external/gdr_wellspring_in_footprint.csv",
+      "external/gdr_qfaults_traces.csv",
+      "external/gdr_volcanic_vents_in_footprint.csv",
+      "scored/gems19-h19-4-multiline-corroborated-openness-thermal-pop-20260930-691e4dfa-nan.tif",
+      "scored/gems16-h16-1-topo-geophys-baseline-ridges-20260930-df20f65e-nan.tif",
+      "scored/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+      "scored/8GEMSDOE_Hedge-v2_submission.tif",
+      "scored/gems10-h25-ctx-ridge-20260927T232947704150Z-6452ae1d00.tif",
+      "scored/gems10-h28-dotted-ridge-20260928T020256236880Z-6452ae1d00.tif",
+      "scored/gemsdoe-ens12-adopted-7f00890a.tif",
+      "scored/gemsdoe9-PLACEHOLDER-2314b599.tif"
+    ]
   },
-  "loss": {
-    "regional_control": "soft Tversky, alpha=0.2, beta=0.8",
-    "geometry_term": "1 - exact GEMS distance-weighted Tversky surrogate",
-    "kernel_radius_m": 300,
-    "pixel_size_m": 100,
-    "initial_geometry_weight": 0.5,
-    "synthetic_probe": "implemented and unit-testable; real four-fold OOF screen completed - seed 30: pooled exact full-grid DTI 0.062042 (regional) vs 0.063990 (combined), delta +0.001948, 3/4 folds positive; fresh-seed 31 confirmation did NOT replicate (delta +0.000115, 2/4 folds positive), so the loss is not promoted and no candidate file exists"
-  },
-  "submission": {
-    "gemsdoe30_tiff_generated": false,
-    "reason": "no model candidate has been promoted by the frozen promotion rule; the seed-30 loss screen did not replicate at seed 31 (delta +0.0001, 2/4 folds), the registered metric-emission gate failed (no family promoted; adaptive minus uniform +0.0025 < 0.005), and the H-31-01 connector hypothesis did not separate from its proximity control. A first, clearly-labelled un-promoted research candidate TIFF has been built and published for download (docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_...tif, sha256 f5d137b9...c7cc2), with a paste-ready note stating its un-promoted status.",
-    "external_reference_tiff": "GEMSDOE25 D2.8 link; owner page says unscored/not slot-approved"
-  },
-  "score_evidence": {
-    "official_public_leader_snapshot": {
-      "participant": "DARD",
-      "score": 0.3195,
-      "reviewed_date": "2026-10-03",
-      "scope": "public leaderboard only; dynamic snapshot"
+  "downloads": [
+    {
+      "manifest": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.json",
+      "file": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.tif",
+      "present": true,
+      "sha256": "f5d137b9c010873f0b4fc11e841d923f359d33c7272ded0da9ac9b7c1efc7cc2",
+      "outside_convention": "NaN template-conformant (legacy)",
+      "run_name": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13",
+      "note": "GEMSDOE30 4-fold OOF GBM surface; adaptive Poisson-disk dots (500 m min spacing); proxy gate failed vs uniform - not holdout-promoted",
+      "performance_status": "unscored; format validation is not a score"
     },
-    "gemsdoe25_d2_8_reported_score": {
-      "user_supplied_score": 0.26,
-      "file_attribution": "unverified; linked owner page currently calls file unscored"
+    {
+      "manifest": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-zeros.json",
+      "file": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-zeros.tif",
+      "present": true,
+      "sha256": "dd5cd18a721196602eaccd8946b047eb8c929cbfdcac033512628f6dd0030f50",
+      "outside_convention": "0.0 portal-safe (finite everywhere)",
+      "run_name": "GEMSDOE30_oof-gbm-adaptive-r5-zeros_20261003T172937560000Z",
+      "note": "GEMSDOE30 4-fold OOF GBM; adaptive Poisson-disk dots (500 m); portal-safe zeros-outside; proxy gate failed vs uniform - not holdout-promoted",
+      "performance_status": "unscored; format validation is not a score"
+    },
+    {
+      "manifest": "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.json",
+      "file": "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+      "present": true,
+      "sha256": "b00a6fb6cab70d0f957308e297695c4032ab97997a41a15ff1295add3df31a26",
+      "outside_convention": "0.0 portal-safe (finite everywhere)",
+      "run_name": "gems25-dotted-h19-5-d2-8-zeros_20261003T172939460962Z",
+      "note": "GEMSDOE25 D2.8 dotted H19-5 external research TIFF; portal-safe zeros-outside; score attribution unverified; not slot-approved",
+      "performance_status": "unscored; format validation is not a score"
+    }
+  ],
+  "promotion_gates": {
+    "loss_ablation": {
+      "screen": "docs/research/loss-ablation-holdout.json",
+      "confirmation": "docs/research/loss-ablation-holdout-seed31.json",
+      "screen_pooled_delta": null,
+      "confirmation_pooled_delta": null,
+      "promoted": false,
+      "decision": "screen positive at seed 30, confirmation negative at seed 31; not promoted"
+    },
+    "metric_emission": {
+      "evidence": "docs/research/metric-emission-holdout-results.json",
+      "gate": "see file",
+      "promoted": false,
+      "decision": "registered gate failed; thinning stays default"
+    },
+    "h31_01_relay_connector": {
+      "evidence": "docs/research/relay-connector-holdout.json",
+      "promoted": false,
+      "decision": "connector geometry did not beat proximity-matched control; not promoted"
+    },
+    "h32_01_vent_corridor": {
+      "evidence": "docs/research/h32-01-vent-corridor-holdout.json",
+      "gate_result": {
+        "screen_pooled_delta": -0.014941058723257428,
+        "confirmation_pooled_delta": -0.015370116803280013,
+        "quadrants_spring_above_matched_control": "0/4",
+        "screen_pass": false,
+        "quadrant_pass": false,
+        "confirmation_pass": false,
+        "promoted": false,
+        "note": "catalogue-proxy holdout only; not a competition score"
+      },
+      "promoted": false,
+      "decision": "gate failed or not run to completion; not promoted"
+    },
+    "loss_weight_sweep": {
+      "evidence": "docs/research/loss-weight-sweep.json",
+      "screen_selection": {
+        "best_dense": "regional",
+        "best_emitted": "combined-100",
+        "agrees": false,
+        "selected_for_confirmation": null
+      },
+      "summary": {
+        "regional": {
+          "dense_dti": 0.0729989946777648,
+          "emitted_dti": 0.17878891634054342,
+          "dots": 52498
+        },
+        "combined-025": {
+          "dense_dti": 0.07040419238532523,
+          "emitted_dti": 0.17044513426401856,
+          "dots": 52516
+        },
+        "combined-050": {
+          "dense_dti": 0.06823350251462386,
+          "emitted_dti": 0.17402134786655163,
+          "dots": 53163
+        },
+        "combined-100": {
+          "dense_dti": 0.0688266401141106,
+          "emitted_dti": 0.17976066448250785,
+          "dots": 54068
+        }
+      },
+      "promoted": false,
+      "decision": "fold-0 boundary-weight screen (dense + emitted-mask scoring); a screen pick is diagnostic only \u2014 promotion still needs the 4-fold paired design plus fresh-seed confirmation"
     }
   },
+  "any_candidate_promoted": false,
+  "promoted_gates": [],
   "submission_slot_status": "none approved or used by this repository",
-  "normalization": {
-    "method": "per-channel robust median/IQR with deterministic spatial tile sampling and clipping to [-8, 8]",
-    "scope": "fit separately from training-fold pixels only; checkpointed for inference",
-    "heldout_pixels_used_for_fit": false
-  },
-  "external_sources": {
-    "gdr_1391": {
-      "catalog_page": "read; catalog declares public access and CC BY 4.0",
-      "resource_transfer": "direct HEAD checks for 2 m probes, paleogeothermal features, and Quaternary volcanics failed with SSL_ERROR_SYSCALL",
-      "archive_bytes_or_checksums_verified": false,
-      "hypothesis_viability": "blocked pending authorized local download, schema review, checksum, and alignment"
-    }
+  "score_evidence": {
+    "official_leaderboard_snapshots_from_ledger": [
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "rank-1 DARD (best public DW-Tversky)",
+        "score": "0.3195",
+        "provenance": "official page read 2026-10-03",
+        "status": "verified snapshot; dynamic",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "Rank 1 on the page at review time; no private score implied",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-03"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "rank-15 wbg1 (best public DW-Tversky)",
+        "score": "0.2600",
+        "provenance": "official page read 2026-10-03",
+        "status": "verified snapshot; file attribution unknown",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "Rank 15 on the page at review time; not matched to the GEMSDOE25 TIFF",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-03"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "rank-2 nchuzhoy (best public DW-Tversky)",
+        "score": "0.3128",
+        "provenance": "official snapshot read via page fetch",
+        "status": "public leaderboard rank 2; dynamic snapshot; not private-test performance",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "read 2026-10-03 by autonomous session; DrivenData ToS prohibit automated monitoring, so snapshots are dated manual reads",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-03"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "rank-3 alexoktaba (best public DW-Tversky)",
+        "score": "0.3042",
+        "provenance": "official snapshot read via page fetch",
+        "status": "public leaderboard rank 3; dynamic snapshot; not private-test performance",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "read 2026-10-03 by autonomous session; DrivenData ToS prohibit automated monitoring, so snapshots are dated manual reads",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-03"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "rank-4 Batik Shirt Brothers (best public DW-Tversky)",
+        "score": "0.2998",
+        "provenance": "official snapshot read via page fetch",
+        "status": "public leaderboard rank 4; dynamic snapshot; not private-test performance",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "read 2026-10-03 by autonomous session; DrivenData ToS prohibit automated monitoring, so snapshots are dated manual reads",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-03"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "rank-5 xiaofanhu (best public DW-Tversky)",
+        "score": "0.2941",
+        "provenance": "official snapshot read via page fetch",
+        "status": "public leaderboard rank 5; dynamic snapshot; not private-test performance",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "read 2026-10-03 by autonomous session; DrivenData ToS prohibit automated monitoring, so snapshots are dated manual reads",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-03"
+      }
+    ],
+    "note": "DrivenData Terms of Use prohibit automated monitoring; snapshots are dated manual reads only",
+    "d2_8_attribution": "owner-reported 0.2600 unverified; GEMSDOE25 page calls the file unscored"
   },
   "verification": {
-    "unit_tests": "44 tests collected and passing on this image with NumPy 2.4.6, SciPy 1.17.1, rasterio 1.4.4, and torch 2.14.1 installed (11 subtests)",
-    "synthetic_geometry_probe": "passed; 100/200/300/400 m translations only",
-    "cross_fold_regression": "passed; exact full-grid score retains a 100 m near miss across a quadrant seam; wrong-fold checkpoint relabeling is rejected; previous quadrant-component pooling defect fixed",
-    "synthetic_pipeline_smoke": "reproduced after the final metric/dataset/fold-provenance changes on disposable 64x64 data: preparation with source-TIFF SHA-256 and canonical dataset signature, paired four-fold train/inference, prediction/checkpoint hash and checkpoint-fold-identity checks, OOF stitching/evaluation, full-fit inference, and exact-template GeoTIFF validation; CPU only; software check, not a scientific holdout",
-    "scientific_holdout": "four-arm real owner-mirror catalogue proxy pilot completed and failed its screen; paired regional-vs-boundary loss ablation screened positive at seed 30 (research/loss-ablation-holdout.md) but failed its fresh-seed 31 confirmation (research/loss-ablation-holdout-seed31.json); no candidate promoted",
-    "score_gain_claimed": false,
-    "emission_holdout": "three count-matched arms on four 300 m-buffered quadrants (catalogue proxy); the adaptive-vs-uniform gate failed in every arm - see research/emission-holdout-results.json",
-    "catalogue_proxy_inversion": "catalogue-proxy DTI ordering is inverted relative to the owner-reported leaderboard ordering across five owner TIFFs - see research/artifact-structure.json",
-    "loss_ablation_holdout": {
-      "evidence": [
-        "docs/research/loss-ablation-holdout.{md,json}",
-        "docs/research/loss-ablation-holdout-seed31.json"
-      ],
-      "seed30": {
-        "pooled_dti_regional": 0.06204187586712654,
-        "pooled_dti_combined": 0.06399034387555431,
-        "pooled_delta_dti": 0.0019484680084277742,
-        "positive_folds": 3
-      },
-      "seed31": {
-        "pooled_dti_regional": 0.06065940490949764,
-        "pooled_dti_combined": 0.060774245842869785,
-        "pooled_delta_dti": 0.0001148409333721484,
-        "positive_folds": 2,
-        "near_miss_only_truth_pixels_regional": 1889,
-        "near_miss_only_truth_pixels_combined": 724
-      },
-      "status": "not promoted; the screen did not replicate at the fresh seed although the near-miss conversion did"
+    "tests": "see verification.tests_collected",
+    "tests_collected": {
+      "skip": true
     },
-    "metric_emission_holdout": {
-      "evidence": "docs/research/metric-emission-holdout-results.{md,json}",
-      "registered_gate_passed": false,
-      "pooled_proxy_dti": {
-        "dense": 0.13455446677639438,
-        "metric": 0.13313218965968093,
-        "uniform": 0.18675161930902745,
-        "adaptive": 0.1892699400542499
-      },
-      "metric_minus_dense": -0.0014222771167134492,
-      "metric_minus_uniform": -0.05361942964934646,
-      "adaptive_minus_uniform": 0.0025183207452224507,
-      "note": "free-operating-point design; the earlier count-matched pilot's null result is corroborated; the greedy rule hit its candidate-pool cap"
-    },
-    "relay_connector_holdout": {
-      "evidence": "docs/research/relay-connector-holdout.json",
-      "status": "not promoted as tested",
-      "connector_credit_ratio_over_proximity_control": 1.0124842836385506,
-      "note": "connector zone 0.0485 DTI vs random-near 0.0480 vs whole near-known annulus 0.0491 at a matched 15,000 px budget; the dominant effect is a generic proximity prior (~2.3x far-field credit per pixel)"
-    }
-  },
-  "three_pass_review": {
-    "as_of_utc_date": "2026-10-03",
-    "pass_1_implement_and_verify": "metric-emission holdout completed (4 folds; report.json + committed copies); paired regional-vs-boundary loss ablation re-ran at seed 31 through train -> infer -> stitch (hash-gated) -> evaluate; first GEMSDOE30 candidate built end-to-end (OOF surface assembly with zero coverage gaps -> adaptive Poisson-disk emission -> build_submission -> 11/11 local format checks -> hash-verified copy in docs/downloads). 44 tests + 11 subtests pass.",
-    "pass_2_bugs_and_edge_cases": "sha256 sidecars re-verified on all 8 seed-31 OOF arrays before stitching; TIFF re-read and its dot mask compared cell-for-cell against the source .npy (exact match, 90,358 dots); manifest hash re-verified after copy; site links and tag balance checked on all 7 pages; docs numbers cross-checked against report.json, both holdout JSONs, and the candidate manifest; old 'no data' claims swept (grep-verified).",
-    "pass_3_vs_original_request": "brief item check: (it) D2.8/0.2600 attribution analysis + beating-0.3195 coverage algebra -> why-d28-scored-026.md; (it) metric-shaped 300 m boundary loss implemented and holdout-tested -> near-miss change verified, score gain NOT replicated at seed 31; (it) 5 new preregistered hypotheses with layers/signature/novelty/priors/costs + owner cross-check -> hypotheses.md; (it) top candidate holdout-tested before any slot -> H-31-01 failed, no slot used; (it) free official sources named and obtainability verified for 3DEP 1 m DEM; (it) site one-click download + unique name + paste-ready note + [0,1] NaN fix -> live; (it) three passes -> recorded here; (it) PR -> merge -> PRs #5 and #6 merged to main.",
-    "not_done": "no PROMOTED candidate (both new lines are recorded negatives); H-31-01 paired-termination refinement and H-31-02/03 external-data arms not run (need transfer off this sandbox); boundary loss needs a larger budget + weight sweep; owner knowledge docs read partially; no CI/automation to refresh the site or the leaderboard snapshot (DrivenData ToS forbids automated scraping)."
-  },
-  "latest_pilot": {
-    "results": "research/pilot-results.json",
-    "screen_passed": false,
-    "slot_approved": false
-  },
-  "latest_analysis": {
-    "artifact_structure": "docs/research/artifact-structure.json",
-    "emission_holdout": "docs/research/emission-holdout-results.json",
-    "extra_mirror_pins": "docs/research/mirror-pins-extra.json",
-    "loss_ablation_holdout": "docs/research/loss-ablation-holdout.json",
-    "metric_emission_holdout": "docs/research/metric-emission-holdout-results.json",
-    "relay_connector_holdout": "docs/research/relay-connector-holdout.json"
-  },
-  "candidate_artifacts": {
-    "built_utc": "2026-10-03T17:04:26Z",
-    "file": "docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13.tif",
-    "manifest": "docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13.json",
-    "sha256": "f5d137b9c010873f0b4fc11e841d923f359d33c7272ded0da9ac9b7c1efc7cc2",
-    "note": "GEMSDOE30 4-fold OOF GBM surface; adaptive Poisson-disk dots (500 m min spacing); proxy gate failed vs uniform - not holdout-promoted",
-    "method": "4-fold out-of-fold HistGradientBoosting surface over competition + local external layers; adaptive Poisson-disk emission (radius 5 px, gamma=1.0, pool 480k)",
-    "dots": 90358,
-    "median_nn_spacing_px": 2.83,
-    "promoted": false,
-    "build_record": "docs/research/candidate-2026-10-03.md"
+    "score_gain_claimed": false
   }
 }
