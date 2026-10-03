@@ -17,7 +17,7 @@
   },
   "submission": {
     "gemsdoe30_tiff_generated": false,
-    "reason": "no organizer template, training files, or full-grid predictions are present",
+    "reason": "no model candidate has been promoted on the frozen spatial holdout; the metric-aware emission experiments failed their registered gates in every arm, and no GEMSDOE30 prediction raster exists",
     "external_reference_tiff": "GEMSDOE25 D2.8 link; owner page says unscored/not slot-approved"
   },
   "score_evidence": {
@@ -47,12 +47,14 @@
     }
   },
   "verification": {
-    "unit_tests": "23 passed with NumPy 2.4.6, SciPy 1.17.1, rasterio 1.4.4, PyTorch 2.14.1, and pytest 9.1.1 installed in an ignored local virtual environment",
+    "unit_tests": "44 tests collected with unittest on this image (NumPy 2.4.6, SciPy 1.17.1, rasterio 1.4.4); 39 pass, 5 torch-gated tests skip because PyTorch is not installed here",
     "synthetic_geometry_probe": "passed; 100/200/300/400 m translations only",
     "cross_fold_regression": "passed; exact full-grid score retains a 100 m near miss across a quadrant seam; wrong-fold checkpoint relabeling is rejected; previous quadrant-component pooling defect fixed",
     "synthetic_pipeline_smoke": "reproduced after the final metric/dataset/fold-provenance changes on disposable 64x64 data: preparation with source-TIFF SHA-256 and canonical dataset signature, paired four-fold train/inference, prediction/checkpoint hash and checkpoint-fold-identity checks, OOF stitching/evaluation, full-fit inference, and exact-template GeoTIFF validation; CPU only; software check, not a scientific holdout",
     "scientific_holdout": "four-arm real owner-mirror catalogue proxy pilot completed; hypothesis screen failed",
-    "score_gain_claimed": false
+    "score_gain_claimed": false,
+    "emission_holdout": "three count-matched arms on four 300 m-buffered quadrants (catalogue proxy); the adaptive-vs-uniform gate failed in every arm - see research/emission-holdout-results.json",
+    "catalogue_proxy_inversion": "catalogue-proxy DTI ordering is inverted relative to the owner-reported leaderboard ordering across five owner TIFFs - see research/artifact-structure.json"
   },
   "three_pass_review": {
     "pass_1_implementation_and_verification": "metric-aware loss, pooled full-grid OOF aggregation, and provenance checks implemented; unit tests and synthetic pipeline smoke passed",
@@ -63,5 +65,10 @@
     "results": "research/pilot-results.json",
     "screen_passed": false,
     "slot_approved": false
+  },
+  "latest_analysis": {
+    "artifact_structure": "docs/research/artifact-structure.json",
+    "emission_holdout": "docs/research/emission-holdout-results.json",
+    "extra_mirror_pins": "docs/research/mirror-pins-extra.json"
   }
 }

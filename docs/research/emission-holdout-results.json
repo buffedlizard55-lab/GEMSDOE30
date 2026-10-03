@@ -1,0 +1,482 @@
+{
+ "title": "Metric-aware emission rules: spatially blocked holdout results (catalogue proxy)",
+ "generated_utc": "2026-10-03T15:56:39Z",
+ "protocol": [
+  "Four fixed quadrants; each fold trains on the other three and predicts the held-out quadrant (300 m buffer strips excluded from both).",
+  "Inside the scored block the public catalogue faults act as proxy truth; every pixel outside the block is masked, mirroring the organizer's known-fault masking.",
+  "Both selection rules are count-matched to the same emitted-pixel budget by expanding then bisecting the exclusion radius.",
+  "Pooled DTI is recomputed once from the summed fold components (valid because the 300 m buffer removes cross-seam kernel interactions)."
+ ],
+ "caveat": "The catalogue proxy is NOT the competition score. The organizer scores only the private set of new expert-labelled faults (problem page 967). A proxy pass is necessary evidence, never a leaderboard estimate.",
+ "commands": [
+  "python3 scripts/emission_holdout.py --per-class 60000 --budget-per-fold 8000  (first, uncounted-target run)",
+  "python3 scripts/emission_holdout.py --reuse-surfaces --budget-per-fold 11025  (count-matched re-run, all 22 features)",
+  "python3 scripts/emission_holdout.py --feature-set bands --tag bands --per-class 45000 --budget-per-fold 11025 --pool-limit 120000",
+  "python3 scripts/emission_holdout.py --feature-set all --tag all --per-class 45000 --budget-per-fold 11025 --pool-limit 120000"
+ ],
+ "runs": [
+  {
+   "report_path": "runs/emission/report.json",
+   "feature_set": "all (22 features)",
+   "budget_per_fold_px": null,
+   "n_features": 22,
+   "features": [
+    "tmi_hg",
+    "iso_grav_anom_hg",
+    "iso_grav_anom_slope",
+    "det_elev_slope",
+    "tmi_vg",
+    "depth_to_base_surf",
+    "cond_surf",
+    "deq_n100a15",
+    "geod_2ndinv",
+    "det_elev",
+    "K",
+    "Th",
+    "U",
+    "TC",
+    "ThK",
+    "UK",
+    "UTh",
+    "TMI_up150",
+    "step_max",
+    "cross_max",
+    "relief",
+    "coh100"
+   ],
+   "folds": [
+    {
+     "fold": 0,
+     "block_pixels": 2449030,
+     "block_truth_pixels": 29319,
+     "uniform": {
+      "radius_px": 6.453125,
+      "emitted": 11019,
+      "dti": 0.08168462980626398,
+      "credit_retention_vs_block_truth": 0.07222469544560778,
+      "tp_weight": 2117.5558959320188,
+      "fp_weight": 10224.213135168215,
+      "fp_per_emitted": 0.927871234700809,
+      "emitted_delta_vs_adaptive": -2
+     },
+     "adaptive": {
+      "radius_px": 17.398193359375,
+      "emitted": 11021,
+      "dti": 0.08075920667651888,
+      "credit_retention_vs_block_truth": 0.07139258211584998,
+      "tp_weight": 2093.1591660268605,
+      "fp_weight": 10223.444089905093,
+      "fp_per_emitted": 0.9276330723078753
+     }
+    },
+    {
+     "fold": 1,
+     "block_pixels": 1366431,
+     "block_truth_pixels": 12596,
+     "uniform": {
+      "radius_px": 5.4609375,
+      "emitted": 11806,
+      "dti": 0.17314979472238762,
+      "credit_retention_vs_block_truth": 0.17475252008913014,
+      "tp_weight": 2201.182796370238,
+      "fp_weight": 10977.78012489963,
+      "fp_per_emitted": 0.9298475457309529,
+      "emitted_delta_vs_adaptive": 779
+     },
+     "adaptive": {
+      "radius_px": 12.030303955078125,
+      "emitted": 11027,
+      "dti": 0.1657159050958655,
+      "credit_retention_vs_block_truth": 0.16477086289203507,
+      "tp_weight": 2075.4538425654173,
+      "fp_weight": 10161.386364299744,
+      "fp_per_emitted": 0.9215005318127999
+     }
+    },
+    {
+     "fold": 2,
+     "block_pixels": 564135,
+     "block_truth_pixels": 9473,
+     "uniform": {
+      "radius_px": 5.4609375,
+      "emitted": 10031,
+      "dti": 0.22303827691726114,
+      "credit_retention_vs_block_truth": 0.23230153747567167,
+      "tp_weight": 2200.592517338693,
+      "fp_weight": 9239.579245553974,
+      "fp_per_emitted": 0.9211025067843659,
+      "emitted_delta_vs_adaptive": -994
+     },
+     "adaptive": {
+      "radius_px": 10.123443603515625,
+      "emitted": 11025,
+      "dti": 0.24491361092466157,
+      "credit_retention_vs_block_truth": 0.26030336064909376,
+      "tp_weight": 2465.853803422302,
+      "fp_weight": 9983.443972721649,
+      "fp_per_emitted": 0.9055277979792878
+     }
+    },
+    {
+     "fold": 3,
+     "block_pixels": 787777,
+     "block_truth_pixels": 9600,
+     "uniform": {
+      "radius_px": 5.4609375,
+      "emitted": 11503,
+      "dti": 0.22286886948902612,
+      "credit_retention_vs_block_truth": 0.23859655636353727,
+      "tp_weight": 2290.5269959270954,
+      "fp_weight": 10696.797782906404,
+      "fp_per_emitted": 0.9299137427546209,
+      "emitted_delta_vs_adaptive": 281
+     },
+     "adaptive": {
+      "radius_px": 13.999176025390625,
+      "emitted": 11222,
+      "dti": 0.2171265148183131,
+      "credit_retention_vs_block_truth": 0.23068083702964595,
+      "tp_weight": 2214.536092828959,
+      "fp_weight": 10381.909335780332,
+      "fp_per_emitted": 0.9251389534646527
+     }
+    }
+   ],
+   "pooled": {
+    "uniform": {
+     "dti": 0.14987838306035928,
+     "tp_weight": 8809.858205568045,
+     "fp_weight": 41138.370288528226,
+     "truth_pixels": 60988.0,
+     "emitted": 44359
+    },
+    "adaptive": {
+     "dti": 0.1507233373042033,
+     "tp_weight": 8849.002904843539,
+     "fp_weight": 40750.183762706816,
+     "truth_pixels": 60988.0,
+     "emitted": 44295
+    }
+   },
+   "paired_delta_dti_adaptive_minus_uniform": 0.0008449542438440094,
+   "folds_positive": 1,
+   "gate": {
+    "criterion": "pooled delta > 0.0 with positive folds >= 3/4",
+    "passed": false,
+    "scope": "catalogue proxy; not an organizer score"
+   },
+   "note": "Count-matched re-run at 11,025 px/fold. Adaptive edge +0.000845 pooled but positive in only 1/4 folds: gate fails."
+  },
+  {
+   "report_path": "runs/emission/bands/report.json",
+   "feature_set": "bands only (10 competition features)",
+   "budget_per_fold_px": 11025,
+   "n_features": 10,
+   "features": [
+    "tmi_hg",
+    "iso_grav_anom_hg",
+    "iso_grav_anom_slope",
+    "det_elev_slope",
+    "tmi_vg",
+    "depth_to_base_surf",
+    "cond_surf",
+    "deq_n100a15",
+    "geod_2ndinv",
+    "det_elev"
+   ],
+   "folds": [
+    {
+     "fold": 0,
+     "block_pixels": 2449030,
+     "block_truth_pixels": 29319,
+     "uniform": {
+      "radius_px": 5.4609375,
+      "emitted": 9588,
+      "dti": 0.06436581377158947,
+      "credit_retention_vs_block_truth": 0.05615284595507596,
+      "tp_weight": 1646.3453298173845,
+      "fp_weight": 8967.386294894168,
+      "fp_per_emitted": 0.9352718288375227,
+      "emitted_delta_vs_adaptive": -1436
+     },
+     "adaptive": {
+      "radius_px": 14.735565185546875,
+      "emitted": 11024,
+      "dti": 0.06979446695930869,
+      "credit_retention_vs_block_truth": 0.061603158850880184,
+      "tp_weight": 1806.1430591084063,
+      "fp_weight": 10307.988980616006,
+      "fp_per_emitted": 0.9350497986770688
+     }
+    },
+    {
+     "fold": 1,
+     "block_pixels": 1366431,
+     "block_truth_pixels": 12596,
+     "uniform": {
+      "radius_px": 4.46875,
+      "emitted": 11379,
+      "dti": 0.14501054639773364,
+      "credit_retention_vs_block_truth": 0.14469082217935705,
+      "tp_weight": 1822.525644659996,
+      "fp_weight": 10634.615566086417,
+      "fp_per_emitted": 0.9345826141213127,
+      "emitted_delta_vs_adaptive": -45
+     },
+     "adaptive": {
+      "radius_px": 13.999176025390625,
+      "emitted": 11424,
+      "dti": 0.13563201460900526,
+      "credit_retention_vs_block_truth": 0.1352073636987877,
+      "tp_weight": 1703.0719982795417,
+      "fp_weight": 10695.74528772512,
+      "fp_per_emitted": 0.9362522135613726
+     }
+    },
+    {
+     "fold": 2,
+     "block_pixels": 564135,
+     "block_truth_pixels": 9473,
+     "uniform": {
+      "radius_px": 4.46875,
+      "emitted": 9124,
+      "dti": 0.1738812709125713,
+      "credit_retention_vs_block_truth": 0.17624048097132985,
+      "tp_weight": 1669.5261208824813,
+      "fp_weight": 8446.120479093845,
+      "fp_per_emitted": 0.9257036912641216,
+      "emitted_delta_vs_adaptive": -1503
+     },
+     "adaptive": {
+      "radius_px": 10.0032958984375,
+      "emitted": 10627,
+      "dti": 0.18413469598190638,
+      "credit_retention_vs_block_truth": 0.19248227980022176,
+      "tp_weight": 1823.3846887163818,
+      "fp_weight": 9796.867170573061,
+      "fp_per_emitted": 0.9218845554317363
+     }
+    },
+    {
+     "fold": 3,
+     "block_pixels": 787777,
+     "block_truth_pixels": 9600,
+     "uniform": {
+      "radius_px": 4.46875,
+      "emitted": 11764,
+      "dti": 0.19866972540490244,
+      "credit_retention_vs_block_truth": 0.21287453353929045,
+      "tp_weight": 2043.5955759882927,
+      "fp_weight": 10988.387123022305,
+      "fp_per_emitted": 0.9340689495938715,
+      "emitted_delta_vs_adaptive": 740
+     },
+     "adaptive": {
+      "radius_px": 16.285858154296875,
+      "emitted": 11024,
+      "dti": 0.1936417264541563,
+      "credit_retention_vs_block_truth": 0.20431586479688654,
+      "tp_weight": 1961.4323531277478,
+      "fp_weight": 10284.479275137517,
+      "fp_per_emitted": 0.9329172056547095
+     }
+    }
+   ],
+   "pooled": {
+    "uniform": {
+     "dti": 0.12375469971113985,
+     "tp_weight": 7181.9926713481545,
+     "fp_weight": 39036.509463096736,
+     "truth_pixels": 60988.0,
+     "emitted": 41855
+    },
+    "adaptive": {
+     "dti": 0.12475634271399651,
+     "tp_weight": 7294.032099232078,
+     "fp_weight": 41085.0807140517,
+     "truth_pixels": 60988.0,
+     "emitted": 44099
+    }
+   },
+   "paired_delta_dti_adaptive_minus_uniform": 0.0010016430028566559,
+   "folds_positive": 2,
+   "gate": {
+    "criterion": "pooled delta > 0.0 with positive folds >= 3/4",
+    "passed": false,
+    "scope": "catalogue proxy; not an organizer score"
+   },
+   "note": "Adaptive edge +0.00100 pooled, 2/4 folds positive: gate fails."
+  },
+  {
+   "report_path": "runs/emission/all/report.json",
+   "feature_set": "all (22 features, ablation arm)",
+   "budget_per_fold_px": 11025,
+   "n_features": 22,
+   "features": [
+    "tmi_hg",
+    "iso_grav_anom_hg",
+    "iso_grav_anom_slope",
+    "det_elev_slope",
+    "tmi_vg",
+    "depth_to_base_surf",
+    "cond_surf",
+    "deq_n100a15",
+    "geod_2ndinv",
+    "det_elev",
+    "K",
+    "Th",
+    "U",
+    "TC",
+    "ThK",
+    "UK",
+    "UTh",
+    "TMI_up150",
+    "step_max",
+    "cross_max",
+    "relief",
+    "coh100"
+   ],
+   "folds": [
+    {
+     "fold": 0,
+     "block_pixels": 2449030,
+     "block_truth_pixels": 29319,
+     "uniform": {
+      "radius_px": 5.4609375,
+      "emitted": 9960,
+      "dti": 0.07863807692537551,
+      "credit_retention_vs_block_truth": 0.06893705467099213,
+      "tp_weight": 2021.1655533201993,
+      "fp_weight": 9213.4512074599,
+      "fp_per_emitted": 0.9250453019538053,
+      "emitted_delta_vs_adaptive": -1063
+     },
+     "adaptive": {
+      "radius_px": 16.371124267578125,
+      "emitted": 11023,
+      "dti": 0.08459749242587088,
+      "credit_retention_vs_block_truth": 0.07482348065037459,
+      "tp_weight": 2193.7496832869947,
+      "fp_weight": 10188.330028757817,
+      "fp_per_emitted": 0.9242792369371148
+     }
+    },
+    {
+     "fold": 1,
+     "block_pixels": 1366431,
+     "block_truth_pixels": 12596,
+     "uniform": {
+      "radius_px": 4.46875,
+      "emitted": 11634,
+      "dti": 0.15095964254714866,
+      "credit_retention_vs_block_truth": 0.15132107053868984,
+      "tp_weight": 1906.0402551218867,
+      "fp_weight": 10840.748310155883,
+      "fp_per_emitted": 0.9318160830458899,
+      "emitted_delta_vs_adaptive": 608
+     },
+     "adaptive": {
+      "radius_px": 11.8636474609375,
+      "emitted": 11026,
+      "dti": 0.150415629270398,
+      "credit_retention_vs_block_truth": 0.14916031184485543,
+      "tp_weight": 1878.823338713497,
+      "fp_weight": 10191.568794997102,
+      "fp_per_emitted": 0.924321494195275
+     }
+    },
+    {
+     "fold": 2,
+     "block_pixels": 564135,
+     "block_truth_pixels": 9473,
+     "uniform": {
+      "radius_px": 4.46875,
+      "emitted": 10257,
+      "dti": 0.22643233411228036,
+      "credit_retention_vs_block_truth": 0.23664261880002574,
+      "tp_weight": 2241.715587452054,
+      "fp_weight": 9367.067863329696,
+      "fp_per_emitted": 0.9132366055698251,
+      "emitted_delta_vs_adaptive": -693
+     },
+     "adaptive": {
+      "radius_px": 10.0032958984375,
+      "emitted": 10950,
+      "dti": 0.22651316833707347,
+      "credit_retention_vs_block_truth": 0.23963818933614564,
+      "tp_weight": 2270.092632435262,
+      "fp_weight": 9947.414224898826,
+      "fp_per_emitted": 0.908439655241902
+     }
+    },
+    {
+     "fold": 3,
+     "block_pixels": 787777,
+     "block_truth_pixels": 9600,
+     "uniform": {
+      "radius_px": 4.46875,
+      "emitted": 11860,
+      "dti": 0.23253541629830468,
+      "credit_retention_vs_block_truth": 0.25060124111508925,
+      "tp_weight": 2405.7719787806273,
+      "fp_weight": 10923.380015665754,
+      "fp_per_emitted": 0.9210269827711429,
+      "emitted_delta_vs_adaptive": 835
+     },
+     "adaptive": {
+      "radius_px": 14.28985595703125,
+      "emitted": 11025,
+      "dti": 0.22934376489010308,
+      "credit_retention_vs_block_truth": 0.2430808905277306,
+      "tp_weight": 2333.5766108334064,
+      "fp_weight": 10141.506300809622,
+      "fp_per_emitted": 0.9198645170802379
+     }
+    }
+   ],
+   "pooled": {
+    "uniform": {
+     "dti": 0.14639010686532863,
+     "tp_weight": 8574.693374674767,
+     "fp_weight": 40344.64739661123,
+     "truth_pixels": 60988.0,
+     "emitted": 43711
+    },
+    "adaptive": {
+     "dti": 0.14800971080117864,
+     "tp_weight": 8676.24226526916,
+     "fp_weight": 40468.819349463374,
+     "truth_pixels": 60988.0,
+     "emitted": 44024
+    }
+   },
+   "paired_delta_dti_adaptive_minus_uniform": 0.0016196039358500058,
+   "folds_positive": 2,
+   "gate": {
+    "criterion": "pooled delta > 0.0 with positive folds >= 3/4",
+    "passed": false,
+    "scope": "catalogue proxy; not an organizer score"
+   },
+   "note": "Adaptive edge +0.00162 pooled, 2/4 folds positive: gate fails."
+  }
+ ],
+ "uncounted_run_note": {
+  "budget_per_fold_px": 8000,
+  "target_not_reached": true,
+  "observed": {
+   "uniform_emitted": 43096,
+   "uniform_pooled_dti": 0.08161116349468804,
+   "adaptive_emitted": 724858,
+   "adaptive_pooled_dti": 0.24830998591056053,
+   "paired_delta_dti": 0.16669882241587247,
+   "folds_positive": 4
+  },
+  "why_invalid": "The adaptive rule emitted 724,858 px, about 17x the uniform rule at the same nominal budget; the comparison is a mass effect, not a selection-rule effect. Numbers recovered from the run log because report.json was overwritten by the count-matched re-run."
+ },
+ "decision": "Both count-matched emission rules (uniform Poisson-disk thinning and confidence-adaptive thinning) fail the registered gate on the catalogue proxy in every arm. Keep uniform thinning as the default; do not spend a submission slot on the adaptive variant.",
+ "promotion_gate": {
+  "criterion": "pooled delta > 0.0 with positive folds >= 3/4",
+  "passed": false,
+  "scope": "catalogue proxy; not an organizer score"
+ }
+}

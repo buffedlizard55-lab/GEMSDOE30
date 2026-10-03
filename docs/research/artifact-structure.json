@@ -1,0 +1,171 @@
+{
+ "generated_utc": "2026-10-03T15:23:45Z",
+ "catalogue_pixels": 60988,
+ "valid_pixels": 5167373,
+ "metric": "DTI = TPw / (TPw + 0.2*FPw + 0.8*FNw + 1e-7); TPw/FNw split the truth set, so DTI = T / (0.2*T + 0.2*F + 0.8*G)",
+ "proxy_caveat": "catalogue-proxy credit is computed against the training labels; the competition scores only unmapped expert-labelled faults with known faults masked",
+ "artifacts": {
+  "h19_5": {
+   "file": "gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
+   "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+   "bytes": 1712322,
+   "emitted_pixels": 121131,
+   "values": [
+    0.0,
+    1.0
+   ],
+   "is_binary": true,
+   "on_catalogue_pixel": 0,
+   "within_300m_of_catalogue": 24167,
+   "median_distance_to_catalogue_m": 1456.0219778561036,
+   "mean_fp_weight_vs_catalogue": 0.912495678378458,
+   "spacing": {
+    "pixels_sampled": 6000.0,
+    "median_px": 1.0,
+    "p10_px": 1.0,
+    "p90_px": 2.0,
+    "fraction_under_1px": 0.0,
+    "fraction_under_2px": 0.896
+   },
+   "catalogue_proxy": {
+    "tp_weight": 12199.639425539293,
+    "fp_weight": 110531.514017661,
+    "fn_weight": 48788.360574460705,
+    "dti": 0.16635123963245285
+   },
+   "owner_reported_score": 0.1922,
+   "owner_reported_status": "unverified claim; no organizer receipt was accessed"
+  },
+  "d1_5": {
+   "file": "gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+   "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+   "bytes": 1632732,
+   "emitted_pixels": 60069,
+   "values": [
+    0.0,
+    1.0
+   ],
+   "is_binary": true,
+   "on_catalogue_pixel": 0,
+   "within_300m_of_catalogue": 11938,
+   "median_distance_to_catalogue_m": 1486.6068747318504,
+   "mean_fp_weight_vs_catalogue": 0.9098230532128813,
+   "spacing": {
+    "pixels_sampled": 6000.0,
+    "median_px": 2.23606797749979,
+    "p10_px": 2.0,
+    "p90_px": 3.605551275463989,
+    "fraction_under_1px": 0.0,
+    "fraction_under_2px": 0.0
+   },
+   "catalogue_proxy": {
+    "tp_weight": 10633.361305372346,
+    "fp_weight": 54652.16098344456,
+    "fn_weight": 50354.638694627654,
+    "dti": 0.17192870429585141
+   },
+   "owner_reported_score": 0.2477,
+   "owner_reported_status": "unverified claim; no organizer receipt was accessed"
+  },
+  "d2_8": {
+   "file": "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+   "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+   "bytes": 1603424,
+   "emitted_pixels": 44090,
+   "values": [
+    0.0,
+    1.0
+   ],
+   "is_binary": true,
+   "on_catalogue_pixel": 0,
+   "within_300m_of_catalogue": 8607,
+   "median_distance_to_catalogue_m": 1500.0,
+   "mean_fp_weight_vs_catalogue": 0.9103020838347119,
+   "spacing": {
+    "pixels_sampled": 6000.0,
+    "median_px": 3.0,
+    "p10_px": 2.8284271247461903,
+    "p90_px": 5.0,
+    "fraction_under_1px": 0.0,
+    "fraction_under_2px": 0.0
+   },
+   "catalogue_proxy": {
+    "tp_weight": 9498.798137301252,
+    "fp_weight": 40135.21887627245,
+    "fn_weight": 51489.20186269874,
+    "dti": 0.16177197800339901
+   },
+   "owner_reported_score": 0.26,
+   "owner_reported_status": "unverified claim; no organizer receipt was accessed"
+  },
+  "h25_ctx_ridge": {
+   "file": "gems10-h25-ctx-ridge-20260927T232947704150Z-6452ae1d00.tif",
+   "sha256": "1381e784fb8b8340beffd0e735ac9eea89ad35d1a807f8a9bab5506e3fc8275e",
+   "bytes": 1772935,
+   "emitted_pixels": 174232,
+   "values": [
+    0.0,
+    1.0
+   ],
+   "is_binary": true,
+   "on_catalogue_pixel": 12866,
+   "within_300m_of_catalogue": 57676,
+   "median_distance_to_catalogue_m": 608.276253029822,
+   "mean_fp_weight_vs_catalogue": 0.8131327095491434,
+   "spacing": {
+    "pixels_sampled": 6000.0,
+    "median_px": 1.0,
+    "p10_px": 1.0,
+    "p90_px": 2.0,
+    "fraction_under_1px": 0.0,
+    "fraction_under_2px": 0.8873333333333333
+   },
+   "catalogue_proxy": {
+    "tp_weight": 33416.3761235648,
+    "fp_weight": 141673.73825016635,
+    "fn_weight": 27571.623876435202,
+    "dti": 0.39872336189247387
+   },
+   "owner_reported_score": 0.128,
+   "owner_reported_status": "unverified claim; no organizer receipt was accessed"
+  },
+  "h28_dotted_ridge": {
+   "file": "gems10-h28-dotted-ridge-20260928T020256236880Z-6452ae1d00.tif",
+   "sha256": "7637b72d4c6c3e10226bf46bd72a20272d62ccbe29743062632d10b158b49c58",
+   "bytes": 1620739,
+   "emitted_pixels": 69281,
+   "values": [
+    0.0,
+    1.0
+   ],
+   "is_binary": true,
+   "on_catalogue_pixel": 4045,
+   "within_300m_of_catalogue": 18502,
+   "median_distance_to_catalogue_m": 800.0,
+   "mean_fp_weight_vs_catalogue": 0.8531377340760513,
+   "spacing": {
+    "pixels_sampled": 6000.0,
+    "median_px": 3.1622776601683795,
+    "p10_px": 3.0,
+    "p90_px": 4.242640687119285,
+    "fraction_under_1px": 0.0,
+    "fraction_under_2px": 0.0
+   },
+   "catalogue_proxy": {
+    "tp_weight": 24371.51290377041,
+    "fp_weight": 59106.23535452291,
+    "fn_weight": 36616.48709622959,
+    "dti": 0.3721639990467161
+   },
+   "owner_reported_score": 0.1839,
+   "owner_reported_status": "unverified claim; no organizer receipt was accessed"
+  }
+ },
+ "arithmetic": {
+  "marginal_inclusion_ratio_at_0p26": 0.054852320675105495,
+  "coverage_multiplier_0p26_to_0p3195": 0.2444676357719835,
+  "fp_reduction_at_coverage_0p41": 0.4225906443506934,
+  "coverage_multiplier_0p26_to_0p2941": 0.13935043897431498,
+  "note": "coverage = T/G; the multiplier is exact for the published metric at fixed FP ratio"
+ }
+}
