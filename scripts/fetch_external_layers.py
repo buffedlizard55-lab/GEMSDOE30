@@ -407,7 +407,8 @@ def main() -> int:
         because the extra vertices cannot add information at this resolution.
         """
 
-        from gemsdoe30.concealment import COVER_CLASS_TABLE, NODATA as COVER_NODATA, classify_units
+        from gemsdoe30.concealment import (COVER_CLASS_TABLE, NODATA as COVER_NODATA,
+                                          classify_units, label_is_water, matched_setting_terms)
 
         merged = np.full(shape, COVER_NODATA, dtype=np.uint8)
         layer_names = []
@@ -517,6 +518,24 @@ def main() -> int:
                         "class_counts": {k: v for k, v in sorted(class_counts.items())},
                         "unit_table": {k: v for k, v in unit_table.items() if k != "mapping"},
                     }
+                    # Audit *why* a unit is class 4: count the terms that fired, so a
+                    # broad term can never quietly turn most of the map into "playa".
+                    term_counts: dict[str, int] = {}
+                    for index in range(len(frame)):
+                        if int(classes[index]) != 4:
+                            continue
+                        label = frame[age_column].tolist()[index]
+                        texts = [label] + [column[index] for column in row_texts]
+                        terms = matched_setting_terms(*texts)
+                        if label_is_water(label):
+                            terms = terms + ["<water label>"]
+                        if not terms:
+                            terms = ["<unexplained>"]
+                        for term in terms:
+                            term_counts[term] = term_counts.get(term, 0) + 1
+                    report["inventory_attributes"][f"{key}:{shapefile.name}"][
+                        "class4_term_counts"
+                    ] = dict(sorted(term_counts.items(), key=lambda item: -item[1])[:20])
                     save()
                     projected = project_geometries_to_grid_crs(
                         frame.geometry.tolist(), frame.crs, "EPSG:32611"

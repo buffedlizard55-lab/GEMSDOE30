@@ -58,13 +58,14 @@ _PLAYA_TERMS = (
     "evaporite",
     "saline",
     "salt pan",
-    # Open water and lake-floor settings: a trace cannot be mapped through a lake, and
-    # the SGMC water/ice polygons carry the label "water" rather than an age letter.
-    "water",
     "lake",
-    "reservoir",
-    "pond",
 )
+
+#: Map-unit *labels* that are water bodies rather than rocks.  These are matched
+#: exactly (never as a substring of a long description) so that a description
+#: mentioning, say, ground water cannot escalate a bedrock unit to the strongest
+#: concealment class.
+_WATER_LABEL_TOKENS = ("WATER", "WTR", "LAKE", "RESERVOIR", "POND", "PLAYA", "ICE", "GLACIER")
 
 #: Mesozoic age markers (spelled out or abbreviated).
 _MESOZOIC_TERMS = (
@@ -153,17 +154,35 @@ def classify_age(age: Any) -> int:
     return 0
 
 
-def is_concealing_setting(*texts: Any) -> bool:
-    """True when any supplied text names a playa/lake/evaporite setting."""
+def matched_setting_terms(*texts: Any) -> list[str]:
+    """The concealing-setting terms present in any supplied text (deduplicated).
 
+    Exposed so a run can *record* which term escalated a unit, instead of publishing an
+    unexplained class-4 share of the map.
+    """
+
+    hits: list[str] = []
     for text in texts:
         lowered = _normalise(text).lower()
         if not lowered:
             continue
         for term in _PLAYA_TERMS:
-            if term in lowered:
-                return True
-    return False
+            if term in lowered and term not in hits:
+                hits.append(term)
+    return hits
+
+
+def label_is_water(age: Any) -> bool:
+    """True when a map-unit label is itself a water body (``water``, ``lake``...)."""
+
+    token = _first_token(_normalise(age))
+    return bool(token) and token in _WATER_LABEL_TOKENS
+
+
+def is_concealing_setting(*texts: Any) -> bool:
+    """True when any supplied text names a playa/lake/evaporite setting."""
+
+    return bool(matched_setting_terms(*texts))
 
 
 def cover_class(age: Any, *unit_texts: Any) -> int:
@@ -177,7 +196,7 @@ def cover_class(age: Any, *unit_texts: Any) -> int:
     itself is scanned too.
     """
 
-    if is_concealing_setting(age, *unit_texts):
+    if label_is_water(age) or is_concealing_setting(*unit_texts):
         return 4
     return classify_age(age)
 

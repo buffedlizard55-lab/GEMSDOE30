@@ -21,6 +21,8 @@ from gemsdoe30.concealment import (
     cover_class,
     cover_weight,
     is_concealing_setting,
+    label_is_water,
+    matched_setting_terms,
 )
 
 
@@ -63,11 +65,12 @@ def test_concealing_settings_are_detected(text):
     assert is_concealing_setting(text)
 
 
-def test_water_and_lake_labels_escalate(  # noqa: D103
-):
+def test_water_labels_escalate_but_water_inside_a_description_does_not():
     assert cover_class("water") == 4
+    assert cover_class("water;0") == 4
     assert cover_class("Qa", "shallow lake") == 4
-    assert cover_class("K", "reservoir silt") == 4
+    # A long description mentioning ground water must not turn bedrock into class 4.
+    assert cover_class("K", "marine shale with ground water aquifers") == 1
     assert cover_class("Qa", "alluvium") == 3
 
 
@@ -104,6 +107,13 @@ def test_cover_weight_rejects_negative_gamma_and_bad_shape():
         cover_weight(np.zeros((2, 2), dtype=np.uint8), gamma=-0.1)
     with pytest.raises(ValueError):
         cover_weight(np.zeros((2, 2, 2), dtype=np.uint8))
+
+
+def test_water_label_detection_is_exact_and_term_reporting_is_auditable():
+    assert label_is_water("water;0") and label_is_water("LAKE")
+    assert not label_is_water("Qa") and not label_is_water("Tt2;0")
+    assert matched_setting_terms("plio-pleistocene playa deposits") == ["playa"]
+    assert "lacustrine" in matched_setting_terms("lacustrine clay")
 
 
 def test_class_table_documents_every_class_the_weight_can_emit():
