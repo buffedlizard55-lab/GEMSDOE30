@@ -330,7 +330,7 @@ control.** Reported rather than hidden because it should decide which file, if a
 
    Repeat the complete paired design with preregistered fresh seeds for confirmation. Do not treat one fold or the synthetic probe as confirmation.
 
-7. Only after a candidate clears the frozen holdout and confirmation gates should it be fit on all permitted training labels. `scripts/infer_model.py` or `scripts/build_submission.py` writes a uniquely named, template-matched TIFF and a JSON sidecar. `scripts/validate_submission.py FILE.tif --template data/raw/sample_submission.tif` must pass before any human upload.
+7. Only after a candidate clears the frozen holdout and confirmation gates should it be fit on all permitted training labels. `scripts/infer_model.py` or `scripts/build_submission.py` writes a uniquely named, template-matched TIFF and a JSON sidecar. The builder and validator add `src/` automatically when run directly from this checkout (package installation is not required for this format step). For the portal, build with the default `--outside zeros`, then run `python scripts/validate_submission.py FILE.tif --template data/raw/sample_submission.tif --portal-safe`; this strict check rejects NaN/Inf anywhere in the raster and must pass before any human upload. Upload the `-zeros.tif` artifact, not the legacy NaN-outside research copy.
 
 ## Useful links
 
