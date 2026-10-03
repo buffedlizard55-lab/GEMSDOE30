@@ -112,19 +112,17 @@ wins and the distilled list must be corrected.
 
 </details>
 
-> **Branch note:** the brief above names the branch of the session in which it
-> was first recorded (`arena/01a10289-gemsdoe30`). Each Arena session is assigned
-> its own branch; work for the current session happens on `arena/01a10315-gemsdoe30`
-> (previous sessions: `arena/01a102bf-gemsdoe30`, `arena/01a10311-gemsdoe30`),
-> and pull requests are opened from whichever branch the session is assigned.
-> The brief's verbatim wording is preserved above unchanged.
+> **Branch note:** the literal brief above preserves the branch named when it was
+> first recorded (`arena/01a10289-gemsdoe30`). This Arena session is fixed to
+> `arena/01a1035b-gemsdoe30`; all changes, commits, pushes, and any PR must stay on
+> that assigned branch. The brief's verbatim wording is preserved above unchanged.
 
 ## Mission and non-negotiable requirements
 
 1. **Objective and historical review:** build an auditable, scientifically grounded workflow to identify previously unmapped geological faults in the DOE GEMS / GeoDAWN region and pursue a result above the user-reported 0.3195 public-leader score. Study the reported GEMSDOE25 D2.8 result and historical submissions; authenticate score-to-file attribution using a submission receipt, ID, hash, or equivalent evidence rather than assuming a score belongs to a named TIFF. Treat public leaderboard snapshots as dynamic feedback, not the private test set or the final award decision. Develop a defensible path to improvement, but never promise a score or prize.
 2. **Metric-aware learning:** the official public metric is a distance-weighted Tversky index with a triangular 300 m support kernel on 100 m pixels, `alpha=0.2`, `beta=0.8`. Prefer training objectives that represent this geometry. Pair any distance/boundary term with a regional loss; compare them under a spatially blocked holdout and report how their near-miss behavior changes. A synthetic unit probe is not a real holdout result.
 3. **Submission first:** when a scientifically promoted candidate exists, make a single-band float32 GeoTIFF with probabilities in `[0,1]`, on the exact sample-template CRS, shape, bounds, and transform; put null/NaN only outside the valid footprint. Check for NaN/Inf *inside* the footprint, which can trigger the portal's “Predicted values must be in range [0, 1]” error. Make the download and the submission instructions obvious at the top of the site. Give every run a unique filename and a short paste-ready submission note.
-4. **No slot without evidence:** pre-register 3–5 genuinely distinct geological hypotheses. Each must state the exact layers, physical signature, why it could indicate a fault absent from USGS/INGENIOUS, what makes it different from prior work, likely DTI change and cost, official data source/license/access status, and a falsifiable holdout gate. Validate the leading candidate against the current spatial-holdout best, with confirmation, before spending a weekly submission slot. No holdout pass means no slot. Beyond the private holdout, require **three types of verification**, each with a pre-stated promotion criterion — spatial block-validation, probability calibration, and feature-perturbation stability — plus a qualitative note showing where a learned change helps and where it fails; the standing protocol is [docs/research/verification-protocol.md](docs/research/verification-protocol.md).
+4. **No slot without evidence:** pre-register 3–5 genuinely distinct geological hypotheses. Each must state the exact layers, physical signature, why it could indicate a fault absent from USGS/INGENIOUS, what makes it different from prior work, likely DTI change and cost, official data source/license/access status, and a falsifiable holdout gate. Validate the leading candidate against the current spatial-holdout best, with confirmation, before spending a weekly submission slot. No holdout pass means no slot. For emitter comparisons, report the global emission budget and active scored-domain count separately; equal global counts are not active-count matched unless the selection/scoring code proves all emitted predictions lie in the scored domain. Beyond the private holdout, require **three types of verification**, each with a pre-stated promotion criterion — spatial block-validation, probability calibration, and feature-perturbation stability — plus a qualitative note showing where a learned change helps and where it fails; the standing protocol is [docs/research/verification-protocol.md](docs/research/verification-protocol.md).
 5. **Research and provenance:** use free, publicly accessible, official or otherwise authoritative data where allowed. Verify claims against the relevant official/primary source line by line where possible; store exact citations/URLs, access and licensing checks, source hashes, experiment protocols, results, and irregularities. Distinguish official facts from user-supplied claims, owner-mirror evidence, hypotheses, and model estimates. Record unavailable files, failed downloads, and other blockers. Never invent a score, source, file hash, access result, or holdout result.
 6. **Competition integrity:** respect the rules and source terms. Do not bypass the DrivenData login, collect or store account credentials, submit files, or consume competition slots on the user's behalf. Public leaderboard values are time-stamped snapshots; do not build a robot/spider that monitors DrivenData.
 7. **Autonomous execution and accountability:** complete what can be done without asking for manual input; identify hard blockers rather than disguising them. Review work in three cumulative passes: implement and verify; inspect bugs/edge cases; re-check against this brief and fix. Flag every unresolved irregularity.
@@ -132,56 +130,34 @@ wins and the distilled list must be corrected.
 9. **Project governance:** use this repository as the research and submission-tooling home. Keep private/large competition data and generated rasters out of Git. The final competition entry must satisfy all eligibility, documentation, AI-disclosure, and submission rules; confirm current requirements with the organizer when ambiguous.
 10. **Delivery:** complete the requested code, documentation, and user-facing site work autonomously where possible. When asked, open a pull request from the assigned project branch and merge it to `main` if GitHub permissions and repository policy allow; report any failure and never claim a PR or merge that did not occur.
 
-## Latest session outcome — supersedes older blocked-status paragraphs below
+## Latest verified state — 2026-10-03
 
-Read the standing brief above every session. On 2026-10-03 we autonomously restored SHA-256-pinned **owner mirrors** via GitHub API and prepared the real 3730×3292 grid (5,167,373 valid pixels, 60,988 catalogue positives). This resolves local data placement, **not organizer authenticity**. `python scripts/restore_public_mirrors.py` reproduces restoration; immutable pins are in `docs/research/mirror-pins.json`. The mirrored template contains labels: footprint only, never use its values as model features/predictions.
+Read the canonical owner brief above first. This current summary supersedes the older session narratives below; those remain an audit trail, not current status.
 
-A preregistered four-arm CPU pilot ran all four 800 m-buffered spatial folds. See [protocol](docs/research/pilot-preregistration.md), [complete results](docs/research/pilot-results.json), [data audit](docs/research/data-audit.json). The top runnable strain/conductance interaction **failed its screen** against the same-run context control. No model candidate promoted; no competition slot used. This limited pointwise pilot is not a full-capacity U-Net or a comparison against the archived best.
+- **Data and access:** core training rasters, the template, and derived feature stacks are present from pinned owner mirrors and locally hash-checked; they are not organizer-authenticated. The competition data page redirects to login, and no credentials or bypass were used. Selected official public GDR 1391 archives were downloaded and checksum-verified through the GitHub Actions bridge (`data/external/external_receipt.json`); the GDR Qfaults v2 layer rasterizes to zero pixels in the ROI and is not usable as local independent truth. D2.8 was downloaded via the public GitHub API, hash-checked, inspected, and locally format-validated; its score attribution remains unresolved.
+- **Metric-shaped loss:** the 300 m geometry term is paired with regional soft-Tversky, not used as a replacement. On spatial holdout it changed near-miss allocation; the fresh-seed DTI gain did not replicate (Δ +0.000115, 2/4 folds). It is not promoted.
+- **H-31-02b:** spatial DTI 0.165541 vs 0.134833 uniform, but below archived best 0.189270; strike permutation removed only 5.99% of gain vs a 50% gate. SGMC comparisons share 80,392 global dots but have 72,310 candidate / 73,843 random / 80,388 archived active dots. Not active-count matched. Do not rerun or retune against these inspected SGMC labels.
+- **H-33-01:** the 80k gate was void: quota arms emitted 68,573 active dots vs an 80,000 active control. At B40, the JSON records mean `dots` of 40,000 for `f_nat`, `f_nat_legacy`, `P0/P25/P50/P75/P100`, `P_rank`, `blind_random_B`, and `rand_P0/P25/P50/P75/P100`; `historical_d28` records 35,824 and is not count-matched. Audited selection/scoring code places all B40 model/random points in the scoring domain, so those 40k arms are active-count matched. Score-first averaged 0.07608 vs 0.07213–0.07250 for band arms; not a promotion result.
+- **Files and portal behavior:** the GBM and SGMC-hedge TIFFs are local, format-validated research artifacts; neither is holdout-promoted. The D2.8 copy is locally inspected/validated, but no exact official score receipt links it to 0.2600. `-zeros.tif` files pass local finite-range/template validation with predictions unchanged inside the footprint. NaN as the cause of the prior range error is plausible, not confirmed; organizer acceptance of zero outside is unverified. Check current official instructions before any upload. No file has been submitted and no weekly slot has been used.
+- **Current science and leaderboard:** five genuinely untried hypotheses, their exact layers/signatures/planning priors/costs/source gates/falsifiable criteria, and a current active shortlist are in [docs/hypotheses.md](docs/hypotheses.md). H-31-04 radiometric source/schema audit is the lowest-cost next action; do not run it until the feature lineage and fold protocol are frozen. The dated official public snapshot displayed DARD at **0.3195** and `wbg1` at **0.2600** (rank 15), with no TIFF hashes. No GEMSDOE30 score is claimed.
+- **Official rules:** all seven parsed PDF chunks were reviewed. Eligibility, deadline-time conflict, and entrant-approved AI disclosure remain open; the organizer must clarify the deadline discrepancy before relying on a cutoff.
 
-The D2.8 historical research TIFF is now a **local one-click download** on the site, independently format-checked against the mirrored template. It remains score-attribution-unverified and not slot-approved. 44 tests pass on this image (torch 2.14.1 and scipy 1.17.1 installed). Previous status text below describes the baseline, not today's restored state.
+- **Verification:** `.venv/bin/python -m pytest -q` passes **85 tests + 11 subtests**. The three published zero-outside TIFF copies each pass all 12 local template/range checks; this does not test organizer acceptance. A seven-page local HTML link/fragment audit passes after correcting the D2.8 download filename to match its manifest. `docs/status.json` was regenerated from its evidence sources.
 
-Later on 2026-10-03 the metric-aware emission line was exercised end to end: `src/gemsdoe30/emission.py` gained a masked-domain scorer fix and a count-matched candidate pool, `tests/test_emission.py` (19 tests) passes, and `scripts/emission_holdout.py` ran three count-matched arms on the four 300 m-buffered quadrants. **All three arms failed their registered gate** (adaptive minus uniform pooled ΔDTI +0.0008 to +0.0016, positive in only 1–2 of 4 folds): uniform Poisson-disk thinning stays the default, no candidate promoted, no slot used. Suite now collects 44 tests; 39 pass on this image and 5 torch-gated tests skip. Numbers: [emission-holdout-results.json](docs/research/emission-holdout-results.json). The owner-artifact audit in [artifact-structure.json](docs/research/artifact-structure.json) also records that catalogue-proxy DTI ordering is *inverted* relative to the owner-reported leaderboard ordering, consistent with the official rule that the Initial Prize Round scores only the private set of new expert-labelled faults.
+Evidence links: [loss holdout](docs/research/loss-ablation-holdout.md) · [H-31-02b](docs/research/h31-02b-scarp-full-pool-holdout.md) · [H-33-01](docs/research/h33-01-placement-policy-holdout.md) · [score/file analysis](docs/leaderboard-analysis.md) · [sources](docs/sources.md) · [irregularities](docs/irregularities.md).
 
-Later still on 2026-10-03 three more real-data experiments completed. **(1) Paired regional-vs-boundary
-loss ablation** — four 300 m-buffered spatial quadrants, identical recipes except the loss, screen
-budget (2 × 20 steps, seed 30): pooled exact full-grid OOF DTI **0.062042 → 0.063990** (Δ **+0.001948**,
-+3.14 % relative), 3/4 folds positive, fold 3 regressing −0.0009; the number of catalogue-truth pixels
-left on partial-distance credit halved (80 → 40). **Confirmed only in part.** The fresh-seed confirmation (seed 31, identical protocol) reproduced the
-behavioural effect — partial-distance truth coverage fell 1,889 → 724 — but **not** the DTI gain:
-pooled ΔDTI **+0.000115** with only **2/4** folds positive (folds 0 and 3 flip sign versus the screen),
-against the required 3/4. Verdict: **the boundary term changes near-miss allocation as designed but
-does not reliably raise the proxy DTI at this budget; not promoted, no candidate file, no slot.**
-Evidence: [loss-ablation-holdout.md](docs/research/loss-ablation-holdout.md),
-[loss-ablation-holdout.json](docs/research/loss-ablation-holdout.json),
-[seed-31 confirmation](docs/research/loss-ablation-holdout-seed31.json). **(2) Preregistered
-metric-algebra emission holdout** — the registered gate **failed**: pooled cross-validated proxy DTI
-`uniform` 0.18675, `adaptive` 0.18927, `dense` 0.13455, `metric` (greedy marginal rule) 0.13313; the
-metric rule needed ≥ +0.005 versus both dense and uniform and came out −0.0014 and −0.0536, below
-uniform in every fold, and adaptive's +0.0025 edge over uniform is under the threshold. No emission
-family promoted. Mechanism: the greedy rule hit its candidate-pool cap (exactly 120,000 px per fold)
-at 0.033–0.043 credit/px while uniform thinning emitted 3–6× fewer pixels at 2.4–4.7× the credit —
-"thin, don't flood" again, matching the owner's sparse dotted masks. Evidence:
-[metric-emission-holdout-results.md](docs/research/metric-emission-holdout-results.md) +
-[metric-emission-holdout-results.json](docs/research/metric-emission-holdout-results.json).
-**(3) H-31-01 relay-connector component holdout** — the connector geometry earned only **+1.2 %**
-credit per emitted pixel over a proximity-matched control and fell below the unrestricted near-known
-annulus, so the hypothesis is **not promoted as tested**; the dominant effect is the generic proximity
-prior (~2.3× far-field). Evidence:
-[relay-connector-holdout.json](docs/research/relay-connector-holdout.json). No GEMSDOE30 submission
-TIFF exists, no slot has been used, and **no score is claimed** for any of this work.
+### Historical Session 2 record — initial range-error hypothesis (superseded), vent research base, H-32 register
 
-### Session 2 (later on 2026-10-03) — portal-safe fix, vent research base, H-32 register, H-32-01 gate
-
-1. **The portal "[0, 1]" rejection is root-caused and fixed.** Measured: the official sample template
-   itself encodes **7,111,787 NaN cells outside the footprint** and both published downloads matched
-   that mask exactly — so a NaN-unaware elementwise range check fails any template-conformant file.
-   The GEMSDOE25 page independently reached the same inference and ships a zeros-outside fallback
-   (byte-verified). This site now publishes **portal-safe `-zeros.tif` variants as the primary
-   downloads** (finite 0.0 outside; `nodata=None`; in-footprint bytes identical to the NaN copies;
-   all 12 strict checks pass including `portal_range_all_pixels` over 12,279,160 cells). New tooling:
+1. **Historical range-error hypothesis — not a confirmed root cause.** The pinned sample template
+   contains **7,111,787 NaN cells outside the footprint**, so an elementwise validator that checks
+   every cell against [0,1] could reject a template-conformant NaN-outside raster. This is plausible,
+   but the organizer's validator is private and no portal upload was made. The GEMSDOE25 owner page
+   also reports a NaN-related inference for a different file; that does not confirm this portal
+   event. The published `-zeros.tif` alternatives pass the repository's local strict checks
+   (finite 0.0 outside; in-footprint values unchanged), but organizer acceptance of zero outside is
+   unverified. Check current official instructions before any upload. Tooling remains:
    `scripts/make_portal_safe.py`, `write_submission_file(outside_value=0.0)`,
    `convert_to_portal_safe`, `validate_submission.py --portal-safe`, `tests/test_portal_safe.py`.
-   **Upload the `-zeros.tif` file.**
 2. **Verified knowledge base** (`docs/research/geothermal-vents-knowledge.md`): the official rules
    PDF was read line-by-line — training labels = INGENIOUS Great Basin compilation (DOI
    10.15121/1881483); **test labels = expert-new faults** (NLR/USGS, Qfaults + new); metric penalizes
@@ -232,27 +208,25 @@ pushes probability inward *everywhere*. **Combined verdict across all three runs
 reliably changes near-miss behaviour and never reliably raises the proxy DTI. Not promoted.**
 Evidence: [loss-ablation-verdict.md](docs/research/loss-ablation-verdict.md) (+ `runs/loss-ablation/holdout.json`).
 
-**(B) Emitter frames — how the mass is placed beats how it is learned.** The same out-of-fold
-probability field scores **0.09712** submitted as a dense field and **0.25461** after 400 m
-Poisson-disk sparsification: a **2.6×** difference from the emission operator alone, and the largest
-single effect measured in either session. Against the internal blind lattice the learned field wins by
-**+3.4 %** on the catalogue frame (0.25461 vs 0.24634 at 4 px). A second frame was then built that the
-catalogue cannot provide: the USGS SGMC fault inventory, split by connected component with 30 % hidden,
-scored under the organizer's masking rule. On that frame the **budget-matched** control is the
-decisive one — uniform random dots at the *same* dot count, not a differently dense lattice. At 5
-repeats: our model-dot set (80,392 dots) scores **0.09526** against blind random at 80,392 dots
-**0.07617** (**+25.1 %**) and against the 3 px probability lattice with 6.6× more dots (0.09395)
-**+1.4 %**; the sibling-branch GBM candidate (75,001 in-domain dots) scores **0.07279** against blind
-random at 75,001 dots **0.07460** (**−2.4 %**), i.e. below chance on this frame. Evidence:
+**(B) Emitter frames — sparse placement changes catalogue-proxy scores, but count scope matters.**
+The same out-of-fold probability field scores **0.09712** as a dense field and **0.25461** after
+400 m Poisson-disk sparsification on the full-catalogue proxy. Against a blind 4 px lattice the
+learned field is +3.4% (0.25461 vs 0.24634) on that catalogue frame; neither comparison is private-test
+evidence. A second five-repeat frame uses USGS SGMC components, with 30% hidden and known catalogue
+pixels masked. The historical `cand_t04s4`/random comparison shares an **80,392 global emission
+budget**, but the active scored-domain counts are **80,388 vs 73,843**. Mean DTI is 0.09526 vs
+0.07617 (+25.1% arithmetic on that frozen screen), **not an active-count-matched placement effect**.
+The GBM candidate/random comparison is unmatched globally and in-domain: candidate **90,358 global /
+75,001 active** (DTI 0.07279) versus random **75,001 global / 68,848 active** (0.07460). These are
+raw proxy diagnostics, not equal-active-count comparisons. The SGMC frame is an independent but
+imperfect inventory, not the competition's expert-new labels. Evidence and full scope:
 [emitter-holdout.md](docs/research/emitter-holdout.md),
 [novelty-holdout.md](docs/research/novelty-holdout.md),
 `docs/research/{emitter-comparison,novelty-holdout,discovery-shift}.json`.
-**Correction recorded for the audit trail:** an earlier draft of this section quoted "+4.4 % over a
-blind lattice" for the model dots. That comparison used a lattice with 527,504 dots against an
-80,392-dot candidate — unmatched budgets. The same-run budget-matched numbers above replace it, and
-the direction of the conclusion survives only because the matched control is a *random* dot set
-rather than a lattice; on the earlier unmatched comparison the sign alternates with the lattice's
-spacing (74,288-dot lattice 0.08442, 97,028-dot lattice 0.09873).
+**Correction retained for the audit trail:** an earlier draft quoted "+4.4% over a blind lattice"
+for model dots; that compared 527,504 lattice dots with an 80,392-global-dot candidate. The sign also
+changes across lattice spacings (74,288-dot lattice 0.08442; 97,028-dot lattice 0.09873). Do not use
+that as count-controlled evidence.
 
 **(C) A working official-data bridge.** A GitHub Actions runner downloads official layers,
 SHA-256-verifies them, rasterises them onto the competition grid and commits the result back
@@ -266,21 +240,22 @@ Quaternary-fault v2 shapefile downloaded but rasterised to **zero** features ins
 
 **(D) Metric theory.** Adding one prediction pixel whose triangular kernel credit against an
 uncovered truth pixel is `k` changes the DTI denominator by exactly `0.2` and the numerator by `k`, so
-**a dot helps iff `k > 0.2 × DTI`** — about **5.2 %** at the incumbent's operating point, and
-**independent of the size of the hidden truth set**. This is why broad hedging across weak hypotheses
-is near-optimal here, and why the SGMC layer is worth a bounded bet even though no local frame can
-score it. Derivation and measured response surface: [metric-response-surface.md](docs/metric-response-surface.md).
+**an added unit prediction improves the current DTI only if `k > 0.2 × DTI`** — about **5.2 %**
+at a hypothetical 0.2600 score. This is an exact single-pixel marginal condition, not evidence that
+broad hedging or any SGMC feature is near-optimal. The SGMC layer is a research input only; its local
+holdout comparisons are proxy evidence with the count-scope limitations documented below. Derivation:
+[metric-response-surface.md](docs/metric-response-surface.md).
 
 **(E) Second published candidate, with a measured comparison.** `docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif`
-(SHA-256 `fed5232e…66da`; 85,526 dots; **zero** dots on the masked catalogue) adds a bounded SGMC hedge
-(worst case ≤ 3 % of the DTI denominator) to the model's off-catalogue dots. Both published candidates
-were scored on the independent-inventory frame, 5 repeats: the SGMC-hedged candidate **0.18343** (the
-SGMC arms are tautological there — hidden components of the same inventory — so this is not evidence),
-the sibling GBM candidate **0.07279**, blind random at the same count 0.07460, the 0.2600 artefact
-0.07061. **The GBM candidate's 75,001 dots are therefore worth less than 75,001 blind random dots on
-an independent fault inventory, while our 80,392-dot model set is worth +25 % over its own matched
-control.** Reported rather than hidden because it should decide which file, if any, is submitted.
-**Neither candidate has a leaderboard score and no slot has been used.**
+(SHA-256 `fed5232e…66da`; 85,526 global dots; **zero** dots on the masked catalogue) adds an SGMC
+hedge to model off-catalogue dots. On the five-repeat SGMC frame, its 0.18343 mean is tautological
+because SGMC itself defines both the input and held-out truth. The sibling GBM candidate mean is
+0.07279, versus 0.07460 for the random control, but those counts are **90,358 global / 75,001 active**
+versus **75,001 global / 68,848 active** and are not matched. D2.8's local proxy mean is 0.07061,
+not the reported 0.2600. The archived model-dot comparison's +25.1% is likewise global-budget
+matched but not active-count matched. These diagnostics do not decide which competition file should
+be submitted; neither candidate has a leaderboard score, no file is promoted, and no slot has been
+used.
 
 ### Session 4 (2026-10-03, branch `arena/01a10315-gemsdoe30`) — data blocker closed, H-32-05 falsified
 
@@ -340,14 +315,15 @@ session.** Both were re-checked from scratch rather than trusted:
 2. **H-33-01 (placement policy) — preregistered, run, decided.** Frozen design in
    [h33-01-preregistration.md](docs/research/h33-01-preregistration.md) before any score was seen;
    harness `scripts/placement_policy_holdout.py` (tests: `tests/test_placement_policy.py`).
-   The gate-budget screen (80,000 dots) hit a capacity wall — the 0.4-thresholded, 4 px-thinned
-   pools hold only 68,573 dots, so every quota arm collapsed to the same union; the harness
-   **voided** the gate instead of adjudicating a non-count-matched comparison, and the registered
-   verdict is **not promoted** (IR-30-032 records the design undercount and the new pre-flight
-   capacity rule). The count-matched 40 k sensitivity run is the substantive evidence:
-   whole-domain score-first thinning **0.07608** beats blind random **+35 %** and beats **every**
-   band-stratified arm (0.0721–0.0725), while pure proximity ranking is catastrophic (0.03660).
-   Verdict: **the placement-policy line is closed** — placement is exhausted as a lever; the next
+   The 80,000-dot gate hit a capacity wall — the 0.4-thresholded, 4 px-thinned pools hold only
+   68,573 in-domain dots, so every quota arm collapsed to the same union; the harness **voided**
+   the gate rather than comparing 68,573 with the 80,000-dot in-domain control, and the registered
+   verdict is **not promoted** (IR-30-032). The 40k sensitivity run is active-count matched by code:
+   every model pool and random control is restricted to the scoring domain, and `score_emitter`
+   counts dots after masking. Whole-domain score-first thinning **0.07608** exceeds blind random by
+   about **35 %** and beats every band-stratified arm (0.0721–0.0725); proximity ranking is 0.03660.
+   The JSON lacks separate global/active fields; code semantics are documented in the report and
+   IR-30-033. The registered placement-policy line is closed; the next
    registered experiment must improve the score field itself. Full numbers:
    [h33-01-placement-policy-holdout.md](docs/research/h33-01-placement-policy-holdout.md) ·
    [JSON](docs/research/h33-01-placement-policy-holdout.json).
@@ -364,11 +340,12 @@ session.** Both were re-checked from scratch rather than trusted:
 
 ## Current verified state — 2026-10-03
 
-- The recorded baseline commit for this checkout already contains the model/loss, tests, training/inference/validation scripts, and site scaffold. The Git history available here is shallow/grafted to that commit, so earlier claims about a prior README-only state cannot be independently verified from this repository. At the start of this review there were **no competition rasters, sample template, checkpoints, real holdout predictions, or generated GEMSDOE30 TIFFs**. The rasters have since been restored from SHA-256-pinned owner mirrors (not organizer-authenticated) and real-data training, OOF prediction, stitching and scoring all run locally; what remains blocked is organizer-authenticated data and the hidden expert labels.
-- The DrivenData data page redirects an unauthenticated visitor to its login page. No DrivenData credentials/session or competition rasters are available here, and the shell cannot retrieve the public owner-mirror TIFFs in this environment. The safe data preflight is `bash scripts/download_competition_data.sh`; it reports missing inputs and does **not** attempt a login bypass.
-- The official leaderboard was read on **2026-10-03**: the displayed leader was **DARD, 0.3195**. It is a live, changeable public score; it is not private-test performance. The supplied claim that the linked GEMSDOE25 D2.8 TIFF scored 0.2600 is **not authenticated to that exact file**: the GEMSDOE25 landing page currently describes that TIFF as unscored/not slot-approved, while the public leaderboard contains a 0.2600 row for participant `wbg1` at rank 15. See [analysis](docs/leaderboard-analysis.md) and [irregularities](docs/irregularities.md).
-- The 300 m loss geometry and spatial-holdout pipeline are implemented. **44 tests pass** with NumPy, SciPy, rasterio, PyTorch, and pytest installed; the geometry term matches the independent metric on a masked grid, and a seam regression test confirms the pooled OOF score keeps 100 m near-miss credit across quadrants. Review fixed quadrant-component pooling, prevents fold-specific checkpoints from being relabeled across OOF folds, and checks prediction/checkpoint hashes and experiment recipes. A disposable synthetic 64×64 smoke passed paired four-fold training/inference, OOF stitching/evaluation, full-fit inference, and exact-template TIFF validation. Real-data spatial holdouts have now run (four-arm pilot, metric-emission holdout, paired loss ablation) and are recorded above; the loss screen is positive but unconfirmed, and **no candidate file has been promoted, no score is claimed, and no GEMSDOE30 TIFF has been produced.**
-- The site exposes a one-click link to the pre-existing GEMSDOE25 research TIFF, clearly labeled external, unscored, and not slot-approved. It is not represented as this repository's model output or as an approved competition submission. A genuine GEMSDOE30 download will be generated only after data placement, training, holdout promotion, and exact-template validation.
+- **Data:** the three core rasters and prepared grid are present from SHA-256-pinned owner mirrors, with dataset signature `291d3467…dee855ed`. They are not organizer-authenticated; the unauthenticated DrivenData data page redirects to login. No credentials, cookies, or login bypass were used. The mirrored sample template contains the label positives and is used only for grid/footprint metadata.
+- **Scores:** the dated official public snapshot showed DARD **0.3195** at rank 1 and `wbg1` **0.2600** at rank 15, without TIFF hashes. The GEMSDOE25 D2.8 page calls the named artifact unscored/not slot-approved. Its user-supplied 0.2600 attribution remains unresolved; local proxy DTIs are not competition scores. See [analysis](docs/leaderboard-analysis.md), [D2.8 protocol note](docs/research/why-d28-scored-026.md), and [irregularities](docs/irregularities.md).
+- **Metric-shaped loss:** the 300 m geometry term is implemented with the regional loss and tested. Near-miss allocation changes on spatial holdout (fresh-seed partial-distance truth coverage 1,889 → 724), but the DTI gain did not replicate (fresh-seed Δ +0.000115, 2/4 folds). It is not promoted and no metric improvement is claimed.
+- **Current emitter/scarp results:** H-31-02b failed its primary spatial and strike-permutation gates. Its SGMC screen is global-budget matched only (80,392 global; candidate 72,310 vs blind random 73,843 active scored-domain pixels; archived numeric baseline 80,388); do not retune/re-run against those inspected labels. H-33-01’s 80k gate was void (68,573 in-domain vs 80,000 control); code review confirms its 40k sensitivity arms are active-count matched because selection is restricted to the scoring domain. Full interpretations: [H-31-02b](docs/research/h31-02b-scarp-full-pool-holdout.md), [H-33-01](docs/research/h33-01-placement-policy-holdout.md), and [IR-30-033](docs/irregularities.md).
+- **Files and site:** GBM (90,358 dots) and SGMC-hedged (85,526 dots) GEMSDOE30 research candidates, plus the external D2.8 reference, have prominent local zero-outside download variants and exact manual submission instructions. All are unpromoted; no weekly slot has been used. Local range/grid validation is not organizer acceptance, and acceptance of zero outside remains unverified.
+- **Hypotheses/rules:** the active shortlist identifies five still-untried, bounded hypotheses; H-31-01, H-31-02b, H-32-01, and H-32-05 are explicitly marked tested/not promoted. All seven parsed chunks of the official-rules PDF were reviewed; the deadline-time discrepancy, eligibility, and entrant-approved AI disclosure remain open. See [hypotheses](docs/hypotheses.html), [complete rules review](docs/research/official-rules-review-2026-10-03.md), and the [three-pass review log](docs/research/review-checklist-2026-10-03.md).
 
 ## Start here
 
@@ -421,7 +398,7 @@ session.** Both were re-checked from scratch rather than trusted:
 
    Repeat the complete paired design with preregistered fresh seeds for confirmation. Do not treat one fold or the synthetic probe as confirmation.
 
-7. Only after a candidate clears the frozen holdout and confirmation gates should it be fit on all permitted training labels. `scripts/infer_model.py` or `scripts/build_submission.py` writes a uniquely named, template-matched TIFF and a JSON sidecar. The builder and validator add `src/` automatically when run directly from this checkout (package installation is not required for this format step). The builder accepts `--note` or `--comment` for the paste-ready portal comment. For the portal, build with the default `--outside zeros`, then run `python scripts/validate_submission.py FILE.tif --template data/raw/sample_submission.tif --portal-safe`; this strict check rejects NaN/Inf anywhere in the raster and must pass before any human upload. Upload the `-zeros.tif` artifact, not the legacy NaN-outside research copy.
+7. Only after a candidate clears the frozen holdout and confirmation gates should it be fit on all permitted training labels. `scripts/infer_model.py` or `scripts/build_submission.py` writes a uniquely named, template-matched TIFF and a JSON sidecar. The builder and validator add `src/` automatically when run directly from this checkout (package installation is not required for this format step). The builder accepts `--note` or `--comment` for the paste-ready portal comment. The builder can produce the locally checked `--outside zeros` alternative; run `python scripts/validate_submission.py FILE.tif --template data/raw/sample_submission.tif --portal-safe` to prove the file is finite/in-range on the exact local template. This is a repository check, not organizer acceptance. The official sample uses NaN outside and acceptance of zero outside remains unverified; follow current official instructions before choosing which outside convention, if any, to upload.
 
 ## Useful links
 
@@ -434,7 +411,7 @@ session.** Both were re-checked from scratch rather than trusted:
 
 ## Repository map
 
-- `index.html`, `executive-summary.html`, `docs/assets/site.css` — GitHub Pages landing page and submission instructions; the landing page links the external reference TIFF, not an approved GEMSDOE30 result.
+- `index.html`, `executive-summary.html`, `docs/assets/site.css` — GitHub Pages landing page, locally checked research TIFF downloads, and manual submission instructions; no linked artifact is a promoted GEMSDOE30 result.
 - `docs/ai-disclosure-draft.md` — truthful current-session starting point for the rules-required entrant narrative; must be updated and reviewed before any entry.
 - `src/gemsdoe30/metric.py` — reference DTI implementation; vectorized with NumPy/SciPy when installed, dependency-free for small tests.
 - `src/gemsdoe30/losses.py` — regional soft-Tversky plus the 300 m metric-geometry term, inspired by (not a verbatim copy of) Kervadec et al.
@@ -449,10 +426,10 @@ Later on 2026-10-03 a first GEMSDOE30 candidate file was built and published for
 
 ## Current next steps and limits
 
-1. **Upload path is fixed — use it.** The portal-safe `-zeros.tif` variants are the primary downloads for all three published TIFFs (GBM candidate, measured variant, external D2.8) and the site's submission guide walks through the upload with paste-ready notes. The scientific gates are unchanged: **no candidate is holdout-promoted**; submitting an un-promoted file is the owner's decision, and the file's note must say exactly that.
-2. **H-32-01 and H-32-05 are both falsified on the proxy**; the remaining runnable local candidate is the **H-31-02 reduced matched-filter scarp arm** on the local 12-channel scarp stack (the raw 3DEP 1 m arm still needs the ~9 GB tile transfer off-sandbox). **That placement-policy test (H-33-01) has since been preregistered, run, and closed with a negative result: at count-matched budgets, whole-domain score-first emission beats every band-stratified placement, and proximity-first placement loses badly. The next registered experiment must change the lever — score-field quality on the learning side (or a dense/dot hybrid), not placement.** H-32-04 cannot be validated on the catalogue proxy at all (IR-30-021) and needs the OSTI 1148722 / GDR 616 inventories retrieved and checksummed first. The independent-inventory idea behind the measured variant's novelty frame is the *shape* of evidence that should gate future claims (see item 7).
-3. **Boundary loss remains not promoted — and its retry criterion has now been executed.** The recorded retry (larger budget + preregistered boundary-weight sweep + emitted-mask scoring) ran as a fold-0 screen ([loss-weight-sweep.md](docs/research/loss-weight-sweep.md), 2026-10-03): dense scoring prefers plain `regional` at every weight; emitted-mask scoring prefers `combined-100` by only +0.0010 on one fold — the scorings disagree, so no weight is selected for confirmation and the line stays closed. The near-miss behavioural effect the brief asked for *is* demonstrated (partial-distance truth coverage 1,889 → 724); the metric gain is not. Any future loss work should start from the standing [verification-protocol.md](docs/research/verification-protocol.md) (three checks with pre-stated criteria) and a new mechanism, not more λ tuning.
-4. **Build/validate rule unchanged:** an exact-grid, holdout-promoted candidate only after its family beats the same-run best by the frozen margin with fresh-seed confirmation. Both published un-promoted candidates — the GBM surface (`…aedb3d13-nan.tif`, SHA-256 `f5d137b9…c7cc2`, 90,358 dots) and the measured SGMC-hedge variant (`…ac08b41e.tif`, SHA-256 `fed5232e…66da`, 85,526 dots) — plus their portal-safe variants are research artifacts with honest notes.
-5. **Feed:** `scripts/build_status.py` keeps `docs/status.json` current automatically. The leaderboard itself can only be refreshed by dated manual reads (DrivenData ToS prohibit automated monitoring) — recorded in `docs/score-ledger.csv` with `evidence_class=official-snapshot`.
-6. **Limits that only the owner/organizer can lift:** organizer-authenticated data (IR-30-001); the hidden expert labels (the real target); score-to-file attribution for the D2.8 artifact (IR-30-002); entrant eligibility under rules §1.3 (IR-30-020); the deadline-time discrepancy (IR-30-008); final AI-disclosure narrative sign-off.
-7. *(from the independent 2026-10-03 session's emitter work)* The budget-matched blind-random control is the standard for any emitter claim in this repository: a learned emitter must beat uniform random dots **at the same emitted count on the same frame and the same run**, because the previous lattice control changed sign with lattice spacing. Under that standard, only the UNet out-of-fold dot set clears it (+25.1 %); the HistGradientBoosting-derived candidate does not (−2.4 %), and no emitter has yet been tested against the *clustered* geometry the official hidden fault set is expected to have. H-33-01 extended that standard to placement arms and added a pre-flight requirement: **realised pool capacities must be counted at the frozen threshold/spacing before a gate budget is fixed, and collapsed (identical-mask) arms void the gate** (IR-30-032).
+1. **Manual submission path:** use the prominent `-zeros.tif` downloads only as explicitly labelled research artifacts and follow the exact human upload steps in [`executive-summary.html`](executive-summary.html). Do not submit on the user's behalf. Organizer acceptance of zeros outside the footprint is not yet confirmed.
+2. **Do not rerun the inspected SGMC screen.** H-31-02b failed its primary spatial and strike-permutation gates; its positive SGMC comparison was global-budget matched only, not active-count matched. H-33-01's 80k gate was void, while its 40k sensitivity comparison is active-count matched by audited generator/scorer semantics. These statuses and counts are recorded in IR-30-033.
+3. **Next science action:** audit the H-31-04 radiometric K–Th–U source lineage, bands, and schema; then preregister a buffered spatial holdout with fresh confirmation if viable. The current five untried hypotheses, access gates, planning priors, and falsifiable criteria are in [`docs/hypotheses.md`](docs/hypotheses.md). H-31-03 needs full-ROI NHD/DEM coverage; H-32-04 needs an independent fault inventory, not the overlapping Qfaults layer.
+4. **Loss decision:** keep the 300 m metric-geometry term paired with regional loss, because that matches the research question; report the reproduced near-miss behavior and the non-replicated DTI gain honestly. Do not continue λ tuning without a distinct preregistered mechanism and new holdout.
+5. **Score and file provenance:** keep DARD 0.3195 as the dated public snapshot, and the D2.8 0.2600 attribution unresolved. Local catalogue/SGMC DTIs, format validation, and leaderboard rows are separate evidence classes. No score or improvement is claimed for any GEMSDOE30 TIFF.
+6. **Rules/access blockers:** organizer-authenticated rasters and hidden labels; exact D2.8 receipt/hash link; eligibility; deadline-time clarification; and final entrant-approved AI disclosure remain open. Official rules were reviewed in full and summarized at [`official-rules-review-2026-10-03.md`](docs/research/official-rules-review-2026-10-03.md).
+7. **Review and delivery:** three cumulative review passes are logged in [`review-checklist-2026-10-03.md`](docs/research/review-checklist-2026-10-03.md). Tests, the current fixed-branch PR, and merge outcome will be recorded there after execution. All GitHub work stays on `arena/01a1035b-gemsdoe30`; automated DrivenData monitoring remains prohibited.

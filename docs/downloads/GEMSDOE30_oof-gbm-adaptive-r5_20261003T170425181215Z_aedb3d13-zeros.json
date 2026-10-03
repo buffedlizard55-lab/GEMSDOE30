@@ -1,11 +1,11 @@
 {
   "schema_version": 2,
   "run_name": "GEMSDOE30_oof-gbm-adaptive-r5-zeros_20261003T172937560000Z",
-  "note": "GEMSDOE30 4-fold OOF GBM; adaptive Poisson-disk dots (500 m); portal-safe zeros-outside; proxy gate failed vs uniform - not holdout-promoted",
+  "note": "GEMSDOE30 4-fold OOF GBM; proxy gate failed; counts unmatched; unpromoted/unscored; local zero-outside copy",
   "output_file": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-zeros.tif",
   "output_sha256": "dd5cd18a721196602eaccd8946b047eb8c929cbfdcac033512628f6dd0030f50",
   "prediction_array_sha256": "a061ca749ed76fd4cb42854b35da94c3406cd58b57342d2f1461165f24c8b3e9",
-  "outside_convention": "0.0 portal-safe (finite everywhere)",
+  "outside_convention": "0.0 outside (finite-range validated locally; organizer acceptance unverified)",
   "template_file": "data/raw/sample_submission.tif",
   "created_utc": "2026-10-03T17:29:39+00:00",
   "format_validation": {

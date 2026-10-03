@@ -7,7 +7,7 @@
 This is the exact retry the ablation follow-up required: *"use a larger training
 budget and a boundary-weight sweep before any fresh-seed test, and score
 emitted masks rather than dense probability surfaces"* (see
-[loss-ablation-holdout-seed31.md](loss-ablation-holdout-seed31.md)). All four
+[seed-31 confirmation JSON](loss-ablation-holdout-seed31.json)). All four
 arms trained with identical recipes and seed 30 on fold 0 (the same 300 m-buffered
 180 ° quadrant design as the ablation) at 2 epochs × 50 steps = 100 steps per
 arm (2.5× the ablation screen's 2 × 20 steps), then predicted their held-out

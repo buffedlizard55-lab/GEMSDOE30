@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_utc": "2026-10-03T19:57:22Z",
+  "generated_utc": "2026-10-03T21:10:59Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -90,9 +90,9 @@
       "file": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-zeros.tif",
       "present": true,
       "sha256": "dd5cd18a721196602eaccd8946b047eb8c929cbfdcac033512628f6dd0030f50",
-      "outside_convention": "0.0 portal-safe (finite everywhere)",
+      "outside_convention": "0.0 outside (finite-range validated locally; organizer acceptance unverified)",
       "run_name": "GEMSDOE30_oof-gbm-adaptive-r5-zeros_20261003T172937560000Z",
-      "note": "GEMSDOE30 4-fold OOF GBM; adaptive Poisson-disk dots (500 m); portal-safe zeros-outside; proxy gate failed vs uniform - not holdout-promoted",
+      "note": "GEMSDOE30 4-fold OOF GBM; proxy gate failed; counts unmatched; unpromoted/unscored; local zero-outside copy",
       "performance_status": "unscored; format validation is not a score"
     },
     {
@@ -100,9 +100,9 @@
       "file": "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
       "present": true,
       "sha256": "b00a6fb6cab70d0f957308e297695c4032ab97997a41a15ff1295add3df31a26",
-      "outside_convention": "0.0 portal-safe (finite everywhere)",
+      "outside_convention": "0.0 outside (finite-range validated locally; organizer acceptance unverified)",
       "run_name": "gems25-dotted-h19-5-d2-8-zeros_20261003T172939460962Z",
-      "note": "GEMSDOE25 D2.8 dotted H19-5 external research TIFF; portal-safe zeros-outside; score attribution unverified; not slot-approved",
+      "note": "GEMSDOE25 D2.8 research; 0.2600 attribution unverified; not slot-approved; local zero-outside copy",
       "performance_status": "unscored; format validation is not a score"
     },
     {
@@ -110,9 +110,9 @@
       "file": "gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e-zeros.tif",
       "present": true,
       "sha256": "d7977d7b93287f17fbf3cb85f10fdbee4acc5c8453a7faa451e760363433a286",
-      "outside_convention": "0.0 portal-safe (finite everywhere)",
+      "outside_convention": "0.0 outside (finite-range validated locally; organizer acceptance unverified)",
       "run_name": "gemsdoe30-sgmc-hedge-d10-85k_20261003T182842779739Z",
-      "note": "model dots (thr 0.4, 400 m spacing) + USGS SGMC off-catalogue traces; R=300m metric-aware; novelty-frame holdout beats matched random by 25%; portal-safe zeros-outside",
+      "note": "GEMSDOE30 SGMC-hedge research; SGMC holdout tautological; unpromoted/unscored; local zero-outside copy",
       "performance_status": "unscored; format validation is not a score"
     },
     {
@@ -122,7 +122,7 @@
       "sha256": "fed5232e8efeefef00728ce9d5884f08e007c542f317cb11419452d14ff866da",
       "outside_convention": "NaN template-conformant (legacy)",
       "run_name": "GEMSDOE30_sgmc-hedge-t04-s4-d10_20261003T174409650983Z_ac08b41e",
-      "note": "model dots (thr 0.4, 400 m spacing) + USGS SGMC off-catalogue fault traces; R=300 m metric-aware; novelty-frame holdout beats lattice by 4.4%",
+      "note": "GEMSDOE30 SGMC-hedge research raster; SGMC holdout is tautological; not promoted; unscored",
       "performance_status": "unscored; format validation is not a score"
     }
   ],
@@ -401,7 +401,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "80 tests collected in 0.24s",
+      "pytest_collect": "85 tests collected in 0.21s",
       "exit_code": 0
     },
     "score_gain_claimed": false
