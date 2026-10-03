@@ -1,0 +1,66 @@
+{
+  "path": "docs/downloads/gemsdoe30-edge-hybrid-80k-02845bd4-20261003T234340Z-allfinite.tif",
+  "passed": false,
+  "checks": [
+    {
+      "name": "template_single_band",
+      "passed": true,
+      "detail": "count=1"
+    },
+    {
+      "name": "single_band",
+      "passed": true,
+      "detail": "count=1"
+    },
+    {
+      "name": "float32",
+      "passed": true,
+      "detail": "dtypes=('float32',)"
+    },
+    {
+      "name": "epsg",
+      "passed": true,
+      "detail": "crs=EPSG:32611"
+    },
+    {
+      "name": "template_epsg",
+      "passed": true,
+      "detail": "crs=EPSG:32611"
+    },
+    {
+      "name": "shape_matches_template",
+      "passed": true,
+      "detail": "output=(3730, 3292) template=(3730, 3292)"
+    },
+    {
+      "name": "transform_matches_template",
+      "passed": true,
+      "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+    },
+    {
+      "name": "100m_north_up_grid",
+      "passed": true,
+      "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+    },
+    {
+      "name": "finite_and_in_range_inside_footprint",
+      "passed": true,
+      "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+    },
+    {
+      "name": "null_outside_template_footprint",
+      "passed": false,
+      "detail": "outside_pixels=7111787; null/NaN/nodata required"
+    },
+    {
+      "name": "whole_raster_finite_range_diagnostic_advisory",
+      "passed": true,
+      "detail": "advisory only: all_pixels=12279160 finite and in [0, 1]; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+    },
+    {
+      "name": "template_readable",
+      "passed": true,
+      "detail": "shape=(3730, 3292)"
+    }
+  ]
+}
