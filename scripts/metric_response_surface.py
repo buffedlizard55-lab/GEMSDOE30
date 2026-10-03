@@ -34,6 +34,7 @@ claim a competition score.
 
 from __future__ import annotations
 
+import sys
 import argparse
 import json
 import math
@@ -43,6 +44,14 @@ from pathlib import Path
 import numpy as np
 import rasterio
 from scipy import ndimage
+
+
+# Run from an uninstalled checkout exactly as documented (`python scripts/<name>.py`):
+# make the in-repo package importable without `pip install -e .`.
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+_SRC = _REPO_ROOT / "src"
+if str(_SRC) not in sys.path:
+    sys.path.insert(0, str(_SRC))
 
 from gemsdoe30.metric import distance_weighted_tversky
 

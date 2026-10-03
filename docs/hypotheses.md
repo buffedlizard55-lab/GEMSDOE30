@@ -217,3 +217,32 @@ raw [`h32-01-vent-corridor-holdout.json`](research/h32-01-vent-corridor-holdout.
 catalogue proxy cannot clear H-32-04 (circularity) and did not clear H-32-01; the next runnable
 candidates are **H-32-05 (buried pinch-out edges)** and the H-31-02 reduced matched-filter
 scarp arm. No submission slot is justified.
+
+**Status (measured 2026-10-03, third session): H-32-05 ran its preregistered gate and FAILED —
+not promoted.** Preregistration frozen in
+[`h32-05-preregistration.md`](research/h32-05-preregistration.md) before the run; harness
+`scripts/basement_edge_holdout.py`; result
+[`h32-05-basement-edge-holdout.md`](research/h32-05-basement-edge-holdout.md).
+
+| Clause | Required | Measured | Verdict |
+| --- | --- | --- | --- |
+| Screen pooled Δ vs `random_near_matched` (N = 15,000, seed 31) | ≥ +0.002 | **−0.02614** | fail |
+| Quadrant sign consistency | ≥ 3 / 4 | **0 / 4** | fail |
+| Confirmation pooled Δ (seed 41) | > 0 | **−0.02591** | fail |
+| Transform clause (edge > basement-depth magnitude, both splits) | > 0 | +0.00122 / +0.00345 | **pass** |
+
+Primary arm 0.00283 DTI vs matched-random 0.02897 at N = 15,000 — roughly a 10× deficit. The
+transform clause passing is the one durable finding: the **step geometry** of the basement surface
+does carry more than its raw value, and `grav_edge_only` (0.00666) was the best of the four feature
+arms, consistent with [USGS OFR 2005-1154](https://pubs.usgs.gov/of/2005/1154/of2005-1154.pdf)
+(concealed basin faults mapped from horizontal gravity gradients). But the whole family sits far
+below the random controls. **Design defect declared:** the preregistered `coherence ≥ 0.5` floor
+accepted 99.65 % of footprint pixels (5,149,374 / 5,167,373), so the "must be an oriented linear
+feature" clause never actually constrained the primary arm — the oriented-edge variant of H-32-05
+remains untested.
+
+**Three consecutive component-holdout falsifications (H-31-01, H-32-01, H-32-05) against the same
+`random_near_matched` control (~0.029 DTI) point at the real binding constraint: not which scalar
+field ranks pixels, but *where* a fixed emission budget is placed relative to mapped structure.**
+The next registered experiment should therefore be a placement-policy test, not another detector.
+No submission slot is justified by any candidate in this register.

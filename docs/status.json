@@ -1,10 +1,58 @@
 {
   "schema_version": 2,
-  "generated_utc": "2026-10-03T18:31:21Z",
+  "generated_utc": "2026-10-03T19:09:16Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
+  "data_placement": {
+    "directory": "data/raw",
+    "required_files_present": true,
+    "sha256_verified_against_pins": true,
+    "files": [
+      {
+        "dest": "training_features.tif",
+        "path": "data/raw/training_features.tif",
+        "present": true,
+        "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "expected_bytes": 418912844,
+        "actual_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "actual_bytes": 418912844,
+        "sha256_matches_pin": true
+      },
+      {
+        "dest": "labels.tif",
+        "path": "data/raw/labels.tif",
+        "present": true,
+        "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+        "expected_bytes": 425830,
+        "actual_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+        "actual_bytes": 425830,
+        "sha256_matches_pin": true
+      },
+      {
+        "dest": "sample_submission.tif",
+        "path": "data/raw/sample_submission.tif",
+        "present": true,
+        "expected_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+        "expected_bytes": 1599597,
+        "actual_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+        "actual_bytes": 1599597,
+        "sha256_matches_pin": true
+      }
+    ],
+    "prepared_dataset": {
+      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+      "matches_recorded_pin": true,
+      "positive_label_pixels": 60988,
+      "template_valid_pixels": 5167373
+    },
+    "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
+  },
   "competition_data": {
-    "owner_mirror_files_present": [],
+    "owner_mirror_files_present": [
+      "training_features.tif",
+      "labels.tif",
+      "sample_submission.tif"
+    ],
     "organizer_authenticated": false,
     "prepared_dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
     "pins_core_sha256_verified_at_restore": true,
@@ -112,6 +160,25 @@
       },
       "promoted": false,
       "decision": "gate failed or not run to completion; not promoted"
+    },
+    "h32_05_basement_edge": {
+      "evidence": "docs/research/h32-05-basement-edge-holdout.json",
+      "preregistration": "docs/research/h32-05-preregistration.md",
+      "gate_result": {
+        "screen_pooled_delta_vs_matched": -0.026138084434710756,
+        "confirmation_pooled_delta_vs_matched": -0.02591141514006239,
+        "screen_pooled_delta_vs_dbs_magnitude": 0.001223583744711719,
+        "confirmation_pooled_delta_vs_dbs_magnitude": 0.0034474675404338032,
+        "quadrants_primary_above_matched_control": "0/4",
+        "screen_pass": false,
+        "quadrant_pass": false,
+        "confirmation_pass": false,
+        "transform_clause_pass": true,
+        "promoted": false,
+        "note": "catalogue-proxy holdout only; not a competition score"
+      },
+      "promoted": false,
+      "decision": "registered gate failed (screen + confirmation); not promoted"
     },
     "loss_weight_sweep": {
       "evidence": "docs/research/loss-weight-sweep.json",
@@ -225,7 +292,8 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "skip": true
+      "pytest_collect": "67 tests collected in 0.21s",
+      "exit_code": 0
     },
     "score_gain_claimed": false
   }

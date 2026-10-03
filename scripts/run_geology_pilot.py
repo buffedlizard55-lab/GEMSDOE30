@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Frozen CPU pilot on owner-mirror real catalogue data; never approves a slot."""
+import sys
 import argparse
 import hashlib
 import json
@@ -7,6 +8,14 @@ from pathlib import Path
 from datetime import datetime, timezone
 import numpy as np
 import torch
+
+# Run from an uninstalled checkout exactly as documented (`python scripts/<name>.py`):
+# make the in-repo package importable without `pip install -e .`.
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+_SRC = _REPO_ROOT / "src"
+if str(_SRC) not in sys.path:
+    sys.path.insert(0, str(_SRC))
+
 from gemsdoe30.cv import spatial_quadrant_masks, compare_spatial_holdout
 from gemsdoe30.geology import interaction_features
 from gemsdoe30.losses import GEMSBoundaryAwareLoss

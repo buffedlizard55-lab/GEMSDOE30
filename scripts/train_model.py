@@ -14,6 +14,14 @@ import json
 import sys
 from pathlib import Path
 
+# Run from an uninstalled checkout exactly as documented (`python scripts/<name>.py`):
+# make the in-repo package importable without `pip install -e .`.
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+_SRC = _REPO_ROOT / "src"
+if str(_SRC) not in sys.path:
+    sys.path.insert(0, str(_SRC))
+
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)

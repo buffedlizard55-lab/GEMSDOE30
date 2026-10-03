@@ -40,6 +40,7 @@ fabricated.
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import sys
@@ -122,9 +123,17 @@ report: dict = {
 
 
 def save() -> None:
-    """Persist the receipt after every stage so a hard failure still leaves evidence."""
+    """Persist the in-progress receipt after every stage.
+
+    Written to a ``.partial`` sidecar rather than the canonical receipt: an
+    in-flight or failed run must never clobber a committed, complete receipt
+    (an earlier version overwrote it on entry, so even ``--help`` destroyed the
+    audited GitHub-Actions receipt). The canonical file is only replaced by a
+    completed run, or by ``--allow-overwrite``.
+    """
     report["updated_utc"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    (OUT / "external_receipt.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    (OUT / "external_receipt.partial.json").write_text(
+        json.dumps(report, indent=2) + "\n", encoding="utf-8")
 
 
 def fetch(url: str, key: str) -> Path | None:
@@ -392,8 +401,21 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--dry-run", action="store_true",
+                        help="show what would happen without fetching or writing anything")
+    parser.add_argument("--allow-overwrite", action="store_true",
+                        help="let a completed run replace the committed canonical receipt")
+    args = parser.parse_args()
+
+    if args.dry_run:
+        print("dry run: no network access, no files written")
+        for key, spec in SOURCES.items():
+            print(f"  {key}: {spec['url']}")
+        raise SystemExit(0)
+
     report["stage"] = "started"
-    save()  # stub receipt: a hard crash still leaves an auditable file for the commit step
+    save()  # sidecar only: a hard crash still leaves evidence without clobbering the receipt
     try:
         code = main()
         report["stage"] = "completed"
@@ -403,7 +425,16 @@ if __name__ == "__main__":
         print(report["trace"], file=sys.stderr)
         report["stage"] = "failed"
         code = 1
+
     receipt_path = OUT / "external_receipt.json"
-    receipt_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    print(f"wrote {receipt_path.relative_to(ROOT)}", flush=True)
+    payload = json.dumps(report, indent=2) + "\n"
+    if code == 0 and args.allow_overwrite:
+        receipt_path.write_text(payload, encoding="utf-8")
+        print(f"wrote {receipt_path.relative_to(ROOT)}", flush=True)
+    else:
+        partial = OUT / "external_receipt.partial.json"
+        partial.write_text(payload, encoding="utf-8")
+        reason = "run did not complete" if code != 0 else "--allow-overwrite not given"
+        print(f"{reason}: left the committed receipt untouched; "
+              f"progress written to {partial.relative_to(ROOT)}", flush=True)
     sys.exit(code)

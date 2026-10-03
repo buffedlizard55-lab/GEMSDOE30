@@ -123,6 +123,22 @@ def main() -> int:
         }
     else:
         gates["h32_01_vent_corridor"] = {"evidence": None, "promoted": False, "decision": "not run yet"}
+    basement = load_json(research / "h32-05-basement-edge-holdout.json") or {}
+    if basement:
+        basement_gate = basement.get("gate_result", {})
+        gates["h32_05_basement_edge"] = {
+            "evidence": "docs/research/h32-05-basement-edge-holdout.json",
+            "preregistration": "docs/research/h32-05-preregistration.md",
+            "gate_result": basement_gate,
+            "promoted": bool(basement_gate.get("promoted", False)),
+            "decision": (
+                "gate passed pending standard promotion review"
+                if basement_gate.get("promoted")
+                else "registered gate failed (screen + confirmation); not promoted"
+            ),
+        }
+    else:
+        gates["h32_05_basement_edge"] = {"evidence": None, "promoted": False, "decision": "not run yet"}
     sweep = load_json(research / "loss-weight-sweep.json") or {}
     if sweep:
         gates["loss_weight_sweep"] = {
@@ -141,8 +157,51 @@ def main() -> int:
     core_pins = load_json(research / "mirror-pins.json") or {}
     extra_pins = load_json(research / "mirror-pins-extra.json") or {}
     prepared = load_json(research / "prepared-manifest.json") or {}
+    # scripts/restore_public_mirrors.py writes mirrors to data/raw/<dest>, so the
+    # existence check must look there (a previous version checked data/<dest> and
+    # therefore always reported an empty list even with the data in place: IR-30-025).
     data_dir = ROOT / "data" / "raw"
-    present = [row["dest"] for row in core_pins.get("files", []) if (ROOT / "data" / row["dest"]).is_file()]
+    placement = []
+    for row in core_pins.get("files", []):
+        if row.get("group") != "core":
+            continue
+        path = data_dir / row["dest"]
+        entry = {
+            "dest": row["dest"],
+            "path": str(path.relative_to(ROOT)),
+            "present": path.is_file(),
+            "expected_sha256": row.get("sha256"),
+            "expected_bytes": row.get("bytes"),
+        }
+        if path.is_file():
+            actual = sha256_file(path)
+            entry["actual_sha256"] = actual
+            entry["actual_bytes"] = path.stat().st_size
+            entry["sha256_matches_pin"] = actual == row.get("sha256")
+        placement.append(entry)
+    present = [row["dest"] for row in placement if row["present"]]
+    required = ("training_features.tif", "labels.tif", "sample_submission.tif")
+    hashes_ok = all(row.get("sha256_matches_pin") for row in placement
+                    if row["dest"] in required and row["present"])
+    placement_ok = all(row["present"] for row in placement if row["dest"] in required) and hashes_ok
+    prepared_local_manifest = load_json(ROOT / "data" / "processed" / "manifest.json") or {}
+    data_placement = {
+        "directory": str(data_dir.relative_to(ROOT)),
+        "required_files_present": placement_ok,
+        "sha256_verified_against_pins": hashes_ok,
+        "files": placement,
+        "prepared_dataset": {
+            "dataset_signature": prepared_local_manifest.get("dataset_signature"),
+            "matches_recorded_pin": (
+                prepared_local_manifest.get("dataset_signature") == prepared.get("dataset_signature")
+                if prepared_local_manifest.get("dataset_signature") else None
+            ),
+            "positive_label_pixels": prepared_local_manifest.get("positive_label_pixels"),
+            "template_valid_pixels": prepared_local_manifest.get("template_valid_pixels"),
+        },
+        "note": ("placement + SHA-256 verification is a precondition for training, not evidence "
+                 "of model quality; mirrors are owner-supplied and not organizer-authenticated"),
+    }
 
     # Score evidence: only dated snapshot rows from the ledger (never live scraping).
     ledger_rows = []
@@ -159,6 +218,7 @@ def main() -> int:
         "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
         "project": "GEMSDOE30",
+        "data_placement": data_placement,
         "competition_data": {
             "owner_mirror_files_present": present,
             "organizer_authenticated": False,
