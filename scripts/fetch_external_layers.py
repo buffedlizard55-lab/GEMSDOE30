@@ -271,8 +271,11 @@ def main() -> int:
         if not merged:
             report["derived"][key] = {"ok": False, "reason": "no line features found", "layers": layer_names}
             return
-        # project to the competition CRS and clip to the grid box
-        promoted = shapely.from_wkt([shapely.to_wkt(geometry) for geometry in merged])
+        # project to the competition CRS and clip to the grid box.
+        # NOTE: never round-trip geometries through WKT with numpy - a single large
+        # multipart polygon forces a fixed-width string array (28 GiB observed on the
+        # GDR 1391 geothermal polygons).  Use an object array of geometries instead.
+        promoted = np.asarray(merged, dtype=object)
         def _project(coords, _transformer=transformer):
             return np.column_stack(_transformer.transform(coords[:, 0], coords[:, 1]))
 
@@ -346,8 +349,8 @@ def main() -> int:
             except Exception as exc:  # noqa: BLE001
                 report["errors"][f"{key}:{candidate.name}"] = repr(exc)[:200]
         clip_box = shapely.box(bounds[0], bounds[1], bounds[2], bounds[3])
-        kept = [g for g in shapely.intersection(shapely.from_wkt([shapely.to_wkt(g) for g in geometries]), clip_box)
-                if not shapely.is_empty(g)]
+        promoted = np.asarray(geometries, dtype=object)
+        kept = [g for g in shapely.intersection(promoted, clip_box) if not shapely.is_empty(g)]
         if not kept:
             report["derived"][key] = {"ok": False, "reason": "no features in grid", "layers": layers}
             return
