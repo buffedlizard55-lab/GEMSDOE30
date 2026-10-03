@@ -1,0 +1,56 @@
+{
+  "as_of_utc_date": "2026-10-03",
+  "project": "GEMSDOE30",
+  "checkout_status": "scaffold added; original checkout contained only README.md",
+  "competition_data": {
+    "present": false,
+    "access": "competition data page redirected unauthenticated request to DrivenData login",
+    "result": "real-data training and spatial-holdout evaluation blocked"
+  },
+  "loss": {
+    "regional_control": "soft Tversky, alpha=0.2, beta=0.8",
+    "geometry_term": "1 - exact GEMS distance-weighted Tversky surrogate",
+    "kernel_radius_m": 300,
+    "pixel_size_m": 100,
+    "initial_geometry_weight": 0.5,
+    "synthetic_probe": "implemented and unit-testable; not a real holdout result"
+  },
+  "submission": {
+    "gemsdoe30_tiff_generated": false,
+    "reason": "no organizer template, training files, or full-grid predictions are present",
+    "external_reference_tiff": "GEMSDOE25 D2.8 link; owner page says unscored/not slot-approved"
+  },
+  "score_evidence": {
+    "official_public_leader_snapshot": {
+      "participant": "DARD",
+      "score": 0.3195,
+      "reviewed_date": "2026-10-03",
+      "scope": "public leaderboard only; dynamic snapshot"
+    },
+    "gemsdoe25_d2_8_reported_score": {
+      "user_supplied_score": 0.26,
+      "file_attribution": "unverified; linked owner page currently calls file unscored"
+    }
+  },
+  "submission_slot_status": "none approved or used by this repository",
+  "normalization": {
+    "method": "per-channel robust median/IQR with deterministic spatial tile sampling and clipping to [-8, 8]",
+    "scope": "fit separately from training-fold pixels only; checkpointed for inference",
+    "heldout_pixels_used_for_fit": false
+  },
+  "external_sources": {
+    "gdr_1391": {
+      "catalog_page": "read; catalog declares public access and CC BY 4.0",
+      "resource_transfer": "direct HEAD checks for 2 m probes, paleogeothermal features, and Quaternary volcanics failed with SSL_ERROR_SYSCALL",
+      "archive_bytes_or_checksums_verified": false,
+      "hypothesis_viability": "blocked pending authorized local download, schema review, checksum, and alignment"
+    }
+  },
+  "verification": {
+    "unit_tests": "18 passed with NumPy, SciPy, rasterio, and PyTorch installed",
+    "synthetic_geometry_probe": "passed; 100/200/300/400 m translations only",
+    "synthetic_pipeline_smoke": "passed on disposable 64x64 grid through paired four-fold OOF and full-fit GeoTIFF validation",
+    "scientific_holdout": "not run; real competition labels/features/template unavailable",
+    "score_gain_claimed": false
+  }
+}

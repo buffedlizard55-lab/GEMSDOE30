@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GEMSDOE30: auditable DOE GEMS fault discovery research, metric-aligned training, spatial holdout, and submission tooling.">
+  <title>GEMSDOE30 · Fault discovery, verified</title>
+  <link rel="stylesheet" href="docs/assets/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html"><span class="brand-mark">G30</span> GEMSDOE30</a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="executive-summary.html">Submission guide</a>
+        <a href="docs/hypotheses.html">Hypotheses</a>
+        <a href="docs/leaderboard-analysis.html">Score analysis</a>
+        <a href="docs/sources.html">Sources</a>
+        <a href="README.md">Project brief</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <span class="eyebrow">DOE GEMS · Northwestern Great Basin</span>
+        <h1 id="page-title">Map faults the catalogue has not found.</h1>
+        <p class="lead">A research-first workflow for fault discovery, where the training objective respects the competition's 300 m scoring geometry and every candidate must earn promotion on spatial holdout before a submission slot is considered.</p>
+        <div class="actions">
+          <a class="button" href="executive-summary.html">How to submit →</a>
+          <a class="button secondary" href="docs/loss-design.html">Read the loss experiment</a>
+          <a class="button caution" href="https://buffedlizard55-lab.github.io/GEMSDOE25/docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif" target="_blank" rel="noopener noreferrer">↓ External research TIFF</a>
+        </div>
+        <p class="fine-print">The external file is GEMSDOE25 research only—owner page says unscored/not slot-approved. It is not a GEMSDOE30 result or an approved submission.</p>
+        <p class="fine-print">Updated 2026-10-03 · public leaderboard values are time-stamped snapshots, not private-test results.</p>
+      </div>
+      <aside class="hero-panel" aria-label="Current project status">
+        <span class="status-pill red">No GEMSDOE30 TIFF yet</span>
+        <div class="divider"></div>
+        <div class="big-score">0.3195</div>
+        <p class="score-caption">Displayed public leader · DARD · read 2026-10-03</p>
+        <p class="fine-print">This is the official public leaderboard snapshot, not a score from this repository and not the private evaluation.</p>
+        <div class="divider"></div>
+        <strong>Why no file?</strong>
+        <p class="fine-print">The competition raster package and sample template are absent. The data page redirects unauthenticated visitors to login; we will not fabricate a grid or bypass access controls.</p>
+      </aside>
+    </section>
+
+    <section class="notice" aria-label="Download status">
+      <div class="icon" aria-hidden="true">⚠</div>
+      <div>
+        <strong>Download option — existing research TIFF, not a GEMSDOE30 submission.</strong>
+        <p>The linked GEMSDOE25 page describes this D2.8 GeoTIFF as format-validated but <b>unscored and not slot-approved</b>. Its score-to-file attribution is unresolved: the user-supplied brief says 0.2600, while the linked owner page says unscored. The file is hosted by another public project; it is not generated or independently revalidated here.</p>
+        <div class="actions">
+          <a class="button caution" href="https://buffedlizard55-lab.github.io/GEMSDOE25/docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif" target="_blank" rel="noopener noreferrer">↓ Download D2.8 research TIFF (external)</a>
+          <a class="button secondary" href="https://buffedlizard55-lab.github.io/GEMSDOE25/docs/executive-summary.html" target="_blank" rel="noopener noreferrer">Review its caveats and checks ↗</a>
+        </div>
+        <p class="fine-print">Do not treat this external research artifact as this project's promoted candidate. Read the <a href="docs/leaderboard-analysis.html">score/file analysis</a> before using it.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="research-title">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">What this project is doing</span>
+          <h2 id="research-title">Fit the model to the score, test the geology.</h2>
+        </div>
+        <p>Metric/loss, training, OOF stitching, and safe file-building plumbing passed disposable synthetic smoke tests. There are still no real-data results; synthetic checks are not holdout evidence.</p>
+      </div>
+      <div class="grid three">
+        <article class="card">
+          <p class="kicker">01 · Scoring geometry</p>
+          <h3>Reward proximity, not just pixel coincidence</h3>
+          <p>A 300 m triangular kernel gives a one-pixel near miss partial credit. The combined loss adds a differentiable distance-weighted term to regional soft-Tversky; it does not replace the regional objective.</p>
+          <a href="docs/loss-design.html">Loss details, equations, and limitations →</a>
+        </article>
+        <article class="card">
+          <p class="kicker">02 · Scientific tests</p>
+          <h3>Four ranked, falsifiable hypotheses</h3>
+          <p>Prioritized candidates target hydrothermal observations, dilation–conductivity corridors, seismicity fabric, and depth-resolved thermal gradients. Expected gains are planning priors—not measured scores.</p>
+          <a href="docs/hypotheses.html">Layers, novelty, source access, and gates →</a>
+        </article>
+        <article class="card">
+          <p class="kicker">03 · Submission safety</p>
+          <h3>Fail closed on bad GeoTIFFs</h3>
+          <p>The validator checks one float32 band, EPSG:32611, 100 m resolution, exact template transform/shape, finite in-range values inside the footprint, and null/NaN outside.</p>
+          <a href="executive-summary.html#format">Submission steps and range-error fix →</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="snapshot-title">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Score context</span>
+          <h2 id="snapshot-title">0.2600 is not the public lead.</h2>
+        </div>
+        <p>Both rankings and attribution are handled explicitly; reported sibling-repository values are recorded as claims unless an official score receipt is available.</p>
+      </div>
+      <div class="grid two">
+        <article class="card">
+          <p class="kicker">Official snapshot · 2026-10-03</p>
+          <div class="stat-row"><span class="stat">0.3195</span><span class="stat-label">DARD · rank 1 on the displayed public leaderboard</span></div>
+          <p class="fine-print">A dynamic public score; it does not disclose private-set results. Check the competition site for the current value.</p>
+          <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/" target="_blank" rel="noopener noreferrer">Open official leaderboard ↗</a>
+        </article>
+        <article class="card">
+          <p class="kicker">Attribution discrepancy</p>
+          <div class="stat-row"><span class="stat">0.2600</span><span class="stat-label">D2.8 score reported in the brief</span></div>
+          <p class="fine-print">The linked GEMSDOE25 page currently calls the named D2.8 TIFF unscored/not slot-approved. The official table displays 0.2600 for `wbg1`, but does not identify the external TIFF. Exact file-score linkage is unverified.</p>
+          <a href="docs/leaderboard-analysis.html">See what is known and unknown →</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="next-title">
+      <div class="callout">
+        <h2 id="next-title">Next gate: data → paired holdout → exact file</h2>
+        <p>Competition inputs are still the hard blocker. Once authorized data are placed locally, run the regional and combined arms on identical buffered spatial folds, compare pooled DTI and distance-to-fault error profiles, confirm with fresh seeds, then build a unique TIFF and short note. A synthetic probe or favorable in-sample result is not enough.</p>
+        <div class="actions">
+          <a class="button" href="executive-summary.html">Open submission guide</a>
+          <a class="button secondary" href="docs/irregularities.html">Review blockers & irregularities</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-wrap">
+      <span>GEMSDOE30 · evidence before upload · no score claims without receipts</span>
+      <span><a href="docs/sources.html">Source register</a> · <a href="docs/score-ledger.csv">Score ledger</a> · <a href="docs/status.json">Status feed (JSON)</a> · <a href="README.md">Project brief</a></span>
+    </div>
+  </footer>
+</body>
+</html>

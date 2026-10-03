@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Leaderboard & file attribution · GEMSDOE30</title><link rel="stylesheet" href="assets/site.css"></head>
+<body>
+<header class="site-header"><div class="nav-wrap"><a class="brand" href="../index.html"><span class="brand-mark">G30</span> GEMSDOE30</a><nav class="nav-links"><a href="../index.html">Home</a><a href="../executive-summary.html">Submission guide</a><a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a></nav></div></header>
+<main>
+<section class="page-intro"><span class="eyebrow">Evidence, not attribution by filename</span><h1>0.2600 is a claim; 0.3195 led the public board.</h1><p class="lead">The metric makes 300 m near-misses valuable, but the score attached to one particular TIFF must be authenticated independently from its filename or a static project page.</p></section>
+<div class="grid two">
+<article class="card"><p class="kicker">Official snapshot · 2026-10-03</p><div class="stat-row"><span class="stat">0.3195</span><span class="stat-label">DARD · rank 1 on displayed public leaderboard</span></div><p>Time-sensitive public result; it says nothing about the private set. <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/" target="_blank" rel="noopener noreferrer">Open leaderboard ↗</a></p></article>
+<article class="card"><p class="kicker">User-supplied GEMSDOE25 attribution</p><div class="stat-row"><span class="stat">0.2600</span><span class="stat-label">D2.8 name in the brief</span></div><p>The official leaderboard's rank-15 `wbg1` row also displayed 0.2600, but no file name or hash. The linked GEMSDOE25 D2.8 page currently calls that artifact unscored/not slot-approved. File-to-score linkage is unresolved.</p></article>
+</div>
+<section class="section">
+<div class="section-head"><div><span class="eyebrow">What the metric rewards</span><h2>Nearby is better than far away—but redundancy costs.</h2></div><p>These are exact results for one isolated truth pixel and one unit-probability prediction; they are not model or leaderboard measurements.</p></div>
+<div class="table-wrap"><table><thead><tr><th>Prediction offset</th><th>Best TP credit</th><th>FP mass</th><th>FN mass</th><th>Approx. DTI</th></tr></thead><tbody><tr><td>0 m</td><td>1</td><td>0</td><td>0</td><td>1.000</td></tr><tr><td>100 m</td><td>2/3</td><td>1/3</td><td>1/3</td><td>0.667</td></tr><tr><td>200 m</td><td>1/3</td><td>2/3</td><td>2/3</td><td>0.333</td></tr><tr><td>300 m</td><td>0</td><td>1</td><td>1</td><td>0</td></tr><tr><td>400 m</td><td>0</td><td>1</td><td>1</td><td>0</td></tr></tbody></table></div>
+</section>
+<section class="section grid two">
+<article class="card"><p class="kicker">Mechanistic explanation</p><h3>Why dotted predictions can help</h3><p>For each true pixel, the scorer credits the best nearby weighted prediction; extra points around the same truth do not add proportional TP. But emitted probabilities still pay a distance-weighted FP cost. Carefully thinning a redundant line or band can retain local kernel coverage while cutting FP mass. Too much thinning loses coverage and raises FN.</p><p class="fine-print">This explains a plausible mechanism, not why the particular D2.8 file allegedly reached 0.2600. The exact file has not been independently downloaded or linked to a DrivenData receipt here.</p></article>
+<article class="card"><p class="kicker">Decision</p><h3>Can GEMSDOE30 beat 0.26 or 0.3195?</h3><p>It is possible in principle, but unknown. There is no training data, spatial-holdout result, generated candidate, or live submission from this checkout. The synthetic test confirms only that the implemented geometry loss ranks the intended toy near-misses.</p><p class="fine-print">The 0.5 geometry weight is an initial setting, not tuned evidence. No score or improvement is claimed.</p></article>
+</section>
+<section class="section"><div class="callout"><h2>Do not burn a slot on a story.</h2><p>The next evidence is a paired, buffered spatial-holdout comparison on real labels, followed by fresh-seed confirmation and an exact file audit. Full metric formulas, owner-page statements, score ledger, and caveats are in the <a href="leaderboard-analysis.md">full analysis</a> and <a href="score-ledger.csv">historical ledger</a>.</p></div></section>
+</main>
+<footer><div class="footer-wrap"><span>Score claims are not score receipts</span><span><a href="sources.html">Sources</a> · <a href="irregularities.html">Irregularities</a> · <a href="../index.html">Home</a></span></div></footer>
+</body></html>
