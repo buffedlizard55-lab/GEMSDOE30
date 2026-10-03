@@ -138,6 +138,7 @@ This is the authoritative current status; later dated experiment records below a
 - **Five genuinely untried geological hypotheses:** current shortlist and source/access/falsifiable gates are in [docs/hypotheses.md](docs/hypotheses.md) and [the review note](docs/research/untried-hypotheses-review-2026-10-03.md). H-31-04's GeoDAWN band-lineage/schema check is the lowest-cost new-hypothesis action; no unvalidated candidate gets a weekly slot.
 - **Scores and TIFFs:** the dated public snapshot showed DARD 0.3195 and `wbg1` 0.2600 (rank 15); neither leaderboard row identifies a TIFF hash. The D2.8 local artifact's claimed 0.2600 remains unlinked and its owner page labels it unscored/not slot-approved. The published competition format requires null/NaN outside the data bounds; the site now links the NaN-outside research TIFFs and sidecars, locally checked against the available template. Zero-outside variants are retained only as explicitly nonstandard diagnostics and are not linked as submission files. The exact artifact behind the earlier `[0,1]` error is unknown, so its cause remains undiagnosed. No file was uploaded; no weekly slot has been used.
 - **Submission-format correction:** `submission.py` and the CLI now default to the published NaN-outside contract; whole-raster finite checks and zero-outside writes are labeled diagnostic-only. Sidecars separately record published-format results and strict whole-raster diagnostics. See [the three-pass correction review](docs/research/submission-format-review-2026-10-03.md).
+- **Session 30 (branch `arena/01a103f1-gemsdoe30`), metric-exact emitter and the catalogue-frame inversion:** `src/gemsdoe30/emitter_opt.py` (EDGE) emits the expected-marginal-credit greedy support of a belief field and stops at the published marginal threshold. In the registered component-holdout comparison (`docs/research/emitter-opt-holdout.json`, `…-convergence.json`, protocol in `emitter-opt-preregistration.md`) it beat every belief-ordered emission family on the same field: **0.19125 vs 0.13848** (+0.05277) on the proximity field, **0.18368 vs 0.14014** (+0.04354) on the hybrid field, **0.15784 vs 0.14015** (+0.01768) on external evidence — and it **lost** on the leak-contaminated GBM field (0.11834 vs 0.13326), which is reported in the same document. `IR-30-039` records the measured **sign inversion** between the full-catalogue proxy and the owner-reported leaderboard ordering of the `dot_thin` family; the consequence is that catalogue-derived frames can no longer adjudicate emission design (they remain mandatory degenerate-failure screens). The new `gemsdoe30-edge-hybrid-80k-02845bd4-nan.tif` download is published-format-validated, unpromoted, and 0 of its 80,000 dots lie on the training catalogue. See `docs/research/score-ceiling-analysis.md` for the 0.3195 coverage arithmetic.
 - **Rules and verification:** all seven parsed chunks of the September 2026 official rules PDF were reviewed. The homepage/rules deadline-time conflict, eligibility, and final entrant-approved AI disclosure remain open. Final verification is recorded in the review checklist. PR [#15](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/15) was merged to `main` at `44403fd67a92fd5b7658233e62af5b1d45811d1b` on 2026-10-03 21:50:40 UTC; its branch head was `e3967c590b43c65b4f3433f46d50d2781c286fdd`. Documentation-only PR [#16](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/16) then recorded that merge in the review log; it merged to `main` at this session's base `1e377d4556445a3e9a80b64e129e36ed82e9a93f` on 2026-10-03 21:51:57 UTC.
 
 ## Historical session record — retained as an audit trail (superseded where noted)
@@ -496,6 +497,73 @@ Component-Holdout Proxy** and the **Independent USGS SGMC Fault Inventory** (bot
    gate improves the Poisson-thinned basement step score on both catalogue screen (`0.02380 → 0.02574`)
    and confirm (`0.02566 → 0.02933`), but still trails the spacing+distance-matched control
    (`0.03660` / `0.03655`, `0/4` quadrants; `promoted = false`).
+
+## Session 30 update (2026-10-03, branch `arena/01a103f1-gemsdoe30`) — metric-exact emitter (`EDGE`), catalogue-frame inversion (`IR-30-039`), H-34 register
+
+**What was built.** `src/gemsdoe30/emitter_opt.py` (EDGE) and `src/gemsdoe30/fields.py` (belief
+fields), with `scripts/emitter_opt_holdout.py` (registered comparison), `scripts/build_edge_candidate.py`
+(candidate builder) and two test modules (`tests/test_emitter_opt.py`, `tests/test_fields.py`). EDGE
+ranks candidate dots by the exact expected marginal credit
+`dT(x) = Σ_δ π(x+δ)·max(0, k(δ) − C(x+δ))` and stops when `dT ≤ 0.2s/(1−0.2s)·dF`, i.e. at the exact
+marginal condition of the published index. Bookkeeping is verified against an independent from-scratch
+credit pass (relative error 1.95e-7); prefixes of the acceptance order reproduce the recorded cumulative
+statistics.
+
+**Registered result (frame fixed before running, `docs/research/emitter-opt-preregistration.md`).** Whole
+8-connected catalogue components split seed 31 into a stand-in hidden half (20,870 px) and a known half
+(40,118 px, masked from every metric term); four spatial quadrant folds; leave-one-fold-out parameter
+choice per family. Pooled cross-validated DTI at each family's held-out choice:
+
+| field | EDGE | best other family | margin | folds won |
+| --- | ---: | ---: | ---: | ---: |
+| proximity (known traces) | **0.19125** | adaptive 0.13848 | **+0.05277** | 4/4 |
+| hybrid (proximity ∧ external evidence) | **0.18368** | adaptive 0.14014 | **+0.04354** | 3/4 |
+| external (USGS SGMC + GDR layers) | **0.15784** | adaptive 0.14015 | **+0.01768** | 3/4 |
+| gbm (leak-contaminated) | 0.11834 | adaptive **0.13326** | −0.01491 | 0/4 |
+
+Uniform thinning (≈0.125), dense quantile emission (0.060–0.074) and the previously shipped
+belief-ordered marginal rule (0.031–0.060) were beaten decisively in the same runs. The registered gate
+(≥ +0.005 over the best other family, ≥ 3/4 folds) is met on all three legitimate fields and fails on the
+leak-contaminated one, which is reported rather than hidden. Absolute values are **not comparable** with
+the earlier registered 0.18675/0.18927 pair (different frame; its `data/processed/*.npy` inputs are absent
+here). Registered limits: the stand-in hidden truth is half the same catalogue, so the margins are proxy
+margins; the candidate should be taken at the measured prefix plateau, not at `accepted` (the proximity
+peak is interior at 100,000 dots while the marginal rule kept accepting to the 160,000 cap).
+
+**Candidate artifact (unpromoted).** `docs/downloads/gemsdoe30-edge-hybrid-80k-02845bd4-nan.tif`
+(SHA-256 `f87d3fc008230ec12a2b2ad260de643d15b8e474135d28020dafd2c784d2cbd5`, 592,782 B): 80,000 dots,
+binary, **0 on the training catalogue**, published-format validation passed, sidecar with the full
+provenance. It is linked first on the site with an explicit "unpromoted" label; no slot was used.
+
+**IR-30-039 — the catalogue proxy is inverted.** On hash-verified bytes: full-catalogue proxy DTI is
+0.16635 (parent, 121,131 dots), 0.17193 (d1.5, 60,069) and 0.16177 (d2.8, 44,090) while the
+owner-reported scores for the same three artifacts rise 0.1922 → 0.2477 → 0.2600. The official metric
+deletes USGS/INGENIOUS pixels from every term, so a catalogue frame pays for exactly the dots the
+competition removes. Consequences recorded in `docs/irregularities.md` and
+`docs/research/score-ceiling-analysis.md`: catalogue frames stay as screens, never as promotion evidence;
+the archived negatives under that frame are screen failures inside a biased frame, while the independent
+SGMC-novelty results in those reports stand.
+
+**Highest-score study (`docs/research/score-ceiling-analysis.md`).** The 0.3195 gap is a coverage gap,
+quantified from the metric alone: at `s = 0.3195` a dot must sit within ≈280 m of a scored truth pixel
+(`k > 0.0683`), and with the owner-model hidden mass the leader's statistics need `T = 3,466 + 0.0683·F`;
+with perfect knowledge the same metric ceilings near 0.78. Also derived: a binary 0/1 raster strictly
+dominates any graded map of the same support, so every submission must be sparse binary dots.
+
+**H-34 register (`docs/hypotheses.md` §H-34, `docs/hypotheses.html`).** Four new ranked candidates that
+target faults a surface catalogue cannot contain: **H-34-01** substrate-concealment prior from USGS SGMC
+map-unit polygons (data on disk, next action); **H-34-02** potential-field depth lineaments (GeoDAWN tilt +
+Euler deconvolution); **H-34-03** drainage χ/ksn (USGS NHD + 3DEP, blocked until the clipped product is on
+disk); **H-34-04** heat-flow anomalies and borehole-gradient discontinuities (IHFC release 2024, power-check
+first). Each names layers, physical signature, why it evades USGS/INGENIOUS, its difference from existing
+work, expected index gain versus cost, an official free source verified this session (source register
+addendum), and a falsifiable blocked-holdout gate. None is validated; none may consume a slot.
+
+**Operations.** `.github/workflows/status-feed.yml` regenerates `docs/status.json` from repository
+artifacts and re-runs the format checks on every relevant push and weekly (no DrivenData access, no
+scraper). `IR-30-040` fixed the external-layer bridge trigger (it pointed at a stale branch name);
+`IR-30-041` records the emitter-truncation semantics and the convergence re-run. Test suite:
+**107 passed, 5 skipped (torch absent), 7 subtests passed**.
 
 ## Current next steps and limits
 

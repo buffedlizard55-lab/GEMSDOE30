@@ -1,32 +1,26 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-03T22:22:09Z",
+  "generated_utc": "2026-10-03T23:33:20Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
     "directory": "data/raw",
-    "required_files_present": true,
+    "required_files_present": false,
     "sha256_verified_against_pins": true,
     "files": [
       {
         "dest": "training_features.tif",
         "path": "data/raw/training_features.tif",
-        "present": true,
+        "present": false,
         "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-        "expected_bytes": 418912844,
-        "actual_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-        "actual_bytes": 418912844,
-        "sha256_matches_pin": true
+        "expected_bytes": 418912844
       },
       {
         "dest": "labels.tif",
         "path": "data/raw/labels.tif",
-        "present": true,
+        "present": false,
         "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "expected_bytes": 425830,
-        "actual_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "actual_bytes": 425830,
-        "sha256_matches_pin": true
+        "expected_bytes": 425830
       },
       {
         "dest": "sample_submission.tif",
@@ -40,17 +34,15 @@
       }
     ],
     "prepared_dataset": {
-      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
-      "matches_recorded_pin": true,
-      "positive_label_pixels": 60988,
-      "template_valid_pixels": 5167373
+      "dataset_signature": null,
+      "matches_recorded_pin": null,
+      "positive_label_pixels": null,
+      "template_valid_pixels": null
     },
     "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
   },
   "competition_data": {
     "owner_mirror_files_present": [
-      "training_features.tif",
-      "labels.tif",
       "sample_submission.tif"
     ],
     "organizer_authenticated": false,
@@ -130,6 +122,20 @@
       "run_name": "gems25-dotted-h19-5-d2-8-zeros_20261003T172939460962Z",
       "note": "Archived zero-outside diagnostic; not published-format compliant or upload-recommended",
       "performance_status": "unscored; local format validation is not a score"
+    },
+    {
+      "manifest": "gemsdoe30-edge-hybrid-80k-02845bd4-nan.json",
+      "file": "gemsdoe30-edge-hybrid-80k-02845bd4-nan.tif",
+      "present": true,
+      "sha256": "f87d3fc008230ec12a2b2ad260de643d15b8e474135d28020dafd2c784d2cbd5",
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "site_linked": true,
+      "submission_recommendation": false,
+      "run_name": "edge-emitter-session30",
+      "note": "GEMSDOE30 EDGE emitter, hybrid belief field, 80,000 dots; unpromoted research artifact (see docs/research/emitter-opt-holdout.md)",
+      "performance_status": "unscored; format validation is not a score"
     },
     {
       "manifest": "gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e-zeros.json",
@@ -466,7 +472,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "97 tests collected in 0.34s",
+      "pytest_collect": "112 tests collected in 0.56s",
       "exit_code": 0
     },
     "score_gain_claimed": false
