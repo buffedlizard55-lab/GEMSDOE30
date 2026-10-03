@@ -163,6 +163,53 @@ def verify(path: Path, expected: str, label: str) -> None:
         raise ValueError(f"{label} SHA-256 mismatch: {digest} != {expected}")
 
 
+def project_geometries_to_grid_crs(
+    geometries: list[object],
+    source_crs: object | None,
+    target_crs: str = "EPSG:32611",
+) -> object:
+    """Project shapely geometries from ``source_crs`` (defaulting to EPSG:4326) to ``target_crs``.
+
+    Fixes IR-30-032: an earlier version of ``rasterise_linework`` hardcoded
+    ``EPSG:4326 -> EPSG:32611`` regardless of the shapefile's ``.prj`` CRS, which mapped
+    already-projected NAD83 meter coordinates in ``qfaults_ingenious_nad83conus117`` out of
+    bounds and produced zero intersecting features.
+    """
+    import numpy as np
+    import shapely
+    from pyproj import CRS, Transformer
+
+    promoted = np.asarray(geometries, dtype=object)
+    if promoted.size == 0:
+        return promoted
+    src = CRS.from_user_input(source_crs) if source_crs is not None else CRS.from_epsg(4326)
+    dst = CRS.from_user_input(target_crs)
+    if src == dst:
+        return promoted
+    layer_transformer = Transformer.from_crs(src, dst, always_xy=True)
+
+    def _project(coords, _transformer=layer_transformer):
+        return np.column_stack(_transformer.transform(coords[:, 0], coords[:, 1]))
+
+    try:
+        return shapely.transform(promoted, _project)
+    except TypeError:  # pragma: no cover - shapely signature fallback
+        return np.array([shapely.transform(g, _project) for g in promoted], dtype=object)
+
+
+def read_csv_with_fallback(path: Path) -> list[dict[str, str]]:
+    """Read a CSV into a list of dicts with UTF-8 first and Latin-1 fallback (fixes Paleo_geothermal_final.csv)."""
+    import csv
+
+    try:
+        text = path.read_text(encoding="utf-8-sig")
+    except UnicodeDecodeError:
+        text = path.read_text(encoding="latin-1")
+    reader = csv.DictReader(text.splitlines())
+    return list(reader)
+
+
+
 def main() -> int:
     import numpy as np
     import pyogrio
@@ -276,22 +323,18 @@ def main() -> int:
                     mask[:] = True  # keep all line work when no text flag is available
                 selected = gdf.loc[mask]
                 feature_count += int(len(selected))
-                merged.extend(selected.geometry.tolist())
+                layer_geoms = project_geometries_to_grid_crs(
+                    selected.geometry.tolist(), gdf.crs, "EPSG:32611"
+                )
+                merged.extend(layer_geoms.tolist())
         if not merged:
             report["derived"][key] = {"ok": False, "reason": "no line features found", "layers": layer_names}
             return
-        # project to the competition CRS and clip to the grid box.
+        # Clip projected geometries (already in EPSG:32611) to the grid box.
         # NOTE: never round-trip geometries through WKT with numpy - a single large
         # multipart polygon forces a fixed-width string array (28 GiB observed on the
         # GDR 1391 geothermal polygons).  Use an object array of geometries instead.
-        promoted = np.asarray(merged, dtype=object)
-        def _project(coords, _transformer=transformer):
-            return np.column_stack(_transformer.transform(coords[:, 0], coords[:, 1]))
-
-        try:
-            projected = shapely.transform(promoted, _project)
-        except TypeError:  # older/newer shapely signature differences
-            projected = np.array([shapely.transform(g, _project) for g in promoted])
+        projected = np.asarray(merged, dtype=object)
         clip_box = shapely.box(bounds[0], bounds[1], bounds[2], bounds[3])
         clipped = shapely.intersection(projected, clip_box)
         kept = [geometry for geometry in clipped if not shapely.is_empty(geometry)]
@@ -331,30 +374,43 @@ def main() -> int:
         for candidate in sorted(list(extract_dir.rglob("*.shp")) + list(extract_dir.rglob("*.csv"))):
             try:
                 if candidate.suffix == ".csv":
-                    import pandas as pd
-                    frame = pd.read_csv(candidate)
-                    x_column = next((c for c in frame.columns if c.lower() in ("longitude", "lon", "x", "x_utm", "utm_x")), None)
-                    y_column = next((c for c in frame.columns if c.lower() in ("latitude", "lat", "y", "y_utm", "utm_y")), None)
+                    rows = read_csv_with_fallback(candidate)
+                    if not rows:
+                        layers.append({"file": candidate.name, "rows": 0, "used": False})
+                        continue
+                    cols = list(rows[0].keys())
+                    x_column = next((c for c in cols if c and c.strip().lower() in ("longitude", "lon", "x", "x_utm", "utm_x", "long_deg_nad83")), None)
+                    y_column = next((c for c in cols if c and c.strip().lower() in ("latitude", "lat", "y", "y_utm", "utm_y", "lat_deg_nad83")), None)
                     if x_column is None or y_column is None:
-                        layers.append({"file": candidate.name, "rows": int(len(frame)), "used": False})
+                        layers.append({"file": candidate.name, "rows": len(rows), "used": False})
                         continue
-                    values = frame[[x_column, y_column]].to_numpy(dtype=float)
-                    geographic = abs(values[:, 0]).max() <= 180.0
+                    xs, ys = [], []
+                    for r in rows:
+                        try:
+                            xs.append(float(r[x_column]))
+                            ys.append(float(r[y_column]))
+                        except (TypeError, ValueError):
+                            continue
+                    if not xs:
+                        layers.append({"file": candidate.name, "rows": len(rows), "used": False})
+                        continue
+                    x_arr = np.asarray(xs, dtype=float)
+                    y_arr = np.asarray(ys, dtype=float)
+                    geographic = float(np.abs(x_arr).max()) <= 180.0
                     if geographic:
-                        east, north = transformer.transform(values[:, 0], values[:, 1])
+                        east, north = transformer.transform(x_arr, y_arr)
                     else:
-                        east, north = values[:, 0], values[:, 1]
+                        east, north = x_arr, y_arr
                     geometries.extend(shapely.points(east, north).tolist())
-                    layers.append({"file": candidate.name, "rows": int(len(frame)), "used": True})
+                    layers.append({"file": candidate.name, "rows": len(rows), "used": True})
                 else:
-                    gdf = pyogrio.read_dataframe(candidate)
-                    if not len(gdf):
+                    meta, _, wkb_geom, _ = pyogrio.read_raw(candidate)
+                    if wkb_geom is None or len(wkb_geom) == 0:
                         continue
-                    if gdf.crs is None:
-                        gdf = gdf.set_crs("EPSG:4326")
-                    gdf = gdf.to_crs("EPSG:32611")
-                    geometries.extend(gdf.geometry.tolist())
-                    layers.append({"file": candidate.name, "rows": int(len(gdf)), "used": True})
+                    raw_geoms = shapely.from_wkb(wkb_geom)
+                    projected = project_geometries_to_grid_crs(raw_geoms, meta.get("crs"))
+                    geometries.extend([g for g in projected if g is not None and not shapely.is_empty(g)])
+                    layers.append({"file": candidate.name, "rows": int(len(wkb_geom)), "used": True})
             except Exception as exc:  # noqa: BLE001
                 report["errors"][f"{key}:{candidate.name}"] = repr(exc)[:200]
         clip_box = shapely.box(bounds[0], bounds[1], bounds[2], bounds[3])

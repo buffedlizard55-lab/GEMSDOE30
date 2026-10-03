@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_utc": "2026-10-03T19:09:16Z",
+  "generated_utc": "2026-10-03T20:55:45Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -212,6 +212,28 @@
       },
       "promoted": false,
       "decision": "fold-0 boundary-weight screen (dense + emitted-mask scoring); a screen pick is diagnostic only \u2014 promotion still needs the 4-fold paired design plus fresh-seed confirmation"
+    },
+    "h33_01_placement_and_scarp": {
+      "evidence": "docs/research/h33-01-placement-and-scarp-holdout.json",
+      "preregistration": "docs/research/h33-01-placement-and-scarp-preregistration.md",
+      "gate_verdicts": {},
+      "promoted": false,
+      "decision": "H-31-02r passes independent SGMC novelty frame (+86.1% / +91.6%) and transform clause (+22.4%), but trails dispersed control on catalogue proxy (-0.00261); H-32-05b falsified; not promoted"
+    },
+    "verification_checks_h31_02r": {
+      "evidence": "docs/research/verification-checks-results.json",
+      "report": "docs/research/verification-checks-results.md",
+      "summary": {
+        "check1_catalogue_proxy_pass": false,
+        "check1_sgmc_novelty_pass": true,
+        "check2_catalogue_oof_calibrated_pass": true,
+        "check2_sgmc_oof_calibrated_pass": false,
+        "check3_perturbation_stability_pass": true,
+        "slot_promoted": false,
+        "reason": "Check 2 (4-fold OOF isotonic calibration: catalogue frame slope=0.9009, mean top-decile ratio=1.0495, folds>=0.70=4/4, pass=True; SGMC frame slope=0.9101, mean top-decile ratio=1.0940, folds>=0.70=2/4, pass=False); Check 3 (LiDAR permutation removes 57.0% of gain, full-topography permutation removes 97.2%, unrelated gravity permutation retains +0.03670, folds=4/4, pass=True); Check 1 passes on the independent SGMC novelty frame (delta=+0.03670) but fails on the catalogue component proxy (delta=-0.00073). Slot promoted = False."
+      },
+      "promoted": false,
+      "decision": "Check 2 (4-fold OOF isotonic calibration: catalogue frame slope=0.9009, mean top-decile ratio=1.0495, folds>=0.70=4/4, pass=True; SGMC frame slope=0.9101, mean top-decile ratio=1.0940, folds>=0.70=2/4, pass=False); Check 3 (LiDAR permutation removes 57.0% of gain, full-topography permutation removes 97.2%, unrelated gravity permutation retains +0.03670, folds=4/4, pass=True); Check 1 passes on the independent SGMC novelty frame (delta=+0.03670) but fails on the catalogue component proxy (delta=-0.00073). Slot promoted = False."
     }
   },
   "any_candidate_promoted": false,
@@ -292,7 +314,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "67 tests collected in 0.21s",
+      "pytest_collect": "77 tests collected in 0.35s",
       "exit_code": 0
     },
     "score_gain_claimed": false

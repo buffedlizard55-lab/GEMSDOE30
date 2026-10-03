@@ -1,0 +1,465 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-03T20:29:34Z",
+  "protocol": "docs/research/verification-protocol.md",
+  "candidate_evaluated": "H-31-02r (scarp_dipole_continuity, N=15,000, r=3.0 px)",
+  "check1_spatial_block_validation": {
+    "catalogue_proxy_screen_delta": -0.0007292017265245199,
+    "sgmc_novelty_screen_delta": 0.036703760667917994,
+    "sgmc_quadrants_positive": "4/4",
+    "pass_catalogue_proxy": false,
+    "pass_sgmc_novelty_frame": true
+  },
+  "check2_probability_calibration": {
+    "catalogue_component_frame": {
+      "pooled_oof_reliability_slope": 0.9009288700985707,
+      "pooled_oof_reliability_intercept": 0.0036956680290228944,
+      "slope_in_0_8_to_1_2": true,
+      "mean_fold_top_decile_val_to_train_ratio": 1.0494895445940415,
+      "min_fold_top_decile_val_to_train_ratio": 0.7642861058826889,
+      "folds_with_top_decile_ratio_ge_0_70": "4/4",
+      "top_bin_stability_pass": true,
+      "check2_pass": true,
+      "per_fold": {
+        "fold_0": {
+          "uncalibrated_slope": 0.01986173746093493,
+          "calibrated_slope": 0.5729170105807839,
+          "train_top_decile_rate": 0.039290329885717186,
+          "val_top_decile_rate": 0.03947115798393878,
+          "top_decile_val_to_train_ratio": 1.0046023563240003,
+          "fold_check2_pass": false
+        },
+        "fold_1": {
+          "uncalibrated_slope": 0.02869455003857518,
+          "calibrated_slope": 1.0690186992924664,
+          "train_top_decile_rate": 0.04041441496908959,
+          "val_top_decile_rate": 0.03526211955793063,
+          "top_decile_val_to_train_ratio": 0.8725134233639253,
+          "fold_check2_pass": true
+        },
+        "fold_2": {
+          "uncalibrated_slope": 0.06879374656211462,
+          "calibrated_slope": 3.1105283368181342,
+          "train_top_decile_rate": 0.03607060629316961,
+          "val_top_decile_rate": 0.05614592921094469,
+          "top_decile_val_to_train_ratio": 1.5565562928055516,
+          "fold_check2_pass": false
+        },
+        "fold_3": {
+          "uncalibrated_slope": 0.027585827098532335,
+          "calibrated_slope": 0.778519030503365,
+          "train_top_decile_rate": 0.041705542529791396,
+          "val_top_decile_rate": 0.03187496669381913,
+          "top_decile_val_to_train_ratio": 0.7642861058826889,
+          "fold_check2_pass": false
+        }
+      },
+      "oof_decile_bins": [
+        {
+          "bin": 0,
+          "count": 528787,
+          "predicted_mean": 0.015604560632531891,
+          "empirical_rate": 0.0189187706959513,
+          "used_for_slope": true
+        },
+        {
+          "bin": 1,
+          "count": 488418,
+          "predicted_mean": 0.017375038208808587,
+          "empirical_rate": 0.019045162135711623,
+          "used_for_slope": true
+        },
+        {
+          "bin": 2,
+          "count": 488562,
+          "predicted_mean": 0.023659956794915605,
+          "empirical_rate": 0.025499322501545352,
+          "used_for_slope": true
+        },
+        {
+          "bin": 3,
+          "count": 497564,
+          "predicted_mean": 0.02606380598244886,
+          "empirical_rate": 0.02776527240716772,
+          "used_for_slope": true
+        },
+        {
+          "bin": 4,
+          "count": 506322,
+          "predicted_mean": 0.025945120184280485,
+          "empirical_rate": 0.025748436765536557,
+          "used_for_slope": true
+        },
+        {
+          "bin": 5,
+          "count": 504585,
+          "predicted_mean": 0.02671599925554948,
+          "empirical_rate": 0.025922292577068285,
+          "used_for_slope": true
+        },
+        {
+          "bin": 6,
+          "count": 459902,
+          "predicted_mean": 0.035835429071436956,
+          "empirical_rate": 0.03719705502476615,
+          "used_for_slope": true
+        },
+        {
+          "bin": 7,
+          "count": 474115,
+          "predicted_mean": 0.03975996923347479,
+          "empirical_rate": 0.04012950444512407,
+          "used_for_slope": true
+        },
+        {
+          "bin": 8,
+          "count": 463467,
+          "predicted_mean": 0.040199665526006345,
+          "empirical_rate": 0.03989712320402531,
+          "used_for_slope": true
+        },
+        {
+          "bin": 9,
+          "count": 470479,
+          "predicted_mean": 0.04025902268889235,
+          "empirical_rate": 0.039381141347435276,
+          "used_for_slope": true
+        }
+      ]
+    },
+    "sgmc_novelty_frame": {
+      "pooled_oof_reliability_slope": 0.9101322471094418,
+      "pooled_oof_reliability_intercept": 0.0009696616720868273,
+      "slope_in_0_8_to_1_2": true,
+      "mean_fold_top_decile_val_to_train_ratio": 1.0940029269772338,
+      "min_fold_top_decile_val_to_train_ratio": 0.24526454034347236,
+      "folds_with_top_decile_ratio_ge_0_70": "2/4",
+      "top_bin_stability_pass": false,
+      "check2_pass": false,
+      "per_fold": {
+        "fold_0": {
+          "uncalibrated_slope": 0.04430011780044284,
+          "calibrated_slope": 0.6119210733642759,
+          "train_top_decile_rate": 0.06529141996646018,
+          "val_top_decile_rate": 0.04097186487351014,
+          "top_decile_val_to_train_ratio": 0.6275229562254451,
+          "fold_check2_pass": false
+        },
+        "fold_1": {
+          "uncalibrated_slope": 0.08839255356554188,
+          "calibrated_slope": 1.9181135737278665,
+          "train_top_decile_rate": 0.04688375606071681,
+          "val_top_decile_rate": 0.08588915942546965,
+          "top_decile_val_to_train_ratio": 1.831959865038093,
+          "fold_check2_pass": false
+        },
+        "fold_2": {
+          "uncalibrated_slope": 0.01917659864139591,
+          "calibrated_slope": 0.24800142914520076,
+          "train_top_decile_rate": 0.062082506831992075,
+          "val_top_decile_rate": 0.015226637501519018,
+          "top_decile_val_to_train_ratio": 0.24526454034347236,
+          "fold_check2_pass": false
+        },
+        "fold_3": {
+          "uncalibrated_slope": 0.08055088017639256,
+          "calibrated_slope": 1.204951040108944,
+          "train_top_decile_rate": 0.04657252604817104,
+          "val_top_decile_rate": 0.07783500230152596,
+          "top_decile_val_to_train_ratio": 1.6712643463019252,
+          "fold_check2_pass": false
+        }
+      },
+      "oof_decile_bins": [
+        {
+          "bin": 0,
+          "count": 485368,
+          "predicted_mean": 0.0021364354075804975,
+          "empirical_rate": 0.0018501425722338514,
+          "used_for_slope": true
+        },
+        {
+          "bin": 1,
+          "count": 447103,
+          "predicted_mean": 0.004013941101389081,
+          "empirical_rate": 0.0040907799768733375,
+          "used_for_slope": true
+        },
+        {
+          "bin": 2,
+          "count": 444196,
+          "predicted_mean": 0.009258909242738242,
+          "empirical_rate": 0.010018100117965943,
+          "used_for_slope": true
+        },
+        {
+          "bin": 3,
+          "count": 452697,
+          "predicted_mean": 0.022647197556006582,
+          "empirical_rate": 0.024396008809424406,
+          "used_for_slope": true
+        },
+        {
+          "bin": 4,
+          "count": 459474,
+          "predicted_mean": 0.03794368482079432,
+          "empirical_rate": 0.03970627282501295,
+          "used_for_slope": true
+        },
+        {
+          "bin": 5,
+          "count": 466646,
+          "predicted_mean": 0.040117365961364795,
+          "empirical_rate": 0.04738066971537311,
+          "used_for_slope": true
+        },
+        {
+          "bin": 6,
+          "count": 423167,
+          "predicted_mean": 0.04231826430636305,
+          "empirical_rate": 0.028066933385637347,
+          "used_for_slope": true
+        },
+        {
+          "bin": 7,
+          "count": 439003,
+          "predicted_mean": 0.04167156846258593,
+          "empirical_rate": 0.030090910540474667,
+          "used_for_slope": true
+        },
+        {
+          "bin": 8,
+          "count": 425832,
+          "predicted_mean": 0.043115541173887606,
+          "empirical_rate": 0.04104905220838265,
+          "used_for_slope": true
+        },
+        {
+          "bin": 9,
+          "count": 430771,
+          "predicted_mean": 0.05584908191069984,
+          "empirical_rate": 0.05524280882417804,
+          "used_for_slope": true
+        }
+      ]
+    }
+  },
+  "check3_feature_perturbation_stability": {
+    "lidar_scarp_channels_only": {
+      "baseline_dti": 0.02979476776688037,
+      "candidate_dti": 0.06649852843479837,
+      "raw_gain_over_baseline": 0.036703760667917994,
+      "own_family_perturbed_dti": 0.045563683567420965,
+      "own_family_gain_removed_fraction": 0.5703732938100842,
+      "own_family_removes_ge_50pct": true,
+      "unrelated_family_perturbed_dti": 0.06649852843479837,
+      "unrelated_family_retained_gain": 0.036703760667917994,
+      "unrelated_family_retains_positive_gain": true,
+      "per_fold_deltas": [
+        0.016660134023328204,
+        0.02373576014755607,
+        0.03756141148489521,
+        0.09662806181154973
+      ],
+      "folds_positive": "4/4",
+      "fold_sign_consistency_ge_3_of_4": true,
+      "check3_pass": true
+    },
+    "full_topographic_scarp_family": {
+      "baseline_dti": 0.02979476776688037,
+      "candidate_dti": 0.06649852843479837,
+      "raw_gain_over_baseline": 0.036703760667917994,
+      "own_family_perturbed_dti": 0.030804197281751388,
+      "own_family_gain_removed_fraction": 0.9724979267382445,
+      "own_family_removes_ge_50pct": true,
+      "unrelated_family_perturbed_dti": 0.06649852843479837,
+      "unrelated_family_retained_gain": 0.036703760667917994,
+      "unrelated_family_retains_positive_gain": true,
+      "per_fold_deltas": [
+        0.016660134023328204,
+        0.02373576014755607,
+        0.03756141148489521,
+        0.09662806181154973
+      ],
+      "folds_positive": "4/4",
+      "fold_sign_consistency_ge_3_of_4": true,
+      "check3_pass": true
+    }
+  },
+  "qualitative_atlas": {
+    "sgmc_novelty_frame": {
+      "where_it_helps": [
+        {
+          "row_bounds": [
+            3136,
+            3200
+          ],
+          "col_bounds": [
+            1792,
+            1856
+          ],
+          "centroid_utm11n_m": [
+            425750.0,
+            4191750.0
+          ],
+          "quadrant": 3,
+          "truth_pixels": 306,
+          "candidate_tp_weight": 76.783,
+          "control_tp_weight": 7.052,
+          "delta_tp_weight": 69.731
+        },
+        {
+          "row_bounds": [
+            2560,
+            2624
+          ],
+          "col_bounds": [
+            1600,
+            1664
+          ],
+          "centroid_utm11n_m": [
+            406550.0,
+            4249350.0
+          ],
+          "quadrant": 2,
+          "truth_pixels": 125,
+          "candidate_tp_weight": 50.479,
+          "control_tp_weight": 3.31,
+          "delta_tp_weight": 47.17
+        }
+      ],
+      "where_it_fails": [
+        {
+          "row_bounds": [
+            320,
+            384
+          ],
+          "col_bounds": [
+            320,
+            384
+          ],
+          "centroid_utm11n_m": [
+            278550.0,
+            4473350.0
+          ],
+          "quadrant": 0,
+          "truth_pixels": 201,
+          "candidate_tp_weight": 0.0,
+          "control_tp_weight": 10.111,
+          "delta_tp_weight": -10.111
+        },
+        {
+          "row_bounds": [
+            512,
+            576
+          ],
+          "col_bounds": [
+            2752,
+            2816
+          ],
+          "centroid_utm11n_m": [
+            521750.0,
+            4454150.0
+          ],
+          "quadrant": 1,
+          "truth_pixels": 293,
+          "candidate_tp_weight": 0.0,
+          "control_tp_weight": 9.475,
+          "delta_tp_weight": -9.475
+        }
+      ]
+    },
+    "catalogue_component_frame": {
+      "where_it_helps": [
+        {
+          "row_bounds": [
+            1664,
+            1728
+          ],
+          "col_bounds": [
+            1344,
+            1408
+          ],
+          "centroid_utm11n_m": [
+            380950.0,
+            4338950.0
+          ],
+          "quadrant": 0,
+          "truth_pixels": 52,
+          "candidate_tp_weight": 21.595,
+          "control_tp_weight": 0.566,
+          "delta_tp_weight": 21.028
+        },
+        {
+          "row_bounds": [
+            3328,
+            3392
+          ],
+          "col_bounds": [
+            1536,
+            1600
+          ],
+          "centroid_utm11n_m": [
+            400150.0,
+            4172550.0
+          ],
+          "quadrant": 2,
+          "truth_pixels": 86,
+          "candidate_tp_weight": 15.671,
+          "control_tp_weight": 0.0,
+          "delta_tp_weight": 15.671
+        }
+      ],
+      "where_it_fails": [
+        {
+          "row_bounds": [
+            1024,
+            1088
+          ],
+          "col_bounds": [
+            1600,
+            1664
+          ],
+          "centroid_utm11n_m": [
+            406550.0,
+            4402950.0
+          ],
+          "quadrant": 0,
+          "truth_pixels": 93,
+          "candidate_tp_weight": 0.057,
+          "control_tp_weight": 9.752,
+          "delta_tp_weight": -9.695
+        },
+        {
+          "row_bounds": [
+            2496,
+            2560
+          ],
+          "col_bounds": [
+            1792,
+            1856
+          ],
+          "centroid_utm11n_m": [
+            425750.0,
+            4255750.0
+          ],
+          "quadrant": 3,
+          "truth_pixels": 69,
+          "candidate_tp_weight": 0.0,
+          "control_tp_weight": 8.464,
+          "delta_tp_weight": -8.464
+        }
+      ]
+    }
+  },
+  "overall_promotion_decision": {
+    "check1_catalogue_proxy_pass": false,
+    "check1_sgmc_novelty_pass": true,
+    "check2_catalogue_oof_calibrated_pass": true,
+    "check2_sgmc_oof_calibrated_pass": false,
+    "check3_perturbation_stability_pass": true,
+    "slot_promoted": false,
+    "reason": "Check 2 (4-fold OOF isotonic calibration: catalogue frame slope=0.9009, mean top-decile ratio=1.0495, folds>=0.70=4/4, pass=True; SGMC frame slope=0.9101, mean top-decile ratio=1.0940, folds>=0.70=2/4, pass=False); Check 3 (LiDAR permutation removes 57.0% of gain, full-topography permutation removes 97.2%, unrelated gravity permutation retains +0.03670, folds=4/4, pass=True); Check 1 passes on the independent SGMC novelty frame (delta=+0.03670) but fails on the catalogue component proxy (delta=-0.00073). Slot promoted = False."
+  },
+  "runtime_seconds": 62.8
+}
