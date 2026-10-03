@@ -17,7 +17,7 @@ stitched out-of-fold probability field.
 |---|---|---|---|---|
 | `lattice_4px` (blind, no learning) | 323,245 | 0.24634 | 0.08008 | 0.03688 |
 | `lattice_5px` | 206,895 | 0.24525 | **0.09138** | 0.04234 |
-| `model_poisson_4px` (OOF field, 4 px) | ~323k | **0.25461** | 0.08356 | 0.03792 |
+| `model_poisson_4px` (combined OOF field, 4 px) | 309,492 | **0.25461** | 0.08356 | 0.03792 |
 | `model_t0.4_s4px` (threshold 0.4, then 4 px) | ~80k | 0.22007 | 0.10451 | 0.05825 |
 | `model_t0.4_s4px` **off-catalogue only** (`cand_t04s4`) | 80,392 | 0.00165 | 0.00096 | 0.00047 |
 | historical artefact (leaderboard 0.2600) | 44,090 | 0.16177 | **0.11305** | **0.05800** |
@@ -26,10 +26,10 @@ stitched out-of-fold probability field.
 Three conclusions, in order of importance:
 
 1. **Converting the model to dots is worth more than any modelling change attempted here.**
-   The raw out-of-fold probability mosaic scores 0.10503 on the same grid and the same metric
-   (`docs/research/discovery-shift.json`); Poisson-thinning it to 4 px spacing scores
-   **0.25461**. Same model, same weights, same seed — a factor of 2.4 from the emission
-   operator alone. The metric charges `FP_w` for every pixel a prediction touches, so a
+   The raw out-of-fold probability mosaic scores **0.09712** on the same grid and the same metric
+   (`runs/loss-ablation/holdout.json`, `docs/research/discovery-shift.json`); Poisson-thinning it
+   to 4 px spacing scores **0.25461**. Same model, same weights, same seed — a factor of **2.6**
+   from the emission operator alone. The metric charges `FP_w` for every pixel a prediction touches, so a
    smooth field over a 5.17 M-pixel footprint is maximally expensive and minimally
    informative.
 2. **The learned field does add something over blind spacing, but only ~3 %.** 0.25461 vs

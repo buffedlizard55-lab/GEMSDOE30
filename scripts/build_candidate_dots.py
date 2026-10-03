@@ -67,6 +67,9 @@ def main() -> int:
     parser.add_argument("--erode-catalogue-in-inventory", type=int, default=3)
     parser.add_argument("--max-runtime-seconds", type=float, default=None)
     args = parser.parse_args()
+    if args.model_spacing_px <= 0 and not args.model_spacing_px_keep and args.base is None:
+        parser.error("--model-spacing-px 0 without --model-spacing-px-keep or --base would "
+                     "emit nothing")
 
     import rasterio
     from scipy.ndimage import binary_dilation

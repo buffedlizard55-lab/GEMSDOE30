@@ -32,8 +32,9 @@ false-positive mass** — against a metric that prices them at 1 : 0.2. Verdict 
 [docs/research/loss-ablation-verdict.md](docs/research/loss-ablation-verdict.md).
 
 **2. Turning the model into dots matters more than any modelling change tried here.** The same
-out-of-fold probability field scores **0.10503** submitted as a field and **0.25461** after
-400 m Poisson-disk sparsification — a **2.4×** difference from the emission operator alone.
+out-of-fold probability field (combined arm) scores **0.09712** submitted as a field and
+**0.25461** after 400 m Poisson-disk sparsification — a **2.6×** difference from the emission
+operator alone.
 The learned field beats a blind lattice by only **+3.4 %** on the catalogue frame and **+4.4 %**
 on the independent-inventory frame, which is the honest size of the localisation signal.
 Evidence: [docs/research/emitter-holdout.md](docs/research/emitter-holdout.md).
