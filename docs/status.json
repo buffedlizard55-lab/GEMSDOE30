@@ -17,7 +17,7 @@
   },
   "submission": {
     "gemsdoe30_tiff_generated": false,
-    "reason": "no model candidate has been promoted by the frozen promotion rule; the seed-30 loss screen did not replicate at seed 31 (delta +0.0001, 2/4 folds), the registered metric-emission gate failed (no family promoted), and the H-31-01 connector hypothesis did not separate from its proximity control. No GEMSDOE30 prediction raster exists.",
+    "reason": "no model candidate has been promoted by the frozen promotion rule; the seed-30 loss screen did not replicate at seed 31 (delta +0.0001, 2/4 folds), the registered metric-emission gate failed (no family promoted; adaptive minus uniform +0.0025 < 0.005), and the H-31-01 connector hypothesis did not separate from its proximity control. A first, clearly-labelled un-promoted research candidate TIFF has been built and published for download (docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_...tif, sha256 f5d137b9...c7cc2), with a paste-ready note stating its un-promoted status.",
     "external_reference_tiff": "GEMSDOE25 D2.8 link; owner page says unscored/not slot-approved"
   },
   "score_evidence": {
@@ -116,5 +116,17 @@
     "loss_ablation_holdout": "docs/research/loss-ablation-holdout.json",
     "metric_emission_holdout": "docs/research/metric-emission-holdout-results.json",
     "relay_connector_holdout": "docs/research/relay-connector-holdout.json"
+  },
+  "candidate_artifacts": {
+    "built_utc": "2026-10-03T17:04:26Z",
+    "file": "docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13.tif",
+    "manifest": "docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13.json",
+    "sha256": "f5d137b9c010873f0b4fc11e841d923f359d33c7272ded0da9ac9b7c1efc7cc2",
+    "note": "GEMSDOE30 4-fold OOF GBM surface; adaptive Poisson-disk dots (500 m min spacing); proxy gate failed vs uniform - not holdout-promoted",
+    "method": "4-fold out-of-fold HistGradientBoosting surface over competition + local external layers; adaptive Poisson-disk emission (radius 5 px, gamma=1.0, pool 480k)",
+    "dots": 90358,
+    "median_nn_spacing_px": 2.83,
+    "promoted": false,
+    "build_record": "docs/research/candidate-2026-10-03.md"
   }
 }

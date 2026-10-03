@@ -67,6 +67,10 @@ masks** (D2.8, 44,090 dots, median nearest-neighbour spacing 3.0 px ≈ the 300 
 D1.5, 60,069 dots at 2.24 px) while the dense masks score far lower. The proxy ordering
 (`adaptive` > `uniform` > `dense` > `metric`) again matches "thin, don't flood".
 
+## Deliverable built from the OOF surface (un-promoted)
+
+The four fold surfaces were stitched block-wise into a complete out-of-fold grid (every pixel predicted by a model that never saw its quadrant; zero coverage gaps over the 5,167,373 valid pixels) and emitted with the adaptive rule (radius 5 px, gamma = 1.0, candidate pool 480,000) that the protocol selected in all four leave-one-fold-out folds. The result (90,358 dots; median nearest-neighbour spacing 2.83 px; 17.7 % of dots within 300 m of the catalogue versus an 8.6 % base rate) was written with `scripts/build_submission.py` to `GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13.tif` and passes all 11 local format checks. Because the adaptive family missed the frozen +0.005 gate against uniform (+0.0025), this file is **not promoted**; it ships with that statement in its manifest note and on the site. Array hash `be95b587…`, TIFF SHA-256 `f5d137b9…`.
+
 ## What this does and does not show
 
 * **Shows:** with the real 300 m metric algebra evaluated on real out-of-fold data, a
