@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-03T23:45:23+00:00",
+  "generated_utc": "2026-10-03T23:50:28+00:00",
   "runner": "GitHub Actions (general internet access); the agent sandbox cannot reach these hosts",
   "drivendata_contacted": false,
   "grid_source_note": "Derived rasters use the hash-pinned owner-mirror competition grid. Those bytes are owner-mirrored, not organizer-authenticated; alignment is verified, labels are never learnt from.",
@@ -150,39 +150,44 @@
       ],
       "per_class": {
         "0": {
-          "pixels": 725388,
+          "pixels": 355195,
+          "footprint_fraction": 0.06873802220199703,
           "description": "pre-Cenozoic bedrock / undivided / unmapped",
           "on_catalogue_pixels": 3454,
-          "fraction_within_300m_of_catalogue": 0.03542242220714983,
-          "median_distance_to_catalogue_px": 76.0
+          "fraction_within_300m_of_catalogue": 0.07218007010233815,
+          "median_distance_to_catalogue_px": 24.73863375370596
         },
         "1": {
-          "pixels": 861370,
+          "pixels": 506038,
+          "footprint_fraction": 0.09792945080604787,
           "description": "Mesozoic-Paleogene indurated units",
           "on_catalogue_pixels": 5006,
-          "fraction_within_300m_of_catalogue": 0.043716405261385934,
-          "median_distance_to_catalogue_px": 49.64876634922564
+          "fraction_within_300m_of_catalogue": 0.07395096810911433,
+          "median_distance_to_catalogue_px": 24.08318915758459
         },
         "2": {
-          "pixels": 3676907,
+          "pixels": 1486005,
+          "footprint_fraction": 0.2875745567428556,
           "description": "Neogene-Tertiary basin fill and volcanics",
           "on_catalogue_pixels": 21485,
-          "fraction_within_300m_of_catalogue": 0.04165022395181602,
-          "median_distance_to_catalogue_px": 127.8632081562167
+          "fraction_within_300m_of_catalogue": 0.10261472875259504,
+          "median_distance_to_catalogue_px": 20.396078054371138
         },
         "3": {
-          "pixels": 4253836,
+          "pixels": 2178476,
+          "footprint_fraction": 0.4215828816692737,
           "description": "Quaternary surficial cover",
           "on_catalogue_pixels": 21438,
-          "fraction_within_300m_of_catalogue": 0.03757408607195952,
-          "median_distance_to_catalogue_px": 71.17583859709698
+          "fraction_within_300m_of_catalogue": 0.07316582785396764,
+          "median_distance_to_catalogue_px": 25.96150997149434
         },
         "4": {
-          "pixels": 2761659,
+          "pixels": 641659,
+          "footprint_fraction": 0.12417508857982576,
           "description": "playa / lake bed / evaporite / salt flat",
           "on_catalogue_pixels": 9605,
-          "fraction_within_300m_of_catalogue": 0.02543978094326635,
-          "median_distance_to_catalogue_px": 410.7578362003578
+          "fraction_within_300m_of_catalogue": 0.10887091118491286,
+          "median_distance_to_catalogue_px": 19.1049731745428
         }
       },
       "confound_note": "Per-class distance-to-catalogue statistics are the confound check: if a concealment class is simply 'far from the catalogue' its apparent value would be an artefact, which is why the experiment uses a count- and distance-matched control (H-34-01 preregistration)."
@@ -261,7 +266,7 @@
   },
   "errors": {},
   "stage": "completed",
-  "updated_utc": "2026-10-03T23:46:01+00:00",
+  "updated_utc": "2026-10-03T23:51:04+00:00",
   "python": "3.11.16",
   "imports": {
     "numpy": "2.4.6",
