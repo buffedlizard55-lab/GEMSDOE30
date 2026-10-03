@@ -110,10 +110,11 @@ All rows [MEASURED] on the hash-pinned grid (`data/raw/labels.tif`,
 | `GEMSDOE30_oof-gbm-adaptive-r5_…-nan.tif` | 90,358 | 2,517 | 0.1902044 |
 | `gemsdoe30-sgmc-hedge-d10-85k-…-nan.tif` | 85,526 | 0 | 0.0017506 |
 
-Two checks give confidence in the protocol: the `d2.8` proxy value reproduces the repository's
-recorded `0.1617719829` to seven decimals, and the OOF GBM file is confirmed *strictly binary*
-(`np.unique` of positives = `{1.0}`), i.e. the project has been emitting in the metric-optimal shape
-all along.
+Three checks give confidence in the protocol: the `d2.8` proxy value reproduces the repository's
+recorded `0.1617719829` to seven decimals; the OOF GBM file is confirmed *strictly binary*
+(`np.unique` of positives = `{1.0}`); and a 3×3 neighbour count over the shipped `d2.8` bytes shows
+that **all 44,090 positive pixels are isolated** — not one has a positive 8-neighbour — so the
+reported-best artifact is a fully de-duplicated dot field, not a region emission in disguise.
 
 **The reported rank order and the proxy order disagree, and not by noise.** With 121,131 → 60,069 →
 44,090 dots the reported scores rise (0.1922 → 0.2477 → 0.2600 [OWNER-REPORT]) while the proxy falls
@@ -160,10 +161,24 @@ dots, roughly **one in eight to one in five sits within 300 m of a hidden fault*
 per dot of ≈ 0.11–0.15 (compare the parent's 12,199.64/121,131 = 0.101 measured **on the catalogue**,
 which is the only per-dot credit number we can measure and is *not* the hidden-truth number).
 
-**Is there room?** Yes, by a wide margin. With `G = 12,691` and perfect knowledge, dots every ≈ 3 px
-along the hidden traces (≈ 4,200 dots) give `T ≈ 0.8G`, `F ≈ 4,200`, hence `DTI ≈ 0.78`. The
-0.26 → 0.3195 gap is therefore **not** an emission-quality gap; it is a coverage gap of roughly
-+25 % relative weighted coverage of hidden faults. That is the only quantity worth optimizing now.
+**Is there room?** Yes — but the budget has to respect the credit accounting, because one dot can
+deliver at most 1.0 unit of credit (the kernel's peak weight). A 4,200-dot budget therefore carries
+at most `T = 4,200 = 0.33G`, not `0.8G`. The exact form of the requirement is a budget table; with
+`G = 12,691` and every dot assumed *far* from truth (the conservative case, `F = N`):
+
+| dots | required `T` for `s = 0.3195` | required coverage of hidden truth | mean credit per dot |
+| ---: | ---: | ---: | ---: |
+| 10,000 | 4,149 | 32.7 % | 0.41 |
+| 30,000 | 5,515 | 43.5 % | 0.18 |
+| 44,090 (the `d2.8` size) | 6,477 | 51.0 % | 0.15 |
+| 80,000 | 8,930 | 70.4 % | 0.11 |
+
+With *perfect* knowledge — a dot on every hidden truth pixel, `N = G`, `T = G` — the score is set by
+the kernel's unavoidable spill onto non-truth cells, `s = 1/(0.2(1 + ρ) + 0.8)`: a 1-pixel-wide trace
+under a 300 m kernel spills roughly 1–2 units of off-truth weight per unit of covered trace
+(`ρ = F/G ≈ 1–2`), giving `s ≈ 0.71–0.83`; only a *filled-region* truth (no boundary spill) reaches
+1.00. The 0.26 → 0.3195 gap is therefore **not** an emission-quality gap: it is roughly ten to twenty
+points of weighted coverage of hidden faults, and the feasible ceiling is ≈ 0.7–0.8, not ≈ 1.0.
 
 ---
 

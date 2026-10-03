@@ -576,13 +576,18 @@ def main() -> int:
         distance_to_catalogue = distance_transform_edt(~labels)
         per_class = {}
         for value, description in COVER_CLASS_TABLE.items():
-            cells = merged == value
+            # Statistics are restricted to the competition footprint: before the
+            # nodata mask the polygon map covers the whole raster rectangle (the
+            # states extend far beyond the ROI), which made an earlier receipt report
+            # class shares that summed to 2.4x the footprint.
+            cells = (merged == value) & footprint
             count = int(cells.sum())
             if count == 0:
                 per_class[str(value)] = {"pixels": 0, "description": description}
                 continue
             per_class[str(value)] = {
                 "pixels": count,
+                "footprint_fraction": float(count / footprint.sum()),
                 "description": description,
                 "on_catalogue_pixels": int((cells & labels).sum()),
                 "fraction_within_300m_of_catalogue": float((distance_to_catalogue[cells] <= 3).mean()),
