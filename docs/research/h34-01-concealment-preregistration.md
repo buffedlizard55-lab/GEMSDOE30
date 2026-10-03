@@ -43,10 +43,14 @@ Derived layers produced by the extended fetch script (committed, auditable):
 | 1 | Mesozoic–Paleogene indurated units | 1.25 |
 | 2 | Neogene/Tertiary basin fill and volcanics | 1.50 |
 | 3 | Quaternary surficial cover | 1.75 |
-| 4 | playa / lake bed / evaporite / salt flat | 2.00 |
+| 4 | playa / lake / evaporite / salt flat / open water | 2.00 |
 
-Age class comes from the SGMC map-unit `AGE` string; any unit text naming a playa,
-lake bed, evaporite or salt flat escalates the unit to class 4 regardless of age. The
+Age class comes from the SGMC map-unit **label** string (the measured polygon schema
+carries no `AGE` column: `NV_geol_poly.shp` / `CA_geol_poly.shp` expose
+`STATE, ORIG_LABEL, SGMC_LABEL, UNIT_LINK, REF_ID, GENERALIZE, SRC_URL, URL,
+geometry`); any unit text — label, lithology or description from the package's
+`XX_units.csv` table — naming a playa, lake, evaporite, salt flat or water body
+escalates the unit to class 4 regardless of age. The
 weight is `1 + γ·class/4` with **γ = 1.0 primary** (γ = 0.5 reported as a labelled
 sensitivity, never gating). A layer whose class mapping is degenerate (numeric age
 code, or > 98 % class 0) is refused by the fetch script rather than published.

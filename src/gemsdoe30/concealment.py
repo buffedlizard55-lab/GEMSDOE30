@@ -58,6 +58,12 @@ _PLAYA_TERMS = (
     "evaporite",
     "saline",
     "salt pan",
+    # Open water and lake-floor settings: a trace cannot be mapped through a lake, and
+    # the SGMC water/ice polygons carry the label "water" rather than an age letter.
+    "water",
+    "lake",
+    "reservoir",
+    "pond",
 )
 
 #: Mesozoic age markers (spelled out or abbreviated).
@@ -164,12 +170,14 @@ def cover_class(age: Any, *unit_texts: Any) -> int:
     """Cover class for one map unit: age class escalated to 4 by its setting text.
 
     ``unit_texts`` are any other attribute strings that carry the deposit
-    description (name, lithology, rock type, descriptive text).  A playa is mapped to
-    class 4 regardless of the age string, because an evaporite/playa setting hides
-    structure even when the mapped age string is old.
+    description (name, lithology, rock type, descriptive text).  A playa or lake is
+    mapped to class 4 regardless of the age string, because an evaporite/water
+    setting hides structure even when the mapped age string is older — and the SGMC
+    water polygons carry the label ``water`` rather than an age letter, so the label
+    itself is scanned too.
     """
 
-    if is_concealing_setting(*unit_texts):
+    if is_concealing_setting(age, *unit_texts):
         return 4
     return classify_age(age)
 

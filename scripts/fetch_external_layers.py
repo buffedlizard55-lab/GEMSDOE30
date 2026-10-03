@@ -307,20 +307,95 @@ def main() -> int:
         report.setdefault("archives", {})[key] = listing
         save()
 
-    # SGMC map-unit attribute columns, preferred in this order.  The tables are known
-    # to carry an ``AGE`` field; the alternatives are recorded so a schema drift fails
-    # loudly in the receipt rather than silently skipping the layer.
-    AGE_COLUMN_PREFERENCE = ("AGE", "AGE_CODE", "ROCKAGE", "MAJOR1", "UNIT_AGE", "AGE_UNIT")
+    # SGMC map-unit label columns, preferred in this order.  Measured on the two state
+    # packages: ``NV_geol_poly``/``CA_geol_poly`` carry no ``AGE`` field at all; the age
+    # is encoded in the standardised ``SGMC_LABEL`` ("Qa", "Tv", "KJf", ...) and the
+    # original state-map label.  The description tables (``XX_units.csv``) carry the
+    # words ("playa", "lake") that escalate a unit to the strongest concealment class.
+    LABEL_COLUMN_PREFERENCE = ("SGMC_LABEL", "ORIG_LABEL", "AGE", "AGE_CODE",
+                               "ROCKAGE", "MAJOR1", "UNIT_AGE", "AGE_UNIT")
     #: Columns that are geometry blobs or ESRI bookkeeping, never unit descriptions.
     EXCLUDED_TEXT_COLUMNS = {"GEOM", "WEB_GEOM", "SHAPE", "SHAPE_LENG", "SHAPE_LEN",
-                             "SHAPE_AREA", "SHAPE_LENGTH", "OBJECTID", "FID", "SOURCE"}
+                             "SHAPE_AREA", "SHAPE_LENGTH", "OBJECTID", "FID", "SOURCE",
+                             "SRC_URL", "URL"}
+    #: Age prefixes SGMC labels use; a column is accepted as a label column only when at
+    #: least this fraction of its values starts with one of them, so a numeric code
+    #: column can never be mistaken for ages.
+    LABEL_PREFIXES = ("Q", "T", "K", "J", "TR", "MZ", "PZ", "PC", "AR", "Z", "WATER", "ICE")
 
-    def choose_age_column(frame) -> str | None:
+    def label_like_fraction(values) -> float:
+        if not len(values):
+            return 0.0
+        hits = 0
+        for value in values:
+            text = str(value).strip().upper()
+            if text and text[0].isalpha() and any(text.startswith(p) for p in LABEL_PREFIXES):
+                hits += 1
+        return hits / len(values)
+
+    def choose_label_column(frame) -> str | None:
         lowered = {str(column).lower(): str(column) for column in frame.columns}
-        for candidate in AGE_COLUMN_PREFERENCE:
-            if candidate.lower() in lowered:
-                return lowered[candidate.lower()]
-        return None
+        for candidate in LABEL_COLUMN_PREFERENCE:
+            column = lowered.get(candidate.lower())
+            if column is not None and label_like_fraction(frame[column].tolist()) >= 0.5:
+                return column
+        # No preferred name: accept any text column whose values look like SGMC labels.
+        best, best_fraction = None, 0.0
+        for column in frame.columns:
+            if column == "geometry" or str(frame[column].dtype) not in ("object", "str", "string"):
+                continue
+            if str(column).upper() in EXCLUDED_TEXT_COLUMNS:
+                continue
+            fraction = label_like_fraction(frame[column].tolist())
+            if fraction > best_fraction:
+                best, best_fraction = str(column), fraction
+        return best if best_fraction >= 0.5 else None
+
+    def load_unit_text_table(extract_dir: Path) -> dict:
+        """Read ``XX_units.csv`` (mapped-unit descriptions) into a key -> texts map.
+
+        The SGMC state packages ship a unit table alongside the polygon shapefile; its
+        columns carry the words that the label alone cannot express (a playa is often
+        labelled ``Qp`` or ``Qa``).  The table schema is not pinned in the repository, so
+        the key column and the text columns are discovered and *recorded*; a table that
+        cannot be joined is reported, never silently ignored.
+        """
+
+        table = {"files": [], "key_column": None, "rows": 0, "matched_keys": 0}
+        mapping: dict[str, list[str]] = {}
+        for csv_path in sorted(extract_dir.rglob("*.csv")):
+            if "unit" not in csv_path.name.lower():
+                continue
+            try:
+                rows = read_csv_with_fallback(csv_path)
+            except Exception as exc:  # noqa: BLE001
+                report["errors"][f"units:{csv_path.name}"] = repr(exc)[:200]
+                continue
+            if not rows:
+                continue
+            columns = list(rows[0].keys())
+            key_column = next((c for c in columns if c and c.strip().upper()
+                               in ("UNIT_LINK", "SGMC_LABEL", "ORIG_LABEL")), None)
+            if key_column is None:
+                table["files"].append({"file": csv_path.name, "rows": len(rows),
+                                       "used": False, "columns": columns[:40]})
+                continue
+            text_columns = [c for c in columns if c and c != key_column
+                            and c.strip().upper() not in EXCLUDED_TEXT_COLUMNS]
+            for row in rows:
+                key = str(row.get(key_column, "")).strip().upper()
+                if not key:
+                    continue
+                texts = [row[c] for c in text_columns if row.get(c)]
+                if texts:
+                    mapping.setdefault(key, []).extend(str(t) for t in texts)
+            table["files"].append({"file": csv_path.name, "rows": len(rows), "used": True,
+                                   "key_column": key_column, "text_columns": text_columns[:40]})
+            table["key_column"] = key_column
+            table["rows"] += len(rows)
+            table["keys"] = len(mapping)
+        table["mapping"] = mapping
+        return table
 
     def rasterise_sgmc_polygons(paths: list[Path], key: str) -> None:
         """Rasterise SGMC map-unit polygons into the H-34-01 concealment class raster.
@@ -355,6 +430,8 @@ def main() -> int:
             if not chosen:
                 report.setdefault("errors", {})[f"{key}:{archive.name}"] = "no polygon layers in archive"
                 continue
+            unit_table = load_unit_text_table(extract_dir)
+            unit_mapping = unit_table.pop("mapping", {})
             layer_names.append({"archive": archive.name,
                                 "polygon_layers": [item[0].name for item in polygon_layers],
                                 "used": [item[0].name for item in chosen]})
@@ -363,10 +440,10 @@ def main() -> int:
                     frame = pyogrio.read_dataframe(shapefile)
                     if not len(frame):
                         continue
-                    age_column = choose_age_column(frame)
+                    age_column = choose_label_column(frame)
                     if age_column is None:
                         report["errors"][f"{key}:{shapefile.name}"] = (
-                            "no age column; columns: "
+                            "no label-like column; columns: "
                             + ", ".join(str(column) for column in frame.columns)[:300]
                         )
                         continue
@@ -375,11 +452,37 @@ def main() -> int:
                         if column != "geometry"
                         and str(frame[column].dtype) in ("object", "str", "string")
                         and str(column).upper() not in EXCLUDED_TEXT_COLUMNS
+                        and column != age_column
                     ]
-                    classes = classify_units(
-                        frame[age_column].tolist(),
-                        [frame[column].tolist() for column in text_columns],
+                    row_texts = [
+                        [str(value) for value in frame[column].tolist()]
+                        for column in text_columns
+                    ]
+                    # Join the XX_units.csv description table on whatever key column it
+                    # shares with the polygon attributes; unmatched rows simply keep the
+                    # text they already have (never a fabricated description).
+                    join_column = next(
+                        (column for column in frame.columns
+                         if unit_table.get("key_column")
+                         and str(column).upper() == str(unit_table["key_column"]).upper()),
+                        None,
                     )
+                    matched_join = 0
+                    if join_column is not None and unit_mapping:
+                        joined = []
+                        for value in frame[join_column].tolist():
+                            texts = unit_mapping.get(str(value).strip().upper(), [])
+                            if texts:
+                                matched_join += 1
+                            joined.append(" ".join(texts))
+                        row_texts.append(joined)
+                    unit_table.setdefault("joins", []).append({
+                        "layer": shapefile.name,
+                        "join_column": join_column,
+                        "matched_rows": matched_join,
+                        "rows": int(len(frame)),
+                    })
+                    classes = classify_units(frame[age_column].tolist(), row_texts)
                     # Guard against a silent degenerate mapping: if the age column is a
                     # numeric code rather than an age string, every unit would fall into
                     # class 0 and the "prior" would be a constant 1.0 that looks like a
@@ -412,6 +515,7 @@ def main() -> int:
                         },
                         "text_columns_used": [str(column) for column in text_columns][:20],
                         "class_counts": {k: v for k, v in sorted(class_counts.items())},
+                        "unit_table": {k: v for k, v in unit_table.items() if k != "mapping"},
                     }
                     save()
                     projected = project_geometries_to_grid_crs(
@@ -622,13 +726,19 @@ def main() -> int:
                     geometries.extend(shapely.points(east, north).tolist())
                     layers.append({"file": candidate.name, "rows": len(rows), "used": True})
                 else:
-                    meta, _, wkb_geom, _ = pyogrio.read_raw(candidate)
-                    if wkb_geom is None or len(wkb_geom) == 0:
+                    # pyogrio 0.13 (what the workflow installs) has no ``read_raw``;
+                    # ``read_dataframe`` is the supported path and is what the linework
+                    # rasteriser already uses (IR-30-044: the raw reader silently failed
+                    # for every GDR layer on the 2026-10-03 runs).
+                    frame = pyogrio.read_dataframe(candidate)
+                    if not len(frame):
+                        layers.append({"file": candidate.name, "rows": 0, "used": False})
                         continue
-                    raw_geoms = shapely.from_wkb(wkb_geom)
-                    projected = project_geometries_to_grid_crs(raw_geoms, meta.get("crs"))
+                    projected = project_geometries_to_grid_crs(
+                        frame.geometry.tolist(), frame.crs, "EPSG:32611"
+                    )
                     geometries.extend([g for g in projected if g is not None and not shapely.is_empty(g)])
-                    layers.append({"file": candidate.name, "rows": int(len(wkb_geom)), "used": True})
+                    layers.append({"file": candidate.name, "rows": int(len(frame)), "used": True})
             except Exception as exc:  # noqa: BLE001
                 report["errors"][f"{key}:{candidate.name}"] = repr(exc)[:200]
         clip_box = shapely.box(bounds[0], bounds[1], bounds[2], bounds[3])

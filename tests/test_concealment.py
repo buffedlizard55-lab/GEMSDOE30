@@ -63,6 +63,14 @@ def test_concealing_settings_are_detected(text):
     assert is_concealing_setting(text)
 
 
+def test_water_and_lake_labels_escalate(  # noqa: D103
+):
+    assert cover_class("water") == 4
+    assert cover_class("Qa", "shallow lake") == 4
+    assert cover_class("K", "reservoir silt") == 4
+    assert cover_class("Qa", "alluvium") == 3
+
+
 def test_playa_escalates_an_otherwise_old_age_to_the_strongest_class():
     assert cover_class("Pz", "playa deposit") == 4
     assert cover_class("Qa", "alluvial fan") == 3
