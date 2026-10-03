@@ -1,32 +1,142 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Current geological hypotheses · GEMSDOE30</title><link rel="stylesheet" href="assets/site.css"></head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Active geological hypotheses · GEMSDOE30</title>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
 <body>
-<header class="site-header"><div class="nav-wrap"><a class="brand" href="../index.html"><span class="brand-mark">G30</span> GEMSDOE30</a><nav class="nav-links"><a href="../index.html">Home</a><a href="../executive-summary.html">Submission guide</a><a href="leaderboard-analysis.html">Score analysis</a><a href="sources.html">Sources</a></nav></div></header>
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand" href="../index.html"><span class="brand-mark">G30</span> GEMSDOE30</a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="../index.html">Home</a>
+      <a href="../executive-summary.html">Submission guide</a>
+      <a href="leaderboard-analysis.html">Score analysis</a>
+      <a href="sources.html">Sources</a>
+    </nav>
+  </div>
+</header>
 <main>
-<section class="page-intro"><span class="eyebrow">Research register · 2026-10-03 review</span><h1>Five untried hypotheses. None is promoted.</h1><p class="lead">“Untried” means not tested in the inspected repository experiments or identified public owner summaries; it does not prove global novelty. The leading next action is a source/band audit—not an immediate model run. Full protocols and provenance are in <a href="hypotheses.md">the Markdown register</a>.</p></section>
-<div class="notice red"><div class="icon" aria-hidden="true">!</div><div><strong>No weekly slot has been used.</strong><p>H-31-01, H-31-02b, H-32-01, and H-32-05 have measured not-promoted outcomes. H-33-01's 80k gate was void; its 40k sensitivity comparison is active-count matched by the audited code path. No result below is a competition score. Do not rerun or tune against the already-inspected SGMC holdout.</p></div></div>
-<section class="section table-wrap"><h2>Active shortlist — source, mechanism, and falsifiable gate</h2><p class="fine-print">Expected ΔDTI values are low-confidence experiment-planning priors only, not forecasts. A proxy pass is necessary for local screening but cannot establish hidden expert-label performance.</p>
-<table><thead><tr><th>Rank / hypothesis</th><th>Layers and signature</th><th>Why an uncatalogued fault · distinction</th><th>Expected gain / cost</th><th>Official source and access</th><th>Falsifiable gate</th></tr></thead><tbody>
-<tr><td><strong>1 · H-31-04</strong><br>K–Th–U radiometric alteration unmixing</td><td><code>geodawn_rad_u8.tif</code> K, Th, U, total count; ratio stack Th/K, U/K, U/Th. Test ratio-space alteration with along-lineament coherence, not raw magnitude.</td><td>Fluid-rock alteration can form a halo without a mapped surface trace or scarp. Explicit unmixing plus lineament coherence differs from using radiometric bands as ordinary model inputs; lithology-stratified null is required.</td><td>Planning prior <strong>+0.001…+0.012</strong>; low compute cost.</td><td><a href="https://doi.org/10.5066/P93LGLVQ" target="_blank" rel="noopener noreferrer">USGS GeoDAWN, DOI 10.5066/P93LGLVQ ↗</a>. Local data are owner-derived/quantised, not organizer-authenticated. Audit band lineage/schema before freezing.</td><td>Four buffered blocks; compare unmixing/coherence to same-run baseline, raw-band arm, and count-matched spatial null. Require pooled ΔDTI ≥ +0.005, ≥3/4 positive folds, and fresh-seed replication; report near-miss bins and lithology-stratified null.</td></tr>
-<tr><td><strong>2 · H-32-03</strong><br>Geothermometer discordance / blind upflow</td><td>Wellspring chemistry <code>geothermquartz_c</code>, <code>geothermchalc_c</code>, <code>geothermcat_c</code> plus <code>cond_surf</code>; test non-equilibrium temperatures and corridor geometry.</td><td>Chemistry can sample deep fluid pathways above blind faults. Distinct from scalar spring-temperature work; only about 1,000 chemistry sites, so statistical power is limited.</td><td>Planning prior <strong>+0.001…+0.012</strong>; low compute cost after source/schema check.</td><td><a href="https://gdr.openei.org/submissions/1486" target="_blank" rel="noopener noreferrer">GDR 1486 provenance page ↗</a> · <a href="https://gdr.openei.org/submissions/1391" target="_blank" rel="noopener noreferrer">GDR 1391 ↗</a>. Exact chemistry CSV lineage, license, and schema must be reverified; local mirrors are not organizer-authenticated.</td><td>Predeclare discordance formula and lineament tolerance; compare chemistry-only and chemistry×conductance to temperature-only and proximity-matched controls on buffered blocks. Require +0.005, ≥3/4 folds, and fresh-seed confirmation; stop if source/schema audit fails.</td></tr>
-<tr><td><strong>3 · H-32-02</strong><br>Quaternary vent-feeder alignment</td><td>21 GDR 1391 vents (20 basalt, one rhyolite) plus <code>tmi_hg</code>/magnetic edges; test 2+ vents aligned over 2–8 km and continuation along a magnetic dike-like edge.</td><td>Vent chains can expose feeder structures absent from fault catalogues; measured 0/21 vents are within 300 m of a catalogue trace. No inspected local/owner summary uses vent geometry. Volcanic and non-tectonic confounding is substantial.</td><td>Planning prior <strong>+0.001…+0.010</strong>; low compute cost, low power.</td><td><a href="https://gdr.openei.org/submissions/1391" target="_blank" rel="noopener noreferrer">Official GDR 1391 ↗</a>, CC BY 4.0 per catalog. Volcanics ZIP hash-verified through the recorded bridge receipt and rasterized locally; competition rasters remain owner mirrors.</td><td>Freeze vent-pair distance/strike and magnetic-edge tolerance; compare to 1,000 spatially constrained random point sets and magnetic-only controls on blocked holdout. Require positive paired effect in ≥3/4 folds plus fresh-seed confirmation; no post-hoc widening.</td></tr>
-<tr><td><strong>4 · H-31-03</strong><br>Drainage-response faults</td><td>USGS NHD flowlines plus 1–10 m USGS 3DEP DEM; seek strike-aligned knickpoint chains, channel offsets/beheaded channels, and geometry coherent across candidate traces.</td><td>Rivers preserve deformation where a scarp is eroded or buried. No hydrology transform was found in inspected repo/owner summaries. Must distinguish tectonics from lithology, drainage capture, and DEM artefacts.</td><td>Planning prior <strong>+0.002…+0.020</strong>; medium-high data/processing cost.</td><td><a href="https://tnmaccess.nationalmap.gov/api/v1/products?datasets=National%20Hydrography%20Dataset%20(NHD)%20Best%20Resolution&amp;bbox=-119,38.5,-118.5,39" target="_blank" rel="noopener noreferrer">USGS TNM NHD API test-bbox query ↗</a> returned product records for one bbox. Full-ROI coverage, download, terms, and DEM linkage remain unchecked; not yet runnable.</td><td>First obtain and checksum full-ROI NHD/DEM. Then freeze detector and compare to slope-only and spatially matched random controls on buffered blocks; require +0.005 over best, ≥3/4 folds, and fresh-seed confirmation. Incomplete coverage stops the test.</td></tr>
-<tr><td><strong>5 · H-32-04</strong><br>Kinematically constrained Qfaults gap completion</td><td>Quaternary fault traces with recency, slip sense/rate, and length; seek physically consistent gap-extension/continuity more than 300 m from the known catalogue.</td><td>May find unmapped geometry, but INGENIOUS/Qfaults overlaps training labels; a catalogue holdout is circular. Distinct from scarp morphology because it uses fault kinematics rather than topography.</td><td>Conditional prior <strong>+0.005…+0.025</strong>; medium data/analysis cost.</td><td><a href="https://www.osti.gov/dataexplorer/biblio/dataset/1148722" target="_blank" rel="noopener noreferrer">OSTI 1148722 ↗</a> and <a href="https://gdr.openei.org/submissions/616" target="_blank" rel="noopener noreferrer">GDR 616 ↗</a> independent-inventory pages verified; archives/schema/coverage not yet verified. Downloaded GDR 1391 Qfaults rasterizes to zero ROI features.</td><td><strong>Hard gate:</strong> obtain/hash an independent inventory, prove independence from INGENIOUS/Qfaults, and verify ROI coverage. Only then preregister a buffered spatial holdout and require +0.005, ≥3/4 folds, fresh confirmation. Without independent truth, do not score or promote.</td></tr>
-</tbody></table></section>
-<section class="section grid two">
-<article class="card"><p class="kicker">Count-scope rule · IR-30-033</p><h2>Match the count that the score actually uses</h2><p>Report global emitted budget and active scored-domain count separately. Equal global counts do not guarantee equal active counts after a scoring mask. H-31-02b/archived novelty were global-budget matched only; do not retune on those inspected SGMC labels. H-33-01's 40k sensitivity is different: code review confirms selection and random controls are restricted to the score domain, so it is active-count matched.</p><a href="research/novelty-holdout.md">Full emitter comparison ↗</a></article>
-<article class="card"><p class="kicker">Next action</p><h2>H-31-04: audit before scoring</h2><p>Check K–Th–U band lineage, metadata, scaling, and source/schema; then preregister a candidate-vs-baseline spatial holdout and fresh confirmation. Do not tune against the public leaderboard or treat an unverified planning prior as an expected score.</p><a href="research/official-rules-review-2026-10-03.md">Official rules review ↗</a> · <a href="irregularities.html">Open blockers ↗</a></article>
-</section>
-<section class="section table-wrap"><h2>Tested lines — not promoted</h2><table><thead><tr><th>Experiment</th><th>Measured result</th><th>Decision</th></tr></thead><tbody>
-<tr><td>H-31-01 relay connector</td><td>+1.2% credit/pixel over proximity-matched control, below whole near-known annulus.</td><td>Not promoted; same connector feature is closed on these inspected labels.</td></tr>
-<tr><td>H-31-02b reduced-stack scarp orientation</td><td>Spatial DTI 0.165541 vs uniform 0.134833; archived best 0.189270. Strike perturbation removed 5.99% of gain. SGMC screen used 80,392 global dots but 72,310/73,843/80,388 active dots (candidate/random/archive).</td><td>Primary and strike gates failed; SGMC result screen-only, not active-count matched. No rerun on those SGMC labels.</td></tr>
-<tr><td>H-32-01 discharge corridor</td><td>Preregistered screen Δ −0.01494; confirmation Δ −0.01537; 0/4 quadrants positive.</td><td>Failed; not promoted.</td></tr>
-<tr><td>H-32-05 basement/pinch-out edges</td><td>Screen Δ −0.02614; confirmation Δ −0.02591; transform clause passed but coherence floor accepted 99.65% of cells.</td><td>Family failed; oriented-edge subvariant remains untested.</td></tr>
-<tr><td>H-33-01 placement policy</td><td>80k gate void (68,573 vs 80,000 in-domain dots). At 40k, score-first 0.07608 vs 0.0721–0.0725 stratified; code verifies active-count match.</td><td>Registered placement line closed; not a promotion result.</td></tr>
-<tr><td>300 m metric-shaped loss</td><td>Near-miss behavior reproduced; seed-31 DTI Δ +0.000115, only 2/4 folds positive.</td><td>Not promoted; do not continue λ tuning without a new mechanism.</td></tr>
-</tbody></table><p><a href="research/h31-02b-scarp-full-pool-holdout.md">H-31-02b interpretation ↗</a> · <a href="research/h33-01-placement-policy-holdout.md">H-33-01 report ↗</a> · <a href="research/review-checklist-2026-10-03.md">Three-pass review ↗</a></p></section>
-<section class="section"><div class="callout"><h2>No candidate advances to a weekly slot without fresh evidence.</h2><p>Require source checks, a frozen protocol, spatially blocked improvement over a comparable holdout best, fresh-seed confirmation, feature-perturbation stability, and exact-file validation. Public proxy scores and format validation are not competition scores.</p><p><a href="../executive-summary.html">Submission guide</a> · <a href="sources.html">Verified sources</a> · <a href="leaderboard-analysis.html">Score/file analysis</a></p></div></section>
+  <section class="page-intro">
+    <span class="eyebrow">Research register · reviewed 2026-10-03</span>
+    <h1>Five untried geological hypotheses, with gates.</h1>
+    <p class="lead">This active shortlist is bounded by code and public owner summaries inspected in this checkout; it is not a claim about every private or historical run. Each candidate names its observables, physical signature, distinction from prior work, planning prior, cost, official source/access state, and a falsifiable blocked-holdout gate. See the <a href="hypotheses.md">full Markdown register</a> for protocols, history, and evidence.</p>
+  </section>
+
+  <section class="notice red" aria-label="Promotion status">
+    <div class="icon" aria-hidden="true">!</div>
+    <div>
+      <strong>No hypothesis is currently promoted; no weekly slot is approved.</strong>
+      <p>H-31-02r is the strongest measured new feature transform, but its spatial result is split by validation frame and the SGMC top-decile calibration-ratio criterion passes only 2/4 folds. Do not retune against the inspected SGMC labels. The lowest-cost next action is the H-31-04 source/metadata audit, not a submission.</p>
+      <p><a href="research/h33-01-placement-and-scarp-holdout.md">Placement/scarp holdout</a> · <a href="research/verification-checks-results.md">Three-check verification</a> · <a href="irregularities.html">Open irregularities</a></p>
+    </div>
+  </section>
+
+  <section class="section table-wrap" aria-labelledby="shortlist-title">
+    <h2 id="shortlist-title">Active untried shortlist</h2>
+    <p class="fine-print">The +0.005 / 3-of-4 / fresh-seed criterion is a planning gate, not a measured improvement or score forecast. Equal global dot budgets are insufficient: record the active scored-domain count as well. Catalogue-derived holdouts are necessary but biased because known catalogue pixels are masked by the competition metric.</p>
+    <table>
+      <thead><tr>
+        <th>Rank / candidate</th>
+        <th>Layers and physical signature</th>
+        <th>Rationale and distinction from prior work</th>
+        <th>Planning prior / cost</th>
+        <th>Official source and access</th>
+        <th>Falsifiable gate</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>1 · H-31-04</strong><br>Radiometric alteration unmixing along lineaments</td>
+          <td><code>geodawn_rad_u8.tif</code>: K, Th, U, total count; derived Th/K, U/K, U/Th. Test K–Th–U ratio-space alteration plus along-lineament coherence, not raw band magnitude.</td>
+          <td>Fluid-rock alteration may form a halo where no mapped surface trace or scarp exists. A three-endmember/ratio transform coupled to lineament coherence is distinct from using radiometric bands as ordinary model inputs. Ratios may mostly encode lithology, so stratified nulls are mandatory.</td>
+          <td><strong>+0.001…+0.012</strong><br>Low compute cost; source/schema audit first.</td>
+          <td><a href="https://doi.org/10.5066/P93LGLVQ">USGS GeoDAWN, DOI 10.5066/P93LGLVQ</a>. Public-domain catalog record. Local quantized bands are owner-derived mirrors; metadata and source-to-band lineage are not independently authenticated.</td>
+          <td>Checksum and verify bands; freeze unmixing and lineament rules. On four buffered spatial blocks compare against regional baseline, raw-band arm, and count-matched spatial null; require pooled ΔDTI ≥ +0.005 over same-run best, ≥3/4 positive folds and fresh-seed replication, with near-miss and lithology-stratified results reported.</td>
+        </tr>
+        <tr>
+          <td><strong>2 · H-32-03</strong><br>Geothermometer discordance / blind-upflow zoning</td>
+          <td>Wellspring chemistry fields <code>geothermquartz_c</code>, <code>geothermchalc_c</code>, <code>geothermcat_c</code> plus <code>cond_surf</code>. Detect non-equilibrium temperature discordance and test corridors on independent lineaments.</td>
+          <td>Chemistry can sample deep pathways above faults without surface expression. This is different from scalar spring-temperature or thermal-population work. The usable chemistry subset is only about 1,000 sites; power and sample-selection bias are concerns.</td>
+          <td><strong>+0.001…+0.012</strong><br>Low compute cost after source/schema check.</td>
+          <td><a href="https://gdr.openei.org/submissions/1486">GDR 1486</a> records the well/spring mirror provenance; <a href="https://gdr.openei.org/submissions/1391">GDR 1391</a> documents the INGENIOUS compilation. Exact CSV lineage, license, and schema need re-verification; owner mirrors are not organizer-authenticated.</td>
+          <td>Predeclare discordance formula and lineament tolerance. Compare chemistry-only and chemistry×conductance against temperature-only and proximity-matched controls on buffered blocks; require the common +0.005 / 3-of-4 / fresh-seed gate and hold out whole site clusters. Stop if provenance or schema fails.</td>
+        </tr>
+        <tr>
+          <td><strong>3 · H-32-02</strong><br>Quaternary vent-feeder alignment</td>
+          <td>21 GDR 1391 vents (20 basalt, one rhyolite) plus <code>tmi_hg</code>/magnetic-anomaly edges. Test two or more vents aligned over 2–8 km and continuation along a dike-like magnetic edge.</td>
+          <td>Vent chains can expose feeder structures absent from the fault catalogue; 0/21 vents are within 300 m of catalogue traces. No inspected local or public owner summary uses vent geometry. Small n and non-tectonic volcanic controls limit power.</td>
+          <td><strong>+0.001…+0.010</strong><br>Low compute cost; low statistical power.</td>
+          <td><a href="https://gdr.openei.org/submissions/1391">GDR 1391</a> states CC BY 4.0; its Quaternary-volcanics archive was downloaded and hash-verified through the recorded runner bridge. The derived raster remains an owner mirror.</td>
+          <td>Freeze vent-pair distance/strike and magnetic-edge tolerances. Compare with 1,000 spatially constrained random point sets and magnetic-only controls on blocked holdout; require a positive paired effect in ≥3/4 folds and fresh-seed confirmation. Reject rather than widen the search after seeing results.</td>
+        </tr>
+        <tr>
+          <td><strong>4 · H-31-03</strong><br>Drainage-response fault traces</td>
+          <td>USGS NHD flowlines plus 1–10 m USGS 3DEP DEM. Seek strike-aligned knickpoint chains, channel offsets/beheaded channels, and channel geometry coherent across a candidate trace.</td>
+          <td>Drainage may preserve deformation where scarps are eroded or buried. No hydrology transform was found in inspected repository or public owner summaries. Must distinguish tectonics from lithology, drainage capture, and DEM artefacts.</td>
+          <td><strong>+0.002…+0.020</strong><br>Medium-high data/processing cost.</td>
+          <td><a href="https://tnmaccess.nationalmap.gov/api/v1/products?datasets=National%20Hydrography%20Dataset%20(NHD)%20Best%20Resolution&amp;bbox=-119,38.5,-118.5,39">USGS TNM NHD Best Resolution query</a> returned products for one test bbox only. Full ROI coverage, downloads, reuse details, and DEM linkage remain unchecked. 3DEP is public domain.</td>
+          <td>Obtain full-ROI data; checksum and verify schema/coverage before freezing a detector. Compare with slope-only and spatially matched controls on buffered blocks; require +0.005 over best, ≥3/4 folds and fresh-seed confirmation. Incomplete coverage stops the test.</td>
+        </tr>
+        <tr>
+          <td><strong>5 · H-32-04</strong><br>Kinematically constrained Qfaults gap completion <em>(conditional)</em></td>
+          <td>Quaternary traces with recency, slip sense/rate, and length. Test physically consistent gap-extension/continuity beyond 300 m from catalogue pixels.</td>
+          <td>Potentially adds unmapped geometry, but Qfaults/INGENIOUS provenance overlaps training labels; catalogue-only validation is circular. This differs from scarp morphology by using fault kinematics rather than topography. The corrected Qfaults raster is not independent truth.</td>
+          <td><strong>+0.005…+0.025 conditional</strong><br>Medium data/analysis cost.</td>
+          <td><a href="https://www.osti.gov/dataexplorer/biblio/dataset/1148722">OSTI 1148722</a> and <a href="https://gdr.openei.org/submissions/616">GDR 616</a> are official independent-inventory candidates; pages were checked, but archive transfer, schema, and ROI coverage are unverified. The GDR 1391 Qfaults v2 raster was corrected; 1/59,065 footprint pixels is &gt;300 m from catalogue.</td>
+          <td>Hard gate: retrieve/checksum an inventory; verify independence from INGENIOUS/Qfaults and ROI coverage; then preregister blocked holdout. Require +0.005 over count-matched baseline, ≥3/4 folds, and fresh-seed replication. If no independent truth is available, do not score or promote.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section table-wrap" aria-labelledby="measured-title">
+    <h2 id="measured-title">Measured outcomes that constrain the shortlist</h2>
+    <table>
+      <thead><tr><th>Experiment</th><th>Result</th><th>Current decision</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>H-31-02r · 1 m LiDAR scarp dipole + 500 m strike continuity</strong><br><code>step_max</code>, <code>lapneg_max</code>, <code>lappos_max</code>, <code>coh100</code>, <code>strike</code>, <code>lidar_valid</code>, with <code>det_elev_slope</code> fallback.</td>
+          <td>Beats <code>step_max_only</code> by +22.4% screen and +20.2% confirmation. Check 1 is split: catalogue ΔDTI −0.00073 (−0.00261 in the placement report), 2/4 quadrants; SGMC-frame ΔDTI +0.03670, 4/4. Check 2 slopes are 0.9009 (catalogue) and 0.9101 (SGMC); however the SGMC top-decile precision-ratio criterion passes only 2/4 folds. Check 3 removes 57.0% of gain when LiDAR channels are permuted and 97.2% for full topography; unrelated gravity retains 100%.</td>
+          <td><strong>Not promoted.</strong> The dual-frame/three-check gate is incomplete. SGMC labels were inspected; no retuning on those labels. See <a href="research/h33-01-placement-and-scarp-holdout.md">holdout report</a> and <a href="research/verification-checks-results.md">three-check report</a>.</td>
+        </tr>
+        <tr>
+          <td><strong>H-33-01 placement policy</strong><br>Near-splay, mid-relay, far-basin, and 60/25/15% power-law hedge.</td>
+          <td>Near-splay beats uniform placement on catalogue component holdout; hedge comparison has split sign on the 5 km clustered SGMC seeds. The associated H-31-02b/archive dot-budget comparison matched 80,392 global dots but not active counts (72,310 candidate / 73,843 random / 80,388 archive).</td>
+          <td>Report as global-budget matched only, never active-count matched. No SGMC-label retuning. See <a href="irregularities.html">IR-30-037</a> and the <a href="research/h33-01-placement-and-scarp-holdout.md">preregistered report</a>.</td>
+        </tr>
+        <tr>
+          <td><strong>Metric-shaped boundary loss</strong><br>Added to, not substituted for, regional loss.</td>
+          <td>Four-fold screen improved pooled DTI by +0.0019 (3/4 folds), but fresh-seed confirmation was only +0.000115 (2/4). Near-miss conversion reproduced; scored DTI gain did not.</td>
+          <td><strong>Not promoted.</strong> Continue only with a new preregistered design; no claim of improvement. See <a href="research/loss-ablation-holdout.md">paired loss report</a>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section grid two" aria-label="Research rules">
+    <article class="card">
+      <p class="kicker">Validation gate</p>
+      <h2>No slot until blocked holdout passes</h2>
+      <p>Freeze source hashes, recipe, thresholds, folds, seed, and count budget before scoring. Compare against the same-run best and spatial/count-matched controls; report both global budget and active scored-domain counts, near-miss bins, and a fresh-seed confirmation. A catalogue-derived frame is a biased proxy, not private expert truth.</p>
+    </article>
+    <article class="card">
+      <p class="kicker">Evidence boundary</p>
+      <h2>“Untried” is bounded, not absolute</h2>
+      <p>The shortlist excludes tested variants in the inspected repository and public owner summaries. It cannot establish absence of private experiments. Recheck exact layer manifests and provenance before preregistration; if a candidate duplicates a prior arm, replace it before looking at scores.</p>
+    </article>
+  </section>
+
+  <section class="section content">
+    <p>Full protocols, source details, older candidate registers, experiment outputs, and limitations are maintained in the <a href="hypotheses.md">research hypothesis register (Markdown)</a>, <a href="sources.html">source register</a>, and <a href="irregularities.html">irregularity log</a>.</p>
+  </section>
 </main>
-<footer><div class="footer-wrap"><span>Hypotheses are testable plans, not leaderboard predictions</span><span><a href="hypotheses.md">Full register</a> · <a href="../index.html">Home</a></span></div></footer>
-</body></html>
+<footer>
+  <div class="footer-wrap">
+    <span>GEMSDOE30 · hypotheses are proposals, not results</span>
+    <span><a href="../README.md">Project brief</a> · <a href="hypotheses.md">Full register</a></span>
+  </div>
+</footer>
+</body>
+</html>

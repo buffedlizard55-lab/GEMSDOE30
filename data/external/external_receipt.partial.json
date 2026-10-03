@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-03T19:12:26+00:00",
+  "generated_utc": "2026-10-03T21:11:07+00:00",
   "runner": "GitHub Actions (general internet access); the agent sandbox cannot reach these hosts",
   "drivendata_contacted": false,
   "grid_source_note": "Derived rasters use the hash-pinned owner-mirror competition grid. Those bytes are owner-mirrored, not organizer-authenticated; alignment is verified, labels are never learnt from.",
@@ -93,14 +93,20 @@
       "fraction_within_300m_of_catalogue": 0.24938223515234142
     },
     "gdr_qfaults_v2": {
-      "ok": false,
-      "reason": "no features intersect the grid",
+      "path": "data/external/derived_gdr_qfaults_v2_100m_u8.tif",
+      "bytes": 191289,
+      "sha256": "82bdf4e67f16de893caa7a7c16bfe51eac0a712b87db93fff60c1eebef701eb9",
+      "ok": true,
+      "feature_count_in_grid": 1117,
       "layers": [
         {
           "layer": "qfaults_ingenious_nad83conus117_2023-06-27.shp",
           "rows": 22956
         }
-      ]
+      ],
+      "pixels_in_footprint": 59065,
+      "pixels_off_catalogue_gt_300m": 1,
+      "fraction_within_300m_of_catalogue": 0.9999830694997037
     },
     "gdr_paleo": {
       "path": "data/external/derived_gdr_paleo_100m_u8.tif",
@@ -110,7 +116,7 @@
       "feature_count_in_grid": 402,
       "layers": [
         {
-          "file": "Paleo_geothermal_final.shp",
+          "file": "Paleo_geothermal_final.csv",
           "rows": 709,
           "used": true
         }
@@ -118,46 +124,24 @@
       "pixels_in_footprint": 244
     },
     "gdr_volcanics": {
-      "path": "data/external/derived_gdr_volcanics_100m_u8.tif",
-      "bytes": 72349,
-      "sha256": "c219bd644e6f7a4071dc429e29b909a2296967b0657bf456bb6675413ee76cb2",
-      "ok": true,
-      "feature_count_in_grid": 941,
-      "layers": [
-        {
-          "file": "great_basin_flows.shp",
-          "rows": 5281,
-          "used": true
-        },
-        {
-          "file": "great_basin_vents.shp",
-          "rows": 1514,
-          "used": true
-        }
-      ],
-      "pixels_in_footprint": 6776
+      "ok": false,
+      "reason": "no features in grid",
+      "layers": []
     },
     "gdr_2m_probes": {
-      "path": "data/external/derived_gdr_2m_probes_100m_u8.tif",
-      "bytes": 78021,
-      "sha256": "7ac3cfdf2412f7f8a8b82d928115888c510f106f0254fb0b3988448db2f3b6ec",
-      "ok": true,
-      "feature_count_in_grid": 3439,
-      "layers": [
-        {
-          "file": "2m_temperature_probe_n83geo.shp",
-          "rows": 3800,
-          "used": true
-        }
-      ],
-      "pixels_in_footprint": 2700
+      "ok": false,
+      "reason": "no features in grid",
+      "layers": []
     }
   },
   "errors": {
-    "gdr_paleo:Paleo_geothermal_final.csv": "UnicodeDecodeError('utf-8', b'FID,Long_deg_NAD83,Lat_deg_NAD83,Location,State,Deposit_type,Map_unit,Ref_source,Comments\\r\\n1,-115.8682057,38.36521629,Abel Springs,NV,Travertine,Qt,Ayling_2020, \\r\\n2,-"
+    "gdr_paleo:Paleo_geothermal_final.shp": "AttributeError(\"module 'pyogrio' has no attribute 'read_raw'\")",
+    "gdr_volcanics:great_basin_flows.shp": "AttributeError(\"module 'pyogrio' has no attribute 'read_raw'\")",
+    "gdr_volcanics:great_basin_vents.shp": "AttributeError(\"module 'pyogrio' has no attribute 'read_raw'\")",
+    "gdr_2m_probes:2m_temperature_probe_n83geo.shp": "AttributeError(\"module 'pyogrio' has no attribute 'read_raw'\")"
   },
   "stage": "completed",
-  "updated_utc": "2026-10-03T19:12:38+00:00",
+  "updated_utc": "2026-10-03T21:11:20+00:00",
   "python": "3.11.16",
   "imports": {
     "numpy": "2.4.6",
