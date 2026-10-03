@@ -50,9 +50,6 @@ import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-import numpy as np
-import rasterio
-
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "external"
 OUT.mkdir(parents=True, exist_ok=True)
@@ -124,6 +121,12 @@ report: dict = {
 }
 
 
+def save() -> None:
+    """Persist the receipt after every stage so a hard failure still leaves evidence."""
+    report["updated_utc"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    (OUT / "external_receipt.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+
+
 def fetch(url: str, key: str) -> Path | None:
     dest = WORK / f"{key}{Path(url).suffix or '.bin'}"
     try:
@@ -152,10 +155,17 @@ def verify(path: Path, expected: str, label: str) -> None:
 
 
 def main() -> int:
+    import numpy as np
     import pyogrio
+    import rasterio
     import shapely
-    from rasterio.features import rasterize
     from pyproj import Transformer
+    from rasterio.features import rasterize
+
+    report["python"] = sys.version.split()[0]
+    report["imports"] = {"numpy": np.__version__, "rasterio": rasterio.__version__,
+                         "shapely": shapely.__version__}
+    save()
 
     # ---- 1. competition grid -------------------------------------------------
     grid_dir = WORK / "grid"
@@ -180,6 +190,7 @@ def main() -> int:
     }
     bounds = rasterio.transform.array_bounds(shape[0], shape[1], transform)
     transformer = Transformer.from_crs("EPSG:4326", "EPSG:32611", always_xy=True)
+    save()
 
     def write_raster(path: Path, array: np.ndarray, dtype: str, nodata: int) -> dict:
         profile = {
@@ -268,6 +279,7 @@ def main() -> int:
             ),
         })
         report["derived"][key] = receipt
+        save()
         print(f"[derive] {key}: {int(inside.sum())} px, {int(off_catalogue.sum())} px >300 m off catalogue", flush=True)
 
     def rasterise_points_or_polygons(archive: Path, key: str) -> None:
@@ -318,6 +330,7 @@ def main() -> int:
         receipt.update({"ok": True, "feature_count_in_grid": len(kept), "layers": layers,
                         "pixels_in_footprint": int(inside.sum())})
         report["derived"][key] = receipt
+        save()
         print(f"[derive] {key}: {int(inside.sum())} px", flush=True)
 
     # ---- 2. SGMC state-map fault linework ------------------------------------
@@ -329,6 +342,7 @@ def main() -> int:
             )
     if sgmc_paths:
         rasterise_linework(sgmc_paths, "sgmc_faults")
+    save()
 
     # ---- 3. GDR INGENIOUS layers ---------------------------------------------
     if (path := fetch(SOURCES["gdr_qfaults_v2"]["url"], "gdr_qfaults_v2")):
@@ -336,6 +350,7 @@ def main() -> int:
     for key in ("gdr_paleo", "gdr_volcanics", "gdr_2m_probes"):
         if (path := fetch(SOURCES[key]["url"], key)):
             rasterise_points_or_polygons(path, key)
+        save()
     for key in ("gdr_qfaults_v2", "gdr_paleo", "gdr_volcanics", "gdr_2m_probes"):
         if key in report["downloads"]:
             report["downloads"][key].update(
@@ -346,12 +361,16 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    report["stage"] = "started"
+    save()  # stub receipt: a hard crash still leaves an auditable file for the commit step
     try:
         code = main()
+        report["stage"] = "completed"
     except Exception as exc:  # noqa: BLE001 - always leave an auditable receipt
         report["fatal"] = repr(exc)
         report["trace"] = traceback.format_exc()[-2500:]
         print(report["trace"], file=sys.stderr)
+        report["stage"] = "failed"
         code = 1
     receipt_path = OUT / "external_receipt.json"
     receipt_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
