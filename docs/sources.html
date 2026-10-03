@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Verified sources · GEMSDOE30</title><link rel="stylesheet" href="assets/site.css"></head>
+<body>
+<header class="site-header"><div class="nav-wrap"><a class="brand" href="../index.html"><span class="brand-mark">G30</span> GEMSDOE30</a><nav class="nav-links"><a href="../index.html">Home</a><a href="../executive-summary.html">Submission guide</a><a href="hypotheses.html">Hypotheses</a><a href="leaderboard-analysis.html">Score analysis</a></nav></div></header>
+<main>
+<section class="page-intro"><span class="eyebrow">Source register · checked 2026-10-03</span><h1>Primary evidence, with boundaries.</h1><p class="lead">The links below are authoritative starting points. “Read” means the source page text was retrieved; it does not imply linked data files were downloaded, checksummed, aligned, or independently scored.</p></section>
+<div class="notice"><div class="icon" aria-hidden="true">i</div><div><strong>No password handling. No source scraping.</strong><p>The competition data page redirects to login. DrivenData's Terms of Use prohibit automated website monitoring/copying; this project does not scrape the leaderboard. Public-source archive pages can be read here, but binary retrieval may still fail in this environment.</p></div></div>
+<section class="section">
+<div class="section-head"><div><span class="eyebrow">Official competition</span><h2>Rules, metric, and submission format</h2></div><p>Use current official terms before any final upload; competition rules can change.</p></div>
+<div class="grid two">
+<article class="card"><h3>Problem description</h3><p>Specifies the distance-weighted Tversky metric, `R=300 m`, `alpha=0.2`, `beta=0.8`, the 100 m input-grid description, and single-band float32 GeoTIFF requirements.</p><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/" target="_blank" rel="noopener noreferrer">Read the problem description ↗</a></article>
+<article class="card"><h3>Official rules PDF · NLR</h3><p>§3.2 calls for generative-AI disclosure in the narrative if used; §3.4/3.5 cover weekly feedback submissions and one final entry. Appendix A.1's 5:00 p.m. ET cutoff differs in clock time from the current homepage text.</p><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf" target="_blank" rel="noopener noreferrer">Read official rules ↗</a></article>
+<article class="card"><h3>Leaderboard snapshot</h3><p>Read on 2026-10-03: displayed leader DARD at 0.3195; rank-15 `wbg1` at 0.2600. Current public page is dynamic and does not prove which external TIFF produced a score.</p><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/" target="_blank" rel="noopener noreferrer">Open leaderboard ↗</a></article>
+<article class="card"><h3>Terms of Use</h3><p>The prohibited-uses clause disallows robots/spiders/automatic processes to monitor or copy the website. No scheduled leaderboard crawler is included.</p><a href="https://www.drivendata.org/termsofuse/" target="_blank" rel="noopener noreferrer">Read terms ↗</a></article>
+</div>
+</section>
+<section class="section">
+<div class="section-head"><div><span class="eyebrow">Geoscience</span><h2>Official and primary data</h2></div><p>Access/license statements were checked at catalog level. Files still require local byte-level and geospatial verification.</p></div>
+<div class="grid two">
+<article class="card"><h3>USGS GeoDAWN</h3><p>Airborne magnetic and radiometric surveys across northwestern Great Basin Nevada and California; DOI 10.5066/P93LGLVQ. The release describes survey data and processing; no raster binary is in this checkout.</p><a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7" target="_blank" rel="noopener noreferrer">USGS ScienceBase ↗</a></article>
+<article class="card"><h3>INGENIOUS · GDR 1391</h3><p>DOE GDR catalog says publicly accessible, CC BY 4.0, and lists 2 m temperature probes, paleogeothermal features, Quaternary volcanics, geodetic models, seismicity, and wells/springs. Direct shell HEAD requests to the <a href="https://gdr.openei.org/files/1391/2m_temperature_probe_INGENIOUS_regional_data.zip">1.03 MB probe ZIP</a>, <a href="https://gdr.openei.org/files/1391/paleo_geothermal_regional.zip">82 kB paleogeothermal ZIP</a>, and <a href="https://gdr.openei.org/files/1391/great_basin_q_volcanics.zip">9.44 MB volcanics ZIP</a> failed with TLS errors; no archive bytes or hashes were verified.</p><a href="https://gdr.openei.org/submissions/1391" target="_blank" rel="noopener noreferrer">Open GDR record ↗</a></article>
+<article class="card"><h3>USGS 3-D Great Basin temperature model</h3><p>Version 1.1, DOI 10.5066/P149FR54. USGS catalog states public access/public-domain license. It is a regional subsurface thermal prior, not a fault map.</p><a href="https://data.usgs.gov/datacatalog/data/USGS:65b3fe07d34e36a390458ce9" target="_blank" rel="noopener noreferrer">USGS Data Catalog ↗</a></article>
+<article class="card"><h3>INGENIOUS project context</h3><p>Great Basin Center for Geothermal Energy project description, collaborators, scope, and cited data-release sources.</p><a href="https://gbcge.org/current-projects/ingenious/" target="_blank" rel="noopener noreferrer">GBCGE project page ↗</a></article>
+</div>
+</section>
+<section class="section">
+<div class="section-head"><div><span class="eyebrow">Methods</span><h2>Loss-method source</h2></div></div>
+<div class="card"><h3>Kervadec et al. · Boundary loss for highly unbalanced segmentation</h3><p>Preprint first submitted in 2018; MIDL conference publication in PMLR 2019. It proposes complementing region losses with a boundary/distance term and reports medical-segmentation results. It does not establish GEMS fault-mapping gains.</p><a href="https://proceedings.mlr.press/v102/kervadec19a.html" target="_blank" rel="noopener noreferrer">PMLR paper ↗</a> · <a href="https://arxiv.org/abs/1812.07032" target="_blank" rel="noopener noreferrer">arXiv record ↗</a></div>
+</section>
+<section class="section content"><p>Full claim-by-claim verification notes and limitations: <a href="sources.md">source register (Markdown)</a>. See also the <a href="score-ledger.csv">unverified historical score ledger</a> and <a href="irregularities.html">irregularity register</a>.</p></section>
+</main>
+<footer><div class="footer-wrap"><span>Source text read does not equal data-file authentication</span><span><a href="../index.html">Home</a> · <a href="../README.md">Project brief</a></span></div></footer>
+</body></html>
