@@ -30,6 +30,11 @@ SOURCES (all free, all official, licence recorded per item)
 OUTPUTS (committed back to the repository, small and auditable)
 --------------------------------------------------------------
 data/external/derived_*_100m*.tif   rasterised layers on the exact competition grid
+                                    incl. the H-34-01 concealment classes
+                                    (derived_sgmc_cover_100m_u8.tif: 0-4 per
+                                    src/gemsdoe30/concealment.py, 255 = unmapped)
+                                    and the concealed/inferred linework subset
+                                    (derived_sgmc_concealed_100m_u8.tif)
 data/external/external_receipt.json download URLs, byte counts, SHA-256 values,
                                     feature counts, footprint coverage, licence
 
@@ -52,6 +57,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+# The concealment class mapping (H-34-01) lives in src/ so it is unit-tested in a
+# session sandbox; the runner uses the same code path, not a copy of it.
+sys.path.insert(0, str(ROOT / "src"))
 OUT = ROOT / "data" / "external"
 OUT.mkdir(parents=True, exist_ok=True)
 WORK = Path(tempfile.mkdtemp(prefix="gems_ext_"))
@@ -255,19 +263,229 @@ def main() -> int:
     transformer = Transformer.from_crs("EPSG:4326", "EPSG:32611", always_xy=True)
     save()
 
-    def write_raster(path: Path, array: np.ndarray, dtype: str, nodata: int) -> dict:
+    def write_raster(path: Path, array: np.ndarray, dtype: str, nodata: int,
+                     *, outside_value: int = 0) -> dict:
+        """Write a single-band raster on the competition grid, outside footprint set.
+
+        ``outside_value`` defaults to 0, which is right for the evidence layers (a
+        positive value means "evidence here").  The concealment raster passes its own
+        nodata code instead: class 0 there means *mapped bedrock*, and conflating that
+        with "outside the map" would fabricate cover-class-0 data outside the footprint.
+        """
         profile = {
             "driver": "GTiff", "dtype": dtype, "count": 1, "height": shape[0],
             "width": shape[1], "crs": crs, "transform": transform,
             "compress": "deflate", "nodata": nodata, "predictor": 2,
         }
+        payload = np.where(footprint, array, outside_value)
         with rasterio.open(path, "w", **profile) as dataset:
-            dataset.write(array.astype(dtype), 1)
+            dataset.write(payload.astype(dtype), 1)
         return {
             "path": str(path.relative_to(ROOT)),
             "bytes": path.stat().st_size,
             "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
         }
+
+    def list_archive_members(paths: list[Path], key: str) -> None:
+        """Record every member (name + uncompressed size) of an archive, for audit.
+
+        Added while extending this script for H-34-01: the earlier receipt recorded
+        only the layers the linework pass happened to read, so the presence or absence
+        of SGMC map-unit *polygon* layers could not be checked from the receipt alone.
+        """
+
+        listing = {}
+        for archive in paths:
+            try:
+                with zipfile.ZipFile(archive) as handle:
+                    listing[archive.name] = [
+                        {"name": item.filename, "bytes": int(item.file_size)}
+                        for item in handle.infolist()
+                    ]
+            except Exception as exc:  # noqa: BLE001
+                report["errors"][f"archive:{archive.name}"] = repr(exc)[:200]
+        report.setdefault("archives", {})[key] = listing
+        save()
+
+    # SGMC map-unit attribute columns, preferred in this order.  The tables are known
+    # to carry an ``AGE`` field; the alternatives are recorded so a schema drift fails
+    # loudly in the receipt rather than silently skipping the layer.
+    AGE_COLUMN_PREFERENCE = ("AGE", "AGE_CODE", "ROCKAGE", "MAJOR1", "UNIT_AGE", "AGE_UNIT")
+    #: Columns that are geometry blobs or ESRI bookkeeping, never unit descriptions.
+    EXCLUDED_TEXT_COLUMNS = {"GEOM", "WEB_GEOM", "SHAPE", "SHAPE_LENG", "SHAPE_LEN",
+                             "SHAPE_AREA", "SHAPE_LENGTH", "OBJECTID", "FID", "SOURCE"}
+
+    def choose_age_column(frame) -> str | None:
+        lowered = {str(column).lower(): str(column) for column in frame.columns}
+        for candidate in AGE_COLUMN_PREFERENCE:
+            if candidate.lower() in lowered:
+                return lowered[candidate.lower()]
+        return None
+
+    def rasterise_sgmc_polygons(paths: list[Path], key: str) -> None:
+        """Rasterise SGMC map-unit polygons into the H-34-01 concealment class raster.
+
+        Classes come from :mod:`gemsdoe30.concealment` (age rank, escalated by a
+        playa/lake/evaporite setting).  Higher classes are rasterised last so that
+        where units overlap the more concealing class wins.  At 100 m the *generalised*
+        polygon layer is used in preference to the detailed one when both are present,
+        because the extra vertices cannot add information at this resolution.
+        """
+
+        from gemsdoe30.concealment import COVER_CLASS_TABLE, NODATA as COVER_NODATA, classify_units
+
+        merged = np.full(shape, COVER_NODATA, dtype=np.uint8)
+        layer_names = []
+        for archive in paths:
+            extract_dir = WORK / f"x_{key}_{archive.stem}"
+            extract_dir.mkdir(parents=True, exist_ok=True)
+            with zipfile.ZipFile(archive) as handle:
+                handle.extractall(extract_dir)
+            polygon_layers = []
+            for shapefile in sorted(extract_dir.rglob("*.shp")):
+                try:
+                    info = pyogrio.read_info(shapefile)
+                except Exception as exc:  # noqa: BLE001
+                    report["errors"][f"{key}:{shapefile.name}"] = repr(exc)[:200]
+                    continue
+                if "poly" in str(info.get("geometry_type", "")).lower():
+                    polygon_layers.append((shapefile, int(info.get("features") or 0)))
+            preferred = [item for item in polygon_layers if "det" not in item[0].name.lower()]
+            chosen = preferred or polygon_layers
+            if not chosen:
+                report.setdefault("errors", {})[f"{key}:{archive.name}"] = "no polygon layers in archive"
+                continue
+            layer_names.append({"archive": archive.name,
+                                "polygon_layers": [item[0].name for item in polygon_layers],
+                                "used": [item[0].name for item in chosen]})
+            for shapefile, _ in chosen:
+                try:
+                    frame = pyogrio.read_dataframe(shapefile)
+                    if not len(frame):
+                        continue
+                    age_column = choose_age_column(frame)
+                    if age_column is None:
+                        report["errors"][f"{key}:{shapefile.name}"] = (
+                            "no age column; columns: "
+                            + ", ".join(str(column) for column in frame.columns)[:300]
+                        )
+                        continue
+                    text_columns = [
+                        column for column in frame.columns
+                        if column != "geometry"
+                        and str(frame[column].dtype) in ("object", "str", "string")
+                        and str(column).upper() not in EXCLUDED_TEXT_COLUMNS
+                    ]
+                    classes = classify_units(
+                        frame[age_column].tolist(),
+                        [frame[column].tolist() for column in text_columns],
+                    )
+                    # Guard against a silent degenerate mapping: if the age column is a
+                    # numeric code rather than an age string, every unit would fall into
+                    # class 0 and the "prior" would be a constant 1.0 that looks like a
+                    # valid null result.  Refuse to publish such a layer.
+                    alphabetic = sum(
+                        1 for value in frame[age_column].tolist()
+                        if any(character.isalpha() for character in str(value))
+                    )
+                    class0_fraction = (sum(1 for value in classes if int(value) == 0)
+                                       / max(len(classes), 1))
+                    if alphabetic < 0.5 * len(frame) or class0_fraction > 0.98:
+                        report["errors"][f"{key}:{shapefile.name}"] = (
+                            "degenerate class mapping: age column "
+                            f"{age_column!r} alphabetic_fraction={alphabetic / max(len(frame), 1):.3f} "
+                            f"class0_fraction={class0_fraction:.3f}; layer skipped"
+                        )
+                        save()
+                        continue
+                    class_counts: dict[int, int] = {}
+                    for value in classes:
+                        class_counts[int(value)] = class_counts.get(int(value), 0) + 1
+                    report.setdefault("inventory_attributes", {})[
+                        f"{key}:{shapefile.name}"
+                    ] = {
+                        "rows": int(len(frame)),
+                        "age_column": age_column,
+                        "age_top_values": {
+                            str(k)[:60]: int(v)
+                            for k, v in frame[age_column].astype(str).value_counts().head(20).items()
+                        },
+                        "text_columns_used": [str(column) for column in text_columns][:20],
+                        "class_counts": {k: v for k, v in sorted(class_counts.items())},
+                    }
+                    save()
+                    projected = project_geometries_to_grid_crs(
+                        frame.geometry.tolist(), frame.crs, "EPSG:32611"
+                    )
+                    clip_box = shapely.box(bounds[0], bounds[1], bounds[2], bounds[3])
+                    pairs = []
+                    for geometry, value in zip(projected.tolist(), classes):
+                        if geometry is None or shapely.is_empty(geometry):
+                            continue
+                        if not shapely.intersects(geometry, clip_box):
+                            continue
+                        pairs.append((value, geometry))
+                    if not pairs:
+                        continue
+                    # Ascending class order: the most concealing unit wins an overlap.
+                    pairs.sort(key=lambda item: item[0])
+                    layer_raster = rasterize(
+                        [(geometry, int(value)) for value, geometry in pairs],
+                        out_shape=shape, transform=transform, fill=COVER_NODATA,
+                        dtype="uint8", all_touched=False,
+                    )
+                    mapped = layer_raster != COVER_NODATA
+                    # Merge archives: keep whatever is mapped, and on a double-mapped
+                    # cell keep the more concealing class.
+                    merged = np.where(
+                        mapped & (merged == COVER_NODATA), layer_raster,
+                        np.where(mapped & (layer_raster > merged), layer_raster, merged),
+                    ).astype(np.uint8)
+                    print(f"[derive] {key}: {shapefile.name} -> {int(mapped.sum())} px mapped", flush=True)
+                except Exception as exc:  # noqa: BLE001
+                    report["errors"][f"{key}:{shapefile.name}"] = repr(exc)[:300]
+                    save()
+        mapped_total = int((merged != COVER_NODATA).sum())
+        if mapped_total == 0:
+            report["derived"][key] = {"ok": False, "reason": "no mapped polygon cells", "layers": layer_names}
+            return
+        from scipy.ndimage import distance_transform_edt
+        distance_to_catalogue = distance_transform_edt(~labels)
+        per_class = {}
+        for value, description in COVER_CLASS_TABLE.items():
+            cells = merged == value
+            count = int(cells.sum())
+            if count == 0:
+                per_class[str(value)] = {"pixels": 0, "description": description}
+                continue
+            per_class[str(value)] = {
+                "pixels": count,
+                "description": description,
+                "on_catalogue_pixels": int((cells & labels).sum()),
+                "fraction_within_300m_of_catalogue": float((distance_to_catalogue[cells] <= 3).mean()),
+                "median_distance_to_catalogue_px": float(np.median(distance_to_catalogue[cells])),
+            }
+        receipt = write_raster(OUT / f"derived_{key}_100m_u8.tif", merged, "uint8",
+                               COVER_NODATA, outside_value=COVER_NODATA)
+        receipt.update({
+            "ok": True,
+            "class_table": {str(k): v for k, v in COVER_CLASS_TABLE.items()},
+            "nodata": COVER_NODATA,
+            "footprint_pixels": int(footprint.sum()),
+            "mapped_pixels_in_footprint": int(((merged != COVER_NODATA) & footprint).sum()),
+            "fraction_of_footprint_mapped": float(((merged != COVER_NODATA) & footprint).sum() / footprint.sum()),
+            "layers": layer_names,
+            "per_class": per_class,
+            "confound_note": (
+                "Per-class distance-to-catalogue statistics are the confound check: if a "
+                "concealment class is simply 'far from the catalogue' its apparent value "
+                "would be an artefact, which is why the experiment uses a count- and "
+                "distance-matched control (H-34-01 preregistration)."
+            ),
+        })
+        report["derived"][key] = receipt
+        save()
+        print(f"[derive] {key}: {mapped_total} px mapped on the grid", flush=True)
 
     def rasterise_linework(paths: list[Path], key: str, filter_terms=("fault", "thrust")) -> None:
         """Rasterise line features mentioning fault/thrust onto the competition grid."""
@@ -437,7 +655,15 @@ def main() -> int:
                 {k: SOURCES[key][k] for k in ("licence", "what", "landing")}
             )
     if sgmc_paths:
+        list_archive_members(sgmc_paths, "sgmc")
         rasterise_linework(sgmc_paths, "sgmc_faults")
+        # H-34-01: the concealed/inferred subset of the same linework is the
+        # mapping-effort signal inside the fault layer itself; keep it separate so the
+        # polygon cover prior can be cross-checked against it.
+        rasterise_linework(sgmc_paths, "sgmc_concealed",
+                           filter_terms=("concealed", "inferred", "queried"))
+        # H-34-01: map-unit polygons -> substrate-concealment classes.
+        rasterise_sgmc_polygons(sgmc_paths, "sgmc_cover")
     save()
 
     # ---- 3. GDR INGENIOUS layers ---------------------------------------------

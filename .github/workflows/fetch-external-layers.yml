@@ -27,6 +27,9 @@ on:
     paths:
       - ".github/workflows/fetch-external-layers.yml"
       - "scripts/fetch_external_layers.py"
+      # The H-34-01 concealment class mapping is imported by the fetch script, so a
+      # change to it must re-derive the cover raster on the runner.
+      - "src/gemsdoe30/concealment.py"
   workflow_dispatch:
 
 permissions:
