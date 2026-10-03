@@ -69,24 +69,68 @@ def main() -> int:
     research = ROOT / "docs" / "research"
     downloads = ROOT / "docs" / "downloads"
 
+    # Which artifacts the site actually links, read from the pages themselves
+    # rather than from a manifest field a builder may not set.
+    site_html = ""
+    for page in (ROOT / "index.html", ROOT / "executive-summary.html"):
+        if page.is_file():
+            site_html += page.read_text(encoding="utf-8", errors="replace")
+
+    def _nested(manifest: dict, *keys: str):
+        """Read a scalar from either the flat or the nested sidecar schema."""
+        for key in keys:
+            if manifest.get(key) is not None:
+                return manifest[key]
+        for block in ("validation_published_format", "validation_all_cells_finite", "value_guarantees"):
+            block_data = manifest.get(block)
+            if isinstance(block_data, dict):
+                for key in keys:
+                    if block_data.get(key) is not None:
+                        return block_data[key]
+        return None
+
     # Downloads inventory straight from the published manifests.
     download_entries = []
     for manifest_path in sorted(downloads.glob("*.json")):
         manifest = load_json(manifest_path) or {}
-        tif_name = manifest.get("output_file") or manifest_path.stem + ".tif"
+        # Sidecars disagree on whether `output_file` is a bare filename or a
+        # repo-relative path; joining a path onto `downloads` silently produced
+        # `docs/downloads/docs/downloads/x.tif` and reported every artifact as
+        # missing. Reduce to the basename and resolve inside `downloads`.
+        raw_name = manifest.get("output_file") or (manifest_path.stem + ".tif")
+        tif_name = Path(str(raw_name)).name
         tif_path = downloads / tif_name
+        present = tif_path.is_file()
+        measured_sha = sha256_file(tif_path) if present else None
+        claimed_sha = manifest.get("output_sha256")
+        published_passed = _nested(manifest, "published_format_compliant", "passed")
+        strict_passed = _nested(manifest, "whole_raster_range_diagnostic_passed")
+        if strict_passed is None:
+            strict_block = manifest.get("validation_all_cells_finite")
+            strict_passed = strict_block.get("passed") if isinstance(strict_block, dict) else None
+        if published_passed is None:
+            published_block = manifest.get("validation_published_format")
+            published_passed = published_block.get("passed") if isinstance(published_block, dict) else None
+        all_in_range = _nested(manifest, "all_cells_in_0_1")
+        nan_cells = _nested(manifest, "nan_cells_anywhere")
         entry = {
             "manifest": manifest_path.name,
-            "file": tif_name,
-            "present": tif_path.is_file(),
-            "sha256": manifest.get("output_sha256") or (sha256_file(tif_path) if tif_path.is_file() else None),
+            "file": f"docs/downloads/{tif_name}",
+            "present": present,
+            "sha256": measured_sha or claimed_sha,
+            "sha256_matches_manifest": (measured_sha == claimed_sha) if (present and claimed_sha) else None,
             "outside_convention": manifest.get("outside_convention", "unknown; inspect the sidecar"),
-            "published_format_compliant": manifest.get("published_format_compliant"),
-            "whole_raster_range_diagnostic_passed": manifest.get("whole_raster_range_diagnostic_passed"),
-            "site_linked": manifest.get("site_linked"),
+            "published_format_compliant": published_passed,
+            "whole_raster_range_diagnostic_passed": strict_passed,
+            "all_cells_finite_and_in_range": all_in_range,
+            "nan_cells_anywhere": nan_cells,
+            "range_error_immune": bool(manifest.get("range_error_immunity", {}).get("immune_to_whole_raster_range_check"))
+            if isinstance(manifest.get("range_error_immunity"), dict)
+            else None,
+            "site_linked": (tif_name in site_html) or None,
             "submission_recommendation": manifest.get("submission_recommendation", False),
             "run_name": manifest.get("run_name"),
-            "note": manifest.get("note"),
+            "note": manifest.get("note") or manifest.get("drivendata_note"),
             "performance_status": manifest.get("performance_status", "unscored"),
         }
         download_entries.append(entry)
@@ -280,10 +324,39 @@ def main() -> int:
         "submission_format": {
             "published_outside_convention": "null/NaN outside the data bounds; finite probabilities in [0, 1] inside",
             "official_problem_description": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-            "builder_default": "NaN outside",
-            "zero_outside": "nonstandard diagnostic only; not linked as a submission-format download",
+            "builder_default": "zeros outside (range-error immune); --outside nan available for the literal spec reading",
+            "zero_outside": (
+                "primary published convention for this project since 2026-10-03. Legal on two verified "
+                "grounds: the organizer's own reference solution writes its example with no nodata tag and "
+                "finite values everywhere, and the owner ledger records r7-nms3-dem10-scarp_0c9199f14e62 = "
+                "0.1294 beside ..._allfinite = 0.1294, i.e. identical scores for both encodings. See IR-30-045."
+            ),
             "historical_range_error_file_identified": False,
-            "historical_range_error_cause_diagnosed": False,
+            "historical_range_error_cause_diagnosed": True,
+            "historical_range_error_cause": (
+                "Two mechanisms measured on the pin-matched mirrors (IR-30-044): training_features.tif "
+                "declares nodata as the float32 sentinel -3.4028234663852886e+38 and carries it on 3,061 "
+                "pixels inside the 5,167,373-pixel scoring footprint per band (band 6 tc: 3,073; 58,171 "
+                "band-pixels total); and band 1 calls only 5,165,852 pixels valid against the template's "
+                "5,167,373, so a feature-derived footprint mask strands exactly 3,061 scored pixels as NaN. "
+                "Either alone produces the portal's range rejection. The specific trigger in the one "
+                "historical upload is still inferred, not proven: that file was never obtained."
+            ),
+            "range_error_root_cause_record": "docs/research/range-error-root-cause-2026-10-03.md",
+            "hardened_builder": "scripts/build_portal_submission.py",
+            "known_faults_masked_from_scoring": {
+                "value": True,
+                "source": "https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516",
+                "quote": (
+                    "Pixels corresponding to known USGS/INGENIOUS faults are masked / excluded from "
+                    "evaluation, so they do not count towards penalty terms. Re-evaluation will also "
+                    "mask/exclude the existing USGS/INGENIOUS faults."
+                ),
+                "consequence": (
+                    "Probability mass on catalogue pixels earns no TP and no FP, so it is pure waste of the "
+                    "emission budget. Every candidate must report dots_on_catalogue. See IR-30-047."
+                ),
+            },
             "local_validation_guarantees_portal_acceptance": False,
         },
         "promotion_gates": gates,

@@ -1,0 +1,229 @@
+{
+  "schema_version": 3,
+  "run_name": "edge-emitter-session30",
+  "note": "GEMSDOE30 EDGE emitter, hybrid belief field, 80,000 dots; unpromoted research artifact (see docs/research/emitter-opt-holdout.md)",
+  "output_file": "gemsdoe30-edge-hybrid-80k-02845bd4-nan.tif",
+  "output_sha256": "f87d3fc008230ec12a2b2ad260de643d15b8e474135d28020dafd2c784d2cbd5",
+  "prediction_array_sha256": "fa1ea07cd1f5147e481cf85a7baabd51f52135f0adad4099fd85cdde37d7eeda",
+  "outside_convention": "NaN outside; matches published GEMS format",
+  "published_format_compliant": true,
+  "template_file": "data/raw/sample_submission.tif",
+  "created_utc": "2026-10-03T23:24:33+00:00",
+  "format_validation": {
+    "path": "docs/downloads/gemsdoe30-edge-hybrid-80k-02845bd4-nan.tif",
+    "passed": true,
+    "checks": [
+      {
+        "name": "template_single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "float32",
+        "passed": true,
+        "detail": "dtypes=('float32',)"
+      },
+      {
+        "name": "epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "template_epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "shape_matches_template",
+        "passed": true,
+        "detail": "output=(3730, 3292) template=(3730, 3292)"
+      },
+      {
+        "name": "transform_matches_template",
+        "passed": true,
+        "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "100m_north_up_grid",
+        "passed": true,
+        "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "finite_and_in_range_inside_footprint",
+        "passed": true,
+        "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+      },
+      {
+        "name": "null_outside_template_footprint",
+        "passed": true,
+        "detail": "outside_pixels=7111787; null/NaN/nodata required"
+      },
+      {
+        "name": "whole_raster_finite_range_diagnostic_advisory",
+        "passed": true,
+        "detail": "advisory only: whole-array diagnostic found 7111787 NaN/Inf cell(s); this is not a diagnosis of portal behavior; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+      },
+      {
+        "name": "template_readable",
+        "passed": true,
+        "detail": "shape=(3730, 3292)"
+      }
+    ]
+  },
+  "whole_raster_range_diagnostic": {
+    "path": "docs/downloads/gemsdoe30-edge-hybrid-80k-02845bd4-nan.tif",
+    "passed": false,
+    "checks": [
+      {
+        "name": "template_single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "float32",
+        "passed": true,
+        "detail": "dtypes=('float32',)"
+      },
+      {
+        "name": "epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "template_epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "shape_matches_template",
+        "passed": true,
+        "detail": "output=(3730, 3292) template=(3730, 3292)"
+      },
+      {
+        "name": "transform_matches_template",
+        "passed": true,
+        "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "100m_north_up_grid",
+        "passed": true,
+        "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "finite_and_in_range_inside_footprint",
+        "passed": true,
+        "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+      },
+      {
+        "name": "finite_in_range_outside_footprint_diagnostic",
+        "passed": false,
+        "detail": "outside_pixels=7111787; finite in-range values required for the nonstandard whole-array diagnostic (finite=0)"
+      },
+      {
+        "name": "whole_raster_finite_range_diagnostic",
+        "passed": false,
+        "detail": "whole-array diagnostic found 7111787 NaN/Inf cell(s); this is not a diagnosis of portal behavior"
+      },
+      {
+        "name": "template_readable",
+        "passed": true,
+        "detail": "shape=(3730, 3292)"
+      }
+    ]
+  },
+  "whole_raster_range_diagnostic_passed": false,
+  "performance_status": "unscored; format validation is not a score",
+  "edge_emitter": {
+    "field": "hybrid",
+    "field_definition": "geometric mean of the proximity and external fields",
+    "emitter": "edge_select (expected marginal credit greedy)",
+    "emitter_truth_mass": 80000.0,
+    "emitter_max_dots_cap": 200000,
+    "edge_accepted": 160674,
+    "cap_limited": false,
+    "dots": 80000,
+    "dots_on_training_catalogue": 0,
+    "catalogue_proxy_dti_NOT_A_SCORE": 0.1779398,
+    "catalogue_proxy_note": "The catalogue proxy is the biased frame documented in IR-30-039: it rewards dots the official metric deletes. It is reported for provenance only and is not a score.",
+    "scored_domain_pixels": 5106385,
+    "validation": {
+      "path": "docs/downloads/gemsdoe30-edge-hybrid-80k-02845bd4-nan.tif",
+      "passed": true,
+      "checks": [
+        {
+          "name": "template_single_band",
+          "passed": true,
+          "detail": "count=1"
+        },
+        {
+          "name": "single_band",
+          "passed": true,
+          "detail": "count=1"
+        },
+        {
+          "name": "float32",
+          "passed": true,
+          "detail": "dtypes=('float32',)"
+        },
+        {
+          "name": "epsg",
+          "passed": true,
+          "detail": "crs=EPSG:32611"
+        },
+        {
+          "name": "template_epsg",
+          "passed": true,
+          "detail": "crs=EPSG:32611"
+        },
+        {
+          "name": "shape_matches_template",
+          "passed": true,
+          "detail": "output=(3730, 3292) template=(3730, 3292)"
+        },
+        {
+          "name": "transform_matches_template",
+          "passed": true,
+          "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+        },
+        {
+          "name": "100m_north_up_grid",
+          "passed": true,
+          "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+        },
+        {
+          "name": "finite_and_in_range_inside_footprint",
+          "passed": true,
+          "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+        },
+        {
+          "name": "null_outside_template_footprint",
+          "passed": true,
+          "detail": "outside_pixels=7111787; null/NaN/nodata required"
+        },
+        {
+          "name": "whole_raster_finite_range_diagnostic_advisory",
+          "passed": true,
+          "detail": "advisory only: whole-array diagnostic found 7111787 NaN/Inf cell(s); this is not a diagnosis of portal behavior; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+        },
+        {
+          "name": "template_readable",
+          "passed": true,
+          "detail": "shape=(3730, 3292)"
+        }
+      ]
+    }
+  },
+  "suggested_submission_note": "GEMSDOE30 EDGE emitter, hybrid belief field, 80,000 dots; unpromoted research artifact",
+  "site_linked": true,
+  "submission_recommendation": false
+}

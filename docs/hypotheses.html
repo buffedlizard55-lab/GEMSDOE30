@@ -115,6 +115,56 @@
     </table>
   </section>
 
+
+  <section class="section table-wrap" aria-labelledby="h34-title">
+    <h2 id="h34-title">New register (2026-10-03, session 30): H-34 — four candidates that target faults a <em>surface catalogue cannot contain</em></h2>
+    <p class="fine-print">Two measured facts bound what can still move the score. (1) Emission is nearly solved: the published index rewards sparse binary dots, and on the component holdout this session a metric-optimal emitter (EDGE, <code>src/gemsdoe30/emitter_opt.py</code>) beats every belief-ordered emission family on the same belief field — no emitter change creates coverage the field does not support (<a href="research/score-ceiling-analysis.md">score-ceiling analysis</a>). (2) The catalogue is not the target: the organizer masks USGS/INGENIOUS pixels, and this session reproduced a <strong>sign inversion</strong> — the catalogue proxy ranks <code>dot_thin(H19-5, d)</code> as d1.5 &gt; h19-5 &gt; d2.8 while the owner-reported leaderboard ranks them the other way. Every H-34 candidate therefore targets faults that a surface-mapping catalogue is structurally unable to record, uses free official data, and can be tested without hidden labels. <strong>None is validated; none may consume a weekly slot.</strong> Full detail: <a href="hypotheses.md">Markdown register</a>.</p>
+    <table>
+      <thead><tr>
+        <th>Rank / candidate</th><th>Layers and physical signature</th><th>Why it can catch a fault <em>absent</em> from the catalogue</th><th>Distinction from prior work</th><th>Planning ΔDTI / cost</th><th>Official source and access (checked 2026-10-03)</th><th>Falsifiable gate</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>1 · H-34-01</strong><br>Substrate-concealment prior (observability model)</td>
+          <td>USGS SGMC state geologic-map <strong>polygons</strong> (map-unit age + lithology → surficial/young-cover mask) crossed with the relief bands. Signature: an observability weight, not an edge filter — where young cover and basin fill hide surface expression, inside the known structural grain.</td>
+          <td>A catalogue is a mapping-effort product: it records where rock is exposed enough to map a trace. Faults under basin fill and Quaternary cover are missing from <em>any</em> surface catalogue, while the organizer's new faults are by construction what the catalogue lacks.</td>
+          <td>Every prior hypothesis here used an <em>evidence</em> field (scarp, magnetic edge, corridor, proximity). None modelled the <strong>selection process that produced the labels</strong>. A concealment prior re-weights where to spend existing evidence instead of adding a detector.</td>
+          <td><strong>+0.002…+0.015</strong><br><strong>Low</strong> cost: archives already downloaded and hash-verified; the fetch script rasterises only linework and must be extended to polygon units.</td>
+          <td><a href="https://mrdata.usgs.gov/geology/state/">USGS SGMC</a> — public domain, consistent lithology/age/GIS structure. Verified this session: <code>NV.zip</code> 69,056,094 B and <code>CA.zip</code> 24,977,406 B recorded OK in <code>data/external/external_receipt.json</code> via the repository's GitHub-Actions bridge.</td>
+          <td>Distance-matched control is mandatory (the prior must not reduce to "far from the catalogue"): concealment-weighted emission vs the same emitter on a proximity field and on a count- and distance-matched random field; require ≥ +0.005 over same-run best, ≥ 3/4 spatial folds positive, fresh-draw confirmation, lithology-stratified null reported.</td>
+        </tr>
+        <tr>
+          <td><strong>2 · H-34-02</strong><br>Potential-field <em>depth</em> lineaments (tilt + Euler deconvolution)</td>
+          <td>GeoDAWN airborne magnetic grids (or the competition magnetic bands). Signature: upward continuation → tilt-angle derivative → 3-D analytic signal → Euler depth; keep lineaments with inverted source depth ≥ ~0.5–1 km.</td>
+          <td>A buried magnetic source with no surface rupture produces no scarp, no mapped trace and little topographic lineament: invisible to a surface catalogue while still focusing permeability and heat.</td>
+          <td>Prior and registered work used magnetic <em>values</em> or their horizontal gradient. No inspected code inverts for <strong>depth</strong>; the depth filter is exactly what separates "already mapped" from "cannot be mapped".</td>
+          <td><strong>+0.002…+0.012</strong><br><strong>Medium</strong>: transforms are cheap; owner-derivative u8 quantisation and band lineage must be re-verified against the official grids first.</td>
+          <td><a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">USGS GeoDAWN, DOI 10.5066/P93LGLVQ</a> — verified this session at ScienceBase: Walker Lane / western Great Basin, 149,030 line-km, release includes geoTIFF geophysical grids. Sandbox cannot reach sciencebase; the proven runner bridge is the transfer path.</td>
+          <td>Preregister the depth cutoff and tracker. Depth-filtered arm must beat (a) the same transform without the depth filter and (b) a spacing/distance-matched control on the buffered component holdout; ≥ +0.005, ≥ 3/4 folds; reject if driven by flight-line artefacts (rotated-kernel null).</td>
+        </tr>
+        <tr>
+          <td><strong>3 · H-34-03</strong><br>Drainage χ-transform disequilibrium and along-strike k<sub>sn</sub></td>
+          <td>USGS NHD flowlines + 3DEP DEM. Signature: χ-transform disequilibrium across a candidate trace plus strike-aligned normalised channel-steepness (k<sub>sn</sub>) anomalies at a fixed concavity index.</td>
+          <td>Fluvial networks integrate uplift and record deformation where the scarp is degraded or buried; NHD/3DEP come from a different programme than the fault catalogue, so agreement is independent evidence.</td>
+          <td>The registered-but-unrun H-31-03 searched for channel offsets/beheaded channels/knickpoint chains qualitatively; χ/k<sub>sn</sub> is a quantitative, area-normalising transform. Nothing in the repository computes χ or k<sub>sn</sub>.</td>
+          <td><strong>+0.002…+0.010</strong><br><strong>High</strong>: DEM conditioning, flow routing, profile extraction, lithology controls.</td>
+          <td><a href="https://tnmaccess.nationalmap.gov/api/v1/products?datasets=National%20Hydrography%20Dataset%20(NHD)%20Best%20Resolution&amp;bbox=-119,38.5,-118.5,39">USGS TNM Products API</a> — verified this session: 35 NHD product records for a test bbox with direct public URLs (<code>prd-tnm.s3.amazonaws.com</code>); California state FileGDB 982,386,104 B; 3DEP public domain. Full-ROI transfer not yet verified — not runnable yet.</td>
+          <td>Blocked until clipped NHD + 3DEP data are on disk and checksummed. Then preregister concavity index and χ threshold; beat slope-only and drainage-density-matched controls (≥ +0.005, ≥ 3/4 folds) with whole-basin holdout.</td>
+        </tr>
+        <tr>
+          <td><strong>4 · H-34-04</strong><br>Heat-flow anomalies and borehole-gradient discontinuities</td>
+          <td>IHFC Global Heat Flow Database (release 2024) site values + GDR well/spring records. Signature: heat-flow anomaly (W m⁻²), its spatial gradient, and borehole depth-gradient discontinuities aligned along strike.</td>
+          <td>A permeable fault zone focuses convective heat transport, so heat flow can be anomalous above a structure with no surface rupture; heat-flow sites come from drilling programmes, not fault mapping.</td>
+          <td>Prior thermal work used spring temperature populations, geothermometer chemistry and 2 m probes as point features. Heat flow is a different observable with a different sampling design.</td>
+          <td><strong>+0.001…+0.008</strong><br><strong>Medium</strong>; low statistical power — count ROI sites before running.</td>
+          <td><a href="https://ihfc-iugg.org/products/global-heat-flow-database">IHFC Global Heat Flow Database</a> — verified this session: release 2024 has ~91,182 points (54,553 continental), downloadable via <a href="https://doi.org/10.5880/fidgeo.2024.014">DOI 10.5880/fidgeo.2024.014</a>; quality documented in <a href="https://doi.org/10.1016/j.tecto.2023.229976">doi:10.1016/j.tecto.2023.229976</a>.</td>
+          <td>Count ROI sites first; if fewer than ~50 in the footprint, report as exploratory only. Otherwise hold out whole site clusters, compare anomaly+alignment vs temperature-only and count/distance-matched random controls; ≥ +0.005 and ≥ 3/4 folds, else stop.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="fine-print"><strong>Ranking logic.</strong> H-34-01 first: it is the only candidate that models <em>why</em> the labels are missing, reuses verified archives, and has a cheap decisive control. H-34-02 second: depth-localised magnetic sources are a textbook blind-fault signature with official grids available. H-34-03 has the best physical independence but the highest cost and an unverified transfer. H-34-04 is cheapest to start and the most likely to be underpowered in one 350 × 330 km footprint. <strong>Next action: H-34-01, because its data are already on disk.</strong></p>
+  </section>
+
   <section class="section grid two" aria-label="Research rules">
     <article class="card">
       <p class="kicker">Validation gate</p>

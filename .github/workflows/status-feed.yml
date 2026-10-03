@@ -1,0 +1,107 @@
+name: status-feed
+
+# Why this workflow exists
+# ------------------------
+# The owner brief requires an always-current project feed instead of manually
+# re-checked status text, without violating the DrivenData Terms of Use (which
+# prohibit robots/automated monitoring of the competition site).  This workflow
+# keeps the feed honest by regenerating it only from evidence that already lives
+# in the repository (gate JSONs, download sidecars, mirror pins, the score
+# ledger) and by re-running the GeoTIFF format checks against the hash-pinned
+# competition template fetched from the public mirror.  It never contacts
+# drivendata.org.
+#
+# Manual review links (open in a browser):
+#   Competition rules and data tab   https://www.drivendata.org/competitions/306/competition-doe-gems/
+#   Official rules PDF               https://docs.nlr.gov/docs/fy26osti/96647.pdf
+#   Public leaderboard (manual read) https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/
+
+on:
+  push:
+    branches:
+      - main
+      - arena/01a103f1-gemsdoe30
+    paths:
+      - "docs/research/**"
+      - "docs/downloads/**"
+      - "scripts/**.py"
+      - "src/**.py"
+      - "docs/score-ledger.csv"
+      - ".github/workflows/status-feed.yml"
+  schedule:
+    # Weekly refresh so a stale feed is visible even when nothing is pushed.
+    - cron: "23 13 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Two workflows can be triggered by the same push (this one and
+# fetch-external-layers).  Serialise this one per branch so its `git push` can
+# never race another workflow's push (the failure mode that produced IR-30-043).
+concurrency:
+  group: status-feed-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  feed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install readers and test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy scipy rasterio shapely pyproj pytest
+
+      - name: Fetch the hash-pinned competition template (public mirror)
+        continue-on-error: true
+        run: |
+          set -x
+          mkdir -p data/raw
+          curl -fSL --retry 3 -o data/raw/sample_submission.tif \
+            "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE24/07345ea0604953d7efb858d9cfbc21e20c7aca0b/data/bridge/sample_submission.tif"
+          echo "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc  data/raw/sample_submission.tif" | sha256sum -c -
+
+      - name: Regenerate the status feed from repository artifacts
+        run: python scripts/build_status.py --output docs/status.json
+
+      - name: Re-run GeoTIFF format checks on every published research file
+        continue-on-error: true
+        run: |
+          set -x
+          shopt -s nullglob
+          mkdir -p docs/research/format-checks
+          for file in docs/downloads/*.tif; do
+            [ -f "$file" ] || continue
+            # NOTE: receipts go to docs/research/format-checks/, never over the
+            # provenance sidecar next to the TIFF (IR-30-042: an earlier version
+            # of this workflow wrote the validation payload over every sidecar,
+            # destroying hashes, run names and notes).
+            python scripts/validate_submission.py "$file" \
+              --template data/raw/sample_submission.tif \
+              --json "docs/research/format-checks/$(basename "${file%.tif}").json" \
+              && echo "OK $file" || echo "::warning file=$file::local format check failed or template missing"
+          done
+
+      - name: Commit the refreshed feed
+        run: |
+          set -x
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f docs/status.json docs/research/format-checks
+          if git diff --cached --quiet; then
+            echo "status feed unchanged"
+          else
+            git commit -m "status feed: regenerate from artifacts [skip ci]"
+            # Rebase first: a sibling workflow may have pushed since checkout.
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
