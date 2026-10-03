@@ -4,19 +4,74 @@
 <body>
 <header class="site-header"><div class="nav-wrap"><a class="brand" href="../index.html"><span class="brand-mark">G30</span> GEMSDOE30</a><nav class="nav-links"><a href="../index.html">Home</a><a href="../executive-summary.html">Submission guide</a><a href="leaderboard-analysis.html">Score analysis</a><a href="sources.html">Sources</a></nav></div></header>
 <main>
-<section class="page-intro"><span class="eyebrow">Research register · planning only</span><h1>Four fault hypotheses worth falsifying.</h1><p class="lead">Ranked by expected discovery value versus cost. The numerical intervals are low-confidence planning priors—not predictions, holdout results, or score guarantees. None has been run in this checkout.</p></section>
-<div class="notice red"><div class="icon" aria-hidden="true">!</div><div><strong>Promotion is blocked.</strong><p>Training rasters, labels, and the organizer's template are absent. Rank 1 cannot be validated until its public-source archives are downloaded and checked; no weekly submission slot is approved.</p></div></div>
-<section class="section table-wrap"><table><thead><tr><th>Rank</th><th>Specific layers and physical signature</th><th>Why it could reveal a missing fault</th><th>Difference / planning prior / cost</th><th>Access and status</th></tr></thead><tbody>
-<tr><td><strong>1 · Top</strong></td><td>GDR 1391 2 m temperature probes, paleogeothermal spring deposits (including sinter/tufa), Quaternary vents/flows. Test separate layers, then a preregistered spatial-coincidence/corridor transform.</td><td>Upflow and spring deposits can reflect fluid pathways above a fault that lacks a mapped surface trace; signals are indirect and have non-fault causes.</td><td>Distinct from isotropic thermal-point buffers by testing specific omitted observations and their spatial joint pattern. Planning prior: <strong>+0.000 to +0.006 DTI</strong>, low confidence; medium-high cost.</td><td>DOE GDR 1391 catalog says public and CC BY 4.0. Direct shell HEAD requests to its <a href="https://gdr.openei.org/files/1391/2m_temperature_probe_INGENIOUS_regional_data.zip">probe</a>, <a href="https://gdr.openei.org/files/1391/paleo_geothermal_regional.zip">paleo-feature</a>, and <a href="https://gdr.openei.org/files/1391/great_basin_q_volcanics.zip">volcanics</a> archives failed with TLS errors; no bytes/checksums or alignment verified. <strong>Blocked; no holdout.</strong></td></tr>
-<tr><td><strong>2</strong></td><td>Geodetic dilation/shear and surface conductance/depth-to-conductive-base. Look for locally persistent intersections, not scalar thresholds.</td><td>Fracture opening and fluid/clay conductivity may coincide along blind permeable corridors; basins and smoothing can confound.</td><td>Tests a joint mechanistic transform beyond raw scalar channels. Prior: <strong>+0.000 to +0.004</strong>; low-medium cost after official feature files arrive.</td><td>Competition stack / INGENIOUS sources. The GDR catalog states public access / CC BY 4.0; the official competition package is login-gated here, and exact bands are unverified. <strong>Not run.</strong></td></tr>
-<tr><td><strong>3</strong></td><td>Dependent/independent earthquake-density grids with shear/dilation; multiscale directional ridge/fabric coherence.</td><td>A linear seismicity fabric may indicate a blind active strand absent from the surface fault catalogue; swarms, completeness, and aseismicity can defeat it.</td><td>Different from scalar strain/seismicity inputs and from terrain/geophysics lineament filters. Prior: <strong>+0.000 to +0.003</strong>; low-medium cost.</td><td>INGENIOUS GDR 1391 catalog is public / CC BY 4.0 and lists the layers; archive availability/schema are not locally verified and the training raster is unavailable. <strong>Not run.</strong></td></tr>
-<tr><td><strong>4</strong></td><td>USGS 3-D Great Basin temperature model v1.1 (DOI 10.5066/P149FR54), depth-differenced gradients and isotherm bending.</td><td>Hydrothermal flow can perturb subsurface thermal gradients above blind faults, but regional smoothing and conductive assumptions may erase fault-scale structure.</td><td>New depth-resolved thermal prior versus surface radiometry/point buffers. Prior: <strong>+0.000 to +0.002</strong>; medium-high cost and resolution risk.</td><td>USGS catalog says public domain and links data. Actual grid/alignment not checked. <strong>Not run.</strong></td></tr>
-</tbody></table></section>
-<section class="section grid two">
-<article class="card"><p class="kicker">Validation gate</p><h2>No slot until it beats holdout</h2><p>Freeze four buffered spatial folds, identical model/seed/budget, separate feature ablations, pooled official DTI components, and near-miss distance bins. Require a preregistered screen and fresh-seed confirmation against the same-run current best. This is a known-catalogue proxy, not private expert truth.</p></article>
-<article class="card"><p class="kicker">Novelty boundary</p><h2>“Not found” is not “never tried”</h2><p>Novelty was checked against inspected GEMSDOE24–27 public summaries, not all historical code. Audit exact layer manifests and prior experiments before freezing any candidate. If the same data/transform were already tried, rewrite the hypothesis before observing scores.</p></article>
+<section class="page-intro"><span class="eyebrow">Research register · five hypotheses, one shipped hedge</span><h1>Five ways to find a fault the catalogue missed.</h1><p class="lead">Ranked by expected DTI gain per unit of implementation cost. Each names exact layers, the physical signature being exploited, why it could reveal a fault absent from the public catalogue, and how it differs from anything already tried here. Full text and equations: <a href="hypotheses.md">hypotheses.md</a>.</p></section>
+
+<div class="notice amber"><div class="icon" aria-hidden="true">i</div><div>
+<strong>What changed since the previous register.</strong>
+<p>Rank 1's source is now downloaded, hash-verified and rasterised by a GitHub-runner bridge (<code>data/external/derived_sgmc_faults_100m_u8.tif</code>, SHA-256 <code>26d142c4…61b5c</code>), and it has been through two falsification tests. The measured outcome is recorded below the table. The remaining four hypotheses are still registered-but-unrun.</p>
+</div></div>
+
+<section class="section table-wrap">
+<table>
+<thead><tr><th>Rank</th><th>Layer(s) &amp; physical signature</th><th>Why it can reveal a fault missing from USGS/INGENIOUS</th><th>Novelty vs this repo · gain/cost</th><th>Status</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>1</strong><br>shipped as a bounded hedge</td>
+<td>USGS <em>State Geologic Map Compilation</em> fault linework (NV + CA), rasterised to the 100 m grid: 82,151 px, 21,160 features, 1,679 components. Signature = mapped trace, used as a distance field plus an emission prior, restricted to the 61,664 px that sit &gt;300 m from every catalogue fault.</td>
+<td>The scoring catalogue is the USGS Quaternary fault database plus INGENIOUS. The SGMC is a different compilation by different agencies (state geological surveys, 1:24,000–1:250,000), so its fault set is not a subset of the catalogue. A fault digitised by a state survey but absent from the Quaternary database is exactly the class the sponsor's experts would have had available when they labelled "new" faults.</td>
+<td>Every prior experiment here used the catalogue as truth or as a proxy. No prior work used SGMC as a model input or emission prior. <strong>Gain: highest of the five; cost: low</strong> (bridge built and running).</td>
+<td><strong>Delivered</strong> — layer committed, 75.1 % of it off-catalogue, two falsification tests run (below).</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>1 m LiDAR scarp morphology from 3DEP DEM: 12 bands including <code>step_max</code>, <code>lapneg_max</code>, <code>lappos_max</code>, <code>downface_max</code>, <code>upface_max</code>, <code>cross_max</code>, <code>relief</code>, <code>coh100</code>, <code>strike</code>. Signature = paired opposite-sign curvature across the local strike (monoclinal scarp: convex crest, concave base) with along-strike coherence filtering.</td>
+<td>Published maps are compiled from field mapping and aerial photography; scarps shorter than a metre, or degraded and vegetated, are systematically absent from them. The sponsor collected 1 m lidar for this region and states that most faults there are subtle.</td>
+<td>Prior work used the 100 m <code>det_elev_slope</code> band and ridge transforms. The 1 m-derived curvature pair and the paired-sign test are new. <strong>Gain: high; cost: low</strong> (layer already mirrored).</td>
+<td>Registered; not yet ablated against the 19-band baseline.</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>Potential-field derivatives: TMI, RTP, <code>tmi_hg</code>, <code>tmi_vg</code>, <code>iso_grav_anom</code> (+ slopes), vertical derivative, upward continuations at 150–1000 m. Signature = tilt-angle ridge maxima persisting across upward continuations (worming-style), emitted as a smooth per-pixel field rather than binary peaks.</td>
+<td>The catalogue is dominated by surface-expressed faults. Structures buried under basin fill have no surface trace by definition, and the sponsor explicitly states that many faults in this region are hidden below the surface and require geophysical data to detect.</td>
+<td>A worming attempt upstream failed because it was emitted as sparse binary peak sets (nonzero on 0.001–0.084 % of pixels) — a coverage failure, not a signal failure. The smooth-field formulation is new here. <strong>Gain: medium-high; cost: medium</strong> (multi-scale continuation on 2 CPUs).</td>
+<td>Registered; not yet run.</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>Thermal plumbing: GDR 1391 well &amp; spring temperature/chemistry (<code>temp_c</code>, quartz/chalcedony/cation geothermometers), paleo-geothermal deposits (sinter/tufa), and 2 m temperature-probe surveys. Signature = geothermometry residual (measured vs chemistry-implied temperature) plus anisotropic kernel density of thermal points elongated along the local structure strike.</td>
+<td>A spring line with no mapped fault is direct surface evidence of an unmapped permeable structure. Sinter and tufa record <em>paleo</em> upflow and survive after the spring dies, extending the record beyond currently active systems.</td>
+<td>Earlier attempts used coarse thermal-point counts and raw openness; the geothermometry residual and the paleo-deposit layer have not been used. <strong>Gain: medium; cost: medium</strong> (sparse points must become a field).</td>
+<td>Source reachable from the CI runner; subset already mirrored. Registered; not yet run.</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td>Geodetic strain: <code>geod_shearrate</code>, <code>geod_dilaterate</code>, <code>geod_2ndinv</code> and GDR geodetic grids. Signature = strain localisation index (local second invariant normalised by a long-wavelength background) highlighting narrow deforming corridors.</td>
+<td>Geodetic strain is depth-integrated and independent of surface expression, so it can flag active structures with no mapped scarp.</td>
+<td>The bands were previously used raw, and an earlier strain × conductance interaction pilot failed its registered screen — which is why this ranks last, not why it is excluded. <strong>Gain: lowest of the five; cost: low</strong> (layers in hand).</td>
+<td>Registered; carries a documented prior negative result.</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section class="section content"><p>Full protocol, source-access details, cost rationale, and limitations: <a href="hypotheses.md">research hypothesis register (Markdown)</a> · <a href="sources.html">source register</a> · <a href="irregularities.html">open irregularities</a>.</p></section>
+
+<section class="section grid two">
+<article class="card">
+<p class="kicker">H1 · corroboration test · positive</p>
+<h2>2.9× enrichment over chance</h2>
+<p>24.94 % of SGMC fault pixels lie within 300 m of a public-catalogue fault, against a footprint base rate of 8.61 %. The layer preferentially marks real faults rather than being arbitrary linework.</p>
+</article>
+<article class="card">
+<p class="kicker">H1 · independent-evidence test · low power</p>
+<h2>Lidar scarp AUC 0.52 vs local control</h2>
+<p>Against partner pixels 1–2 km away matched on distance-to-catalogue and terrain-slope decile, the off-catalogue class is only marginally enriched in 1 m scarp morphology (best band <code>step_max</code> AUC 0.520). The positive control behaves the same way — catalogue faults score ≈0.52 on the same measure — so the test cannot separate real from unreal linework. Recorded as inconclusive, not as a pass.</p>
+</article>
+</section>
+
+<section class="section content">
+<h2>What the metric says about betting on a hypothesis</h2>
+<p>Under <code>DTI = TP_w / (TP_w + 0.2·FP_w + 0.8·FN_w)</code>, adding one prediction pixel whose triangular kernel credit against an uncovered truth pixel is <code>k</code> changes the denominator by exactly <code>0.2</code> and the numerator by <code>k</code>. The dot therefore helps <strong>iff <code>k &gt; 0.2 × DTI</code></strong> — about <strong>5.2 %</strong> at the incumbent's operating point. The rule contains no reference to the size of the hidden truth set, so it does not loosen or tighten as the private set shrinks. This is why a large, public, independent inventory is worth a bounded hedge even though no local frame can score it: <em>the bar for betting is very low, and the layer's downside is structurally capped.</em> Full derivation: <a href="metric-response-surface.md">metric response surface</a>.</p>
+<p>Validation protocol owed for hypotheses 2–5: four buffered spatial folds, identical architecture/seed/budget, separate feature ablations, pooled official DTI components, and near-miss distance bins, with the screen pre-registered before scores are seen. A known-catalogue proxy is not private expert truth.</p>
+</section>
 </main>
-<footer><div class="footer-wrap"><span>GEMSDOE30 · candidate hypotheses, not results</span><span><a href="../README.md">Project brief</a> · <a href="hypotheses.md">Full register</a></span></div></footer>
+<footer><div class="footer-wrap"><span>GEMSDOE30 · hypotheses, evidence and explicit uncertainty</span><span><a href="../README.md">Project brief</a> · <a href="hypotheses.md">Full register</a> · <a href="../executive-summary.html">Submission guide</a></span></div></footer>
 </body></html>

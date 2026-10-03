@@ -1,0 +1,35 @@
+{
+  "base_dots": 0,
+  "disk_filter_note": "inventory dots are also kept by poisson_disk_select; where a base dot already sits within the separation distance the inventory contribution merges into it",
+  "domain_pixels": 4745447,
+  "emitted_pixels": 85526,
+  "generated_utc": "2026-10-03T17:44:07Z",
+  "grid": {
+    "epsg": 32611,
+    "shape_hw": [
+      3730,
+      3292
+    ],
+    "transform_gdal": [
+      243350.0,
+      100.0,
+      0.0,
+      4508550.0,
+      0.0,
+      -100.0
+    ]
+  },
+  "inventory": "sgmc",
+  "inventory_dots": 5281,
+  "inventory_pixels_off_catalogue": 62226,
+  "inventory_spacing_px": 10.0,
+  "max_in_footprint": 1.0,
+  "min_in_footprint": 0.0,
+  "model_dots": 80392,
+  "model_spacing_px": 4.0,
+  "model_threshold": 0.4,
+  "overlap_pixels": 147,
+  "runtime_seconds": 2.6,
+  "script": "scripts/build_candidate_dots.py",
+  "valid_pixels": 5167373
+}

@@ -132,6 +132,12 @@ p { margin: 0 0 14px; }
 .notice .icon { font-size: 1.2rem; line-height: 1.3; }
 .notice p:last-child { margin-bottom: 0; }
 .notice.red { border-color: #edb8ad; background: var(--red-bg); color: #54231f; }
+.notice.green { border-color: #9fd3a8; background: #eef9f0; color: #17401f; }
+.notice.green strong { color: #14471f; }
+.notice.green .button { display: inline-block; margin: 0.35rem 0 0.5rem; }
+.notice.green code { background: #ffffff; border: 1px solid #cfe6d4; }
+.notice.amber { border-color: #ecc98d; background: #fdf6e7; color: #5a4416; }
+.notice.amber strong { color: #5a4416; }
 
 .actions { display: flex; flex-wrap: wrap; gap: 11px; margin: 22px 0 8px; }
 .button {

@@ -1,0 +1,270 @@
+{
+  "decision": {
+    "criterion": "on this off-catalogue inventory, does the learned field beat an unlearned lattice at comparable spacing?",
+    "model_minus_lattice_mean_dti": 0.0008996395197846535
+  },
+  "elapsed_seconds": 57.8,
+  "emitters_available": {
+    "artefact": true,
+    "inventory": true,
+    "model_oof": true
+  },
+  "generated_utc": "2026-10-03T17:42:22Z",
+  "grid": {
+    "epsg": 32611,
+    "shape_hw": [
+      3730,
+      3292
+    ],
+    "transform_gdal": [
+      243350.0,
+      100.0,
+      0.0,
+      4508550.0,
+      0.0,
+      -100.0
+    ]
+  },
+  "inventory": {
+    "connected_components": 1679,
+    "name": "USGS SGMC fault linework, 100 m rasterisation",
+    "pixels_in_footprint": 82156,
+    "pixels_off_catalogue": 62229,
+    "sha256": null,
+    "source": "https://mrdata.usgs.gov/geology/state/ (NV.zip, CA.zip); US public domain"
+  },
+  "notes": [
+    "The inventory is an independent expert compilation, so it is a legitimate held-out target for novelty hypotheses; it is not the competition truth.",
+    "Emitters are not all matched on emitted count; compare DTI together with emitted_pixels.",
+    "The historical artefact is included purely as a calibration reference."
+  ],
+  "protocol": {
+    "alpha": 0.2,
+    "buffer_px": 3,
+    "domain_pixels": 4745447,
+    "holdout_fraction": 0.3,
+    "inventory_spacing_px": 10.0,
+    "model_spacing_px": 3.0,
+    "radius_m": 300.0,
+    "repeats": 3,
+    "seed": 30
+  },
+  "repeats_detail": [
+    {
+      "emitters": {
+        "cand_t04s4": {
+          "dti": 0.10225960907669693,
+          "emitted_pixels": 80388,
+          "fp_weight": 79070.261490847,
+          "tp_weight": 3122.5338819921017,
+          "truth_pixels": 17621.0
+        },
+        "cand_t04s4_sgmc10": {
+          "dti": 0.18735266798922018,
+          "emitted_pixels": 85526,
+          "fp_weight": 82722.91688562749,
+          "tp_weight": 5964.227721840143,
+          "truth_pixels": 17621.0
+        },
+        "cand_t04s4_sgmc15": {
+          "dti": 0.15431188545657443,
+          "emitted_pixels": 83592,
+          "fp_weight": 81341.60212832416,
+          "tp_weight": 4834.915985360742,
+          "truth_pixels": 17621.0
+        },
+        "historical_artefact": {
+          "dti": 0.07260092998898951,
+          "emitted_pixels": 35824,
+          "fp_weight": 35136.39776356762,
+          "tp_weight": 1556.2244897410274,
+          "truth_pixels": 17621.0
+        },
+        "lattice": {
+          "dti": 0.09322823865698393,
+          "emitted_pixels": 527504,
+          "fp_weight": 521058.5880874768,
+          "tp_weight": 11239.257960297167,
+          "truth_pixels": 17621.0
+        },
+        "model_probability_dots": {
+          "dti": 0.0942080290503798,
+          "emitted_pixels": 506746,
+          "fp_weight": 500575.09511178354,
+          "tp_weight": 10966.29293300584,
+          "truth_pixels": 17621.0
+        },
+        "visible_inventory_dots": {
+          "dti": 0.001116490615746026,
+          "emitted_pixels": 3495,
+          "fp_weight": 3484.7731130988136,
+          "tp_weight": 16.520777266472578,
+          "truth_pixels": 17621.0
+        }
+      },
+      "hidden_components": 504,
+      "holdout_truth_pixels_in_domain": 17621,
+      "repeat": 0,
+      "visible_components": 1175
+    },
+    {
+      "emitters": {
+        "cand_t04s4": {
+          "dti": 0.10005143850250678,
+          "emitted_pixels": 80388,
+          "fp_weight": 79093.150034667,
+          "tp_weight": 3060.4861832670867,
+          "truth_pixels": 17698.0
+        },
+        "cand_t04s4_sgmc10": {
+          "dti": 0.18942263665093237,
+          "emitted_pixels": 85526,
+          "fp_weight": 82689.35479185992,
+          "tp_weight": 6043.524655278772,
+          "truth_pixels": 17698.0
+        },
+        "cand_t04s4_sgmc15": {
+          "dti": 0.1545223722472407,
+          "emitted_pixels": 83592,
+          "fp_weight": 81338.10014785241,
+          "tp_weight": 4851.431741319597,
+          "truth_pixels": 17698.0
+        },
+        "historical_artefact": {
+          "dti": 0.07181587768187782,
+          "emitted_pixels": 35824,
+          "fp_weight": 35133.554821449725,
+          "tp_weight": 1543.5983111970127,
+          "truth_pixels": 17698.0
+        },
+        "lattice": {
+          "dti": 0.09334913869783248,
+          "emitted_pixels": 527504,
+          "fp_weight": 521035.54400785046,
+          "tp_weight": 11259.531817629933,
+          "truth_pixels": 17698.0
+        },
+        "model_probability_dots": {
+          "dti": 0.09441945707380207,
+          "emitted_pixels": 506746,
+          "fp_weight": 500531.1200296487,
+          "tp_weight": 10996.459712550044,
+          "truth_pixels": 17698.0
+        },
+        "visible_inventory_dots": {
+          "dti": 0.0016828828001131354,
+          "emitted_pixels": 3474,
+          "fp_weight": 3459.711540333983,
+          "tp_weight": 24.999799992889166,
+          "truth_pixels": 17698.0
+        }
+      },
+      "hidden_components": 504,
+      "holdout_truth_pixels_in_domain": 17698,
+      "repeat": 1,
+      "visible_components": 1175
+    },
+    {
+      "emitters": {
+        "cand_t04s4": {
+          "dti": 0.08535243299178451,
+          "emitted_pixels": 80388,
+          "fp_weight": 79330.40440568281,
+          "tp_weight": 2539.5064882151783,
+          "truth_pixels": 16724.0
+        },
+        "cand_t04s4_sgmc10": {
+          "dti": 0.17390237875899903,
+          "emitted_pixels": 85526,
+          "fp_weight": 83037.20006255398,
+          "tp_weight": 5402.654938258231,
+          "truth_pixels": 16724.0
+        },
+        "cand_t04s4_sgmc15": {
+          "dti": 0.13894622951371535,
+          "emitted_pixels": 83592,
+          "fp_weight": 81643.12575503456,
+          "tp_weight": 4245.777239557356,
+          "truth_pixels": 16724.0
+        },
+        "historical_artefact": {
+          "dti": 0.06863059709093547,
+          "emitted_pixels": 35824,
+          "fp_weight": 35198.73830095143,
+          "tp_weight": 1420.867567807436,
+          "truth_pixels": 16724.0
+        },
+        "lattice": {
+          "dti": 0.08901896304008515,
+          "emitted_pixels": 527504,
+          "fp_weight": 521412.82178485394,
+          "tp_weight": 10663.987677518278,
+          "truth_pixels": 16724.0
+        },
+        "model_probability_dots": {
+          "dti": 0.08966777283007363,
+          "emitted_pixels": 506746,
+          "fp_weight": 500936.6036228477,
+          "tp_weight": 10369.213843714446,
+          "truth_pixels": 16724.0
+        },
+        "visible_inventory_dots": {
+          "dti": 0.0010489614456850674,
+          "emitted_pixels": 3576,
+          "fp_weight": 3566.770190761399,
+          "tp_weight": 14.78564777225256,
+          "truth_pixels": 16724.0
+        }
+      },
+      "hidden_components": 504,
+      "holdout_truth_pixels_in_domain": 16724,
+      "repeat": 2,
+      "visible_components": 1175
+    }
+  ],
+  "script": "scripts/novelty_holdout.py",
+  "summary": {
+    "cand_t04s4": {
+      "max_dti": 0.10225960907669693,
+      "mean_dti": 0.09588782685699608,
+      "min_dti": 0.08535243299178451,
+      "repeats": 3
+    },
+    "cand_t04s4_sgmc10": {
+      "max_dti": 0.18942263665093237,
+      "mean_dti": 0.1835592277997172,
+      "min_dti": 0.17390237875899903,
+      "repeats": 3
+    },
+    "cand_t04s4_sgmc15": {
+      "max_dti": 0.1545223722472407,
+      "mean_dti": 0.1492601624058435,
+      "min_dti": 0.13894622951371535,
+      "repeats": 3
+    },
+    "historical_artefact": {
+      "max_dti": 0.07260092998898951,
+      "mean_dti": 0.0710158015872676,
+      "min_dti": 0.06863059709093547,
+      "repeats": 3
+    },
+    "lattice": {
+      "max_dti": 0.09334913869783248,
+      "mean_dti": 0.09186544679830051,
+      "min_dti": 0.08901896304008515,
+      "repeats": 3
+    },
+    "model_probability_dots": {
+      "max_dti": 0.09441945707380207,
+      "mean_dti": 0.09276508631808517,
+      "min_dti": 0.08966777283007363,
+      "repeats": 3
+    },
+    "visible_inventory_dots": {
+      "max_dti": 0.0016828828001131354,
+      "mean_dti": 0.0012827782871814096,
+      "min_dti": 0.0010489614456850674,
+      "repeats": 3
+    }
+  }
+}

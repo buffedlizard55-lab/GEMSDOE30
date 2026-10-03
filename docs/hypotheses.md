@@ -65,6 +65,46 @@ names the exact free official source plus its verified access status in this che
   tolerance; a naive emission would smear error into false-positive mass. The gate is therefore
   evaluated after the emission operator, not on the raw probability map.
 
+### H1 measured status (2026-10-03) — the layer exists, and it is partly corroborated
+
+The bridge ran on a GitHub runner and committed the layer. Verified from
+`data/external/external_receipt.json` (run 37140924182, 2026-10-03T17:33Z):
+
+| quantity | value |
+|---|---|
+| source archives | `NV.zip` 69,056,094 B SHA-256 `3b333ac0…7606`, `CA.zip` 24,977,406 B SHA-256 `78765ba4…4431` |
+| SGMC line features inside the grid | 21,160 |
+| rasterised pixels inside the footprint | 82,151 |
+| connected components | 1,679 (median 21 px, max 1,794 px) |
+| pixels more than 300 m from any catalogue fault | **61,664 (75.1 %)** |
+| layer SHA-256 | `26d142c4…61b5c` |
+| attribute schema | `STATE, DESCRIPT, MISC, REF_ID, SRC_URL, GEOM, WEB_GEOM, SYMBOL` — **no age field**; `DESCRIPT` carries certainty and sense of displacement (`certain` 37,797 + 3,610 thrust-certain in NV; `approximate` 9,893; `concealed` 2,180; `inferred or queried` 302) |
+
+Two falsification tests were run, and they disagree in strength:
+
+* **Corroboration test (positive).** 24.94 % of SGMC pixels lie within 300 m of a public-catalogue
+  fault, against a footprint base rate of 8.61 % — a **2.9× enrichment** over chance. The layer is
+  therefore not random linework; it preferentially marks real faults.
+* **Independent-evidence test (weak).** Against a *local* control (partner pixels 1–2 km away,
+  matched on distance-to-catalogue and terrain-slope decile, n = 58,494) the SGMC off-catalogue class
+  is only marginally enriched in 1 m lidar scarp morphology: best band `step_max` AUC = 0.520,
+  `downface_max` 0.522, everything else 0.49–0.52 (`docs/research/sgmc-falsification.json`). The
+  positive control behaves the same way — catalogue faults themselves score only AUC ≈ 0.52 on this
+  measure — so the test is low-power rather than negative: it cannot separate real from unreal
+  linework with these bands.
+* **Self-prediction test (negative, informative).** Hiding 30 % of SGMC connected components and
+  emitting dots along the visible 70 % predicts the hidden 30 % *worse than a blind lattice*
+  (0.00128 vs 0.09187 mean DTI at 5,700 vs 208,000 dots; the budget difference explains most of it,
+  but the layer clearly is not self-similar at component scale). Do not assume local SGMC density
+  extrapolates.
+
+**Verdict.** H1 stays rank 1 but as an explicitly *unvalidated bet*, because 75.1 % of the layer is
+information the catalogue does not contain and the admission bar under the metric is only
+`0.2 × DTI ≈ 5.2 %`. Its inclusion in the shipped candidate is a bounded hedge (cost ≤ 3 % of the
+DTI denominator for 5,281 dots), not a promoted result. There is no local frame that can validate it:
+the catalogue frames cannot score off-catalogue strategies at all, and any frame built from the SGMC
+itself is tautological for an emitter that uses the SGMC (see `docs/research/emitter-holdout.md`).
+
 ## H2 — 1 m LiDAR scarp curvature pair (rank 2)
 
 * **Layers.** `data/external/lidar_scarp_features_u8.tif` (12 bands: `ex_max`, `ex_mean`, `step_max`,

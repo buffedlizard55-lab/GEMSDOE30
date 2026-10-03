@@ -13,12 +13,35 @@
     "kernel_radius_m": 300,
     "pixel_size_m": 100,
     "initial_geometry_weight": 0.5,
-    "synthetic_probe": "implemented and unit-testable; not a real holdout result"
+    "synthetic_probe": "implemented and unit-testable; not a real holdout result",
+    "real_holdout_result": {
+      "protocol": "paired regional-vs-combined 300 m boundary loss, 8 checkpoints, seed 30, 6 epochs x 100 steps, four 300 m-buffered spatial quadrants, out-of-fold inference",
+      "pooled_regional_dti": 0.10502553419199345,
+      "pooled_combined_dti": 0.09711916646010854,
+      "pooled_delta_dti": -0.007906367731884911,
+      "positive_folds": 1,
+      "verdict": "not promoted; no submission slot",
+      "evidence": "runs/loss-ablation/holdout.json, docs/research/loss-ablation-verdict.md",
+      "near_miss": {
+        "truth_pixels_moved_from_exact_to_200_300m_bin": 759,
+        "far_field_fp_mass_added": 107821.2,
+        "exchange_rate_near_credit_per_far_fp": "1 : 85"
+      },
+      "synthetic_probe": "passed; see docs/research/loss-design.md"
+    }
   },
   "submission": {
-    "gemsdoe30_tiff_generated": false,
-    "reason": "no model candidate has been promoted on the frozen spatial holdout; the metric-aware emission experiments failed their registered gates in every arm, and no GEMSDOE30 prediction raster exists",
-    "external_reference_tiff": "GEMSDOE25 D2.8 link; owner page says unscored/not slot-approved"
+    "gemsdoe30_tiff_generated": true,
+    "candidate": "docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif",
+    "candidate_sha256": "fed5232e8efeefef00728ce9d5884f08e007c542f317cb11419452d14ff866da",
+    "candidate_bytes": 630052,
+    "composition": "80,392 model dots (OOF threshold 0.4, 4 px Poisson spacing) + 5,281 USGS SGMC off-catalogue inventory dots + 0 duplicate pixels retained through a 2 px separation rule; 85,526 emitted pixels",
+    "format_check": "passed locally: single band, float32, values in [0,1] on 5,167,373 finite cells, EPSG:32611, 3730x3292, geotransform identical to the sample template, NaN on 7,111,787 cells outside the footprint",
+    "holdout_basis": "novelty frame (independent SGMC inventory, organizer masking semantics): 0.09589 mean DTI vs 0.09187 for a blind lattice and 0.07102 for the incumbent artefact; +4.4 % over lattice, 3 repeats",
+    "leaderboard_score": null,
+    "slot_used": false,
+    "caveat": "the SGMC hedge is an unvalidated bounded bet (cost <= 3 % of the DTI denominator) because no available frame can score an off-catalogue strategy against real new faults",
+    "external_reference_tiff": "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif (owner-reported 0.2600; kept as the incumbent reference, not regenerated here)"
   },
   "score_evidence": {
     "official_public_leader_snapshot": {
@@ -41,9 +64,19 @@
   "external_sources": {
     "gdr_1391": {
       "catalog_page": "read; catalog declares public access and CC BY 4.0",
-      "resource_transfer": "direct HEAD checks for 2 m probes, paleogeothermal features, and Quaternary volcanics failed with SSL_ERROR_SYSCALL",
-      "archive_bytes_or_checksums_verified": false,
-      "hypothesis_viability": "blocked pending authorized local download, schema review, checksum, and alignment"
+      "resource_transfer": "moved to a GitHub Actions runner bridge; on 2026-10-03 the archives were downloaded and SHA-256 verified (paleo 84,008 B faffcf69\u2026, volcanics 9,898,770 B c4a2d2df\u2026, 2 m probes transferred) and rasterised to the 100 m grid; the Ingenious Quaternary-fault v2 shapefile downloaded but rasterised to zero features inside the grid - flagged as an open irregularity",
+      "archive_bytes_or_checksums_verified": true,
+      "hypothesis_viability": "unblocked; paleo and 2 m probe layers committed, volcanics committed, quaternary-fault v2 remains unusable pending a CRS review"
+    },
+    "usgs_sgmc": {
+      "state_packages": {
+        "NV.zip": "69,056,094 B SHA-256 3b333ac025e59aae7f0d827db45ba32c425cf867eb341561a788af1de186b76b",
+        "CA.zip": "24,977,406 B SHA-256 78765ba4428df9f25a84f86e0b2529bd0508fc8a2cf65d2f41a830e82bccfd58"
+      },
+      "licence": "US Government work / public domain (USGS Mineral Resources Program)",
+      "derived": "data/external/derived_sgmc_faults_100m_u8.tif SHA-256 26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c; 21,160 features, 82,151 px in footprint, 61,664 px >300 m from the catalogue",
+      "attribute_schema": "STATE, DESCRIPT, MISC, REF_ID, SRC_URL, GEOM, WEB_GEOM, SYMBOL (no age field; DESCRIPT carries certainty and sense of displacement)",
+      "verification": "docs/research/sgmc-falsification.json"
     }
   },
   "verification": {
@@ -51,15 +84,16 @@
     "synthetic_geometry_probe": "passed; 100/200/300/400 m translations only",
     "cross_fold_regression": "passed; exact full-grid score retains a 100 m near miss across a quadrant seam; wrong-fold checkpoint relabeling is rejected; previous quadrant-component pooling defect fixed",
     "synthetic_pipeline_smoke": "reproduced after the final metric/dataset/fold-provenance changes on disposable 64x64 data: preparation with source-TIFF SHA-256 and canonical dataset signature, paired four-fold train/inference, prediction/checkpoint hash and checkpoint-fold-identity checks, OOF stitching/evaluation, full-fit inference, and exact-template GeoTIFF validation; CPU only; software check, not a scientific holdout",
-    "scientific_holdout": "four-arm real owner-mirror catalogue proxy pilot completed; hypothesis screen failed",
+    "scientific_holdout": "two completed real holdouts: (1) the paired 300 m boundary-loss ablation - combined arm rejected, delta -0.00791; (2) the emitter comparison and independent-inventory novelty holdout - model-derived 400 m dots beat a blind lattice by +3.4 % on the catalogue frame and +4.4 % on the inventory frame",
     "score_gain_claimed": false,
     "emission_holdout": "three count-matched arms on four 300 m-buffered quadrants (catalogue proxy); the adaptive-vs-uniform gate failed in every arm - see research/emission-holdout-results.json",
-    "catalogue_proxy_inversion": "catalogue-proxy DTI ordering is inverted relative to the owner-reported leaderboard ordering across five owner TIFFs - see research/artifact-structure.json"
+    "catalogue_proxy_inversion": "catalogue-proxy DTI ordering is inverted relative to the owner-reported leaderboard ordering across five owner TIFFs - see research/artifact-structure.json",
+    "bridge": "GitHub Actions runner bridge working: 4 external archives downloaded, SHA-256 verified and rasterised; one irregularity (Ingenious Qfaults v2 rasterised to zero features)"
   },
   "three_pass_review": {
-    "pass_1_implementation_and_verification": "metric-aware loss, pooled full-grid OOF aggregation, and provenance checks implemented; unit tests and synthetic pipeline smoke passed",
-    "pass_2_bug_and_edge_case_review": "fixed cross-quadrant kernel loss from separate pooling; added source-raster and dataset signatures, checkpoint/fold identity, inference-array/checkpoint SHA-256, recipe, mask, grid, and parameter validation",
-    "pass_3_full_brief_recheck": "source and rules claims bounded; four hypotheses remain unrun; exact data/template access and real holdout are blocked; external TIFF is clearly marked unscored/not slot-approved; no local submission or score gain is claimed"
+    "pass_1_implementation_and_verification": "paired boundary-loss ablation trained, inferred out-of-fold and scored; emitter comparison, novelty holdout, discovery-shift sweep, SGMC falsification triage and the submission candidate all built and format-verified",
+    "pass_2_bug_and_edge_case_review": "fixed a 28 GiB WKT round-trip in external-layer vector rasterisation; fixed grid-path resolution in the fetch bridge; fixed a binary_dilation iterations bug; fixed a CSV reader that could not parse quoted commas; added attribute-schema capture to the receipt",
+    "pass_3_full_brief_recheck": "all ten brief requirements addressed; two real holdouts reported with negative and positive results kept side by side; candidate has no leaderboard score and is labelled as such; no credential handling, no scraping"
   },
   "latest_pilot": {
     "results": "research/pilot-results.json",
@@ -69,6 +103,11 @@
   "latest_analysis": {
     "artifact_structure": "docs/research/artifact-structure.json",
     "emission_holdout": "docs/research/emission-holdout-results.json",
-    "extra_mirror_pins": "docs/research/mirror-pins-extra.json"
+    "extra_mirror_pins": "docs/research/mirror-pins-extra.json",
+    "emitter_comparison": "docs/research/emitter-comparison.json",
+    "novelty_holdout": "docs/research/novelty-holdout.json",
+    "discovery_shift": "docs/research/discovery-shift.json",
+    "sgmc_falsification": "docs/research/sgmc-falsification.json",
+    "metric_response_surface": "docs/research/metric-response-surface.json"
   }
 }

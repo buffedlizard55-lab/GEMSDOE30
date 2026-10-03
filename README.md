@@ -17,6 +17,57 @@
 
 ## Latest session outcome — supersedes older blocked-status paragraphs below
 
+### Session 2026-10-03 (continued) — three real holdouts, one falsified hypothesis, one shipped candidate
+
+Everything below was produced, measured and committed in this repository. Nothing here is a
+leaderboard claim.
+
+**1. The paired 300 m boundary-loss hypothesis is falsified.** Eight checkpoints (four spatial
+folds × {regional, combined}), identical seed/architecture/steps, out-of-fold inference over the
+whole grid. Pooled DTI: regional **0.105026**, combined **0.097119**, delta **−0.00791**;
+positive in **1 of 4** folds. The geometry term adds **+107,821 units of far-field `FP_w`** and
+the near-miss exchange rate is about **1 unit of new near-miss credit per 85 units of new distant
+false-positive mass** — against a metric that prices them at 1 : 0.2. Verdict recorded as
+`not promoted; no submission slot`. Evidence: `runs/loss-ablation/holdout.json`,
+[docs/research/loss-ablation-verdict.md](docs/research/loss-ablation-verdict.md).
+
+**2. Turning the model into dots matters more than any modelling change tried here.** The same
+out-of-fold probability field scores **0.10503** submitted as a field and **0.25461** after
+400 m Poisson-disk sparsification — a **2.4×** difference from the emission operator alone.
+The learned field beats a blind lattice by only **+3.4 %** on the catalogue frame and **+4.4 %**
+on the independent-inventory frame, which is the honest size of the localisation signal.
+Evidence: [docs/research/emitter-holdout.md](docs/research/emitter-holdout.md).
+
+**3. The external-data bridge works.** A GitHub Actions runner downloads official layers,
+SHA-256-verifies them, rasterises them onto the competition grid and commits the result back
+(`data/external/external_receipt.json`). Verified transfers: USGS SGMC `NV.zip` 69,056,094 B and
+`CA.zip` 24,977,406 B; GDR 1391 paleo-geothermal, Quaternary volcanics and 2 m temperature
+probes. Flagged irregularity: the Ingenious Quaternary-fault v2 shapefile downloaded but
+rasterised to **zero** features inside the grid (CRS mismatch suspected).
+
+**4. Rank-1 hypothesis (SGMC fault inventory) is delivered but not validated.**
+`derived_sgmc_faults_100m_u8.tif`: 21,160 features, 82,151 px in the footprint, **61,664 px
+(75.1 %) more than 300 m from every catalogue fault**. Two falsification tests disagree:
+**+2.9× enrichment** over chance against the catalogue (positive) versus a **low-power lidar
+corroboration test** (AUC 0.520, positive control also only 0.522). Full record:
+[docs/hypotheses.md](docs/hypotheses.md), `docs/research/sgmc-falsification.json`.
+
+**5. Metric theory that drives every decision here.** Adding one prediction pixel with kernel
+credit `k` against an uncovered truth pixel changes the DTI denominator by exactly `0.2` and the
+numerator by `k`, so **a dot helps iff `k > 0.2 × DTI`** — about **5.2 %** at the incumbent's
+operating point. The rule does not depend on the size of the hidden truth set, which is why
+broad, honest hedging across weak hypotheses is near-optimal under this metric.
+Derivation and the measured response surface: [docs/metric-response-surface.md](docs/metric-response-surface.md).
+
+**6. Shipped candidate (no leaderboard score, no slot used).**
+`docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif` — single band, float32,
+values in [0,1], EPSG:32611, 3730×3292, template-identical geotransform, NaN on all 7,111,787
+cells outside the footprint, SHA-256 `fed5232e…66da`. It is the model's off-catalogue dots plus a
+bounded SGMC hedge whose worst-case cost is ≤ 3 % of the DTI denominator. The historic
+`…-nan.tif` artefact with the owner-reported 0.2600 stays as the incumbent reference.
+
+### Session 2026-10-03 (earlier) — data restored, two pilots run
+
 Read the standing brief above every session. On 2026-10-03 we autonomously restored SHA-256-pinned **owner mirrors** via GitHub API and prepared the real 3730×3292 grid (5,167,373 valid pixels, 60,988 catalogue positives). This resolves local data placement, **not organizer authenticity**. `python scripts/restore_public_mirrors.py` reproduces restoration; immutable pins are in `docs/research/mirror-pins.json`. The mirrored template contains labels: footprint only, never use its values as model features/predictions.
 
 A preregistered four-arm CPU pilot ran all four 800 m-buffered spatial folds. See [protocol](docs/research/pilot-preregistration.md), [complete results](docs/research/pilot-results.json), [data audit](docs/research/data-audit.json). The top runnable strain/conductance interaction **failed its screen** against the same-run context control. No model candidate promoted; no competition slot used. This limited pointwise pilot is not a full-capacity U-Net or a comparison against the archived best.
@@ -100,9 +151,31 @@ Later on 2026-10-03 the metric-aware emission line was exercised end to end: `sr
 
 ## Current next steps and limits
 
-1. Obtain the authorized competition package and template, then verify byte-level provenance and feature/label semantics. This is the current hard blocker to real training/holdout testing.
-2. Run the registered regional-vs-boundary ablation on spatial blocks; report all folds, seeds, pooled DTI, near-miss histograms, and failure cases. The 0.5 geometry weight is an initial test setting, not a tuned or established optimum.
-3. Test the leading geothermal-evidence hypothesis only if its exact GDR archives are downloaded, checksummed, licensed, aligned, and separately ablated. Catalog-page visibility is not proof that a ZIP has been retrieved.
-4. Build and validate an exact-grid TIFF only from a promoted model. No artifact can be honestly produced from this checkout today because its competition template and prediction inputs are absent.
-5. Refresh the leaderboard snapshot by a permitted method. DrivenData's Terms of Use prohibit robots/spiders/automatic access for monitoring or copying, so this project does not scrape it; this limitation prevents an autonomous continuously updated leaderboard feed. The official site remains the manual source of live values.
-6. Confirm any deadline discrepancy in the competition homepage versus the September 2026 rules PDF with the organizer; see [irregularities](docs/irregularities.md).
+1. **No candidate here has a leaderboard score.** The only verified number in the repository is
+   the historic artefact's owner-reported 0.2600. The shipped candidate beat a blind lattice by
+   +4.4 % on the only independent off-catalogue frame that exists, which is necessary but not
+   sufficient evidence. Spending a slot is a judgement call the user owns; the file and its
+   paste-ready comment are ready if that call is made.
+2. **The catalogue cannot validate off-catalogue strategies.** Any holdout whose truth is the
+   public catalogue can only reward predictions placed on that catalogue — and those pixels are
+   exactly the ones the organizer masks out. Every remaining hypothesis must therefore be scored
+   on an independent inventory frame (`scripts/novelty_holdout.py`) or on the private test set.
+3. **Hypotheses 2–5 are registered but unrun** (`docs/hypotheses.md`). Next in line: the 1 m
+   lidar paired-curvature scarp transform (H2), then the tilt-angle/upward-continuation field for
+   buried structures (H3). Each needs its own pre-registered screen, the four buffered spatial
+   folds, and a same-run control.
+4. **H1's SGMC hedge cannot be validated locally.** It is shipped as an explicitly bounded,
+   unvalidated bet. If the user prefers maximum conservatism, ship
+   `runs/candidates/model_t04_s4.npy` (the same model dots without the hedge) instead — the two
+   differ only by the 5,281 inventory pixels.
+5. **Open irregularities to resolve with the organizer or by re-reading sources:** the Ingenious
+   Quaternary-fault v2 CRS failure; the competition-homepage end time (2026-12-03 23:59 UTC)
+   versus the rules PDF's Appendix A.1 (17:00 ET); and the fact that SGMC linework carries **no
+   age attribute**, which prevents restricting the hedge to late-Cenozoic faults.
+6. **Deadline and submission mechanics remain manual.** DrivenData's Terms of Use prohibit
+   robots/spiders/automatic access, so there is no automated leaderboard feed and no automated
+   upload. The site's status feed (`docs/status.json`) is the machine-readable summary this
+   project can offer.
+7. **Reproduce everything from a clean checkout** with the commands in *Start here*; the two new
+   holdout scripts are `scripts/emitter_comparison.py` and `scripts/novelty_holdout.py`, and the
+   candidate builder is `scripts/build_candidate_dots.py`.

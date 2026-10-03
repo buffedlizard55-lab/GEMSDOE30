@@ -21,18 +21,20 @@
     </div>
   </header>
 
-  <main><section class="section callout"><h2>New: data restored and real spatial pilot completed</h2><p><a href="docs/research/pilot-results.json">Full measured results: no promotion, no slot</a></p><p>Owner-mirror rasters are now locally SHA-256 verified. They are not organizer-authenticated. The reference D2.8 download passes our exact mirrored-template checks; it is not a new GEMSDOE30 model or slot-approved.</p><p><a href="docs/research/pilot-preregistration.md">Frozen four-arm hypothesis experiment (screen failed)</a> · <a href="docs/research/data-audit.json">Template irregularity</a> · <a href="docs/research/reference-validation.json">File validation</a></p></section>
+  <main><section class="section callout"><h2>New this session: a working official-data bridge, a falsified loss, and a format-verified candidate</h2>
+<p><strong>Download the candidate:</strong> <a href="docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif" download="gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif">gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif</a> · <a href="executive-summary.html#download">how to submit</a></p>
+<p>The 300 m boundary loss is rejected on its own holdout (<a href="docs/research/loss-ablation-verdict.md">&minus;0.0079 pooled DTI, 1 of 4 folds positive</a>). Turning the same model into 400 m dots instead of a probability field is worth <a href="docs/research/emitter-holdout.md">2.4&times;</a>. The USGS SGMC fault inventory is now fetched, hash-verified and committed by a runner bridge (<a href="data/external/external_receipt.json">receipt</a>), with its two falsification tests recorded honestly in <a href="docs/hypotheses.html">the hypothesis register</a>.</p></section>
     <section class="hero" aria-labelledby="page-title">
       <div>
         <span class="eyebrow">DOE GEMS · Northwestern Great Basin</span>
         <h1 id="page-title">Map faults the catalogue has not found.</h1>
         <p class="lead">A research-first workflow for fault discovery, where the training objective respects the competition's 300 m scoring geometry and every candidate must earn promotion on spatial holdout before a submission slot is considered.</p>
         <div class="actions">
-          <a class="button" href="executive-summary.html">How to submit →</a>
-          <a class="button secondary" href="docs/loss-design.html">Read the loss experiment</a>
-          <a class="button caution" href="docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif" download="gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif">↓ Download external research TIFF</a>
+          <a class="button" href="docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif" download="gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif">↓ Download the candidate GeoTIFF</a>
+          <a class="button secondary" href="executive-summary.html#download">How to submit →</a>
+          <a class="button secondary" href="docs/research/emitter-holdout.md">Read the holdout measurements</a>
         </div>
-        <p class="fine-print">The external file is GEMSDOE25 research only—owner page says unscored/not slot-approved. It is not a GEMSDOE30 result or an approved submission.</p>
+        <p class="fine-print">Format-verified locally (single band, float32, [0,1], EPSG:32611, NaN outside the footprint). It carries no leaderboard score and no submission slot has been used. The incumbent file with a verified 0.2600 is kept separately as the reference.</p>
         <p class="fine-print">Updated 2026-10-03 · public leaderboard values are time-stamped snapshots, not private-test results.</p>
       </div>
       <aside class="hero-panel" aria-label="Current project status">

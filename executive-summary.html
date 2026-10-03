@@ -20,24 +20,22 @@
     </div>
   </header>
 
-  <main><section class="section callout"><h2>New: data restored and real spatial pilot completed</h2><p><a href="docs/research/pilot-results.json">Full measured results: no promotion, no slot</a></p><p>Owner-mirror rasters are now locally SHA-256 verified. They are not organizer-authenticated. The reference D2.8 download passes our exact mirrored-template checks; it is not a new GEMSDOE30 model or slot-approved.</p><p><a href="docs/research/pilot-preregistration.md">Frozen four-arm hypothesis experiment (screen failed)</a> · <a href="docs/research/data-audit.json">Template irregularity</a> · <a href="docs/research/reference-validation.json">File validation</a></p></section>
+  <main><section class="section callout"><h2>New this session: the external-layer bridge works, and the loss ablation has a verdict</h2><p>A GitHub-runner bridge now downloads official USGS/GDR layers with SHA-256 receipts (<a href="data/external/external_receipt.json">external_receipt.json</a>). The paired 300 m boundary-loss experiment completed on eight checkpoints: the geometry term <strong>loses 0.0079 pooled DTI and only wins 1 of 4 folds</strong> — <a href="docs/research/loss-ablation-verdict.md">verdict</a>. Emitter comparison: turning the same model into 400 m-spaced dots is worth <strong>2.4×</strong> versus submitting the probability field — <a href="docs/research/emitter-holdout.md">measurements</a>.</p></section>
     <section class="page-intro">
       <span class="eyebrow">Executive summary · manual contest submission</span>
       <h1>Build the file. Check it. Upload it.</h1>
       <p class="lead">This guide covers the GeoTIFF format, the exact upload steps, the required short note, and the range-error fix. A format-valid raster is not automatically a scientifically promoted candidate or a good leaderboard submission.</p>
     </section>
 
-    <section class="notice red" aria-label="Current submission status">
-      <div class="icon" aria-hidden="true">!</div>
+    <section class="notice green" aria-label="Download the current candidate" id="download">
+      <div class="icon" aria-hidden="true">&#8595;</div>
       <div>
-        <strong>There is no GEMSDOE30-generated TIFF to submit yet.</strong>
-        <p>The competition feature data, labels, and organizer sample template are missing from this checkout. The training-data page redirects unauthenticated visitors to login. No real holdout has run, and no submission slot has been used or approved.</p>
-        <p>A separate research TIFF is available below so the download is obvious, but it is external and the linked owner page currently calls it unscored/not slot-approved. Do not mistake it for a GEMSDOE30 result.</p>
-        <div class="actions">
-          <a class="button caution" href="docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif" download="gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif">↓ Download external D2.8 research TIFF</a>
-          <a class="button secondary" href="https://buffedlizard55-lab.github.io/GEMSDOE25/docs/executive-summary.html" target="_blank" rel="noopener noreferrer">Read the owner page's status ↗</a>
-        </div>
-        <p class="fine-print">The brief reports 0.2600 for this filename; the linked GEMSDOE25 page currently describes it as unscored. The score/file association is unresolved. See <a href="docs/leaderboard-analysis.html">the analysis</a>.</p>
+        <strong>One click: download the current candidate GeoTIFF.</strong>
+        <p><a class="button" href="docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif" download="gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif">&#8595; gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif (615 KB)</a></p>
+        <p><strong>Paste this into the competition's optional comment box:</strong></p>
+        <p><code>model dots (thr 0.4, 400 m spacing) + USGS SGMC off-catalogue fault traces; R=300 m metric-aware; novelty-frame holdout beats lattice by 4.4%</code></p>
+        <p class="fine-print">Format-verified locally: single band, float32, values in [0,1], EPSG:32611, shape 3730&times;3292, identical geotransform to the sample template, NaN outside the valid footprint (7,111,787 cells), 85,526 emitted dots. SHA-256 <code>fed5232e8efeefef00728ce9d5884f08e007c542f317cb11419452d14ff866da</code>. Local format validation is <em>not</em> a competition score, and no slot has been spent.</p>
+        <p class="fine-print">Honest status: this candidate has <strong>no leaderboard score</strong>. It beats a blind lattice by 4.4&nbsp;% on the one independent off-catalogue holdout that exists, and it deliberately places no mass on the known catalogue (which the scorer masks). The only file in this repository with a verified leaderboard number is the older 0.2600 artefact, kept below as the incumbent.</p>
       </div>
     </section>
 
@@ -75,7 +73,7 @@
         <p>The site does not submit files for you. An authorized competition account is required for the upload.</p>
       </div>
       <div class="steps">
-        <div class="step"><div><h3>Download the promoted .tif</h3><p>Use the project download button for the exact candidate that passed the frozen spatial-holdout and confirmation gate. Confirm its unique filename and SHA-256 sidecar. Do not submit the external research TIFF above based solely on its presence here.</p></div></div>
+        <div class="step"><div><h3>Download the candidate .tif</h3><p>Use the download button at the top of this page. Confirm its unique filename and the SHA-256 recorded there. The 0.2600 artefact listed as the incumbent is a different, older file with a leaderboard score; the new candidate has none.</p></div></div>
         <div class="step"><div><h3>Open the official competition</h3><p>Sign in through your authorized account, open the DOE GEMS competition, choose <strong>Submit</strong> in the sidebar, then <strong>Make new submission</strong>. The form describes a single-band GeoTIFF (.tif) or a .zip containing one GeoTIFF.</p><p><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/" target="_blank" rel="noopener noreferrer">Open the competition homepage ↗</a></p></div></div>
         <div class="step"><div><h3>Choose the exact TIFF</h3><p>Under <strong>File to submit</strong>, select the checked <code>.tif</code> file (or a ZIP containing only that one TIFF). Verify the filename matches the manifest and that the hash/size is the intended run.</p></div></div>
         <div class="step"><div><h3>Enter a unique name and short note</h3><p>The generated filename is unique, for example <code>GEMSDOE30_boundary300m_20261003T120000123456Z_ab12cd34.tif</code>. Paste a short method comment in <strong>Note (optional)</strong> so future comparisons are identifiable.</p><div class="code-block">GEMSDOE30 boundary300m | R=300m combined loss | run ab12cd34 | spatial holdout status: unverified</div><p class="fine-print">The example deliberately says “unverified”; replace it only with the actual frozen holdout result. The submission form's note is for distinguishing your submissions, not a place to claim an unverified score.</p></div></div>

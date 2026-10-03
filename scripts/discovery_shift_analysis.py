@@ -90,6 +90,10 @@ def main() -> int:
     parser.add_argument("--alpha", type=float, default=0.2)
     parser.add_argument("--cluster-radius-km", type=float, default=3.0)
     parser.add_argument("--densities", type=float, nargs="+", default=list(DEFAULT_DENSITIES))
+    parser.add_argument("--lattice-spacing-px", type=float, default=4.0,
+                        help="spacing of the internal blind-lattice reference arm")
+    parser.add_argument("--no-lattice", action="store_true",
+                        help="skip the blind-lattice reference arm")
     args = parser.parse_args()
 
     valid = np.load(args.data_dir / "valid.npy", mmap_mode="r").astype(bool, copy=False)
@@ -110,6 +114,15 @@ def main() -> int:
             raise ValueError(f"{path}: predictions outside [0, 1]")
         predictions[arm] = plane
 
+    arms = list(ARMS)
+    if not args.no_lattice:
+        spacing = max(1, int(round(args.lattice_spacing_px)))
+        lattice = np.zeros(valid.shape, dtype=np.float32)
+        lattice[np.arange(0, valid.shape[0], spacing)[:, None],
+                np.arange(0, valid.shape[1], spacing)[None, :]] = 1.0
+        predictions["blind_lattice"] = np.where(valid, lattice, 0.0)
+        arms.append("blind_lattice")
+
     rng = np.random.default_rng(args.seed)
     report: dict[str, object] = {
         "script": "scripts/discovery_shift_analysis.py",
@@ -118,7 +131,8 @@ def main() -> int:
         "dataset_signature": manifest.get("dataset_signature"),
         "footprint_pixels": int(valid.sum()),
         "catalogue_truth_pixels": int(truth.sum()),
-        "arms": list(ARMS),
+        "arms": arms,
+        "lattice_spacing_px": None if args.no_lattice else args.lattice_spacing_px,
         "density_shift": {},
         "cluster_shift": {},
         "catalogue_masked": {},
@@ -127,13 +141,13 @@ def main() -> int:
     started = time.time()
 
     def score_all(truth_binary, scored_mask, tag, bucket):
-        for arm in ARMS:
+        for arm in arms:
             components = _components(predictions[arm], truth_binary, scored_mask,
                                      args.radius_m, args.alpha)
             bucket.setdefault(arm, {})[tag] = _summarise(components)
 
     # ---- full catalogue reference -------------------------------------------------
-    for arm in ARMS:
+    for arm in arms:
         components = _components(predictions[arm], truth, valid, args.radius_m, args.alpha)
         report["density_shift"].setdefault(arm, {})["1.000"] = _summarise(components)
 
@@ -193,7 +207,7 @@ def main() -> int:
     from scipy.ndimage import binary_dilation
 
     catalogue_dilated = binary_dilation(truth, iterations=3)
-    for arm in ARMS:
+    for arm in arms:
         masked_prediction = np.where(catalogue_dilated, 0.0, predictions[arm])
         hidden_truth = truth & ~catalogue_dilated
         scored = valid & ~catalogue_dilated
@@ -211,40 +225,53 @@ def main() -> int:
     for fold in range(4):
         _, fold_mask = spatial_quadrant_masks(valid, fold, buffer_m=args.radius_m)
         entry: dict[str, object] = {"scored_pixels": int(fold_mask.sum())}
-        for arm in ARMS:
+        for arm in arms:
             components = _components(predictions[arm], truth & fold_mask, fold_mask,
                                      args.radius_m, args.alpha)
             entry[arm] = _summarise(components)
         entry["delta_combined_minus_regional"] = entry["combined"]["dti"] - entry["regional"]["dti"]
+        if "blind_lattice" in entry:
+            entry["delta_lattice_minus_regional"] = entry["blind_lattice"]["dti"] - entry["regional"]["dti"]
         report["fold_slices"][f"fold{fold}"] = entry
 
-    report["paired"] = {
-        "density_shift": _paired_delta(
-            {k: v["dti"] for k, v in report["density_shift"]["combined"].items() if not k.startswith("_")},
-            {k: v["dti"] for k, v in report["density_shift"]["regional"].items() if not k.startswith("_")},
-        ),
-        "cluster_shift": _paired_delta(
-            {k: v["dti"] for k, v in report["cluster_shift"]["combined"].items() if not k.startswith("_")},
-            {k: v["dti"] for k, v in report["cluster_shift"]["regional"].items() if not k.startswith("_")},
-        ),
-        "fold_slices": _paired_delta(
-            {k: v["combined"]["dti"] for k, v in report["fold_slices"].items()},
-            {k: v["regional"]["dti"] for k, v in report["fold_slices"].items()},
-        ),
-    }
+    paired: dict[str, object] = {}
+    for other in arms:
+        if other == ARMS[0]:
+            continue
+        paired[other] = {
+            "density_shift": _paired_delta(
+                {k: v["dti"] for k, v in report["density_shift"][other].items()
+                 if not k.startswith("_")},
+                {k: v["dti"] for k, v in report["density_shift"][ARMS[0]].items()
+                 if not k.startswith("_")},
+            ),
+            "cluster_shift": _paired_delta(
+                {k: v["dti"] for k, v in report["cluster_shift"][other].items()
+                 if not k.startswith("_")},
+                {k: v["dti"] for k, v in report["cluster_shift"][ARMS[0]].items()
+                 if not k.startswith("_")},
+            ),
+            "fold_slices": _paired_delta(
+                {k: v[other]["dti"] for k, v in report["fold_slices"].items()},
+                {k: v[ARMS[0]]["dti"] for k, v in report["fold_slices"].items()},
+            ),
+        }
+    report["paired"] = paired
     report["elapsed_seconds"] = round(time.time() - started, 1)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(f"wrote {args.output} in {report['elapsed_seconds']}s")
     for bucket in ("density_shift", "cluster_shift"):
-        for tag in sorted(k for k in report[bucket]["regional"] if not k.startswith("_")):
-            r = report[bucket]["regional"][tag]["dti"]
-            c = report[bucket]["combined"][tag]["dti"]
-            print(f"  {bucket:14s} {tag:12s} regional={r:.6f} combined={c:.6f} delta={c - r:+.6f}")
+        for tag in sorted(k for k in report[bucket][ARMS[0]] if not k.startswith("_")):
+            line = f"  {bucket:14s} {tag:12s}"
+            for arm in arms:
+                line += f" {arm}={report[bucket][arm][tag]['dti']:.6f}"
+            print(line)
     for fold, entry in sorted(report["fold_slices"].items()):
-        print(f"  {fold} regional={entry['regional']['dti']:.6f} "
-              f"combined={entry['combined']['dti']:.6f} "
-              f"delta={entry['delta_combined_minus_regional']:+.6f}")
+        line = f"  {fold}"
+        for arm in arms:
+            line += f" {arm}={entry[arm]['dti']:.6f}"
+        print(line)
     return 0
 
 

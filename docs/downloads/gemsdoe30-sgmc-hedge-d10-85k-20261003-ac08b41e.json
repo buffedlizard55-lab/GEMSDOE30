@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "run_name": "GEMSDOE30_sgmc-hedge-t04-s4-d10_20261003T174409650983Z_ac08b41e",
+  "note": "model dots (thr 0.4, 400 m spacing) + USGS SGMC off-catalogue fault traces; R=300 m metric-aware; novelty-frame holdout beats lattice by 4.4%",
+  "output_file": "GEMSDOE30_sgmc-hedge-t04-s4-d10_20261003T174409650983Z_ac08b41e.tif",
+  "output_sha256": "fed5232e8efeefef00728ce9d5884f08e007c542f317cb11419452d14ff866da",
+  "prediction_array_sha256": "1a579e97c0b39c0fe2064ecce2147bd03bf88d4a527235c5973565b5ff36b5a8",
+  "template_file": "data/raw/sample_submission.tif",
+  "created_utc": "2026-10-03T17:44:10+00:00",
+  "format_validation": {
+    "path": "outputs/GEMSDOE30_sgmc-hedge-t04-s4-d10_20261003T174409650983Z_ac08b41e.tif",
+    "passed": true,
+    "checks": [
+      {
+        "name": "template_single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "float32",
+        "passed": true,
+        "detail": "dtypes=('float32',)"
+      },
+      {
+        "name": "epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "template_epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "shape_matches_template",
+        "passed": true,
+        "detail": "output=(3730, 3292) template=(3730, 3292)"
+      },
+      {
+        "name": "transform_matches_template",
+        "passed": true,
+        "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "100m_north_up_grid",
+        "passed": true,
+        "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "finite_and_in_range_inside_footprint",
+        "passed": true,
+        "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+      },
+      {
+        "name": "null_outside_template_footprint",
+        "passed": true,
+        "detail": "outside_pixels=7111787; null/NaN/nodata required"
+      },
+      {
+        "name": "template_readable",
+        "passed": true,
+        "detail": "shape=(3730, 3292)"
+      }
+    ]
+  },
+  "performance_status": "unscored; format validation is not a score"
+}
