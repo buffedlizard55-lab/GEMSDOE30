@@ -114,7 +114,8 @@ wins and the distilled list must be corrected.
 
 > **Branch note:** the brief above names the branch of the session in which it
 > was first recorded (`arena/01a10289-gemsdoe30`). Each Arena session is assigned
-> its own branch; work for this session happens on `arena/01a102bf-gemsdoe30`,
+> its own branch; work for the current session happens on `arena/01a10315-gemsdoe30`
+> (previous sessions: `arena/01a102bf-gemsdoe30`, `arena/01a10311-gemsdoe30`),
 > and pull requests are opened from whichever branch the session is assigned.
 > The brief's verbatim wording is preserved above unchanged.
 
@@ -281,6 +282,51 @@ an independent fault inventory, while our 80,392-dot model set is worth +25 % ov
 control.** Reported rather than hidden because it should decide which file, if any, is submitted.
 **Neither candidate has a leaderboard score and no slot has been used.**
 
+### Session 4 (2026-10-03, branch `arena/01a10315-gemsdoe30`) — data blocker closed, H-32-05 falsified
+
+**The standing "single remaining blocker to training is data placement" is closed, and the claim that
+the brief's central loss deliverable was "verified working here on CPU" was not true until this
+session.** Both were re-checked from scratch rather than trusted:
+
+1. **Data placement — resolved without manual input.** Raw `curl` to `drivendata.org` and
+   `dropbox.com` fails in this sandbox (TLS EOF), but `gh api` reaches the pinned owner mirrors. The
+   three core rasters were fetched from the pinned refs and reassembled, then **SHA-256-verified
+   against `docs/research/mirror-pins.json`**: `4371c82e…43123bc5` (418,912,844 B, 5 parts),
+   `7ba308cc…5ae4093`, `2176d08e…54d35cbc`. `download_competition_data.sh` exits 0;
+   `prepare_data.py` reproduces **`dataset_signature 291d3467…dee855ed`, byte-identical to the
+   signature earlier sessions recorded** — the independent proof that this is the same data
+   (5,167,373 valid pixels, 60,988 catalogue positives, 19 bands, EPSG:32611, 100 m). Training then
+   ran on real data on CPU (`train_model.py --fold 0 --loss combined`, ~0.55 s/step).
+   Mirrors remain **not organizer-authenticated** (IR-30-001 unchanged). See IR-30-024.
+2. **Boundary-loss verification gap — closed.** With no torch installed, the 5 boundary-loss tests in
+   `tests/test_optional_loss.py` were **skipping**, so the deliverable the brief centres on had never
+   executed here. torch 2.14.1 installed; the suite now runs them: **67 passed, 11 subtests, 0
+   skipped** — including the check that the geometry term equals `1 − distance_weighted_tversky(…)`
+   to 10 decimal places and that near-misses are ranked by 300 m kernel distance. See IR-30-030.
+3. **H-32-05 (buried range-front pinch-out edges) — preregistered, run, falsified.** Design frozen in
+   [h32-05-preregistration.md](docs/research/h32-05-preregistration.md) *before* the run, on the real
+   `depth_to_base_surf` / `iso_grav_anom_hg` / `tmi_hg` bands, with USGS-cited physics
+   ([OFR 2005-1154](https://pubs.usgs.gov/of/2005/1154/of2005-1154.pdf),
+   [OFR 2000-189](https://pubs.usgs.gov/of/2000/0189/pdf/of00-189.pdf),
+   [USGS 70259621](https://pubs.usgs.gov/publication/70259621)). Registered gate **failed every
+   scoring clause**: screen Δ −0.02614 vs matched random (needed ≥ +0.002), 0/4 quadrants,
+   confirmation Δ −0.02591. The pre-declared *transform clause* passed (+0.0012 / +0.0034: the
+   basement-surface **edge** does beat its raw **magnitude**), but the whole family sits ~10× below
+   the random controls. **Not promoted; no slot spent.** [Result](docs/research/h32-05-basement-edge-holdout.md).
+   Declared design defect: the `coherence ≥ 0.5` floor accepted 99.65 % of pixels, so the
+   oriented-edge variant was never fairly tested (IR-30-029).
+4. **Three real bugs found and fixed** while verifying, each with a reproduction: the status feed
+   looked for mirrors in the wrong directory so it always reported "no data" (IR-30-025); 9 of 22
+   scripts could not run on an uninstalled checkout even though the docs say to run them that way
+   (IR-30-026, fixed and re-verified with the package uninstalled); and
+   `fetch_external_layers.py` clobbered a committed audit receipt on *any* invocation, including
+   `--help` (IR-30-027 — an accidental `--help` cost a 783-line deletion, restored from git; in-flight
+   evidence now goes to a sidecar and the canonical receipt needs `--allow-overwrite`).
+5. **Reading of three consecutive falsifications (H-31-01, H-32-01, H-32-05) against the same
+   `random_near_matched` control (~0.029 DTI):** the binding constraint on this proxy is **where a
+   fixed emission budget is placed relative to mapped structure**, not which scalar field ranks the
+   pixels. The next registered experiment should be a placement-policy test, not a new detector.
+
 ## Current verified state — 2026-10-03
 
 - The recorded baseline commit for this checkout already contains the model/loss, tests, training/inference/validation scripts, and site scaffold. The Git history available here is shallow/grafted to that commit, so earlier claims about a prior README-only state cannot be independently verified from this repository. At the start of this review there were **no competition rasters, sample template, checkpoints, real holdout predictions, or generated GEMSDOE30 TIFFs**. The rasters have since been restored from SHA-256-pinned owner mirrors (not organizer-authenticated) and real-data training, OOF prediction, stitching and scoring all run locally; what remains blocked is organizer-authenticated data and the hidden expert labels.
@@ -308,6 +354,16 @@ control.** Reported rather than hidden because it should decide which file, if a
    bash scripts/download_competition_data.sh
    python scripts/prepare_data.py
    ```
+
+   **Status (verified 2026-10-03, this session): this step is complete and reproducible without any
+   manual input.** `python scripts/restore_public_mirrors.py` fetches the SHA-256-pinned owner
+   mirrors through the GitHub API and reassembles `training_features.tif` from its five parts; all
+   three core rasters then hash-match `docs/research/mirror-pins.json` exactly
+   (`4371c82e…43123bc5` / `7ba308cc…5ae4093` / `2176d08e…54d35cbc`), `download_competition_data.sh`
+   exits 0, and `prepare_data.py` reproduces `dataset_signature 291d3467…dee855ed` — identical to the
+   signature recorded by earlier sessions, which is the independent check that the mirror is the same
+   data. `docs/status.json → data_placement` re-verifies placement and hashes on every regeneration.
+   These remain **owner mirrors, not organizer-authenticated files**.
 
    The preparation script fails closed on CRS, transform, shape, label encoding, or footprint mismatch. It records SHA-256 values for the three source rasters and a dataset signature in the prepared manifest, then writes raw features and masks under the Git-ignored `data/processed/`. Each training run fits and stores its own robust normalization statistics using training-fold pixels only, never held-out pixels; the checkpoint is bound to that prepared dataset signature.
 
@@ -359,7 +415,7 @@ Later on 2026-10-03 a first GEMSDOE30 candidate file was built and published for
 ## Current next steps and limits
 
 1. **Upload path is fixed — use it.** The portal-safe `-zeros.tif` variants are the primary downloads for all three published TIFFs (GBM candidate, measured variant, external D2.8) and the site's submission guide walks through the upload with paste-ready notes. The scientific gates are unchanged: **no candidate is holdout-promoted**; submitting an un-promoted file is the owner's decision, and the file's note must say exactly that.
-2. **H-32-01 (discharge corridors) is falsified on the proxy**; the next runnable local candidates are **H-32-05 (buried pinch-out edges on `depth_to_base_surf`/gravity/magnetic gradients)** and the **H-31-02 reduced matched-filter scarp arm** on the local 12-channel scarp stack (the raw 3DEP 1 m arm still needs the ~9 GB tile transfer off-sandbox). H-32-04 cannot be validated on the catalogue proxy at all (IR-30-021) and needs the OSTI 1148722 / GDR 616 inventories retrieved and checksummed first. The independent-inventory idea behind the measured variant's novelty frame is the *shape* of evidence that should gate future claims (see item 7).
+2. **H-32-01 and H-32-05 are both falsified on the proxy**; the remaining runnable local candidate is the **H-31-02 reduced matched-filter scarp arm** on the local 12-channel scarp stack (the raw 3DEP 1 m arm still needs the ~9 GB tile transfer off-sandbox). **The higher-value next experiment, argued from three consecutive falsifications (H-31-01, H-32-01, H-32-05) against the same `random_near_matched` control, is a *placement-policy* test — how to allocate a fixed emission budget between near-catalogue and off-catalogue space — rather than another detector.** H-32-04 cannot be validated on the catalogue proxy at all (IR-30-021) and needs the OSTI 1148722 / GDR 616 inventories retrieved and checksummed first. The independent-inventory idea behind the measured variant's novelty frame is the *shape* of evidence that should gate future claims (see item 7).
 3. **Boundary loss remains not promoted — and its retry criterion has now been executed.** The recorded retry (larger budget + preregistered boundary-weight sweep + emitted-mask scoring) ran as a fold-0 screen ([loss-weight-sweep.md](docs/research/loss-weight-sweep.md), 2026-10-03): dense scoring prefers plain `regional` at every weight; emitted-mask scoring prefers `combined-100` by only +0.0010 on one fold — the scorings disagree, so no weight is selected for confirmation and the line stays closed. The near-miss behavioural effect the brief asked for *is* demonstrated (partial-distance truth coverage 1,889 → 724); the metric gain is not. Any future loss work should start from the standing [verification-protocol.md](docs/research/verification-protocol.md) (three checks with pre-stated criteria) and a new mechanism, not more λ tuning.
 4. **Build/validate rule unchanged:** an exact-grid, holdout-promoted candidate only after its family beats the same-run best by the frozen margin with fresh-seed confirmation. Both published un-promoted candidates — the GBM surface (`…aedb3d13-nan.tif`, SHA-256 `f5d137b9…c7cc2`, 90,358 dots) and the measured SGMC-hedge variant (`…ac08b41e.tif`, SHA-256 `fed5232e…66da`, 85,526 dots) — plus their portal-safe variants are research artifacts with honest notes.
 5. **Feed:** `scripts/build_status.py` keeps `docs/status.json` current automatically. The leaderboard itself can only be refreshed by dated manual reads (DrivenData ToS prohibit automated monitoring) — recorded in `docs/score-ledger.csv` with `evidence_class=official-snapshot`.
