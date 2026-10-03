@@ -1,11 +1,11 @@
 {
   "schema_version": 2,
   "run_name": "gemsdoe30-sgmc-hedge-d10-85k_20261003T182842779739Z",
-  "note": "model dots (thr 0.4, 400 m spacing) + USGS SGMC off-catalogue traces; R=300m metric-aware; novelty-frame holdout beats matched random by 25%; portal-safe zeros-outside",
+  "note": "GEMSDOE30 SGMC-hedge research; SGMC holdout tautological; unpromoted/unscored; local zero-outside copy",
   "output_file": "gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e-zeros.tif",
   "output_sha256": "d7977d7b93287f17fbf3cb85f10fdbee4acc5c8453a7faa451e760363433a286",
   "prediction_array_sha256": "1a579e97c0b39c0fe2064ecce2147bd03bf88d4a527235c5973565b5ff36b5a8",
-  "outside_convention": "0.0 portal-safe (finite everywhere)",
+  "outside_convention": "0.0 outside (finite-range validated locally; organizer acceptance unverified)",
   "template_file": "data/raw/sample_submission.tif",
   "created_utc": "2026-10-03T18:28:44+00:00",
   "format_validation": {

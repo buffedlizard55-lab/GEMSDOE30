@@ -94,8 +94,8 @@ def main() -> int:
     gates["loss_ablation"] = {
         "screen": "docs/research/loss-ablation-holdout.json",
         "confirmation": "docs/research/loss-ablation-holdout-seed31.json",
-        "screen_pooled_delta": loss_screen.get("comparison", {}).get("pooled_dti_delta"),
-        "confirmation_pooled_delta": loss_confirm.get("comparison", {}).get("pooled_dti_delta"),
+        "screen_pooled_delta": loss_screen.get("pooled_delta_dti"),
+        "confirmation_pooled_delta": loss_confirm.get("pooled_delta_dti"),
         "promoted": False,
         "decision": "screen positive at seed 30, confirmation negative at seed 31; not promoted",
     }
@@ -178,8 +178,9 @@ def main() -> int:
             "gate_verdicts": verdicts,
             "promoted": any_h33_promoted,
             "decision": (
-                "H-31-02r passes independent SGMC novelty frame (+86.1% / +91.6%) and transform clause (+22.4%), "
-                "but trails dispersed control on catalogue proxy (-0.00261); H-32-05b falsified; not promoted"
+                "H-31-02r beats its step_max ablation (+22.4% / +20.2%) and is spatially positive on the SGMC frame (+0.03670, 4/4), "
+                "but catalogue spatial checks are negative (-0.00073 / -0.00261, 2/4) and the SGMC top-decile calibration-ratio gate passes 2/4; "
+                "H-32-05b falsified; H-31-02r not promoted"
             ),
         }
     else:

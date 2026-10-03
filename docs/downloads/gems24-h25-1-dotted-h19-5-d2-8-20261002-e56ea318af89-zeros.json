@@ -1,11 +1,11 @@
 {
   "schema_version": 2,
   "run_name": "gems25-dotted-h19-5-d2-8-zeros_20261003T172939460962Z",
-  "note": "GEMSDOE25 D2.8 dotted H19-5 external research TIFF; portal-safe zeros-outside; score attribution unverified; not slot-approved",
+  "note": "GEMSDOE25 D2.8 research; 0.2600 attribution unverified; not slot-approved; local zero-outside copy",
   "output_file": "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
   "output_sha256": "b00a6fb6cab70d0f957308e297695c4032ab97997a41a15ff1295add3df31a26",
   "prediction_array_sha256": "be28e3b627b9f399dfd0e263daa1433ebbec30cf76feb6bf35f420d7e7d0d751",
-  "outside_convention": "0.0 portal-safe (finite everywhere)",
+  "outside_convention": "0.0 outside (finite-range validated locally; organizer acceptance unverified)",
   "template_file": "data/raw/sample_submission.tif",
   "created_utc": "2026-10-03T17:29:40+00:00",
   "format_validation": {

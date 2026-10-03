@@ -12,8 +12,10 @@ scorer is the IR-30-031-corrected score-first greedy (`poisson_disk_select_order
 
 ## 1. What the run measured about its own design (the uncomfortable part first)
 
-The frozen budget B = 80,000 exceeds what the 0.4-thresholded, 4 px-thinned pools can supply.
-Measured pool capacities (whole scan, no cap):
+The frozen budget B = 80,000 **active scored-domain dots** exceeds what the 0.4-thresholded,
+4 px-thinned pools can supply. All pools and random controls in this harness are constructed inside
+the scoring domain, so the recorded `dots` count is active-domain count and also equals total
+emitted count for those arms. Measured pool capacities (whole scan, no cap):
 
 | pool | spaced candidates |
 |---|---|
@@ -41,12 +43,24 @@ launch attempt carried was also an unpreregistered artefact (it made capacities 
 still); it was removed to restore the frozen "full thinned pool" semantics, with `max_kept`
 early-stopping added as a pure speed device (prefix-equivalence proven by test).
 
-## 2. The substantive evidence: count-matched budgets
+## 2. The substantive evidence: 40,000-dot active-count-matched sensitivity
 
-The preregistered sensitivity budget (40,000) sits just under capacity, so **every arm there is
-fully count-matched at 40,000 dots** and the comparison is valid, if not gated. Diagnostics at
-12,000 (all arms realisable, including P100) and 30,000 (P75/P100 partly capacity-bound) were
-run as explicitly un-gated support. Means over 5 repeats (in-domain Qfaults DTI):
+The preregistered sensitivity budget (40,000) sits just under capacity. **The 40,000-dot emitter arms
+and their random controls are both active-count matched in the scored domain**, not merely equal on a
+pre-mask global budget. This was verified from `scripts/placement_policy_holdout.py`: band pools are
+built from `domain`, the full score pool is `domain & score > threshold`, `P_rank` is prefiltered to
+`domain`, blind random draws are sampled from `domain`, and `score_emitter` zeros predictions outside
+`domain` before recording `dots`. Thus, for the 40k model and random arms, every emitted point is
+inside the scoring domain and the recorded count is the active count (40,000). I inspected the
+JSON `sensitivity_budgets.B40000.summary` per-arm `mean_dots` values (five repeats each):
+`f_nat`, `f_nat_legacy`, `P0/P25/P50/P75/P100`, `P_rank`, `blind_random_B`, and
+`rand_P0/rand_P25/rand_P50/rand_P75/rand_P100` each record **40,000**; `historical_d28`
+records **35,824** and is not count-matched. The sensitivity JSON stores aggregates rather than
+per-repeat count rows, so the active/global interpretation still depends on the audited selection
+and scoring code path. This count result does not apply to the 80k gate, where quota arms emitted
+only 68,573 active dots against the 80,000-dot random control. Diagnostics at 12,000 (all arms
+realisable, including P100) and 30,000 (P75/P100 partly capacity-bound) were run as explicitly
+un-gated support. Means over 5 repeats (in-domain Qfaults DTI):
 
 | arm | B40,000 | B30,000 | B12,000 |
 |---|---|---|---|

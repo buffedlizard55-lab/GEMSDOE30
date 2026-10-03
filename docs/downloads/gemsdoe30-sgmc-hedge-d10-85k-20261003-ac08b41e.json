@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "run_name": "GEMSDOE30_sgmc-hedge-t04-s4-d10_20261003T174409650983Z_ac08b41e",
-  "note": "model dots (thr 0.4, 400 m spacing) + USGS SGMC off-catalogue fault traces; R=300 m metric-aware; novelty-frame holdout beats lattice by 4.4%",
+  "note": "GEMSDOE30 SGMC-hedge research raster; SGMC holdout is tautological; not promoted; unscored",
   "output_file": "GEMSDOE30_sgmc-hedge-t04-s4-d10_20261003T174409650983Z_ac08b41e.tif",
   "output_sha256": "fed5232e8efeefef00728ce9d5884f08e007c542f317cb11419452d14ff866da",
   "prediction_array_sha256": "1a579e97c0b39c0fe2064ecce2147bd03bf88d4a527235c5973565b5ff36b5a8",

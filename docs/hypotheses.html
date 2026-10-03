@@ -1,54 +1,142 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Ranked geological hypotheses · GEMSDOE30</title><link rel="stylesheet" href="assets/site.css"></head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Active geological hypotheses · GEMSDOE30</title>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
 <body>
-<header class="site-header"><div class="nav-wrap"><a class="brand" href="../index.html"><span class="brand-mark">G30</span> GEMSDOE30</a><nav class="nav-links"><a href="../index.html">Home</a><a href="../executive-summary.html">Submission guide</a><a href="leaderboard-analysis.html">Score analysis</a><a href="sources.html">Sources</a></nav></div></header>
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand" href="../index.html"><span class="brand-mark">G30</span> GEMSDOE30</a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="../index.html">Home</a>
+      <a href="../executive-summary.html">Submission guide</a>
+      <a href="leaderboard-analysis.html">Score analysis</a>
+      <a href="sources.html">Sources</a>
+    </nav>
+  </div>
+</header>
 <main>
-<section class="page-intro"><span class="eyebrow">Research register · measured where noted</span><h1>Fifteen fault hypotheses &amp; placement laws worth falsifying.</h1><p class="lead">Session 5 adds the <b>H-33-01 placement-policy decomposition</b>, the <b>H-31-02r 1 m LiDAR scarp dipole + 500 m strike continuity</b> holdout, and the <b>H-32-05b 1.5 km coherent basement step ridge (<code>p90</code> gate)</b> re-test — all evaluated under spacing-matched (<code>r = 3.0 px</code> Poisson-disk) and distance-matched controls across both the Catalogue Component Proxy and the Independent USGS SGMC Fault Inventory. Full evidence in <a href="hypotheses.md">the Markdown register</a>, <a href="research/h33-01-placement-and-scarp-holdout.md"><code>h33-01-placement-and-scarp-holdout.md</code></a>, and <a href="research/verification-checks-results.md"><code>verification-checks-results.md</code></a>.</p></section>
+  <section class="page-intro">
+    <span class="eyebrow">Research register · reviewed 2026-10-03</span>
+    <h1>Five untried geological hypotheses, with gates.</h1>
+    <p class="lead">This active shortlist is bounded by code and public owner summaries inspected in this checkout; it is not a claim about every private or historical run. Each candidate names its observables, physical signature, distinction from prior work, planning prior, cost, official source/access state, and a falsifiable blocked-holdout gate. See the <a href="hypotheses.md">full Markdown register</a> for protocols, history, and evidence.</p>
+  </section>
 
-<section class="section table-wrap"><h2>Session 5 spacing-matched holdout results (<code>H-33-01</code>, <code>H-31-02r</code>, <code>H-32-05b</code>; <code>N = 15,000</code>, <code>r = 3.0 px</code>)</h2>
-<p class="fine-print">Preregistered in <a href="research/h33-01-placement-and-scarp-preregistration.md"><code>h33-01-placement-and-scarp-preregistration.md</code></a>. First finding (<b>IR-30-031</b>): legacy <code>top_n_emission</code> emitted contiguous blobs (<code>median_nn_px = 1.0 px</code>, <code>99.95 % ≤ 3 px</code>) vs dispersed random controls; applying <code>r = 3.0 px</code> Poisson-disk thinning lifts DTI on the exact same basement feature surface from <code>0.00373 → 0.02380</code> (<b>6.38× multiplier</b>).</p>
-<table><thead><tr><th>ID / Candidate</th><th>Layers &amp; Physical Signature</th><th>Catalogue Screen / Confirm DTI</th><th>Independent SGMC Inventory (Unclustered / 5 km Clustered)</th><th>Verdict &amp; Three-Check Status</th></tr></thead><tbody>
-<tr><td><strong>H-33-01 Placement-Policy Decomposition</strong></td><td>Distance-from-catalogue bands (<code>300–1,500 m</code> near-splay, <code>1,500–5,000 m</code> stepover, <code>&gt; 5,000 m</code> far-basin) + <code>60/25/15 %</code> power-law hedge.</td><td>Near-splay: <b><code>0.07234 / 0.07434</code></b> (<b>2.7×</b> uniform <code>0.02674 / 0.02694</code>; <b>18.6×</b> far-basin <code>0.00389</code>). Hedge: <b><code>0.05604 / 0.04656</code></b> (<code>+0.02930 / +0.01962</code>, <code>4/4</code> quadrants).</td><td>Unclustered: <b><code>0.03200 / 0.03030</code></b> vs uniform <code>0.02787 / 0.02719</code> (<code>+0.00413 / +0.00311</code>). Clustered: <code>0.01022 / 0.01760</code> vs <code>0.01297 / 0.01128</code> (<code>−0.00274</code> s31, <code>+0.00632</code> s41).</td><td><b>Mechanism proven; hedge not promoted</b> (split sign on 5 km clustered SGMC seed 31).</td></tr>
-<tr><td><strong>H-31-02r 1 m LiDAR Scarp Dipole + 500 m Strike Continuity</strong></td><td><code>lidar_scarp_features_u8.tif</code> (<code>step_max</code>, <code>lapneg_max</code>, <code>lappos_max</code>, <code>coh100</code>, <code>strike</code>, <code>lidar_valid</code>) + <code>det_elev_slope</code> fallback.</td><td><b><code>0.03323 / 0.03066</code></b> — beats <code>step_max_only</code> (<code>0.02715 / 0.02551</code>, <b>+22.4 % / +20.2 %</b>, transform clause <b>PASS</b>); trails dispersed control (<code>0.03585 / 0.03070</code>, <code>−0.00261</code>).</td><td>Unclustered: <b><code>0.05913 / 0.05308</code></b> vs control <code>0.03178 / 0.02903</code> (<b>+86.1 % / +82.8 %</b>, <code>4/4</code> quadrants). Clustered: <b><code>0.02916 / 0.01652</code></b> vs <code>0.01522 / 0.01029</code> (<b>+91.6 % / +60.5 %</b>).</td><td><b>Passes on independent SGMC fault inventory (+86 % to +92 %)</b> + Check 2 (<code>slope = 0.9009</code>, <code>4/4</code> folds) + Check 3 (<code>97.2 %</code> topographic dependence); <b>withheld from automatic slot promotion</b> because catalogue proxy Δ is <code>−0.00261</code> (<a href="irregularities.html">IR-30-033</a>).</td></tr>
-<tr><td><strong>H-32-05b 1.5 km Coherent Basement Step Ridge (<code>p90</code> gate)</strong></td><td><code>depth_to_base_surf</code>, <code>iso_grav_anom_hg</code>, <code>tmi_hg</code> with 1.5 km (<code>15 × 15 px</code>) structure-tensor <code>p90</code> gate (<code>coherence ≥ 0.6545</code>, selecting <b>10.00 %</b> of footprint vs <code>99.65 %</code> in IR-30-029).</td><td><b><code>0.02574 / 0.02933</code></b> — beats ungated Poisson (<code>0.02380 / 0.02566</code>) and legacy un-thinned (<code>0.00373 / 0.00526</code>), trails <code>basement_matched_control</code> (<code>0.03660 / 0.03655</code>, <code>0/4</code> quadrants).</td><td>Unclustered: <code>0.02798 / 0.02431</code> vs control <code>0.03382 / 0.03025</code> (<code>−0.00585</code>). Clustered: <code>0.01247 / 0.01071</code> vs <code>0.01760 / 0.01222</code>.</td><td><b>Falsified (<code>promoted = false</code>)</b> — fixing both IR-30-029 and IR-30-031 lifts DTI <code>6.9×</code>, but the basement step family still trails distance-matched random.</td></tr>
-</tbody></table></section>
+  <section class="notice red" aria-label="Promotion status">
+    <div class="icon" aria-hidden="true">!</div>
+    <div>
+      <strong>No hypothesis is currently promoted; no weekly slot is approved.</strong>
+      <p>H-31-02r is the strongest measured new feature transform, but its spatial result is split by validation frame and the SGMC top-decile calibration-ratio criterion passes only 2/4 folds. Do not retune against the inspected SGMC labels. The lowest-cost next action is the H-31-04 source/metadata audit, not a submission.</p>
+      <p><a href="research/h33-01-placement-and-scarp-holdout.md">Placement/scarp holdout</a> · <a href="research/verification-checks-results.md">Three-check verification</a> · <a href="irregularities.html">Open irregularities</a></p>
+    </div>
+  </section>
 
-<section class="section table-wrap"><h2>H-32 register — five candidates never tried here (second 2026-10-03 session)</h2>
-<p class="fine-print">Grounded in the <a href="research/geothermal-vents-knowledge.md">verified geothermal-vent knowledge base</a> (official DOE/OSTI literature + measured GDR spring/vent/Qfaults data). The rules PDF verified this session confirms the scored target is expert-new faults beyond the INGENIOUS catalogue and that Phase 2 will be judged on an expert-revised label set — so these candidates target structures experts can confirm.</p>
-<table><thead><tr><th>Rank</th><th>Candidate · layers · signature</th><th>Why an un-catalogued fault</th><th>Difference · prior · cost</th><th>Status</th></tr></thead><tbody>
-<tr><td><strong>1 · Top</strong></td><td><strong>H-32-01 Geothermal-discharge corridor.</strong> GDR wellspring sites (512 cells ≥ 60 °C; 256 ≥ 100 °C) + cond_surf/depth_to_base_surf/det_elev_slope. Hot-spring cluster alignment corridors (2–8 km pairs) and 1 km discharge haloes.</td><td>Measured: only 11.6 % of spring rows lie within 300 m of the catalogue; median hot cell is 1.4 km away (outflow surfaces km from the source structure — Faulds). Most discharge demands a conduit the catalogue lacks.</td><td>Owner thermal work is scalar temperature; nothing tests cluster-alignment corridors or geothermometer-ranked discharge. Prior <strong>+0.005 … +0.030</strong>; <strong>low cost</strong>.</td><td><strong>Holdout gate FAILED — not promoted</strong> (ΔDTI −0.0149/−0.0154 vs matched control, 0/4 quadrants; <a href="research/h32-01-vent-corridor-holdout.md">result</a>)</td></tr>
-<tr><td><strong>2</strong></td><td><strong>H-32-04 Un-catalogued Qfaults completion.</strong> Qfaults slip rate/recency/slip sense + kinematic gap-extension corridors &gt;300 m from catalogue pixels.</td><td>45 % of in-footprint Qfaults centroids sit &gt;300 m from catalogue truth — literally "fault pixels not already captured" (staff thread 11536).</td><td>Owner h18-4 used geologic-map faults (0.036); no kinematic Qfaults weighting exists. Prior <strong>+0.005 … +0.025 conditional</strong>; medium cost. <strong>Circular on catalogue holdout</strong> — needs OSTI 1148722 / GDR 616 validation.</td><td>Registered; external validation sources named and verified obtainable</td></tr>
-<tr><td><strong>3</strong></td><td><strong>H-32-05 Buried pinch-out edges.</strong> depth_to_base_surf + iso_grav_anom_hg + tmi_hg structure-tensor/Laplacian edges of the basement surface.</td><td>Faults buried under alluvium have no scarp for lidar mapping and are absent from expression catalogues; their displacement persists in basement depth.</td><td>Basement depth used only as a plain band everywhere inspected; no edge transform of it exists in this repo or the owner sites. Prior <strong>+0.002 … +0.015</strong>; low-medium cost.</td><td><strong>Holdout gate FAILED — not promoted</strong> (screen Δ −0.02614 vs matched control, 0/4 quadrants, confirmation Δ −0.02591; transform clause <em>passed</em>: edge &gt; raw magnitude +0.0012/+0.0034; declared defect: coherence floor accepted 99.65 % of pixels — <a href="research/h32-05-basement-edge-holdout.md">result</a> · <a href="research/h32-05-preregistration.md">preregistration</a>)</td></tr>
-<tr><td><strong>4</strong></td><td><strong>H-32-03 Geothermometer discordance upflow.</strong> Quartz/chalcedony/cation geothermometer discordance + cond_surf; steam-loss upflow corridors.</td><td>39–75 % of Great Basin systems are blind (Faulds); chemistry samples deep pathways with no surface expression.</td><td>Spring chemistry unused anywhere inspected. Prior <strong>+0.001 … +0.012</strong>; low cost; power-limited (~1k chemistry sites).</td><td>Registered</td></tr>
-<tr><td><strong>5</strong></td><td><strong>H-32-02 Vent feeder alignment.</strong> 21 mapped vents (20 basalt) + tmi_hg/magnetic edge extensions (dike swarms).</td><td>Measured: <strong>0 of 21 vents</strong> lie within 300 m of the catalogue (median 2.2 km) — feeder structures are unmapped.</td><td>Vents unused in any inspected page. Prior <strong>+0.001 … +0.010</strong>; low cost; n = 21 (pilot power).</td><td>Registered</td></tr>
-</tbody></table></section>
-<div class="notice red"><div class="icon" aria-hidden="true">!</div><div><strong>No candidate is promoted and no submission slot has been used.</strong><p>Owner-mirror rasters are present locally (SHA-256 verified, <b>not organizer-authenticated</b>). <b>Five</b> real-data holdouts have run (H-32-05 added this session and falsified), and the competition data blocker is closed — the three core rasters are in place, SHA-256-verified against the pins, and reproduce the recorded dataset signature: the paired regional-vs-boundary loss ablation screened positive (Δ +0.0019, 3/4 folds) and then <b>failed its fresh-seed (31) confirmation</b> (Δ +0.0001, 2/4 folds) although its near-miss conversion reproduced (1,889 → 724); the preregistered metric-emission gate <b>failed</b>; and the H-31-01 relay-connector test did not separate from its proximity control. External candidates remain blocked on transfer of the named public archives. <a href="research/loss-ablation-holdout.md">Loss evidence</a> · <a href="research/metric-emission-holdout-results.md">emission gate result</a> · <a href="status.json">status feed</a></p></div></div>
-<section class="section table-wrap"><h2>New register — five candidates added 2026-10-03</h2>
-<table><thead><tr><th>Rank</th><th>Hypothesis and physical signature</th><th>Planning prior / cost</th><th>Status (measured where noted)</th></tr></thead><tbody>
-<tr><td><strong>1</strong></td><td><b>H-31-01 Relay-ramp / step-over connector completion.</b> Pairs of sub-parallel lineament terminations (azimuth within ~20°, 0.3–3 km separation, along-strike overlap) and the connector between them; competition bands plus LiDAR scarp channels, catalogue geometry used only as geometry.</td><td>+0.005…+0.030; medium cost (all inputs local).</td><td><b>Run 2026-10-03 — not promoted as tested.</b> Component holdout at a matched 15,000 px budget: connector 0.0485 DTI vs proximity-matched random 0.0480 vs whole near-known annulus 0.0491 vs far field 0.0214. The effect (+1.2 % credit/px) is noise-level and loses to the simpler control; the dominant prior is proximity itself (~2.3× far-field). <a href="research/relay-connector-holdout.json">JSON</a>. Refinement: require paired terminations explicitly and test on component pairs, not pixel pools.</td></tr>
-<tr><td><strong>2</strong></td><td><b>H-31-02 Matched-filter scarp bank on official USGS 3DEP 1 m DEM</b> with along-strike continuity tracking (oriented, scale-selected step filters for 0.5–5 m scarps).</td><td>+0.005…+0.040 (highest ceiling, lowest confidence); high cost for raw DEM (32 tiles verified, ~275–287 MB each); low-cost reduced arm on the existing 12-channel scarp stack.</td><td><b>Reduced arm (<code>H-31-02r</code>) run 2026-10-03:</b> beats <code>step_max_only</code> (+22.4 % screen, +20.2 % confirm) and beats spacing+distance-matched control on the <b>independent USGS SGMC fault inventory by +86.1 %</b> unclustered (0.05913 vs 0.03178, 4/4 quadrants) and <b>+91.6 %</b> clustered (0.02916 vs 0.01522), passing Check 2 (slope 0.9009) and Check 3 (97.2 % topographic dependence); trails control by −0.00261 on the catalogue component proxy (<a href="research/h33-01-placement-and-scarp-holdout.md">result</a> · <a href="research/verification-checks-results.md">3-check report</a>). Raw 32-tile 1 m DEM transfer remains off-sandbox.</td></tr>
-<tr><td><strong>3</strong></td><td><b>H-31-03 Drainage-response faults</b> — channel offsets, beheaded channels, knickpoint chains from USGS NHD flowlines + 3DEP DEM.</td><td>+0.002…+0.020; medium-high cost.</td><td><b>Registered, not run; source check incomplete.</b> No hydrology layer is used anywhere in this repository.</td></tr>
-<tr><td><strong>4</strong></td><td><b>H-31-04 K–Th–U radiometric unmixing along lineaments</b> (GeoDAWN radiometrics + ratio stack; along-lineament coherence, lithology-stratified null).</td><td>+0.001…+0.012; cheapest arm — rasters already local.</td><td><b>Registered, not run.</b> <a href="https://doi.org/10.5066/P93LGLVQ">GeoDAWN DOI</a>.</td></tr>
-<tr><td><strong>5</strong></td><td><b>H-31-05 Curvature (second-derivative) strain-ridge detector</b> on geodetic strain bands.</td><td>−0.002…+0.006; very low cost; a negative result is the base-rate expectation.</td><td><b>Registered, lowest priority.</b> Honours the repository’s own failed strain-interaction screen.</td></tr>
-</tbody></table></section>
-<section class="section callout"><h2>Measured outcomes recorded with the register</h2>
-<p><b>Loss geometry (core brief question).</b> The boundary-aware objective uses a Euclidean distance transform sampled in metres on the real <b>300 m</b> kernel radius, added to (not replacing) the regional soft-Tversky term. Paired four-fold buffered spatial holdout, identical recipes, screen budget: pooled exact full-grid OOF DTI <b>0.062042 → 0.063990</b> (Δ <b>+0.0019</b>, +3.14 %), 3/4 folds positive, partial-distance-only truth pixels 80 → 40. Fresh-seed (31) confirmation: Δ <b>+0.000115</b>, only <b>2/4</b> folds positive (sign-flipping), while partial-distance-only truth still fell 1,889 → 724. <b>The screen did not replicate; the loss is not promoted.</b> <a href="research/loss-ablation-holdout.md">Evidence and limitations</a>.</p>
-<p><b>Metric-greedy emission (preregistered gate).</b> <b>Failed.</b> Pooled cross-validated proxy DTI: uniform 0.18675, adaptive 0.18927, dense 0.13455, metric 0.13313. The metric rule needed ≥ +0.005 versus both dense and uniform; it came out −0.0014 and −0.0536, below uniform in every fold. Mechanism: the greedy rule hit its candidate-pool cap (120,000 px per fold) at 0.033–0.043 credit/px while uniform thinning emitted 3–6× fewer pixels at 2.4–4.7× the credit per pixel. <a href="research/metric-emission-holdout-results.md">Registered result</a>.</p></section>
-<section class="section callout"><h2>Cross-check against the owner&rsquo;s own 2026-10-02/03 findings <span class="fine-print">(owner-reported, not independently verified)</span></h2>
-<p><b>Relay geometry is twice-dead:</b> the owner&rsquo;s preregistered H30-1 relay &times; terrain factorial screened positive (+0.0041, 4/4 folds) and then <b>failed its fresh-draw confirmation</b> (&minus;0.0013, 1/4) &rarr; registered verdict &ldquo;stop&rdquo;; our independent H-31-01 holdout also failed its proximity control. <b>DEM curvature/scarp is the family that works</b> (owner factor B, +0.0253, 4/4) &mdash; the strongest external corroboration for H-31-02. <b>Thermal/geochemical is small but consistent</b> (D, +0.0044, 4/4, supporting H-31-04). <b>Potential fields were inert</b> (A, &minus;0.0027) and <b>strain/seismicity consistently negative</b> (C, &minus;0.0109, 0/4). Emission: score-ordered ~2.4&nbsp;px dots at &asymp;2.45&ndash;3.5&nbsp;% share beat score-blind thinning (+0.0034, 4/4), and the joint add-on surface passed both replicates while its predicted best corner did not &mdash; their own selection was partly screen-overfit. See the full cross-check in <a href="hypotheses.md">the Markdown register</a>.</p></section>
-<section class="section table-wrap"><h2>Earlier register — four candidates (2026-09-30)</h2>
-<table><thead><tr><th>Rank</th><th>Specific layers and physical signature</th><th>Why it could reveal a missing fault</th><th>Difference / planning prior / cost</th><th>Access and status</th></tr></thead><tbody>
-<tr><td><strong>1 · Top</strong></td><td>GDR 1391 2 m temperature probes, paleogeothermal spring deposits (including sinter/tufa), Quaternary vents/flows. Test separate layers, then a preregistered spatial-coincidence/corridor transform.</td><td>Upflow and spring deposits can reflect fluid pathways above a fault that lacks a mapped surface trace; signals are indirect and have non-fault causes.</td><td>Distinct from isotropic thermal-point buffers by testing specific omitted observations and their spatial joint pattern. Planning prior: <strong>+0.000 to +0.006 DTI</strong>, low confidence; medium-high cost.</td><td>DOE GDR 1391 catalog says public and CC BY 4.0. Direct shell HEAD requests to its <a href="https://gdr.openei.org/files/1391/2m_temperature_probe_INGENIOUS_regional_data.zip">probe</a>, <a href="https://gdr.openei.org/files/1391/paleo_geothermal_regional.zip">paleo-feature</a>, and <a href="https://gdr.openei.org/files/1391/great_basin_q_volcanics.zip">volcanics</a> archives failed with TLS errors; no bytes/checksums or alignment verified. <strong>Blocked; no holdout.</strong></td></tr>
-<tr><td><strong>2</strong></td><td>Geodetic dilation/shear and surface conductance/depth-to-conductive-base. Look for locally persistent intersections, not scalar thresholds.</td><td>Fracture opening and fluid/clay conductivity may coincide along blind permeable corridors; basins and smoothing can confound.</td><td>Tests a joint mechanistic transform beyond raw scalar channels. Prior: <strong>+0.000 to +0.004</strong>; low-medium cost after official feature files arrive.</td><td>Competition stack / INGENIOUS sources. The GDR catalog states public access / CC BY 4.0; the official competition package is login-gated here, and exact bands are unverified. <strong>Not run.</strong></td></tr>
-<tr><td><strong>3</strong></td><td>Dependent/independent earthquake-density grids with shear/dilation; multiscale directional ridge/fabric coherence.</td><td>A linear seismicity fabric may indicate a blind active strand absent from the surface fault catalogue; swarms, completeness, and aseismicity can defeat it.</td><td>Different from scalar strain/seismicity inputs and from terrain/geophysics lineament filters. Prior: <strong>+0.000 to +0.003</strong>; low-medium cost.</td><td>INGENIOUS GDR 1391 catalog is public / CC BY 4.0 and lists the layers; archive availability/schema are not locally verified and the training raster is unavailable. <strong>Not run.</strong></td></tr>
-<tr><td><strong>4</strong></td><td>USGS 3-D Great Basin temperature model v1.1 (DOI 10.5066/P149FR54), depth-differenced gradients and isotherm bending.</td><td>Hydrothermal flow can perturb subsurface thermal gradients above blind faults, but regional smoothing and conductive assumptions may erase fault-scale structure.</td><td>New depth-resolved thermal prior versus surface radiometry/point buffers. Prior: <strong>+0.000 to +0.002</strong>; medium-high cost and resolution risk.</td><td>USGS catalog says public domain and links data. Actual grid/alignment not checked. <strong>Not run.</strong></td></tr>
-</tbody></table></section>
-<section class="section grid two">
-<article class="card"><p class="kicker">Validation gate</p><h2>No slot until it beats holdout</h2><p>Freeze four buffered spatial folds, identical model/seed/budget, separate feature ablations, pooled official DTI components, and near-miss distance bins. Require a preregistered screen and fresh-seed confirmation against the same-run current best. This is a known-catalogue proxy, not private expert truth.</p></article>
-<article class="card"><p class="kicker">Novelty boundary</p><h2>“Not found” is not “never tried”</h2><p>Novelty was checked against inspected GEMSDOE24–27 public summaries, not all historical code. Audit exact layer manifests and prior experiments before freezing any candidate. If the same data/transform were already tried, rewrite the hypothesis before observing scores.</p></article>
-</section>
-<section class="section content"><p>Full protocol, source-access details, cost rationale, and limitations: <a href="hypotheses.md">research hypothesis register (Markdown)</a> · <a href="sources.html">source register</a> · <a href="irregularities.html">open irregularities</a>.</p></section>
+  <section class="section table-wrap" aria-labelledby="shortlist-title">
+    <h2 id="shortlist-title">Active untried shortlist</h2>
+    <p class="fine-print">The +0.005 / 3-of-4 / fresh-seed criterion is a planning gate, not a measured improvement or score forecast. Equal global dot budgets are insufficient: record the active scored-domain count as well. Catalogue-derived holdouts are necessary but biased because known catalogue pixels are masked by the competition metric.</p>
+    <table>
+      <thead><tr>
+        <th>Rank / candidate</th>
+        <th>Layers and physical signature</th>
+        <th>Rationale and distinction from prior work</th>
+        <th>Planning prior / cost</th>
+        <th>Official source and access</th>
+        <th>Falsifiable gate</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>1 · H-31-04</strong><br>Radiometric alteration unmixing along lineaments</td>
+          <td><code>geodawn_rad_u8.tif</code>: K, Th, U, total count; derived Th/K, U/K, U/Th. Test K–Th–U ratio-space alteration plus along-lineament coherence, not raw band magnitude.</td>
+          <td>Fluid-rock alteration may form a halo where no mapped surface trace or scarp exists. A three-endmember/ratio transform coupled to lineament coherence is distinct from using radiometric bands as ordinary model inputs. Ratios may mostly encode lithology, so stratified nulls are mandatory.</td>
+          <td><strong>+0.001…+0.012</strong><br>Low compute cost; source/schema audit first.</td>
+          <td><a href="https://doi.org/10.5066/P93LGLVQ">USGS GeoDAWN, DOI 10.5066/P93LGLVQ</a>. Public-domain catalog record. Local quantized bands are owner-derived mirrors; metadata and source-to-band lineage are not independently authenticated.</td>
+          <td>Checksum and verify bands; freeze unmixing and lineament rules. On four buffered spatial blocks compare against regional baseline, raw-band arm, and count-matched spatial null; require pooled ΔDTI ≥ +0.005 over same-run best, ≥3/4 positive folds and fresh-seed replication, with near-miss and lithology-stratified results reported.</td>
+        </tr>
+        <tr>
+          <td><strong>2 · H-32-03</strong><br>Geothermometer discordance / blind-upflow zoning</td>
+          <td>Wellspring chemistry fields <code>geothermquartz_c</code>, <code>geothermchalc_c</code>, <code>geothermcat_c</code> plus <code>cond_surf</code>. Detect non-equilibrium temperature discordance and test corridors on independent lineaments.</td>
+          <td>Chemistry can sample deep pathways above faults without surface expression. This is different from scalar spring-temperature or thermal-population work. The usable chemistry subset is only about 1,000 sites; power and sample-selection bias are concerns.</td>
+          <td><strong>+0.001…+0.012</strong><br>Low compute cost after source/schema check.</td>
+          <td><a href="https://gdr.openei.org/submissions/1486">GDR 1486</a> records the well/spring mirror provenance; <a href="https://gdr.openei.org/submissions/1391">GDR 1391</a> documents the INGENIOUS compilation. Exact CSV lineage, license, and schema need re-verification; owner mirrors are not organizer-authenticated.</td>
+          <td>Predeclare discordance formula and lineament tolerance. Compare chemistry-only and chemistry×conductance against temperature-only and proximity-matched controls on buffered blocks; require the common +0.005 / 3-of-4 / fresh-seed gate and hold out whole site clusters. Stop if provenance or schema fails.</td>
+        </tr>
+        <tr>
+          <td><strong>3 · H-32-02</strong><br>Quaternary vent-feeder alignment</td>
+          <td>21 GDR 1391 vents (20 basalt, one rhyolite) plus <code>tmi_hg</code>/magnetic-anomaly edges. Test two or more vents aligned over 2–8 km and continuation along a dike-like magnetic edge.</td>
+          <td>Vent chains can expose feeder structures absent from the fault catalogue; 0/21 vents are within 300 m of catalogue traces. No inspected local or public owner summary uses vent geometry. Small n and non-tectonic volcanic controls limit power.</td>
+          <td><strong>+0.001…+0.010</strong><br>Low compute cost; low statistical power.</td>
+          <td><a href="https://gdr.openei.org/submissions/1391">GDR 1391</a> states CC BY 4.0; its Quaternary-volcanics archive was downloaded and hash-verified through the recorded runner bridge. The derived raster remains an owner mirror.</td>
+          <td>Freeze vent-pair distance/strike and magnetic-edge tolerances. Compare with 1,000 spatially constrained random point sets and magnetic-only controls on blocked holdout; require a positive paired effect in ≥3/4 folds and fresh-seed confirmation. Reject rather than widen the search after seeing results.</td>
+        </tr>
+        <tr>
+          <td><strong>4 · H-31-03</strong><br>Drainage-response fault traces</td>
+          <td>USGS NHD flowlines plus 1–10 m USGS 3DEP DEM. Seek strike-aligned knickpoint chains, channel offsets/beheaded channels, and channel geometry coherent across a candidate trace.</td>
+          <td>Drainage may preserve deformation where scarps are eroded or buried. No hydrology transform was found in inspected repository or public owner summaries. Must distinguish tectonics from lithology, drainage capture, and DEM artefacts.</td>
+          <td><strong>+0.002…+0.020</strong><br>Medium-high data/processing cost.</td>
+          <td><a href="https://tnmaccess.nationalmap.gov/api/v1/products?datasets=National%20Hydrography%20Dataset%20(NHD)%20Best%20Resolution&amp;bbox=-119,38.5,-118.5,39">USGS TNM NHD Best Resolution query</a> returned products for one test bbox only. Full ROI coverage, downloads, reuse details, and DEM linkage remain unchecked. 3DEP is public domain.</td>
+          <td>Obtain full-ROI data; checksum and verify schema/coverage before freezing a detector. Compare with slope-only and spatially matched controls on buffered blocks; require +0.005 over best, ≥3/4 folds and fresh-seed confirmation. Incomplete coverage stops the test.</td>
+        </tr>
+        <tr>
+          <td><strong>5 · H-32-04</strong><br>Kinematically constrained Qfaults gap completion <em>(conditional)</em></td>
+          <td>Quaternary traces with recency, slip sense/rate, and length. Test physically consistent gap-extension/continuity beyond 300 m from catalogue pixels.</td>
+          <td>Potentially adds unmapped geometry, but Qfaults/INGENIOUS provenance overlaps training labels; catalogue-only validation is circular. This differs from scarp morphology by using fault kinematics rather than topography. The corrected Qfaults raster is not independent truth.</td>
+          <td><strong>+0.005…+0.025 conditional</strong><br>Medium data/analysis cost.</td>
+          <td><a href="https://www.osti.gov/dataexplorer/biblio/dataset/1148722">OSTI 1148722</a> and <a href="https://gdr.openei.org/submissions/616">GDR 616</a> are official independent-inventory candidates; pages were checked, but archive transfer, schema, and ROI coverage are unverified. The GDR 1391 Qfaults v2 raster was corrected; 1/59,065 footprint pixels is &gt;300 m from catalogue.</td>
+          <td>Hard gate: retrieve/checksum an inventory; verify independence from INGENIOUS/Qfaults and ROI coverage; then preregister blocked holdout. Require +0.005 over count-matched baseline, ≥3/4 folds, and fresh-seed replication. If no independent truth is available, do not score or promote.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section table-wrap" aria-labelledby="measured-title">
+    <h2 id="measured-title">Measured outcomes that constrain the shortlist</h2>
+    <table>
+      <thead><tr><th>Experiment</th><th>Result</th><th>Current decision</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>H-31-02r · 1 m LiDAR scarp dipole + 500 m strike continuity</strong><br><code>step_max</code>, <code>lapneg_max</code>, <code>lappos_max</code>, <code>coh100</code>, <code>strike</code>, <code>lidar_valid</code>, with <code>det_elev_slope</code> fallback.</td>
+          <td>Beats <code>step_max_only</code> by +22.4% screen and +20.2% confirmation. Check 1 is split: catalogue ΔDTI −0.00073 (−0.00261 in the placement report), 2/4 quadrants; SGMC-frame ΔDTI +0.03670, 4/4. Check 2 slopes are 0.9009 (catalogue) and 0.9101 (SGMC); however the SGMC top-decile precision-ratio criterion passes only 2/4 folds. Check 3 removes 57.0% of gain when LiDAR channels are permuted and 97.2% for full topography; unrelated gravity retains 100%.</td>
+          <td><strong>Not promoted.</strong> The dual-frame/three-check gate is incomplete. SGMC labels were inspected; no retuning on those labels. See <a href="research/h33-01-placement-and-scarp-holdout.md">holdout report</a> and <a href="research/verification-checks-results.md">three-check report</a>.</td>
+        </tr>
+        <tr>
+          <td><strong>H-33-01 placement policy</strong><br>Near-splay, mid-relay, far-basin, and 60/25/15% power-law hedge.</td>
+          <td>Near-splay beats uniform placement on catalogue component holdout; hedge comparison has split sign on the 5 km clustered SGMC seeds. The associated H-31-02b/archive dot-budget comparison matched 80,392 global dots but not active counts (72,310 candidate / 73,843 random / 80,388 archive).</td>
+          <td>Report as global-budget matched only, never active-count matched. No SGMC-label retuning. See <a href="irregularities.html">IR-30-037</a> and the <a href="research/h33-01-placement-and-scarp-holdout.md">preregistered report</a>.</td>
+        </tr>
+        <tr>
+          <td><strong>Metric-shaped boundary loss</strong><br>Added to, not substituted for, regional loss.</td>
+          <td>Four-fold screen improved pooled DTI by +0.0019 (3/4 folds), but fresh-seed confirmation was only +0.000115 (2/4). Near-miss conversion reproduced; scored DTI gain did not.</td>
+          <td><strong>Not promoted.</strong> Continue only with a new preregistered design; no claim of improvement. See <a href="research/loss-ablation-holdout.md">paired loss report</a>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section grid two" aria-label="Research rules">
+    <article class="card">
+      <p class="kicker">Validation gate</p>
+      <h2>No slot until blocked holdout passes</h2>
+      <p>Freeze source hashes, recipe, thresholds, folds, seed, and count budget before scoring. Compare against the same-run best and spatial/count-matched controls; report both global budget and active scored-domain counts, near-miss bins, and a fresh-seed confirmation. A catalogue-derived frame is a biased proxy, not private expert truth.</p>
+    </article>
+    <article class="card">
+      <p class="kicker">Evidence boundary</p>
+      <h2>“Untried” is bounded, not absolute</h2>
+      <p>The shortlist excludes tested variants in the inspected repository and public owner summaries. It cannot establish absence of private experiments. Recheck exact layer manifests and provenance before preregistration; if a candidate duplicates a prior arm, replace it before looking at scores.</p>
+    </article>
+  </section>
+
+  <section class="section content">
+    <p>Full protocols, source details, older candidate registers, experiment outputs, and limitations are maintained in the <a href="hypotheses.md">research hypothesis register (Markdown)</a>, <a href="sources.html">source register</a>, and <a href="irregularities.html">irregularity log</a>.</p>
+  </section>
 </main>
-<footer><div class="footer-wrap"><span>GEMSDOE30 · candidate hypotheses, not results</span><span><a href="../README.md">Project brief</a> · <a href="hypotheses.md">Full register</a></span></div></footer>
-</body></html>
+<footer>
+  <div class="footer-wrap">
+    <span>GEMSDOE30 · hypotheses are proposals, not results</span>
+    <span><a href="../README.md">Project brief</a> · <a href="hypotheses.md">Full register</a></span>
+  </div>
+</footer>
+</body>
+</html>

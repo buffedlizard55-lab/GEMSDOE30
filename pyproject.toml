@@ -19,7 +19,7 @@ train = [
   "rasterio>=1.3",
   "torch>=2.1",
 ]
-test = ["pytest>=8.0"]
+test = ["pytest>=8.0", "shapely>=2.0", "pyproj>=3.5"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
