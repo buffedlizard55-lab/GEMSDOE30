@@ -24,3 +24,7 @@ Last reviewed: **2026-10-03**. “Fixed” means the repository now mitigates th
 ## Escalation / next action
 
 The next session should start by running `bash scripts/download_competition_data.sh`. If the official files are still unavailable, do not fabricate a submission. Record which exact input is missing and continue only with source research, synthetic tests, and code review. Once files are placed, first execute the data-grid audit, then freeze spatial folds, then run the regional-vs-combined-loss comparison and the rank-1 hypothesis protocol. Do not spend any weekly slot on an unvalidated candidate.
+
+## Latest-session superseding evidence
+
+IR-30-001/004/006: owner mirrors now restored through GitHub API and hashes verified, real four-arm pilot completed; organizer authentication and official external archive transfer remain unresolved. IR-30-005: local historical D2.8 reference published, **no new promoted model output**. IR-30-NEW: mirrored sample template has 60,988 ones equal to catalogue labels; never use these template values for learning or output. See `research/session-review.md` and full results. Older absence claims are baseline history, superseded by this paragraph.

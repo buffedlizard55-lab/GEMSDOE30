@@ -1,0 +1,817 @@
+{
+  "created_utc": "2026-10-03T14:05:59.825353+00:00",
+  "seed": 30,
+  "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+  "preregistration_sha256": "81629823b2dfcc9540ed826752daaeadb56704a7779b00f2fd46f0a5262891d6",
+  "scope": "real owner-mirror catalogue spatial proxy; not new-fault test or competition score",
+  "mask": "identical full labelled footprint for all arms; missing features zero-imputed after fold-local scaling",
+  "valid_pixels": 5167373,
+  "positive_pixels": 60988,
+  "buffer_m": 800,
+  "feature_max_support_m": 500,
+  "receipts": [
+    {
+      "seed": 30,
+      "arm": "R",
+      "history_total_regional_boundary": [
+        [
+          0.9176690176129341,
+          0.9176690176129341,
+          0.0
+        ],
+        [
+          0.9057414174079895,
+          0.9057414174079895,
+          0.0
+        ],
+        [
+          0.9183567509055137,
+          0.9183567509055137,
+          0.0
+        ]
+      ],
+      "checkpoint_sha256": "936998fc5112f78b58a73a180bd6eef99f1106084e2857eecc8c61032064d5f4",
+      "prediction_sha256": "025db7d1c5837c704b5d432b9ace4d88afe8a88fa2bf94ca3167b019c130852f",
+      "heldout_pixels": 2449030,
+      "training_pixels": 2697105,
+      "fold": 0
+    },
+    {
+      "seed": 30,
+      "arm": "R",
+      "history_total_regional_boundary": [
+        [
+          0.9181197732686996,
+          0.9181197732686996,
+          0.0
+        ],
+        [
+          0.9003626272082329,
+          0.9003626272082329,
+          0.0
+        ],
+        [
+          0.9206826597452163,
+          0.9206826597452163,
+          0.0
+        ]
+      ],
+      "checkpoint_sha256": "46b32d82fcea06b81c042c035130b1595ea1522ef7a2e421b60780a4ed941b72",
+      "prediction_sha256": "b35d30fccabacecddbe9a18b43ede542daedfc757de76b575a2b51387f9cced0",
+      "heldout_pixels": 1366431,
+      "training_pixels": 3785543,
+      "fold": 1
+    },
+    {
+      "seed": 30,
+      "arm": "R",
+      "history_total_regional_boundary": [
+        [
+          0.9218015179038048,
+          0.9218015179038048,
+          0.0
+        ],
+        [
+          0.9018991768360138,
+          0.9018991768360138,
+          0.0
+        ],
+        [
+          0.9217099770903587,
+          0.9217099770903587,
+          0.0
+        ]
+      ],
+      "checkpoint_sha256": "39b505c127202ff57b437ea6091ae50b33897af7c01f089760f991f6db646aed",
+      "prediction_sha256": "8b9a29bd84995597e8ae1baddd689aeceab563fe6f38e7ad37be95e909b8864d",
+      "heldout_pixels": 564135,
+      "training_pixels": 4585115,
+      "fold": 2
+    },
+    {
+      "seed": 30,
+      "arm": "R",
+      "history_total_regional_boundary": [
+        [
+          0.9196582183241844,
+          0.9196582183241844,
+          0.0
+        ],
+        [
+          0.8996287703514099,
+          0.8996287703514099,
+          0.0
+        ],
+        [
+          0.9180648252367973,
+          0.9180648252367973,
+          0.0
+        ]
+      ],
+      "checkpoint_sha256": "400c1cbb4b3fccdf5c63669d100d9f1dcefd8aec666158290c787e50e8715dbc",
+      "prediction_sha256": "bf75b1843067b5ce50749b599214ddd5b22acd41b5d3662da02a9fc16de4719a",
+      "heldout_pixels": 787777,
+      "training_pixels": 4367754,
+      "fold": 3
+    },
+    {
+      "seed": 30,
+      "arm": "G",
+      "history_total_regional_boundary": [
+        [
+          1.3490037679672242,
+          0.9176564887166023,
+          0.862694551050663
+        ],
+        [
+          1.2999159902334214,
+          0.9057021871209144,
+          0.7884276151657105
+        ],
+        [
+          1.2936045944690704,
+          0.9183318167924881,
+          0.7505455508828163
+        ]
+      ],
+      "checkpoint_sha256": "ff2da86f88e80890a608694c31b3785d0b4d828648707bd8e0adee5ce06826b5",
+      "prediction_sha256": "6af1b66b232e891e6c2fccc3e5bf382f4dbc5828bc5fe265c34ff89a78e070e0",
+      "heldout_pixels": 2449030,
+      "training_pixels": 2697105,
+      "fold": 0
+    },
+    {
+      "seed": 30,
+      "arm": "G",
+      "history_total_regional_boundary": [
+        [
+          1.3424778610467911,
+          0.9181235283613205,
+          0.8487086415290832
+        ],
+        [
+          1.327632576227188,
+          0.9003559142351151,
+          0.8545533314347267
+        ],
+        [
+          1.333362379670143,
+          0.920634263753891,
+          0.8254562333226204
+        ]
+      ],
+      "checkpoint_sha256": "dbd5ae4ab6bb0a4fd1c1c9f801ca69e7fb3d0a5f3868ca0d9e63850b7f540e6c",
+      "prediction_sha256": "ee90e6bd9d0be57570f4f97c8d81b335c5c79bb6ed7d0e5a1a6f216f38e9a299",
+      "heldout_pixels": 1366431,
+      "training_pixels": 3785543,
+      "fold": 1
+    },
+    {
+      "seed": 30,
+      "arm": "G",
+      "history_total_regional_boundary": [
+        [
+          1.3346073478460312,
+          0.921801595389843,
+          0.8256115213036537
+        ],
+        [
+          1.318786683678627,
+          0.9019305631518364,
+          0.8337122574448586
+        ],
+        [
+          1.3250921607017516,
+          0.9217176213860512,
+          0.8067490831017494
+        ]
+      ],
+      "checkpoint_sha256": "fb402b0c85783ed51cd2a7ef512c0b355d1307afe5ac458b005ac8db9cd67c20",
+      "prediction_sha256": "02b8cd33e7799e18e22b8558dcadeb54a61dbc4e67f75d1da1f56bb198ca2d6a",
+      "heldout_pixels": 564135,
+      "training_pixels": 4585115,
+      "fold": 2
+    },
+    {
+      "seed": 30,
+      "arm": "G",
+      "history_total_regional_boundary": [
+        [
+          1.3427702337503433,
+          0.9196554630994797,
+          0.8462295427918434
+        ],
+        [
+          1.326923167705536,
+          0.8996449694037437,
+          0.8545564010739326
+        ],
+        [
+          1.3211267828941344,
+          0.9180838748812675,
+          0.8060858160257339
+        ]
+      ],
+      "checkpoint_sha256": "10fb08f2c1155e4709fe32b1bac179b1d1442d386f2aef04b5f6ba61eab7a4b4",
+      "prediction_sha256": "4ea364f47d192d3c046767d67e904c1fcebc4743e71fa42c51ba612d4f26b4d6",
+      "heldout_pixels": 787777,
+      "training_pixels": 4367754,
+      "fold": 3
+    },
+    {
+      "seed": 30,
+      "arm": "C",
+      "history_total_regional_boundary": [
+        [
+          1.3484556257724762,
+          0.9172682330012322,
+          0.8623747795820236
+        ],
+        [
+          1.2979856312274933,
+          0.9045961886644364,
+          0.78677888661623
+        ],
+        [
+          1.2923957347869872,
+          0.9176043942570686,
+          0.7495826840400696
+        ]
+      ],
+      "checkpoint_sha256": "b4bad2c2b89f21d68a164eaf8553250289a4131d56d4627c1cec70c41e4e6bea",
+      "prediction_sha256": "470e7f9d6750f59d4c1d3b8f50f08d8aac80513942fa88575ec3a482d2d503ce",
+      "heldout_pixels": 2449030,
+      "training_pixels": 2697105,
+      "fold": 0
+    },
+    {
+      "seed": 30,
+      "arm": "C",
+      "history_total_regional_boundary": [
+        [
+          1.341030988097191,
+          0.9172999039292336,
+          0.8474621653556824
+        ],
+        [
+          1.3261401146650313,
+          0.8995101451873779,
+          0.8532599404454231
+        ],
+        [
+          1.3296977043151856,
+          0.9187295287847519,
+          0.8219363480806351
+        ]
+      ],
+      "checkpoint_sha256": "7795a315ceb234735eb1f39d1359353f57b63e97e61b989207a2e9fbd34890ac",
+      "prediction_sha256": "56e05e8457983e9f9534f688860ea398db9ece2c39fc8348429826a2a7727f03",
+      "heldout_pixels": 1366431,
+      "training_pixels": 3785543,
+      "fold": 1
+    },
+    {
+      "seed": 30,
+      "arm": "C",
+      "history_total_regional_boundary": [
+        [
+          1.3323455452919006,
+          0.9206002503633499,
+          0.823490583896637
+        ],
+        [
+          1.3178867906332017,
+          0.9013882920145988,
+          0.8329970017075539
+        ],
+        [
+          1.3221134483814239,
+          0.920089103281498,
+          0.8040486946702003
+        ]
+      ],
+      "checkpoint_sha256": "c3be5a30436be0c43bd63752e4ccc4f470d97eff7eb0f71936b86211359a6efc",
+      "prediction_sha256": "e9e067913a3d80677d638d734b2e76eb0eac7820889df0ad6a87702ee4fe7dc6",
+      "heldout_pixels": 564135,
+      "training_pixels": 4585115,
+      "fold": 2
+    },
+    {
+      "seed": 30,
+      "arm": "C",
+      "history_total_regional_boundary": [
+        [
+          1.340412199497223,
+          0.9184263125061989,
+          0.8439717814326286
+        ],
+        [
+          1.3250984996557236,
+          0.8985848441720009,
+          0.8530273035168647
+        ],
+        [
+          1.318514922261238,
+          0.9166916638612748,
+          0.8036465048789978
+        ]
+      ],
+      "checkpoint_sha256": "43d9b2ead6ca262fc8ddbcbfb644b71a0179f6f78ff00f4bed941a2ee8890e08",
+      "prediction_sha256": "12a519b6061cd18f6027a53d72871850ee71c6adc79504c234053a1c4320ab78",
+      "heldout_pixels": 787777,
+      "training_pixels": 4367754,
+      "fold": 3
+    },
+    {
+      "seed": 30,
+      "arm": "H",
+      "history_total_regional_boundary": [
+        [
+          1.3480183720588683,
+          0.917017138004303,
+          0.862002445757389
+        ],
+        [
+          1.2978311359882355,
+          0.9044845938682556,
+          0.7866930976510048
+        ],
+        [
+          1.291728127002716,
+          0.9172032535076141,
+          0.749049736559391
+        ]
+      ],
+      "checkpoint_sha256": "1a9ed035ef92932f7ec47ed2d2a9fcad5a88746b08a512e87b3c3654ea92da6f",
+      "prediction_sha256": "3f559d993b96c053fae6be048c68ab8a6ac0ab7ea981bba735becf84f9415fdc",
+      "heldout_pixels": 2449030,
+      "training_pixels": 2697105,
+      "fold": 0
+    },
+    {
+      "seed": 30,
+      "arm": "H",
+      "history_total_regional_boundary": [
+        [
+          1.340954628586769,
+          0.9172173902392388,
+          0.8474744886159897
+        ],
+        [
+          1.3250566601753235,
+          0.8989232137799263,
+          0.8522668987512588
+        ],
+        [
+          1.3288794338703156,
+          0.9183358132839203,
+          0.8210872367024422
+        ]
+      ],
+      "checkpoint_sha256": "0c62b03725ffaff64660ebd4e3029b62281e9ae3f250ac8a560f5a3e30be7fb6",
+      "prediction_sha256": "96bf172b2fb1e042689f3ed6281fd303f488edec0ababec8859a26922cdc622b",
+      "heldout_pixels": 1366431,
+      "training_pixels": 3785543,
+      "fold": 1
+    },
+    {
+      "seed": 30,
+      "arm": "H",
+      "history_total_regional_boundary": [
+        [
+          1.332889461517334,
+          0.9208446517586708,
+          0.8240896314382553
+        ],
+        [
+          1.3174335211515427,
+          0.901085977256298,
+          0.8326950818300247
+        ],
+        [
+          1.3229165464639663,
+          0.9205119386315346,
+          0.8048092246055603
+        ]
+      ],
+      "checkpoint_sha256": "6769bd4bceae102ede18c9d995e222a261500c560c02e6aca08dd5c70e1db800",
+      "prediction_sha256": "813f3f8f54fc058408b3ca896e91b0fc28120aeebd3ddcc06143b04f4a532dd8",
+      "heldout_pixels": 564135,
+      "training_pixels": 4585115,
+      "fold": 2
+    },
+    {
+      "seed": 30,
+      "arm": "H",
+      "history_total_regional_boundary": [
+        [
+          1.339975157380104,
+          0.9181442007422447,
+          0.8436619207262993
+        ],
+        [
+          1.3234506011009217,
+          0.8975816652178764,
+          0.8517378628253937
+        ],
+        [
+          1.3186462730169297,
+          0.9168613076210022,
+          0.8035699442029
+        ]
+      ],
+      "checkpoint_sha256": "8379274fca3e1fdefe32752e8f41d63a17d9e5bd02b2509cbedbb24cc4b151e4",
+      "prediction_sha256": "111e093c916363e1e3d8d4b5d8b3d8b7d6b38c930b50cd866a9caaac5cbe39ea",
+      "heldout_pixels": 787777,
+      "training_pixels": 4367754,
+      "fold": 3
+    }
+  ],
+  "controls_dti": {
+    "R": 0.05769260887260726,
+    "G": 0.05769885306773233,
+    "C": 0.057787992058285685
+  },
+  "comparisons_to_R": {
+    "G": {
+      "folds": [
+        {
+          "fold": 0,
+          "fold_isolated_baseline_dti": 0.058200085594876896,
+          "fold_isolated_candidate_dti": 0.05823054318455478,
+          "fold_isolated_delta_dti": 3.0457589677880537e-05,
+          "heldout_valid_pixels": 2449030,
+          "heldout_truth_pixels": 29319,
+          "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+        },
+        {
+          "fold": 1,
+          "fold_isolated_baseline_dti": 0.044493343565633656,
+          "fold_isolated_candidate_dti": 0.04448440148119117,
+          "fold_isolated_delta_dti": -8.94208444248562e-06,
+          "heldout_valid_pixels": 1366431,
+          "heldout_truth_pixels": 12596,
+          "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+        },
+        {
+          "fold": 2,
+          "fold_isolated_baseline_dti": 0.0805110376225869,
+          "fold_isolated_candidate_dti": 0.0805238454655203,
+          "fold_isolated_delta_dti": 1.280784293339332e-05,
+          "heldout_valid_pixels": 564135,
+          "heldout_truth_pixels": 9473,
+          "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+        },
+        {
+          "fold": 3,
+          "fold_isolated_baseline_dti": 0.05848959609239688,
+          "fold_isolated_candidate_dti": 0.05850117273417497,
+          "fold_isolated_delta_dti": 1.1576641778088259e-05,
+          "heldout_valid_pixels": 787777,
+          "heldout_truth_pixels": 9600,
+          "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+        }
+      ],
+      "pooled_baseline": {
+        "tp_weight": 39156.84267626206,
+        "fp_weight": 3110466.4732467583,
+        "fn_weight": 21831.157323737938,
+        "dti": 0.05769260887260726
+      },
+      "pooled_candidate": {
+        "tp_weight": 39276.7839290003,
+        "fp_weight": 3120373.0071575367,
+        "fn_weight": 21711.2160709997,
+        "dti": 0.05769885306773233
+      },
+      "pooled_delta_dti": 6.24419512507135e-06,
+      "aggregation": "exact full-grid DTI on the stitched out-of-fold mosaic; cross-quadrant kernel interactions retained",
+      "scope": "catalogue-derived spatial proxy; not private-test truth or a competition score"
+    },
+    "C": {
+      "folds": [
+        {
+          "fold": 0,
+          "fold_isolated_baseline_dti": 0.058200085594876896,
+          "fold_isolated_candidate_dti": 0.05826136142213057,
+          "fold_isolated_delta_dti": 6.127582725367481e-05,
+          "heldout_valid_pixels": 2449030,
+          "heldout_truth_pixels": 29319,
+          "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+        },
+        {
+          "fold": 1,
+          "fold_isolated_baseline_dti": 0.044493343565633656,
+          "fold_isolated_candidate_dti": 0.04448648627241237,
+          "fold_isolated_delta_dti": -6.857293221286531e-06,
+          "heldout_valid_pixels": 1366431,
+          "heldout_truth_pixels": 12596,
+          "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+        },
+        {
+          "fold": 2,
+          "fold_isolated_baseline_dti": 0.0805110376225869,
+          "fold_isolated_candidate_dti": 0.08072984738564343,
+          "fold_isolated_delta_dti": 0.0002188097630565211,
+          "heldout_valid_pixels": 564135,
+          "heldout_truth_pixels": 9473,
+          "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+        },
+        {
+          "fold": 3,
+          "fold_isolated_baseline_dti": 0.05848959609239688,
+          "fold_isolated_candidate_dti": 0.059025155244099646,
+          "fold_isolated_delta_dti": 0.0005355591517027664,
+          "heldout_valid_pixels": 787777,
+          "heldout_truth_pixels": 9600,
+          "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+        }
+      ],
+      "pooled_baseline": {
+        "tp_weight": 39156.84267626206,
+        "fp_weight": 3110466.4732467583,
+        "fn_weight": 21831.157323737938,
+        "dti": 0.05769260887260726
+      },
+      "pooled_candidate": {
+        "tp_weight": 41728.11077415943,
+        "fp_weight": 3324768.123183006,
+        "fn_weight": 19259.88922584057,
+        "dti": 0.057787992058285685
+      },
+      "pooled_delta_dti": 9.538318567842846e-05,
+      "aggregation": "exact full-grid DTI on the stitched out-of-fold mosaic; cross-quadrant kernel interactions retained",
+      "scope": "catalogue-derived spatial proxy; not private-test truth or a competition score"
+    },
+    "H": {
+      "folds": [
+        {
+          "fold": 0,
+          "fold_isolated_baseline_dti": 0.058200085594876896,
+          "fold_isolated_candidate_dti": 0.05815409623054012,
+          "fold_isolated_delta_dti": -4.598936433677925e-05,
+          "heldout_valid_pixels": 2449030,
+          "heldout_truth_pixels": 29319,
+          "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+        },
+        {
+          "fold": 1,
+          "fold_isolated_baseline_dti": 0.044493343565633656,
+          "fold_isolated_candidate_dti": 0.044659493899283906,
+          "fold_isolated_delta_dti": 0.00016615033365025011,
+          "heldout_valid_pixels": 1366431,
+          "heldout_truth_pixels": 12596,
+          "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+        },
+        {
+          "fold": 2,
+          "fold_isolated_baseline_dti": 0.0805110376225869,
+          "fold_isolated_candidate_dti": 0.08071260315377415,
+          "fold_isolated_delta_dti": 0.00020156553118724774,
+          "heldout_valid_pixels": 564135,
+          "heldout_truth_pixels": 9473,
+          "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+        },
+        {
+          "fold": 3,
+          "fold_isolated_baseline_dti": 0.05848959609239688,
+          "fold_isolated_candidate_dti": 0.0588309386483671,
+          "fold_isolated_delta_dti": 0.00034134255597022267,
+          "heldout_valid_pixels": 787777,
+          "heldout_truth_pixels": 9600,
+          "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+        }
+      ],
+      "pooled_baseline": {
+        "tp_weight": 39156.84267626206,
+        "fp_weight": 3110466.4732467583,
+        "fn_weight": 21831.157323737938,
+        "dti": 0.05769260887260726
+      },
+      "pooled_candidate": {
+        "tp_weight": 42178.12276937564,
+        "fp_weight": 3367373.7920215763,
+        "fn_weight": 18809.877230624355,
+        "dti": 0.05772283779225569
+      },
+      "pooled_delta_dti": 3.0228919648433994e-05,
+      "aggregation": "exact full-grid DTI on the stitched out-of-fold mosaic; cross-quadrant kernel interactions retained",
+      "scope": "catalogue-derived spatial proxy; not private-test truth or a competition score"
+    }
+  },
+  "best_control": "C",
+  "H_vs_best": {
+    "folds": [
+      {
+        "fold": 0,
+        "fold_isolated_baseline_dti": 0.05826136142213057,
+        "fold_isolated_candidate_dti": 0.05815409623054012,
+        "fold_isolated_delta_dti": -0.00010726519159045406,
+        "heldout_valid_pixels": 2449030,
+        "heldout_truth_pixels": 29319,
+        "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+      },
+      {
+        "fold": 1,
+        "fold_isolated_baseline_dti": 0.04448648627241237,
+        "fold_isolated_candidate_dti": 0.044659493899283906,
+        "fold_isolated_delta_dti": 0.00017300762687153665,
+        "heldout_valid_pixels": 1366431,
+        "heldout_truth_pixels": 12596,
+        "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+      },
+      {
+        "fold": 2,
+        "fold_isolated_baseline_dti": 0.08072984738564343,
+        "fold_isolated_candidate_dti": 0.08071260315377415,
+        "fold_isolated_delta_dti": -1.7244231869273374e-05,
+        "heldout_valid_pixels": 564135,
+        "heldout_truth_pixels": 9473,
+        "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+      },
+      {
+        "fold": 3,
+        "fold_isolated_baseline_dti": 0.059025155244099646,
+        "fold_isolated_candidate_dti": 0.0588309386483671,
+        "fold_isolated_delta_dti": -0.00019421659573254368,
+        "heldout_valid_pixels": 787777,
+        "heldout_truth_pixels": 9600,
+        "score_scope": "quadrant-isolated diagnostic; excludes cross-quadrant 300 m interactions"
+      }
+    ],
+    "pooled_baseline": {
+      "tp_weight": 41728.11077415943,
+      "fp_weight": 3324768.123183006,
+      "fn_weight": 19259.88922584057,
+      "dti": 0.057787992058285685
+    },
+    "pooled_candidate": {
+      "tp_weight": 42178.12276937564,
+      "fp_weight": 3367373.7920215763,
+      "fn_weight": 18809.877230624355,
+      "dti": 0.05772283779225569
+    },
+    "pooled_delta_dti": -6.515426602999447e-05,
+    "aggregation": "exact full-grid DTI on the stitched out-of-fold mosaic; cross-quadrant kernel interactions retained",
+    "scope": "catalogue-derived spatial proxy; not private-test truth or a competition score"
+  },
+  "screen_passed": false,
+  "near_miss_profiles": {
+    "R": {
+      "heldout_truth_pixels": 60988,
+      "best_credit_distance_bins": {
+        "exact_0m": 60979,
+        "near_0_to_100m": 0,
+        "100_to_200m": 9,
+        "200_to_300m": 0,
+        "no_positive_credit": 0
+      },
+      "false_positive_cost_by_distance": [
+        {
+          "distance_bin": "0_to_100m",
+          "pixels": 60988,
+          "probability_mass": 39156.707276165485,
+          "weighted_false_positive_mass": 0.0
+        },
+        {
+          "distance_bin": "100_to_200m",
+          "pixels": 176003,
+          "probability_mass": 112920.43015858531,
+          "weighted_false_positive_mass": 42367.73617332792
+        },
+        {
+          "distance_bin": "200_to_300m",
+          "pixels": 169333,
+          "probability_mass": 108368.92435073853,
+          "weighted_false_positive_mass": 82963.6451620847
+        },
+        {
+          "distance_bin": "300m_or_more",
+          "pixels": 4761049,
+          "probability_mass": 2985135.0919113457,
+          "weighted_false_positive_mass": 2985135.0919113457
+        }
+      ],
+      "note": "a changed profile is evidence about proxy error allocation, not new-fault truth"
+    },
+    "G": {
+      "heldout_truth_pixels": 60988,
+      "best_credit_distance_bins": {
+        "exact_0m": 60979,
+        "near_0_to_100m": 0,
+        "100_to_200m": 9,
+        "200_to_300m": 0,
+        "no_positive_credit": 0
+      },
+      "false_positive_cost_by_distance": [
+        {
+          "distance_bin": "0_to_100m",
+          "pixels": 60988,
+          "probability_mass": 39276.65145513415,
+          "weighted_false_positive_mass": 0.0
+        },
+        {
+          "distance_bin": "100_to_200m",
+          "pixels": 176003,
+          "probability_mass": 113270.96866333485,
+          "weighted_false_positive_mass": 42499.31093211661
+        },
+        {
+          "distance_bin": "200_to_300m",
+          "pixels": 169333,
+          "probability_mass": 108707.48306512833,
+          "weighted_false_positive_mass": 83222.65642051454
+        },
+        {
+          "distance_bin": "300m_or_more",
+          "pixels": 4761049,
+          "probability_mass": 2994651.0398049057,
+          "weighted_false_positive_mass": 2994651.0398049057
+        }
+      ],
+      "note": "a changed profile is evidence about proxy error allocation, not new-fault truth"
+    },
+    "C": {
+      "heldout_truth_pixels": 60988,
+      "best_credit_distance_bins": {
+        "exact_0m": 60985,
+        "near_0_to_100m": 0,
+        "100_to_200m": 3,
+        "200_to_300m": 0,
+        "no_positive_credit": 0
+      },
+      "false_positive_cost_by_distance": [
+        {
+          "distance_bin": "0_to_100m",
+          "pixels": 60988,
+          "probability_mass": 41728.061165988445,
+          "weighted_false_positive_mass": 0.0
+        },
+        {
+          "distance_bin": "100_to_200m",
+          "pixels": 176003,
+          "probability_mass": 120400.59558406472,
+          "weighted_false_positive_mass": 45176.1968506398
+        },
+        {
+          "distance_bin": "200_to_300m",
+          "pixels": 169333,
+          "probability_mass": 115571.08777025342,
+          "weighted_false_positive_mass": 88473.84747798409
+        },
+        {
+          "distance_bin": "300m_or_more",
+          "pixels": 4761049,
+          "probability_mass": 3191118.078854382,
+          "weighted_false_positive_mass": 3191118.078854382
+        }
+      ],
+      "note": "a changed profile is evidence about proxy error allocation, not new-fault truth"
+    },
+    "H": {
+      "heldout_truth_pixels": 60988,
+      "best_credit_distance_bins": {
+        "exact_0m": 60897,
+        "near_0_to_100m": 0,
+        "100_to_200m": 91,
+        "200_to_300m": 0,
+        "no_positive_credit": 0
+      },
+      "false_positive_cost_by_distance": [
+        {
+          "distance_bin": "0_to_100m",
+          "pixels": 60988,
+          "probability_mass": 42176.0766684711,
+          "weighted_false_positive_mass": 0.0
+        },
+        {
+          "distance_bin": "100_to_200m",
+          "pixels": 176003,
+          "probability_mass": 121733.98304742575,
+          "weighted_false_positive_mass": 45678.61644009036
+        },
+        {
+          "distance_bin": "200_to_300m",
+          "pixels": 169333,
+          "probability_mass": 116861.23404049873,
+          "weighted_false_positive_mass": 89469.05576744779
+        },
+        {
+          "distance_bin": "300m_or_more",
+          "pixels": 4761049,
+          "probability_mass": 3232226.1198140383,
+          "weighted_false_positive_mass": 3232226.1198140383
+        }
+      ],
+      "note": "a changed profile is evidence about proxy error allocation, not new-fault truth"
+    }
+  },
+  "slot_approved": false,
+  "decision": "screen failed; no slot",
+  "oof_sha256": {
+    "R": "bfcf29f10aae6160496c748fc8c6158b7caca167371ca7a97e912d78859a9325",
+    "G": "490384c5c30a3190774fa60cac4d82e4eafdd88102247e9533ce7b65e780d5ef",
+    "C": "25e23b4d1f4c5531c360d4fbeb3a74e9b8217cd245ba2cecca1ed2a61943b68b",
+    "H": "30c9dd64f9da2f91a9da0f158a8ed48de321a274d1b960e52be97d7ddedf1805"
+  }
+}

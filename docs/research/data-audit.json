@@ -1,0 +1,6 @@
+{
+  "template_label_pixels": 60988,
+  "template_ones_equal_labels": true,
+  "warning": "Owner template contains labels; use footprint only, never predictions/features.",
+  "organizer_authenticated": false
+}

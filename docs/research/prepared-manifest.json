@@ -1,0 +1,118 @@
+{
+  "schema_version": 3,
+  "prepared_utc": "2026-10-03T13:59:16+00:00",
+  "features_path": "data/raw/training_features.tif",
+  "labels_path": "data/raw/labels.tif",
+  "template_path": "data/raw/sample_submission.tif",
+  "source_files": {
+    "training_features": {
+      "path": "data/raw/training_features.tif",
+      "sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5"
+    },
+    "labels": {
+      "path": "data/raw/labels.tif",
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
+    },
+    "sample_submission": {
+      "path": "data/raw/sample_submission.tif",
+      "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc"
+    }
+  },
+  "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+  "feature_array": "features_raw.npy",
+  "shape_hw": [
+    3730,
+    3292
+  ],
+  "feature_channels": 19,
+  "feature_band_names": [
+    "mag_anom - Magnetic anomaly - deviation from expected Earth's magnetic field",
+    "rtp - Reduced to pole magnetic data - magnetic anomaly corrected for latitude effects",
+    "tmi_hg - Total magnetic intensity horizontal gradient - rate of change in horizontal direction",
+    "geod_2ndinv - Geodetic second invariant - measure of strain rate tensor magnitude",
+    "iso_grav_anom_slope - Isostatic gravity anomaly slope - gradient of gravity after isostatic correction",
+    "tc - Tilt angle or total curvature - magnetic field derivative for edge detection",
+    "geod_shearrate - Geodetic shear rate - rate of angular deformation from GPS/InSAR",
+    "geod_dilaterate - Geodetic dilatation rate - rate of volumetric strain (expansion/contraction)",
+    "tmi_vg - Total magnetic intensity vertical gradient - rate of change in vertical direction",
+    "deq_n100a15 - Distance to earthquake (n=100km radius, a=15\u00b0 azimuth parameters)",
+    "iso_grav_anom_vg - Isostatic gravity anomaly vertical gradient - vertical rate of change",
+    "det_elev - Detrended elevation - topography with regional trends removed",
+    "iso_grav_anom - Isostatic gravity anomaly - gravity after compensating for topographic mass",
+    "tmi - Total magnetic intensity - total strength of magnetic field",
+    "depth_to_base_surf - Depth to basement surface - thickness of sedimentary cover",
+    "ieq_n100a15 - Earthquake intensity or density (n=100km radius, a=15\u00b0 parameters)",
+    "cond_surf - Conductivity surface - electrical conductivity of subsurface",
+    "iso_grav_anom_hg - Isostatic gravity anomaly horizontal gradient - horizontal rate of change",
+    "det_elev_slope - Detrended elevation slope - gradient of elevation after detrending"
+  ],
+  "feature_dtypes": [
+    "float32",
+    "float32",
+    "float32",
+    "float32",
+    "float32",
+    "float32",
+    "float32",
+    "float32",
+    "float32",
+    "float32",
+    "float32",
+    "float32",
+    "float32",
+    "float32",
+    "float32",
+    "float32",
+    "float32",
+    "float32",
+    "float32"
+  ],
+  "finite_feature_pixels_by_channel": [
+    5164312,
+    5164312,
+    5164312,
+    5164312,
+    5164312,
+    5164300,
+    5164312,
+    5164312,
+    5164312,
+    5164312,
+    5164312,
+    5164312,
+    5164312,
+    5164312,
+    5164312,
+    5164312,
+    5164312,
+    5164312,
+    5164312
+  ],
+  "epsg": 32611,
+  "transform_gdal": [
+    243350.0,
+    100.0,
+    0.0,
+    4508550.0,
+    0.0,
+    -100.0
+  ],
+  "pixel_size_m": [
+    100.0,
+    100.0
+  ],
+  "template_valid_pixels": 5167373,
+  "valid_mask_sha256": "aadc4079300653c5293dbe74c7f29b1fe04a1d0c58620d4e3d82ed3765348364",
+  "label_valid_pixels": 5167373,
+  "positive_label_pixels": 60988,
+  "label_values_observed": [
+    0.0,
+    1.0
+  ],
+  "normalization": {
+    "fit_scope": "training-fold pixels only; fitted separately for each checkpoint",
+    "method": "deterministic spatially balanced robust median/IQR samples; clip scaled values to [-8, 8]",
+    "missing_value_after_scaling": 0.0,
+    "heldout_pixels_used_for_fit": false
+  }
+}
