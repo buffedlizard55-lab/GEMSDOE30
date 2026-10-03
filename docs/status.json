@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-03T23:25:37Z",
+  "generated_utc": "2026-10-03T23:27:23Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -18,12 +18,9 @@
       {
         "dest": "labels.tif",
         "path": "data/raw/labels.tif",
-        "present": true,
+        "present": false,
         "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "expected_bytes": 425830,
-        "actual_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "actual_bytes": 425830,
-        "sha256_matches_pin": true
+        "expected_bytes": 425830
       },
       {
         "dest": "sample_submission.tif",
@@ -46,7 +43,6 @@
   },
   "competition_data": {
     "owner_mirror_files_present": [
-      "labels.tif",
       "sample_submission.tif"
     ],
     "organizer_authenticated": false,
@@ -135,10 +131,10 @@
       "outside_convention": "NaN outside; matches published GEMS format",
       "published_format_compliant": true,
       "whole_raster_range_diagnostic_passed": false,
-      "site_linked": null,
+      "site_linked": true,
       "submission_recommendation": false,
       "run_name": "edge-emitter-session30",
-      "note": "GEMSDOE30 EDGE emitter, hybrid belief field, 80,000 dots; unpromoted research artifact",
+      "note": "GEMSDOE30 EDGE emitter, hybrid belief field, 80,000 dots; unpromoted research artifact (see docs/research/emitter-opt-holdout.md)",
       "performance_status": "unscored; format validation is not a score"
     },
     {
@@ -476,7 +472,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "112 tests collected in 0.33s",
+      "pytest_collect": "112 tests collected in 0.59s",
       "exit_code": 0
     },
     "score_gain_claimed": false

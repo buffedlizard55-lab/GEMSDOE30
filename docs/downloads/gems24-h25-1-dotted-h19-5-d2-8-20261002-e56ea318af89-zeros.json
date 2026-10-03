@@ -1,183 +1,66 @@
 {
-  "schema_version": 3,
-  "artifact_type": "research GeoTIFF",
-  "run_name": "gems25-dotted-h19-5-d2-8-zeros_20261003T172939460962Z",
-  "note": "Archived zero-outside diagnostic; not published-format compliant or upload-recommended",
-  "scientific_status": "Diagnostic copy of an external D2.8 reference; score attribution unresolved",
-  "submission_recommendation": false,
-  "site_linked": false,
-  "output_file": "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
-  "output_sha256": "b00a6fb6cab70d0f957308e297695c4032ab97997a41a15ff1295add3df31a26",
-  "output_bytes": 423878,
-  "prediction_array_sha256": "be28e3b627b9f399dfd0e263daa1433ebbec30cf76feb6bf35f420d7e7d0d751",
-  "template_file": "data/raw/sample_submission.tif",
-  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "created_utc": "2026-10-03T17:29:40+00:00",
-  "validation_rechecked_utc": "2026-10-03T22:15:05+00:00",
-  "outside_convention": "0.0 outside; nonstandard diagnostic only; does not match published null/NaN-outside format",
-  "outside_value_counts": {
-    "outside_pixels": 7111787,
-    "nan_outside": false,
-    "zero_outside": true
-  },
-  "published_format_compliant": false,
-  "format_validation": {
-    "path": "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
-    "passed": false,
-    "checks": [
-      {
-        "name": "template_single_band",
-        "passed": true,
-        "detail": "count=1"
-      },
-      {
-        "name": "single_band",
-        "passed": true,
-        "detail": "count=1"
-      },
-      {
-        "name": "float32",
-        "passed": true,
-        "detail": "dtypes=('float32',)"
-      },
-      {
-        "name": "epsg",
-        "passed": true,
-        "detail": "crs=EPSG:32611"
-      },
-      {
-        "name": "template_epsg",
-        "passed": true,
-        "detail": "crs=EPSG:32611"
-      },
-      {
-        "name": "shape_matches_template",
-        "passed": true,
-        "detail": "output=(3730, 3292) template=(3730, 3292)"
-      },
-      {
-        "name": "transform_matches_template",
-        "passed": true,
-        "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
-      },
-      {
-        "name": "100m_north_up_grid",
-        "passed": true,
-        "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
-      },
-      {
-        "name": "finite_and_in_range_inside_footprint",
-        "passed": true,
-        "detail": "valid_pixels=5167373 min=0.0 max=1.0"
-      },
-      {
-        "name": "null_outside_template_footprint",
-        "passed": false,
-        "detail": "outside_pixels=7111787; null/NaN/nodata required"
-      },
-      {
-        "name": "whole_raster_finite_range_diagnostic_advisory",
-        "passed": true,
-        "detail": "advisory only: all_pixels=12279160 finite and in [0, 1]; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
-      },
-      {
-        "name": "template_readable",
-        "passed": true,
-        "detail": "shape=(3730, 3292)"
-      }
-    ]
-  },
-  "whole_raster_range_diagnostic": {
-    "path": "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
-    "passed": true,
-    "checks": [
-      {
-        "name": "template_single_band",
-        "passed": true,
-        "detail": "count=1"
-      },
-      {
-        "name": "single_band",
-        "passed": true,
-        "detail": "count=1"
-      },
-      {
-        "name": "float32",
-        "passed": true,
-        "detail": "dtypes=('float32',)"
-      },
-      {
-        "name": "epsg",
-        "passed": true,
-        "detail": "crs=EPSG:32611"
-      },
-      {
-        "name": "template_epsg",
-        "passed": true,
-        "detail": "crs=EPSG:32611"
-      },
-      {
-        "name": "shape_matches_template",
-        "passed": true,
-        "detail": "output=(3730, 3292) template=(3730, 3292)"
-      },
-      {
-        "name": "transform_matches_template",
-        "passed": true,
-        "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
-      },
-      {
-        "name": "100m_north_up_grid",
-        "passed": true,
-        "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
-      },
-      {
-        "name": "finite_and_in_range_inside_footprint",
-        "passed": true,
-        "detail": "valid_pixels=5167373 min=0.0 max=1.0"
-      },
-      {
-        "name": "finite_in_range_outside_footprint_diagnostic",
-        "passed": true,
-        "detail": "outside_pixels=7111787; finite in-range values required for the nonstandard whole-array diagnostic (finite=7111787)"
-      },
-      {
-        "name": "whole_raster_finite_range_diagnostic",
-        "passed": true,
-        "detail": "all_pixels=12279160 finite and in [0, 1]"
-      },
-      {
-        "name": "template_readable",
-        "passed": true,
-        "detail": "shape=(3730, 3292)"
-      }
-    ]
-  },
-  "whole_raster_range_diagnostic_passed": true,
-  "raster": {
-    "band_count": 1,
-    "dtype": "float32",
-    "crs": "EPSG:32611",
-    "epsg": 32611,
-    "shape": [
-      3730,
-      3292
-    ],
-    "transform": [
-      100.0,
-      0.0,
-      243350.0,
-      0.0,
-      -100.0,
-      4508550.0
-    ],
-    "in_footprint_finite_count": 5167373,
-    "in_footprint_min": 0.0,
-    "in_footprint_max": 1.0,
-    "outside_nodata_tag": null
-  },
-  "performance_status": "unscored; local format validation is not a score",
-  "source_file": "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
-  "source_sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
-  "in_footprint_identical_to_source": true
+  "path": "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+  "passed": false,
+  "checks": [
+    {
+      "name": "template_single_band",
+      "passed": true,
+      "detail": "count=1"
+    },
+    {
+      "name": "single_band",
+      "passed": true,
+      "detail": "count=1"
+    },
+    {
+      "name": "float32",
+      "passed": true,
+      "detail": "dtypes=('float32',)"
+    },
+    {
+      "name": "epsg",
+      "passed": true,
+      "detail": "crs=EPSG:32611"
+    },
+    {
+      "name": "template_epsg",
+      "passed": true,
+      "detail": "crs=EPSG:32611"
+    },
+    {
+      "name": "shape_matches_template",
+      "passed": true,
+      "detail": "output=(3730, 3292) template=(3730, 3292)"
+    },
+    {
+      "name": "transform_matches_template",
+      "passed": true,
+      "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+    },
+    {
+      "name": "100m_north_up_grid",
+      "passed": true,
+      "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+    },
+    {
+      "name": "finite_and_in_range_inside_footprint",
+      "passed": true,
+      "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+    },
+    {
+      "name": "null_outside_template_footprint",
+      "passed": false,
+      "detail": "outside_pixels=7111787; null/NaN/nodata required"
+    },
+    {
+      "name": "whole_raster_finite_range_diagnostic_advisory",
+      "passed": true,
+      "detail": "advisory only: all_pixels=12279160 finite and in [0, 1]; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+    },
+    {
+      "name": "template_readable",
+      "passed": true,
+      "detail": "shape=(3730, 3292)"
+    }
+  ]
 }
