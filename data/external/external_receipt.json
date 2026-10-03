@@ -1,0 +1,32 @@
+{
+  "generated_utc": "2026-10-03T16:59:37+00:00",
+  "runner": "GitHub Actions (general internet access); the agent sandbox cannot reach these hosts",
+  "drivendata_contacted": false,
+  "grid_source_note": "Derived rasters use the hash-pinned owner-mirror competition grid. Those bytes are owner-mirrored, not organizer-authenticated; alignment is verified, labels are never learnt from.",
+  "downloads": {
+    "grid_labels": {
+      "url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE24/07345ea0604953d7efb858d9cfbc21e20c7aca0b/data/bridge/labels.tif",
+      "bytes": 425830,
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "ok": true
+    },
+    "grid_template": {
+      "url": "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE24/07345ea0604953d7efb858d9cfbc21e20c7aca0b/data/bridge/sample_submission.tif",
+      "bytes": 1599597,
+      "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "ok": true
+    }
+  },
+  "derived": {},
+  "errors": {},
+  "stage": "failed",
+  "updated_utc": "2026-10-03T16:59:38+00:00",
+  "python": "3.11.16",
+  "imports": {
+    "numpy": "2.4.6",
+    "rasterio": "1.4.4",
+    "shapely": "2.1.2"
+  },
+  "fatal": "RasterioIOError('/tmp/gems_ext_d3qo1x_7/grid/grid_labels.tif: No such file or directory')",
+  "trace": "Traceback (most recent call last):\n  File \"rasterio/_base.pyx\", line 311, in rasterio._base.DatasetBase.__init__\n  File \"rasterio/_base.pyx\", line 222, in rasterio._base.open_dataset\n  File \"rasterio/_err.pyx\", line 359, in rasterio._err.exc_wrap_pointer\nrasterio._err.CPLE_OpenFailedError: /tmp/gems_ext_d3qo1x_7/grid/grid_labels.tif: No such file or directory\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py\", line 367, in <module>\n    code = main()\n           ^^^^^^\n  File \"/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py\", line 178, in main\n    with rasterio.open(grid_dir / \"grid_labels.tif\") as dataset:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/rasterio/env.py\", line 463, in wrapper\n    return f(*args, **kwds)\n           ^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/rasterio/__init__.py\", line 356, in open\n    dataset = DatasetReader(path, driver=driver, sharing=sharing, **kwargs)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"rasterio/_base.pyx\", line 313, in rasterio._base.DatasetBase.__init__\nrasterio.errors.RasterioIOError: /tmp/gems_ext_d3qo1x_7/grid/grid_labels.tif: No such file or directory\n"
+}
