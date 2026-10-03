@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-03T22:22:09Z",
+  "generated_utc": "2026-10-03T23:37:33Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -40,10 +40,10 @@
       }
     ],
     "prepared_dataset": {
-      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
-      "matches_recorded_pin": true,
-      "positive_label_pixels": 60988,
-      "template_valid_pixels": 5167373
+      "dataset_signature": null,
+      "matches_recorded_pin": null,
+      "positive_label_pixels": null,
+      "template_valid_pixels": null
     },
     "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
   },
@@ -130,6 +130,48 @@
       "run_name": "gems25-dotted-h19-5-d2-8-zeros_20261003T172939460962Z",
       "note": "Archived zero-outside diagnostic; not published-format compliant or upload-recommended",
       "performance_status": "unscored; local format validation is not a score"
+    },
+    {
+      "manifest": "gemsdoe30-d15-poisson200m-offcat-60069-20261003T233210Z-68d0e2e4.json",
+      "file": "docs/downloads/gemsdoe30-d15-poisson200m-offcat-60069-20261003T233210Z-68d0e2e4.tif",
+      "present": false,
+      "sha256": "4dc278c4e5b80bbe50da76244e6eacdb230660807b49b4388470697b23f42ac8",
+      "outside_convention": "zeros",
+      "published_format_compliant": null,
+      "whole_raster_range_diagnostic_passed": null,
+      "site_linked": null,
+      "submission_recommendation": false,
+      "run_name": "gemsdoe30-d15-poisson200m-offcat-60069-20261003T233210Z-68d0e2e4",
+      "note": null,
+      "performance_status": "unscored"
+    },
+    {
+      "manifest": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca-nanoutside.json",
+      "file": "docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca-nanoutside.tif",
+      "present": false,
+      "sha256": "5f963b8bca5ec226ddc7caaadec239c6be6d28aa567f890033be04d04bfd5e32",
+      "outside_convention": "nan",
+      "published_format_compliant": null,
+      "whole_raster_range_diagnostic_passed": null,
+      "site_linked": null,
+      "submission_recommendation": false,
+      "run_name": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca-nanoutside",
+      "note": null,
+      "performance_status": "unscored"
+    },
+    {
+      "manifest": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.json",
+      "file": "docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+      "present": false,
+      "sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd",
+      "outside_convention": "zeros",
+      "published_format_compliant": null,
+      "whole_raster_range_diagnostic_passed": null,
+      "site_linked": null,
+      "submission_recommendation": false,
+      "run_name": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca",
+      "note": null,
+      "performance_status": "unscored"
     },
     {
       "manifest": "gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e-zeros.json",
@@ -466,7 +508,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "97 tests collected in 0.34s",
+      "pytest_collect": "102 tests collected in 0.27s",
       "exit_code": 0
     },
     "score_gain_claimed": false

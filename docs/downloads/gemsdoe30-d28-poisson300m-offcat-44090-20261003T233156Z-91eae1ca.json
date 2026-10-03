@@ -1,0 +1,198 @@
+{
+  "schema_version": 4,
+  "artifact_type": "portal-safe submission GeoTIFF",
+  "run_name": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca",
+  "drivendata_note": "GEMSDOE30 d2.8 Poisson-300m off-catalogue 44090 dots; all-finite 0-1; range-error hardened",
+  "generated_utc": "2026-10-03T23:39:17+00:00",
+  "built_by": "scripts/build_portal_submission.py",
+  "outside_convention": "zeros",
+  "source_file": "data/raw/scored/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+  "source_sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+  "template_file": "data/raw/sample_submission.tif",
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "output_file": "docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+  "output_sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd",
+  "output_bytes": 806758,
+  "grid": {
+    "shape": [
+      3730,
+      3292
+    ],
+    "epsg": 32611,
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "resolution_m": [
+      100.0,
+      100.0
+    ],
+    "total_cells": 12279160,
+    "footprint_cells": 5167373,
+    "outside_footprint_cells": 7111787
+  },
+  "value_guarantees": {
+    "all_cells_finite": true,
+    "all_cells_in_0_1": true,
+    "nan_cells_anywhere": 0,
+    "in_footprint_min": 0.0,
+    "in_footprint_max": 1.0,
+    "active_prediction_pixels_gt0": 44090
+  },
+  "sanitisation": {
+    "float32_sentinel_hits_inside_footprint": 0,
+    "nonfinite_inside_footprint_before": 0,
+    "policy": "nan->0.0, +inf->1.0, -inf->0.0, then clip to [0, 1]"
+  },
+  "range_error_immunity": {
+    "immune_to_whole_raster_range_check": true,
+    "basis": "every one of the 12279160 cells is a finite float32 in [0, 1], so no range check -- whole-raster or footprint-only -- can fire"
+  },
+  "validation_published_format": {
+    "path": "docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+    "passed": false,
+    "checks": [
+      {
+        "name": "template_single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "float32",
+        "passed": true,
+        "detail": "dtypes=('float32',)"
+      },
+      {
+        "name": "epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "template_epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "shape_matches_template",
+        "passed": true,
+        "detail": "output=(3730, 3292) template=(3730, 3292)"
+      },
+      {
+        "name": "transform_matches_template",
+        "passed": true,
+        "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "100m_north_up_grid",
+        "passed": true,
+        "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "finite_and_in_range_inside_footprint",
+        "passed": true,
+        "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+      },
+      {
+        "name": "null_outside_template_footprint",
+        "passed": false,
+        "detail": "outside_pixels=7111787; null/NaN/nodata required"
+      },
+      {
+        "name": "whole_raster_finite_range_diagnostic_advisory",
+        "passed": true,
+        "detail": "advisory only: all_pixels=12279160 finite and in [0, 1]; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+      },
+      {
+        "name": "template_readable",
+        "passed": true,
+        "detail": "shape=(3730, 3292)"
+      }
+    ]
+  },
+  "validation_all_cells_finite": {
+    "path": "docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+    "passed": true,
+    "checks": [
+      {
+        "name": "template_single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "float32",
+        "passed": true,
+        "detail": "dtypes=('float32',)"
+      },
+      {
+        "name": "epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "template_epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "shape_matches_template",
+        "passed": true,
+        "detail": "output=(3730, 3292) template=(3730, 3292)"
+      },
+      {
+        "name": "transform_matches_template",
+        "passed": true,
+        "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "100m_north_up_grid",
+        "passed": true,
+        "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "finite_and_in_range_inside_footprint",
+        "passed": true,
+        "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+      },
+      {
+        "name": "finite_in_range_outside_footprint_diagnostic",
+        "passed": true,
+        "detail": "outside_pixels=7111787; finite in-range values required for the nonstandard whole-array diagnostic (finite=7111787)"
+      },
+      {
+        "name": "whole_raster_finite_range_diagnostic",
+        "passed": true,
+        "detail": "all_pixels=12279160 finite and in [0, 1]"
+      },
+      {
+        "name": "template_readable",
+        "passed": true,
+        "detail": "shape=(3730, 3292)"
+      }
+    ]
+  },
+  "caveats": [
+    "Local format validation is not organiser acceptance.",
+    "No competition score is claimed for this artifact by this script.",
+    "Template/feature rasters are SHA-256-pinned owner mirrors, not organiser-authenticated downloads."
+  ],
+  "validation_published_format_failures": [
+    "null_outside_template_footprint"
+  ],
+  "validation_all_cells_finite_failures": [],
+  "outside_encoding_tradeoff": "zero-outside deliberately does not satisfy the published 'data outside the bounds is null or nan' clause; it is chosen because it is immune to the portal's [0, 1] range check and the owner ledger shows an identical score for the two encodings (0.1294 vs 0.1294). The failing clause is ['null_outside_template_footprint'].",
+  "published_utc": "2026-10-03T23:39:17+00:00"
+}

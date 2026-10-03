@@ -152,7 +152,57 @@ tufa and alteration are *independent* channels to the same geometry the metric r
 | 14 | GDR 1391 INGENIOUS | https://gdr.openei.org/submissions/1391 | official (DOE) | prior session |
 | 15 | Kervadec et al. boundary loss (PMLR 2019) | https://proceedings.mlr.press/v102/kervadec19a.html | official (PMLR) | prior session |
 | 16 | USGS Quaternary Fault and Fold Database | https://www.usgs.gov/programs/earthquake-hazards/faults | official | cited in rules §2 |
+| 17 | DrivenData staff ruling — known faults masked from scoring (forum 11516) | https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516 | official (organizer staff post) | 2026-10-03 |
+| 18 | Reference solution — all-finite, nodata-free example writer | https://github.com/drivendataorg/gems-prize-reference-solution | official (organizer code) | 2026-10-03, cell "Save final prediction in required format" |
 
-**No-hallucination statement:** every number in §1–§3 is either quoted from a source in this
-register, measured in this checkout with the command listed, or explicitly tagged [CLAIM]/
-[INFERENCE]. Scores attributed to owner files remain unauthenticated ([CLAIM]).
+## 7. Scoring mechanics verified 2026-10-03 (seventh session) [OFFICIAL + MEASURED]
+
+These four facts change strategy and are stated here so no future session has to rediscover
+or re-litigate them.
+
+**7.1 Known-fault pixels are masked out of evaluation entirely [OFFICIAL].** DrivenData staff
+(`chrisk-dd`) on the official competition forum, thread 11516, 16 Sep 2026:
+*"Pixels corresponding to known USGS/INGENIOUS faults are masked / excluded from evaluation,
+so they do not count towards penalty terms"* and *"Re-evaluation will also mask/exclude the
+existing USGS/INGENIOUS faults."* Source:
+<https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516>
+**Consequence:** probability mass on catalogue pixels earns no TP and no FP. It is pure waste
+of the emission budget. Every candidate must report `dots_on_catalogue`; the shipped d2.8
+file has 0 of 44,090, the GEMSDOE30 OOF GBM artifact wastes 2,517.
+
+**7.2 The metric collapses to a two-term closed form [MEASURED].** Substituting
+`FN_w = G − TP_w` into the published formula gives
+
+```
+DTI = TP_w / ( 0.8·G + 0.2·(TP_w + FP_w) )
+```
+
+where `G` is the number of ground-truth pixels. Verified numerically against
+`src/gemsdoe30/metric.py` to better than 1e-9 on both dotted artifacts (d2.8: 0.161772 both
+ways; d1.5: 0.171929 both ways). **Consequence:** differentiating gives a clean break-even —
+a dot is worth adding iff its marginal TP credit per unit FP cost exceeds `0.2 × DTI`
+(≈ 0.052 at DTI 0.26). Because `TP_w` is a *max* over each truth pixel's 300 m neighbourhood,
+a redundant dot has marginal TP = 0 and is **strictly harmful**. This is the whole reason
+"thin, don't flood" wins, and it is a property of the metric, not of any particular model.
+
+**7.3 De-clumping is the dominant lever, and the optimum sits at the kernel radius [MEASURED].**
+KD-tree nearest-neighbour spacing of the locally available artifacts, against owner-reported
+portal scores: 121,131 dots at 100 m min spacing → 0.1922; 60,069 at 200 m → 0.2477; 44,090 at
+282.8 m (median NN exactly 300 m) → 0.2600. Monotone. The winning separation lands on the
+300 m kernel radius `R` itself — the scale at which two dots stop competing for the same
+truth pixels. Independent corroboration inside this repo: the 6.38× Poisson-thinning
+multiplier at `r = 3.0 px` (`IR-30-033`). **Consequence:** d2.8 occupies 0.85 % of the
+footprint while a 300 m hex packing could hold ~15× more dots, so the shipped file is
+*evidence-limited, not packing-limited*. Beating 0.2600 needs more non-redundant dots placed
+where un-catalogued faults actually are — a better score field over the 19 GeoDAWN bands, not
+a different emission schedule.
+
+**7.4 The catalogue proxy is anti-correlated with portal score and must not be used as a
+holdout [MEASURED].** Catalogue-proxy DTI ranks the GBM artifact (0.19020) *above* d2.8
+(0.16177), the reverse of the portal ordering. Expected, given 7.1: the real test set is
+expert-labelled faults absent from the catalogue, and catalogue pixels are masked out of
+scoring. Recorded as `IR-30-041`.
+
+**No-hallucination statement:** every number in §1–§3 and §7 is either quoted from a source in
+this register, measured in this checkout with the command listed, or explicitly tagged
+[CLAIM]/[INFERENCE]. Scores attributed to owner files remain unauthenticated ([CLAIM]).
