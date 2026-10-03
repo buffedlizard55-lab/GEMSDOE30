@@ -1,6 +1,6 @@
 {
-  "schema_version": 2,
-  "generated_utc": "2026-10-03T21:45:51Z",
+  "schema_version": 3,
+  "generated_utc": "2026-10-03T22:22:09Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -80,52 +80,95 @@
       "file": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.tif",
       "present": true,
       "sha256": "f5d137b9c010873f0b4fc11e841d923f359d33c7272ded0da9ac9b7c1efc7cc2",
-      "outside_convention": "NaN template-conformant (legacy)",
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "site_linked": true,
+      "submission_recommendation": false,
       "run_name": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13",
-      "note": "GEMSDOE30 4-fold OOF GBM surface; adaptive Poisson-disk dots (500 m min spacing); proxy gate failed vs uniform - not holdout-promoted",
-      "performance_status": "unscored; format validation is not a score"
+      "note": "4-fold OOF GBM; adaptive emission missed its proxy gate; unpromoted and unscored",
+      "performance_status": "unscored; local format validation is not a score"
     },
     {
       "manifest": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-zeros.json",
       "file": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-zeros.tif",
       "present": true,
       "sha256": "dd5cd18a721196602eaccd8946b047eb8c929cbfdcac033512628f6dd0030f50",
-      "outside_convention": "0.0 outside (finite-range validated locally; organizer acceptance unverified)",
+      "outside_convention": "0.0 outside; nonstandard diagnostic only; does not match published null/NaN-outside format",
+      "published_format_compliant": false,
+      "whole_raster_range_diagnostic_passed": true,
+      "site_linked": false,
+      "submission_recommendation": false,
       "run_name": "GEMSDOE30_oof-gbm-adaptive-r5-zeros_20261003T172937560000Z",
-      "note": "GEMSDOE30 4-fold OOF GBM; proxy gate failed; counts unmatched; unpromoted/unscored; local zero-outside copy",
-      "performance_status": "unscored; format validation is not a score"
+      "note": "Archived zero-outside diagnostic; not published-format compliant or upload-recommended",
+      "performance_status": "unscored; local format validation is not a score"
+    },
+    {
+      "manifest": "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.json",
+      "file": "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+      "present": true,
+      "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "site_linked": true,
+      "submission_recommendation": false,
+      "run_name": "GEMSDOE25_dotted-h19-5-d2-8_20261002_e56ea318af89",
+      "note": "External D2.8 research reference; 0.2600 score attribution unverified; owner page says unscored/not slot-approved",
+      "performance_status": "unscored; local format validation is not a score"
     },
     {
       "manifest": "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.json",
       "file": "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
       "present": true,
       "sha256": "b00a6fb6cab70d0f957308e297695c4032ab97997a41a15ff1295add3df31a26",
-      "outside_convention": "0.0 outside (finite-range validated locally; organizer acceptance unverified)",
+      "outside_convention": "0.0 outside; nonstandard diagnostic only; does not match published null/NaN-outside format",
+      "published_format_compliant": false,
+      "whole_raster_range_diagnostic_passed": true,
+      "site_linked": false,
+      "submission_recommendation": false,
       "run_name": "gems25-dotted-h19-5-d2-8-zeros_20261003T172939460962Z",
-      "note": "GEMSDOE25 D2.8 research; 0.2600 attribution unverified; not slot-approved; local zero-outside copy",
-      "performance_status": "unscored; format validation is not a score"
+      "note": "Archived zero-outside diagnostic; not published-format compliant or upload-recommended",
+      "performance_status": "unscored; local format validation is not a score"
     },
     {
       "manifest": "gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e-zeros.json",
       "file": "gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e-zeros.tif",
       "present": true,
       "sha256": "d7977d7b93287f17fbf3cb85f10fdbee4acc5c8453a7faa451e760363433a286",
-      "outside_convention": "0.0 outside (finite-range validated locally; organizer acceptance unverified)",
+      "outside_convention": "0.0 outside; nonstandard diagnostic only; does not match published null/NaN-outside format",
+      "published_format_compliant": false,
+      "whole_raster_range_diagnostic_passed": true,
+      "site_linked": false,
+      "submission_recommendation": false,
       "run_name": "gemsdoe30-sgmc-hedge-d10-85k_20261003T182842779739Z",
-      "note": "GEMSDOE30 SGMC-hedge research; SGMC holdout tautological; unpromoted/unscored; local zero-outside copy",
-      "performance_status": "unscored; format validation is not a score"
+      "note": "Archived zero-outside diagnostic; not published-format compliant or upload-recommended",
+      "performance_status": "unscored; local format validation is not a score"
     },
     {
       "manifest": "gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.json",
-      "file": "GEMSDOE30_sgmc-hedge-t04-s4-d10_20261003T174409650983Z_ac08b41e.tif",
-      "present": false,
+      "file": "gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif",
+      "present": true,
       "sha256": "fed5232e8efeefef00728ce9d5884f08e007c542f317cb11419452d14ff866da",
-      "outside_convention": "NaN template-conformant (legacy)",
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "site_linked": true,
+      "submission_recommendation": false,
       "run_name": "GEMSDOE30_sgmc-hedge-t04-s4-d10_20261003T174409650983Z_ac08b41e",
-      "note": "GEMSDOE30 SGMC-hedge research raster; SGMC holdout is tautological; not promoted; unscored",
-      "performance_status": "unscored; format validation is not a score"
+      "note": "SGMC-hedge research raster; SGMC holdout is tautological; not promoted or scored",
+      "performance_status": "unscored; local format validation is not a score"
     }
   ],
+  "submission_format": {
+    "published_outside_convention": "null/NaN outside the data bounds; finite probabilities in [0, 1] inside",
+    "official_problem_description": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "builder_default": "NaN outside",
+    "zero_outside": "nonstandard diagnostic only; not linked as a submission-format download",
+    "historical_range_error_file_identified": false,
+    "historical_range_error_cause_diagnosed": false,
+    "local_validation_guarantees_portal_acceptance": false
+  },
   "promotion_gates": {
     "loss_ablation": {
       "screen": "docs/research/loss-ablation-holdout.json",
@@ -423,7 +466,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "95 tests collected in 0.28s",
+      "pytest_collect": "97 tests collected in 0.34s",
       "exit_code": 0
     },
     "score_gain_claimed": false

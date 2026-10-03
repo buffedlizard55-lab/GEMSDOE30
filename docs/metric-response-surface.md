@@ -18,7 +18,7 @@ Different proxy protocols produce different local DTIs and must not be conflated
 | Catalogue checkerboard hide-and-recover | 30,865 held-out catalogue pixels; known components masked | **0.1509524764** | [`emission-anatomy.json`](research/emission-anatomy.json) |
 | Independent SGMC component holdout | Five repeats; mean over SGMC hidden components | **0.07060919** (values 0.07260906, 0.07182390, 0.06866501, 0.06639569, 0.07355228) | [`novelty-holdout.json`](research/novelty-holdout.json) |
 
-None is a competition score. The full-catalogue and checkerboard catalogue frames use different truths/masks; the SGMC frame is an independent but imperfect map compilation. The portal-safe zeros-outside sidecar records local format checks passed and unchanged in-footprint values. Organizer acceptance of zero outside values is unverified; the official example/template uses NaN outside the footprint.
+None is a competition score. The full-catalogue and checkerboard catalogue frames use different truths/masks; the SGMC frame is an independent but imperfect map compilation. The archived zero-outside sidecar records unchanged in-footprint values and a passing whole-raster finite diagnostic, but the file fails the published null/NaN-outside format check. The linked NaN-outside copy passes the repository's published-format check. The exact artifact behind the earlier `[0,1]` error remains unidentified, and local validation does not establish organizer acceptance.
 
 ## 3. Exact metric algebra
 

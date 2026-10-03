@@ -26,7 +26,7 @@ The exact local artifact is `docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261
 
 Local proxy metrics are protocol-specific and not competition scores: full-catalogue DTI **0.1617719829** (`emitter-comparison.json`); catalogue checkerboard hide-and-recover DTI **0.1509524764** (`emission-anatomy.json`); five-repeat SGMC component-holdout DTI **0.07260906, 0.07182390, 0.06866501, 0.06639569, 0.07355228** (mean **0.07060919**). The catalogue checkerboard, full-catalogue, and SGMC frames use different truths and masks, so their scores are not interchangeable. None verifies or predicts the hidden competition score.
 
-The portal-safe zeros-outside copy has a local format-validation sidecar, but the official template uses NaN outside the footprint and the organizer’s validator is not public. **Acceptance of the zero-outside fallback remains unverified.**
+The archived zero-outside copy preserves the in-footprint predictions and passes a strict all-finite diagnostic, but it fails the published-format outside check because the public specification requires null/NaN outside. It is not linked as a submission-format file. The NaN-outside research TIFF follows the published convention and passes local checks against the available template. The exact file behind the earlier `[0,1]` error is unknown, so its cause remains undiagnosed; local validation does not establish organizer acceptance.
 
 ## Why dotting/thinning could increase DTI — mechanism, not attribution
 

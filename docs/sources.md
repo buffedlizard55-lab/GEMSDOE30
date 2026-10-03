@@ -30,7 +30,7 @@
 
 | Page | What was read | Limitation |
 | --- | --- | --- |
-| GEMSDOE25 | Its landing page and executive-summary page offer the `dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif` and label it format-validated but unscored/not slot-approved. It gives a 44,090-pixel count and a truncated SHA-256 prefix. | Owner-maintained page, not DrivenData; exact score/file association is not verified. Its current status conflicts with the 0.2600 attribution supplied in the prompt. The exact local D2.8 NaN TIFF was downloaded through the public GitHub API and SHA-256 checked (`91eae1ca…bbe639b8`); the finite-zero copy was generated locally (`b00a6fb6…df31a26`) and passed strict template/range checks with in-footprint values unchanged. This verifies the local artifact, not its score attribution or organizer provenance. |
+| GEMSDOE25 | Its landing page and executive-summary page offer the `dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif` and label it format-validated but unscored/not slot-approved. It gives a 44,090-pixel count and a truncated SHA-256 prefix. | Owner-maintained page, not DrivenData; exact score/file association is not verified. Its current status conflicts with the 0.2600 attribution supplied in the prompt. The exact local D2.8 NaN TIFF was downloaded through the public GitHub API and SHA-256 checked (`91eae1ca…bbe639b8`); the finite-zero diagnostic was generated locally (`b00a6fb6…df31a26`), preserves in-footprint values, passes only the strict all-finite diagnostic, and fails the published null/NaN-outside check. This verifies the local artifact, not its score attribution or organizer provenance. |
 | GEMSDOE24 | Its landing page describes an H19-5 dotted candidate and an owner-reported 0.2477 score anchor; it also distinguishes model expectations from scores. | Owner-reported, no organizer receipt authenticated here. |
 | GEMSDOE27 | Its public pages describe topology/gap-closure and catalogue-derived holdout work and explicitly call those proxy results, not hidden-test scores. | Owner-maintained and not independently rerun; useful as a novelty audit only. |
 
@@ -111,11 +111,8 @@ Recorded in `score-ledger.csv` with `evidence_class=official-snapshot`.
 
 * An earlier draft said the D2.8 TIFF bytes were unavailable in this sandbox. That draft claim
   was superseded by the 2026-10-03 GitHub-API retrieval and is corrected in the current GEMSDOE25
-  table above: the NaN artifact hash was checked; its local zero-outside copy passed the exact-grid
-  checks, and in-footprint values were identical (44,090 binary dots). This does not verify who
-  uploaded that exact file or which official score, if any, belongs to it.
-* The GEMSDOE25 landing page reports its own range-error inference: NaNs inside that project's file may have triggered the message; it explicitly says the portal validator is not public.
-  That is another plausible hypothesis, not confirmation of this repository's prior error cause
-  or of the organizer accepting zero outside. The official sample here contains NaN outside the
-  footprint, and this repository's zero-outside copies pass local checks only; portal acceptance
-  remains unverified.
+  table above: the NaN artifact hash was checked; its local zero-outside diagnostic preserves the
+  same in-footprint values (44,090 binary dots) and passes the separate all-finite diagnostic, but
+  fails the published null/NaN-outside format check. This does not verify who uploaded that exact
+  file or which official score, if any, belongs to it.
+* The GEMSDOE25 landing page reports its own range-error inference: NaNs inside that project's file may have triggered the message; it explicitly says the portal validator is not public. This owner-side statement is not confirmation of this repository's prior error cause. The public GEMS problem description requires null/NaN outside; the local zero-outside copies are now recorded as nonstandard diagnostics, fail the published-format outside check, and are not linked as submission-format downloads. The exact prior-error file remains unidentified, and no local check establishes portal acceptance.

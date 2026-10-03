@@ -20,7 +20,7 @@ SHA-256: `91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8`
 - One float32 band, 3730 × 3292, EPSG:32611, 100 m grid matching the locally pinned sample template.
 - 44,090 positive binary pixels inside the footprint; each is an isolated 8-neighbour dot. None overlaps a known catalogue label.
 - 8,266 pixels fall inside the experiment’s 3-pixel catalogue buffer; 35,824 are outside it. A **separate direct Euclidean distance-to-catalogue calculation** reports 19.5214% (about 8,607 of 44,090) within 300 m. These counts use different constructions and are not interchangeable or contradictory. Median dot-to-catalogue distance is about 1.5 km. These are raster properties, not proof that any dot is a fault.
-- The portal-safe zeros-outside sidecar reports local format checks passed and the same in-footprint predictions. “Format validation passed” is not an organizer score or portal-acceptance receipt; the official example uses NaN outside the footprint, and acceptance of the zero-outside fallback remains unverified.
+- The archived zero-outside copy preserves the same 44,090 in-footprint dots and passes a strict whole-raster finite-range diagnostic, but it fails the published-format outside check because the public specification requires null/NaN outside. It is not linked as a submission-format file. The NaN-outside original passes the repository's published-format local checks. Neither result is an organizer score or portal-acceptance receipt; the exact prior `[0,1]` error file remains unknown.
 
 ### Proxy measurements — different targets, not competition scores
 
