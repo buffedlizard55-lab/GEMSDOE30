@@ -169,7 +169,11 @@ def main() -> int:
             extra_path = Path(raw_path)
             if not extra_path.is_file():
                 raise FileNotFoundError(f"extra emitter missing: {extra_path}")
-            extra_plane = np.load(extra_path)
+            if extra_path.suffix.lower() in {".tif", ".tiff"}:
+                with rasterio.open(extra_path) as dataset:
+                    extra_plane = dataset.read(1)
+            else:
+                extra_plane = np.load(extra_path, allow_pickle=False)
             emitters[name] = np.where(
                 footprint & (np.nan_to_num(extra_plane, nan=0.0) > 0), 1.0, 0.0).astype(np.float32)
 

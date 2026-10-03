@@ -1,15 +1,15 @@
 {
   "decision": {
     "criterion": "on this off-catalogue inventory, does the learned field beat an unlearned lattice at comparable spacing?",
-    "model_minus_lattice_mean_dti": 0.0008996395197846535
+    "model_minus_lattice_mean_dti": 0.0010240665476547728
   },
-  "elapsed_seconds": 57.8,
+  "elapsed_seconds": 125.7,
   "emitters_available": {
     "artefact": true,
     "inventory": true,
     "model_oof": true
   },
-  "generated_utc": "2026-10-03T17:42:22Z",
+  "generated_utc": "2026-10-03T17:52:22Z",
   "grid": {
     "epsg": 32611,
     "shape_hw": [
@@ -28,8 +28,8 @@
   "inventory": {
     "connected_components": 1679,
     "name": "USGS SGMC fault linework, 100 m rasterisation",
-    "pixels_in_footprint": 82156,
-    "pixels_off_catalogue": 62229,
+    "pixels_in_footprint": 82151,
+    "pixels_off_catalogue": 62226,
     "sha256": null,
     "source": "https://mrdata.usgs.gov/geology/state/ (NV.zip, CA.zip); US public domain"
   },
@@ -46,225 +46,462 @@
     "inventory_spacing_px": 10.0,
     "model_spacing_px": 3.0,
     "radius_m": 300.0,
-    "repeats": 3,
+    "repeats": 5,
     "seed": 30
   },
   "repeats_detail": [
     {
       "emitters": {
-        "cand_t04s4": {
-          "dti": 0.10225960907669693,
-          "emitted_pixels": 80388,
-          "fp_weight": 79070.261490847,
-          "tp_weight": 3122.5338819921017,
-          "truth_pixels": 17621.0
+        "blind_random_75001": {
+          "dti": 0.07534179025273283,
+          "emitted_pixels": 68848,
+          "fp_weight": 67996.14176018446,
+          "tp_weight": 2118.4084760583937,
+          "truth_pixels": 17618.0
         },
-        "cand_t04s4_sgmc10": {
-          "dti": 0.18735266798922018,
+        "blind_random_80392": {
+          "dti": 0.07516011984299317,
+          "emitted_pixels": 73843,
+          "fp_weight": 72955.08307566986,
+          "tp_weight": 2188.902992799878,
+          "truth_pixels": 17618.0
+        },
+        "blind_random_85526": {
+          "dti": 0.0797143501766411,
+          "emitted_pixels": 78512,
+          "fp_weight": 77542.90525425396,
+          "tp_weight": 2398.01361721009,
+          "truth_pixels": 17618.0
+        },
+        "cand_gbm": {
+          "dti": 0.07250002314623913,
+          "emitted_pixels": 75001,
+          "fp_weight": 73789.8813204182,
+          "tp_weight": 2122.5752986334264,
+          "truth_pixels": 17618.0
+        },
+        "cand_hedge": {
+          "dti": 0.18733652924330355,
           "emitted_pixels": 85526,
-          "fp_weight": 82722.91688562749,
-          "tp_weight": 5964.227721840143,
-          "truth_pixels": 17621.0
+          "fp_weight": 82722.99557495333,
+          "tp_weight": 5963.229912694544,
+          "truth_pixels": 17618.0
         },
-        "cand_t04s4_sgmc15": {
-          "dti": 0.15431188545657443,
-          "emitted_pixels": 83592,
-          "fp_weight": 81341.60212832416,
-          "tp_weight": 4834.915985360742,
-          "truth_pixels": 17621.0
+        "cand_t04s4": {
+          "dti": 0.10224873101288633,
+          "emitted_pixels": 80388,
+          "fp_weight": 79070.34018017283,
+          "tp_weight": 3121.9459046423435,
+          "truth_pixels": 17618.0
         },
         "historical_artefact": {
-          "dti": 0.07260092998898951,
+          "dti": 0.0726090596416822,
           "emitted_pixels": 35824,
           "fp_weight": 35136.39776356762,
           "tp_weight": 1556.2244897410274,
-          "truth_pixels": 17621.0
+          "truth_pixels": 17618.0
         },
         "lattice": {
-          "dti": 0.09322823865698393,
+          "dti": 0.09321432611899538,
           "emitted_pixels": 527504,
-          "fp_weight": 521058.5880874768,
-          "tp_weight": 11239.257960297167,
-          "truth_pixels": 17621.0
+          "fp_weight": 521059.53308742156,
+          "tp_weight": 11237.338840462267,
+          "truth_pixels": 17618.0
         },
         "model_probability_dots": {
-          "dti": 0.0942080290503798,
+          "dti": 0.09420051160984315,
           "emitted_pixels": 506746,
-          "fp_weight": 500575.09511178354,
-          "tp_weight": 10966.29293300584,
-          "truth_pixels": 17621.0
+          "fp_weight": 500575.50713444274,
+          "tp_weight": 10965.178551007062,
+          "truth_pixels": 17618.0
         },
         "visible_inventory_dots": {
-          "dti": 0.001116490615746026,
+          "dti": 0.0011128060846088068,
           "emitted_pixels": 3495,
-          "fp_weight": 3484.7731130988136,
-          "tp_weight": 16.520777266472578,
-          "truth_pixels": 17621.0
+          "fp_weight": 3484.830304057232,
+          "tp_weight": 16.463586308062077,
+          "truth_pixels": 17618.0
         }
       },
       "hidden_components": 504,
-      "holdout_truth_pixels_in_domain": 17621,
+      "holdout_truth_pixels_in_domain": 17618,
       "repeat": 0,
       "visible_components": 1175
     },
     {
       "emitters": {
+        "blind_random_75001": {
+          "dti": 0.07312415053834245,
+          "emitted_pixels": 68848,
+          "fp_weight": 68013.87552012182,
+          "tp_weight": 2059.963465180248,
+          "truth_pixels": 17695.0
+        },
+        "blind_random_80392": {
+          "dti": 0.07621982671478944,
+          "emitted_pixels": 73843,
+          "fp_weight": 72947.49103049334,
+          "tp_weight": 2224.8930851891637,
+          "truth_pixels": 17695.0
+        },
+        "blind_random_85526": {
+          "dti": 0.07983822752208053,
+          "emitted_pixels": 78512,
+          "fp_weight": 77542.49729263166,
+          "tp_weight": 2406.7918562702835,
+          "truth_pixels": 17695.0
+        },
+        "cand_gbm": {
+          "dti": 0.07884955350642708,
+          "emitted_pixels": 75001,
+          "fp_weight": 73668.57542682104,
+          "tp_weight": 2314.43964189291,
+          "truth_pixels": 17695.0
+        },
+        "cand_hedge": {
+          "dti": 0.1894369528054292,
+          "emitted_pixels": 85526,
+          "fp_weight": 82689.35479185992,
+          "tp_weight": 6043.526846162975,
+          "truth_pixels": 17695.0
+        },
         "cand_t04s4": {
-          "dti": 0.10005143850250678,
+          "dti": 0.10005928907934336,
           "emitted_pixels": 80388,
           "fp_weight": 79093.150034667,
           "tp_weight": 3060.4861832670867,
-          "truth_pixels": 17698.0
-        },
-        "cand_t04s4_sgmc10": {
-          "dti": 0.18942263665093237,
-          "emitted_pixels": 85526,
-          "fp_weight": 82689.35479185992,
-          "tp_weight": 6043.524655278772,
-          "truth_pixels": 17698.0
-        },
-        "cand_t04s4_sgmc15": {
-          "dti": 0.1545223722472407,
-          "emitted_pixels": 83592,
-          "fp_weight": 81338.10014785241,
-          "tp_weight": 4851.431741319597,
-          "truth_pixels": 17698.0
+          "truth_pixels": 17695.0
         },
         "historical_artefact": {
-          "dti": 0.07181587768187782,
+          "dti": 0.07182389753450796,
           "emitted_pixels": 35824,
           "fp_weight": 35133.554821449725,
           "tp_weight": 1543.5983111970127,
-          "truth_pixels": 17698.0
+          "truth_pixels": 17695.0
         },
         "lattice": {
-          "dti": 0.09334913869783248,
+          "dti": 0.09333025348449497,
           "emitted_pixels": 527504,
-          "fp_weight": 521035.54400785046,
-          "tp_weight": 11259.531817629933,
-          "truth_pixels": 17698.0
+          "fp_weight": 521036.6412732063,
+          "tp_weight": 11257.003222122788,
+          "truth_pixels": 17695.0
         },
         "model_probability_dots": {
-          "dti": 0.09441945707380207,
+          "dti": 0.09440788454165382,
           "emitted_pixels": 506746,
-          "fp_weight": 500531.1200296487,
-          "tp_weight": 10996.459712550044,
-          "truth_pixels": 17698.0
+          "fp_weight": 500532.1007221845,
+          "tp_weight": 10994.873926088214,
+          "truth_pixels": 17695.0
         },
         "visible_inventory_dots": {
-          "dti": 0.0016828828001131354,
+          "dti": 0.0016831547272941176,
           "emitted_pixels": 3474,
           "fp_weight": 3459.711540333983,
           "tp_weight": 24.999799992889166,
-          "truth_pixels": 17698.0
+          "truth_pixels": 17695.0
         }
       },
       "hidden_components": 504,
-      "holdout_truth_pixels_in_domain": 17698,
+      "holdout_truth_pixels_in_domain": 17695,
       "repeat": 1,
       "visible_components": 1175
     },
     {
       "emitters": {
-        "cand_t04s4": {
-          "dti": 0.08535243299178451,
-          "emitted_pixels": 80388,
-          "fp_weight": 79330.40440568281,
-          "tp_weight": 2539.5064882151783,
-          "truth_pixels": 16724.0
+        "blind_random_75001": {
+          "dti": 0.07236663029057112,
+          "emitted_pixels": 68848,
+          "fp_weight": 68059.73808367465,
+          "tp_weight": 1981.8849748522043,
+          "truth_pixels": 16723.0
         },
-        "cand_t04s4_sgmc10": {
-          "dti": 0.17390237875899903,
+        "blind_random_80392": {
+          "dti": 0.07267761904394256,
+          "emitted_pixels": 73843,
+          "fp_weight": 73022.09853937401,
+          "tp_weight": 2063.7219906412065,
+          "truth_pixels": 16723.0
+        },
+        "blind_random_85526": {
+          "dti": 0.07850833555126814,
+          "emitted_pixels": 78512,
+          "fp_weight": 77587.69308942446,
+          "tp_weight": 2304.76062925905,
+          "truth_pixels": 16723.0
+        },
+        "cand_gbm": {
+          "dti": 0.06848153191625708,
+          "emitted_pixels": 75001,
+          "fp_weight": 73827.47098130366,
+          "tp_weight": 1954.1009540259838,
+          "truth_pixels": 16723.0
+        },
+        "cand_hedge": {
+          "dti": 0.17391490477996474,
           "emitted_pixels": 85526,
           "fp_weight": 83037.20006255398,
-          "tp_weight": 5402.654938258231,
-          "truth_pixels": 16724.0
+          "tp_weight": 5402.913964059204,
+          "truth_pixels": 16723.0
         },
-        "cand_t04s4_sgmc15": {
-          "dti": 0.13894622951371535,
-          "emitted_pixels": 83592,
-          "fp_weight": 81643.12575503456,
-          "tp_weight": 4245.777239557356,
-          "truth_pixels": 16724.0
+        "cand_t04s4": {
+          "dti": 0.08534631531443455,
+          "emitted_pixels": 80388,
+          "fp_weight": 79330.40440568281,
+          "tp_weight": 2539.2518442086875,
+          "truth_pixels": 16723.0
         },
         "historical_artefact": {
-          "dti": 0.06863059709093547,
+          "dti": 0.0686650094557789,
           "emitted_pixels": 35824,
           "fp_weight": 35198.73830095143,
-          "tp_weight": 1420.867567807436,
-          "truth_pixels": 16724.0
+          "tp_weight": 1421.5342344939709,
+          "truth_pixels": 16723.0
         },
         "lattice": {
-          "dti": 0.08901896304008515,
+          "dti": 0.08901129976299854,
           "emitted_pixels": 527504,
-          "fp_weight": 521412.82178485394,
-          "tp_weight": 10663.987677518278,
-          "truth_pixels": 16724.0
+          "fp_weight": 521413.2166909521,
+          "tp_weight": 10662.987677518278,
+          "truth_pixels": 16723.0
         },
         "model_probability_dots": {
-          "dti": 0.08966777283007363,
+          "dti": 0.08966101855071709,
           "emitted_pixels": 506746,
-          "fp_weight": 500936.6036228477,
-          "tp_weight": 10369.213843714446,
-          "truth_pixels": 16724.0
+          "fp_weight": 500936.9562636452,
+          "tp_weight": 10368.351914923638,
+          "truth_pixels": 16723.0
         },
         "visible_inventory_dots": {
-          "dti": 0.0010489614456850674,
+          "dti": 0.0010449633652289975,
           "emitted_pixels": 3576,
-          "fp_weight": 3566.770190761399,
-          "tp_weight": 14.78564777225256,
-          "truth_pixels": 16724.0
+          "fp_weight": 3566.827381719817,
+          "tp_weight": 14.728456813842058,
+          "truth_pixels": 16723.0
         }
       },
       "hidden_components": 504,
-      "holdout_truth_pixels_in_domain": 16724,
+      "holdout_truth_pixels_in_domain": 16723,
       "repeat": 2,
+      "visible_components": 1175
+    },
+    {
+      "emitters": {
+        "blind_random_75001": {
+          "dti": 0.07604825586155832,
+          "emitted_pixels": 68848,
+          "fp_weight": 67989.16252031885,
+          "tp_weight": 2157.499081533402,
+          "truth_pixels": 17926.0
+        },
+        "blind_random_80392": {
+          "dti": 0.07710452775214251,
+          "emitted_pixels": 73843,
+          "fp_weight": 72942.74580528196,
+          "tp_weight": 2265.520177934319,
+          "truth_pixels": 17926.0
+        },
+        "blind_random_85526": {
+          "dti": 0.08115910503866582,
+          "emitted_pixels": 78512,
+          "fp_weight": 77534.78835726494,
+          "tp_weight": 2462.386313933879,
+          "truth_pixels": 17926.0
+        },
+        "cand_gbm": {
+          "dti": 0.074454513719564,
+          "emitted_pixels": 75001,
+          "fp_weight": 73753.5645962873,
+          "tp_weight": 2198.735605843365,
+          "truth_pixels": 17926.0
+        },
+        "cand_hedge": {
+          "dti": 0.17531355933042123,
+          "emitted_pixels": 85526,
+          "fp_weight": 82968.42413061051,
+          "tp_weight": 5620.297513246536,
+          "truth_pixels": 17926.0
+        },
+        "cand_t04s4": {
+          "dti": 0.08380381817573407,
+          "emitted_pixels": 80388,
+          "fp_weight": 79325.54978441351,
+          "tp_weight": 2574.52153275162,
+          "truth_pixels": 17926.0
+        },
+        "historical_artefact": {
+          "dti": 0.06639568777989673,
+          "emitted_pixels": 35824,
+          "fp_weight": 35191.09491289074,
+          "tp_weight": 1438.577741123736,
+          "truth_pixels": 17926.0
+        },
+        "lattice": {
+          "dti": 0.09455119418819963,
+          "emitted_pixels": 527504,
+          "fp_weight": 521006.9547257106,
+          "tp_weight": 11424.342765823007,
+          "truth_pixels": 17926.0
+        },
+        "model_probability_dots": {
+          "dti": 0.09583388065811119,
+          "emitted_pixels": 506746,
+          "fp_weight": 500520.29976548365,
+          "tp_weight": 11182.018291991204,
+          "truth_pixels": 17926.0
+        },
+        "visible_inventory_dots": {
+          "dti": 0.0012172482292130077,
+          "emitted_pixels": 3519,
+          "fp_weight": 3508.730116363983,
+          "tp_weight": 18.314971283078194,
+          "truth_pixels": 17926.0
+        }
+      },
+      "hidden_components": 504,
+      "holdout_truth_pixels_in_domain": 17926,
+      "repeat": 3,
+      "visible_components": 1175
+    },
+    {
+      "emitters": {
+        "blind_random_75001": {
+          "dti": 0.07611511716364744,
+          "emitted_pixels": 68848,
+          "fp_weight": 67976.34295690025,
+          "tp_weight": 2226.9964883886278,
+          "truth_pixels": 19022.0
+        },
+        "blind_random_80392": {
+          "dti": 0.07967356899696809,
+          "emitted_pixels": 73843,
+          "fp_weight": 72895.77511515177,
+          "tp_weight": 2412.455606870353,
+          "truth_pixels": 19022.0
+        },
+        "blind_random_85526": {
+          "dti": 0.08630037446242617,
+          "emitted_pixels": 78512,
+          "fp_weight": 77436.4212082731,
+          "tp_weight": 2696.3827765509486,
+          "truth_pixels": 19022.0
+        },
+        "cand_gbm": {
+          "dti": 0.06964642620209413,
+          "emitted_pixels": 75001,
+          "fp_weight": 73830.42620433029,
+          "tp_weight": 2117.7553395964205,
+          "truth_pixels": 19022.0
+        },
+        "cand_hedge": {
+          "dti": 0.19114260908989708,
+          "emitted_pixels": 85526,
+          "fp_weight": 82632.33360746322,
+          "tp_weight": 6308.820623125881,
+          "truth_pixels": 19022.0
+        },
+        "cand_t04s4": {
+          "dti": 0.10482714531580489,
+          "emitted_pixels": 80388,
+          "fp_weight": 79022.94997325123,
+          "tp_weight": 3321.6065245606005,
+          "truth_pixels": 19022.0
+        },
+        "historical_artefact": {
+          "dti": 0.07355227768112903,
+          "emitted_pixels": 35824,
+          "fp_weight": 35103.43783796503,
+          "tp_weight": 1660.0974926836789,
+          "truth_pixels": 19022.0
+        },
+        "lattice": {
+          "dti": 0.0996568049230042,
+          "emitted_pixels": 527504,
+          "fp_weight": 520642.3989293998,
+          "tp_weight": 12135.526552002877,
+          "truth_pixels": 19022.0
+        },
+        "model_probability_dots": {
+          "dti": 0.10078091585564128,
+          "emitted_pixels": 506746,
+          "fp_weight": 500188.5063791195,
+          "tp_weight": 11854.475805539638,
+          "truth_pixels": 19022.0
+        },
+        "visible_inventory_dots": {
+          "dti": 0.0010114024979171864,
+          "emitted_pixels": 3472,
+          "fp_weight": 3461.461278132896,
+          "tp_weight": 16.094560384750366,
+          "truth_pixels": 19022.0
+        }
+      },
+      "hidden_components": 504,
+      "holdout_truth_pixels_in_domain": 19022,
+      "repeat": 4,
       "visible_components": 1175
     }
   ],
   "script": "scripts/novelty_holdout.py",
   "summary": {
+    "blind_random_75001": {
+      "max_dti": 0.07611511716364744,
+      "mean_dti": 0.07459918882137043,
+      "min_dti": 0.07236663029057112,
+      "repeats": 5
+    },
+    "blind_random_80392": {
+      "max_dti": 0.07967356899696809,
+      "mean_dti": 0.07616713247016715,
+      "min_dti": 0.07267761904394256,
+      "repeats": 5
+    },
+    "blind_random_85526": {
+      "max_dti": 0.08630037446242617,
+      "mean_dti": 0.08110407855021634,
+      "min_dti": 0.07850833555126814,
+      "repeats": 5
+    },
+    "cand_gbm": {
+      "max_dti": 0.07884955350642708,
+      "mean_dti": 0.0727864096981163,
+      "min_dti": 0.06848153191625708,
+      "repeats": 5
+    },
+    "cand_hedge": {
+      "max_dti": 0.19114260908989708,
+      "mean_dti": 0.18342891104980316,
+      "min_dti": 0.17391490477996474,
+      "repeats": 5
+    },
     "cand_t04s4": {
-      "max_dti": 0.10225960907669693,
-      "mean_dti": 0.09588782685699608,
-      "min_dti": 0.08535243299178451,
-      "repeats": 3
-    },
-    "cand_t04s4_sgmc10": {
-      "max_dti": 0.18942263665093237,
-      "mean_dti": 0.1835592277997172,
-      "min_dti": 0.17390237875899903,
-      "repeats": 3
-    },
-    "cand_t04s4_sgmc15": {
-      "max_dti": 0.1545223722472407,
-      "mean_dti": 0.1492601624058435,
-      "min_dti": 0.13894622951371535,
-      "repeats": 3
+      "max_dti": 0.10482714531580489,
+      "mean_dti": 0.09525705977964063,
+      "min_dti": 0.08380381817573407,
+      "repeats": 5
     },
     "historical_artefact": {
-      "max_dti": 0.07260092998898951,
-      "mean_dti": 0.0710158015872676,
-      "min_dti": 0.06863059709093547,
-      "repeats": 3
+      "max_dti": 0.07355227768112903,
+      "mean_dti": 0.07060918641859897,
+      "min_dti": 0.06639568777989673,
+      "repeats": 5
     },
     "lattice": {
-      "max_dti": 0.09334913869783248,
-      "mean_dti": 0.09186544679830051,
-      "min_dti": 0.08901896304008515,
-      "repeats": 3
+      "max_dti": 0.0996568049230042,
+      "mean_dti": 0.09395277569553855,
+      "min_dti": 0.08901129976299854,
+      "repeats": 5
     },
     "model_probability_dots": {
-      "max_dti": 0.09441945707380207,
-      "mean_dti": 0.09276508631808517,
-      "min_dti": 0.08966777283007363,
-      "repeats": 3
+      "max_dti": 0.10078091585564128,
+      "mean_dti": 0.09497684224319332,
+      "min_dti": 0.08966101855071709,
+      "repeats": 5
     },
     "visible_inventory_dots": {
-      "max_dti": 0.0016828828001131354,
-      "mean_dti": 0.0012827782871814096,
-      "min_dti": 0.0010489614456850674,
-      "repeats": 3
+      "max_dti": 0.0016831547272941176,
+      "mean_dti": 0.0012139149808524231,
+      "min_dti": 0.0010114024979171864,
+      "repeats": 5
     }
   }
 }

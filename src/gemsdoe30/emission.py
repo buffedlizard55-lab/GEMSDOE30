@@ -318,3 +318,154 @@ def required_fp_reduction(current_dti: float, target_dti: float, coverage: float
     if before <= 0:
         raise ValueError("implied FP ratio is not positive; check coverage/DTI")
     return 1.0 - after / before
+
+
+def _kernel_offsets(radius_m: float, pixel_size_m: float) -> list[tuple[int, int, float]]:
+    """Exact triangular-kernel offsets: ``(dy, dx, k)`` with ``k = 1 - d/R``."""
+
+    reach = int(math.ceil(radius_m / pixel_size_m))
+    offsets: list[tuple[int, int, float]] = []
+    for dy in range(-reach, reach + 1):
+        for dx in range(-reach, reach + 1):
+            distance = pixel_size_m * math.hypot(dy, dx)
+            if distance <= radius_m:
+                offsets.append((dy, dx, 1.0 - distance / radius_m))
+    return offsets
+
+
+def metric_optimal_emission(
+    score: Any,
+    mask: Any = None,
+    *,
+    alpha: float = DEFAULT_ALPHA,
+    radius_m: float = DEFAULT_RADIUS_M,
+    pixel_size_m: float = 100.0,
+    belief_cut: float = 0.0,
+    pool_limit: int | None = None,
+    max_dots: int | None = None,
+    return_diagnostics: bool = False,
+) -> Any:
+    """Greedy dot selection driven by the published index's marginal algebra.
+
+    Candidates are visited in descending belief order (ties broken by raster
+    order, so the result is deterministic).  A candidate ``x`` is kept only when
+    its *expected marginal* effect on the index is positive.  With
+    ``A = sum_g belief(g) * credit(g)``, ``F = sum kept cost(x)`` and
+    ``T = sum belief`` in the scored domain, the published index is
+
+        DTI = A / (alpha*(A + F) + (1 - alpha)*T),
+
+    so adding mass ``dA`` at expected false-positive cost ``dF = cost(x)`` and
+    unchanged ``T`` improves it exactly when
+
+        dA > lambda * dF,      lambda = alpha*s / (1 - alpha*s),  s = DTI_now.
+
+    ``gain(x)`` uses the metric's maximum rule: it is the *extra* weighted credit
+    the pixel supplies for the modelled truth field beyond the credit already
+    supplied by accepted neighbours.  Duplicating credit therefore yields zero
+    gain, which is why the metric prefers spaced dots over dense lines, while the
+    spacing adapts to the local belief instead of being a fixed radius.
+
+    ``score`` is a belief/confidence surface in ``[0, 1]`` (a calibrated
+    probability, a rank score or a binary base mask all work).  ``mask`` limits
+    candidates to the scored domain (official domain = valid footprint minus
+    masked known-fault pixels).  ``max_dots`` stops the sweep early; ``pool_limit``
+    caps the candidate pool for speed (highest-belief pixels win).
+    """
+
+    import numpy as np
+
+    belief = np.asarray(score, dtype=np.float32)
+    if belief.ndim != 2:
+        raise ValueError("score must be two-dimensional")
+    if not 0.0 <= belief_cut < 1.0:
+        raise ValueError("belief_cut must be in [0, 1)")
+    if pool_limit is not None and pool_limit <= 0:
+        raise ValueError("pool_limit must be positive")
+    if max_dots is not None and max_dots <= 0:
+        raise ValueError("max_dots must be positive")
+
+    domain = np.isfinite(belief)
+    if mask is not None:
+        mask_array = np.asarray(mask, dtype=bool)
+        if mask_array.shape != belief.shape:
+            raise ValueError("mask shape differs from score")
+        domain &= mask_array
+    values = np.where(domain, belief, 0.0).astype(np.float32, copy=True)
+    if values.size and values.max() <= belief_cut:
+        empty = np.zeros(belief.shape, dtype=bool)
+        return {"selected": empty, "credit": np.zeros(belief.shape, dtype=np.float32),
+                "dots": 0, "surrogate_dti": 0.0} if return_diagnostics else empty
+
+    rows, cols = np.nonzero(domain & (values > belief_cut))
+    if pool_limit is not None and rows.size > pool_limit:
+        flat = np.argpartition(-values[rows, cols], pool_limit)[:pool_limit]
+        rows, cols = rows[flat], cols[flat]
+    if rows.size == 0:
+        empty = np.zeros(belief.shape, dtype=bool)
+        return {"selected": empty, "credit": np.zeros(belief.shape, dtype=np.float32),
+                "dots": 0, "surrogate_dti": 0.0} if return_diagnostics else empty
+    order = np.lexsort((cols, rows, -values[rows, cols]))
+    rows, cols = rows[order], cols[order]
+
+    offsets = _kernel_offsets(radius_m, pixel_size_m)
+    height, width = values.shape
+    credit = np.zeros(values.shape, dtype=np.float32)
+    selected = np.zeros(values.shape, dtype=bool)
+
+    truth_mass = float(values.sum(dtype=np.float64))
+    achieved = 0.0
+    fp_mass = 0.0
+    dots = 0
+    scale = alpha * radius_m  # weights kernel credit of a unit-belief neighbour
+
+    # The emitted value is 1.0 (binary emission is optimal on a fixed support), so a
+    # kept pixel offers ``kernel`` credit to each truth pixel in its window.  The
+    # expected false-positive weight of that pixel is the probability that no truth
+    # pixel lies within the kernel: prod(1 - belief(g)*kernel) over the window.
+    for row, col, belief_value in zip(rows.tolist(), cols.tolist(), values[rows, cols].tolist()):
+        gain = 0.0
+        cost = 1.0
+        window = []
+        for dy, dx, kernel in offsets:
+            y, x = row + dy, col + dx
+            if 0 <= y < height and 0 <= x < width:
+                neighbour = float(values[y, x])
+                if neighbour > 0.0:
+                    offered = kernel
+                    already = float(credit[y, x])
+                    if offered > already:
+                        gain += neighbour * (offered - already)
+                    cost *= 1.0 - neighbour * kernel
+                    window.append((y, x, offered))
+        if cost < 0.0:
+            cost = 0.0
+        elif cost > 1.0:
+            cost = 1.0
+        denominator = alpha * (achieved + fp_mass) + (1.0 - alpha) * truth_mass
+        current = achieved / denominator if denominator > 0.0 else 0.0
+        threshold = alpha * current / (1.0 - alpha * current) if current < 1.0 / alpha else float("inf")
+        if gain <= threshold * cost or gain <= 0.0:
+            continue
+        selected[row, col] = True
+        achieved += gain
+        fp_mass += cost
+        for y, x, offered in window:
+            if offered > credit[y, x]:
+                credit[y, x] = offered
+        dots += 1
+        if max_dots is not None and dots >= max_dots:
+            break
+
+    if not return_diagnostics:
+        return selected
+    denominator = alpha * (achieved + fp_mass) + (1.0 - alpha) * truth_mass
+    return {
+        "selected": selected,
+        "credit": credit,
+        "dots": dots,
+        "achieved_credit": achieved,
+        "fp_mass": fp_mass,
+        "truth_mass": truth_mass,
+        "surrogate_dti": achieved / denominator if denominator > 0.0 else 0.0,
+    }
