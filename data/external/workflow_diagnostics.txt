@@ -1,5 +1,5 @@
-run: 37138926461  ref: arena/01a102a1-gemsdoe30  sha: 16934b5860b16ffb525ca3321cdb463a6d33c351
-date: 2026-10-03T17:00:29Z
+run: 37139024393  ref: arena/01a102a1-gemsdoe30  sha: 23623d6c7c82517e949ad938917ba52065f7b065
+date: 2026-10-03T17:02:01Z
 pwd: /home/runner/work/GEMSDOE30/GEMSDOE30
 python: Python 3.11.16
 Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (26.2.1)
@@ -11,6 +11,8 @@ Collecting rasterio
   Downloading rasterio-1.4.4-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (9.3 kB)
 Collecting pyogrio
   Downloading pyogrio-0.13.0-cp311-abi3-manylinux_2_28_x86_64.whl.metadata (5.8 kB)
+Collecting geopandas
+  Downloading geopandas-1.2.0-py3-none-any.whl.metadata (2.0 kB)
 Collecting shapely
   Downloading shapely-2.1.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (6.8 kB)
 Collecting pyproj
@@ -38,19 +40,20 @@ Collecting python-dateutil>=2.8.2 (from pandas)
 Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas)
   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
 Downloading numpy-2.4.6-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.9 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.9/16.9 MB 135.6 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.9/16.9 MB 388.4 MB/s  0:00:00
 Downloading scipy-1.17.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.3 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.3/35.3 MB 153.9 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.3/35.3 MB 417.2 MB/s  0:00:00
 Downloading rasterio-1.4.4-cp311-cp311-manylinux_2_28_x86_64.whl (35.9 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.9/35.9 MB 115.2 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.9/35.9 MB 224.6 MB/s  0:00:00
 Downloading pyogrio-0.13.0-cp311-abi3-manylinux_2_28_x86_64.whl (33.3 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 33.3/33.3 MB 153.8 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 33.3/33.3 MB 233.7 MB/s  0:00:00
+Downloading geopandas-1.2.0-py3-none-any.whl (368 kB)
 Downloading shapely-2.1.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (3.1 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 148.6 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 289.7 MB/s  0:00:00
 Downloading pyproj-3.7.2-cp311-cp311-manylinux_2_28_x86_64.whl (9.5 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.5/9.5 MB 143.0 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.5/9.5 MB 196.3 MB/s  0:00:00
 Downloading pandas-3.0.6-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (11.1 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.1/11.1 MB 160.7 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.1/11.1 MB 423.7 MB/s  0:00:00
 Downloading click-8.5.0-py3-none-any.whl (125 kB)
 Downloading cligj-0.7.2-py3-none-any.whl (7.1 kB)
 Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
@@ -61,26 +64,32 @@ Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
 Downloading click_plugins-1.1.1.2-py2.py3-none-any.whl (11 kB)
 Downloading packaging-26.3-py3-none-any.whl (129 kB)
 Downloading pyparsing-3.3.3-py3-none-any.whl (126 kB)
-Installing collected packages: six, pyparsing, packaging, numpy, click, certifi, attrs, shapely, scipy, python-dateutil, pyproj, pyogrio, cligj, click-plugins, affine, rasterio, pandas
+Installing collected packages: six, pyparsing, packaging, numpy, click, certifi, attrs, shapely, scipy, python-dateutil, pyproj, pyogrio, cligj, click-plugins, affine, rasterio, pandas, geopandas
 
-Successfully installed affine-3.0.1 attrs-26.1.0 certifi-2026.7.22 click-8.5.0 click-plugins-1.1.1.2 cligj-0.7.2 numpy-2.4.6 packaging-26.3 pandas-3.0.6 pyogrio-0.13.0 pyparsing-3.3.3 pyproj-3.7.2 python-dateutil-2.9.0.post0 rasterio-1.4.4 scipy-1.17.1 shapely-2.1.2 six-1.17.0
+Successfully installed affine-3.0.1 attrs-26.1.0 certifi-2026.7.22 click-8.5.0 click-plugins-1.1.1.2 cligj-0.7.2 geopandas-1.2.0 numpy-2.4.6 packaging-26.3 pandas-3.0.6 pyogrio-0.13.0 pyparsing-3.3.3 pyproj-3.7.2 python-dateutil-2.9.0.post0 rasterio-1.4.4 scipy-1.17.1 shapely-2.1.2 six-1.17.0
 imports ok 1.4.4 0.13.0
---- fetch_external_layers.py start 17:00:43 ---
+--- fetch_external_layers.py start 17:02:15 ---
 [fetch] grid_labels: 425830 bytes
 [fetch] grid_template: 1599597 bytes
 [fetch] sgmc_nv: 69056094 bytes
 [fetch] sgmc_ca: 24977406 bytes
+[derive] sgmc_faults: 82156 px, 61668 px >300 m off catalogue
+[fetch] gdr_qfaults_v2: 6131182 bytes
+[fetch] gdr_paleo: 84008 bytes
+[derive] gdr_paleo: 244 px
+[fetch] gdr_volcanics: 9898770 bytes
 Traceback (most recent call last):
   File "/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py", line 374, in <module>
     code = main()
            ^^^^^^
-  File "/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py", line 351, in main
-    rasterise_linework(sgmc_paths, "sgmc_faults")
-  File "/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py", line 232, in rasterise_linework
-    gdf = pyogrio.read_dataframe(shapefile)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/pyogrio/geopandas.py", line 361, in read_dataframe
-    raise ImportError("geopandas is required to use pyogrio.read_dataframe()")
-ImportError: geopandas is required to use pyogrio.read_dataframe()
+  File "/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py", line 359, in main
+    rasterise_points_or_polygons(path, key)
+  File "/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py", line 328, in rasterise_points_or_polygons
+    kept = [g for g in shapely.intersection(shapely.from_wkt([shapely.to_wkt(g) for g in geometries]), clip_box)
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/shapely/io.py", line 305, in from_wkt
+    return lib.from_wkt(geometry, invalid_handler, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 28.1 GiB for an array with shape (6795,) and data type <U1108404
 
 wrote data/external/external_receipt.json
