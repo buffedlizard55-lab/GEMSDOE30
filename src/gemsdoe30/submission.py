@@ -57,13 +57,13 @@ def validate_probability_values(values: Any, valid_mask: Any) -> None:
 
 
 def validate_portal_range(values: Any) -> None:
-    """Raise unless *every* cell is finite and inside [0, 1].
+    """Run a strict whole-array ``[0, 1]`` diagnostic; do not infer portal behavior.
 
-    The DrivenData submission form reports "Predicted values must be in range
-    [0, 1]" for files that fail its range check. A NaN anywhere in the raster
-    (including outside the template footprint) fails an elementwise range test
-    because every comparison against NaN is false, so a portal-safe file must
-    hold finite, in-range values in every cell.
+    The public GEMS submission specification explicitly permits null/NaN outside
+    the data bounds while requiring in-footprint predictions in ``[0, 1]``.
+    This stricter helper is retained for diagnosing a naive whole-array range
+    check only. It is not the official file contract and does not establish how
+    DrivenData's private validator treats nodata cells.
     """
 
     try:
@@ -72,12 +72,14 @@ def validate_portal_range(values: Any) -> None:
         raise RuntimeError("NumPy is required to validate raster values") from exc
     arr = np.asarray(values)
     if arr.ndim != 2:
-        raise ValueError("portal range check expects a 2D array")
+        raise ValueError("whole-array range diagnostic expects a 2D array")
     if not np.issubdtype(arr.dtype, np.number) or np.iscomplexobj(arr):
         raise ValueError("prediction values must be real numeric values")
     if not np.all(np.isfinite(arr)):
         bad = int(np.count_nonzero(~np.isfinite(arr)))
-        raise ValueError(f"prediction has {bad} NaN/Inf cell(s); the portal rejects NaN values anywhere in the raster")
+        raise ValueError(
+            f"whole-array diagnostic found {bad} NaN/Inf cell(s); this is not a diagnosis of portal behavior"
+        )
     if np.any((arr < 0.0) | (arr > 1.0)):
         lo, hi = float(arr.min()), float(arr.max())
         raise ValueError(f"prediction range [{lo}, {hi}] is outside [0, 1]")
@@ -116,21 +118,26 @@ def validate_submission_file(
     *,
     expected_epsg: int = 32611,
     expected_resolution_m: float = 100.0,
-    portal_safe: bool = False,
+    require_finite_all_cells: bool = False,
+    portal_safe: bool | None = None,
 ) -> SubmissionReport:
-    """Validate one single-band float32 output against the supplied official template.
+    """Validate one single-band float32 output against the public GEMS file contract.
 
-    This checks local file structure and range; it cannot certify organizer-side
-    acceptance, eligibility, scientific quality, or competition performance.
+    The default requires finite ``[0, 1]`` predictions inside the template
+    footprint and null/NaN nodata outside it, as specified on the public problem
+    page. It cannot certify organizer-side acceptance, eligibility, scientific
+    quality, or competition performance.
 
-    Two outside-footprint conventions are supported. The default (``portal_safe=
-    False``) requires null/NaN cells outside the template footprint, matching the
-    official sample template's own encoding. ``portal_safe=True`` instead requires
-    *finite* in-range values everywhere (the writer uses 0.0 outside) and adds a
-    strict whole-raster ``[0, 1]`` check, because the submission form's range
-    error is triggered by NaN cells anywhere in the file, including outside the
-    footprint. Upload the portal-safe variant when in doubt.
+    ``require_finite_all_cells=True`` is a stricter *diagnostic* for checking
+    whether every array cell is finite and in range. Such an artifact generally
+    uses zero outside the footprint and does **not** meet the published
+    null/NaN-outside requirement. ``portal_safe`` is retained as a compatibility
+    alias for this diagnostic only; it is not evidence of portal acceptance.
     """
+    if portal_safe is not None:
+        if require_finite_all_cells and not portal_safe:
+            raise ValueError("portal_safe=False conflicts with require_finite_all_cells=True")
+        require_finite_all_cells = bool(portal_safe)
 
     np, rasterio = _rasterio_modules()
     submission_path = Path(submission_path)
@@ -184,12 +191,15 @@ def validate_submission_file(
             outside = ~valid
             if outside.any():
                 outside_values = out_data[outside]
-                if portal_safe:
-                    outside_ok = bool(np.all(np.isfinite(outside_values)) and np.all((outside_values >= 0.0) & (outside_values <= 1.0)))
-                    zeros = int(np.count_nonzero(outside_values == 0.0))
+                if require_finite_all_cells:
+                    outside_ok = bool(
+                        np.all(np.isfinite(outside_values))
+                        and np.all((outside_values >= 0.0) & (outside_values <= 1.0))
+                    )
+                    finite = int(np.count_nonzero(np.isfinite(outside_values)))
                     outside_detail = (
-                        f"outside_pixels={int(outside.sum())}; finite [0,1] required "
-                        f"(zeros={zeros}); convention: 0.0 outside"
+                        f"outside_pixels={int(outside.sum())}; finite in-range values required "
+                        f"for the nonstandard whole-array diagnostic (finite={finite})"
                     )
                 else:
                     outside_is_nan = np.isnan(outside_values)
@@ -204,27 +214,36 @@ def validate_submission_file(
         else:
             outside_ok = False
             outside_detail = "grid shape mismatch prevents footprint comparison"
-        if portal_safe:
-            checks.append(SubmissionCheck("finite_in_range_outside_footprint", outside_ok, outside_detail))
+        if require_finite_all_cells:
+            checks.append(
+                SubmissionCheck("finite_in_range_outside_footprint_diagnostic", outside_ok, outside_detail)
+            )
         else:
             checks.append(SubmissionCheck("null_outside_template_footprint", outside_ok, outside_detail))
 
         if grid_matches:
             try:
                 validate_portal_range(out_data)
-                portal_detail = f"all_pixels={out_data.size} finite and in [0, 1]"
-                portal_passed = True
+                diagnostic_detail = f"all_pixels={out_data.size} finite and in [0, 1]"
+                diagnostic_passed = True
             except ValueError as exc:
-                portal_detail = str(exc)
-                portal_passed = False
+                diagnostic_detail = str(exc)
+                diagnostic_passed = False
         else:
-            portal_detail = "grid shape mismatch prevents whole-raster range check"
-            portal_passed = False
+            diagnostic_detail = "grid shape mismatch prevents whole-raster range diagnostic"
+            diagnostic_passed = False
         checks.append(
             SubmissionCheck(
-                "portal_range_all_pixels" if portal_safe else "portal_range_all_pixels_informational",
-                portal_passed if portal_safe else True,
-                portal_detail if portal_safe else f"advisory: {portal_detail}",
+                "whole_raster_finite_range_diagnostic"
+                if require_finite_all_cells
+                else "whole_raster_finite_range_diagnostic_advisory",
+                diagnostic_passed if require_finite_all_cells else True,
+                diagnostic_detail
+                if require_finite_all_cells
+                else (
+                    f"advisory only: {diagnostic_detail}; the public GEMS specification permits "
+                    "null/NaN outside the footprint, and private portal behavior is unverified"
+                ),
             )
         )
 
@@ -254,18 +273,20 @@ def write_submission_file(
     It fails before writing if in-footprint predictions are non-finite or outside
     [0, 1]. Outside the valid template footprint it writes ``outside_value``:
 
-    * ``nan`` (default) matches the official sample template's own encoding and
-      sets the band nodata tag to NaN.
-    * ``0.0`` produces the portal-safe variant: every cell finite and in [0, 1]
-      with no nodata tag, which satisfies whole-raster range checks of the kind
-      behind the form error "Predicted values must be in range [0, 1]".
+    * ``nan`` (default) matches the published GEMS format (null/NaN outside)
+      and sets the band nodata tag to NaN.
+    * ``0.0`` produces a nonstandard whole-array diagnostic variant. It is finite
+      everywhere, but it does not match the published null/NaN-outside contract;
+      no organizer confirmation of this convention is available. The sidecar
+      records both the official-contract result and the separate strict-range
+      diagnostic.
     """
 
     np, rasterio = _rasterio_modules()
     outside = float(outside_value)
     if not (math.isnan(outside) or outside == 0.0):
-        raise ValueError("outside_value must be NaN (template convention) or 0.0 (portal-safe convention)")
-    portal_safe = not math.isnan(outside)
+        raise ValueError("outside_value must be NaN (published format) or 0.0 (nonstandard diagnostic only)")
+    finite_all_cells = not math.isnan(outside)
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with rasterio.open(template_path) as template:
@@ -293,7 +314,7 @@ def write_submission_file(
             compress="deflate",
             predictor=3,
         )
-        if portal_safe:
+        if finite_all_cells:
             profile.update(nodata=None)
         else:
             profile.update(nodata=np.nan)
@@ -306,26 +327,43 @@ def write_submission_file(
                 GEMS_RUN_NAME=run_name,
                 GEMS_NOTE=note,
                 GEMS_METRIC="distance-weighted Tversky; R=300 m; alpha=0.2; beta=0.8",
-                GEMS_OUTSIDE_CONVENTION="0.0 portal-safe" if portal_safe else "NaN template-conformant",
+                GEMS_OUTSIDE_CONVENTION=(
+                    "0.0 outside; nonstandard finite-all-cells diagnostic"
+                    if finite_all_cells
+                    else "NaN outside; public GEMS format"
+                ),
             )
 
-    report = validate_submission_file(output_path, template_path, portal_safe=portal_safe)
-    if not report.passed:
+    report = validate_submission_file(output_path, template_path)
+    whole_raster_diagnostic = validate_submission_file(
+        output_path, template_path, require_finite_all_cells=True
+    )
+    if finite_all_cells and not whole_raster_diagnostic.passed:
+        failed = [check.name for check in whole_raster_diagnostic.checks if not check.passed]
+        raise ValueError(f"whole-array diagnostic failed: {', '.join(failed)}")
+    if not finite_all_cells and not report.passed:
         failed = [check.name for check in report.checks if not check.passed]
-        raise ValueError(f"written GeoTIFF failed local format checks: {', '.join(failed)}")
+        raise ValueError(f"written GeoTIFF failed the published GEMS format check: {', '.join(failed)}")
 
     digest = hashlib.sha256(output_path.read_bytes()).hexdigest()
     manifest = {
-        "schema_version": 2,
+        "schema_version": 3,
         "run_name": run_name,
         "note": note,
         "output_file": output_path.name,
         "output_sha256": digest,
         "prediction_array_sha256": _sha256_array(np.ascontiguousarray(probs)),
-        "outside_convention": "0.0 portal-safe (finite everywhere)" if portal_safe else "NaN template-conformant",
+        "outside_convention": (
+            "0.0 outside; nonstandard diagnostic only; does not match published null/NaN-outside format"
+            if finite_all_cells
+            else "NaN outside; matches published GEMS format"
+        ),
+        "published_format_compliant": bool(report.passed),
         "template_file": str(Path(template_path)),
         "created_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "format_validation": report.to_dict(),
+        "whole_raster_range_diagnostic": whole_raster_diagnostic.to_dict(),
+        "whole_raster_range_diagnostic_passed": bool(whole_raster_diagnostic.passed),
         "performance_status": "unscored; format validation is not a score",
     }
     manifest_file = Path(metadata_path) if metadata_path else output_path.with_suffix(".json")
@@ -342,12 +380,13 @@ def convert_to_portal_safe(
     run_name: str,
     metadata_path: str | Path | None = None,
 ) -> dict[str, Any]:
-    """Rewrite an existing NaN-outside raster as the portal-safe 0.0-outside variant.
+    """Create a nonstandard finite-outside diagnostic copy of a NaN-outside raster.
 
-    Prediction values inside the template footprint are copied unchanged and the
-    manifest records SHA-256 digests for both files plus proof that the
-    in-footprint arrays are identical. Fails closed on out-of-range or non-finite
-    values inside the footprint.
+    The public GEMS format requires null/NaN outside the footprint. This legacy
+    helper is retained only for diagnosing whole-array range checks; its output
+    is not published-format compliant unless the organizer explicitly confirms
+    the zero-outside convention. In-footprint values are copied unchanged, and
+    the sidecar records both validation results and source/output hashes.
     """
 
     np, rasterio = _rasterio_modules()
@@ -377,7 +416,7 @@ def convert_to_portal_safe(
         dst_vals = rewritten.read(1, masked=False)
     same_inside = bool(np.array_equal(src_vals[valid], dst_vals[valid]))
     if not same_inside:
-        raise ValueError("portal-safe conversion changed an in-footprint value; refusing to publish")
+        raise ValueError("finite-outside diagnostic conversion changed an in-footprint value; refusing to write")
     manifest["source_file"] = source_path.name
     manifest["source_sha256"] = hashlib.sha256(Path(source_path).read_bytes()).hexdigest()
     manifest["in_footprint_identical_to_source"] = True

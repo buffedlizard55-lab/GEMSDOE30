@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed local GeoTIFF format validation against the official template."""
+"""Fail-closed local GeoTIFF format validation against the available sample template."""
 
 from __future__ import annotations
 
@@ -22,18 +22,25 @@ def main() -> int:
     parser.add_argument("--template", type=Path, default=Path("data/raw/sample_submission.tif"))
     parser.add_argument("--json", type=Path, default=None, help="optional path for a machine-readable receipt")
     parser.add_argument(
+        "--finite-all-cells",
         "--portal-safe",
+        dest="finite_all_cells",
         action="store_true",
         help=(
-            "require the upload-safe convention: every cell finite and in [0, 1], "
-            "0.0 outside the template footprint (use this before any portal upload)"
+            "strict local diagnostic: require every raster cell finite and in [0, 1]. "
+            "This is not the published GEMS outside-value rule; the public spec requires "
+            "null/NaN outside. --portal-safe is a legacy alias, not an acceptance claim."
         ),
     )
     args = parser.parse_args()
     try:
         from gemsdoe30.submission import validate_submission_file
 
-        report = validate_submission_file(args.submission, args.template, portal_safe=args.portal_safe)
+        report = validate_submission_file(
+            args.submission,
+            args.template,
+            require_finite_all_cells=args.finite_all_cells,
+        )
         payload = report.to_dict()
         text = json.dumps(payload, indent=2)
         print(text)

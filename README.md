@@ -112,7 +112,7 @@ wins and the distilled list must be corrected.
 
 </details>
 
-> **Branch note:** the literal owner brief above preserves the branch name recorded in the original request. This Arena session is fixed to `arena/01a1035b-gemsdoe30`; all changes, commits, pushes, and any PR from this session remain on that assigned branch. The brief's verbatim wording is preserved above unchanged.
+> **Branch note:** the literal owner brief above preserves the branch name recorded in the original request. This Arena session is fixed to `arena/01a103c1-gemsdoe30`; all changes, commits, pushes, and any PR from this session remain on that assigned branch. The brief's verbatim wording is preserved above unchanged.
 
 ## Mission and non-negotiable requirements
 
@@ -129,15 +129,16 @@ wins and the distilled list must be corrected.
 
 ## Current reviewed state — 2026-10-03 (after synchronizing with current `main`)
 
-This is the authoritative current status; later dated experiment records below are supporting evidence, and older session narratives are history. The full three-pass audit is [docs/research/review-checklist-2026-10-03.md](docs/research/review-checklist-2026-10-03.md).
+This is the authoritative current status; later dated experiment records below are supporting evidence, and older session narratives are history. The cumulative reviews are [the scientific/repository review](docs/research/review-checklist-2026-10-03.md) and [the current submission-format correction review](docs/research/submission-format-review-2026-10-03.md).
 
 - **Data and sources:** the local grid, labels, template, and derived feature stacks are restored from SHA-256-pinned owner mirrors, not organizer-authenticated. The DrivenData data tab redirects to login; no credentials or bypass were used. Selected official GDR 1391 archives were downloaded and checksum-verified through the public runner bridge; a CRS/encoding ingestion defect was fixed in `scripts/fetch_external_layers.py`. Qfaults rasterization now produces local features, but its provenance overlaps the training catalogue and it is not independent truth. See [source register](docs/sources.md), `data/external/external_receipt.json`, and [irregularities](docs/irregularities.md).
 - **Metric-shaped loss:** the 300 m geometry term remains paired with regional soft-Tversky. It changes near-miss allocation, but the fresh-seed confirmation was +0.000115 with 2/4 folds positive; a separate larger-budget confirmation was −0.00791 with 1/4 positive. The weight-sweep scorings disagreed. No boundary-loss setting is promoted.
 - **H-31-02b / H-33-01 / H-32-05b:** the reduced-stack H-31-02b scarp screen failed its spatial-best and feature-perturbation gates. H-33-01's 80k gate was void at 68,573 active dots vs 80,000; its 40k sensitivity was active-count matched by code review but is not a promotion result. H-32-05b's 1.5 km p90 basement-edge variant improved on its own ablation but stayed below its spacing-and-distance-matched control. None is promoted.
 - **H-31-02r promising but withheld:** the preregistered 1 m LiDAR scarp-dipole + 500 m strike-continuity transform beats its `step_max` ablation by 22.4%/20.2% on catalogue screen/confirmation and beats spacing/distance-matched controls on four independent USGS SGMC frames. However, the catalogue-component spatial check is negative (0.03323 vs 0.03585, Δ −0.00261; 2/4 quadrants); the three-check evaluation is split by frame, and the SGMC top-decile calibration-ratio criterion passes only 2/4 folds. The predeclared dual-frame promotion gate therefore fails. This is a promising measured feature, **not a promoted entry**; do not retune against the already-inspected SGMC labels. Evidence: [registered results](docs/research/h33-01-placement-and-scarp-holdout.md), [three-check results](docs/research/verification-checks-results.md), and IR-30-035.
 - **Five genuinely untried geological hypotheses:** current shortlist and source/access/falsifiable gates are in [docs/hypotheses.md](docs/hypotheses.md) and [the review note](docs/research/untried-hypotheses-review-2026-10-03.md). H-31-04's GeoDAWN band-lineage/schema check is the lowest-cost new-hypothesis action; no unvalidated candidate gets a weekly slot.
-- **Scores and TIFFs:** the dated public snapshot showed DARD 0.3195 and `wbg1` 0.2600 (rank 15); neither leaderboard row identifies a TIFF hash. The D2.8 local artifact's claimed 0.2600 remains unlinked and its owner page labels it unscored/not slot-approved. Three prominently linked `-zeros.tif` files pass 12 local template/range checks each, but portal acceptance of zero outside and the prior range-error cause are both unverified. No file was uploaded; no weekly slot has been used.
-- **Rules and verification:** all seven parsed chunks of the September 2026 official rules PDF were reviewed. The homepage/rules deadline-time conflict, eligibility, and final entrant-approved AI disclosure remain open. Final verification is recorded in the review checklist. PR [#15](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/15) was merged to `main` at `44403fd67a92fd5b7658233e62af5b1d45811d1b` on 2026-10-03 21:50:40 UTC; its branch head was `e3967c590b43c65b4f3433f46d50d2781c286fdd`.
+- **Scores and TIFFs:** the dated public snapshot showed DARD 0.3195 and `wbg1` 0.2600 (rank 15); neither leaderboard row identifies a TIFF hash. The D2.8 local artifact's claimed 0.2600 remains unlinked and its owner page labels it unscored/not slot-approved. The published competition format requires null/NaN outside the data bounds; the site now links the NaN-outside research TIFFs and sidecars, locally checked against the available template. Zero-outside variants are retained only as explicitly nonstandard diagnostics and are not linked as submission files. The exact artifact behind the earlier `[0,1]` error is unknown, so its cause remains undiagnosed. No file was uploaded; no weekly slot has been used.
+- **Submission-format correction:** `submission.py` and the CLI now default to the published NaN-outside contract; whole-raster finite checks and zero-outside writes are labeled diagnostic-only. Sidecars separately record published-format results and strict whole-raster diagnostics. See [the three-pass correction review](docs/research/submission-format-review-2026-10-03.md).
+- **Rules and verification:** all seven parsed chunks of the September 2026 official rules PDF were reviewed. The homepage/rules deadline-time conflict, eligibility, and final entrant-approved AI disclosure remain open. Final verification is recorded in the review checklist. PR [#15](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/15) was merged to `main` at `44403fd67a92fd5b7658233e62af5b1d45811d1b` on 2026-10-03 21:50:40 UTC; its branch head was `e3967c590b43c65b4f3433f46d50d2781c286fdd`. Documentation-only PR [#16](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/16) then recorded that merge in the review log; it merged to `main` at this session's base `1e377d4556445a3e9a80b64e129e36ed82e9a93f` on 2026-10-03 21:51:57 UTC.
 
 ## Historical session record — retained as an audit trail (superseded where noted)
 
@@ -179,15 +180,7 @@ TIFF exists, no slot has been used, and **no score is claimed** for any of this 
 
 ### Session 2 (later on 2026-10-03) — historical range-error hypothesis, vent research base, H-32 register, H-32-01 gate
 
-1. **Historical range-error hypothesis — unresolved, not a root cause.** The official sample template
-   contains **7,111,787 NaN cells outside the footprint**. A validator that checks every cell against
-   `[0,1]` could reject a template-conformant NaN-outside file, but the organizer's validator is
-   private and this does not confirm the reported failure's cause. The GEMSDOE25 page's inference is
-   also unconfirmed. This site provides locally checked finite-zero-outside copies with predictions
-   unchanged inside; **organizer acceptance of zero outside is unverified**. No upload was made; check
-   current official instructions before choosing an outside convention. Tooling includes
-   `scripts/make_portal_safe.py`, `write_submission_file(outside_value=0.0)`,
-   `convert_to_portal_safe`, `validate_submission.py --portal-safe`, and `tests/test_portal_safe.py`.
+1. **Historical range-error investigation — unresolved and superseded by the format correction below.** The official sample template contains **7,111,787 NaN cells outside the footprint**. The earlier session hypothesized that a whole-array `[0,1]` check might reject NaNs; this was never verified and does **not** diagnose the reported error. The exact offending upload remains unknown. That hypothesis previously led to finite-zero-outside diagnostic copies; they do not match the published null/NaN-outside convention and are no longer presented as submission-format downloads. No upload was made. The current builder defaults to NaN outside; finite-all-cells checking and `scripts/make_portal_safe.py` remain diagnostic only.
 2. **Verified knowledge base** (`docs/research/geothermal-vents-knowledge.md`): the official rules
    PDF was read line-by-line — training labels = INGENIOUS Great Basin compilation (DOI
    10.15121/1881483); **test labels = expert-new faults** (NLR/USGS, Qfaults + new); metric penalizes
@@ -362,9 +355,7 @@ session.** Both were re-checked from scratch rather than trusted:
    consistent): leader DARD **0.3195**; `wbg1` 0.2600 at rank 15 confirmed; a rank-19 row of
    0.2449 numerically equals the owner-reported GEMSDOE27 score — recorded as coincidence, not
    attribution. No GEMSDOE30 file has been scored; target **> 0.3195** is not yet reached.
-5. Full suite: **80 passed + 11 subtests, 0 skipped**. Portal-safe download validation re-run
-   (12/12 on all three `-zeros.tif`). Provenance re-verified: published D2.8 copy and restored
-   labels/template match their SHA-256 pins byte-for-byte; every download manifest self-verifies.
+5. Full suite at that review: **80 passed + 11 subtests, 0 skipped**. The three then-current zero-outside diagnostic downloads passed 12/12 *finite-all-cells* checks; this was an internal diagnostic, not published-format compliance or portal acceptance. The NaN-outside source TIFFs and restored labels/template matched their SHA-256 pins byte-for-byte. The latest submission-format correction and sidecar rechecks are recorded below and supersede any earlier “portal-safe” wording.
 
 ## Superseded baseline snapshot — before owner-mirror restoration (historical)
 
@@ -427,7 +418,7 @@ The following notes describe an earlier checkout state and are retained as an au
 
    Repeat the complete paired design with preregistered fresh seeds for confirmation. Do not treat one fold or the synthetic probe as confirmation.
 
-7. Only after a candidate clears the frozen holdout and confirmation gates should it be fit on all permitted training labels. `scripts/infer_model.py` or `scripts/build_submission.py` writes a uniquely named, template-matched TIFF and a JSON sidecar. The builder and validator add `src/` automatically when run directly from this checkout (package installation is not required for this format step). The builder accepts `--note` or `--comment` for the paste-ready submission note. A locally checked zero-outside artifact can be built with `--outside zeros` and checked with `python scripts/validate_submission.py FILE.tif --template data/raw/sample_submission.tif --portal-safe`; this repository check does not establish that the organizer accepts zero outside. The portal validator is private and the historical range-error cause is unconfirmed. Do not treat local validation as promotion or upload approval; the authorized entrant must review current official instructions before any manual submission.
+7. Only after a candidate clears the frozen holdout and confirmation gates should it be fit on all permitted training labels. `scripts/infer_model.py` or `scripts/build_submission.py` writes a uniquely named, template-matched TIFF and a JSON sidecar. The builder defaults to the published null/NaN-outside convention; it accepts `--note` or `--comment` for the paste-ready submission note. Run `python scripts/validate_submission.py FILE.tif --template data/raw/sample_submission.tif` for the published-format local check. `--finite-all-cells` is a stricter whole-raster diagnostic (with legacy alias `--portal-safe`), not an organizer requirement or acceptance claim. Building zero outside requires `--outside zeros --allow-nonstandard-zero-outside` and is diagnostic only; do not use it as the submission format unless the organizer explicitly clarifies the rule. The exact file behind the prior `[0,1]` error remains unidentified, so its cause is undiagnosed. Local validation is not promotion or upload approval; the authorized entrant must review current official instructions before any manual submission.
 
 ## Useful links
 
@@ -446,7 +437,7 @@ The following notes describe an earlier checkout state and are retained as an au
 - `src/gemsdoe30/losses.py` — regional soft-Tversky plus the 300 m metric-geometry term, inspired by (not a verbatim copy of) Kervadec et al.
 - `src/gemsdoe30/cv.py`, `analysis.py` — buffered spatial blocks, exact full-grid OOF scoring, fold-isolated diagnostics, and near-miss profiles.
 - `src/gemsdoe30/normalization.py` — deterministic robust scaling fit separately on each training-fold mask and saved in each checkpoint to prevent held-out feature leakage.
-- `src/gemsdoe30/submission.py` — strict GeoTIFF writer/validator and sidecar.
+- `src/gemsdoe30/submission.py` — published-format GeoTIFF writer/validator (NaN outside by default) and auditable sidecar; strict finite-all-cells checking is diagnostic only.
 - `scripts/` — data preflight, preparation, paired training arms, inference, validation, and probes.
 - `docs/` — source ledger, reported-score ledger, hypothesis register, results interpretation, and irregularities.
 - `data/raw/`, `data/processed/`, `outputs/`, `runs/` — local-only data and outputs; ignored by Git.
@@ -508,7 +499,7 @@ Component-Holdout Proxy** and the **Independent USGS SGMC Fault Inventory** (bot
 
 ## Current next steps and limits
 
-1. **No file is promoted and no weekly slot is justified.** The prominent `-zeros.tif` links are downloadable research artifacts that each pass this repository's local template/range checks. Zero-outside organizer acceptance and the prior range-error cause remain unverified; the authorized entrant must check current official instructions. No file was uploaded here.
+1. **No file is promoted and no weekly slot is justified.** The site prominently links the NaN-outside research TIFFs, which pass the repository's local checks against the published null/NaN-outside convention. Zero-outside variants are archived only as nonstandard diagnostics; they are not format-conformant under the published rule and are not linked as submission files. The exact file behind the previous `[0,1]` error is unknown, so the cause remains undiagnosed. No file was uploaded here.
 2. **H-31-02r is the strongest measured new feature signal, but not a submission candidate.** Its spatial evidence is split between the incomplete catalogue proxy and independent SGMC frames, and the SGMC calibration-ratio criterion misses its fold threshold in 2/4 folds. The predeclared dual-frame gate withholds promotion. Do not rerun or retune on the inspected SGMC labels. A future OOF model integration would need a frozen design and validation independent of those inspected labels; absent that, do not spend a slot. Full results: [placement/scarp holdout](docs/research/h33-01-placement-and-scarp-holdout.md) and [three-check review](docs/research/verification-checks-results.md).
 3. **Boundary-loss line remains closed.** The 300 m geometry term remains paired with regional loss and changes near-miss allocation, but seed-31 and larger-budget confirmations do not establish a DTI gain; weight-sweep scoring criteria disagreed. Do not restart λ tuning without a materially new, preregistered mechanism and independent validation.
 4. **Untried geology:** the five current candidates, exact layers/signatures, planning priors/costs, official source/access checks, and falsifiable gates are in [docs/hypotheses.md](docs/hypotheses.md) and [the bounded novelty audit](docs/research/untried-hypotheses-review-2026-10-03.md). H-31-04's GeoDAWN lineage/schema audit is the lowest-cost next *new-hypothesis* action; H-31-03 needs full-ROI NHD/DEM coverage; H-32-04 needs an independent inventory such as OSTI 1148722 or GDR 616, not Qfaults alone.

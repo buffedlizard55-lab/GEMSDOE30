@@ -80,7 +80,11 @@ def main() -> int:
             "file": tif_name,
             "present": tif_path.is_file(),
             "sha256": manifest.get("output_sha256") or (sha256_file(tif_path) if tif_path.is_file() else None),
-            "outside_convention": manifest.get("outside_convention", "NaN template-conformant (legacy)"),
+            "outside_convention": manifest.get("outside_convention", "unknown; inspect the sidecar"),
+            "published_format_compliant": manifest.get("published_format_compliant"),
+            "whole_raster_range_diagnostic_passed": manifest.get("whole_raster_range_diagnostic_passed"),
+            "site_linked": manifest.get("site_linked"),
+            "submission_recommendation": manifest.get("submission_recommendation", False),
             "run_name": manifest.get("run_name"),
             "note": manifest.get("note"),
             "performance_status": manifest.get("performance_status", "unscored"),
@@ -259,7 +263,7 @@ def main() -> int:
 
     promoted = [name for name, gate in gates.items() if gate.get("promoted")]
     status = {
-        "schema_version": 2,
+        "schema_version": 3,
         "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
         "project": "GEMSDOE30",
@@ -273,6 +277,15 @@ def main() -> int:
             "extra_pins_files": [row["dest"] for row in extra_pins.get("files", [])],
         },
         "downloads": download_entries,
+        "submission_format": {
+            "published_outside_convention": "null/NaN outside the data bounds; finite probabilities in [0, 1] inside",
+            "official_problem_description": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+            "builder_default": "NaN outside",
+            "zero_outside": "nonstandard diagnostic only; not linked as a submission-format download",
+            "historical_range_error_file_identified": False,
+            "historical_range_error_cause_diagnosed": False,
+            "local_validation_guarantees_portal_acceptance": False,
+        },
         "promotion_gates": gates,
         "any_candidate_promoted": bool(promoted),
         "promoted_gates": promoted,

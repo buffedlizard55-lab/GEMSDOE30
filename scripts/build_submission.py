@@ -38,35 +38,45 @@ def main() -> int:
     parser.add_argument("--probabilities", type=Path, required=True, help="2D .npy or one-band GeoTIFF")
     parser.add_argument("--template", type=Path, default=Path("data/raw/sample_submission.tif"))
     parser.add_argument("--output-dir", type=Path, default=Path("outputs"))
-    parser.add_argument("--name", default="boundary300m", help="short safe model/method label for the filename")
+    parser.add_argument("--name", default="candidate", help="short safe model/method label for the filename")
     parser.add_argument(
         "--note", "--comment", dest="note", default=None,
-        help="short comment to paste into the competition submission form (alias: --comment)",
+        help="short method/holdout comment for the submission form, at most 200 characters (alias: --comment)",
     )
     parser.add_argument(
         "--outside",
         choices=("zeros", "nan"),
-        default="zeros",
+        default="nan",
         help=(
-            "values outside the template footprint: 'zeros' (default) writes finite 0.0 with no "
-            "nodata tag — the portal-safe convention that passes whole-raster [0,1] range checks; "
-            "'nan' matches the official sample template's own NaN encoding (research copies)"
+            "outside-footprint convention: 'nan' (default, matches the published GEMS format); "
+            "'zeros' writes finite 0.0 only for a nonstandard whole-array diagnostic and "
+            "requires --allow-nonstandard-zero-outside"
         ),
+    )
+    parser.add_argument(
+        "--allow-nonstandard-zero-outside",
+        action="store_true",
+        help="explicitly allow a zero-outside file that does not match the published null/NaN-outside format",
     )
     args = parser.parse_args()
 
     try:
         from gemsdoe30.submission import write_submission_file
 
+        if args.outside == "zeros" and not args.allow_nonstandard_zero_outside:
+            raise ValueError(
+                "zero outside does not match the published GEMS null/NaN-outside format; "
+                "pass --allow-nonstandard-zero-outside only for a diagnostic or after organizer clarification"
+            )
         if not args.probabilities.is_file() or not args.template.is_file():
             raise FileNotFoundError("probability grid or sample template is missing")
         values = _read_probabilities(args.probabilities)
         slug = re.sub(r"[^A-Za-z0-9_-]+", "-", args.name).strip("-_")[:40] or "candidate"
         digest = hashlib.sha256(args.probabilities.read_bytes()).hexdigest()[:8]
         timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
-        suffix = "" if args.outside == "zeros" else "-nan"
+        suffix = "-nan" if args.outside == "nan" else "-zeros"
         run_name = f"GEMSDOE30_{slug}_{timestamp}_{digest}{suffix}"
-        note = args.note or f"{run_name} | R=300m metric-aware loss | holdout status: unverified"
+        note = args.note or f"{run_name} | method label: {slug}; holdout status: unverified"
         if len(note) > 200:
             raise ValueError("note must be no more than 200 characters")
         args.output_dir.mkdir(parents=True, exist_ok=True)
@@ -80,9 +90,12 @@ def main() -> int:
             outside_value=0.0 if args.outside == "zeros" else float("nan"),
         )
         print(json.dumps(manifest, indent=2))
-        print(f"\nUpload name: {output_path.name}")
+        print(f"\nGeoTIFF file: {output_path.name}")
         print(f"Note (optional): {note}")
         print(f"Outside convention: {manifest['outside_convention']}")
+        print(f"Published GEMS format compliant: {manifest['published_format_compliant']}")
+        if not manifest['published_format_compliant']:
+            print("WARNING: this zero-outside diagnostic does not meet the published null/NaN-outside requirement.")
         print("Gate: local format check only; no holdout promotion or competition score is implied.")
         return 0
     except (ImportError, FileNotFoundError, RuntimeError, ValueError) as exc:
