@@ -11,6 +11,13 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+# Keep the repository's command-line tools runnable directly from a checkout.
+# Users should not need to install the package merely to build a validated TIFF.
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+_SRC = _REPO_ROOT / "src"
+if str(_SRC) not in sys.path:
+    sys.path.insert(0, str(_SRC))
+
 
 def _read_probabilities(path: Path):
     import numpy as np
