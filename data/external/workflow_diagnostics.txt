@@ -1,5 +1,5 @@
-run: 37162227500  ref: main  sha: b156ea081aec3c726d7983d04f061c91d0ea1cd5
-date: 2026-10-03T23:34:54Z
+run: 37162866276  ref: arena/01a10411-gemsdoe30  sha: 9a9a42a664f2592e76dfc033b2a85775636613e0
+date: 2026-10-03T23:47:14Z
 pwd: /home/runner/work/GEMSDOE30/GEMSDOE30
 python: Python 3.11.16
 Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (26.2.1)
@@ -40,20 +40,20 @@ Collecting python-dateutil>=2.8.2 (from pandas)
 Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas)
   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
 Downloading numpy-2.4.6-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.9 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.9/16.9 MB 152.9 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.9/16.9 MB 120.9 MB/s  0:00:00
 Downloading scipy-1.17.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.3 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.3/35.3 MB 427.4 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.3/35.3 MB 128.2 MB/s  0:00:00
 Downloading rasterio-1.4.4-cp311-cp311-manylinux_2_28_x86_64.whl (35.9 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.9/35.9 MB 377.9 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.9/35.9 MB 102.3 MB/s  0:00:00
 Downloading pyogrio-0.13.0-cp311-abi3-manylinux_2_28_x86_64.whl (33.3 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 33.3/33.3 MB 293.3 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 33.3/33.3 MB 124.8 MB/s  0:00:00
 Downloading geopandas-1.2.0-py3-none-any.whl (368 kB)
 Downloading shapely-2.1.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (3.1 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 209.9 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 225.6 MB/s  0:00:00
 Downloading pyproj-3.7.2-cp311-cp311-manylinux_2_28_x86_64.whl (9.5 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.5/9.5 MB 225.0 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.5/9.5 MB 126.1 MB/s  0:00:00
 Downloading pandas-3.0.6-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (11.1 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.1/11.1 MB 408.1 MB/s  0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.1/11.1 MB 115.6 MB/s  0:00:00
 Downloading click-8.5.0-py3-none-any.whl (125 kB)
 Downloading cligj-0.7.2-py3-none-any.whl (7.1 kB)
 Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
@@ -68,7 +68,7 @@ Installing collected packages: six, pyparsing, packaging, numpy, click, certifi,
 
 Successfully installed affine-3.0.1 attrs-26.1.0 certifi-2026.7.22 click-8.5.0 click-plugins-1.1.1.2 cligj-0.7.2 geopandas-1.2.0 numpy-2.4.6 packaging-26.3 pandas-3.0.6 pyogrio-0.13.0 pyparsing-3.3.3 pyproj-3.7.2 python-dateutil-2.9.0.post0 rasterio-1.4.4 scipy-1.17.1 shapely-2.1.2 six-1.17.0
 imports ok 1.4.4 0.13.0
---- fetch_external_layers.py start 23:35:09 ---
+--- fetch_external_layers.py start 23:47:28 ---
 [fetch] grid_labels: 425830 bytes
 [fetch] grid_template: 1599597 bytes
 [fetch] sgmc_nv: 69056094 bytes
@@ -81,4 +81,4 @@ imports ok 1.4.4 0.13.0
 [fetch] gdr_volcanics: 9898770 bytes
 [fetch] gdr_2m_probes: 1080530 bytes
 --allow-overwrite not given: left the committed receipt untouched; progress written to data/external/external_receipt.partial.json
---- exit code 0 23:35:23 ---
+--- exit code 0 23:47:41 ---
