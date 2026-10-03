@@ -39,7 +39,10 @@ def main() -> int:
     parser.add_argument("--template", type=Path, default=Path("data/raw/sample_submission.tif"))
     parser.add_argument("--output-dir", type=Path, default=Path("outputs"))
     parser.add_argument("--name", default="boundary300m", help="short safe model/method label for the filename")
-    parser.add_argument("--note", default=None, help="short comment to paste into the competition submission form")
+    parser.add_argument(
+        "--note", "--comment", dest="note", default=None,
+        help="short comment to paste into the competition submission form (alias: --comment)",
+    )
     parser.add_argument(
         "--outside",
         choices=("zeros", "nan"),
