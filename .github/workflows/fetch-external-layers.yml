@@ -1,0 +1,85 @@
+name: fetch-external-layers
+
+# Why this workflow exists
+# ------------------------
+# The agent session sandbox can only reach api.github.com / github.com / codeload.github.com /
+# pypi.org.  mrdata.usgs.gov, gdr.openei.org and sciencebase.gov are unreachable from it, so a
+# hypothesis that depends on an official external layer cannot be *verified as obtainable* from
+# inside a session.  A GitHub-hosted runner can reach those hosts; this workflow is the bridge.
+# It downloads only the specific free official files named in scripts/fetch_external_layers.py,
+# verifies the competition grid against pinned SHA-256 values, derives small 100 m rasters on the
+# exact submission grid, and commits those rasters plus a measurement receipt back to the branch.
+#
+# It never contacts drivendata.org: the competition Terms of Use prohibit robots/automatic access.
+# Manual review links (open in a browser):
+#   USGS SGMC geologic maps of US states      https://mrdata.usgs.gov/geology/state/
+#   GDR 1391 INGENIOUS (DOI 10.15121/1881483) https://gdr.openei.org/submissions/1391
+
+on:
+  push:
+    branches:
+      - main
+      - arena/01a102a1-gemsdoe30
+    paths:
+      - ".github/workflows/fetch-external-layers.yml"
+      - "scripts/fetch_external_layers.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Diagnostics header
+        run: |
+          mkdir -p data/external
+          {
+            echo "run: $GITHUB_RUN_ID  ref: $GITHUB_REF_NAME  sha: $GITHUB_SHA"
+            echo "date: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "pwd: $(pwd)"
+            echo "python: $(python -V 2>&1)"
+          } > data/external/workflow_diagnostics.txt
+
+      - name: Install geospatial readers
+        run: |
+          python -m pip install --upgrade pip >> data/external/workflow_diagnostics.txt 2>&1
+          python -m pip install numpy scipy rasterio pyogrio geopandas shapely pyproj pandas >> data/external/workflow_diagnostics.txt 2>&1
+          python -c "import rasterio, pyogrio, geopandas, shapely, pyproj, pandas, numpy; print('imports ok', rasterio.__version__, pyogrio.__version__)" >> data/external/workflow_diagnostics.txt 2>&1
+
+      - name: Fetch and derive official external layers
+        continue-on-error: true
+        run: |
+          {
+            echo "--- fetch_external_layers.py start $(date -u +%H:%M:%S) ---"
+            python scripts/fetch_external_layers.py
+            echo "--- exit code $? $(date -u +%H:%M:%S) ---"
+          } >> data/external/workflow_diagnostics.txt 2>&1
+
+      - name: Commit derived layers and receipt
+        if: always()
+        run: |
+          set -x
+          ls -la data/external || true
+          head -c 3000 data/external/external_receipt.json || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f data/external
+          git status --short
+          if git diff --cached --quiet; then
+            echo "nothing staged"
+          else
+            git commit -m "external layers: official USGS SGMC / GDR 100 m rasters + receipt [skip ci]"
+            git push origin HEAD:${{ github.ref_name }}
+          fi

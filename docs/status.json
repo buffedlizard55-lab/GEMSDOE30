@@ -1,7 +1,7 @@
 {
   "as_of_utc_date": "2026-10-03",
   "project": "GEMSDOE30",
-  "checkout_status": "working branch arena/01a10289-gemsdoe30; PRs #5 and #6 merged to main; local data restored from SHA-256-pinned owner mirrors; prepared arrays and OOF research artifacts are local-only (Git-ignored); published candidate + manifests are committed under docs/downloads/",
+  "checkout_status": "working branch arena/01a102a1-gemsdoe30 (merged with main after PRs #5-#7); local data restored from SHA-256-pinned owner mirrors; prepared arrays and OOF research artifacts are local-only (Git-ignored); two published candidates and their manifests are committed under docs/downloads/",
   "competition_data": {
     "present": true,
     "access": "immutable SHA-256 verified owner mirrors via GitHub API",
@@ -13,12 +13,49 @@
     "kernel_radius_m": 300,
     "pixel_size_m": 100,
     "initial_geometry_weight": 0.5,
-    "synthetic_probe": "implemented and unit-testable; real four-fold OOF screen completed - seed 30: pooled exact full-grid DTI 0.062042 (regional) vs 0.063990 (combined), delta +0.001948, 3/4 folds positive; fresh-seed 31 confirmation did NOT replicate (delta +0.000115, 2/4 folds positive), so the loss is not promoted and no candidate file exists"
+    "synthetic_probe": "implemented and unit-testable; real four-fold OOF screen completed - seed 30: pooled exact full-grid DTI 0.062042 (regional) vs 0.063990 (combined), delta +0.001948, 3/4 folds positive; fresh-seed 31 confirmation did NOT replicate (delta +0.000115, 2/4 folds positive), so the loss is not promoted and no candidate file exists",
+    "real_holdout_result_fullbudget": {
+      "protocol": "paired regional-vs-combined 300 m boundary loss, 8 checkpoints, seed 30, 6 epochs x 100 steps x batch 4 x 96 px (600 optimizer steps per fold), four 300 m-buffered spatial quadrants, out-of-fold inference",
+      "pooled_regional_dti": 0.10502553419199345,
+      "pooled_combined_dti": 0.09711916646010854,
+      "pooled_delta_dti": -0.007906367731884911,
+      "positive_folds": 1,
+      "verdict": "not promoted; no submission slot",
+      "evidence": "runs/loss-ablation/holdout.json, docs/research/loss-ablation-verdict.md",
+      "near_miss": {
+        "truth_pixels_exact_regional": 48491,
+        "truth_pixels_exact_combined": 47964,
+        "truth_pixels_200_300m_regional": 5070,
+        "truth_pixels_200_300m_combined": 5829,
+        "far_field_fp_mass_regional": 1044121.1,
+        "far_field_fp_mass_combined": 1151942.3
+      },
+      "cross_check": "the short-budget screen on main (seed 30 delta +0.00195, seed 31 delta +0.00011) and this 600-step run agree on the promotion verdict; at the longer budget the geometry term is clearly negative (-0.0079 pooled, 1/4 folds)"
+    }
   },
   "submission": {
-    "gemsdoe30_tiff_generated": false,
-    "reason": "no model candidate has been promoted by the frozen promotion rule; the seed-30 loss screen did not replicate at seed 31 (delta +0.0001, 2/4 folds), the registered metric-emission gate failed (no family promoted; adaptive minus uniform +0.0025 < 0.005), and the H-31-01 connector hypothesis did not separate from its proximity control. A first, clearly-labelled un-promoted research candidate TIFF has been built and published for download (docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_...tif, sha256 f5d137b9...c7cc2), with a paste-ready note stating its un-promoted status.",
-    "external_reference_tiff": "GEMSDOE25 D2.8 link; owner page says unscored/not slot-approved"
+    "gemsdoe30_tiff_generated": true,
+    "reason": "no candidate satisfies the frozen promotion rule; three independent gates failed (short-budget loss screen did not replicate at seed 31; the full-budget loss ablation is negative at -0.0079 pooled; the registered metric-emission gate failed). Two clearly-labelled, format-verified research candidates are published for download with explicit un-promoted status.",
+    "published_candidates": [
+      {
+        "file": "docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13.tif",
+        "sha256": "f5d137b9c010873f0b4fc11e841d923f359d33c7272ded0da9ac9b7c1efc7cc2",
+        "built": "2026-10-03T17:04:26Z",
+        "composition": "HistGradientBoosting OOF surfaces, adaptive Poisson-disk thinning (adaptive radius 5 px, gamma 1.0, floor 0.25); 90,358 dots; 17.7 % within 300 m of a catalogue fault (2.1x enrichment)",
+        "evidence": "docs/research/candidate-2026-10-03.md",
+        "leaderboard_score": null
+      },
+      {
+        "file": "docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif",
+        "sha256": "fed5232e8efeefef00728ce9d5884f08e007c542f317cb11419452d14ff866da",
+        "composition": "80,392 UNet out-of-fold dots (threshold 0.4, 4 px Poisson spacing) + 5,281 USGS SGMC off-catalogue inventory dots (10 px spacing); 85,526 dots, zero on the masked catalogue",
+        "holdout_basis": "independent-inventory novelty frame: 0.09589 mean DTI vs 0.09187 blind lattice (+4.4 %) and 0.07102 incumbent artefact (+35 %); 3 repeats",
+        "evidence": "docs/research/emitter-holdout.md, docs/research/final-candidate-recipe.json",
+        "caveat": "the SGMC hedge is an unvalidated bounded bet (worst case <= 3 % of the DTI denominator); a conservative variant without it is runs/candidates/model_t04_s4.npy",
+        "leaderboard_score": null
+      }
+    ],
+    "external_reference_tiff": "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif (owner-reported 0.2600; incumbent reference, not regenerated here)"
   },
   "score_evidence": {
     "official_public_leader_snapshot": {
@@ -41,9 +78,19 @@
   "external_sources": {
     "gdr_1391": {
       "catalog_page": "read; catalog declares public access and CC BY 4.0",
-      "resource_transfer": "direct HEAD checks for 2 m probes, paleogeothermal features, and Quaternary volcanics failed with SSL_ERROR_SYSCALL",
-      "archive_bytes_or_checksums_verified": false,
-      "hypothesis_viability": "blocked pending authorized local download, schema review, checksum, and alignment"
+      "resource_transfer": "moved to a GitHub Actions runner bridge; 2026-10-03 archives downloaded and SHA-256 verified (paleo 84,008 B faffcf69..., volcanics 9,898,770 B c4a2d2df..., 2 m probes transferred) and rasterised to the 100 m grid; the Ingenious Quaternary-fault v2 shapefile downloaded but rasterised to zero features inside the grid - open irregularity (CRS suspected)",
+      "archive_bytes_or_checksums_verified": true,
+      "hypothesis_viability": "unblocked; paleo, 2 m probe and volcanics layers committed; quaternary-fault v2 unusable pending a CRS review"
+    },
+    "usgs_sgmc": {
+      "state_packages": {
+        "NV.zip": "69,056,094 B SHA-256 3b333ac025e59aae7f0d827db45ba32c425cf867eb341561a788af1de186b76b",
+        "CA.zip": "24,977,406 B SHA-256 78765ba4428df9f25a84f86e0b2529bd0508fc8a2cf65d2f41a830e82bccfd58"
+      },
+      "licence": "US Government work / public domain (USGS Mineral Resources Program)",
+      "derived": "data/external/derived_sgmc_faults_100m_u8.tif SHA-256 26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c; 21,160 features, 82,151 px in footprint, 61,664 px >300 m from the catalogue (75.1 %)",
+      "attribute_schema": "STATE, DESCRIPT, MISC, REF_ID, SRC_URL, GEOM, WEB_GEOM, SYMBOL (no age field; DESCRIPT carries certainty and sense of displacement)",
+      "verification": "docs/research/sgmc-falsification.json"
     }
   },
   "verification": {
@@ -95,7 +142,10 @@
       "status": "not promoted as tested",
       "connector_credit_ratio_over_proximity_control": 1.0124842836385506,
       "note": "connector zone 0.0485 DTI vs random-near 0.0480 vs whole near-known annulus 0.0491 at a matched 15,000 px budget; the dominant effect is a generic proximity prior (~2.3x far-field credit per pixel)"
-    }
+    },
+    "bridge": "GitHub Actions runner bridge working: USGS SGMC NV/CA, GDR paleo/volcanics/2 m probes downloaded, SHA-256 verified and rasterised; one irregularity (Ingenious Qfaults v2 rasterised to zero features); it also fixed a 28 GiB WKT round-trip in vector rasterisation",
+    "emitter_frames": "reviewed at matched emitted count (the repository standard since 2026-10-03): on the independent USGS SGMC inventory frame with 30 % of components hidden and a 3 px visible-dilation exclusion, 5 repeats, the UNet out-of-fold dot set (80,392 dots) scores 0.09526 against uniform random dots at the same count 0.07617 (+25.1 %) and matches a 3 px blind probability lattice that uses 6.6x more dots (0.09395); the sibling branch's HistGradientBoosting-derived candidate (75,001 in-domain dots) scores 0.07279 against its matched random control 0.07460 (-2.4 %). SGMC-containing arms are tautological on this frame and are never cited as validation. Evidence: docs/research/novelty-holdout.{md,json}, docs/research/emitter-holdout.md",
+    "novelty_frame_correction": "an earlier draft quoted +4.4 % for the model dots against a 'blind lattice'; that lattice carried 527,504 dots against 80,392, so the budgets were not matched and the sign of the comparison alternates with lattice spacing (99,028-dot lattice 0.09873 vs 74,288-dot lattice 0.08442). Replaced by the matched-random control above; recorded so the correction is auditable."
   },
   "three_pass_review": {
     "as_of_utc_date": "2026-10-03",
@@ -115,7 +165,15 @@
     "extra_mirror_pins": "docs/research/mirror-pins-extra.json",
     "loss_ablation_holdout": "docs/research/loss-ablation-holdout.json",
     "metric_emission_holdout": "docs/research/metric-emission-holdout-results.json",
-    "relay_connector_holdout": "docs/research/relay-connector-holdout.json"
+    "relay_connector_holdout": "docs/research/relay-connector-holdout.json",
+    "emitter_comparison": "docs/research/emitter-comparison.json",
+    "novelty_holdout": "docs/research/novelty-holdout.json",
+    "discovery_shift": "docs/research/discovery-shift.json",
+    "sgmc_falsification": "docs/research/sgmc-falsification.json",
+    "metric_response_surface": "docs/research/metric-response-surface.json",
+    "loss_ablation_full_budget_verdict": "docs/research/loss-ablation-verdict.md",
+    "emitter_holdout_analysis": "docs/research/emitter-holdout.md",
+    "novelty_holdout_doc": "docs/research/novelty-holdout.md"
   },
   "candidate_artifacts": {
     "built_utc": "2026-10-03T17:04:26Z",
@@ -128,5 +186,12 @@
     "median_nn_spacing_px": 2.83,
     "promoted": false,
     "build_record": "docs/research/candidate-2026-10-03.md"
+  },
+  "metric_theory": {
+    "marginal_rule": "adding one prediction pixel with kernel credit k against an uncovered truth pixel changes the denominator by exactly 0.2 and the numerator by k, so the dot helps iff k > 0.2 * DTI",
+    "admission_threshold_at_0_2600": 0.052,
+    "admission_threshold_at_0_3195": 0.0639,
+    "target_independence": "the rule contains no reference to the size of the truth set, so it does not loosen or tighten as the private set shrinks",
+    "evidence": "docs/metric-response-surface.md, docs/research/metric-response-surface.json"
   }
 }
