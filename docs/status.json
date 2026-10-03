@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_utc": "2026-10-03T19:09:16Z",
+  "generated_utc": "2026-10-03T19:57:22Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -212,6 +212,16 @@
       },
       "promoted": false,
       "decision": "fold-0 boundary-weight screen (dense + emitted-mask scoring); a screen pick is diagnostic only \u2014 promotion still needs the 4-fold paired design plus fresh-seed confirmation"
+    },
+    "h33_01_placement_policy": {
+      "evidence": "docs/research/h33-01-placement-policy-holdout.json",
+      "verdict_doc": "docs/research/h33-01-placement-policy-holdout.md",
+      "preregistration": "docs/research/h33-01-preregistration.md",
+      "promoted": false,
+      "gate_pass": false,
+      "gate_void_reason": "gate-budget arms are capacity-collapsed (mean dots 68,573.0 < 80,000); comparisons against exactly-B controls are not count-matched, violating the frozen 'fill the exact budget B' construction; the diagnostic budgets below are the substantive evidence and the next preregistration must choose a gate budget at which all arms are realisable",
+      "capacity_collapse": true,
+      "decision": "Not promoted; the incumbent whole-domain model-score emission stands"
     }
   },
   "any_candidate_promoted": false,
@@ -284,6 +294,105 @@
         "notes": "read 2026-10-03 by autonomous session; DrivenData ToS prohibit automated monitoring, so snapshots are dated manual reads",
         "evidence_class": "official-snapshot",
         "as_of_utc": "2026-10-03"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "rank-6 joeyfezster (best public DW-Tversky)",
+        "score": "0.2919",
+        "provenance": "official page read 2026-10-03 (second dated read this session)",
+        "status": "verified snapshot; dynamic",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "No file attribution; public score only",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-03"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "rank-7 ndavis7 (best public DW-Tversky)",
+        "score": "0.2888",
+        "provenance": "official page read 2026-10-03 (second dated read this session)",
+        "status": "verified snapshot; dynamic",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "No file attribution; public score only",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-03"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "rank-8 mzoorob (best public DW-Tversky)",
+        "score": "0.2884",
+        "provenance": "official page read 2026-10-03 (second dated read this session)",
+        "status": "verified snapshot; dynamic",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "No file attribution; public score only",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-03"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "rank-9 GrigorSargsyan (best public DW-Tversky)",
+        "score": "0.2876",
+        "provenance": "official page read 2026-10-03 (second dated read this session)",
+        "status": "verified snapshot; dynamic",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "No file attribution; public score only",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-03"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "rank-10 HardcoreTechGod (best public DW-Tversky)",
+        "score": "0.2854",
+        "provenance": "official page read 2026-10-03 (second dated read this session)",
+        "status": "verified snapshot; dynamic",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "No file attribution; public score only",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-03"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "rank-12 kinghorton42 (best public DW-Tversky)",
+        "score": "0.2635",
+        "provenance": "official page read 2026-10-03 (second dated read this session)",
+        "status": "verified snapshot; dynamic",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "Reads as a plausible public-cluster neighbour of the owner-reported 0.2600/0.2477 values; attribution deliberately NOT inferred",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-03"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "rank-14 No Fault of Our Own (best public DW-Tversky)",
+        "score": "0.2624",
+        "provenance": "official page read 2026-10-03 (second dated read this session)",
+        "status": "verified snapshot; dynamic",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "No file attribution; public score only",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-03"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "rank-19 extradr19 (best public DW-Tversky)",
+        "score": "0.2449",
+        "provenance": "official page read 2026-10-03 (second dated read this session)",
+        "status": "verified snapshot; dynamic",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "Value equals the owner-reported GEMSDOE27 score 0.2449; numeric coincidence only, not a file attribution (IR-30-002 class)",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-03"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "rank-1..5 re-read confirmation",
+        "score": "0.3195/0.3128/0.3042/0.2998/0.2941",
+        "provenance": "official page read 2026-10-03 (second dated read this session)",
+        "status": "verified snapshot; identical to the earlier same-day rows; leader unchanged",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "Confirms no intraday change at the top; public leaderboard only",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-03"
       }
     ],
     "note": "DrivenData Terms of Use prohibit automated monitoring; snapshots are dated manual reads only",
@@ -292,7 +401,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "67 tests collected in 0.21s",
+      "pytest_collect": "80 tests collected in 0.24s",
       "exit_code": 0
     },
     "score_gain_claimed": false

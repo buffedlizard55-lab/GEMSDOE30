@@ -327,6 +327,41 @@ session.** Both were re-checked from scratch rather than trusted:
    fixed emission budget is placed relative to mapped structure**, not which scalar field ranks the
    pixels. The next registered experiment should be a placement-policy test, not a new detector.
 
+### Session 5 (2026-10-03, this branch `arena/01a10330-gemsdoe30`) — emitter-order fix, score ledger, H-33-01 run to verdict
+
+1. **IR-30-031: real library bug found and fixed.** `poisson_disk_select`/`adaptive_disk_select`
+   documented a descending-score greedy but built `np.lexsort((-values, rows, cols))` — and
+   `np.lexsort` keys on the **last** array, so visits were column-major (raster order), not
+   score-first. Fixed at all three occurrences, regression tests added (`ScoreFirstVisitOrderTests`,
+   `OrderedSelectionTests`, plus a `max_kept` prefix-equivalence test), and the affected-artifact
+   caveat recorded in [docs/irregularities.md](docs/irregularities.md). Historical *relative*
+   conclusions stand (arms and controls shared the same rule); prior absolute numbers are now
+   labelled "measured under raster-order visiting".
+2. **H-33-01 (placement policy) — preregistered, run, decided.** Frozen design in
+   [h33-01-preregistration.md](docs/research/h33-01-preregistration.md) before any score was seen;
+   harness `scripts/placement_policy_holdout.py` (tests: `tests/test_placement_policy.py`).
+   The gate-budget screen (80,000 dots) hit a capacity wall — the 0.4-thresholded, 4 px-thinned
+   pools hold only 68,573 dots, so every quota arm collapsed to the same union; the harness
+   **voided** the gate instead of adjudicating a non-count-matched comparison, and the registered
+   verdict is **not promoted** (IR-30-032 records the design undercount and the new pre-flight
+   capacity rule). The count-matched 40 k sensitivity run is the substantive evidence:
+   whole-domain score-first thinning **0.07608** beats blind random **+35 %** and beats **every**
+   band-stratified arm (0.0721–0.0725), while pure proximity ranking is catastrophic (0.03660).
+   Verdict: **the placement-policy line is closed** — placement is exhausted as a lever; the next
+   registered experiment must improve the score field itself. Full numbers:
+   [h33-01-placement-policy-holdout.md](docs/research/h33-01-placement-policy-holdout.md) ·
+   [JSON](docs/research/h33-01-placement-policy-holdout.json).
+3. **Regional OOF mosaic regenerated post-fix and verified**: `runs/oof/regional-oof.npy`,
+   5,167,373 finite pixels (= template count), range [0, 1], mean 0.23551, 23.67 % > 0.4,
+   scope sidecar matches the frozen 4-fold plan.
+4. **Score ledger refreshed** with dated `official-snapshot` rows (2026-10-03 manual read, twice,
+   consistent): leader DARD **0.3195**; `wbg1` 0.2600 at rank 15 confirmed; a rank-19 row of
+   0.2449 numerically equals the owner-reported GEMSDOE27 score — recorded as coincidence, not
+   attribution. No GEMSDOE30 file has been scored; target **> 0.3195** is not yet reached.
+5. Full suite: **80 passed + 11 subtests, 0 skipped**. Portal-safe download validation re-run
+   (12/12 on all three `-zeros.tif`). Provenance re-verified: published D2.8 copy and restored
+   labels/template match their SHA-256 pins byte-for-byte; every download manifest self-verifies.
+
 ## Current verified state — 2026-10-03
 
 - The recorded baseline commit for this checkout already contains the model/loss, tests, training/inference/validation scripts, and site scaffold. The Git history available here is shallow/grafted to that commit, so earlier claims about a prior README-only state cannot be independently verified from this repository. At the start of this review there were **no competition rasters, sample template, checkpoints, real holdout predictions, or generated GEMSDOE30 TIFFs**. The rasters have since been restored from SHA-256-pinned owner mirrors (not organizer-authenticated) and real-data training, OOF prediction, stitching and scoring all run locally; what remains blocked is organizer-authenticated data and the hidden expert labels.
@@ -415,9 +450,9 @@ Later on 2026-10-03 a first GEMSDOE30 candidate file was built and published for
 ## Current next steps and limits
 
 1. **Upload path is fixed — use it.** The portal-safe `-zeros.tif` variants are the primary downloads for all three published TIFFs (GBM candidate, measured variant, external D2.8) and the site's submission guide walks through the upload with paste-ready notes. The scientific gates are unchanged: **no candidate is holdout-promoted**; submitting an un-promoted file is the owner's decision, and the file's note must say exactly that.
-2. **H-32-01 and H-32-05 are both falsified on the proxy**; the remaining runnable local candidate is the **H-31-02 reduced matched-filter scarp arm** on the local 12-channel scarp stack (the raw 3DEP 1 m arm still needs the ~9 GB tile transfer off-sandbox). **The higher-value next experiment, argued from three consecutive falsifications (H-31-01, H-32-01, H-32-05) against the same `random_near_matched` control, is a *placement-policy* test — how to allocate a fixed emission budget between near-catalogue and off-catalogue space — rather than another detector.** H-32-04 cannot be validated on the catalogue proxy at all (IR-30-021) and needs the OSTI 1148722 / GDR 616 inventories retrieved and checksummed first. The independent-inventory idea behind the measured variant's novelty frame is the *shape* of evidence that should gate future claims (see item 7).
+2. **H-32-01 and H-32-05 are both falsified on the proxy**; the remaining runnable local candidate is the **H-31-02 reduced matched-filter scarp arm** on the local 12-channel scarp stack (the raw 3DEP 1 m arm still needs the ~9 GB tile transfer off-sandbox). **That placement-policy test (H-33-01) has since been preregistered, run, and closed with a negative result: at count-matched budgets, whole-domain score-first emission beats every band-stratified placement, and proximity-first placement loses badly. The next registered experiment must change the lever — score-field quality on the learning side (or a dense/dot hybrid), not placement.** H-32-04 cannot be validated on the catalogue proxy at all (IR-30-021) and needs the OSTI 1148722 / GDR 616 inventories retrieved and checksummed first. The independent-inventory idea behind the measured variant's novelty frame is the *shape* of evidence that should gate future claims (see item 7).
 3. **Boundary loss remains not promoted — and its retry criterion has now been executed.** The recorded retry (larger budget + preregistered boundary-weight sweep + emitted-mask scoring) ran as a fold-0 screen ([loss-weight-sweep.md](docs/research/loss-weight-sweep.md), 2026-10-03): dense scoring prefers plain `regional` at every weight; emitted-mask scoring prefers `combined-100` by only +0.0010 on one fold — the scorings disagree, so no weight is selected for confirmation and the line stays closed. The near-miss behavioural effect the brief asked for *is* demonstrated (partial-distance truth coverage 1,889 → 724); the metric gain is not. Any future loss work should start from the standing [verification-protocol.md](docs/research/verification-protocol.md) (three checks with pre-stated criteria) and a new mechanism, not more λ tuning.
 4. **Build/validate rule unchanged:** an exact-grid, holdout-promoted candidate only after its family beats the same-run best by the frozen margin with fresh-seed confirmation. Both published un-promoted candidates — the GBM surface (`…aedb3d13-nan.tif`, SHA-256 `f5d137b9…c7cc2`, 90,358 dots) and the measured SGMC-hedge variant (`…ac08b41e.tif`, SHA-256 `fed5232e…66da`, 85,526 dots) — plus their portal-safe variants are research artifacts with honest notes.
 5. **Feed:** `scripts/build_status.py` keeps `docs/status.json` current automatically. The leaderboard itself can only be refreshed by dated manual reads (DrivenData ToS prohibit automated monitoring) — recorded in `docs/score-ledger.csv` with `evidence_class=official-snapshot`.
 6. **Limits that only the owner/organizer can lift:** organizer-authenticated data (IR-30-001); the hidden expert labels (the real target); score-to-file attribution for the D2.8 artifact (IR-30-002); entrant eligibility under rules §1.3 (IR-30-020); the deadline-time discrepancy (IR-30-008); final AI-disclosure narrative sign-off.
-7. *(from the independent 2026-10-03 session's emitter work)* The budget-matched blind-random control is the standard for any emitter claim in this repository: a learned emitter must beat uniform random dots **at the same emitted count on the same frame and the same run**, because the previous lattice control changed sign with lattice spacing. Under that standard, only the UNet out-of-fold dot set clears it (+25.1 %); the HistGradientBoosting-derived candidate does not (−2.4 %), and no emitter has yet been tested against the *clustered* geometry the official hidden fault set is expected to have.
+7. *(from the independent 2026-10-03 session's emitter work)* The budget-matched blind-random control is the standard for any emitter claim in this repository: a learned emitter must beat uniform random dots **at the same emitted count on the same frame and the same run**, because the previous lattice control changed sign with lattice spacing. Under that standard, only the UNet out-of-fold dot set clears it (+25.1 %); the HistGradientBoosting-derived candidate does not (−2.4 %), and no emitter has yet been tested against the *clustered* geometry the official hidden fault set is expected to have. H-33-01 extended that standard to placement arms and added a pre-flight requirement: **realised pool capacities must be counted at the frozen threshold/spacing before a gate budget is fixed, and collapsed (identical-mask) arms void the gate** (IR-30-032).
