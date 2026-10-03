@@ -175,11 +175,18 @@ def main() -> int:
         if path is None:
             raise RuntimeError(f"cannot continue without the competition grid ({name})")
         verify(path, sha, name)
-    with rasterio.open(grid_dir / "grid_labels.tif") as dataset:
+    grid_labels = WORK / "grid_labels.tif"
+    grid_template = WORK / "grid_template.tif"
+    (grid_labels, grid_template) = (
+        grid_dir / "grid_labels.tif", grid_dir / "grid_template.tif"
+    ) if (grid_dir / "grid_labels.tif").exists() else (
+        next(WORK.glob("grid_labels*")), next(WORK.glob("grid_template*"))
+    )
+    with rasterio.open(grid_labels) as dataset:
         transform, crs = dataset.transform, dataset.crs
         shape = (dataset.height, dataset.width)
         labels = dataset.read(1) > 0
-    with rasterio.open(grid_dir / "grid_template.tif") as dataset:
+    with rasterio.open(grid_template) as dataset:
         footprint = np.isfinite(dataset.read(1))
     report["grid"] = {
         "shape": list(shape),
@@ -245,13 +252,13 @@ def main() -> int:
             return
         # project to the competition CRS and clip to the grid box
         promoted = shapely.from_wkt([shapely.to_wkt(geometry) for geometry in merged])
-        projected = shapely.transform(
-            promoted,
-            lambda coords: np.column_stack(
-                transformer.transform(coords[:, 0], coords[:, 1])
-            ),
-            interleaved=False,
-        )
+        def _project(coords, _transformer=transformer):
+            return np.column_stack(_transformer.transform(coords[:, 0], coords[:, 1]))
+
+        try:
+            projected = shapely.transform(promoted, _project)
+        except TypeError:  # older/newer shapely signature differences
+            projected = np.array([shapely.transform(g, _project) for g in promoted])
         clip_box = shapely.box(bounds[0], bounds[1], bounds[2], bounds[3])
         clipped = shapely.intersection(projected, clip_box)
         kept = [geometry for geometry in clipped if not shapely.is_empty(geometry)]
