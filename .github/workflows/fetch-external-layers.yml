@@ -59,6 +59,7 @@ jobs:
           python -c "import rasterio, pyogrio, shapely, pyproj, pandas, numpy; print('imports ok', rasterio.__version__, pyogrio.__version__)" >> data/external/workflow_diagnostics.txt 2>&1
 
       - name: Fetch and derive official external layers
+        continue-on-error: true
         run: |
           {
             echo "--- fetch_external_layers.py start $(date -u +%H:%M:%S) ---"
@@ -67,6 +68,7 @@ jobs:
           } >> data/external/workflow_diagnostics.txt 2>&1
 
       - name: Commit derived layers and receipt
+        if: always()
         run: |
           set -x
           ls -la data/external || true
