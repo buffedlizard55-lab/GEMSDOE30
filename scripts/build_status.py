@@ -152,20 +152,50 @@ def main() -> int:
         }
     else:
         gates["loss_weight_sweep"] = {"evidence": None, "promoted": False, "decision": "not run yet"}
-    h33 = load_json(research / "h33-01-placement-policy-holdout.json") or {}
-    if h33:
+    h33_policy = load_json(research / "h33-01-placement-policy-holdout.json") or {}
+    if h33_policy:
         gates["h33_01_placement_policy"] = {
             "evidence": "docs/research/h33-01-placement-policy-holdout.json",
             "verdict_doc": "docs/research/h33-01-placement-policy-holdout.md",
             "preregistration": "docs/research/h33-01-preregistration.md",
             "promoted": False,
-            "gate_pass": bool((h33.get("gates") or {}).get("pass", False)),
-            "gate_void_reason": h33.get("gates_void_reason"),
-            "capacity_collapse": bool((h33.get("capacity") or {}).get("gate_arms_collapse_identical")),
-            "decision": h33.get("decision", "not run yet"),
+            "gate_pass": bool((h33_policy.get("gates") or {}).get("pass", False)),
+            "gate_void_reason": h33_policy.get("gates_void_reason"),
+            "capacity_collapse": bool((h33_policy.get("capacity") or {}).get("gate_arms_collapse_identical")),
+            "decision": h33_policy.get("decision", "not run yet"),
         }
     else:
         gates["h33_01_placement_policy"] = {"evidence": None, "promoted": False, "decision": "not run yet"}
+    h33_scarp = load_json(research / "h33-01-placement-and-scarp-holdout.json") or {}
+    if h33_scarp:
+        verdicts = h33_scarp.get("gate_verdicts", {})
+        any_h33_promoted = any(
+            bool(v.get("promoted", False)) for v in verdicts.values() if isinstance(v, dict)
+        )
+        gates["h33_01_placement_and_scarp"] = {
+            "evidence": "docs/research/h33-01-placement-and-scarp-holdout.json",
+            "preregistration": "docs/research/h33-01-placement-and-scarp-preregistration.md",
+            "gate_verdicts": verdicts,
+            "promoted": any_h33_promoted,
+            "decision": (
+                "H-31-02r passes independent SGMC novelty frame (+86.1% / +91.6%) and transform clause (+22.4%), "
+                "but trails dispersed control on catalogue proxy (-0.00261); H-32-05b falsified; not promoted"
+            ),
+        }
+    else:
+        gates["h33_01_placement_and_scarp"] = {"evidence": None, "promoted": False, "decision": "not run yet"}
+    vchecks = load_json(research / "verification-checks-results.json") or {}
+    if vchecks:
+        vsum = vchecks.get("overall_promotion_decision", {})
+        gates["verification_checks_h31_02r"] = {
+            "evidence": "docs/research/verification-checks-results.json",
+            "report": "docs/research/verification-checks-results.md",
+            "summary": vsum,
+            "promoted": bool(vsum.get("slot_promoted", False)),
+            "decision": vsum.get("reason", "see verification-checks-results.json"),
+        }
+    else:
+        gates["verification_checks_h31_02r"] = {"evidence": None, "promoted": False, "decision": "not run yet"}
 
     # Data provenance.
     core_pins = load_json(research / "mirror-pins.json") or {}
