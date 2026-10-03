@@ -212,6 +212,75 @@ TIFF exists, no slot has been used, and **no score is claimed** for any of this 
    **official-snapshot** rows from the 2026-10-03 leaderboard read (DARD 0.3195 rank 1 … wbg1 0.2600
    rank 15). Suite now collects **60 tests**, all passing on this image.
 
+### Independent session, same day — full-budget ablation, emitter frames, external-data bridge
+
+A second autonomous session (`arena/01a102a1-gemsdoe30`, PR #8) ran three further real holdouts on
+the same prepared grid. Where the two sessions overlap they **agree**, and where they differ the
+difference is budget, not method.
+
+**(A) The paired boundary-loss ablation at full budget.** Eight checkpoints, seed 30, **6 × 100
+steps × batch 4 × 96 px (600 optimizer steps per fold)** — 15× the screen budget above. Pooled
+exact full-grid OOF DTI **0.105026 (regional) → 0.097119 (combined)**, Δ **−0.00791**, positive in
+**1 of 4** folds. Near-miss allocation again changed exactly as designed, and this time the direction
+is measurable in both terms: truth pixels resolved exactly fell 48,491 → 47,964, the 200–300 m
+near-miss bin rose 5,070 → 5,829, and far-field `FP_w` rose 1,044,121 → 1,151,942. The exchange rate
+is roughly **1 unit of new near-miss credit per 85 units of new distant false-positive mass**, against
+a metric that prices them at 1 : 0.2. Mechanism: `FP_w = Σ p(x)(1 − max_g k(d))` is linear in total
+emitted mass over a 5.17 M-pixel footprint, so a boundary term built from the same kernel mostly
+pushes probability inward *everywhere*. **Combined verdict across all three runs: the geometry term
+reliably changes near-miss behaviour and never reliably raises the proxy DTI. Not promoted.**
+Evidence: [loss-ablation-verdict.md](docs/research/loss-ablation-verdict.md) (+ `runs/loss-ablation/holdout.json`).
+
+**(B) Emitter frames — how the mass is placed beats how it is learned.** The same out-of-fold
+probability field scores **0.09712** submitted as a dense field and **0.25461** after 400 m
+Poisson-disk sparsification: a **2.6×** difference from the emission operator alone, and the largest
+single effect measured in either session. Against the internal blind lattice the learned field wins by
+**+3.4 %** on the catalogue frame (0.25461 vs 0.24634 at 4 px). A second frame was then built that the
+catalogue cannot provide: the USGS SGMC fault inventory, split by connected component with 30 % hidden,
+scored under the organizer's masking rule. On that frame the **budget-matched** control is the
+decisive one — uniform random dots at the *same* dot count, not a differently dense lattice. At 5
+repeats: our model-dot set (80,392 dots) scores **0.09526** against blind random at 80,392 dots
+**0.07617** (**+25.1 %**) and against the 3 px probability lattice with 6.6× more dots (0.09395)
+**+1.4 %**; the sibling-branch GBM candidate (75,001 in-domain dots) scores **0.07279** against blind
+random at 75,001 dots **0.07460** (**−2.4 %**), i.e. below chance on this frame. Evidence:
+[emitter-holdout.md](docs/research/emitter-holdout.md),
+[novelty-holdout.md](docs/research/novelty-holdout.md),
+`docs/research/{emitter-comparison,novelty-holdout,discovery-shift}.json`.
+**Correction recorded for the audit trail:** an earlier draft of this section quoted "+4.4 % over a
+blind lattice" for the model dots. That comparison used a lattice with 527,504 dots against an
+80,392-dot candidate — unmatched budgets. The same-run budget-matched numbers above replace it, and
+the direction of the conclusion survives only because the matched control is a *random* dot set
+rather than a lattice; on the earlier unmatched comparison the sign alternates with the lattice's
+spacing (74,288-dot lattice 0.08442, 97,028-dot lattice 0.09873).
+
+**(C) A working official-data bridge.** A GitHub Actions runner downloads official layers,
+SHA-256-verifies them, rasterises them onto the competition grid and commits the result back
+(`data/external/external_receipt.json`). Verified: USGS SGMC `NV.zip` 69,056,094 B and `CA.zip`
+24,977,406 B, plus GDR 1391 paleo-geothermal, Quaternary volcanics and 2 m temperature probes. The
+SGMC derivation holds **21,160 features / 82,151 px** in the footprint, **75.1 % of them more than
+300 m from every catalogue fault**. Falsification: **+2.9× enrichment** over chance against the
+catalogue (positive) versus a **low-power** lidar corroboration test (AUC 0.520; the positive control
+scores only 0.522) — recorded as inconclusive, not as a pass. Open irregularity: the Ingenious
+Quaternary-fault v2 shapefile downloaded but rasterised to **zero** features inside the grid.
+
+**(D) Metric theory.** Adding one prediction pixel whose triangular kernel credit against an
+uncovered truth pixel is `k` changes the DTI denominator by exactly `0.2` and the numerator by `k`, so
+**a dot helps iff `k > 0.2 × DTI`** — about **5.2 %** at the incumbent's operating point, and
+**independent of the size of the hidden truth set**. This is why broad hedging across weak hypotheses
+is near-optimal here, and why the SGMC layer is worth a bounded bet even though no local frame can
+score it. Derivation and measured response surface: [metric-response-surface.md](docs/metric-response-surface.md).
+
+**(E) Second published candidate, with a measured comparison.** `docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif`
+(SHA-256 `fed5232e…66da`; 85,526 dots; **zero** dots on the masked catalogue) adds a bounded SGMC hedge
+(worst case ≤ 3 % of the DTI denominator) to the model's off-catalogue dots. Both published candidates
+were scored on the independent-inventory frame, 5 repeats: the SGMC-hedged candidate **0.18343** (the
+SGMC arms are tautological there — hidden components of the same inventory — so this is not evidence),
+the sibling GBM candidate **0.07279**, blind random at the same count 0.07460, the 0.2600 artefact
+0.07061. **The GBM candidate's 75,001 dots are therefore worth less than 75,001 blind random dots on
+an independent fault inventory, while our 80,392-dot model set is worth +25 % over its own matched
+control.** Reported rather than hidden because it should decide which file, if any, is submitted.
+**Neither candidate has a leaderboard score and no slot has been used.**
+
 ## Current verified state — 2026-10-03
 
 - The recorded baseline commit for this checkout already contains the model/loss, tests, training/inference/validation scripts, and site scaffold. The Git history available here is shallow/grafted to that commit, so earlier claims about a prior README-only state cannot be independently verified from this repository. At the start of this review there were **no competition rasters, sample template, checkpoints, real holdout predictions, or generated GEMSDOE30 TIFFs**. The rasters have since been restored from SHA-256-pinned owner mirrors (not organizer-authenticated) and real-data training, OOF prediction, stitching and scoring all run locally; what remains blocked is organizer-authenticated data and the hidden expert labels.
@@ -289,9 +358,10 @@ Later on 2026-10-03 a first GEMSDOE30 candidate file was built and published for
 
 ## Current next steps and limits
 
-1. **Upload path is fixed — use it.** The portal-safe `-zeros.tif` variants are the primary downloads and the site's submission guide walks through the upload with paste-ready notes. The scientific gates are unchanged: **no candidate is holdout-promoted**; submitting an un-promoted file is the owner's decision, and the file's note must say exactly that.
-2. **H-32-01 (discharge corridors) is falsified on the proxy**; the next runnable local candidates are **H-32-05 (buried pinch-out edges on `depth_to_base_surf`/gravity/magnetic gradients)** and the **H-31-02 reduced matched-filter scarp arm** on the local 12-channel scarp stack (the raw 3DEP 1 m arm still needs the ~9 GB tile transfer off-sandbox). H-32-04 cannot be validated on the catalogue proxy at all (IR-30-021) and needs the OSTI 1148722 / GDR 616 inventories retrieved and checksummed first.
+1. **Upload path is fixed — use it.** The portal-safe `-zeros.tif` variants are the primary downloads for all three published TIFFs (GBM candidate, measured variant, external D2.8) and the site's submission guide walks through the upload with paste-ready notes. The scientific gates are unchanged: **no candidate is holdout-promoted**; submitting an un-promoted file is the owner's decision, and the file's note must say exactly that.
+2. **H-32-01 (discharge corridors) is falsified on the proxy**; the next runnable local candidates are **H-32-05 (buried pinch-out edges on `depth_to_base_surf`/gravity/magnetic gradients)** and the **H-31-02 reduced matched-filter scarp arm** on the local 12-channel scarp stack (the raw 3DEP 1 m arm still needs the ~9 GB tile transfer off-sandbox). H-32-04 cannot be validated on the catalogue proxy at all (IR-30-021) and needs the OSTI 1148722 / GDR 616 inventories retrieved and checksummed first. The independent-inventory idea behind the measured variant's novelty frame is the *shape* of evidence that should gate future claims (see item 7).
 3. **Boundary loss remains not promoted — and its retry criterion has now been executed.** The recorded retry (larger budget + preregistered boundary-weight sweep + emitted-mask scoring) ran as a fold-0 screen ([loss-weight-sweep.md](docs/research/loss-weight-sweep.md), 2026-10-03): dense scoring prefers plain `regional` at every weight; emitted-mask scoring prefers `combined-100` by only +0.0010 on one fold — the scorings disagree, so no weight is selected for confirmation and the line stays closed. The near-miss behavioural effect the brief asked for *is* demonstrated (partial-distance truth coverage 1,889 → 724); the metric gain is not. Any future loss work should start from the standing [verification-protocol.md](docs/research/verification-protocol.md) (three checks with pre-stated criteria) and a new mechanism, not more λ tuning.
-4. **Build/validate rule unchanged:** an exact-grid, holdout-promoted candidate only after its family beats the same-run best by the frozen margin with fresh-seed confirmation. The published un-promoted candidate (`docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_…`, SHA-256 `f5d137b9…c7cc2`, 90,358 dots) and its portal-safe variant are research artifacts with honest notes.
+4. **Build/validate rule unchanged:** an exact-grid, holdout-promoted candidate only after its family beats the same-run best by the frozen margin with fresh-seed confirmation. Both published un-promoted candidates — the GBM surface (`…aedb3d13-nan.tif`, SHA-256 `f5d137b9…c7cc2`, 90,358 dots) and the measured SGMC-hedge variant (`…ac08b41e.tif`, SHA-256 `fed5232e…66da`, 85,526 dots) — plus their portal-safe variants are research artifacts with honest notes.
 5. **Feed:** `scripts/build_status.py` keeps `docs/status.json` current automatically. The leaderboard itself can only be refreshed by dated manual reads (DrivenData ToS prohibit automated monitoring) — recorded in `docs/score-ledger.csv` with `evidence_class=official-snapshot`.
 6. **Limits that only the owner/organizer can lift:** organizer-authenticated data (IR-30-001); the hidden expert labels (the real target); score-to-file attribution for the D2.8 artifact (IR-30-002); entrant eligibility under rules §1.3 (IR-30-020); the deadline-time discrepancy (IR-30-008); final AI-disclosure narrative sign-off.
+7. *(from the independent 2026-10-03 session's emitter work)* The budget-matched blind-random control is the standard for any emitter claim in this repository: a learned emitter must beat uniform random dots **at the same emitted count on the same frame and the same run**, because the previous lattice control changed sign with lattice spacing. Under that standard, only the UNet out-of-fold dot set clears it (+25.1 %); the HistGradientBoosting-derived candidate does not (−2.4 %), and no emitter has yet been tested against the *clustered* geometry the official hidden fault set is expected to have.
