@@ -126,6 +126,7 @@
     "method": "4-fold out-of-fold HistGradientBoosting surface over competition + local external layers; adaptive Poisson-disk emission (radius 5 px, gamma=1.0, pool 480k)",
     "dots": 90358,
     "median_nn_spacing_px": 2.83,
-    "promoted": false
+    "promoted": false,
+    "build_record": "docs/research/candidate-2026-10-03.md"
   }
 }
