@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-03T17:32:22+00:00",
+  "generated_utc": "2026-10-03T17:33:29+00:00",
   "runner": "GitHub Actions (general internet access); the agent sandbox cannot reach these hosts",
   "drivendata_contacted": false,
   "grid_source_note": "Derived rasters use the hash-pinned owner-mirror competition grid. Those bytes are owner-mirrored, not organizer-authenticated; alignment is verified, labels are never learnt from.",
@@ -38,26 +38,44 @@
       "url": "https://gdr.openei.org/files/1391/qfaults_ingenious_nad83conus117_2023-06-27.zip",
       "bytes": 6131182,
       "sha256": "c7b091c9ac8bca140ad89ee6bb2bd63dd3ac12e3013acbfd8373d11c9faee59d",
-      "ok": true
+      "ok": true,
+      "licence": "CC BY 4.0 (DOI 10.15121/1881483)",
+      "what": "INGENIOUS Quaternary fault compilation v2 (provenance check for the training catalogue)",
+      "landing": "https://gdr.openei.org/submissions/1391"
     },
     "gdr_paleo": {
       "url": "https://gdr.openei.org/files/1391/paleo_geothermal_regional.zip",
       "bytes": 84008,
       "sha256": "faffcf697f32dbbf6cbb317cd1effb3e305538ce38eb239d72d0c6fa071e91ca",
-      "ok": true
+      "ok": true,
+      "licence": "CC BY 4.0 (DOI 10.15121/1881483)",
+      "what": "paleogeothermal features (sinter/tufa and related spring deposits)",
+      "landing": "https://gdr.openei.org/submissions/1391"
     },
     "gdr_volcanics": {
       "url": "https://gdr.openei.org/files/1391/great_basin_q_volcanics.zip",
       "bytes": 9898770,
       "sha256": "c4a2d2dfd5c44f42e0aba37290948881631aff312b8b9ca7934b6dc1e451e5be",
-      "ok": true
+      "ok": true,
+      "licence": "CC BY 4.0 (DOI 10.15121/1881483)",
+      "what": "Quaternary volcanic vents and flows",
+      "landing": "https://gdr.openei.org/submissions/1391"
+    },
+    "gdr_2m_probes": {
+      "url": "https://gdr.openei.org/files/1391/2m_temperature_probe_INGENIOUS_regional_data.zip",
+      "bytes": 1080530,
+      "sha256": "1301f70d230058e616ea5d34d1c7a32fabf7d49198172f376c59c89bd652eca3",
+      "ok": true,
+      "licence": "CC BY 4.0 (DOI 10.15121/1881483)",
+      "what": "2 m shallow temperature probe surveys",
+      "landing": "https://gdr.openei.org/submissions/1391"
     }
   },
   "derived": {
     "sgmc_faults": {
       "path": "data/external/derived_sgmc_faults_100m_u8.tif",
-      "bytes": 213045,
-      "sha256": "4175bd41e9dae09487152d40d573893c6f8fb2f832c89d884051ce7ac8c443c9",
+      "bytes": 213034,
+      "sha256": "26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c",
       "ok": true,
       "feature_count_in_grid": 21160,
       "layers": [
@@ -70,9 +88,9 @@
           "rows": 31145
         }
       ],
-      "pixels_in_footprint": 82156,
-      "pixels_off_catalogue_gt_300m": 61668,
-      "fraction_within_300m_of_catalogue": 0.24937922975802132
+      "pixels_in_footprint": 82151,
+      "pixels_off_catalogue_gt_300m": 61664,
+      "fraction_within_300m_of_catalogue": 0.24938223515234142
     },
     "gdr_qfaults_v2": {
       "ok": false,
@@ -98,13 +116,48 @@
         }
       ],
       "pixels_in_footprint": 244
+    },
+    "gdr_volcanics": {
+      "path": "data/external/derived_gdr_volcanics_100m_u8.tif",
+      "bytes": 72349,
+      "sha256": "c219bd644e6f7a4071dc429e29b909a2296967b0657bf456bb6675413ee76cb2",
+      "ok": true,
+      "feature_count_in_grid": 941,
+      "layers": [
+        {
+          "file": "great_basin_flows.shp",
+          "rows": 5281,
+          "used": true
+        },
+        {
+          "file": "great_basin_vents.shp",
+          "rows": 1514,
+          "used": true
+        }
+      ],
+      "pixels_in_footprint": 6776
+    },
+    "gdr_2m_probes": {
+      "path": "data/external/derived_gdr_2m_probes_100m_u8.tif",
+      "bytes": 78021,
+      "sha256": "7ac3cfdf2412f7f8a8b82d928115888c510f106f0254fb0b3988448db2f3b6ec",
+      "ok": true,
+      "feature_count_in_grid": 3439,
+      "layers": [
+        {
+          "file": "2m_temperature_probe_n83geo.shp",
+          "rows": 3800,
+          "used": true
+        }
+      ],
+      "pixels_in_footprint": 2700
     }
   },
   "errors": {
     "gdr_paleo:Paleo_geothermal_final.csv": "UnicodeDecodeError('utf-8', b'FID,Long_deg_NAD83,Lat_deg_NAD83,Location,State,Deposit_type,Map_unit,Ref_source,Comments\\r\\n1,-115.8682057,38.36521629,Abel Springs,NV,Travertine,Qt,Ayling_2020, \\r\\n2,-"
   },
-  "stage": "failed",
-  "updated_utc": "2026-10-03T17:32:35+00:00",
+  "stage": "completed",
+  "updated_utc": "2026-10-03T17:33:41+00:00",
   "python": "3.11.16",
   "imports": {
     "numpy": "2.4.6",
@@ -731,7 +784,5 @@
         }
       }
     }
-  },
-  "fatal": "MemoryError((6795,), dtype('<U1108404'))",
-  "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py\", line 395, in <module>\n    code = main()\n           ^^^^^^\n  File \"/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py\", line 380, in main\n    rasterise_points_or_polygons(path, key)\n  File \"/home/runner/work/GEMSDOE30/GEMSDOE30/scripts/fetch_external_layers.py\", line 349, in rasterise_points_or_polygons\n    kept = [g for g in shapely.intersection(shapely.from_wkt([shapely.to_wkt(g) for g in geometries]), clip_box)\n                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/shapely/io.py\", line 305, in from_wkt\n    return lib.from_wkt(geometry, invalid_handler, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nnumpy._core._exceptions._ArrayMemoryError: Unable to allocate 28.1 GiB for an array with shape (6795,) and data type <U1108404\n"
+  }
 }
