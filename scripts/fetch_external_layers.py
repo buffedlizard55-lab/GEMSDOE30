@@ -233,6 +233,27 @@ def main() -> int:
                 layer_names.append({"layer": shapefile.name, "rows": int(len(gdf))})
                 if not len(gdf):
                     continue
+                # Attribute audit: the age/type codes on the state fault layers are what
+                # would let a later run keep only late-Cenozoic structures instead of the
+                # whole linework inventory.  Record the schema (bounded size) in the
+                # receipt so the filter can be designed from verified values.
+                try:
+                    schema = {}
+                    for column in gdf.columns:
+                        if column == "geometry":
+                            continue
+                        series = gdf[column]
+                        entry = {"dtype": str(series.dtype), "n_unique": int(series.nunique(dropna=True))}
+                        if str(series.dtype) in ("object", "str", "string"):
+                            counts = series.astype(str).value_counts().head(25)
+                            entry["top_values"] = {str(k)[:80]: int(v) for k, v in counts.items()}
+                        schema[str(column)] = entry
+                    report.setdefault("inventory_attributes", {})[
+                        f"{key}:{shapefile.name}"
+                    ] = {"rows": int(len(gdf)), "fields": schema}
+                    save()
+                except Exception as exc:  # noqa: BLE001
+                    report["errors"][f"attributes:{key}:{shapefile.name}"] = repr(exc)[:200]
                 text_columns = [
                     column for column in gdf.columns
                     if column != "geometry" and str(gdf[column].dtype) in ("object", "str", "string")
