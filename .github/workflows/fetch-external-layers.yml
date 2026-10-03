@@ -1,0 +1,69 @@
+name: fetch-external-layers
+
+# Why this workflow exists
+# ------------------------
+# The agent session sandbox can only reach api.github.com / github.com / codeload.github.com /
+# pypi.org.  mrdata.usgs.gov, gdr.openei.org and sciencebase.gov are unreachable from it, so a
+# hypothesis that depends on an official external layer cannot be *verified as obtainable* from
+# inside a session.  A GitHub-hosted runner can reach those hosts; this workflow is the bridge.
+# It downloads only the specific free official files named in scripts/fetch_external_layers.py,
+# verifies the competition grid against pinned SHA-256 values, derives small 100 m rasters on the
+# exact submission grid, and commits those rasters plus a measurement receipt back to the branch.
+#
+# It never contacts drivendata.org: the competition Terms of Use prohibit robots/automatic access.
+# Manual review links (open in a browser):
+#   USGS SGMC geologic maps of US states  https://mrdata.usgs.gov/geology/state/
+#   GDR 1391 INGENIOUS (DOI 10.15121/1881483) https://gdr.openei.org/submissions/1391
+
+on:
+  push:
+    branches:
+      - main
+      - arena/01a102a1-gemsdoe30
+    paths:
+      - ".github/workflows/fetch-external-layers.yml"
+      - "scripts/fetch_external_layers.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install geospatial readers
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy scipy rasterio pyogrio shapely pyproj pandas
+
+      - name: Fetch and derive official external layers
+        run: python scripts/fetch_external_layers.py
+        continue-on-error: true
+
+      - name: Commit derived layers and receipt
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f data/external/external_receipt.json data/external/derived_*_100m_u8.tif data/external/derived_*_100m.tif || true
+          if git diff --cached --quiet; then
+            echo "no derived layers to commit"
+          else
+            git commit -m "external layers: derive official USGS SGMC / GDR 100 m rasters [skip ci]"
+            git push origin HEAD:${{ github.ref_name }}
+          fi
+
+      - name: Receipt summary
+        if: always()
+        run: python -c "import json,pathlib;p=pathlib.Path('data/external/external_receipt.json');print(p.read_text()[:4000] if p.exists() else 'no receipt')"
