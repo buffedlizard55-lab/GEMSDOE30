@@ -15,6 +15,8 @@ from __future__ import annotations
 import math
 from typing import Any
 
+EVALUATOR_VERSION = "component-holdout-v2-footprint-20261025"
+
 PIXEL_M = 100.0
 RADIUS_M = 300.0
 ALPHA = 0.2
@@ -213,7 +215,17 @@ def masked_dti_by_blocks(prediction: Any, truth: Any, known: Any, valid: Any, *,
     truth = np.asarray(truth, dtype=bool)
     known = np.asarray(known, dtype=bool)
     valid = np.asarray(valid, dtype=bool)
-    scored = ~known
+    if prediction.ndim != 2 or not (prediction.shape == truth.shape == known.shape == valid.shape):
+        raise ValueError("prediction, truth, known and valid must be same-shaped 2D arrays")
+    if not math.isfinite(pixel_m) or not math.isfinite(radius_m) or pixel_m <= 0 or radius_m <= 0:
+        raise ValueError("pixel size and kernel radius must be finite and positive")
+    if not math.isfinite(alpha) or not 0 <= alpha <= 1:
+        raise ValueError("alpha must be in [0, 1]")
+    scored = valid & ~known
+    if not np.isfinite(prediction[scored]).all() or np.any((prediction[scored] < 0) | (prediction[scored] > 1)):
+        raise ValueError("scored predictions must be finite in [0, 1]")
+    if fp_weight is not None and np.any(truth & ~valid):
+        raise ValueError("cached FP weights cannot be trusted with out-of-footprint truth")
     positive = truth & scored
     p = np.where(scored, prediction.astype(np.float64), 0.0)
     credit = np.zeros(p.shape, dtype=np.float64)
@@ -232,16 +244,20 @@ def masked_dti_by_blocks(prediction: Any, truth: Any, known: Any, valid: Any, *,
             candidate = p[y0d + dy:y1d + dy, x0d + dx:x1d + dx] * kernel
             np.maximum(credit[y0d:y1d, x0d:x1d], candidate, out=credit[y0d:y1d, x0d:x1d])
     if fp_weight is None:
-        fp_weight = fp_weight_field(truth, known, pixel_m=pixel_m, radius_m=radius_m)
-    fp_field = p * fp_weight
+        fp_weight = fp_weight_field(positive, ~scored, pixel_m=pixel_m, radius_m=radius_m)
+    fp_weight = np.asarray(fp_weight)
+    if fp_weight.shape != p.shape or not np.isfinite(fp_weight[scored]).all() or np.any((fp_weight[scored] < 0) | (fp_weight[scored] > 1)):
+        raise ValueError("FP weights must match the grid and be finite in [0, 1]")
+    fp_field = p * np.where(scored, fp_weight, 0.0)
     result: dict[str, Any] = {
+        "evaluator_version": EVALUATOR_VERSION,
         "pooled": {
             "dti": dti_from_components(float(credit[positive].sum()), float(fp_field.sum()),
                                        float(positive.sum()), alpha=alpha),
             "tp_weight": float(credit[positive].sum()),
             "fp_weight": float(fp_field.sum()),
             "truth_pixels": float(positive.sum()),
-            "emitted_pixels": int(np.count_nonzero(prediction)),
+            "emitted_pixels": int(np.count_nonzero(p)),
         }
     }
     half_r, half_c = height // 2, width // 2
@@ -253,9 +269,6 @@ def masked_dti_by_blocks(prediction: Any, truth: Any, known: Any, valid: Any, *,
         block[r0:r1, c0:c1] = True
         block_scored = block & scored & valid
         truth_block = positive & block
-        if not truth_block.any():
-            result[f"quadrant_{qi}"] = {"dti": float("nan"), "note": "no hidden truth in block"}
-            continue
         tp = float(credit[truth_block].sum())
         fp = float(fp_field[block_scored].sum())
         n = float(truth_block.sum())

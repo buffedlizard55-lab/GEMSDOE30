@@ -1,3 +1,11 @@
+## Current session update — 2026-10-25
+
+Data placement and preparation completed locally using `scripts/restore_public_mirrors.py`
+and `scripts/prepare_data.py`. See `docs/research/2026-10-25/prepared-manifest.json`.
+The large files remain ignored and may need restoration in a fresh checkout.
+Mirror integrity is verified; organizer origin/authentication is not independently
+verified. The older access notes below are historical, not a current placement blocker.
+
 # Local data placement
 
 Competition rasters are not committed. The official competition data page currently requires an authorized DrivenData login; this repository will not handle credentials or bypass that access control.

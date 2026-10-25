@@ -1,26 +1,32 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-19T19:23:01Z",
+  "generated_utc": "2026-10-25T20:11:29Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
     "directory": "data/raw",
-    "required_files_present": false,
+    "required_files_present": true,
     "sha256_verified_against_pins": true,
     "files": [
       {
         "dest": "training_features.tif",
         "path": "data/raw/training_features.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-        "expected_bytes": 418912844
+        "expected_bytes": 418912844,
+        "actual_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "actual_bytes": 418912844,
+        "sha256_matches_pin": true
       },
       {
         "dest": "labels.tif",
         "path": "data/raw/labels.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "expected_bytes": 425830
+        "expected_bytes": 425830,
+        "actual_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+        "actual_bytes": 425830,
+        "sha256_matches_pin": true
       },
       {
         "dest": "sample_submission.tif",
@@ -34,15 +40,17 @@
       }
     ],
     "prepared_dataset": {
-      "dataset_signature": null,
-      "matches_recorded_pin": null,
-      "positive_label_pixels": null,
-      "template_valid_pixels": null
+      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+      "matches_recorded_pin": true,
+      "positive_label_pixels": 60988,
+      "template_valid_pixels": 5167373
     },
     "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
   },
   "competition_data": {
     "owner_mirror_files_present": [
+      "training_features.tif",
+      "labels.tif",
       "sample_submission.tif"
     ],
     "organizer_authenticated": false,
@@ -79,7 +87,7 @@
       "all_cells_finite_and_in_range": null,
       "nan_cells_anywhere": null,
       "range_error_immune": null,
-      "site_linked": true,
+      "site_linked": null,
       "submission_recommendation": false,
       "run_name": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13",
       "note": "4-fold OOF GBM; adaptive emission missed its proxy gate; unpromoted and unscored",
@@ -115,7 +123,7 @@
       "all_cells_finite_and_in_range": null,
       "nan_cells_anywhere": null,
       "range_error_immune": null,
-      "site_linked": true,
+      "site_linked": null,
       "submission_recommendation": false,
       "run_name": "GEMSDOE25_dotted-h19-5-d2-8_20261002_e56ea318af89",
       "note": "External D2.8 research reference; 0.2600 score attribution unverified; owner page says unscored/not slot-approved",
@@ -151,7 +159,7 @@
       "all_cells_finite_and_in_range": true,
       "nan_cells_anywhere": 0,
       "range_error_immune": true,
-      "site_linked": true,
+      "site_linked": null,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-d15-poisson200m-offcat-60069-20261003T233210Z-68d0e2e4",
       "note": "GEMSDOE30 d1.5 Poisson-200m off-catalogue 60069 dots; all-finite 0-1; range-error hardened",
@@ -169,7 +177,7 @@
       "all_cells_finite_and_in_range": false,
       "nan_cells_anywhere": 7111787,
       "range_error_immune": false,
-      "site_linked": true,
+      "site_linked": null,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca-nanoutside",
       "note": "GEMSDOE30 d2.8 Poisson-300m off-catalogue 44090 dots; NaN outside per published spec",
@@ -205,7 +213,7 @@
       "all_cells_finite_and_in_range": true,
       "nan_cells_anywhere": 0,
       "range_error_immune": true,
-      "site_linked": true,
+      "site_linked": null,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-edge-hybrid-80k-02845bd4-20261003T234340Z-allfinite",
       "note": "GEMSDOE30 EDGE hybrid 80000 dots off-catalogue; all-finite 0-1; range-error hardened",
@@ -223,7 +231,7 @@
       "all_cells_finite_and_in_range": null,
       "nan_cells_anywhere": null,
       "range_error_immune": null,
-      "site_linked": true,
+      "site_linked": null,
       "submission_recommendation": false,
       "run_name": "edge-emitter-session30",
       "note": "GEMSDOE30 EDGE emitter, hybrid belief field, 80,000 dots; unpromoted research artifact (see docs/research/emitter-opt-holdout.md)",
@@ -259,7 +267,7 @@
       "all_cells_finite_and_in_range": null,
       "nan_cells_anywhere": null,
       "range_error_immune": null,
-      "site_linked": true,
+      "site_linked": null,
       "submission_recommendation": false,
       "run_name": "GEMSDOE30_sgmc-hedge-t04-s4-d10_20261003T174409650983Z_ac08b41e",
       "note": "SGMC-hedge research raster; SGMC holdout is tautological; not promoted or scored",
@@ -270,10 +278,10 @@
     "published_outside_convention": "null/NaN outside the data bounds; finite probabilities in [0, 1] inside",
     "official_problem_description": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
     "builder_default": "zeros outside (range-error immune); --outside nan available for the literal spec reading",
-    "zero_outside": "primary published convention for this project since 2026-10-03. Legal on two verified grounds: the organizer's own reference solution writes its example with no nodata tag and finite values everywhere, and the owner ledger records r7-nms3-dem10-scarp_0c9199f14e62 = 0.1294 beside ..._allfinite = 0.1294, i.e. identical scores for both encodings. See IR-30-045.",
+    "zero_outside": "Historical all-finite convention. The official reference notebook writes without an explicit nodata argument; owner-reported scores are not organizer confirmation. A whole-array range check does not prove portal acceptance or scientific readiness.",
     "historical_range_error_file_identified": false,
-    "historical_range_error_cause_diagnosed": true,
-    "historical_range_error_cause": "Two mechanisms measured on the pin-matched mirrors (IR-30-044): training_features.tif declares nodata as the float32 sentinel -3.4028234663852886e+38 and carries it on 3,061 pixels inside the 5,167,373-pixel scoring footprint per band (band 6 tc: 3,073; 58,171 band-pixels total); and band 1 calls only 5,165,852 pixels valid against the template's 5,167,373, so a feature-derived footprint mask strands exactly 3,061 scored pixels as NaN. Either alone produces the portal's range rejection. The specific trigger in the one historical upload is still inferred, not proven: that file was never obtained.",
+    "historical_range_error_cause_diagnosed": false,
+    "historical_range_error_cause": "Unknown exact upload. Feature sentinels and feature-derived footprint masks are documented possible failure modes, not a proven diagnosis of the historical rejection.",
     "range_error_root_cause_record": "docs/research/range-error-root-cause-2026-10-03.md",
     "hardened_builder": "scripts/build_portal_submission.py",
     "known_faults_masked_from_scoring": {
@@ -284,6 +292,68 @@
     },
     "local_validation_guarantees_portal_acceptance": false
   },
+  "current_readiness": {
+    "schema_version": 1,
+    "run_id": "gems30-readiness-audit-20261025",
+    "hypothesis": "Prospective: cross-contact magnetic texture displacement may recover buried faults independently of catalogue-flank pruning.",
+    "mechanism": "Matched magnetic texture offsets across independent gravity edges; proposed only, not implemented or tested.",
+    "non_fault_mimic": "Intrusive lithologic contact",
+    "lane": null,
+    "lane_status": "blocked: the current prompt refers to but does not identify a method-lane paragraph",
+    "experiments_run": 0,
+    "experiment_cap": 3,
+    "time_cap_hours": 2,
+    "holdout": {
+      "label": "HOLDOUT-DTI",
+      "value": null,
+      "evaluator_version": "component-holdout-v2-footprint-20261025",
+      "withheld_positives": null,
+      "ci95": null,
+      "status": "not run; buffered-segment protocol and comparable best must be established after shared evaluator correction"
+    },
+    "feature_canaries": {
+      "status": "not run; no candidate features generated"
+    },
+    "registry": {
+      "complete": false,
+      "candidate_surface_correlation": null,
+      "candidate_final_dot_overlap": null,
+      "historical_reference_only": {
+        "artifact": "GEMSDOE32 H33-B2",
+        "compared_with": "GEMSDOE28 solo-d2.8",
+        "spearman": 0.9675873339320377,
+        "fraction_within_3px": 1.0,
+        "decision": "duplicate-stop",
+        "receipt": "docs/research/h33-historical-duplicate-audit.json",
+        "warning": "educational comparison of prior artifacts, not a generated candidate or surface-stage test"
+      }
+    },
+    "raster_sha256": null,
+    "validator_output": {
+      "status": "not run on a new candidate: none generated",
+      "no_nan_inside_footprint": null,
+      "values_in_0_1": null,
+      "crs_match": null,
+      "shape_match": null,
+      "transform_match": null,
+      "historical_reference_diagnostic_only": "docs/research/2026-10-25/historical-h33-format.json"
+    },
+    "submission_name": null,
+    "note": "Readiness blocked: no assigned lane or complete registry; historical H33 is a duplicate. No new TIFF or slot approved.",
+    "submission_approved": false,
+    "slot_selected": false,
+    "verdict": "negative",
+    "verdict_scope": "readiness, not an experimentally falsified geological hypothesis",
+    "blockers": [
+      "Missing assigned method lane",
+      "Missing complete parallel-run surface/raster registry",
+      "Requested shared-template location not supplied; existing local shared tools used and fixed",
+      "Buffered segment holdout and per-feature canaries not run",
+      "Current best must be re-evaluated with the corrected shared footprint handling",
+      "Current portal cap, organizer receipt and acceptance not verified"
+    ]
+  },
+  "historical_promotion_warning": "Prior results require same-protocol re-evaluation after the shared footprint correction.",
   "promotion_gates": {
     "loss_ablation": {
       "screen": "docs/research/loss-ablation-holdout.json",
@@ -581,7 +651,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "119 tests collected in 0.56s",
+      "pytest_collect": "129 tests collected in 0.66s",
       "exit_code": 0
     },
     "score_gain_claimed": false

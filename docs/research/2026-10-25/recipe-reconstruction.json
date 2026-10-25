@@ -1,0 +1,9 @@
+{
+  "kind": "historical recipe reconstruction, not a new submission",
+  "h33_exactly_matches_h28_pruned_with_catalogue_distance_gt_2px": true,
+  "mismatching_pixels": 0,
+  "h25_h30_identical_in_footprint": true,
+  "h28_h31_identical_in_footprint": true,
+  "base_dots": 40199,
+  "h33_dots": 37654
+}

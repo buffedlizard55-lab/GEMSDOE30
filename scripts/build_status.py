@@ -274,9 +274,11 @@ def main() -> int:
         placement.append(entry)
     present = [row["dest"] for row in placement if row["present"]]
     required = ("training_features.tif", "labels.tif", "sample_submission.tif")
-    hashes_ok = all(row.get("sha256_matches_pin") for row in placement
-                    if row["dest"] in required and row["present"])
-    placement_ok = all(row["present"] for row in placement if row["dest"] in required) and hashes_ok
+    required_rows = {row["dest"]: row for row in placement if row["dest"] in required}
+    hashes_ok = all(required_rows.get(name, {}).get("sha256_matches_pin") is True
+                    for name in required)
+    placement_ok = all(required_rows.get(name, {}).get("present") is True
+                       for name in required) and hashes_ok
     prepared_local_manifest = load_json(ROOT / "data" / "processed" / "manifest.json") or {}
     data_placement = {
         "directory": str(data_dir.relative_to(ROOT)),
@@ -326,21 +328,15 @@ def main() -> int:
             "official_problem_description": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
             "builder_default": "zeros outside (range-error immune); --outside nan available for the literal spec reading",
             "zero_outside": (
-                "primary published convention for this project since 2026-10-03. Legal on two verified "
-                "grounds: the organizer's own reference solution writes its example with no nodata tag and "
-                "finite values everywhere, and the owner ledger records r7-nms3-dem10-scarp_0c9199f14e62 = "
-                "0.1294 beside ..._allfinite = 0.1294, i.e. identical scores for both encodings. See IR-30-045."
+                "Historical all-finite convention. The official reference notebook writes without an "
+                "explicit nodata argument; owner-reported scores are not organizer confirmation. "
+                "A whole-array range check does not prove portal acceptance or scientific readiness."
             ),
             "historical_range_error_file_identified": False,
-            "historical_range_error_cause_diagnosed": True,
+            "historical_range_error_cause_diagnosed": False,
             "historical_range_error_cause": (
-                "Two mechanisms measured on the pin-matched mirrors (IR-30-044): training_features.tif "
-                "declares nodata as the float32 sentinel -3.4028234663852886e+38 and carries it on 3,061 "
-                "pixels inside the 5,167,373-pixel scoring footprint per band (band 6 tc: 3,073; 58,171 "
-                "band-pixels total); and band 1 calls only 5,165,852 pixels valid against the template's "
-                "5,167,373, so a feature-derived footprint mask strands exactly 3,061 scored pixels as NaN. "
-                "Either alone produces the portal's range rejection. The specific trigger in the one "
-                "historical upload is still inferred, not proven: that file was never obtained."
+                "Unknown exact upload. Feature sentinels and feature-derived footprint masks are "
+                "documented possible failure modes, not a proven diagnosis of the historical rejection."
             ),
             "range_error_root_cause_record": "docs/research/range-error-root-cause-2026-10-03.md",
             "hardened_builder": "scripts/build_portal_submission.py",
@@ -359,6 +355,8 @@ def main() -> int:
             },
             "local_validation_guarantees_portal_acceptance": False,
         },
+        "current_readiness": load_json(research / "2026-10-25" / "run-card.json"),
+        "historical_promotion_warning": "Prior results require same-protocol re-evaluation after the shared footprint correction.",
         "promotion_gates": gates,
         "any_candidate_promoted": bool(promoted),
         "promoted_gates": promoted,

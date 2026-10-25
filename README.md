@@ -1,5 +1,42 @@
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
+
+## START HERE — current submission decision (2026-10-25)
+
+**NOT APPROVED FOR SUBMISSION. No new unique TIFF was generated in this review.**
+Historical downloads are educational references, not new submissions. The current
+owner protocol takes precedence over contradictory ready-to-submit language in
+older sections below. Read the [current owner-request amendment](docs/research/2026-10-25/owner-request.md)
+at the start of every session (a requirements record, not a verbatim transcript).
+The prior literal brief is preserved below for history.
+
+- [Current nine-site scientific review and four prospective hypotheses](docs/research/2026-10-25/review.md)
+- [Submission guide](executive-summary.html) · [Run card](docs/research/2026-10-25/run-card.json)
+- [Exact historical duplicate audit](docs/research/h33-historical-duplicate-audit.json)
+- [Pinned nine-site artifact registry — explicitly partial](docs/research/priority-site-pins.json)
+
+Raw data placement and preparation succeeded using the existing hash-pinned owner
+mirrors. Do not treat the prompt's old data-placement blocker as still current.
+Organizer authentication is not established by mirror hashes. No new experiment
+was run because the current method lane and complete parallel registry are missing.
+Requested shared-template filenames are absent; existing shared modules were reused.
+
+The shared pooled holdout footprint bug was fixed in
+`src/gemsdoe30/holdout.py` (version `component-holdout-v2-footprint-20261025`).
+Old metrics are historical, not automatically comparable or valid promotion gates.
+The GEMSDOE32 historical reference overlaps the GEMSDOE28 reference at **100% of
+its dots within 3 pixels**, with rank correlation **0.967587** (novelty diagnostics,
+not scores). Re-encoding/renaming that family does not satisfy the new protocol.
+
+**Next session:** resolve the assigned lane/shared-template location; synchronize
+all parallel registry rasters and surfaces; preregister buffered segment folds;
+run single-feature leakage canaries and rerun the best comparator with the fixed
+evaluator before any candidate experiment. Maximum three experiments/two hours.
+Research promotion is separate from weekly slot selection. No current leaderboard
+value or private portal acceptance is claimed here.
+
+---
+
 > **Complete persistent project brief — read the literal owner brief in the section *Read first — owner brief (verbatim)* and this section before every project session.** These are the standing scope, scientific, operational, and integrity requirements from the project request—not a session-status summary. Preserve every acceptance criterion when changing this brief. Keep `docs/score-ledger.csv`, `docs/irregularities.md`, and the linked official sources in sync when updating claims.
 
 ## Read first — owner brief (verbatim)
