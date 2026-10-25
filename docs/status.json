@@ -1,26 +1,32 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-25T20:21:02Z",
+  "generated_utc": "2026-10-25T21:10:12Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
     "directory": "data/raw",
-    "required_files_present": false,
-    "sha256_verified_against_pins": false,
+    "required_files_present": true,
+    "sha256_verified_against_pins": true,
     "files": [
       {
         "dest": "training_features.tif",
         "path": "data/raw/training_features.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-        "expected_bytes": 418912844
+        "expected_bytes": 418912844,
+        "actual_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "actual_bytes": 418912844,
+        "sha256_matches_pin": true
       },
       {
         "dest": "labels.tif",
         "path": "data/raw/labels.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "expected_bytes": 425830
+        "expected_bytes": 425830,
+        "actual_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+        "actual_bytes": 425830,
+        "sha256_matches_pin": true
       },
       {
         "dest": "sample_submission.tif",
@@ -34,20 +40,23 @@
       }
     ],
     "prepared_dataset": {
-      "dataset_signature": null,
-      "matches_recorded_pin": null,
-      "positive_label_pixels": null,
-      "template_valid_pixels": null
+      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+      "matches_recorded_pin": true,
+      "positive_label_pixels": 60988,
+      "template_valid_pixels": 5167373
     },
     "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
   },
   "competition_data": {
     "owner_mirror_files_present": [
+      "training_features.tif",
+      "labels.tif",
       "sample_submission.tif"
     ],
     "organizer_authenticated": false,
     "prepared_dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
-    "pins_core_sha256_verified_at_restore": true,
+    "pins_core_sha256_verified_now": true,
+    "historical_restore_receipt": "docs/research/2026-10-25/prepared-manifest.json",
     "pins_note": "Owner mirrors, not organizer-authenticated. Hash pins verify consistency only. Template values must never be used as features or predictions.",
     "extra_pins_files": [
       "external/lidar_scarp_features_u8.tif",
@@ -140,6 +149,24 @@
       "performance_status": "unscored; local format validation is not a score"
     },
     {
+      "manifest": "gems30-TDX1-44090-20261025-cd5566cd962c.json",
+      "file": "docs/downloads/gems30-TDX1-44090-20261025-cd5566cd962c.tif",
+      "present": true,
+      "sha256": "864b9ed01533616a2f6262c2612f0f3053b0926d69a7c52777e06a4d6b67b30e",
+      "sha256_matches_manifest": true,
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "site_linked": true,
+      "submission_recommendation": false,
+      "run_name": "gems30-TDX1-44090-20261025-cd5566cd962c",
+      "note": "TDX1 gravity-normal magnetic texture lag; 6-feature HGB; negative research result, NOT approved for competition upload.",
+      "performance_status": "unscored; format validation is not a score"
+    },
+    {
       "manifest": "gemsdoe30-d15-poisson200m-offcat-60069-20261003T233210Z-68d0e2e4.json",
       "file": "docs/downloads/gemsdoe30-d15-poisson200m-offcat-60069-20261003T233210Z-68d0e2e4.tif",
       "present": true,
@@ -187,7 +214,7 @@
       "all_cells_finite_and_in_range": true,
       "nan_cells_anywhere": 0,
       "range_error_immune": true,
-      "site_linked": true,
+      "site_linked": null,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca",
       "note": "GEMSDOE30 d2.8 Poisson-300m off-catalogue 44090 dots; all-finite 0-1; range-error hardened",
@@ -269,13 +296,14 @@
   "submission_format": {
     "published_outside_convention": "null/NaN outside the data bounds; finite probabilities in [0, 1] inside",
     "official_problem_description": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-    "builder_default": "zeros outside (range-error immune); --outside nan available for the literal spec reading",
+    "builder_default": "Current shared writer / TDX1: NaN nodata outside, finite [0,1] inside; no range-error-immunity claim",
     "zero_outside": "Historical all-finite convention. The official reference notebook writes without an explicit nodata argument; owner-reported scores are not organizer confirmation. A whole-array range check does not prove portal acceptance or scientific readiness.",
     "historical_range_error_file_identified": false,
     "historical_range_error_cause_diagnosed": false,
     "historical_range_error_cause": "Unknown exact upload. Feature sentinels and feature-derived footprint masks are documented possible failure modes, not a proven diagnosis of the historical rejection.",
     "range_error_root_cause_record": "docs/research/range-error-root-cause-2026-10-03.md",
-    "hardened_builder": "scripts/build_portal_submission.py",
+    "shared_writer": "src/gemsdoe30/submission.py",
+    "legacy_diagnostic_builder": "scripts/build_portal_submission.py",
     "known_faults_masked_from_scoring": {
       "value": true,
       "source": "https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516",
@@ -284,66 +312,230 @@
     },
     "local_validation_guarantees_portal_acceptance": false
   },
-  "current_readiness": {
+  "current_run_pointer": {
     "schema_version": 1,
-    "run_id": "gems30-readiness-audit-20261025",
-    "hypothesis": "Prospective: cross-contact magnetic texture displacement may recover buried faults independently of catalogue-flank pruning.",
-    "mechanism": "Matched magnetic texture offsets across independent gravity edges; proposed only, not implemented or tested.",
-    "non_fault_mimic": "Intrusive lithologic contact",
-    "lane": null,
-    "lane_status": "blocked: the current prompt refers to but does not identify a method-lane paragraph",
-    "experiments_run": 0,
+    "run_card": "docs/research/texture-displacement/run-card.json",
+    "readiness": "docs/research/texture-displacement/readiness.json",
+    "purpose": "Current research artifact; this pointer does not allocate a competition slot"
+  },
+  "current_readiness": {
+    "schema_version": 2,
+    "run_id": "gems30-TDX1-44090-20261025-cd5566cd962c",
+    "hypothesis": "Magnetic texture correspondence with a persistent nonzero lag across gravity edges improves recovery of concealed faults.",
+    "mechanism": "Opposite-flank normalized profile matching at two scales; raw physics plus displacement features in a fixed six-feature HGB.",
+    "non_fault_mimic": "Intrusive lithologic contact; gridding seam",
+    "lane": "TDX-1 gravity-normal magnetic profile displacement (research continuation, not externally assigned)",
+    "experiments_run": 1,
+    "fixed_arms": [
+      "physics3",
+      "core19",
+      "tdx6"
+    ],
     "experiment_cap": 3,
+    "experimental_elapsed_seconds": 196.32,
     "time_cap_hours": 2,
     "holdout": {
       "label": "HOLDOUT-DTI",
-      "value": null,
-      "evaluator_version": "component-holdout-v2-footprint-20261025",
-      "withheld_positives": null,
-      "ci95": null,
-      "status": "not run; buffered-segment protocol and comparable best must be established after shared evaluator correction"
+      "value": 0.0741049687263338,
+      "withheld_positives": 60988,
+      "ci95": [
+        0.0647598451478687,
+        0.08390335797656864
+      ],
+      "tp_weight": 4305.03316898642,
+      "fp_weight": 42211.55773463405,
+      "evaluator_version": "component-holdout-v3-blockstats-20261025",
+      "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+      "scope": "buffered whole-segment catalogue-recovery proxy; NOT organizer performance",
+      "comparators": {
+        "physics3": {
+          "label": "HOLDOUT-DTI",
+          "value": 0.06761988471579462,
+          "withheld_positives": 60988,
+          "ci95": [
+            0.058342463500651705,
+            0.07822455227106889
+          ],
+          "tp_weight": 3924.3276949556757,
+          "fp_weight": 42299.24058964024
+        },
+        "core19": {
+          "label": "HOLDOUT-DTI",
+          "value": 0.13603652358257026,
+          "withheld_positives": 60988,
+          "ci95": [
+            0.12161504601820647,
+            0.15132073995855705
+          ],
+          "tp_weight": 7955.7896559635465,
+          "fp_weight": 40505.94771512586
+        }
+      },
+      "candidate_minus": {
+        "physics3": {
+          "label": "HOLDOUT-DTI difference",
+          "value": 0.006485084010539183,
+          "ci95": [
+            0.0020623282206892633,
+            0.010709198907145149
+          ]
+        },
+        "core19": {
+          "label": "HOLDOUT-DTI difference",
+          "value": -0.061931554856236457,
+          "ci95": [
+            -0.08128312174929626,
+            -0.0429470610841094
+          ]
+        }
+      },
+      "bootstrap": {
+        "unit": "geographic block aggregated across folds",
+        "blocks": 371,
+        "replicates": 2000,
+        "seed": 3071,
+        "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+      }
     },
     "feature_canaries": {
-      "status": "not run; no candidate features generated"
+      "features_per_fold": 22,
+      "folds": 4,
+      "alarm_count": 0,
+      "alarms": [],
+      "receipt": "docs/research/texture-displacement/results.json"
     },
     "registry": {
       "complete": false,
-      "candidate_surface_correlation": null,
-      "candidate_final_dot_overlap": null,
-      "historical_reference_only": {
-        "artifact": "GEMSDOE32 H33-B2",
-        "compared_with": "GEMSDOE28 solo-d2.8",
-        "spearman": 0.9675873339320377,
-        "fraction_within_3px": 1.0,
-        "decision": "duplicate-stop",
-        "receipt": "docs/research/h33-historical-duplicate-audit.json",
-        "warning": "educational comparison of prior artifacts, not a generated candidate or surface-stage test"
-      }
+      "surface": {
+        "decision": "blocked-incomplete-evidence",
+        "registry_entries_compared": 104,
+        "max_spearman": 0.043267465244368,
+        "max_fraction_within_3px": null,
+        "errors": []
+      },
+      "dots": {
+        "decision": "blocked-incomplete-evidence",
+        "registry_entries_compared": 104,
+        "max_spearman": 0.012956085448076162,
+        "max_fraction_within_3px": 0.4070083919256067,
+        "errors": []
+      },
+      "coverage": "all published aligned TIFFs at nine recorded repository snapshots; missing other sessions and most original surfaces",
+      "receipt_surface": "docs/research/texture-displacement/novelty-surface.json",
+      "receipt_dots": "docs/research/texture-displacement/novelty-dots.json"
     },
-    "raster_sha256": null,
+    "raster_sha256": "864b9ed01533616a2f6262c2612f0f3053b0926d69a7c52777e06a4d6b67b30e",
     "validator_output": {
-      "status": "not run on a new candidate: none generated",
-      "no_nan_inside_footprint": null,
-      "values_in_0_1": null,
-      "crs_match": null,
-      "shape_match": null,
-      "transform_match": null,
-      "historical_reference_diagnostic_only": "docs/research/2026-10-25/historical-h33-format.json"
+      "status": "passed",
+      "no_nan_inside_footprint": true,
+      "values_in_0_1": true,
+      "crs_match": true,
+      "shape_match": true,
+      "transform_match": true,
+      "single_float32_band": true,
+      "nan_nodata_outside_footprint": true,
+      "positive_catalogue_pixels": 0,
+      "emitted_dots": 44090,
+      "organizer_acceptance_confirmed": false
     },
-    "submission_name": null,
-    "note": "Readiness blocked: no assigned lane or complete registry; historical H33 is a duplicate. No new TIFF or slot approved.",
+    "submission_name": "gems30-TDX1-44090-20261025-cd5566cd962c",
+    "note": "TDX1 gravity-normal magnetic texture lag; 6-feature HGB; negative research result, NOT approved for competition upload.",
+    "published_tiff": "docs/downloads/gems30-TDX1-44090-20261025-cd5566cd962c.tif",
+    "download_ok": true,
     "submission_approved": false,
     "slot_selected": false,
     "verdict": "negative",
-    "verdict_scope": "readiness, not an experimentally falsified geological hypothesis",
+    "scientific_gate_passed": false,
+    "verdict_scope": "scientific and/or readiness gates; no competition performance claim",
     "blockers": [
-      "Missing assigned method lane",
-      "Missing complete parallel-run surface/raster registry",
-      "Requested shared-template location not supplied; existing local shared tools used and fixed",
-      "Buffered segment holdout and per-feature canaries not run",
-      "Current best must be re-evaluated with the corrected shared footprint handling",
-      "Current portal cap, organizer receipt and acceptance not verified"
-    ]
+      "Candidate failed paired HOLDOUT-DTI improvement gate or feature leakage canary",
+      "Complete parallel-run raster/surface registry unavailable",
+      "No externally assigned lane paragraph was supplied; research lane selected autonomously",
+      "Historical best UNet checkpoints absent: comparable historical-best rerun unavailable",
+      "Current portal cap, eligibility, deadline and organizer acceptance unverified"
+    ],
+    "preregistration_sha256": "f3251e77e408fbe55879c9adc249cf6888a0a82c49ef7320efe4fee135336d38",
+    "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+    "created_utc": "2026-10-25T20:58:35+00:00"
+  },
+  "current_artifact_inspection": {
+    "verified_now": true,
+    "error": null
+  },
+  "current_release_decision": {
+    "schema_version": 1,
+    "readiness_version": "research-readiness-v1-20261025",
+    "raster_sha256": "864b9ed01533616a2f6262c2612f0f3053b0926d69a7c52777e06a4d6b67b30e",
+    "gates": [
+      {
+        "name": "file_contract",
+        "status": "passed",
+        "detail": "Reopened shared-writer GeoTIFF matches template; SHA-256 binds this decision to its exact bytes"
+      },
+      {
+        "name": "labelled_holdout_evidence",
+        "status": "passed",
+        "detail": "HOLDOUT-DTI requires evaluator/protocol, withheld positives and spatial-bootstrap 95% CI"
+      },
+      {
+        "name": "paired_improvement",
+        "status": "failed",
+        "detail": "Fixed candidate must improve both same-protocol controls with positive paired CI lower bound"
+      },
+      {
+        "name": "single_feature_leakage_canaries",
+        "status": "passed",
+        "detail": "All 22 raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC"
+      },
+      {
+        "name": "count_matched_construction",
+        "status": "passed",
+        "detail": "All fixed arms must realize the same predeclared active-domain budget in every fold"
+      },
+      {
+        "name": "surface_observed_registry",
+        "status": "passed",
+        "detail": "104 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+      },
+      {
+        "name": "dots_observed_registry",
+        "status": "passed",
+        "detail": "104 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+      },
+      {
+        "name": "complete_parallel_registry",
+        "status": "unknown",
+        "detail": "Nine-site public snapshots cannot attest all parallel rasters or missing original surfaces"
+      },
+      {
+        "name": "assigned_lane",
+        "status": "unknown",
+        "detail": "Autonomous research continuation is not an externally supplied lane assignment"
+      },
+      {
+        "name": "comparable_historical_best",
+        "status": "unknown",
+        "detail": "Do not substitute an archived metric or a new comparator for a missing historical-best rerun"
+      },
+      {
+        "name": "experimental_budget",
+        "status": "passed",
+        "detail": "At most three experiments / two experimental hours"
+      },
+      {
+        "name": "artifact_identity",
+        "status": "passed",
+        "detail": "Named artifact and note of at most 140 characters"
+      }
+    ],
+    "download_ok": true,
+    "research_verdict": "negative",
+    "eligible_for_separate_slot_selector": false,
+    "submission_approved": false,
+    "slot_selected": false,
+    "display_status": "NOT APPROVED FOR SUBMISSION",
+    "organizer_score": null,
+    "organizer_acceptance_confirmed": false
   },
   "historical_promotion_warning": "Prior results require same-protocol re-evaluation after the shared footprint correction.",
   "promotion_gates": {
@@ -464,13 +656,18 @@
       },
       "promoted": false,
       "decision": "Check 2 (4-fold OOF isotonic calibration: catalogue frame slope=0.9009, mean top-decile ratio=1.0495, folds>=0.70=4/4, pass=True; SGMC frame slope=0.9101, mean top-decile ratio=1.0940, folds>=0.70=2/4, pass=False); Check 3 (LiDAR permutation removes 57.0% of gain, full-topography permutation removes 97.2%, unrelated gravity permutation retains +0.03670, folds=4/4, pass=True); Check 1 passes on the independent SGMC novelty frame (delta=+0.03670) but fails on the catalogue component proxy (delta=-0.00073). Slot promoted = False."
+    },
+    "current_research_artifact": {
+      "evidence": "docs/research/texture-displacement/run-card.json",
+      "promoted": false,
+      "decision": "NOT APPROVED FOR SUBMISSION"
     }
   },
   "any_candidate_promoted": false,
   "promoted_gates": [],
   "submission_slot_status": "none approved or used by this repository",
   "score_evidence": {
-    "official_leaderboard_snapshots_from_ledger": [
+    "historical_leaderboard_snapshot_claims_from_ledger": [
       {
         "site": "DrivenData official leaderboard",
         "submission": "rank-1 DARD (best public DW-Tversky)",
@@ -637,13 +834,14 @@
         "as_of_utc": "2026-10-03"
       }
     ],
-    "note": "DrivenData Terms of Use prohibit automated monitoring; snapshots are dated manual reads only",
+    "validated_organizer_submission_receipts": [],
+    "note": "Historical ledger assertions are not freshly verified or submission-page receipts. No current leaderboard scraping or score projection.",
     "d2_8_attribution": "owner-reported 0.2600 unverified; GEMSDOE25 page calls the file unscored"
   },
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "129 tests collected in 0.72s",
+      "pytest_collect": "148 tests collected in 0.60s",
       "exit_code": 0
     },
     "score_gain_claimed": false

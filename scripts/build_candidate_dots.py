@@ -14,8 +14,9 @@ Two mass sources, both justified in ``docs/metric-response-surface.md`` and
    surface expression (the 1 m lidar scarp bands).
 
 Every emitted dot carries value 1.0.  Under ``DTI = T / (0.2(T+F) + 0.8G)`` scaling a dot
-down scales `T` and `F` together and only shrinks the numerator, so a binary emission is
-always at least as good as a diluted one for a fixed set of dot locations.
+down UNIFORMLY scales `T` and `F` together. This justifies raising a common amplitude
+where no value exceeds 1, NOT arbitrary per-pixel binarization. Binary emission
+here is an empirical policy; graded predictions can beat it on the same support.
 
 Output is a probability-style ``.npy`` array ready for ``scripts/build_submission.py``.
 """

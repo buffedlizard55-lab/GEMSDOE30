@@ -1,0 +1,23 @@
+{
+  "signature": {
+    "transform_version": "tdx1-profiles-v1-20261025",
+    "transform_code_sha256": "b719975b97dc38e7e2b304f949f104171e260fe0cc62245dc5b721a688eba750",
+    "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed"
+  },
+  "source_bands_1based": [
+    1,
+    2,
+    13
+  ],
+  "sha256": {
+    "mag_texture": "468877cf1e677ce8c6e50a76094a585b770cb9b1690b6434e9b2dbba8d29478d",
+    "rtp_texture": "484ff0883e542b08984e6d96172ab146fad551ffa71f44f637f2fb271771848a",
+    "gravity_edge": "cafcc5046dd214514914f8a33411199b2b5c72a480baa100194e4685971ea299",
+    "supported": "40a61fac6d5f3f92e28264d81adc0b1a4cb540b528a267f93a967f8f0ec598a2"
+  },
+  "support_px": 16,
+  "supported_pixels": 4915108,
+  "uses_catalogue_geometry": false,
+  "uses_registry_values": false,
+  "uses_template_values_as_features": false
+}

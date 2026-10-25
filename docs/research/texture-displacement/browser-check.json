@@ -1,0 +1,26 @@
+{
+  "engine": "headless Chromium / playwright-core",
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1100,
+      "overview": true,
+      "guide": true,
+      "download_verified": true,
+      "copy_warning": true,
+      "no_overflow": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "overview": true,
+      "guide": true,
+      "download_verified": true,
+      "copy_warning": true,
+      "no_overflow": true
+    }
+  ],
+  "errors": [],
+  "downloaded_tiff_sha256": "864b9ed01533616a2f6262c2612f0f3053b0926d69a7c52777e06a4d6b67b30e",
+  "private_git_request_status": 403
+}

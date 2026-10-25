@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "run_id": "gems30-TDX1-44090-20261025-cd5566cd962c",
+  "hypothesis": "Magnetic texture correspondence with a persistent nonzero lag across gravity edges improves recovery of concealed faults.",
+  "mechanism": "Opposite-flank normalized profile matching at two scales; raw physics plus displacement features in a fixed six-feature HGB.",
+  "non_fault_mimic": "Intrusive lithologic contact; gridding seam",
+  "lane": "TDX-1 gravity-normal magnetic profile displacement (research continuation, not externally assigned)",
+  "experiments_run": 1,
+  "fixed_arms": [
+    "physics3",
+    "core19",
+    "tdx6"
+  ],
+  "experiment_cap": 3,
+  "experimental_elapsed_seconds": 196.32,
+  "time_cap_hours": 2,
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.0741049687263338,
+    "withheld_positives": 60988,
+    "ci95": [
+      0.0647598451478687,
+      0.08390335797656864
+    ],
+    "tp_weight": 4305.03316898642,
+    "fp_weight": 42211.55773463405,
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "scope": "buffered whole-segment catalogue-recovery proxy; NOT organizer performance",
+    "comparators": {
+      "physics3": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.06761988471579462,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.058342463500651705,
+          0.07822455227106889
+        ],
+        "tp_weight": 3924.3276949556757,
+        "fp_weight": 42299.24058964024
+      },
+      "core19": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.13603652358257026,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.12161504601820647,
+          0.15132073995855705
+        ],
+        "tp_weight": 7955.7896559635465,
+        "fp_weight": 40505.94771512586
+      }
+    },
+    "candidate_minus": {
+      "physics3": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.006485084010539183,
+        "ci95": [
+          0.0020623282206892633,
+          0.010709198907145149
+        ]
+      },
+      "core19": {
+        "label": "HOLDOUT-DTI difference",
+        "value": -0.061931554856236457,
+        "ci95": [
+          -0.08128312174929626,
+          -0.0429470610841094
+        ]
+      }
+    },
+    "bootstrap": {
+      "unit": "geographic block aggregated across folds",
+      "blocks": 371,
+      "replicates": 2000,
+      "seed": 3071,
+      "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+    }
+  },
+  "feature_canaries": {
+    "features_per_fold": 22,
+    "folds": 4,
+    "alarm_count": 0,
+    "alarms": [],
+    "receipt": "docs/research/texture-displacement/results.json"
+  },
+  "registry": {
+    "complete": false,
+    "surface": {
+      "decision": "blocked-incomplete-evidence",
+      "registry_entries_compared": 104,
+      "max_spearman": 0.043267465244368,
+      "max_fraction_within_3px": null,
+      "errors": []
+    },
+    "dots": {
+      "decision": "blocked-incomplete-evidence",
+      "registry_entries_compared": 104,
+      "max_spearman": 0.012956085448076162,
+      "max_fraction_within_3px": 0.4070083919256067,
+      "errors": []
+    },
+    "coverage": "all published aligned TIFFs at nine recorded repository snapshots; missing other sessions and most original surfaces",
+    "receipt_surface": "docs/research/texture-displacement/novelty-surface.json",
+    "receipt_dots": "docs/research/texture-displacement/novelty-dots.json"
+  },
+  "raster_sha256": "864b9ed01533616a2f6262c2612f0f3053b0926d69a7c52777e06a4d6b67b30e",
+  "validator_output": {
+    "status": "passed",
+    "no_nan_inside_footprint": true,
+    "values_in_0_1": true,
+    "crs_match": true,
+    "shape_match": true,
+    "transform_match": true,
+    "single_float32_band": true,
+    "nan_nodata_outside_footprint": true,
+    "positive_catalogue_pixels": 0,
+    "emitted_dots": 44090,
+    "organizer_acceptance_confirmed": false
+  },
+  "submission_name": "gems30-TDX1-44090-20261025-cd5566cd962c",
+  "note": "TDX1 gravity-normal magnetic texture lag; 6-feature HGB; negative research result, NOT approved for competition upload.",
+  "published_tiff": "docs/downloads/gems30-TDX1-44090-20261025-cd5566cd962c.tif",
+  "download_ok": true,
+  "submission_approved": false,
+  "slot_selected": false,
+  "verdict": "negative",
+  "scientific_gate_passed": false,
+  "verdict_scope": "scientific and/or readiness gates; no competition performance claim",
+  "blockers": [
+    "Candidate failed paired HOLDOUT-DTI improvement gate or feature leakage canary",
+    "Complete parallel-run raster/surface registry unavailable",
+    "No externally assigned lane paragraph was supplied; research lane selected autonomously",
+    "Historical best UNet checkpoints absent: comparable historical-best rerun unavailable",
+    "Current portal cap, eligibility, deadline and organizer acceptance unverified"
+  ],
+  "preregistration_sha256": "f3251e77e408fbe55879c9adc249cf6888a0a82c49ef7320efe4fee135336d38",
+  "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+  "created_utc": "2026-10-25T20:58:35+00:00"
+}

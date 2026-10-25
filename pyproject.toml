@@ -7,7 +7,7 @@ name = "gemsdoe30"
 version = "0.1.0"
 description = "Auditable research and submission tooling for the DOE GEMS fault-mapping challenge"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = { text = "MIT" }
 authors = [{ name = "GEMSDOE30 contributors" }]
 dependencies = []
@@ -19,7 +19,17 @@ train = [
   "rasterio>=1.3",
   "torch>=2.1",
 ]
-test = ["pytest>=8.0", "shapely>=2.0", "pyproj>=3.5"]
+research = [
+  "numpy>=1.24",
+  "scipy>=1.10",
+  "rasterio>=1.3",
+  "scikit-learn>=1.3",
+  "threadpoolctl>=3.1",
+]
+test = [
+  "pytest>=8.0", "shapely>=2.0", "pyproj>=3.5",
+  "numpy>=1.24", "scipy>=1.10", "rasterio>=1.3",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
