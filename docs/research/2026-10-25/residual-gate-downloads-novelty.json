@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "candidate": "docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif",
-  "references_compared": 11,
+  "references_compared": 12,
   "errors": [],
   "duplicates": [],
   "max_spearman": 0.010325292092377989,
@@ -101,6 +101,17 @@
       "candidate_dots": 78256,
       "reference_dots": 80000,
       "candidate_fraction_within_3px_of_reference": 0.45021468002453485,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif",
+      "spearman_full_footprint": -0.0010391980740804918,
+      "candidate_dots": 78256,
+      "reference_dots": 32058,
+      "candidate_fraction_within_3px_of_reference": 0.10210079738294828,
       "identical_inside_footprint": false,
       "correlation_duplicate": false,
       "dot_duplicate": false,

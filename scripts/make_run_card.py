@@ -125,7 +125,7 @@ def main():
         "slot_selected": False,
         "generated_utc": side["generated_utc"],
     }
-    out = REC / "run-card.json"
+    out = REC / "run-card-residual-gate.json"
     out.write_text(json.dumps(card, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     print(f"wrote {out} sha256={side['raster_sha256']} verdict=negative note_len={len(note)}")
     return 0

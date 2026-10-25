@@ -86,7 +86,7 @@ a catalogue split. (c) Neither protocol uses expert-labelled new faults, which i
 * Final-dot check against the nine pinned registry rasters (`check_novelty.py --stage dots`): Spearman ≈ 0.002–0.003 against every
   reference; at most **22%** of candidate dots within 3 px of any reference (threshold: Spearman > 0.90 or > 70%). No duplicate.
   Decision `blocked-incomplete-evidence` because the registry is explicitly partial (`complete: false`). **Not a novelty certificate.**
-* Repo-wide check against all 11 other TIFFs in `docs/downloads` (`check_downloads_novelty.py`): max Spearman 0.0103; max
+* Repo-wide check against all 12 other TIFFs in `docs/downloads` (including the other session's H-CC1 candidate, Spearman −0.0010, 10.2 % within 3 px, no duplicate) (`check_downloads_novelty.py`): max Spearman 0.0103; max
   within-3px fraction **45.0%** (GEMSDOE30 edge-hybrid). No duplicate under the thresholds.
 * **Surface-stage check not run.** The registry contains final dot rasters only; the continuous surfaces that produced them were not
   reconstructed, so the required pre-placement surface comparison is **blocked**.
