@@ -32,6 +32,7 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
     expected_arms = set(spec["arms"])
     expected_features = set(spec["features"])
     comparators = expected_arms - {spec["candidate"]}
+    required_positive = set(spec.get("required_positive_deltas", comparators))
     gates = []
 
     def gate(name, status, detail):
@@ -57,12 +58,19 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
     gate("labelled_holdout_evidence", "passed" if measures_valid else "failed",
          "HOLDOUT-DTI requires evaluator/protocol, withheld positives and spatial-bootstrap 95% CI")
     deltas = summary.get("candidate_minus", {})
-    wins = set(deltas) == comparators and all(
-        number(row.get("value")) and row["value"] > 0
-        and interval(row.get("ci95"), -1, 1) and row["ci95"][0] > 0 for row in deltas.values())
-    gate("paired_improvement", "passed" if wins else "failed",
-         ("Fixed candidate must improve both same-protocol controls with positive paired CI lower bound"
-          if spec["id"] == "tdx1" else "Fixed full-stack candidate must improve core19, zero-lag and phase-null controls with positive paired CI lower bounds"))
+    all_deltas_valid = set(deltas) == comparators and all(
+        number(row.get("value")) and interval(row.get("ci95"), -1, 1) for row in deltas.values()
+    )
+    wins = all_deltas_valid and all(
+        deltas[name]["value"] > 0 and deltas[name]["ci95"][0] > 0 for name in required_positive
+    )
+    if spec["id"] == "tdx1":
+        delta_detail = "Fixed candidate must improve both same-protocol controls with positive paired CI lower bound"
+    elif spec["id"] == "tdxc2":
+        delta_detail = "Fixed full-stack candidate must improve core19, zero-lag and phase-null controls with positive paired CI lower bounds"
+    else:
+        delta_detail = "Fixed candidate must improve preregistered core19 comparator with positive paired CI lower bound"
+    gate("paired_improvement", "passed" if wins else "failed", delta_detail)
     features = results.get("feature_canaries", [])
     complete_canaries = (len(features) == 4 and {f.get("fold") for f in features} == set(range(4))
                          and all(len(fold.get("features", [])) == len(expected_features)

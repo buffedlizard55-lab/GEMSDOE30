@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "run_card": "docs/research/texture-displacement/run-card.json",
-  "readiness": "docs/research/texture-displacement/readiness.json",
-  "purpose": "Retained TDX-1 archive for research download; latest TDX-C2 attempt is duplicate-stopped, not a new downloadable submission",
+  "run_card": "docs/research/msdb-piedmont/run-card.json",
+  "readiness": "docs/research/msdb-piedmont/readiness.json",
+  "purpose": "Current research artifact MSDB-1v2 (multi-scale steerable discontinuity + piedmont ramp habitat, +0.036834 / +27.6% over core19; passed observed 167-entry novelty gate; not approved for competition slot without complete parallel registry)",
   "latest_attempt": "docs/research/texture-controls/run-card.json",
   "additional_stopped_attempts": [
     {
