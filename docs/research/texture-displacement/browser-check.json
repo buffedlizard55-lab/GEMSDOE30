@@ -1,5 +1,7 @@
 {
   "engine": "headless Chromium / playwright-core",
+  "chromium_version": "153.0.8010.0",
+  "playwright_version": "1.64.1",
   "viewports": [
     {
       "width": 1440,
@@ -21,6 +23,6 @@
     }
   ],
   "errors": [],
-  "downloaded_tiff_sha256": "864b9ed01533616a2f6262c2612f0f3053b0926d69a7c52777e06a4d6b67b30e",
+  "downloaded_tiff_sha256": "9556e3ddd8ea7658ca510ab02d5b5304ac4c3332c54e7f86df5a24769bd03cdb",
   "private_git_request_status": 403
 }

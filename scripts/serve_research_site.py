@@ -27,6 +27,11 @@ class PublicHandler(SimpleHTTPRequestHandler):
         if not path.is_relative_to(ROOT):
             self.send_error(403, "Outside public site")
             return None
+        # Apply the same denylist after resolving symlinks: a public-looking
+        # filename must not expose .git, raw inputs, caches or model outputs.
+        if any(part.startswith(".") or part in BLOCKED for part in path.relative_to(ROOT).parts):
+            self.send_error(403, "Resolved path is private")
+            return None
         if path.is_dir() and not (path / "index.html").is_file():
             self.send_error(403, "Directory listings disabled")
             return None

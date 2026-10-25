@@ -19,6 +19,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from gemsdoe30.holdout import spatial_bootstrap
 from gemsdoe30.readiness import assess
 from gemsdoe30.submission import validate_submission_file
+from gemsdoe30.texture import SUPPORT_PX, TRANSFORM_VERSION
 
 
 def local_path(relative: str) -> Path:
@@ -89,6 +90,21 @@ def verify(pointer: Path, template: Path, *, write=False):
         raise ValueError("frozen preregistration hash differs between plan/start/results/card")
     if results.get("raster_sha256") != digest:
         raise ValueError("holdout results do not bind to the published TIFF")
+    features = load(directory / "feature-receipt.json")
+    cache = load(directory / "cache-verification.json")
+    transform_hash = hashlib.sha256((ROOT / "src/gemsdoe30/texture.py").read_bytes()).hexdigest()
+    if (features["signature"]["transform_code_sha256"] != transform_hash
+            or features["signature"]["transform_version"] != TRANSFORM_VERSION
+            or features.get("support_px") != SUPPORT_PX
+            or card.get("physical_support_px") != SUPPORT_PX
+            or any(fold.get("buffer_px") != SUPPORT_PX for fold in results["folds"])):
+        raise ValueError("transform identity or physical-support/training guard mismatch")
+    if (cache.get("all_cells_match_raw_sources") is not True
+            or cache.get("dataset_signature") != card.get("dataset_signature")
+            or features["signature"].get("dataset_signature") != card.get("dataset_signature")):
+        raise ValueError("full-cell prepared-cache verification is missing or for another dataset")
+    if started.get("experiment_count") != card.get("experiments_run"):
+        raise ValueError("execution budget count differs between start receipt and card")
     surface = load(directory / "novelty-surface.json")
     dots = load(directory / "novelty-dots.json")
     registry = load(directory / "registry.json")
@@ -109,6 +125,15 @@ def verify(pointer: Path, template: Path, *, write=False):
             raise ValueError("novelty receipt registry/template hash mismatch")
         if audit.get("registry_complete") != registry.get("complete"):
             raise ValueError("novelty completeness flag contradicts its pinned registry")
+        expected_summary = {
+            "decision": audit["decision"], "registry_entries_compared": len(rows),
+            "max_spearman": max((row["spearman_full_footprint"] for row in rows
+                                  if row.get("spearman_full_footprint") is not None), default=None),
+            "max_fraction_within_3px": max((row["candidate_fraction_within_3px_of_reference"] for row in rows
+                                            if row.get("candidate_fraction_within_3px_of_reference") is not None), default=None),
+            "errors": audit["errors"],
+        }
+        check_equal(card["registry"][stage], expected_summary, f"card/registry/{stage}")
     readiness = assess(card, results, format_passed=report.passed, hash_matches=hashes_match,
                        surface_audit=surface, dots_audit=dots, registry=registry)
     if card.get("verdict") != readiness["research_verdict"] or card.get("submission_approved") is not False:

@@ -1,7 +1,7 @@
 {
   "signature": {
-    "transform_version": "tdx1-profiles-v1-20261025",
-    "transform_code_sha256": "b719975b97dc38e7e2b304f949f104171e260fe0cc62245dc5b721a688eba750",
+    "transform_version": "tdx1-profiles-v2-euclidean-support-20261025",
+    "transform_code_sha256": "db3c404bd45f82e133d007e671e07c2fd4d3f57d357d407f9be14ea18ae8ebb4",
     "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed"
   },
   "source_bands_1based": [
@@ -10,13 +10,13 @@
     13
   ],
   "sha256": {
-    "mag_texture": "468877cf1e677ce8c6e50a76094a585b770cb9b1690b6434e9b2dbba8d29478d",
-    "rtp_texture": "484ff0883e542b08984e6d96172ab146fad551ffa71f44f637f2fb271771848a",
-    "gravity_edge": "cafcc5046dd214514914f8a33411199b2b5c72a480baa100194e4685971ea299",
-    "supported": "40a61fac6d5f3f92e28264d81adc0b1a4cb540b528a267f93a967f8f0ec598a2"
+    "mag_texture": "05407079048f7961f37030c6309d34d72d84efa37cbf1dbf661c261d8a3525ab",
+    "rtp_texture": "6a73087c5ac7499fa9fd52eb94958d5fad8bda6660a49f5e39e7379a9ff31570",
+    "gravity_edge": "6d9089adc64ac2c9e7023e81726f24de93e74a79f1a36c4d8fe6f5aba22e8006",
+    "supported": "89a2991cc5ad9eafe60aee655cf3029d51a063336afdc8e031b07cf719a7e273"
   },
-  "support_px": 16,
-  "supported_pixels": 4915108,
+  "support_px": 17,
+  "supported_pixels": 4898149,
   "uses_catalogue_geometry": false,
   "uses_registry_values": false,
   "uses_template_values_as_features": false

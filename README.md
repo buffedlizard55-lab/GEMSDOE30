@@ -2,7 +2,7 @@
 
 ## START HERE — new TIFF available; **NOT APPROVED FOR SUBMISSION**
 
-**Download for research: [new TDX-1 TIFF](docs/downloads/gems30-TDX1-44090-20261025-cd5566cd962c.tif). Do not upload it to the competition.**
+**Download for research: [new TDX-1 TIFF](docs/downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.tif). Do not upload it to the competition.**
 The [live Pages overview](https://buffedlizard55-lab.github.io/GEMSDOE30/) and
 [executive submission guide](executive-summary.html) put the download and automated
 verdict first. This is a new six-feature model output, not a copied/re-encoded
@@ -17,27 +17,38 @@ results and automated checks rather than outsourcing inspection.
 
 | Current evidence | Result |
 |---|---|
-| **HOLDOUT-DTI**, `component-holdout-v3-blockstats-20261025`; **60,988** withheld positives | **0.074105**, spatial-bootstrap **95% CI [0.064760, 0.083903]** |
-| Same-protocol core19 comparator — **HOLDOUT-DTI**, same evaluator/positives | **0.136037**, **95% CI [0.121615, 0.151321]** |
-| Paired candidate − core19 — **HOLDOUT-DTI difference**, same evaluator/positives | **−0.061932**, paired **95% CI [−0.081283, −0.042947]** |
+| **HOLDOUT-DTI**, `component-holdout-v3-blockstats-20261025`; **60,988** withheld positives | **0.072844**, spatial-bootstrap **95% CI [0.063483, 0.083061]** |
+| Same-protocol core19 comparator — **HOLDOUT-DTI**, same evaluator/positives | **0.139821**, **95% CI [0.124178, 0.155905]** |
+| Paired candidate − core19 — **HOLDOUT-DTI difference**, same evaluator/positives | **−0.066977**, paired **95% CI [−0.085747, −0.048300]** |
 | Feature canaries — AUC diagnostics, not DTI | All 22 inputs tested alone in four folds; no alarm above 0.90 |
-| Observed novelty — diagnostics, not scores | 104 aligned files / nine snapshots; max surface rho **0.043267**, final-dot overlap **40.7008%** within 3 px |
+| Observed novelty — diagnostics, not scores | 104 aligned files / nine snapshots; max surface rho **0.042623**, final-dot overlap **40.4922%** within 3 px |
 | GeoTIFF contract | One float32 band; no NaN inside; values [0,1]; CRS/shape/transform match; NaN nodata outside; no positive catalogue pixels |
 | Approval | **Negative.** Complete parallel registry, external lane allocation, historical-best rerun and current portal evidence remain unavailable |
 
 - [Final JSON run card](docs/research/texture-displacement/run-card.json) · [machine-adjudicated gates](docs/research/texture-displacement/readiness.json)
 - [Scientific review / H33 explanation / source links](docs/research/texture-displacement/review.md)
+- [Three-pass verification journal](docs/research/texture-displacement/verification.md) — **166 passed, 5 optional torch skips**, 7 subtests; desktop/mobile download verified
 - [Full results, canaries and pooled-bootstrap sufficient statistics](docs/research/texture-displacement/results.json)
 - [Expanded immutable registry](docs/research/texture-displacement/registry.json) · [exact format validation](docs/research/texture-displacement/validation.json)
 - [Current evidence pointer](docs/current-run.json) · [generated status feed](docs/status.json)
+- [All 119 owner-reported submission claims](docs/research/texture-displacement/owner-claims.csv) — **unverified**, not organizer receipts
+
+**Review correction:** the square Gaussian's diagonal reach required a 17-pixel
+finite-data/training guard, not 16. One preregistered corrective execution followed
+the first negative result; both remain negative. Total experimental time was
+**401.18 seconds across two executions**, with no geological/model/emitter tuning.
+The [retirement receipt](docs/research/texture-displacement/correction-v1-retirement.json)
+preserves the first run's commit, hash and statistics. Current values/download above
+are the corrected run, not fresh independent confirmation.
 
 ### Reproduce and inspect autonomously (Python 3.11+, CPU)
 
 ```bash
 python -m venv .venv
-.venv/bin/pip install -e '.[research,test]'
+.venv/bin/pip install -e '.[research,test]' -c requirements-tdx1.txt
 .venv/bin/python scripts/restore_public_mirrors.py
 .venv/bin/python scripts/prepare_data.py
+.venv/bin/python scripts/verify_prepared_cache.py
 # Registry already pinned in docs/research/texture-displacement/registry.json.
 # A fresh sync is a NEW snapshot, not an exact historical reproduction.
 .venv/bin/python scripts/sync_priority_registry.py --restore-only

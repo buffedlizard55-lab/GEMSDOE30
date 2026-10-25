@@ -62,7 +62,7 @@ jobs:
       - name: Install readers and test dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install numpy scipy rasterio shapely pyproj pytest
+          python -m pip install numpy scipy rasterio shapely pyproj pytest -c requirements-tdx1.txt
 
       - name: Fetch only the hash-pinned competition template (public mirror)
         env:

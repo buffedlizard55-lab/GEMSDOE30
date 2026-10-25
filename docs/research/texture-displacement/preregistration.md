@@ -1,6 +1,27 @@
-# TDX-1 — frozen research plan (2026-10-25)
+# TDX-1 — fixed-hypothesis corrective execution plan (2026-10-25)
 
-This plan is written **before candidate feature construction, fitting or evaluation**.
+The original plan and first negative execution are frozen at commit
+`361b128f9951191378a3a07b06a5d76ce1933836`; their complete receipts remain inspectable there. This amendment is
+registered **before construction/fitting/evaluation of the corrective execution**,
+**after the first negative results were inspected**. It is not fresh independent
+confirmation. The four hypotheses below were ranked before the original implementation.
+
+**Only correction:** use a **17 px** finite-data support and training guard. A square
+Gaussian with sigma 2 and truncate 3 has corner reach `sqrt(2)*6`; the profile's
+farthest sample is `sqrt(3^2+6^2)` away, and bilinear interpolation adds at most
+`sqrt(2)`. The total upper bound is approximately **16.61 px**, so 16 was not
+conservative. Round up to 17. No geological transform, scale, lag, model setting,
+emitter, density, evaluation kernel, bootstrap design or promotion threshold is tuned.
+The source-independent cache is verified cell-for-cell before the corrective fit.
+
+This is execution **2**, still one hypothesis and three fixed arms, within the cap
+of three experiments/two experimental hours. The first run took 196.32 seconds.
+The original 119-source registry snapshot stays frozen; the superseded unpublished
+same-family output is not an independent method or a competition submission.
+The correction is not used to claim independence from that earlier same-family fit.
+See [the retirement receipt](correction-v1-retirement.json).
+
+Original scope, unchanged:
 It continues the first untested hypothesis in the previous [review](../2026-10-25/review.md).
 It is a narrow, autonomously selected **research lane**, not an asserted assignment by
 an external parallel-run coordinator. The prompt names no identifiable lane paragraph;
@@ -42,7 +63,7 @@ when the winning nonzero-lag correlation is positive; require the winning lag's
 sign to agree across scales. Form one displacement feature per magnetic band;
 the third derived feature is their geometric mean times gravity-edge strength
 normalized by a **training-only** 95th percentile. Maximum physical filter/sample
-support is conservatively bounded by 16 px. No registry raster, template value,
+support is conservatively bounded by 17 px. No registry raster, template value,
 fault-distance feature or catalogue direction enters this transform.
 
 ## One experiment, three fixed arms; no tuning or candidate selection
@@ -70,9 +91,9 @@ Whole 8-connected catalogue components are assigned to one of four coarse spatia
 quadrants by centroid; every component is hidden in exactly one fold. Score the
 quadrant plus a 300 m halo around complete assigned components, so components
 crossing a quadrant edge are not cut. Remove whole non-test components touching
-a 16 px guard around that scored region from visible training faults; exclude
+a 17 px guard around that scored region from visible training faults; exclude
 those guard components' pixels from scoring/training, not their neighborhoods.
-Training pixels must lie more than 16 px outside the scoring region. Recompute
+Training pixels must lie more than 17 px outside the scoring region. Recompute
 any catalogue features from `visible` only (none are used by TDX). Mask visible
 fault pixels exactly, never a blanket fault buffer in the evaluator.
 

@@ -161,3 +161,25 @@ has a competition score.
 | IR-30-053 | High | H33 historical reference has 100% directional 3-pixel overlap and Spearman 0.967587 with GEMSDOE28 reference. | Duplicate logged; never offered as a new candidate. One artifact per requested site is a partial educational inventory, not complete novelty certification. |
 | IR-30-054 | Medium | H33 sidecar contains projections and differently scaled holdout fields; source README calls 0.4413 an unreliable mirror estimate. | No organizer receipt inferred; no projected value admitted as HOLDOUT-DTI or ORGANIZER-CONFIRMED. Current leaderboard claims remain unverified. |
 | IR-30-055 | Medium | CI exposed an existing test's assumption that directory iteration preserves file creation order. | Use `assertCountEqual` for the exact remaining input-file inventory; all rejected-output absence checks retained. CI diagnostic annotations added without suppressing failure exit codes. |
+
+
+## 2026-10-25 TDX-1 experiment and final reliability review
+
+Current decision: **NEGATIVE, NOT APPROVED FOR SUBMISSION**. The corrected new
+[TIFF and exact receipt](research/texture-displacement/run-card.json) are downloadable
+for research only. Earlier claims above retain their date/evidence limitations.
+
+| ID | Severity | Observation | Resolution / boundary |
+|---|---|---|---|
+| IR-30-056 | High | First TDX transform underestimated Euclidean support at 16 px: square Gaussian corners plus flank/tangent sampling and interpolation can reach 16.6077 px. | Analytically fixed to 17 px once in the shared transform. Amended plan before corrective fitting; first negative run frozen at commit `361b128f9951191378a3a07b06a5d76ce1933836`. Corrective execution remains negative; no model/emitter tuning or fresh-confirmation claim. |
+| IR-30-057 | High | A common-amplitude monotonicity argument had been overstated as arbitrary independent binarization optimality. | Corrected shared documentation/builder explanation; regression demonstrates a weak false positive that worsens DTI when set to one. Binary emission remains empirical, not a theorem. |
+| IR-30-058 | Medium | Legacy diagnostic conversion omitted source CRS equality; identity fields could be blank/notes over 140 characters. | Central shared writer rejects wrong CRS, blank run name and overlength note. Tests cover failures; no private writer fork. |
+| IR-30-059 | High | Receipt verification could zip-truncate CIs or omit checking paired differences, comparator fields and exact reference identities. | Entire summary and run-card values recomputed/checked, including paired CIs, versions and bootstrap config. Actual TIFF/sidecar/template/registry/preregistration identities bound. Repeated reference rows and changed template bytes fail tests. |
+| IR-30-060 | High | Nine public source snapshots are not a complete parallel registry; current external lane allocation and comparable historical-best UNet checkpoint are unavailable. | 104 unique aligned files observed; unknown evidence blocks promotion. No global-uniqueness certification, selector or upload. No extra lane was fabricated. |
+| IR-30-061 | Medium | Prepared source hashes alone do not prove cached arrays still equal their sources. | New shared cache verifier compares every feature/label/mask cell with raw-source windows and hashes all four arrays before the corrective fit; altered-cache fixtures fail. No large cache committed. |
+| IR-30-062 | Medium | Re-synchronizing main branches would silently change a frozen registry during reproduction. | `--restore-only` reads immutable refs, verifies Git blob/SHA-256/grid and preserves the JSON bytes. Tested fresh restore, cache reuse, bad remote blob and bad cached blob. |
+| IR-30-063 | Medium | Static preview URL filtering alone could allow a public-looking symlink into a private workspace path. | Apply denylist to the resolved path too, refuse directory listings, bind 0.0.0.0 and accept preview hosts. HTTP tests reject `.git`, encoded hidden paths, ignored data/outputs and private symlinks. |
+| IR-30-064 | Medium | Complete owner message supplied 119 distinct named claims; old score ledger had only a subset and current-leader claims conflict. | Full prompt preserved in README; all names/blank result retained in quarantined CSV. Added ledger rows are explicitly unverified user reports. No organizer receipt or current leader invented. |
+
+Automated checks, numerical results and the three-pass journal:
+[TDX-1 verification](research/texture-displacement/verification.md).

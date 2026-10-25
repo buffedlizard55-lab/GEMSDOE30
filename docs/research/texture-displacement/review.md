@@ -3,7 +3,7 @@
 **Date:** 2026-10-25. **Verdict: NEGATIVE — DO NOT SUBMIT.**
 
 A **newly generated** single-band GeoTIFF is now available:
-[`gems30-TDX1-44090-20261025-cd5566cd962c.tif`](../../downloads/gems30-TDX1-44090-20261025-cd5566cd962c.tif).
+[`gems30-TDX1-44090-20261025-5fc508ea81ac.tif`](../../downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.tif).
 Download is appropriate for reproducibility and research. Competition upload is **not approved**.
 It is not a renamed, pruned, re-encoded or unioned historical submission. The candidate
 uses a new six-feature model fit to physical data and visible training labels; historical
@@ -15,6 +15,8 @@ raster values enter only the duplicate audit. A changed hash alone would not pro
 - [Frozen hypotheses / plan](preregistration.md)
 - [Full experiment, canaries and bootstrap sufficient statistics](results.json)
 - [Exact TIFF validation](validation.json)
+- [Three-pass verification / reliability journal](verification.md)
+- [119 unverified owner-reported submission claims](owner-claims.csv)
 
 ## 1. What the historical H33 result establishes — and what it does not
 
@@ -76,8 +78,13 @@ from local methods, implementation costs and off-catalogue rationale were writte
 The prompt refers to an assigned single-method paragraph but does not identify one.
 This is an autonomous **research continuation**, not a fabricated external allocation;
 readiness records lane verification as unknown. No additional geological hypothesis
-or hyperparameter sweep was run. One fixed experiment, three fixed arms, completed
-in approximately **196 seconds** of experimental computation (runtime, not a score).
+or hyperparameter sweep was run. There were **two executions of the same fixed
+hypothesis/three arms**, including one preregistered bug correction: approximately
+**401 seconds total**, **205 seconds for the corrective execution** (runtime, not scores).
+The first negative run is frozen at commit `361b128f9951191378a3a07b06a5d76ce1933836`;
+[the retirement receipt](correction-v1-retirement.json) links its exact full commit.
+The current plan records the post-result amendment before the corrective construction.
+This is not a new independent geological method or fresh independent confirmation.
 
 | Input | Verified local band | Interpretation source | Evidence boundary |
 |---|---:|---|---|
@@ -89,6 +96,9 @@ All inputs came from the existing hash-pinned cached feature stack. No new exter
 source is required for these screens or represented as freshly available. The raw
 source and preparation signatures match the existing pins. [Environment, source hash
 and band tags](environment-and-sources.json); [derived-cache receipt](feature-receipt.json).
+The [full-cell cache verification](cache-verification.json) freshly confirms every
+prepared feature/label/mask cell equals the pinned raw-source derivation, not merely
+a claimed preparation signature.
 Mirror hashes establish consistency, not organizer origin, licensing certification or
 absence of all possible upstream geological-model priors.
 
@@ -97,6 +107,18 @@ magnetic source-depth changes, survey/gridding seams and unrelated sources at di
 depths. At this grid spacing the registered lags are signal-processing hypotheses, not
 validated measurements of fault slip. A correlated magnetic low/offset is not evidence
 by itself of fluid temperature, permeability, a vent, or an economic geothermal resource.
+
+### Guard-bound defect found and corrected before the final file
+
+The initial code called 16 px conservative, overlooking diagonal corners of the
+separable Gaussian's **square** support. The analytic upper bound is
+`sqrt(2)*6 + sqrt(3^2+6^2) + sqrt(2) = 16.6077 px`, including bilinear interpolation.
+The corrected transform and training guard therefore both use **17 px**. This is
+an analytic implementation correction, not a parameter selected to improve a score.
+The original negative result, plan, exact sources and hash are retained at the linked
+commit; the old unpublished same-family download has been retired, not represented
+as another novel method. Current metrics and download all refer to the corrected run.
+A regression now checks the diagonal reach and finite-support exclusion.
 
 ## 3. Hide-and-recover protocol actually executed
 
@@ -107,10 +129,10 @@ by itself of fluid temperature, permeability, a vent, or an economic geothermal 
   a claim to have reconstructed the original vector database's named fault records.
 - A fold scores its quadrant plus a 300 m halo around complete withheld components;
   segments crossing a quadrant edge are never cut. Whole other components touching
-  a 16 px training guard are removed from the visible catalogue. Those guard components'
+  a 17 px training guard are removed from the visible catalogue. Those guard components'
   **exact pixels**, not a blanket neighborhood, are unscored. Remaining visible faults
   are masked pixel-exactly by the shared evaluator.
-- Training pixels lie outside the 16 px regional guard. The physical transform has
+- Training pixels lie outside the 17 px regional guard. The physical transform has
   conservatively bounded support within that guard. No catalogue-distance/direction
   input is used; held-out labels never enter a fold's training targets or statistics.
 - A geographic negative/halo pixel may participate in multiple regional trials. This
@@ -141,14 +163,14 @@ No row is a competition result, projection or ORGANIZER-CONFIRMED score.
 
 | Fixed arm | HOLDOUT-DTI | 95% CI | Interpretation |
 |---|---:|---:|---|
-| `physics3` — raw magnetic anomaly, RTP, gravity | 0.067620 | [0.058342, 0.078225] | Physics-input ablation |
-| `tdx6` — those inputs plus registered displacement features | **0.074105** | **[0.064760, 0.083903]** | Fixed candidate; no selection among arms |
-| `core19` — rerun existing 19-band HGB recipe | **0.136037** | **[0.121615, 0.151321]** | Stronger same-protocol recipe comparator; not a claimed historical-best reproduction |
+| `physics3` — raw magnetic anomaly, RTP, gravity | 0.064591 | [0.055373, 0.074301] | Physics-input ablation |
+| `tdx6` — those inputs plus registered displacement features | **0.072844** | **[0.063483, 0.083061]** | Fixed candidate; no selection among arms |
+| `core19` — rerun existing 19-band HGB recipe | **0.139821** | **[0.124178, 0.155905]** | Stronger same-protocol recipe comparator; not a claimed historical-best reproduction |
 
 | Paired difference, still HOLDOUT-DTI | Value | Paired 95% CI |
 |---|---:|---:|
-| `tdx6 − physics3` | +0.006485 | [+0.002062, +0.010709] |
-| `tdx6 − core19` | **−0.061932** | **[−0.081283, −0.042947]** |
+| `tdx6 − physics3` | +0.008253 | [+0.004208, +0.012197] |
+| `tdx6 − core19` | **−0.066977** | **[−0.085747, −0.048300]** |
 
 **Scientific conclusion:** the derived features add local catalogue-recovery information
 beyond the three raw fields, but this restricted model is decisively inferior to the
@@ -166,7 +188,7 @@ additional unknown gate, **not concealed by calling `core19` the historical best
 
 Every one of the **22 raw/derived inputs** was tested alone in each fold, using both
 bidirectional raw-value AUC and a training-only univariate HGB. There are **no AUC
-alarms above 0.90**; the largest recorded canary is approximately **0.644751**.
+alarms above 0.90**; the largest recorded canary is approximately **0.643433**.
 A low AUC is not proof of no leakage or complete source independence. All per-feature,
 per-fold values and test sample sizes are retained in [results.json](results.json).
 
@@ -183,9 +205,9 @@ were tested. No registry values were used to alter or avoid predictions.
 
 | Diagnostic | Maximum over observed registry | Stop threshold |
 |---|---:|---:|
-| Surface full-footprint Spearman | 0.043267 | >0.90 |
-| Final-dot full-footprint Spearman | 0.012956 | >0.90 |
-| Candidate dots within Euclidean 3 px of any one reference | 40.7008% | >70% |
+| Surface full-footprint Spearman | 0.042623 | >0.90 |
+| Final-dot full-footprint Spearman | 0.013575 | >0.90 |
+| Candidate dots within Euclidean 3 px of any one reference | 40.4922% | >70% |
 
 [Surface audit](novelty-surface.json) · [Final-dot audit](novelty-dots.json).
 Positive support of a dense surface is not treated as placed dots; the meaningful
@@ -203,8 +225,8 @@ all in-footprint values are **0 or 1**; **zero positive catalogue pixels**; NaN 
 outside the scoring footprint. [Validator output](validation.json).
 
 ```text
-SHA-256 864b9ed01533616a2f6262c2612f0f3053b0926d69a7c52777e06a4d6b67b30e
-Name    gems30-TDX1-44090-20261025-cd5566cd962c
+SHA-256 9556e3ddd8ea7658ca510ab02d5b5304ac4c3332c54e7f86df5a24769bd03cdb
+Name    gems30-TDX1-44090-20261025-5fc508ea81ac
 Note    TDX1 gravity-normal magnetic texture lag; 6-feature HGB; negative research result, NOT approved for competition upload.
 ```
 
@@ -246,9 +268,10 @@ is a separate limitation for larger legacy UNet training. Large inputs/caches st
 
 ```bash
 python -m venv .venv
-.venv/bin/pip install -e '.[research,test]'
+.venv/bin/pip install -e '.[research,test]' -c requirements-tdx1.txt
 .venv/bin/python scripts/restore_public_mirrors.py
 .venv/bin/python scripts/prepare_data.py
+.venv/bin/python scripts/verify_prepared_cache.py
 .venv/bin/python scripts/sync_priority_registry.py --restore-only
 .venv/bin/python scripts/run_texture_displacement.py --max-seconds 5400
 .venv/bin/python scripts/verify_current_run.py --write
@@ -284,3 +307,14 @@ rewritten by the status feed or CI.
 **Maximize P(Win):** reject an inferior candidate and conserve the weekly cap.
 **Own the Outcome:** deliver the new TIFF, reproducible negative evidence, corrected
 shared tooling and machine-readable decision instead of outsourcing inspection.
+
+
+## 9. Three progressively deeper review passes
+
+[The complete journal](verification.md) separates implementation/execution,
+bug discovery/correction, and the full requirements/reliability check. Latest local
+suite: **166 passed, 5 optional torch tests skipped, 7 subtests passed**; two
+rasterio/Affine deprecation warnings. Ordinary exact-artifact verification and
+site staleness checks passed; promotion-required verification correctly exited 2.
+Desktop/mobile automated downloads both matched the corrected raster SHA-256.
+PR, CI and deployment results are reported only once independently observed.

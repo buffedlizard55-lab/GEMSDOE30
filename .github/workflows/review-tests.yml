@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install -e '.[research,test]'
+      - run: pip install -e '.[research,test]' -c requirements-tdx1.txt
       - name: Restore only the hash-pinned output template
         env:
           GH_TOKEN: ${{ github.token }}

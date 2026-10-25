@@ -6,11 +6,15 @@ artifacts and unrelated magnetic sources can produce the same signature.
 """
 from __future__ import annotations
 
+import math
 import numpy as np
 from scipy.ndimage import distance_transform_edt, gaussian_filter, map_coordinates
 
-TRANSFORM_VERSION = "tdx1-profiles-v1-20261025"
-SUPPORT_PX = 16
+TRANSFORM_VERSION = "tdx1-profiles-v2-euclidean-support-20261025"
+# scipy's separable Gaussian has SQUARE support. Its diagonal, the farthest
+# profile sample, and bilinear interpolation must all fit a Euclidean guard.
+MAX_SOURCE_REACH_PX = math.sqrt(2) * 6 + math.hypot(3, 6) + math.sqrt(2)
+SUPPORT_PX = math.ceil(MAX_SOURCE_REACH_PX)  # 17, not the former 16
 
 
 def profile_lag(left: np.ndarray, right: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
@@ -70,7 +74,7 @@ def displacement_features(mag_anom, rtp, gravity, valid, *, batch_size=131072):
 
     No labels, catalogue geometry, template values or registry data are accepted.
     Only fully supported finite physical data are used. Outputs are NaN where the
-    16-pixel physical support is unavailable. No missing source values are silently
+    17-pixel physical support is unavailable. No missing source values are silently
     converted into candidate evidence. Float32 batches bound memory consumption.
     """
     arrays = [np.asarray(x, dtype=np.float32) for x in (mag_anom, rtp, gravity)]

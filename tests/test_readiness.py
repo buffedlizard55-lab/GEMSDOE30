@@ -87,3 +87,13 @@ def test_invalid_hash_budget_and_long_notes_do_not_release():
     assert gate(decide(card, results, audit), 'experimental_budget') == 'failed'
     card['note'] = 'x' * 141
     assert not decide(card, results, audit)['download_ok']
+
+
+def test_boolean_counts_and_nonstring_artifact_names_are_not_valid_evidence():
+    card, results, audit = evidence(); card['experiments_run'] = True
+    assert gate(decide(card, results, audit), 'experimental_budget') == 'failed'
+    card, results, audit = evidence(); results['folds'][0]['dot_budget_each_arm'] = True
+    for row in results['folds'][0]['arms'].values(): row['emitted_pixels'] = True
+    assert gate(decide(card, results, audit), 'count_matched_construction') == 'failed'
+    card, results, audit = evidence(); card['submission_name'] = 42
+    assert not decide(card, results, audit)['download_ok']

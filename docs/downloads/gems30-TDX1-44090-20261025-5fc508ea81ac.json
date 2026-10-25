@@ -1,16 +1,16 @@
 {
   "schema_version": 3,
-  "run_name": "gems30-TDX1-44090-20261025-cd5566cd962c",
+  "run_name": "gems30-TDX1-44090-20261025-5fc508ea81ac",
   "note": "TDX1 gravity-normal magnetic texture lag; 6-feature HGB; negative research result, NOT approved for competition upload.",
-  "output_file": "gems30-TDX1-44090-20261025-cd5566cd962c.tif",
-  "output_sha256": "864b9ed01533616a2f6262c2612f0f3053b0926d69a7c52777e06a4d6b67b30e",
-  "prediction_array_sha256": "4df926005bcc65826895703a13ef4e8992c9a59618d0e9acbd03309a5b345e3f",
+  "output_file": "gems30-TDX1-44090-20261025-5fc508ea81ac.tif",
+  "output_sha256": "9556e3ddd8ea7658ca510ab02d5b5304ac4c3332c54e7f86df5a24769bd03cdb",
+  "prediction_array_sha256": "ce919024fcee77326746fe6dd59249f0531b2b54b041ed51568ebf14047b3a30",
   "outside_convention": "NaN outside; matches published GEMS format",
   "published_format_compliant": true,
   "template_file": "/home/user/GEMSDOE30/data/raw/sample_submission.tif",
-  "created_utc": "2026-10-25T20:56:23+00:00",
+  "created_utc": "2026-10-25T21:26:42+00:00",
   "format_validation": {
-    "path": "/home/user/GEMSDOE30/outputs/texture-displacement/gems30-TDX1-44090-20261025-cd5566cd962c.tif",
+    "path": "/home/user/GEMSDOE30/outputs/texture-displacement/gems30-TDX1-44090-20261025-5fc508ea81ac.tif",
     "passed": true,
     "checks": [
       {
@@ -76,7 +76,7 @@
     ]
   },
   "whole_raster_range_diagnostic": {
-    "path": "/home/user/GEMSDOE30/outputs/texture-displacement/gems30-TDX1-44090-20261025-cd5566cd962c.tif",
+    "path": "/home/user/GEMSDOE30/outputs/texture-displacement/gems30-TDX1-44090-20261025-5fc508ea81ac.tif",
     "passed": false,
     "checks": [
       {
@@ -149,7 +149,7 @@
   "scientific_gate_passed": false,
   "run_card": "docs/research/texture-displacement/run-card.json",
   "lineage": "New fit of TDX1; no previous submission values used as model inputs or predictions",
-  "method": "tdx1-profiles-v1-20261025",
-  "preregistration_sha256": "f3251e77e408fbe55879c9adc249cf6888a0a82c49ef7320efe4fee135336d38",
+  "method": "tdx1-profiles-v2-euclidean-support-20261025",
+  "preregistration_sha256": "5d9e71a6a4cbb0f4aba2d15ab18173e0bca722287c391f718f205411fc1bab57",
   "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed"
 }

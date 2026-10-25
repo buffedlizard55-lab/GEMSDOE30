@@ -53,3 +53,17 @@ def test_gravity_normalization_is_training_only():
     _, changed = fold_consensus(a, a, edge, train)
     assert receipt == changed
     with pytest.raises(ValueError): fold_consensus(a, a, edge, ~np.ones_like(train))
+
+
+def test_euclidean_support_covers_square_gaussian_corners_and_interpolation():
+    from gemsdoe30.texture import MAX_SOURCE_REACH_PX, SUPPORT_PX
+    assert 16 < MAX_SOURCE_REACH_PX <= SUPPORT_PX == 17
+    # A legal profile sample can interpolate cell (6, 5). Adding the square
+    # Gaussian corner (6, 6) reaches (12, 11): sqrt(265) > the old 16px guard.
+    assert np.hypot(5.2, np.sqrt(45 - 5.2**2)) <= np.sqrt(45) + 1e-12
+    assert np.hypot(12, 11) > 16
+    yy, xx = np.indices((90, 90), dtype='float32')
+    valid = np.ones((90, 90), dtype=bool); valid[40, 40] = False
+    field = np.sin(yy * .6)
+    fields = displacement_features(field, field, xx, valid)
+    assert not fields['supported'][56, 45]  # sqrt(281) lies between 16 and 17.

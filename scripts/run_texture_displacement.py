@@ -35,6 +35,7 @@ from gemsdoe30.submission import write_submission_file, validate_submission_file
 from gemsdoe30.texture import (TRANSFORM_VERSION, SUPPORT_PX, displacement_features, fold_consensus)
 from gemsdoe30.emission import poisson_disk_select_ordered
 from scripts.check_novelty import audit
+from scripts.verify_prepared_cache import verify as verify_prepared_cache
 from scripts.feature_value_holdout import sample_training_pixels, fit_standardiser, predict_grid
 
 REPORT = ROOT / "docs/research/texture-displacement"
@@ -181,10 +182,16 @@ def run(max_seconds):
     REPORT.mkdir(parents=True, exist_ok=True)
     RUN.mkdir(parents=True, exist_ok=True)
     prereg_sha = sha(REPORT / "preregistration.md")
+    correction = json.loads((REPORT / "correction-v1-retirement.json").read_text())
+    previous_seconds = correction["original_elapsed_seconds"]
+    execution_ordinal = correction["correction_execution_ordinal"]
+    if execution_ordinal != 2 or SUPPORT_PX != 17:
+        raise ValueError("corrective execution must match its frozen 17px/ordinal-2 amendment")
     dump(REPORT / "started.json", {"started_utc": start_time.isoformat(timespec="seconds"),
                                    "preregistration_sha256": prereg_sha,
-                                   "experiment_count": 1, "fixed_arms": ["tdx6", "physics3", "core19"],
+                                   "experiment_count": execution_ordinal, "fixed_arms": ["tdx6", "physics3", "core19"],
                                    "script_sha256": sha(__file__), "max_experimental_seconds": max_seconds})
+    dump(REPORT / "cache-verification.json", verify_prepared_cache(ROOT / "data/processed"))
     base = np.load(ROOT / "data/processed/features_raw.npy", mmap_mode="r")
     labels = np.load(ROOT / "data/processed/labels.npy", mmap_mode="r") > .5
     valid = np.load(ROOT / "data/processed/valid.npy", mmap_mode="r").copy()
@@ -307,8 +314,12 @@ def run(max_seconds):
             "mechanism": "Opposite-flank normalized profile matching at two scales; raw physics plus displacement features in a fixed six-feature HGB.",
             "non_fault_mimic": "Intrusive lithologic contact; gridding seam",
             "lane": "TDX-1 gravity-normal magnetic profile displacement (research continuation, not externally assigned)",
-            "experiments_run": 1, "fixed_arms": list(arms), "experiment_cap": 3,
-            "experimental_elapsed_seconds": round(elapsed, 2), "time_cap_hours": 2,
+            "experiments_run": execution_ordinal, "fixed_arms": list(arms), "experiment_cap": 3,
+            "experimental_elapsed_seconds": round(previous_seconds + elapsed, 2), "time_cap_hours": 2,
+            "this_execution_seconds": round(elapsed, 2),
+            "corrective_execution": True, "physical_support_px": SUPPORT_PX,
+            "confirmation_scope": "Corrective guard-bound bug fix on previously inspected folds; not fresh independent confirmation",
+            "previous_execution_receipt": "docs/research/texture-displacement/correction-v1-retirement.json",
             "holdout": {**summary["arms"]["tdx6"], "evaluator_version": EVALUATOR_VERSION,
                         "protocol_version": SEGMENT_PROTOCOL_VERSION,
                         "scope": "buffered whole-segment catalogue-recovery proxy; NOT organizer performance",
@@ -335,7 +346,7 @@ def run(max_seconds):
                "preregistration_sha256": prereg_sha,
                "evaluator_version": EVALUATOR_VERSION,
                "protocol_version": SEGMENT_PROTOCOL_VERSION,
-               "experimental_elapsed_seconds": round(elapsed, 2), "scientific_gate_passed": scientific_pass}
+               "experimental_elapsed_seconds": round(previous_seconds + elapsed, 2), "this_execution_seconds": round(elapsed, 2), "scientific_gate_passed": scientific_pass}
     dump(REPORT / "results.json", results)
     dump(REPORT / "run-card.json", card)
     manifest_output.update({"submission_approved": False, "download_ok": True,

@@ -1,10 +1,12 @@
 # Current owner request — operational record, 2026-10-25
 
-This is a consolidated requirements record, **not a verbatim transcript** of the
-long owner message. The earlier literal brief remains in README/OWNER_BRIEF.md.
-Read this amendment first on every session; it supersedes older ready-to-submit
-copy and older performance targets. The exact latest message remains in the
-conversation. No claim is made that the older brief is the latest full prompt.
+This is a retained consolidated requirements record, **not a verbatim transcript**.
+The **complete current owner task text (formatting normalized)** is now preserved in
+[README → Current owner prompt](../../../README.md#current-owner-prompt) and
+[the task-text file](../texture-displacement/owner-prompt.txt). Read that full record
+first each session. Current result and automatic gates are selected by
+[docs/current-run.json](../../current-run.json); the prior literal brief remains
+historical owner text, not current readiness or an authenticated competition score.
 
 ## Non-negotiable priority (owner wording)
 

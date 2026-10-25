@@ -1,12 +1,12 @@
 {
-  "started_utc": "2026-10-25T20:55:18+00:00",
-  "preregistration_sha256": "f3251e77e408fbe55879c9adc249cf6888a0a82c49ef7320efe4fee135336d38",
-  "experiment_count": 1,
+  "started_utc": "2026-10-25T21:25:36+00:00",
+  "preregistration_sha256": "5d9e71a6a4cbb0f4aba2d15ab18173e0bca722287c391f718f205411fc1bab57",
+  "experiment_count": 2,
   "fixed_arms": [
     "tdx6",
     "physics3",
     "core19"
   ],
-  "script_sha256": "2bd754cf570d1a6a233d19a1be190a6650ef4ae11ed78bbfe0719e8a90dc2982",
+  "script_sha256": "5dd7d6a73b39cae553b3fcac0dd28c83d70f1f1817984c10bd0cc060637747b0",
   "max_experimental_seconds": 5400
 }

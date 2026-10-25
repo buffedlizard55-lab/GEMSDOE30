@@ -75,9 +75,11 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
          "All 22 raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC")
     folds = results.get("folds", [])
     counts_valid = len(folds) == 4 and {f.get("fold") for f in folds} == set(range(4)) and all(
-        isinstance(fold.get("dot_budget_each_arm"), int) and fold["dot_budget_each_arm"] > 0
+        isinstance(fold.get("dot_budget_each_arm"), int) and not isinstance(fold["dot_budget_each_arm"], bool)
+        and fold["dot_budget_each_arm"] > 0
         and set(fold.get("arms", {})) == {"tdx6", "physics3", "core19"}
-        and all(arm.get("emitted_pixels") == fold.get("dot_budget_each_arm") for arm in fold["arms"].values())
+        and all(isinstance(arm.get("emitted_pixels"), int) and not isinstance(arm["emitted_pixels"], bool)
+                and arm["emitted_pixels"] == fold["dot_budget_each_arm"] for arm in fold["arms"].values())
         for fold in folds)
     gate("count_matched_construction", "passed" if counts_valid else "failed",
          "All fixed arms must realize the same predeclared active-domain budget in every fold")
@@ -106,11 +108,13 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
                      and best.get("candidate_beats_best_with_paired_ci") is True)
     gate("comparable_historical_best", "passed" if best_verified else "unknown",
          "Do not substitute an archived metric or a new comparator for a missing historical-best rerun")
-    within_budget = (isinstance(card.get("experiments_run"), int) and 0 < card["experiments_run"] <= 3
+    within_budget = (isinstance(card.get("experiments_run"), int) and not isinstance(card["experiments_run"], bool)
+                     and 0 < card["experiments_run"] <= 3
                      and number(card.get("experimental_elapsed_seconds"))
                      and 0 < card["experimental_elapsed_seconds"] <= 7200)
     gate("experimental_budget", "passed" if within_budget else "failed", "At most three experiments / two experimental hours")
-    named = bool(card.get("submission_name")) and isinstance(card.get("note"), str) and len(card["note"]) <= 140
+    named = (isinstance(card.get("submission_name"), str) and bool(card["submission_name"].strip())
+             and isinstance(card.get("note"), str) and len(card["note"]) <= 140)
     gate("artifact_identity", "passed" if named else "failed", "Named artifact and note of at most 140 characters")
     promoted = all(row["status"] == "passed" for row in gates)
     return {"schema_version": 1, "readiness_version": READINESS_VERSION,
