@@ -26,7 +26,7 @@ import rasterio
 from sklearn.metrics import roc_auc_score
 from threadpoolctl import threadpool_limits
 
-from gemsdoe30.experiments import CORE_FEATURES, TDX_FEATURES, CONTROL_FEATURES, LayerStack, contract
+from gemsdoe30.experiments import LayerStack, contract
 from gemsdoe30.holdout import (EVALUATOR_VERSION, SEGMENT_PROTOCOL_VERSION,
                               masked_dti_by_blocks, spatial_bootstrap, spatial_segment_folds)
 from gemsdoe30.submission import write_submission_file, validate_submission_file

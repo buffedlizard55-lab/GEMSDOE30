@@ -57,10 +57,36 @@ Completed implementation corrections; final regression count recorded below:
 
 ## Pass 3 — re-check the complete owner request and delivery
 
-Final checks to be recorded after execution: full test suite, exact generated-site
-check, current archived TIFF reinspection, stopped receipt/quarantine check,
-expected non-promotion exit codes, local link/anchor validation, desktop/mobile
-browser downloads, private-path denial, Git diff/clean-tree checks, PR CI and merge.
+Completed locally after integrating concurrent PR #29 records:
+
+- **218 passed, five optional torch skips, seven subtests passed**; two existing
+  rasterio deprecation warnings. No GPU/torch model training was represented as tested.
+- Shared current-archive verifier reopens the retained TIFF and checks its exact
+  bytes/template/sidecar, recomputes pooled uncertainty and validates the negative decision.
+- Latest stopped-attempt verifier recomputes all pooled/bootstrap/canary/duplicate
+  decisions and binds plan, sources, registry, recorded file validation and timing.
+  Local `--inspect-quarantine` additionally reopened stopped bytes successfully.
+- Both `--require-promote` commands returned expected exit **2**, not approval.
+- Exact generated-site checks passed. Every local HTML link/anchor on overview,
+  guide, research page and docs redirect was checked by tests.
+- Headless Chromium/Playwright checks passed at **1440×1100** and **390×844**:
+  archived download SHA-256 matches, warning copy controls work, no horizontal
+  overflow or JS/request failures. Research page offers no stopped-TIFF download.
+- HTTP attempts to fetch `.git/config` and the stopped `outputs/` TIFF return **403**.
+- Tests reject edited CIs/alarms, unknown contracts, omitted controls/features,
+  swapped source guards, repeated/missing/late references, altered validator facts,
+  changed runtime, renamed duplicate publication, and failed partial writes.
+- Rerun-preflight regression confirms no scientific execution or evidence overwrite.
+- PR #29 supplied two late S20 TIFF encodings and different-protocol peer reports.
+  Preserved their records; inspected both existing C2 states against those arrivals
+  **after the stop**. Frozen registry unchanged; 166 combined comparisons, original
+  79.090497% maximum overlap unchanged. Older TDX-1 unavailable surfaces remain
+  explicitly unknown, not fabricated. No refit, new placement or experiment.
+- `git diff --check` passed. The site/feed are rebuilt from verified receipts rather
+  than retaining manually merged generated HTML.
+
+Publication preflight and remote PR CI/merge are recorded in the delivery addendum
+below once observed; no unobserved remote success is claimed here.
 
 **Acceptance boundary:** a new unique competition TIFF could not be delivered
 without violating the explicit duplicate-stop rule. The exact candidate was

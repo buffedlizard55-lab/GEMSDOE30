@@ -132,11 +132,50 @@ def verify(directory: Path, template: Path, *, write=False, inspect_quarantine=F
     if sha(directory / "validation.json") != card.get("recorded_validation_sha256") or validation.get("raster_sha256") != digest:
         raise ValueError("recorded validator hash/identity mismatch")
     check_equal(card["validator_output"], validation.get("facts"), "stopped/card/validator")
+    # Integrating another session must not silently omit newly public local
+    # references. Keep the original pre-placement registry immutable, then check
+    # the SAME saved states against explicitly labelled post-stop arrivals.
+    known = expected | {r["sha256"] for r in registry.get("exclusions", [])} | {digest}
+    extra_hashes = {sha(path) for path in (ROOT / "docs/downloads").glob("*.tif") if sha(path) not in known}
+    additional_path = directory / "registry-parallel-addendum.json"
+    combined = audits
+    if extra_hashes or additional_path.exists():
+        if not additional_path.is_file():
+            raise ValueError("new local references require a post-stop late-registry audit")
+        additional = load(additional_path)
+        extra_rows = additional["rasters"]
+        extra_expected = {r["sha256"] for r in extra_rows}
+        if (additional.get("original_registry_sha256") != registry_sha
+                or extra_expected != extra_hashes or len(extra_rows) != len(extra_expected)):
+            raise ValueError("late-registry identity/inventory mismatch")
+        for row in extra_rows:
+            path = (ROOT / row["path"]).resolve()
+            if not path.is_relative_to(ROOT) or sha(path) != row["sha256"]:
+                raise ValueError("late reference file identity mismatch")
+        combined = {}
+        for which in ("surface", "dots"):
+            late = load(directory / f"novelty-parallel-{which}.json")
+            rows = late["comparisons"]
+            if (late.get("stage") != which or any(r.get("stage") != which for r in rows)
+                    or len(rows) != len(extra_expected) or {r.get("reference_sha256") for r in rows} != extra_expected
+                    or late.get("candidate_sha256") != audits[which].get("candidate_sha256")
+                    or late.get("template_sha256") != sha(template) or late.get("registry_sha256") != sha(additional_path)
+                    or late.get("registry_complete") is not False):
+                raise ValueError("post-stop novelty stage/inventory/identity mismatch")
+            combined[which] = {**audits[which], "comparisons": audits[which]["comparisons"] + rows,
+                               "errors": audits[which].get("errors", []) + late.get("errors", [])}
     # A duplicate can have passed every file-format check. That must never become
     # permission to download, nor a claim that absent bytes were re-read by CI.
     decision = assess(card, results, format_passed=False, hash_matches=False,
-                      surface_audit=audits["surface"], dots_audit=audits["dots"], registry=registry,
+                      surface_audit=combined["surface"], dots_audit=combined["dots"], registry=registry,
                       artifact_public=False)
+    if additional_path.exists():
+        addition = {"registry": str(additional_path.relative_to(ROOT)),
+                    "surface_receipt": str((directory / "novelty-parallel-surface.json").relative_to(ROOT)),
+                    "dots_receipt": str((directory / "novelty-parallel-dots.json").relative_to(ROOT)),
+                    "timing": "Post-stop late-reference audit of saved states; no refit, replacement, new placement or original-registry rewrite",
+                    "combined_observed_registry": decision["observed_registry"]}
+        check_equal(card.get("additional_novelty_evidence"), addition, "stopped/card/additional_novelty_evidence")
     if decision["observed_registry"][stage]["status"] != "failed":
         raise ValueError("a duplicate-stop must be justified by numeric duplicate evidence")
     if any(decision[k] is not False for k in ("download_ok", "submission_approved", "slot_selected", "eligible_for_separate_slot_selector")):

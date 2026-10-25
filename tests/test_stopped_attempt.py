@@ -32,7 +32,10 @@ def isolated(tmp_path, monkeypatch):
         shutil.copy(ROOT / 'src/gemsdoe30' / name, dest)
     template = tmp_path / 'template.tif'
     template.write_bytes(b'synthetic template identity, no raster IO in receipt-only checks')
-    for name in ('novelty-surface.json', 'novelty-dots.json'):
+    for row in load(directory / 'registry-parallel-addendum.json')['rasters']:
+        dest = tmp_path / row['path']; dest.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy(ROOT / row['path'], dest)
+    for name in ('novelty-surface.json', 'novelty-dots.json', 'novelty-parallel-surface.json', 'novelty-parallel-dots.json'):
         p = directory / name; r = load(p)
         r['template_sha256'] = hashlib.sha256(template.read_bytes()).hexdigest(); dump(p, r)
     monkeypatch.setattr(verifier, 'ROOT', tmp_path)
@@ -99,15 +102,19 @@ def test_repeated_reference_rows_cannot_stand_in_for_missing_identities(isolated
 
 def test_duplicate_stop_requires_numeric_evidence_not_an_unverified_flag(isolated):
     verifier, directory, template, _ = isolated
-    p = directory / 'novelty-dots.json'; r = load(p)
-    for row in r['comparisons']:
-        row['candidate_fraction_within_3px_of_reference'] = .2
-        row['spearman_full_footprint'] = .1
-        row['identical_inside_footprint'] = False
-    dump(p, r)
+    for name in ('novelty-dots.json', 'novelty-parallel-dots.json'):
+        p = directory / name; r = load(p)
+        for row in r['comparisons']:
+            row['candidate_fraction_within_3px_of_reference'] = .2
+            row['spearman_full_footprint'] = .1
+            row['identical_inside_footprint'] = False
+        dump(p, r)
     p = directory / 'run-card.json'; c = load(p)
     c['registry']['dots']['max_fraction_within_3px'] = .2
-    c['registry']['dots']['max_spearman'] = .1; dump(p, c)
+    c['registry']['dots']['max_spearman'] = .1
+    c['additional_novelty_evidence']['combined_observed_registry']['dots'].update(
+        max_fraction_within_3px=.2, max_spearman=.1, status='passed')
+    dump(p, c)
     with pytest.raises(ValueError, match='numeric duplicate'):
         verifier.verify(directory, template, write=True)
 
@@ -171,12 +178,13 @@ def test_stopped_bytes_cannot_be_published_even_under_another_download_name(isol
     digest = hashlib.sha256(data).hexdigest()
     for name in ('results.json', 'run-card.json'):
         p = directory / name; r = load(p); r['raster_sha256'] = digest; dump(p, r)
-    p = directory / 'novelty-dots.json'; r = load(p); r['candidate_sha256'] = digest; dump(p, r)
+    for name in ('novelty-dots.json', 'novelty-parallel-dots.json'):
+        p = directory / name; r = load(p); r['candidate_sha256'] = digest; dump(p, r)
     p = directory / 'validation.json'; r = load(p); r['raster_sha256'] = digest; dump(p, r)
     p = directory / 'run-card.json'; r = load(p)
     r['recorded_validation_sha256'] = hashlib.sha256((directory / 'validation.json').read_bytes()).hexdigest(); dump(p, r)
     download = root / 'docs/downloads/renamed-duplicate.tif'
-    download.parent.mkdir(parents=True); download.write_bytes(data)
+    download.parent.mkdir(parents=True, exist_ok=True); download.write_bytes(data)
     with pytest.raises(ValueError, match='published under a download name'):
         verifier.verify(directory, template, write=True)
 
@@ -185,4 +193,15 @@ def test_validator_summary_cannot_be_edited_independently_of_its_bound_receipt(i
     verifier, directory, template, _ = isolated
     p = directory / 'run-card.json'; r = load(p); r['validator_output']['emitted_dots'] = 1; dump(p, r)
     with pytest.raises(ValueError, match='validator'):
+        verifier.verify(directory, template)
+
+
+def test_late_arrivals_are_checked_without_rewriting_the_original_snapshot(isolated):
+    verifier, directory, template, _ = isolated
+    original = (directory / 'registry.json').read_bytes()
+    result = verifier.verify(directory, template)
+    assert result['observed_registry']['dots']['registry_entries_compared'] == 166
+    assert (directory / 'registry.json').read_bytes() == original
+    (directory / 'registry-parallel-addendum.json').unlink()
+    with pytest.raises(ValueError, match='late-registry audit'):
         verifier.verify(directory, template)

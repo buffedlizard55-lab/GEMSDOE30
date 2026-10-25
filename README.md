@@ -45,7 +45,7 @@ call this statistically significant inferiority or select the phase control.
 
 | Automated diagnostic (not a performance score) | Result |
 |---|---|
-| Observed registry | 179 source TIFFs; 164 distinct aligned byte sequences; one unaligned exclusion; all nine priority sites snapshotted |
+| Observed registry | 179 source TIFFs; 164 distinct aligned byte sequences; one unaligned exclusion; all nine priority sites snapshotted; +2 post-stop S20 arrivals = 166 observed comparisons |
 | Before-placement surface comparison | Max Spearman 0.156573; threshold not crossed; original/private surfaces still missing |
 | Final-dot comparison | Max Spearman 0.063833; **79.090497%** within 3 px of G30-S19 — **DUPLICATE-STOP** (>70%) |
 | Individual canaries | 28 distinct features × 4 folds; max bidirectional AUC 0.643433; no alarm above .90 |
@@ -129,6 +129,18 @@ and original continuous surfaces; restore a comparable historical-best model;
 reserve untouched spatial evaluation; only then preregister a distinct mechanism
 with matched physical controls. Do not move dots or rename this duplicate to pass.
 Research promotion and a real weekly slot remain separate decisions.
+
+### Concurrent PR #29 records retained (G30-S20)
+
+Main advanced during this audit. The [G30-S20 run card](docs/research/2026-10-25-s20/run-card.json),
+[analysis](docs/research/2026-10-25-s20/analysis.md) and two research TIFFs are
+preserved as **peer records**, not new outputs or approved selections by this lane.
+S20 also records a duplicate-stop against G30-S19; its different component-holdout
+results are not ranked against the buffered TDX-C2 regional trials. No peer
+`promote` claim allocates a weekly slot here. The retained TDX-1 addendum honestly
+marks its missing continuous-surface comparisons against those arrivals unknown.
+TDX-C2's saved states were checked against both post-stop arrivals: 166 total
+observed comparisons, same maximum overlap. No model or dot changes followed.
 
 ---
 

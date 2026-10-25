@@ -165,5 +165,25 @@
   "source_execution_script_sha256": "523e91d8175e935a72310d7aff0e61d01dffd8d7a2b12638896e9f31e54b621b",
   "source_execution_ref": "79d1be92e578f4e555fe5a5ae8d273728221c8af",
   "created_utc": "2026-10-25T22:59:23+00:00",
-  "logging_scope": "Audit-only finalization after mandatory stop; no refit, reselection or TIFF publication"
+  "logging_scope": "Audit-only finalization after mandatory stop; no refit, reselection or TIFF publication",
+  "additional_novelty_evidence": {
+    "registry": "docs/research/texture-controls/registry-parallel-addendum.json",
+    "surface_receipt": "docs/research/texture-controls/novelty-parallel-surface.json",
+    "dots_receipt": "docs/research/texture-controls/novelty-parallel-dots.json",
+    "timing": "Post-stop late-reference audit of saved states; no refit, replacement, new placement or original-registry rewrite",
+    "combined_observed_registry": {
+      "surface": {
+        "registry_entries_compared": 166,
+        "max_spearman": 0.15657261436067785,
+        "max_fraction_within_3px": null,
+        "status": "passed"
+      },
+      "dots": {
+        "registry_entries_compared": 166,
+        "max_spearman": 0.06383254570926011,
+        "max_fraction_within_3px": 0.790904967112724,
+        "status": "failed"
+      }
+    }
+  }
 }

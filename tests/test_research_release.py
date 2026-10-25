@@ -205,7 +205,9 @@ def test_generated_site_is_exactly_reproducible_from_reopened_artifact():
 def test_new_local_rasters_cannot_be_silently_omitted_from_late_registry(isolated_evidence):
     verifier, directory, pointer, template = isolated_evidence
     decision = verifier.verify(pointer, template)
-    assert decision['observed_registry']['dots']['registry_entries_compared'] == 108
+    # 104 frozen + 4 late (PR #28) + 2 G30-S20 late twins (PR #29); the count is
+    # registry data and must grow explicitly whenever a late raster is audited in.
+    assert decision['observed_registry']['dots']['registry_entries_compared'] == 110
     (directory / 'registry-parallel-addendum.json').unlink()
     with pytest.raises(ValueError, match='explicit late-registry audit'):
         verifier.verify(pointer, template)

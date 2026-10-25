@@ -145,6 +145,13 @@ def finalize(directory: Path, template: Path, *, execution_ref: str | None = Non
             "source_execution_ref": execution_ref,
             "created_utc": failure["created_utc"],
             "logging_scope": "Audit-only finalization after mandatory stop; no refit, reselection or TIFF publication"}
+    previous_card = directory / "run-card.json"
+    if previous_card.exists():
+        previous = load(previous_card)
+        if previous.get("raster_sha256") != card["raster_sha256"]:
+            raise ValueError("audit finalization cannot replace another artifact identity")
+        if "additional_novelty_evidence" in previous:
+            card["additional_novelty_evidence"] = previous["additional_novelty_evidence"]
     if len(card["note"]) > 140:
         raise ValueError("note exceeds 140 characters")
     # Bind already computed holdout statistics to the stopped bytes; this is not
