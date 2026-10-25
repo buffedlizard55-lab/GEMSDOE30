@@ -1,27 +1,33 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-25T22:01:14Z",
+  "generated_utc": "2026-10-25T23:37:47Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
     "directory": "data/raw",
     "availability_scope": "This describes files present in the build worktree at generated_utc; data/raw and data/processed are Git-ignored and are not distributed by GitHub Pages.",
-    "required_files_present": false,
-    "sha256_verified_against_pins": false,
+    "required_files_present": true,
+    "sha256_verified_against_pins": true,
     "files": [
       {
         "dest": "training_features.tif",
         "path": "data/raw/training_features.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-        "expected_bytes": 418912844
+        "expected_bytes": 418912844,
+        "actual_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "actual_bytes": 418912844,
+        "sha256_matches_pin": true
       },
       {
         "dest": "labels.tif",
         "path": "data/raw/labels.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "expected_bytes": 425830
+        "expected_bytes": 425830,
+        "actual_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+        "actual_bytes": 425830,
+        "sha256_matches_pin": true
       },
       {
         "dest": "sample_submission.tif",
@@ -35,20 +41,22 @@
       }
     ],
     "prepared_dataset": {
-      "dataset_signature": null,
-      "matches_recorded_pin": null,
-      "positive_label_pixels": null,
-      "template_valid_pixels": null
+      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+      "matches_recorded_pin": true,
+      "positive_label_pixels": 60988,
+      "template_valid_pixels": 5167373
     },
     "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
   },
   "competition_data": {
     "owner_mirror_files_present": [
+      "training_features.tif",
+      "labels.tif",
       "sample_submission.tif"
     ],
     "organizer_authenticated": false,
     "prepared_dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
-    "pins_core_sha256_verified_now": false,
+    "pins_core_sha256_verified_now": true,
     "historical_restore_receipt": "docs/research/2026-10-25/prepared-manifest.json",
     "pins_note": "Owner mirrors, not organizer-authenticated. Hash pins verify consistency only. Template values must never be used as features or predictions.",
     "extra_pins_files": [
@@ -150,6 +158,26 @@
       "performance_status": "unscored; local format validation is not a score"
     },
     {
+      "manifest": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a.json",
+      "file": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+      "present": true,
+      "sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+      "sha256_matches_manifest": true,
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "legacy_manifest_claim_range_error_immunity": null,
+      "organizer_acceptance_confirmed": false,
+      "site_linked": true,
+      "submission_recommendation": false,
+      "run_name": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a",
+      "note": "MSDB-1v2: 31-feat stationary discontinuity+piedmont ramp HGB x Rayleigh curv gate + Bayes 300m EDGE, 44090 off-cat dots",
+      "performance_status": "unscored; format validation is not a score"
+    },
+    {
       "manifest": "gems30-TDX1-44090-20261025-5fc508ea81ac.json",
       "file": "docs/downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.tif",
       "present": true,
@@ -163,7 +191,7 @@
       "range_error_immune": null,
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
-      "site_linked": true,
+      "site_linked": null,
       "submission_recommendation": false,
       "run_name": "gems30-TDX1-44090-20261025-5fc508ea81ac",
       "note": "TDX1 gravity-normal magnetic texture lag; 6-feature HGB; negative research result, NOT approved for competition upload.",
@@ -411,85 +439,99 @@
   },
   "current_run_pointer": {
     "schema_version": 1,
-    "run_card": "docs/research/texture-displacement/run-card.json",
-    "readiness": "docs/research/texture-displacement/readiness.json",
+    "run_card": "docs/research/msdb-piedmont/run-card.json",
+    "readiness": "docs/research/msdb-piedmont/readiness.json",
     "purpose": "Current research artifact; this pointer does not allocate a competition slot"
   },
   "current_readiness": {
     "schema_version": 2,
-    "run_id": "gems30-TDX1-44090-20261025-5fc508ea81ac",
-    "hypothesis": "Magnetic texture correspondence with a persistent nonzero lag across gravity edges improves recovery of concealed faults.",
-    "mechanism": "Opposite-flank normalized profile matching at two scales; raw physics plus displacement features in a fixed six-feature HGB.",
-    "non_fault_mimic": "Intrusive lithologic contact; gridding seam",
-    "lane": "TDX-1 gravity-normal magnetic profile displacement (research continuation, not externally assigned)",
+    "run_id": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a",
+    "hypothesis": "Concealed Great Basin piedmont splays, breached relay ramps, and shallow-cover basement step-overs produce aligned 100-300 m curvilinear discontinuities across detrended elevation, true potential-field magnetic tilt, reconstructed 2-D vector gravity gradients, basement cover ramps, and GeoDAWN radiometric total count; gating a stationary 31-feature HGB posterior by a fold-local Rayleigh curvilinear-discontinuity envelope and allocating dots via Prentice-Pyke Bayes-calibrated 300 m submodular coverage improves buffered whole-segment fault recovery over both raw-band Poisson-disk (`core19`) and MSDB Poisson-disk (`msdb_poisson`).",
+    "mechanism": "18 bounded-support (`<= 12.73 px < 17 px` guard) steerable Hessian tubularity/saddle, structure-tensor coherence, true Miller-Singh magnetic tilt, reconstructed (dg/dx, dg/dy) strike concordance, and thin-cover piedmont ramp features + 13 stationary local/tectonic raw bands in a regularized HGB + Prentice-Pyke Bayes prevalence calibration x Rayleigh curvilinear discontinuity gate + exact 300 m `edge_select` submodular coverage.",
+    "non_fault_mimic": "Volcanic lava-flow fronts, non-tectonic intrusive pluton contacts, paleoshoreline/playa benches, and lithologically contrasting adjacent bajada fan catchments",
+    "lane": "MSDB-1v2 curvilinear discontinuity-gated piedmont habitat + Bayes-calibrated 300 m EDGE",
     "experiments_run": 2,
+    "previous_execution_receipt": "docs/research/msdb-piedmont/experiment-1-duplicate-stop/receipt.json",
     "fixed_arms": [
-      "physics3",
       "core19",
-      "tdx6"
+      "msdb_poisson",
+      "msdb_edge"
+    ],
+    "candidate_arm": "msdb_edge",
+    "comparator_arms": [
+      "core19",
+      "msdb_poisson"
     ],
     "experiment_cap": 3,
-    "experimental_elapsed_seconds": 401.18,
+    "experimental_elapsed_seconds": 571.07,
     "time_cap_hours": 2,
-    "this_execution_seconds": 204.86,
-    "corrective_execution": true,
-    "physical_support_px": 17,
-    "confirmation_scope": "Corrective guard-bound bug fix on previously inspected folds; not fresh independent confirmation",
-    "previous_execution_receipt": "docs/research/texture-displacement/correction-v1-retirement.json",
+    "this_execution_seconds": 376.45,
+    "corrective_execution": false,
+    "physical_support_px": 13,
+    "holdout_guard_px": 17,
+    "confirmation_scope": "Single preregistered 4-fold spatially buffered whole-component holdout execution",
     "holdout": {
       "label": "HOLDOUT-DTI",
-      "value": 0.07284403971883661,
+      "value": 0.1704616131030584,
       "withheld_positives": 60988,
       "ci95": [
-        0.0634833756035183,
-        0.08306069340489113
+        0.15622652622271732,
+        0.18416757014609178
       ],
-      "tp_weight": 4231.248128771639,
-      "fp_weight": 42248.758737962,
+      "tp_weight": 10006.69118890733,
+      "fp_weight": 39558.74674711629,
       "evaluator_version": "component-holdout-v3-blockstats-20261025",
       "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
       "scope": "buffered whole-segment catalogue-recovery proxy; NOT organizer performance",
       "comparators": {
-        "physics3": {
-          "label": "HOLDOUT-DTI",
-          "value": 0.06459100987774002,
-          "withheld_positives": 60988,
-          "ci95": [
-            0.05537292313708799,
-            0.07430093984458654
-          ],
-          "tp_weight": 3747.2294012850048,
-          "fp_weight": 42374.37436891643
-        },
         "core19": {
           "label": "HOLDOUT-DTI",
-          "value": 0.13982063017811727,
+          "value": 0.13362778873908637,
           "withheld_positives": 60988,
           "ci95": [
-            0.12417754876614995,
-            0.15590471896182123
+            0.11828522390010657,
+            0.1488749805646302
           ],
-          "tp_weight": 8181.277496788421,
-          "fp_weight": 40430.04046109527
+          "tp_weight": 7813.020600502169,
+          "fp_weight": 40577.637846987476
+        },
+        "msdb_poisson": {
+          "label": "HOLDOUT-DTI",
+          "value": 0.16932622608562317,
+          "withheld_positives": 60988,
+          "ci95": [
+            0.15479745226057037,
+            0.18327252056481164
+          ],
+          "tp_weight": 9940.917245984185,
+          "fp_weight": 39650.42437849725
         }
       },
       "candidate_minus": {
-        "physics3": {
-          "label": "HOLDOUT-DTI difference",
-          "value": 0.00825302984109659,
-          "ci95": [
-            0.004207994501731344,
-            0.01219685109477477
-          ]
-        },
         "core19": {
           "label": "HOLDOUT-DTI difference",
-          "value": -0.06697659045928066,
+          "value": 0.036833824363972034,
           "ci95": [
-            -0.08574676486261167,
-            -0.04829962001789458
+            0.022321931701094682,
+            0.05031469880668008
+          ]
+        },
+        "msdb_poisson": {
+          "label": "HOLDOUT-DTI difference",
+          "value": 0.0011353870174352354,
+          "ci95": [
+            -0.0021729500779855263,
+            0.004628178060411529
           ]
         }
+      },
+      "feature_only_ablation_msdb_poisson_minus_core19": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.0356984373465368,
+        "ci95": [
+          0.02162240201956155,
+          0.04884135005788337
+        ]
       },
       "bootstrap": {
         "unit": "geographic block aggregated across folds",
@@ -500,33 +542,33 @@
       }
     },
     "feature_canaries": {
-      "features_per_fold": 22,
+      "features_per_fold": 37,
       "folds": 4,
       "alarm_count": 0,
       "alarms": [],
-      "receipt": "docs/research/texture-displacement/results.json"
+      "receipt": "docs/research/msdb-piedmont/results.json"
     },
     "registry": {
       "complete": false,
       "surface": {
         "decision": "blocked-incomplete-evidence",
-        "registry_entries_compared": 104,
-        "max_spearman": 0.0426226523243077,
+        "registry_entries_compared": 165,
+        "max_spearman": 0.1545037513302229,
         "max_fraction_within_3px": null,
         "errors": []
       },
       "dots": {
         "decision": "blocked-incomplete-evidence",
-        "registry_entries_compared": 104,
-        "max_spearman": 0.013574547776137823,
-        "max_fraction_within_3px": 0.4049217509639374,
+        "registry_entries_compared": 165,
+        "max_spearman": 0.06337779887839463,
+        "max_fraction_within_3px": 0.6477886141982309,
         "errors": []
       },
       "coverage": "all published aligned TIFFs at nine recorded repository snapshots; missing other sessions and most original surfaces",
-      "receipt_surface": "docs/research/texture-displacement/novelty-surface.json",
-      "receipt_dots": "docs/research/texture-displacement/novelty-dots.json"
+      "receipt_surface": "docs/research/msdb-piedmont/novelty-surface.json",
+      "receipt_dots": "docs/research/msdb-piedmont/novelty-dots.json"
     },
-    "raster_sha256": "9556e3ddd8ea7658ca510ab02d5b5304ac4c3332c54e7f86df5a24769bd03cdb",
+    "raster_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
     "validator_output": {
       "status": "passed",
       "no_nan_inside_footprint": true,
@@ -540,45 +582,26 @@
       "emitted_dots": 44090,
       "organizer_acceptance_confirmed": false
     },
-    "submission_name": "gems30-TDX1-44090-20261025-5fc508ea81ac",
-    "note": "TDX1 gravity-normal magnetic texture lag; 6-feature HGB; negative research result, NOT approved for competition upload.",
-    "published_tiff": "docs/downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.tif",
+    "submission_name": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a",
+    "note": "MSDB-1v2: 31-feat stationary discontinuity+piedmont ramp HGB x Rayleigh curv gate + Bayes 300m EDGE, 44090 off-cat dots",
+    "published_tiff": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
     "download_ok": true,
     "submission_approved": false,
     "slot_selected": false,
     "verdict": "negative",
     "scientific_gate_passed": false,
-    "verdict_scope": "scientific and/or readiness gates; no competition performance claim",
+    "verdict_scope": "machine-adjudicated research readiness gates; no competition performance projection",
     "blockers": [
       "Candidate failed paired HOLDOUT-DTI improvement gate or feature leakage canary",
-      "Complete parallel-run raster/surface registry unavailable",
-      "No externally assigned lane paragraph was supplied; research lane selected autonomously",
-      "Historical best UNet checkpoints absent: comparable historical-best rerun unavailable",
-      "Current portal cap, eligibility, deadline and organizer acceptance unverified"
+      "Complete parallel-run raster/surface registry unavailable beyond nine-site snapshot (165 unique aligned files)",
+      "No externally assigned lane paragraph supplied; Rank-1 MSDB-1 lane selected autonomously from four-hypothesis ranking",
+      "Historical UNet checkpoints absent in repository: same-protocol historical-best neural rerun unavailable",
+      "Organizer portal upload receipt not confirmable offline inside sandbox"
     ],
-    "preregistration_sha256": "5d9e71a6a4cbb0f4aba2d15ab18173e0bca722287c391f718f205411fc1bab57",
+    "preregistration_sha256": "4d25d98efe73260e3781c2c7c6167d182233c4cc97f6c6895a380f55bb19fa19",
+    "preregistration_json_sha256": "1d7ea105fab669a3006bf34298eed693e4c8682d81249bbcf5c940ea88e58f38",
     "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
-    "created_utc": "2026-10-25T21:29:01+00:00",
-    "additional_novelty_evidence": {
-      "registry": "docs/research/texture-displacement/registry-parallel-addendum.json",
-      "surface_receipt": "docs/research/texture-displacement/novelty-parallel-surface.json",
-      "dots_receipt": "docs/research/texture-displacement/novelty-parallel-dots.json",
-      "timing": "Late-arriving references; checked both saved states without refitting or replacing dots",
-      "combined_observed_registry": {
-        "surface": {
-          "registry_entries_compared": 108,
-          "max_spearman": 0.05313281983245325,
-          "max_fraction_within_3px": null,
-          "status": "passed"
-        },
-        "dots": {
-          "registry_entries_compared": 108,
-          "max_spearman": 0.013710147110263877,
-          "max_fraction_within_3px": 0.4049217509639374,
-          "status": "passed"
-        }
-      }
-    }
+    "created_utc": "2026-10-25T23:29:53+00:00"
   },
   "current_artifact_inspection": {
     "verified_now": true,
@@ -587,7 +610,7 @@
   "current_release_decision": {
     "schema_version": 1,
     "readiness_version": "research-readiness-v2-parallel-evidence-20261025",
-    "raster_sha256": "9556e3ddd8ea7658ca510ab02d5b5304ac4c3332c54e7f86df5a24769bd03cdb",
+    "raster_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
     "gates": [
       {
         "name": "file_contract",
@@ -607,7 +630,7 @@
       {
         "name": "single_feature_leakage_canaries",
         "status": "passed",
-        "detail": "All 22 raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC"
+        "detail": "All 37 raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC"
       },
       {
         "name": "count_matched_construction",
@@ -617,12 +640,12 @@
       {
         "name": "surface_observed_registry",
         "status": "passed",
-        "detail": "108 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+        "detail": "165 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
       },
       {
         "name": "dots_observed_registry",
         "status": "passed",
-        "detail": "108 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+        "detail": "165 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
       },
       {
         "name": "complete_parallel_registry",
@@ -652,15 +675,15 @@
     ],
     "observed_registry": {
       "surface": {
-        "registry_entries_compared": 108,
-        "max_spearman": 0.05313281983245325,
+        "registry_entries_compared": 165,
+        "max_spearman": 0.1545037513302229,
         "max_fraction_within_3px": null,
         "status": "passed"
       },
       "dots": {
-        "registry_entries_compared": 108,
-        "max_spearman": 0.013710147110263877,
-        "max_fraction_within_3px": 0.4049217509639374,
+        "registry_entries_compared": 165,
+        "max_spearman": 0.06337779887839463,
+        "max_fraction_within_3px": 0.6477886141982309,
         "status": "passed"
       }
     },
@@ -794,7 +817,7 @@
       "decision": "Check 2 (4-fold OOF isotonic calibration: catalogue frame slope=0.9009, mean top-decile ratio=1.0495, folds>=0.70=4/4, pass=True; SGMC frame slope=0.9101, mean top-decile ratio=1.0940, folds>=0.70=2/4, pass=False); Check 3 (LiDAR permutation removes 57.0% of gain, full-topography permutation removes 97.2%, unrelated gravity permutation retains +0.03670, folds=4/4, pass=True); Check 1 passes on the independent SGMC novelty frame (delta=+0.03670) but fails on the catalogue component proxy (delta=-0.00073). Slot promoted = False."
     },
     "current_research_artifact": {
-      "evidence": "docs/research/texture-displacement/run-card.json",
+      "evidence": "docs/research/msdb-piedmont/run-card.json",
       "promoted": false,
       "decision": "NOT APPROVED FOR SUBMISSION"
     }
@@ -1016,7 +1039,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "191 tests collected in 1.00s",
+      "pytest_collect": "199 tests collected in 0.83s",
       "exit_code": 0
     },
     "score_gain_claimed": false

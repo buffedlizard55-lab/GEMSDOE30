@@ -1,0 +1,156 @@
+{
+  "schema_version": 3,
+  "run_name": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a",
+  "note": "MSDB-1v2: 31-feat stationary discontinuity+piedmont ramp HGB x Rayleigh curv gate + Bayes 300m EDGE, 44090 off-cat dots",
+  "output_file": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+  "output_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+  "prediction_array_sha256": "a9dd996790e2afbf951bb237d07b8f7ea80112bc7fc22a5f7f60e89eb3d4f18c",
+  "outside_convention": "NaN outside; matches published GEMS format",
+  "published_format_compliant": true,
+  "template_file": "/home/user/GEMSDOE30/data/raw/sample_submission.tif",
+  "created_utc": "2026-10-25T23:26:01+00:00",
+  "format_validation": {
+    "path": "/home/user/GEMSDOE30/runs/msdb-piedmont/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+    "passed": true,
+    "checks": [
+      {
+        "name": "template_single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "float32",
+        "passed": true,
+        "detail": "dtypes=('float32',)"
+      },
+      {
+        "name": "epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "template_epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "shape_matches_template",
+        "passed": true,
+        "detail": "output=(3730, 3292) template=(3730, 3292)"
+      },
+      {
+        "name": "transform_matches_template",
+        "passed": true,
+        "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "100m_north_up_grid",
+        "passed": true,
+        "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "finite_and_in_range_inside_footprint",
+        "passed": true,
+        "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+      },
+      {
+        "name": "null_outside_template_footprint",
+        "passed": true,
+        "detail": "outside_pixels=7111787; null/NaN/nodata required"
+      },
+      {
+        "name": "whole_raster_finite_range_diagnostic_advisory",
+        "passed": true,
+        "detail": "advisory only: whole-array diagnostic found 7111787 NaN/Inf cell(s); this is not a diagnosis of portal behavior; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+      },
+      {
+        "name": "template_readable",
+        "passed": true,
+        "detail": "shape=(3730, 3292)"
+      }
+    ]
+  },
+  "whole_raster_range_diagnostic": {
+    "path": "/home/user/GEMSDOE30/runs/msdb-piedmont/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+    "passed": false,
+    "checks": [
+      {
+        "name": "template_single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "float32",
+        "passed": true,
+        "detail": "dtypes=('float32',)"
+      },
+      {
+        "name": "epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "template_epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "shape_matches_template",
+        "passed": true,
+        "detail": "output=(3730, 3292) template=(3730, 3292)"
+      },
+      {
+        "name": "transform_matches_template",
+        "passed": true,
+        "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "100m_north_up_grid",
+        "passed": true,
+        "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "finite_and_in_range_inside_footprint",
+        "passed": true,
+        "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+      },
+      {
+        "name": "finite_in_range_outside_footprint_diagnostic",
+        "passed": false,
+        "detail": "outside_pixels=7111787; finite in-range values required for the nonstandard whole-array diagnostic (finite=0)"
+      },
+      {
+        "name": "whole_raster_finite_range_diagnostic",
+        "passed": false,
+        "detail": "whole-array diagnostic found 7111787 NaN/Inf cell(s); this is not a diagnosis of portal behavior"
+      },
+      {
+        "name": "template_readable",
+        "passed": true,
+        "detail": "shape=(3730, 3292)"
+      }
+    ]
+  },
+  "whole_raster_range_diagnostic_passed": false,
+  "performance_status": "unscored; format validation is not a score",
+  "submission_approved": false,
+  "download_ok": true,
+  "submission_recommendation": false,
+  "scientific_gate_passed": false,
+  "run_card": "docs/research/msdb-piedmont/run-card.json",
+  "lineage": "New fit of MSDB-1; zero previous submission values used as inputs or predictions",
+  "method": "msdb-piedmont-v2-20261025",
+  "preregistration_sha256": "4d25d98efe73260e3781c2c7c6167d182233c4cc97f6c6895a380f55bb19fa19",
+  "preregistration_json_sha256": "1d7ea105fab669a3006bf34298eed693e4c8682d81249bbcf5c940ea88e58f38",
+  "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed"
+}

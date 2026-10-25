@@ -74,30 +74,46 @@ def verify(pointer: Path, template: Path, *, write=False):
     report = validate_submission_file(raster, template)
     if not report.passed:
         raise ValueError("published TIFF fails the shared format validator")
-    recomputed = spatial_bootstrap(results["bootstrap_sufficient_statistics"], candidate="tdx6",
+    prereg_spec_path = directory / "preregistration.json"
+    prereg_spec = load(prereg_spec_path) if prereg_spec_path.is_file() else None
+    candidate_arm = prereg_spec["candidate_arm"] if prereg_spec else "tdx6"
+    expected_transform_path = local_path(prereg_spec["transform_module"]) if prereg_spec else (ROOT / "src/gemsdoe30/texture.py")
+    expected_transform_version = prereg_spec["transform_version"] if prereg_spec else TRANSFORM_VERSION
+    expected_support_px = prereg_spec["physical_support_px"] if prereg_spec else SUPPORT_PX
+    expected_guard_px = prereg_spec["holdout_guard_px"] if prereg_spec else SUPPORT_PX
+    if (not isinstance(expected_support_px, int) or isinstance(expected_support_px, bool)
+            or not isinstance(expected_guard_px, int) or isinstance(expected_guard_px, bool)
+            or expected_support_px < 1 or expected_guard_px < expected_support_px):
+        raise ValueError("invalid physical_support_px / holdout_guard_px specification")
+    recomputed = spatial_bootstrap(results["bootstrap_sufficient_statistics"], candidate=candidate_arm,
                                     replicates=2000, seed=3071)
     # Check the complete pooled summary, not only the candidate point estimate.
     # A changed paired CI must not silently turn a negative result into promotion.
     check_equal(results["summary"], recomputed, "results/summary")
     h = card["holdout"]
     card_summary = {key: h[key] for key in ("evaluator_version", "protocol_version", "bootstrap", "candidate_minus")}
-    card_summary["arms"] = {"tdx6": {key: h[key] for key in recomputed["arms"]["tdx6"]},
+    card_summary["arms"] = {candidate_arm: {key: h[key] for key in recomputed["arms"][candidate_arm]},
                             **h["comparators"]}
     check_equal(card_summary, recomputed, "card/holdout")
     preregistration = hashlib.sha256((directory / "preregistration.md").read_bytes()).hexdigest()
     started = load(directory / "started.json")
     if any(row.get("preregistration_sha256") != preregistration for row in (card, results, started)):
         raise ValueError("frozen preregistration hash differs between plan/start/results/card")
+    if prereg_spec is not None:
+        prereg_json_hash = hashlib.sha256(prereg_spec_path.read_bytes()).hexdigest()
+        if any(row.get("preregistration_json_sha256") != prereg_json_hash for row in (card, results, started)):
+            raise ValueError("frozen preregistration.json hash differs between plan/start/results/card")
     if results.get("raster_sha256") != digest:
         raise ValueError("holdout results do not bind to the published TIFF")
     features = load(directory / "feature-receipt.json")
     cache = load(directory / "cache-verification.json")
-    transform_hash = hashlib.sha256((ROOT / "src/gemsdoe30/texture.py").read_bytes()).hexdigest()
+    transform_hash = hashlib.sha256(expected_transform_path.read_bytes()).hexdigest()
     if (features["signature"]["transform_code_sha256"] != transform_hash
-            or features["signature"]["transform_version"] != TRANSFORM_VERSION
-            or features.get("support_px") != SUPPORT_PX
-            or card.get("physical_support_px") != SUPPORT_PX
-            or any(fold.get("buffer_px") != SUPPORT_PX for fold in results["folds"])):
+            or features["signature"]["transform_version"] != expected_transform_version
+            or features.get("support_px") != expected_support_px
+            or card.get("physical_support_px") != expected_support_px
+            or any(fold.get("buffer_px") != expected_guard_px or fold.get("buffer_px") < expected_support_px
+                   for fold in results["folds"])):
         raise ValueError("transform identity or physical-support/training guard mismatch")
     if (cache.get("all_cells_match_raw_sources") is not True
             or cache.get("dataset_signature") != card.get("dataset_signature")
@@ -183,11 +199,13 @@ def verify(pointer: Path, template: Path, *, write=False):
             assessment_registry = {**registry, "complete": False,
                                    "missing_evidence": additional.get("missing_evidence", ["late coverage incomplete"])}
     readiness = assess(card, results, format_passed=report.passed, hash_matches=hashes_match,
-                       surface_audit=combined_surface, dots_audit=combined_dots, registry=assessment_registry)
+                       surface_audit=combined_surface, dots_audit=combined_dots,
+                       registry=assessment_registry, preregistration=prereg_spec)
     if additional_path.exists():
-        addition = {"registry": "docs/research/texture-displacement/registry-parallel-addendum.json",
-                    "surface_receipt": "docs/research/texture-displacement/novelty-parallel-surface.json",
-                    "dots_receipt": "docs/research/texture-displacement/novelty-parallel-dots.json",
+        rel_dir = directory.relative_to(ROOT).as_posix()
+        addition = {"registry": f"{rel_dir}/registry-parallel-addendum.json",
+                    "surface_receipt": f"{rel_dir}/novelty-parallel-surface.json",
+                    "dots_receipt": f"{rel_dir}/novelty-parallel-dots.json",
                     "timing": "Late-arriving references; checked both saved states without refitting or replacing dots",
                     "combined_observed_registry": readiness["observed_registry"]}
         if write:
