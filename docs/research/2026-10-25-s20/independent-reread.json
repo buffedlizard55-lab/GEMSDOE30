@@ -1,0 +1,23 @@
+{
+ "check": "independent rasterio re-read (does not use project validator or final_info)",
+ "stem": "gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa",
+ "zeros_sha256_recomputed": "1b07820d0066e56442ade4f4a3880af92f50b4ca9cac528ccf59696ec5299cd6",
+ "nan_sha256_recomputed": "12bd6196cdebfbaa39960d0d6f600fde498f1fb7675321222ba49489dec69b22",
+ "twins_identical_inside_footprint": true,
+ "dots": 60000,
+ "dots_outside_footprint": 0,
+ "dots_on_catalogue": 0,
+ "dots_within_2px_of_catalogue": 0,
+ "min_dot_distance_to_catalogue_px": 2.23606797749979,
+ "median_dot_distance_to_catalogue_px": 5.0,
+ "frac_dots_gt10px_from_catalogue": 0.21738333333333335,
+ "frac_dots_gt30px_from_catalogue": 0.0235,
+ "vs_candidate_C": {
+  "exact_same_pixel_dots": 13429,
+  "exact_same_pixel_fraction_of_S20": 0.22381666666666666,
+  "S20_fraction_within_3px_of_C": 0.8958166666666667,
+  "C_fraction_within_3px_of_S20": 0.90595,
+  "S20_median_nn_distance_to_C_px": 1.0
+ },
+ "interpretation": "Gate value is the directional S20-within-3px fraction (0.8958 > 0.70 frozen threshold => duplicate-stop vs Candidate C). Exact-pixel overlap is context only and does not override the frozen gate."
+}

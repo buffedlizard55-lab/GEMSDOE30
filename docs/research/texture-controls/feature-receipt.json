@@ -1,0 +1,57 @@
+{
+  "signature": {
+    "transform_version": "tdxc2-local-profile-controls-v1-20261025",
+    "transform_code_sha256": "1037342930b09bbcadc7c68977c43173814956e2566771c5b1f64f3b8df4f325",
+    "parent_transform_code_sha256": "db3c404bd45f82e133d007e671e07c2fd4d3f57d357d407f9be14ea18ae8ebb4",
+    "parent_transform_version": "tdx1-profiles-v2-euclidean-support-20261025",
+    "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+    "original_cache_receipt_sha256": "ec3dc7db94c8a0e3ddeb857aa88b8d1a9f9f98b258fc610c44ae2fa748428377"
+  },
+  "sha256": {
+    "zero_mag": "c89fc621444d1c1ddd6aa95fe90bb0b64cd64b367ab9b7a8d5c035b62d5034ce",
+    "zero_rtp": "1bf9e731727dcca0c1f3ea0f85270fde666e8267bb15701f4ff190981a2dae2a",
+    "phase_mag": "b95c8434f162943de6e3518b27cbcf37539255ba7945147da3e7b6e9e68d008b",
+    "phase_rtp": "5167a42555e84c8c728c071e84c120ea88728451c23efe5163cbe021f41c5829"
+  },
+  "support_px": 17,
+  "supported_pixels": 4898149,
+  "phase_radians": [
+    0.73,
+    -1.21,
+    2.33,
+    -2.02,
+    1.07,
+    -0.48
+  ],
+  "source_bands_1based": [
+    1,
+    2,
+    13
+  ],
+  "uses_catalogue_geometry": false,
+  "uses_registry_values": false,
+  "uses_template_values_as_features": false,
+  "original_feature_receipt": {
+    "signature": {
+      "transform_version": "tdx1-profiles-v2-euclidean-support-20261025",
+      "transform_code_sha256": "db3c404bd45f82e133d007e671e07c2fd4d3f57d357d407f9be14ea18ae8ebb4",
+      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed"
+    },
+    "source_bands_1based": [
+      1,
+      2,
+      13
+    ],
+    "sha256": {
+      "mag_texture": "05407079048f7961f37030c6309d34d72d84efa37cbf1dbf661c261d8a3525ab",
+      "rtp_texture": "6a73087c5ac7499fa9fd52eb94958d5fad8bda6660a49f5e39e7379a9ff31570",
+      "gravity_edge": "6d9089adc64ac2c9e7023e81726f24de93e74a79f1a36c4d8fe6f5aba22e8006",
+      "supported": "89a2991cc5ad9eafe60aee655cf3029d51a063336afdc8e031b07cf719a7e273"
+    },
+    "support_px": 17,
+    "supported_pixels": 4898149,
+    "uses_catalogue_geometry": false,
+    "uses_registry_values": false,
+    "uses_template_values_as_features": false
+  }
+}

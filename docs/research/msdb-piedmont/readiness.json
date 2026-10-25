@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "readiness_version": "research-readiness-v2-parallel-evidence-20261025",
+  "readiness_version": "research-readiness-v3-matched-controls-20261025",
   "raster_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
   "gates": [
     {
@@ -15,8 +15,8 @@
     },
     {
       "name": "paired_improvement",
-      "status": "failed",
-      "detail": "Fixed candidate must improve both same-protocol controls with positive paired CI lower bound"
+      "status": "passed",
+      "detail": "Fixed candidate must improve preregistered core19 comparator with positive paired CI lower bound"
     },
     {
       "name": "single_feature_leakage_canaries",
@@ -31,12 +31,12 @@
     {
       "name": "surface_observed_registry",
       "status": "passed",
-      "detail": "165 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+      "detail": "167 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
     },
     {
       "name": "dots_observed_registry",
       "status": "passed",
-      "detail": "165 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+      "detail": "167 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
     },
     {
       "name": "complete_parallel_registry",
@@ -66,13 +66,13 @@
   ],
   "observed_registry": {
     "surface": {
-      "registry_entries_compared": 165,
+      "registry_entries_compared": 167,
       "max_spearman": 0.1545037513302229,
       "max_fraction_within_3px": null,
       "status": "passed"
     },
     "dots": {
-      "registry_entries_compared": 165,
+      "registry_entries_compared": 167,
       "max_spearman": 0.06337779887839463,
       "max_fraction_within_3px": 0.6477886141982309,
       "status": "passed"

@@ -1,0 +1,13 @@
+{
+  "started_utc": "2026-10-25T22:53:10+00:00",
+  "experiment_count": 1,
+  "fixed_arms": [
+    "core19",
+    "tdx22",
+    "zero22",
+    "phase22"
+  ],
+  "preregistration_sha256": "993095e6315bff7d624e3a4448aed54b664709204f56db66b61c80a480f2b2df",
+  "script_sha256": "523e91d8175e935a72310d7aff0e61d01dffd8d7a2b12638896e9f31e54b621b",
+  "max_experimental_seconds": 3600
+}

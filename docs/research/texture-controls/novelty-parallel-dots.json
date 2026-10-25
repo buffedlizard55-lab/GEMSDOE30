@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "stage": "dots",
+  "candidate": "/home/user/GEMSDOE30/outputs/texture-controls/gems30-TDXC2-44090-20261025-d87627b24504.tif",
+  "candidate_sha256": "af499375cec73f42f98f398370b390e96c3d3b23943477eb1f613570baa98e0d",
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "registry_sha256": "d496ef788380097d3712f3e7efd138c68d9552814b0316dcf23267d9967ed4f1",
+  "registry_complete": false,
+  "comparisons": [
+    {
+      "reference": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
+      "site": "GEMSDOE30-parallel-merged",
+      "reference_sha256": "1b07820d0066e56442ade4f4a3880af92f50b4ca9cac528ccf59696ec5299cd6",
+      "reference_values_sha256": "9f937933d36b3d2f73cb2780be05de8fb1b6e0634888094ec1bbdc79d7174ae3",
+      "stage": "dots",
+      "spearman_full_footprint": 0.058667110430445056,
+      "candidate_dots": 44090,
+      "candidate_positive_support": 44090,
+      "reference_dots": 60000,
+      "candidate_fraction_within_3px_of_reference": 0.7706282603765026,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": true,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif",
+      "site": "GEMSDOE30-parallel-merged",
+      "reference_sha256": "12bd6196cdebfbaa39960d0d6f600fde498f1fb7675321222ba49489dec69b22",
+      "reference_values_sha256": "9f937933d36b3d2f73cb2780be05de8fb1b6e0634888094ec1bbdc79d7174ae3",
+      "stage": "dots",
+      "spearman_full_footprint": 0.058667110430445056,
+      "candidate_dots": 44090,
+      "candidate_positive_support": 44090,
+      "reference_dots": 60000,
+      "candidate_fraction_within_3px_of_reference": 0.7706282603765026,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": true,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+      "site": "GEMSDOE30-parallel-merged",
+      "reference_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+      "reference_values_sha256": "7a89266115d3d8badd92301198711c8d617ce2b739f4755e36d6c04d5dfa1ee7",
+      "stage": "dots",
+      "spearman_full_footprint": null,
+      "candidate_dots": 60000,
+      "candidate_positive_support": 60000,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": true
+    }
+  ],
+  "errors": [],
+  "decision": "blocked-incomplete-evidence",
+  "submission_approved": false
+}

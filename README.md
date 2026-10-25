@@ -49,6 +49,7 @@ python -m venv .venv
 .venv/bin/python scripts/sync_priority_registry.py --output docs/research/msdb-piedmont/registry.json --restore-only
 # Inspect committed MSDB-1v2 artifact & recompute 2,000-draw paired spatial bootstrap (exits 0):
 .venv/bin/python scripts/verify_current_run.py
+.venv/bin/python scripts/verify_stopped_attempt.py
 .venv/bin/python scripts/build_research_site.py --check
 .venv/bin/python -m pytest -q
 # EXPECTED exit 2: valid research download, conservative weekly-slot gate active:

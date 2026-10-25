@@ -97,3 +97,38 @@ def test_boolean_counts_and_nonstring_artifact_names_are_not_valid_evidence():
     assert gate(decide(card, results, audit), 'count_matched_construction') == 'failed'
     card, results, audit = evidence(); card['submission_name'] = 42
     assert not decide(card, results, audit)['download_ok']
+
+
+def test_format_valid_duplicate_is_not_even_a_downloadable_research_release():
+    card, results, audit = evidence()
+    audit['comparisons'][0]['candidate_fraction_within_3px_of_reference'] = .71
+    result = decide(card, results, audit)
+    assert gate(result, 'file_contract') == 'passed'
+    assert result['research_verdict'] == 'negative' and result['download_ok'] is False
+
+
+def test_new_contract_requires_every_matched_control_and_all_28_canaries():
+    from gemsdoe30.experiments import contract
+    card, results, audit = evidence(); card['experiment_spec'] = 'tdxc2'
+    spec = contract(card)
+    results['summary']['arms'] = {name: deepcopy(next(iter(results['summary']['arms'].values()))) for name in spec['arms']}
+    results['summary']['candidate_minus'] = {n: {'value': .05, 'ci95': [.01, .09]}
+                                            for n in spec['arms'] if n != spec['candidate']}
+    for fold in results['feature_canaries']:
+        fold['features'] = [{'feature': name, 'raw_auc': .6, 'univariate_training_only_hgb_auc': .65,
+                             'alarm_above_0_90': False} for name in spec['features']]
+    for fold in results['folds']:
+        fold['arms'] = {name: {'emitted_pixels': 10} for name in spec['arms']}
+    assert decide(card, results, audit)['research_verdict'] == 'promote'
+    results['summary']['candidate_minus'].pop('phase22')
+    assert gate(decide(card, results, audit), 'paired_improvement') == 'failed'
+    results['feature_canaries'][0]['features'].pop()
+    assert gate(decide(card, results, audit), 'single_feature_leakage_canaries') == 'failed'
+
+
+def test_private_artifact_receipts_cannot_imply_a_current_public_file_inspection():
+    card, results, audit = evidence()
+    result = assess(card, results, format_passed=True, hash_matches=True,
+                    surface_audit=audit, dots_audit=audit, registry={'complete': True}, artifact_public=False)
+    assert gate(result, 'file_contract') == 'unknown'
+    assert not result['download_ok'] and result['research_verdict'] == 'negative'

@@ -156,5 +156,26 @@
   "preregistration_sha256": "4d25d98efe73260e3781c2c7c6167d182233c4cc97f6c6895a380f55bb19fa19",
   "preregistration_json_sha256": "1d7ea105fab669a3006bf34298eed693e4c8682d81249bbcf5c940ea88e58f38",
   "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
-  "created_utc": "2026-10-25T23:29:53+00:00"
+  "created_utc": "2026-10-25T23:29:53+00:00",
+  "experiment_spec": "msdb1v2",
+  "additional_novelty_evidence": {
+    "registry": "docs/research/msdb-piedmont/registry-parallel-addendum.json",
+    "surface_receipt": "docs/research/msdb-piedmont/novelty-parallel-surface.json",
+    "dots_receipt": "docs/research/msdb-piedmont/novelty-parallel-dots.json",
+    "timing": "Late-arriving references; checked both saved states without refitting or replacing dots",
+    "combined_observed_registry": {
+      "surface": {
+        "registry_entries_compared": 167,
+        "max_spearman": 0.1545037513302229,
+        "max_fraction_within_3px": null,
+        "status": "passed"
+      },
+      "dots": {
+        "registry_entries_compared": 167,
+        "max_spearman": 0.06337779887839463,
+        "max_fraction_within_3px": 0.6477886141982309,
+        "status": "passed"
+      }
+    }
+  }
 }

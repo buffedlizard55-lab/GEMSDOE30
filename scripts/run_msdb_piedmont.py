@@ -557,6 +557,7 @@ def run(max_seconds: int) -> dict:
     raster_digest = sha(generated)
     results_payload = {
         "schema_version": 2,
+        "experiment_spec": "msdb1v2",
         "summary": summary,
         "feature_only_ablation_msdb_poisson_minus_core19": feature_ablation,
         "folds": folds_out,
@@ -593,6 +594,7 @@ def run(max_seconds: int) -> dict:
     registry_manifest = json.loads(registry_path.read_text())
     provisional_card = {
         "schema_version": 2,
+        "experiment_spec": "msdb1v2",
         "run_id": run_name,
         "hypothesis": (
             "Concealed Great Basin piedmont splays, breached relay ramps, and shallow-cover basement step-overs "

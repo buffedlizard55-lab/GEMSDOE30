@@ -14792,5 +14792,6 @@
   "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
   "experimental_elapsed_seconds": 571.07,
   "this_execution_seconds": 376.45,
-  "scientific_gate_passed": false
+  "scientific_gate_passed": false,
+  "experiment_spec": "msdb1v2"
 }

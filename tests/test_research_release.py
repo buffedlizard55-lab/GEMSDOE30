@@ -36,7 +36,7 @@ class Links(HTMLParser):
             self.downloads.append(attrs.get("href"))
 
 
-@pytest.mark.parametrize("relative", ["index.html", "executive-summary.html", "docs/index.html"])
+@pytest.mark.parametrize("relative", ["index.html", "executive-summary.html", "experiment-review.html", "docs/index.html"])
 def test_generated_pages_have_real_local_links_and_valid_html_anchors(relative):
     path = ROOT / relative
     page = Links(path.read_text())
@@ -196,6 +196,9 @@ def test_status_feed_uses_current_pointer_and_never_advertises_range_immunity(tm
     assert status['current_release_decision']['raster_sha256'] == card['raster_sha256']
     assert status['current_release_decision']['research_verdict'] == 'negative'
     assert status['current_release_decision']['submission_approved'] is False
+    assert status['latest_scientific_attempt']['receipt_inspection']['verified_now'] is True
+    assert status['latest_scientific_attempt']['decision']['download_ok'] is False
+    assert status['latest_scientific_attempt']['public_download'] is False
     assert not status['any_candidate_promoted']
     assert all(row['range_error_immune'] is None for row in status['downloads'])
     assert status['submission_format']['local_validation_guarantees_portal_acceptance'] is False
@@ -214,7 +217,8 @@ def test_generated_site_is_exactly_reproducible_from_reopened_artifact():
 def test_new_local_rasters_cannot_be_silently_omitted_from_late_registry(isolated_evidence):
     verifier, directory, pointer, template = isolated_evidence
     decision = verifier.verify(pointer, template)
-    assert decision['observed_registry']['dots']['registry_entries_compared'] == 108
+    # 104 frozen + 4 PR #28 + 2 G30-S20 PR #29 + 1 MSDB-1v2 = 111
+    assert decision['observed_registry']['dots']['registry_entries_compared'] == 111
     (directory / 'registry-parallel-addendum.json').unlink()
     with pytest.raises(ValueError, match='explicit late-registry audit'):
         verifier.verify(pointer, template)
@@ -256,10 +260,18 @@ def test_preregistration_json_tampering_rejected_on_current_msdb_run(tmp_path, m
     shutil.copy((ROOT / card["published_tiff"]).with_suffix(".json"), raster.with_suffix(".json"))
     template = tmp_path / "template.tif"
     template.write_bytes(b"synthetic template")
-    for name in ("novelty-surface.json", "novelty-dots.json"):
-        d = json.loads((tmp_path / rel_dir / name).read_text())
-        d["template_sha256"] = hashlib.sha256(template.read_bytes()).hexdigest()
-        (tmp_path / rel_dir / name).write_text(json.dumps(d))
+    addendum = tmp_path / rel_dir / "registry-parallel-addendum.json"
+    if addendum.is_file():
+        for row in json.loads(addendum.read_text())["rasters"]:
+            dest = tmp_path / row["path"]
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy(ROOT / row["path"], dest)
+    for name in ("novelty-surface.json", "novelty-dots.json", "novelty-parallel-surface.json", "novelty-parallel-dots.json"):
+        np_path = tmp_path / rel_dir / name
+        if np_path.is_file():
+            d = json.loads(np_path.read_text())
+            d["template_sha256"] = hashlib.sha256(template.read_bytes()).hexdigest()
+            np_path.write_text(json.dumps(d))
     prereg = json.loads((cur_dir / "preregistration.json").read_text())
     mod_rel = prereg["transform_module"]
     (tmp_path / mod_rel).parent.mkdir(parents=True, exist_ok=True)

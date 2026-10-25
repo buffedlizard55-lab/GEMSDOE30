@@ -196,6 +196,20 @@ has a competition score.
 
 
 
+## Session 2026-10-25 S20 (branch `arena/15a1706d-gemsdoe30`) — Lane G30-S20
+
+| ID | Severity | Status | Observation / evidence | Action or consequence |
+| --- | --- | --- | --- | --- |
+| IR-S20-01 | High | Open | Prompt's "single method paragraph" lane again not identifiable in received text. | Lane G30-S20 self-assigned and frozen in `docs/research/2026-10-25-s20/preregistration.md` before any result. Owner may reassign future lanes. |
+| IR-S20-02 | High | Open | Training + external rasters are hash-pinned owner mirrors, not organizer-authenticated downloads (official origins: DrivenData files; USGS 3DEP; USGS GeoDAWN DOI 10.5066/P93LGLVQ, CC0 on official page). | Local git-ignored use only. Replace with owner's authorized DrivenData download and re-verify SHA-256 pins before any upload. |
+| IR-S20-03 | Medium | Closed-workaround | Requested shared files `evaluate_holdout.py` / `submission_writer.py` do not exist. | Reused shared equivalents `src/gemsdoe30/{holdout,submission,emitter_opt,fields}.py` + `scripts/lane_g30s19.py` stack builder; no private fork. New transform added once to shared `fields.py` with tests. |
+| IR-S20-04 | High | Open | `sample_submission.tif` values inside footprint are identical to labels (60,988 ones; re-measured this session), contradicting the problem page's "predicts total fault absence" wording. | Template used for footprint/grid only, never as features or predictions. Flagged for organizer clarification. |
+| IR-S20-05 | High | Open — owner ruling needed | S20 final dots: 89.58% within 3 px of unsubmitted Candidate C (duplicate-stop under frozen gate), but ≤44.9% vs all nine priority scored winners and 36.8% vs H33. Whether unsubmitted same-project candidates belong in the "registry" decides successor-vs-duplicate status. | Verdict recorded negative (duplicate-stop); site keeps Candidate C as only OK-to-submit. Owner/selector may explicitly retire C for S20 as single-file replacement; never submit both as separate discoveries. |
+| IR-S20-06 | Low | Open | Surface-stage novelty statistic computed after E3 on the frozen pre-emission belief, not as a hard stop before E3 emission. | Nothing tuned after seeing novelty; E3 runs regardless for the education file. Future lanes should hard-gate final emission on the surface stage. |
+| IR-S20-07 | Medium | Open | Catalogue component holdout is a biased proxy for expert-labelled off-catalogue faults; lidar/radiometric value could be over- or under-stated by this frame. | All numbers labelled HOLDOUT-DTI with evaluator/CI; no score forecast. One feedback-slot receipt is the only antidote. |
+| IR-S20-08 | Low | Open | No lidar-only vs radiometrics-only ablation inside the 3-experiment budget (E1/E2/E3 spent). Canary AUCs suggest lidar carries more signal; not claimed as attribution. | Preregister as first experiment of a future session; stacks are cached in the worktree (git-ignored). |
+| IR-S20-09 | Medium | Open | Post-merge integration (PR #29): the two new S20 TIFs triggered main's TDX-1 late-registry audit. Dots-stage novelty vs TDX-1 measured exactly (31.46 % of TDX dots within 3 px of S20; Spearman 0.0125), but the TDX continuous surface (`outputs/texture-displacement/tdx1-surface.tif`, sha256 b5545eae…) is git-ignored and unavailable, so the two new surface-stage rows are recorded **undefined** and the TDX surface-observed-registry gate now reads **unknown** (fail-closed) in the regenerated readiness/site. | No value fabricated; TDX verdict unchanged (negative). To restore a defined surface gate, rerun the pinned TDX pipeline in a worktree that retains `outputs/` and re-audit the two arrivals, or accept unknown permanently. Extension recorded inside `registry-parallel-addendum.json` (`extensions`). |
+
 ## 2026-10-25 TDX-1 experiment and final reliability review
 
 Current decision: **NEGATIVE, NOT APPROVED FOR SUBMISSION**. The corrected new
@@ -223,7 +237,29 @@ Automated checks, numerical results and the three-pass journal:
 | IR-TDX-10 | High | GitHub runner `gh api` returned `transform: short source buffer` while streaming the exact pinned binary template; artifact verification never started. Local fresh bytes matched the pin. | Added API-readable failure annotations; one shared byte-safe fallback for this exact error. Rewinds partial bytes, retains size/blob/SHA gates, rejects cross-host credential redirects, never masks HTTP/auth failure. Real Python transfer and CI run 40237841987 passed. |
 | IR-TDX-11 | Medium | A regenerated root landing change remained unstaged during conflict resolution, so worktree checks alone were not sufficient publication evidence. | Generated HTML included in a follow-up commit; exact-site check rerun, clean-tree assertion before final push, actual PR CI required before merge. |
 
+## 2026-10-25 TDX-C2 continuation — latest attempt stopped
 
+**DUPLICATE-STOP. No new unique/approved TIFF.** The retained TDX-1 file is an
+archive, not a new submission from this session. [Latest run card](research/texture-controls/run-card.json).
+
+| ID | Severity | Observation | Resolution / evidence boundary |
+|---|---|---|---|
+| IR-TC2-01 | High | A new full-stack fit has a different hash but 79.090497% final-dot overlap within 3 px of G30-S19, above the mandatory 70% limit. Low Spearman alone missed the collision. | Logged duplicate and stopped; no further hypothesis, model, density or emitter tried; no public TIFF. Full before/after comparison receipts cover 164 aligned byte identities. |
+| IR-TC2-02 | High | Conditional displacement did not improve all matched controls with a positive paired confidence interval. All candidate-minus-control intervals cross zero. | Negative HOLDOUT-DTI result retained with evaluator, 60,988 withheld positives and 95% CI. No claim of significant inferiority, no control selected, no hidden-score forecast. |
+| IR-TC2-03 | High | Duplicate exception originally bypassed the success-only mandatory run-card path. | Audit-only finalizer reopens quarantined bytes and records the negative card/validator without model execution, dot changes or publication. Original executed script pinned at commit `79d1be92e578f4e555fe5a5ae8d273728221c8af`. Future exception path finalizes automatically. |
+| IR-TC2-04 | Medium | Trying to rerun an existing execution could overwrite its failure timestamp despite a no-overwrite check inside the run function. | Added preflight before the exception logger. Regression verifies a rejected rerun leaves all JSON evidence unchanged; this preflight performs no model experiment. |
+| IR-TC2-05 | High | Shared readiness could mark a format-valid duplicate `download_ok`, even while research promotion failed. | Fixed once in shared readiness: numeric duplicate evidence vetoes research download too. Unpublished-file receipts explicitly do not claim current public-byte reinspection. Tests cover flags, numeric thresholds, missing canaries, renamed publication and partial-write failures. |
+| IR-TC2-06 | Medium | No identifiable external lane paragraph; complete private/parallel continuous-surface registry and historical-best checkpoint still missing. | Autonomous continuation of the previous next step, not external assignment. Nine-site snapshot completeness is not global completeness. Unknown gates remain unknown; no slot selector/uploader. |
+| IR-TC2-07 | Medium | Repeated previously inspected folds, one deterministic phase control and public-catalogue truth cannot establish independent hidden-fault generalization. | Reported as exploratory conditional catalogue recovery. Reserve untouched regions/nested evaluation before further tuning; do not call a new seed independent confirmation. |
+| IR-TC2-08 | Medium | Four selected historical finite/zero-outside references fail the local documented null-outside format check, despite valid inside ranges. Exact prior rejected upload remains unidentified. | Nine-reference format receipt names each failing check. No conclusion about private portal acceptance or cause of the earlier range error; no silent clipping or range-error-immunity claim. |
+| IR-TC2-09 | Medium | Competition/rules/USGS/GDR/NLR hosts are outside current network access; mirrors are not organizer-authenticated. | Fresh official evidence limited to the pinned reference GitHub notebook/README. Other official links retained for review, not claimed newly read. No organizer score, current allowance, eligibility or deadline invented. |
+| IR-TC2-10 | Medium | Fault-proxy predictions could be overstated as geothermal-vent discoveries. | No temperature, permeability, flow or vent observations used; all vent/resource claims withheld. Magnetic fabric can be mimicked by intrusive contacts or survey seams. |
+
+[Scientific interpretation](research/texture-controls/review.md) ·
+[Three-pass verification](research/texture-controls/verification.md) ·
+[Negative automated decision](research/texture-controls/readiness.json).
+
+| IR-TC2-11 | Medium | Main advanced through PR #29 during this lane's audit, adding two S20 TIFF encodings after the preregistered 164-reference snapshot. | Preserved peer records and immutable original registry. Audited both saved C2 states post-stop against the arrivals: 166 combined comparisons, S20 nearby-dot overlap 77.062826%, original max 79.090497% unchanged. No refit/replacement. Missing older TDX-1 surface comparisons remain explicitly unknown in that lane's addendum. |
 
 ## 2026-10-25 MSDB-1v2 geophysical metadata audit & experiment log
 
