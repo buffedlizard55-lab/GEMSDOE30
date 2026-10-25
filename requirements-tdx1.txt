@@ -1,0 +1,11 @@
+# Exact direct dependency versions used for the CPU TDX-1 executions (Python 3.11.2).
+# Use with: pip install -e '.[research,test]' -c requirements-tdx1.txt
+# This is a direct-dependency snapshot, not a cross-platform bitwise-reproduction guarantee.
+numpy==2.4.6
+scipy==1.17.1
+rasterio==1.4.4
+scikit-learn==1.9.1
+threadpoolctl==3.7.0
+pytest==9.1.1
+shapely==2.2.0
+pyproj==3.7.2

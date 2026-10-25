@@ -72,3 +72,18 @@ def test_cli_checks_grid_and_pins(tmp_path):
     profile['transform'] = from_origin(100, 600, 100, 100)
     with rasterio.open(paths[1], 'w', **profile) as ds: ds.write(a, 1)
     with pytest.raises(ValueError): audit(paths[1], paths[0], registry, 'dots')
+
+
+def test_cached_ranks_and_stage_surface_match_scipy():
+    from scipy.stats import spearmanr
+    from gemsdoe30.novelty import rank_cache
+    rng = np.random.default_rng(17)
+    a = rng.normal(size=(35, 40))
+    b = rng.integers(0, 4, size=a.shape).astype(float)
+    mask = rng.random(a.shape) > .2
+    row = compare(a, b, mask, stage='surface', cached_ranks=rank_cache(a, mask))
+    assert row['spearman_full_footprint'] == pytest.approx(spearmanr(a[mask], b[mask]).statistic)
+    assert row['candidate_dots'] is None
+    assert row['candidate_fraction_within_3px_of_reference'] is None
+    assert row['undefined'] is False
+    with pytest.raises(ValueError): compare(a, b, mask, stage='invalid')

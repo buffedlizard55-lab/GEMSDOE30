@@ -1,115 +1,24 @@
 <!doctype html>
-<html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="GEMSDOE30: evidence-led fault-discovery research and honest submission readiness.">
-<link rel="stylesheet" href="docs/assets/site.css"><title>GEMSDOE30 · Submission readiness</title>
-<style>.status-block{border:2px solid #a94727;border-radius:16px;padding:24px;background:#fff7ed;color:#522a1c}.status-block h2{color:inherit}.audit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}.audit-grid article{padding:22px;border:1px solid #d7dfdc;border-radius:14px} main{max-width:1160px;margin:auto;padding:28px 20px} code{overflow-wrap:anywhere} .small{font-size:.9rem} details{margin:20px 0} summary{cursor:pointer;font-weight:700}</style>
-</head>
-<body>
-<header class="site-header">
-<div class="nav-wrap"><a class="brand" href="index.html">G30 · GEMSDOE30</a>
-<nav class="nav-links" aria-label="Main navigation"><a href="executive-summary.html">Submission guide</a><a href="docs/research/2026-10-25/review.md">Scientific review</a><a href="docs/research/2026-10-25/source-audit.json">Evidence</a><a href="README.md">Project brief</a>
-</nav>
-</div>
-</header>
-<main>
-<section class="page-intro"><span class="eyebrow">DOE GEMS · Fault-discovery research</span>
-<h1>New evidence.<br>Not renamed predictions.
-</h1>
-<p class="lead">A clear path from geological hypotheses to a genuinely distinct, validated GeoTIFF. This review found shared predictions across the strongest reported historical submissions—and fixed a holdout masking defect.
-</p>
-</section>
-<section class="status-block" style="border-color:#1a7f37;background:#eafaf0;color:#10331c" aria-labelledby="submission-status"><span class="eyebrow">Submission decision · 25 October 2026 · Candidate C · Lane G30-S19</span>
-<h2 id="submission-status">✅ OK TO DOWNLOAD &amp; SUBMIT — Candidate C passed all project gates</h2>
-<p><strong>Submit this file:</strong> <code>gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif</code><br>SHA-256 <code>8a0301d5606e39b114eca997cd43849531393bb3921db26a267478f915f43cc9</code> · 60,000 dots · 0 on catalogue · every cell finite in [0,1].</p>
-<p><a class="button" style="display:inline-block;padding:14px 22px;font-size:1.15rem;font-weight:700" href="docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif" download>⬇ DOWNLOAD SUBMISSION TIF (submit this one)</a></p>
-<p><strong>Paste this note on DrivenData (84 characters):</strong><br><code>G30-S19 habitat GBM (19-band, no catalogue-distance inputs) + EDGE 60k, off-cat &gt;2px</code></p>
-<p class="small">HOLDOUT-DTI <b>0.2230</b> [95% CI 0.205–0.240; 20,870 withheld fault pixels; evaluator component-holdout-v2] vs proximity 0.167 / Poisson 0.195 — the only 2026-10-25 candidate that beat its comparators (A: 0.1222, B: 0.0539, both below). Leakage canaries 43/43 clean · novelty vs the 0.2778 winner: ρ=0.025, overlap 34.9% · validator passed. HOLDOUT-DTI is a local proxy, <b>not</b> a competition score; the live leader is 0.4413 (read 2026-10-25) and no score is promised. No slot was used; you choose when to submit. <a href="docs/research/2026-10-25/lane-g30s19-run-card.json">Run card</a> · <a href="docs/research/2026-10-25/lane-g30s19-analysis.md">Analysis</a> · <a href="executive-summary.html">Submission guide</a> · <a href="docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan.tif" download>NaN-outside twin</a></p>
-</section>
-<section class="status-block" aria-labelledby="submission-status"><span class="eyebrow">Readiness decision · 25 October 2026</span>
-<h2 id="submission-status">Candidates A &amp; B (parallel sessions) — both negative on holdout; neither is recommended for a slot</h2>
-<p><strong>Candidate A</strong> (branch <code>arena/6a5f04fe-gemsdoe30</code>, residual-ridge gate): <a href="docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif" download>download gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif</a>. Valid and unique in the repo. HOLDOUT-DTI 0.1222 [0.1139, 0.1306] against 0.1770 [0.1681, 0.1857] for the count-matched proximity comparator. <b>Not recommended.</b></p>
-<p><strong>Candidate B</strong> (branch <code>arena/6a157983-gemsdoe30</code>, H-CC1 dispersed 3 px, PR #25 merged): <a href="docs/downloads/gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif" download>download gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif</a> (SHA-256 837f555e…ec63ff). It passes the local format validator. HOLDOUT-DTI 0.0539 [0.0507, 0.0572], below a matched random control at 0.0659 [0.0631, 0.0687]. <b>Not recommended.</b></p>
-<p>Both labels are HOLDOUT-DTI (catalogue proxy). Neither has an organizer score. The public leaderboard was read on 2026-10-25 with #1 at 0.4413; the prompt's 0.3195 figure does not appear on it. Any upload must be made by you from your own DrivenData account, using official training files (see irregularity I-1 in the report). Automated checks, not a human inspector, establish research eligibility. No upload was made by this project and no slot was used.</p>
-<a href="docs/research/2026-10-25/session-report.md">Read the full session report (B)</a> · <a href="docs/research/2026-10-25/candidate-residual-gate.md">Design and result (A)</a> · <a href="docs/research/2026-10-25/run-card-residual-gate.json">Run card (A, JSON)</a> · <a href="docs/research/2026-10-25/run-card.json">Run card on main (JSON)</a> · <a href="docs/research/2026-10-25/live-verification.md">Live official facts</a>
-</section>
-<section class="section audit-grid">
-<article><span class="eyebrow">Data preflight</span>
-<h2>Owner mirrors verified
-</h2>
-<p>The pinned feature, label and template files were restored and prepared in the review worktree. Raw and prepared inputs are Git-ignored, not downloadable from this Pages site, and are not organizer-authenticated.
-</p><a href="docs/research/2026-10-25/prepared-manifest.json">Preparation receipt</a>
-</article>
-<article><span class="eyebrow">Novelty check</span>
-<h2>Duplicate family detected
-</h2>
-<p>All H33 reference dots lie within 3 pixels of the GEMSDOE28 reference. Full-footprint rank correlation: <b>0.967587</b>. These are similarity diagnostics, not performance scores.
-</p><a href="docs/research/h33-historical-duplicate-audit.json">Exact comparison results</a>
-</article>
-<article><span class="eyebrow">Shared evaluator</span>
-<h2>Footprint bug fixed
-</h2>
-<p>The pooled holdout now excludes out-of-footprint truth and predictions. Empty-truth quadrants retain their false-positive mass. Historical bests need comparable reruns.
-</p><a href="docs/research/2026-10-25/review.md">Defects and limitations</a>
-</article>
-</section>
-<section class="section">
-<h2>Why the reported H33 result may have improved
-</h2>
-<p>GEMSDOE32 describes deleting dots within 200 m of the known catalogue. Removing redundant or poorly placed predictions can reduce false-positive mass while preserving much of the distance-weighted coverage. That is a plausible metric mechanism, not proof of hidden fault discovery.
-</p>
-<p>The owner's <b>0.2778</b> result is an <b>unverified historical claim</b>, not ORGANIZER-CONFIRMED. Conflicting current-leader claims are not treated as a live leaderboard. We do not forecast a higher score from this audit.
-</p><a class="button secondary" href="docs/research/2026-10-25/review.md">Read the nine-site scientific review</a>
-</section>
-<section class="section">
-<h2>What to test next—after lane allocation
-</h2>
-<div class="audit-grid">
-<article>
-<h3>1. Magnetic texture displacement
-</h3>
-<p>Look for matched texture offsets across gravity edges rather than another high-gradient ridge. Main mimic: intrusive contacts.
-</p>
-</article>
-<article>
-<h3>2. Conductivity saddles
-</h3>
-<p>Test conductive curvature saddles at cover transitions. Main mimic: saline groundwater and sediment facies.
-</p>
-</article>
-<article>
-<h3>3. Residual demagnetization
-</h3>
-<p>Test coherent magnetic lows after conditioning on gravity and broad trends. Main mimic: nonmagnetic basin fill.
-</p>
-</article>
-<article>
-<h3>4. Profile-offset persistence
-</h3>
-<p>Test consistent signed topographic offsets across scales. Main mimics: shorelines and fluvial terraces.
-</p>
-</article>
-</div>
-<p>Prospective hypotheses only. No measured gains or global novelty are claimed. The review names exact cached layers, differences from existing methods, costs and falsification requirements.
-</p>
-</section>
-<section class="section">
-<h2>Downloads: educational reference only
-</h2>
-<p><strong>This is an existing file, not a new submission.</strong> It remains downloadable for reproducibility and learning. A different name or zero/NaN encoding does not make its predictions unique.
-</p><a class="button secondary" href="docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif" download>Download historical D28 TIFF · DO NOT SUBMIT AS NEW</a>
-<p><a href="docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.json">Historical provenance</a> · <a href="executive-summary.html">How a future approved submission will be released</a>
-</p>
-</section>
-<section class="section">
-<h2>Evidence feed—not a leaderboard feed
-</h2>
-<p>Repository status is generated from local manifests and receipts. It cannot verify current private portal rules, available submission slots, or hidden-test performance.
-</p><a href="docs/status.json">Repository status JSON</a> · <a href="docs/research/2026-10-25/source-audit.json">Pinned source URLs and hashes</a> · <a href="docs/research/2026-10-25/owner-request.md">Current owner requirements</a>
-</section>
-</main>
-<footer class="site-footer">
-<p>GEMSDOE30 · Evidence before claims. Local validation is not organizer approval.
-</p><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Official competition</a>
-</footer>
-</body></html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A newly generated GEMS fault-prediction TIFF, reproducible holdout evidence, and an explicit automated submission decision.">
+<title>New research TIFF &amp; readiness · GEMSDOE30</title><link rel="stylesheet" href="docs/assets/research.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html"><span class="brand-mark">G30</span> Fault discovery lab</a>
+<nav aria-label="Main navigation"><a href="index.html" aria-current="page">Overview</a><a href="executive-summary.html">Submission guide</a><a href="docs/research/texture-displacement/review.md">Research</a><a href="README.md">Project brief</a></nav></div></header>
+<main id="main"><section class="intro"><div><p class="eyebrow">DOE GEMS / Research release 01</p><h1>A new TIFF.<br>Not a new claim.</h1><p class="lead">Testing whether magnetic texture offsets across gravity edges reveal concealed faults—without recycling the strongest historical submissions.</p><p class="meta">25 October 2026 <span>·</span> CPU experiment + guard correction <span>·</span> No submission slot used</p></div><a class="text-link" href="docs/research/texture-displacement/preregistration.md">Read the frozen plan ↗</a></section>
+<section class="release" aria-labelledby="release-title">
+<div class="release-heading"><span class="pill caution">NOT APPROVED FOR SUBMISSION</span><span class="pill good">Local TIFF contract passed</span></div>
+<h2 id="release-title">Download for research. <span>Do not submit.</span></h2>
+<p>This is a <strong>newly generated model output</strong>, not a renamed reference. It failed the paired performance gate; complete parallel-run evidence is also missing. Automated inspection has already made the decision—no human inspector is required.</p>
+<div class="actions"><a class="button" href="docs/downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.tif" download>↓ Download new research TIFF <span>0.46 MiB</span></a><a class="button secondary" href="docs/research/texture-displacement/readiness.json">View automated decision</a></div>
+<p class="filename">gems30-TDX1-44090-20261025-5fc508ea81ac.tif</p><details><summary>File identity &amp; validation receipt</summary><dl><dt>SHA-256</dt><dd><code>9556e3ddd8ea7658ca510ab02d5b5304ac4c3332c54e7f86df5a24769bd03cdb</code></dd><dt>Contract</dt><dd>One float32 band · EPSG:32611 · 3,730 × 3,292 · exact template transform · finite [0,1] inside · NaN nodata outside</dd><dt>Receipt</dt><dd><a href="docs/research/texture-displacement/validation.json">Reopened-file validation</a> · <a href="docs/downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.json">Provenance sidecar</a></dd></dl></details></section>
+<section class="evidence-strip" aria-label="Research diagnostics"><article><span>New prediction support</span><strong>44,090 dots</strong><small>Zero positive catalogue pixels</small></article><article><span>Observed novelty</span><strong>108 files compared</strong><small>No duplicate-stop threshold crossed</small></article><article><span>Leakage canaries</span><strong>22 features × 4 folds</strong><small>No AUC alarm above 0.90</small></article></section>
+<section class="two-column section"><div><p class="eyebrow">01 / The experiment</p><h2>A useful signal.<br>Not a competitive model yet.</h2><p>Two-scale profile matching added information beyond the three raw physics inputs. But the six-feature candidate lost to the stronger 19-band comparator on identical buffered holdouts. We preserve that negative result instead of spending a weekly slot.</p><p class="fine">The final run uses the corrected 17-pixel physical-support and training guard. One registered engineering correction followed the first negative result; the same inspected folds are not fresh independent confirmation. <a href="docs/research/texture-displacement/correction-v1-retirement.json">Correction &amp; original-run provenance</a>.</p><div class="table-wrap"><table><caption>HOLDOUT-DTI · 60,988 withheld positive pixels · 95% spatial-bootstrap CI</caption><thead><tr><th>Fixed arm</th><th>HOLDOUT-DTI</th><th>95% CI</th></tr></thead><tbody><tr><th scope="row">Three raw physics bands</th><td>0.06459</td><td>[0.05537, 0.07430]</td></tr><tr><th scope="row">TDX-1 · fixed new candidate</th><td>0.07284</td><td>[0.06348, 0.08306]</td></tr><tr><th scope="row">Core 19-band comparator</th><td>0.13982</td><td>[0.12418, 0.15590]</td></tr></tbody></table></div><p class="fine">Evaluator <code>component-holdout-v3-blockstats-20261025</code>; buffered whole-component regional trials. These are catalogue-recovery proxy measurements, <strong>not organizer scores or leaderboard forecasts</strong>. Full protocol and uncertainty: <a href="docs/research/texture-displacement/review.md">scientific review</a>.</p><a class="text-link" href="docs/research/texture-displacement/results.json">All sufficient statistics &amp; canaries ↗</a></div><figure><img src="docs/assets/tdx1-support.png" width="823" height="933" loading="lazy" alt="New TDX-1 prediction dots in dark green over the pale green competition footprint"><figcaption><span class="legend-dot"></span> New TDX-1 support · footprint view, not a geothermal-vent map. Display is downsampled; the downloadable TIFF retains the exact grid.</figcaption></figure></section>
+<section class="section"><div class="section-heading"><div><p class="eyebrow">02 / Automated inspection</p><h2>Every gate has a state.</h2></div><p>Passed, failed, or unknown.<br>Unknown never means approved.</p></div><div class="table-wrap"><table><thead><tr><th>Gate</th><th>State</th><th>Evidence rule</th></tr></thead><tbody><tr><th scope="row">TIFF contract &amp; exact hash</th><td><span class="gate passed">passed</span></td><td>Reopened shared-writer GeoTIFF matches template; SHA-256 binds this decision to its exact bytes</td></tr><tr><th scope="row">Pooled holdout &amp; confidence interval</th><td><span class="gate passed">passed</span></td><td>HOLDOUT-DTI requires evaluator/protocol, withheld positives and spatial-bootstrap 95% CI</td></tr><tr><th scope="row">Beat same-protocol comparators</th><td><span class="gate failed">failed</span></td><td>Fixed candidate must improve both same-protocol controls with positive paired CI lower bound</td></tr><tr><th scope="row">Single-feature leakage canaries</th><td><span class="gate passed">passed</span></td><td>All 22 raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC</td></tr><tr><th scope="row">Count-matched experiment</th><td><span class="gate passed">passed</span></td><td>All fixed arms must realize the same predeclared active-domain budget in every fold</td></tr><tr><th scope="row">Surface · observed registry</th><td><span class="gate passed">passed</span></td><td>108 recorded comparisons; threshold rho &gt;0.90 or dot overlap &gt;0.70 is duplicate-stop</td></tr><tr><th scope="row">Final dots · observed registry</th><td><span class="gate passed">passed</span></td><td>108 recorded comparisons; threshold rho &gt;0.90 or dot overlap &gt;0.70 is duplicate-stop</td></tr><tr><th scope="row">Complete parallel registry</th><td><span class="gate unknown">unknown</span></td><td>Nine-site public snapshots cannot attest all parallel rasters or missing original surfaces</td></tr><tr><th scope="row">External lane-allocation evidence</th><td><span class="gate unknown">unknown</span></td><td>Autonomous research continuation is not an externally supplied lane assignment</td></tr><tr><th scope="row">Comparable historical-best rerun</th><td><span class="gate unknown">unknown</span></td><td>Do not substitute an archived metric or a new comparator for a missing historical-best rerun</td></tr><tr><th scope="row">Experiment budget</th><td><span class="gate passed">passed</span></td><td>At most three experiments / two experimental hours</td></tr><tr><th scope="row">Submission name &amp; short note</th><td><span class="gate passed">passed</span></td><td>Named artifact and note of at most 140 characters</td></tr></tbody></table></div></section>
+<section class="section two-column"><div><p class="eyebrow">03 / Learning from H33</p><h2>Why pruning may have helped.</h2><p>The historical H33 support can be reproduced exactly by removing catalogue-adjacent dots from the GEMSDOE28 base. Under the max-credit kernel, redundant predictions can add penalty without adding coverage. That is a plausible metric mechanism—not proof of hidden fault discovery.</p><p>The owner's <b>0.2778</b> attribution remains an <b>unverified historical claim</b>, not ORGANIZER-CONFIRMED. No live leaderboard value or higher-score forecast is asserted.</p><a class="text-link" href="docs/research/texture-displacement/review.md">Read the source-linked analysis ↗</a></div><div class="note-card"><h3>What makes this file different?</h3><p>New gravity-normal profile features, a newly fitted six-feature HGB, and no historical raster inputs to the model.</p><p>Maximum observed surface Spearman: <b>0.053133</b>.<br>Maximum final-dot overlap within 3 px: <b>40.4922%</b>.</p><p class="fine">Similarity diagnostics, not DTI. Coverage includes nine frozen public snapshots and explicitly audited late-arriving TIFFs, not all runs or original surfaces. Global uniqueness remains unverified.</p><a href="docs/research/texture-displacement/registry.json">Pinned registry &amp; exclusions</a> · <a href="docs/research/texture-displacement/registry-parallel-addendum.json">Late-reference addendum</a></div></section>
+<section class="section"><p class="eyebrow">04 / Parallel research preserved</p><h2>Other lanes. Separate evidence.</h2><p>These records arrived through concurrent main-branch merges. Their holdouts are different: we do not rank them against TDX-1 or select a weekly submission here. “Promote” in a peer receipt is that lane's reported research verdict, not competition approval.</p><div class="resource-grid"><article><h3>G30-S19 · habitat + EDGE</h3><p>Its lane reports research promotion under an interleaved-component protocol. Not rerun or adjudicated by TDX-1; its conditional uncertainty is not interchangeable with this page's spatial-block CI.</p><a href="docs/research/2026-10-25/lane-g30s19-run-card.json">Peer run card ↗</a></article><article><h3>H-CC1 · contact coincidence</h3><p>Preserved negative record. Its emitted count missed the registered budget; do not reinterpret that comparison as count-matched evidence.</p><a href="docs/research/2026-10-25/h-cc1-run-card.json">Peer run card ↗</a></article><article><h3>Residual-ridge gate</h3><p>Preserved negative and buffered-reach findings. Different geometry and buffer assumptions require a new design, not cross-protocol score selection.</p><a href="docs/research/2026-10-25/run-card-residual-gate.json">Peer run card ↗</a></article></div></section>
+<section class="section"><p class="eyebrow">05 / Evidence you can trace</p><h2>Sources, not invented certainty.</h2><div class="resource-grid"><article><h3>Official reference</h3><p>Band meanings, source grid and reference training/export code, freshly read at an immutable commit.</p><a href="https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/unet-mc-cv-reference-solution.ipynb">Organizer notebook ↗</a></article><article><h3>Scientific record</h3><p>Four ranked hypotheses, one fixed method with a recorded guard correction, non-fault confounds and reproducible evidence.</p><a href="docs/research/texture-displacement/review.md">Source-linked review ↗</a></article><article><h3>Current evidence feed</h3><p>Generated from repository receipts. No automated competition scraping or invented current scores.</p><a href="docs/status.json">Status JSON ↗</a><p><a href="docs/research/texture-displacement/owner-claims.csv">119 unverified owner-reported entries ↗</a></p></article></div></section></main>
+<footer><div><strong>GEMSDOE30</strong><p>Evidence before claims. A valid file is not a competition approval.</p></div>
+<div><a href="docs/status.json">Evidence feed (JSON)</a><a href="docs/research/texture-displacement/run-card.json">Run card</a><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Official competition ↗</a></div>
+<p class="fine">Experiment recorded 2026-10-25T21:29:01+00:00. Repository evidence only; not a live leaderboard. No competition slot selected or used.</p></footer>
+<script src="docs/assets/research.js" defer></script></body></html>

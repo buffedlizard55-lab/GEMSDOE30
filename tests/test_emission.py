@@ -284,3 +284,13 @@ class OrderedSelectionTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def test_uniform_scaling_argument_does_not_justify_arbitrary_binarization():
+    """IR-30-TDX: low confidence at a false location need not be raised to one."""
+    from gemsdoe30.metric import distance_weighted_tversky
+    truth = np.zeros((3, 12), dtype=float)
+    truth[1, 1] = 1
+    graded = truth.copy(); graded[1, 10] = .01
+    binary = (graded > 0).astype(float)
+    assert distance_weighted_tversky(graded, truth).score > distance_weighted_tversky(binary, truth).score

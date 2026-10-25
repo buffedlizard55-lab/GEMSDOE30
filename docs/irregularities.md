@@ -194,3 +194,31 @@ has a competition score.
 | IR-30-076 | Low | Open | The bash sandbox cannot reach drivendata.org, but the page-retrieval tool can. Verification of live pages therefore came through the retrieval tool, not a sandbox fetch. | Recorded in `live-verification.md` with retrieval dates. |
 | IR-30-077 | Medium | Open | Eligibility: the rules require U.S. citizenship or permanent residence for individual entrants and a penalty-of-perjury certification. This repository has no record of who the user is. | Not assessed. The user must confirm eligibility before any entry or payment. |
 
+
+
+## 2026-10-25 TDX-1 experiment and final reliability review
+
+Current decision: **NEGATIVE, NOT APPROVED FOR SUBMISSION**. The corrected new
+[TIFF and exact receipt](research/texture-displacement/run-card.json) are downloadable
+for research only. Earlier claims above retain their date/evidence limitations.
+
+| ID | Severity | Observation | Resolution / boundary |
+|---|---|---|---|
+| IR-TDX-01 | High | First TDX transform underestimated Euclidean support at 16 px: square Gaussian corners plus flank/tangent sampling and interpolation can reach 16.6077 px. | Analytically fixed to 17 px once in the shared transform. Amended plan before corrective fitting; first negative run frozen at commit `361b128f9951191378a3a07b06a5d76ce1933836`. Corrective execution remains negative; no model/emitter tuning or fresh-confirmation claim. |
+| IR-TDX-02 | High | A common-amplitude monotonicity argument had been overstated as arbitrary independent binarization optimality. | Corrected shared documentation/builder explanation; regression demonstrates a weak false positive that worsens DTI when set to one. Binary emission remains empirical, not a theorem. |
+| IR-TDX-03 | Medium | Legacy diagnostic conversion omitted source CRS equality; identity fields could be blank/notes over 140 characters. | Central shared writer rejects wrong CRS, blank run name and overlength note. Tests cover failures; no private writer fork. |
+| IR-TDX-04 | High | Receipt verification could zip-truncate CIs or omit checking paired differences, comparator fields and exact reference identities. | Entire summary and run-card values recomputed/checked, including paired CIs, versions and bootstrap config. Actual TIFF/sidecar/template/registry/preregistration identities bound. Repeated reference rows and changed template bytes fail tests. |
+| IR-TDX-05 | High | Nine public source snapshots are not a complete parallel registry; current external lane allocation and comparable historical-best UNet checkpoint are unavailable. | 104 unique aligned files observed; unknown evidence blocks promotion. No global-uniqueness certification, selector or upload. No extra lane was fabricated. |
+| IR-TDX-06 | Medium | Prepared source hashes alone do not prove cached arrays still equal their sources. | New shared cache verifier compares every feature/label/mask cell with raw-source windows and hashes all four arrays before the corrective fit; altered-cache fixtures fail. No large cache committed. |
+| IR-TDX-07 | Medium | Re-synchronizing main branches would silently change a frozen registry during reproduction. | `--restore-only` reads immutable refs, verifies Git blob/SHA-256/grid and preserves the JSON bytes. Tested fresh restore, cache reuse, bad remote blob and bad cached blob. |
+| IR-TDX-08 | Medium | Static preview URL filtering alone could allow a public-looking symlink into a private workspace path. | Apply denylist to the resolved path too, refuse directory listings, bind 0.0.0.0 and accept preview hosts. HTTP tests reject `.git`, encoded hidden paths, ignored data/outputs and private symlinks. |
+| IR-TDX-09 | Medium | Complete owner message supplied 119 distinct named claims; old score ledger had only a subset and current-leader claims conflict. | Full prompt preserved in README; all names/blank result retained in quarantined CSV. Added ledger rows are explicitly unverified user reports. No organizer receipt or current leader invented. |
+
+Automated checks, numerical results and the three-pass journal:
+[TDX-1 verification](research/texture-displacement/verification.md).
+
+
+| ID | Severity | Observation | Resolution / boundary |
+|---|---|---|---|
+| IR-TDX-10 | High | GitHub runner `gh api` returned `transform: short source buffer` while streaming the exact pinned binary template; artifact verification never started. Local fresh bytes matched the pin. | Added API-readable failure annotations; one shared byte-safe fallback for this exact error. Rewinds partial bytes, retains size/blob/SHA gates, rejects cross-host credential redirects, never masks HTTP/auth failure. Real Python transfer and CI run 40237841987 passed. |
+| IR-TDX-11 | Medium | A regenerated root landing change remained unstaged during conflict resolution, so worktree checks alone were not sufficient publication evidence. | Generated HTML included in a follow-up commit; exact-site check rerun, clean-tree assertion before final push, actual PR CI required before merge. |

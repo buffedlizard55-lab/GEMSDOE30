@@ -8,16 +8,28 @@ from __future__ import annotations
 
 import numpy as np
 from scipy.spatial import cKDTree
-from scipy.stats import spearmanr
+from scipy.stats import rankdata
 
 
-def compare(candidate, reference, footprint):
+def rank_cache(candidate, footprint):
+    """Reuse the exact full-footprint candidate ranks across a large registry."""
+    values = np.asarray(candidate)[np.asarray(footprint, dtype=bool)]
+    if not values.size or not np.isfinite(values).all():
+        raise ValueError('finite, nonempty candidate footprint required')
+    ranks = rankdata(values).astype(np.float64)
+    ranks -= ranks.mean()
+    return ranks, float(np.sqrt(np.dot(ranks, ranks)))
+
+
+def compare(candidate, reference, footprint, *, stage='dots', cached_ranks=None):
     """Full-footprint Spearman and directional dot overlap (Euclidean <=3 px).
 
     Positive values define dots; this definition is meaningful for sparse
     emission rasters, not arbitrary dense probability surfaces. Surface-stage
     decisions use correlation only. Arrays must already share a verified grid.
     """
+    if stage not in ('surface', 'dots'):
+        raise ValueError('stage must be surface or dots')
     a, b = np.asarray(candidate), np.asarray(reference)
     mask = np.asarray(footprint, dtype=bool)
     if a.ndim != 2 or a.shape != b.shape or a.shape != mask.shape or not mask.any():
@@ -26,21 +38,34 @@ def compare(candidate, reference, footprint):
         raise ValueError('non-finite values inside footprint')
     av, bv = a[mask], b[mask]
     constant = np.ptp(av) == 0 or np.ptp(bv) == 0
-    rho = None if constant else float(spearmanr(av, bv).statistic)
-    ac = np.argwhere(mask & (a > 0))
-    bc = np.argwhere(mask & (b > 0))
+    rho = None
+    if not constant:
+        ar, an = rank_cache(a, mask) if cached_ranks is None else cached_ranks
+        br = rankdata(bv).astype(np.float64)
+        br -= br.mean()
+        bn = float(np.sqrt(np.dot(br, br)))
+        if an > 0 and bn > 0:
+            rho = float(np.clip(np.dot(ar, br) / (an * bn), -1.0, 1.0))
     overlap = None
-    if len(ac) and len(bc):
+    candidate_count, reference_count = int(np.count_nonzero(av > 0)), int(np.count_nonzero(bv > 0))
+    # Positive support of a dense continuous surface is NOT a set of placed dots.
+    # Avoid a misleading overlap statistic (and millions of unnecessary KD queries).
+    if stage == 'dots' and candidate_count and reference_count:
+        ac = np.argwhere(mask & (a > 0))
+        bc = np.argwhere(mask & (b > 0))
         distances = cKDTree(bc).query(ac, k=1)[0]
         overlap = float(np.mean(distances <= 3.0))
     return {
+        'stage': stage,
         'spearman_full_footprint': rho,
-        'candidate_dots': len(ac), 'reference_dots': len(bc),
+        'candidate_dots': candidate_count if stage == 'dots' else None,
+        'candidate_positive_support': candidate_count,
+        'reference_dots': reference_count,
         'candidate_fraction_within_3px_of_reference': overlap,
         'identical_inside_footprint': bool(np.array_equal(av, bv)),
         'correlation_duplicate': rho is not None and rho > 0.90,
         'dot_duplicate': overlap is not None and overlap > 0.70,
-        'undefined': rho is None or overlap is None,
+        'undefined': rho is None or (stage == 'dots' and overlap is None),
     }
 
 

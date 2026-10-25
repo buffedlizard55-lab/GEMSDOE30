@@ -1,0 +1,35 @@
+{
+  "source": "docs/research/texture-displacement/owner-prompt.txt",
+  "parsed_claim_lines": 121,
+  "new_claim_rows_added": 81,
+  "ledger_rows": 134,
+  "interpretation": "All additions are unverified user claims; no organizer-confirmed result is inferred.",
+  "blank_results_kept_blank": [
+    "gems91-S18-UNIQUE-curvtilt-20000dots-20261025T182858Z-29db2405"
+  ],
+  "empty_site_reports": [
+    {
+      "site": "GEMSDOE86",
+      "score": null
+    },
+    {
+      "site": "GEMSDOE88",
+      "score": null
+    }
+  ],
+  "conflicting_current_leader_claims": [
+    "0.4413",
+    "0.3195"
+  ],
+  "priority_sites": [
+    "GEMSDOE24",
+    "GEMSDOE25",
+    "GEMSDOE27",
+    "GEMSDOE28",
+    "GEMSDOE30",
+    "GEMSDOE31",
+    "GEMSDOE32",
+    "GEMSDOE33",
+    "GEMSDOE36"
+  ]
+}

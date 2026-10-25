@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "reason": "Review found the Euclidean reach of the square Gaussian support plus profile sampling/interpolation can exceed 16 px. Use ceil(sqrt(2)*6 + sqrt(3^2+6^2) + sqrt(2)) = 17 px.",
+  "original_source_commit": "361b128f9951191378a3a07b06a5d76ce1933836",
+  "original_run_card_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/361b128f9951191378a3a07b06a5d76ce1933836/docs/research/texture-displacement/run-card.json",
+  "original_run_id": "gems30-TDX1-44090-20261025-cd5566cd962c",
+  "original_raster_sha256": "864b9ed01533616a2f6262c2612f0f3053b0926d69a7c52777e06a4d6b67b30e",
+  "original_preregistration_sha256": "f3251e77e408fbe55879c9adc249cf6888a0a82c49ef7320efe4fee135336d38",
+  "original_elapsed_seconds": 196.32,
+  "original_holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.0741049687263338,
+    "withheld_positives": 60988,
+    "ci95": [
+      0.0647598451478687,
+      0.08390335797656864
+    ],
+    "tp_weight": 4305.03316898642,
+    "fp_weight": 42211.55773463405,
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "scope": "buffered whole-segment catalogue-recovery proxy; NOT organizer performance",
+    "comparators": {
+      "physics3": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.06761988471579462,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.058342463500651705,
+          0.07822455227106889
+        ],
+        "tp_weight": 3924.3276949556757,
+        "fp_weight": 42299.24058964024
+      },
+      "core19": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.13603652358257026,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.12161504601820647,
+          0.15132073995855705
+        ],
+        "tp_weight": 7955.7896559635465,
+        "fp_weight": 40505.94771512586
+      }
+    },
+    "candidate_minus": {
+      "physics3": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.006485084010539183,
+        "ci95": [
+          0.0020623282206892633,
+          0.010709198907145149
+        ]
+      },
+      "core19": {
+        "label": "HOLDOUT-DTI difference",
+        "value": -0.061931554856236457,
+        "ci95": [
+          -0.08128312174929626,
+          -0.0429470610841094
+        ]
+      }
+    },
+    "bootstrap": {
+      "unit": "geographic block aggregated across folds",
+      "blocks": 371,
+      "replicates": 2000,
+      "seed": 3071,
+      "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+    }
+  },
+  "original_verdict": "negative",
+  "correction_execution_ordinal": 2,
+  "no_outcome_based_model_changes": true,
+  "same_hypothesis_not_an_independent_novel_method": true,
+  "new_confirmation_set": false,
+  "recorded_utc": "2026-10-25T21:25:17+00:00"
+}

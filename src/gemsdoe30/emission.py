@@ -2,10 +2,9 @@
 
 The GEMS distance-weighted Tversky index (see :mod:`gemsdoe30.metric`) credits each
 truth pixel from the *best* nearby prediction, so redundant prediction pixels add
-false-positive mass without adding true-positive credit.  Competitive entries in
-this competition are therefore not smooth probability maps but sparse binary
-emissions ("dots").  This module implements the two consequences of the published
-metric algebra and the selection rules that use them.
+false-positive mass without adding true-positive credit.  Sparse binary emissions ("dots") can therefore be useful, but are an empirical
+policy, not a mathematical requirement of the metric. This module implements
+metric identities and candidate selection rules for testing that policy.
 
 Metric algebra (exact, from the published equations)
 ----------------------------------------------------
@@ -17,10 +16,11 @@ partition the truth pixels.  Therefore
 
 Two consequences are used throughout this project:
 
-1. **Binary emission is optimal on a fixed support.**  Rescaling every predicted
-   value by ``lambda <= 1`` scales ``T`` and ``F`` by ``lambda`` while ``G`` is
-   fixed, and ``DTI(lambda)`` from (1) is increasing in ``lambda``.  A graded
-   probability map cannot beat the same support emitted as 1.0.
+1. **Uniform amplitude scaling on a fixed shape.** Rescaling *all* predictions
+   by the same ``lambda`` scales ``T`` and ``F`` by ``lambda`` while ``G`` is
+   fixed, so DTI increases with lambda until a value reaches 1. This does NOT
+   prove that independently setting every nonzero pixel to 1 is optimal: a
+   low-confidence false positive can gain FP mass without adding TP credit.
 2. **Marginal inclusion rule.**  Adding prediction mass ``dT`` at false-positive
    cost ``dF`` raises the score iff ``dT/dF > 0.2*DTI/(1 - 0.2*DTI)``; at the
    group's reported operating point (DTI ~ 0.25) that threshold is ~0.052.
@@ -30,8 +30,8 @@ Masked evaluation domain (official clarification)
 DrivenData staff answered on 2026-09-16 (community thread 11516) that pixels of
 *known* USGS/INGENIOUS faults are masked / excluded from evaluation, in both the
 Initial and Final rounds.  The hide-and-recover proxy below therefore scores only
-pixels that are neither masked-known nor hidden truth, and treats hidden catalogue
-components as stand-in truth.  This is stricter (and more honest) than scoring the
+pixels that are not masked-known, and treats hidden catalogue components as
+stand-in positive truth.  This is stricter (and more honest) than scoring the
 whole footprint, which silently rewards predicting the training catalogue.
 """
 

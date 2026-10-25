@@ -1,0 +1,12 @@
+{
+  "started_utc": "2026-10-25T21:25:36+00:00",
+  "preregistration_sha256": "5d9e71a6a4cbb0f4aba2d15ab18173e0bca722287c391f718f205411fc1bab57",
+  "experiment_count": 2,
+  "fixed_arms": [
+    "tdx6",
+    "physics3",
+    "core19"
+  ],
+  "script_sha256": "5dd7d6a73b39cae553b3fcac0dd28c83d70f1f1817984c10bd0cc060637747b0",
+  "max_experimental_seconds": 5400
+}

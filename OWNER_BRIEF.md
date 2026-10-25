@@ -1,3 +1,15 @@
+# Current brief location — read first
+
+The complete latest task text (formatting normalized) is now embedded in
+[README → Current owner prompt](README.md#current-owner-prompt) and mirrored in
+[the task-text record](docs/research/texture-displacement/owner-prompt.txt).
+Read that record and the current run pointer before every session. The older
+brief below is retained as historical owner text, not the current status or a
+verified score/approval statement. New TDX-1 TIFF: research download only;
+[automated decision](docs/research/texture-displacement/readiness.json) is negative.
+
+---
+
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
 > **Complete persistent project brief — read the literal owner brief in the section *Read first — owner brief (verbatim)* and this section before every project session.** These are the standing scope, scientific, operational, and integrity requirements from the project request—not a session-status summary. Preserve every acceptance criterion when changing this brief. Keep `docs/score-ledger.csv`, `docs/irregularities.md`, and the linked official sources in sync when updating claims.
