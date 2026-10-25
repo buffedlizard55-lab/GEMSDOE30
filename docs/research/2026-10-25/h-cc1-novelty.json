@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "stage": "dots",
+  "candidate": "docs/downloads/gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif",
+  "candidate_sha256": "837f555efe1c55f53258aa2fa8b5528684395cc1226a233cf8013690b6ac63ff",
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "registry_sha256": "efacaec7e9f46c7e1dbf2d6dda70c40b55850bda6e2c2d7b25a3fc44614adfdf",
+  "registry_complete": false,
+  "comparisons": [
+    {
+      "reference": "data/external/derived_gdr_2m_probes_100m_u8.tif",
+      "spearman_full_footprint": 0.0015367786751337002,
+      "candidate_dots": 32058,
+      "reference_dots": 2700,
+      "candidate_fraction_within_3px_of_reference": 0.02102439328716701,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "data/external/derived_gdr_paleo_100m_u8.tif",
+      "spearman_full_footprint": 0.001609093168294837,
+      "candidate_dots": 32058,
+      "reference_dots": 244,
+      "candidate_fraction_within_3px_of_reference": 0.0035248611890947657,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "data/external/derived_gdr_qfaults_v2_100m_u8.tif",
+      "spearman_full_footprint": 0.0018215626909155926,
+      "candidate_dots": 32058,
+      "reference_dots": 59065,
+      "candidate_fraction_within_3px_of_reference": 0.10331274564851207,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "data/external/derived_gdr_volcanics_100m_u8.tif",
+      "spearman_full_footprint": 0.003538904875745536,
+      "candidate_dots": 32058,
+      "reference_dots": 6776,
+      "candidate_fraction_within_3px_of_reference": 0.004772599663110612,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "data/external/derived_sgmc_faults_100m_u8.tif",
+      "spearman_full_footprint": 0.0006766639318011424,
+      "candidate_dots": 32058,
+      "reference_dots": 82151,
+      "candidate_fraction_within_3px_of_reference": 0.11900305695926133,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/scored/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
+      "spearman_full_footprint": 0.007224569442356213,
+      "candidate_dots": 32058,
+      "reference_dots": 121131,
+      "candidate_fraction_within_3px_of_reference": 0.3004242310811654,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/scored/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+      "spearman_full_footprint": 0.004721313845045468,
+      "candidate_dots": 32058,
+      "reference_dots": 60069,
+      "candidate_fraction_within_3px_of_reference": 0.27780897123962817,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/scored/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+      "spearman_full_footprint": 0.004192777948510995,
+      "candidate_dots": 32058,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": 0.26501965188096577,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.tif",
+      "spearman_full_footprint": 0.005385703413621327,
+      "candidate_dots": 32058,
+      "reference_dots": 90358,
+      "candidate_fraction_within_3px_of_reference": 0.3102189781021898,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-zeros.tif",
+      "spearman_full_footprint": 0.005385703413621327,
+      "candidate_dots": 32058,
+      "reference_dots": 90358,
+      "candidate_fraction_within_3px_of_reference": 0.3102189781021898,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+      "spearman_full_footprint": 0.004192777948510995,
+      "candidate_dots": 32058,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": 0.26501965188096577,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+      "spearman_full_footprint": 0.004192777948510995,
+      "candidate_dots": 32058,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": 0.26501965188096577,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-d15-poisson200m-offcat-60069-20261003T233210Z-68d0e2e4.tif",
+      "spearman_full_footprint": 0.004721313845045468,
+      "candidate_dots": 32058,
+      "reference_dots": 60069,
+      "candidate_fraction_within_3px_of_reference": 0.27780897123962817,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca-nanoutside.tif",
+      "spearman_full_footprint": 0.004192777948510995,
+      "candidate_dots": 32058,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": 0.26501965188096577,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+      "spearman_full_footprint": 0.004192777948510995,
+      "candidate_dots": 32058,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": 0.26501965188096577,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-edge-hybrid-80k-02845bd4-20261003T234340Z-allfinite.tif",
+      "spearman_full_footprint": 0.0019700690375570405,
+      "candidate_dots": 32058,
+      "reference_dots": 80000,
+      "candidate_fraction_within_3px_of_reference": 0.3293405702164826,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-edge-hybrid-80k-02845bd4-nan.tif",
+      "spearman_full_footprint": 0.0019700690375570405,
+      "candidate_dots": 32058,
+      "reference_dots": 80000,
+      "candidate_fraction_within_3px_of_reference": 0.3293405702164826,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e-zeros.tif",
+      "spearman_full_footprint": 0.005957674947423661,
+      "candidate_dots": 32058,
+      "reference_dots": 85526,
+      "candidate_fraction_within_3px_of_reference": 0.5149416682263398,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif",
+      "spearman_full_footprint": 0.005957674947423661,
+      "candidate_dots": 32058,
+      "reference_dots": 85526,
+      "candidate_fraction_within_3px_of_reference": 0.5149416682263398,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    }
+  ],
+  "errors": [],
+  "decision": "blocked-incomplete-evidence",
+  "submission_approved": false
+}

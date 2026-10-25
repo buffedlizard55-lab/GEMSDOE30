@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "run_id": "gems30-h-cc1-20261025",
+  "lane": {
+    "status": "self-assigned: the prompt's 'single method paragraph' is not present in the request",
+    "registry": "partial (19 repo rasters + 3 H33 references); parallel registry not supplied"
+  },
+  "hypothesis": "H-CC1: where high-pass horizontal-gradient maxima of RTP magnetics and isostatic gravity coincide, a discontinuity (fault) is more likely than either gradient alone.",
+  "mechanism": "Juxtaposition of rock with contrasting susceptibility and density along a discontinuity produces co-located magnetic and gravity gradient maxima; the geometric mean of the two robust z-scores ranks cells.",
+  "non_fault_mimic": "Lithologic contacts and intrusive margins (rock-unit boundaries with both density and susceptibility contrast) produce the same co-located gradients without displacement.",
+  "features_used": [
+    "rtp (reduced-to-pole magnetic anomaly)",
+    "iso_grav_anom (isostatic gravity anomaly)"
+  ],
+  "catalogue_features_used": false,
+  "experiments_run": 3,
+  "experiment_cap": 3,
+  "experiments": {
+    "exp1_candidate_top1pct_floor0.5": {
+      "value": 0.015173,
+      "ci95": [
+        0.014063,
+        0.016283
+      ],
+      "withheld_positives_per_split_seed": [
+        20870,
+        20434,
+        19714,
+        19856,
+        20848
+      ],
+      "label": "HOLDOUT-DTI",
+      "evaluator_version": "component-holdout-v2-footprint-20261025",
+      "ci_method": "t-interval over 5 split seeds (n=5)"
+    },
+    "exp2_binary_ablation_top1pct": {
+      "value": 0.023432,
+      "ci95": [
+        0.021767,
+        0.025097
+      ],
+      "withheld_positives_per_split_seed": [
+        20870,
+        20434,
+        19714,
+        19856,
+        20848
+      ],
+      "label": "HOLDOUT-DTI",
+      "evaluator_version": "component-holdout-v2-footprint-20261025",
+      "ci_method": "t-interval over 5 split seeds (n=5)"
+    },
+    "exp3_dispersed_3px_greedy_32058dots": {
+      "value": 0.053943,
+      "ci95": [
+        0.050672,
+        0.057213
+      ],
+      "withheld_positives_per_split_seed": [
+        20870,
+        20434,
+        19714,
+        19856,
+        20848
+      ],
+      "label": "HOLDOUT-DTI",
+      "evaluator_version": "component-holdout-v2-footprint-20261025",
+      "ci_method": "t-interval over 5 split seeds (n=5)"
+    },
+    "comparator_rtp_gradient_only_top1pct": {
+      "value": 0.010382,
+      "ci95": [
+        0.00933,
+        0.011434
+      ],
+      "withheld_positives_per_split_seed": [
+        20870,
+        20434,
+        19714,
+        19856,
+        20848
+      ],
+      "label": "HOLDOUT-DTI",
+      "evaluator_version": "component-holdout-v2-footprint-20261025",
+      "ci_method": "t-interval over 5 split seeds (n=5)"
+    },
+    "control_matched_random_51207dots": {
+      "value": 0.065926,
+      "ci95": [
+        0.063117,
+        0.068736
+      ],
+      "label": "HOLDOUT-DTI",
+      "evaluator_version": "component-holdout-v2-footprint-20261025"
+    }
+  },
+  "withheld_positives_note": "per-split withheld positives 19,714-20,870 pixels (see docs/research/2026-10-25/contact-coincidence-holdout.json)",
+  "holdout_protocol": "whole 8-connected catalogue components split per 3.2 km tile (shared split_components), 5 seeds (31-35); exact 300 m triangular kernel DTI alpha 0.2 beta 0.8 via shared masked_dti; catalogue used only as hidden truth",
+  "canary_auc_seed31": {
+    "H-CC1 coincidence": 0.6658,
+    "rtp gradient only": 0.5885,
+    "z_grav gradient only": 0.6181
+  },
+  "canary_result": "no feature above 0.90; none flagged",
+  "correlation_overlap_vs_registry": {
+    "partial_registry_19_rasters": {
+      "max_spearman_full_footprint": 0.007225,
+      "max_fraction_dots_within_3px": 0.514942,
+      "threshold": {
+        "spearman": 0.9,
+        "within_3px": 0.7
+      },
+      "duplicate": false
+    },
+    "historical_H33_top_reference_gemsdoe32_zeros_pin_c55bafc4": {
+      "spearman_full_footprint": 0.003837,
+      "fraction_dots_within_3px": 0.233545,
+      "duplicate": false
+    },
+    "novelty_decision": "blocked-incomplete-evidence",
+    "novelty_note": "blocked-incomplete-evidence because the registry is partial by design; no duplicate threshold was crossed"
+  },
+  "raster_sha256": "837f555efe1c55f53258aa2fa8b5528684395cc1226a233cf8013690b6ac63ff",
+  "raster_path": "docs/downloads/gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif",
+  "validator_output": {
+    "tool": "scripts/validate_submission.py (receipt docs/research/2026-10-25/h-cc1-validator.json)",
+    "passed": true,
+    "no_nan_inside_footprint": true,
+    "values_in_0_1": true,
+    "crs_match": "EPSG:32611",
+    "shape_match": "3730x3292",
+    "transform_match": "100 m north-up, origin 243350, 4508550",
+    "null_outside_count": 7111787,
+    "valid_pixels": 5167373,
+    "whole_raster_nan_diagnostic": "advisory only: 7111787 NaN cells outside footprint (published format allows null/NaN outside)"
+  },
+  "submission_name": "gemsdoe30-h-cc1-dispersed3px-32058dots",
+  "submission_note": "H-CC1 dispersed 3px contact-coincidence, 32058 dots; catalogue-proxy holdout-DTI 0.0539 (unscored, not slot-approved)",
+  "submission_note_chars": 117,
+  "verdict": "negative",
+  "verdict_reason": "Did not beat the matched random control (0.0539 vs 0.0659 at equal-or-larger budget; exp3 not budget-matched: 32,058 vs 51,207 dots). Mechanism finding is positive: dispersion raises DTI 0.0234 -> 0.0539. Not promoted; no weekly slot used.",
+  "submission_approved": false,
+  "slot_selected": false,
+  "organizer_confirmed_score": null,
+  "label_note": "No ORGANIZER-CONFIRMED number exists for this file. All values are HOLDOUT-DTI on the catalogue stand-in proxy and are not leaderboard scores."
+}

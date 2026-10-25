@@ -161,3 +161,18 @@ has a competition score.
 | IR-30-053 | High | H33 historical reference has 100% directional 3-pixel overlap and Spearman 0.967587 with GEMSDOE28 reference. | Duplicate logged; never offered as a new candidate. One artifact per requested site is a partial educational inventory, not complete novelty certification. |
 | IR-30-054 | Medium | H33 sidecar contains projections and differently scaled holdout fields; source README calls 0.4413 an unreliable mirror estimate. | No organizer receipt inferred; no projected value admitted as HOLDOUT-DTI or ORGANIZER-CONFIRMED. Current leaderboard claims remain unverified. |
 | IR-30-055 | Medium | CI exposed an existing test's assumption that directory iteration preserves file creation order. | Use `assertCountEqual` for the exact remaining input-file inventory; all rejected-output absence checks retained. CI diagnostic annotations added without suppressing failure exit codes. |
+
+## Session 2026-10-25 (branch `arena/6a157983-gemsdoe30`) — H-CC1 and rules check
+
+| ID | Severity | Finding | Action / status |
+| --- | --- | --- | --- |
+| IR-30-056 | High | Training features and labels were restored from owner-hosted public GitHub mirrors (`scripts/restore_public_mirrors.py`). Rules §3.1/§3.3 say training data is provided to registered DrivenData competitors. Redistribution rights are unverified. | Local, git-ignored copy only. Owner must replace with an official download and check SHA-256 pins before any upload. Source: <https://docs.nlr.gov/docs/fy26osti/96647.pdf> |
+| IR-30-057 | High | Prompt says "0.3195 is the highest score". Official leaderboard page shows #1 = 0.4413 and no 0.3195 entry on pages 1–2. | Reported as a discrepancy. Official page is the reference. Source: <https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/> |
+| IR-30-058 | High | "Lane is the single method paragraph below" refers to a paragraph that is not in the request. | Self-assigned H-CC1; recorded in run card as `lane.status`. |
+| IR-30-059 | High | Exp 3 (dispersed) selected 32,058 dots after exhausting its 5 % pool, short of the 51,207 budget. Not budget-matched to the random control. | Reported as a deviation. No claim of superiority or inferiority at equal dots. Fix needs a new pre-registered experiment. |
+| IR-30-060 | Medium | Feature rasters contain 3,061 NaN cells inside the template footprint (same cells in `rtp` and `iso_grav_anom`). | Kept as scored background with probability 0. Recorded in receipt `source_gaps`. |
+| IR-30-061 | Medium | OWNER_BRIEF.md names branch `arena/01a10289-gemsdoe30`; this session is `arena/6a157983-gemsdoe30`. | Work kept on the assigned session branch. Brief text left unchanged. |
+| IR-30-062 | Medium | Parallel registry supplied is partial (19 repo rasters + 3 H33 references). | Novelty decision stays `blocked-incomplete-evidence`. Not a duplicate by stated thresholds. |
+| IR-30-063 | Medium | Holdout is a catalogue-component proxy; the competition scores new faults. | All numbers labelled HOLDOUT-DTI. Not competition estimates. |
+| IR-30-064 | Low | Historical "0.2600" (GEMSDOE25/30) and "0.2778" (GEMSDOE32) claims remain owner-reported. | Not used as evidence. Ledger keeps them as user-reported. |
+| IR-30-065 | Low | Official problem page allows null/NaN outside the footprint. The portal error "Predicted values must be in range [0, 1]" remains undiagnosed. | The new TIFF uses NaN outside, per the published format. Portal behaviour unverified. |
