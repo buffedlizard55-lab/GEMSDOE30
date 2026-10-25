@@ -65,3 +65,14 @@
 
 These failures prohibit submission approval. They do not negate the completed
 restoration, exact historical forensics, shared-tool fixes, tests or site cleanup.
+
+## CI follow-up (within pass 3)
+
+The first remote run failed an existing test that assumed filesystem directory
+iteration order: it found the two correct input TIFFs in reversed order. The
+failed-output, partial-file and sidecar absence assertions all passed. Replaced
+that order-dependent equality with `assertCountEqual`; this retains exact
+membership/cardinality and does not relax the fail-closed writer requirement.
+A clean tracked-file export also passed locally. CI failure output is now exposed
+as check annotations because the Actions log-download host is outside the sandbox
+allowlist. The first log lookup was additionally delayed by a GitHub API quota.
