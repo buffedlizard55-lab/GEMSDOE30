@@ -301,12 +301,18 @@ def main():
     args = parser.parse_args()
     if not 1 <= args.max_seconds <= 7200:
         parser.error("max-seconds must be in [1,7200]")
+    if (REPORT / "started.json").exists():
+        parser.error("frozen execution already exists; do not overwrite or rerun a stopped experiment in place")
     try:
         run(args.max_seconds)
     except Exception as exc:
         dump(REPORT / "failure.json", {"verdict": "negative", "submission_approved": False,
                                         "error": f"{type(exc).__name__}: {exc}",
                                         "created_utc": datetime.now(timezone.utc).isoformat(timespec="seconds")})
+        if (REPORT / "duplicate-stop.json").is_file() and (REPORT / "results.json").is_file():
+            # Audit-only logging: never refit/reselect/copy the duplicate raster.
+            from scripts.finalize_stopped_attempt import finalize
+            finalize(REPORT, ROOT / "data/raw/sample_submission.tif")
         raise
 
 

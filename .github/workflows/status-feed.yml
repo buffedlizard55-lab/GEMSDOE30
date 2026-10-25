@@ -74,6 +74,7 @@ jobs:
       - name: Verify current artifact, automatic decision and generated site
         run: |
           python scripts/ci_check.py python scripts/verify_current_run.py
+          python scripts/ci_check.py python scripts/verify_stopped_attempt.py
           python scripts/ci_check.py python scripts/build_research_site.py --check
 
       - name: Re-run GeoTIFF format checks on every published research file

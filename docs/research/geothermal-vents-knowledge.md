@@ -206,3 +206,17 @@ scoring. Recorded as `IR-30-046`.
 **No-hallucination statement:** every number in §1–§3 and §7 is either quoted from a source in
 this register, measured in this checkout with the command listed, or explicitly tagged
 [CLAIM]/[INFERENCE]. Scores attributed to owner files remain unauthenticated ([CLAIM]).
+
+
+## 2026-10-25 TDX-C2: negative fault-signature evidence, not vent detection
+
+The [frozen full-stack displacement test](texture-controls/review.md) did not
+establish incremental recovery beyond its matched core19/zero-lag/phase controls
+and crossed the mandatory nearby-dot duplicate threshold. Its exact results,
+conditional confidence intervals and source hashes are retained; it is not a
+new unique submission or evidence for geothermal vents. Intrusive lithologic
+contacts and survey/gridding seams are named mimics of the proposed magnetic
+signature. Fault labels alone contain no temperature, permeability or flow
+observation. Future vent-oriented work must verify appropriate official physical
+observations and their use terms; the current network cannot newly obtain the
+USGS/GDR sources linked in the historical table above.

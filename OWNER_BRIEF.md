@@ -5,8 +5,9 @@ The complete latest task text (formatting normalized) is now embedded in
 [the task-text record](docs/research/texture-displacement/owner-prompt.txt).
 Read that record and the current run pointer before every session. The older
 brief below is retained as historical owner text, not the current status or a
-verified score/approval statement. New TDX-1 TIFF: research download only;
-[automated decision](docs/research/texture-displacement/readiness.json) is negative.
+verified score/approval statement. Latest TDX-C2 attempt: **duplicate-stopped, no new public TIFF**;
+[automated decision](docs/research/texture-controls/readiness.json) is negative.
+The previous TDX-1 TIFF remains an explicitly archived research-only download.
 
 ---
 
