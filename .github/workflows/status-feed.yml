@@ -69,12 +69,12 @@ jobs:
       - name: Fetch only the hash-pinned competition template (public mirror)
         env:
           GH_TOKEN: ${{ github.token }}
-        run: python scripts/restore_public_mirrors.py --ids sample_submission
+        run: python scripts/ci_check.py python scripts/restore_public_mirrors.py --ids sample_submission
 
       - name: Verify current artifact, automatic decision and generated site
         run: |
-          python scripts/verify_current_run.py
-          python scripts/build_research_site.py --check
+          python scripts/ci_check.py python scripts/verify_current_run.py
+          python scripts/ci_check.py python scripts/build_research_site.py --check
 
       - name: Re-run GeoTIFF format checks on every published research file
         continue-on-error: true
