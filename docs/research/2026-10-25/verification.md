@@ -76,3 +76,42 @@ membership/cardinality and does not relax the fail-closed writer requirement.
 A clean tracked-file export also passed locally. CI failure output is now exposed
 as check annotations because the Actions log-download host is outside the sandbox
 allowlist. The first log lookup was additionally delayed by a GitHub API quota.
+
+## Current worktree follow-up — 2026-10-25 20:45 UTC
+
+This follow-up verifies the present clone, rather than assuming ignored files
+from an earlier agent workspace persisted:
+
+- Restored the pinned owner mirrors with `scripts/restore_public_mirrors.py`;
+  SHA-256 and byte counts matched the committed pins for the core inputs. This
+  verifies mirror integrity only, not organizer authentication.
+- Installed local scientific/test dependencies in ignored `.venv/`, then ran
+  `scripts/prepare_data.py`. The resulting dataset signature exactly matches
+  `docs/research/prepared-manifest.json`; the feature stack is cached locally.
+  Raw/prepared files remain Git-ignored and are not part of the GitHub Pages site.
+- Restored all nine priority-site educational TIFFs from the immutable GitHub
+  commits in `priority-site-pins.json`; every downloaded SHA-256 matched. The
+  inventory remains explicitly partial: it is one chosen raster per site, not
+  the complete site/lane registry.
+- Re-ran `scripts/audit_priority_recipes.py`: the H33 dot mask is reproduced
+  exactly by H28 dots after removing locations at catalogue distance <= 2 px;
+  H25/H30 and H28/H31 in-footprint values also match exactly. This is historical
+  forensic evidence, not a new candidate or performance score.
+- Re-ran `scripts/check_novelty.py` on the historical H33 raster. It exited 2
+  with `duplicate-stop`; its dot overlap is above the stated limit for all
+  comparisons, while rank correlation also exceeds the limit against several.
+  The output is not attached as a candidate run card.
+- Re-ran the complete test suite: **124 passed, 5 optional torch tests skipped,
+  7 subtests passed**, with two rasterio pending-deprecation warnings. No GPU
+  training was attempted.
+- Regenerated `docs/status.json` from the actual worktree. Its data-ready fields
+  describe the state when built; the builder now explicitly warns that ignored
+  inputs are not distributed by GitHub Pages.
+
+No geological experiment was run. The text supplied in this conversation
+contains no identifiable single-method lane assignment, the registry is partial,
+and the specified buffered-segment fold/feature-rebuild protocol has not been
+implemented as a valid run for any proposed hypothesis. Selecting a method or
+inventing results would violate the parallel-run rules. Accordingly there is
+still no new unique TIFF to validate or label as OK to submit. No HOLDOUT-DTI,
+95% CI, withheld-positive count, feature-AUC canary or promotion is claimed.

@@ -16,9 +16,13 @@ The prior literal brief is preserved below for history.
 - [Pinned nine-site artifact registry — explicitly partial](docs/research/priority-site-pins.json)
 
 Raw data placement and preparation succeeded using the existing hash-pinned owner
-mirrors. Do not treat the prompt's old data-placement blocker as still current.
-Organizer authentication is not established by mirror hashes. No new experiment
-was run because the current method lane and complete parallel registry are missing.
+mirrors; the current worktree was independently restored and prepared again on
+2026-10-25. Do not treat the prompt's old data-placement blocker as current.
+`data/raw/` and `data/processed/` are Git-ignored and are not distributed by
+GitHub Pages; status-feed availability means present in the builder worktree at
+generation time only. Organizer authentication is not established by mirror
+hashes. No new geological experiment was run because the current method lane and
+complete parallel registry are missing.
 Requested shared-template filenames are absent; existing shared modules were reused.
 
 The shared pooled holdout footprint bug was fixed in
