@@ -1,0 +1,82 @@
+{
+  "complete": false,
+  "note": "partial registry: repo downloads + locally restored scored rasters only; NOT the parallel-run registry",
+  "rasters": [
+    {
+      "path": "data/external/derived_gdr_2m_probes_100m_u8.tif",
+      "sha256": "7ac3cfdf2412f7f8a8b82d928115888c510f106f0254fb0b3988448db2f3b6ec"
+    },
+    {
+      "path": "data/external/derived_gdr_paleo_100m_u8.tif",
+      "sha256": "d6a3609bd7943fa5f1126a3cc688441aeceee261a76cd6a90a206830400066a4"
+    },
+    {
+      "path": "data/external/derived_gdr_qfaults_v2_100m_u8.tif",
+      "sha256": "82bdf4e67f16de893caa7a7c16bfe51eac0a712b87db93fff60c1eebef701eb9"
+    },
+    {
+      "path": "data/external/derived_gdr_volcanics_100m_u8.tif",
+      "sha256": "c219bd644e6f7a4071dc429e29b909a2296967b0657bf456bb6675413ee76cb2"
+    },
+    {
+      "path": "data/external/derived_sgmc_faults_100m_u8.tif",
+      "sha256": "26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c"
+    },
+    {
+      "path": "data/raw/scored/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
+      "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d"
+    },
+    {
+      "path": "data/raw/scored/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+      "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310"
+    },
+    {
+      "path": "data/raw/scored/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+      "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8"
+    },
+    {
+      "path": "docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.tif",
+      "sha256": "f5d137b9c010873f0b4fc11e841d923f359d33c7272ded0da9ac9b7c1efc7cc2"
+    },
+    {
+      "path": "docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-zeros.tif",
+      "sha256": "dd5cd18a721196602eaccd8946b047eb8c929cbfdcac033512628f6dd0030f50"
+    },
+    {
+      "path": "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+      "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8"
+    },
+    {
+      "path": "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+      "sha256": "b00a6fb6cab70d0f957308e297695c4032ab97997a41a15ff1295add3df31a26"
+    },
+    {
+      "path": "docs/downloads/gemsdoe30-d15-poisson200m-offcat-60069-20261003T233210Z-68d0e2e4.tif",
+      "sha256": "4dc278c4e5b80bbe50da76244e6eacdb230660807b49b4388470697b23f42ac8"
+    },
+    {
+      "path": "docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca-nanoutside.tif",
+      "sha256": "5f963b8bca5ec226ddc7caaadec239c6be6d28aa567f890033be04d04bfd5e32"
+    },
+    {
+      "path": "docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+      "sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd"
+    },
+    {
+      "path": "docs/downloads/gemsdoe30-edge-hybrid-80k-02845bd4-20261003T234340Z-allfinite.tif",
+      "sha256": "fb2d0d2d74bad2b52c6fcd48db5d8e2855c938fd222798e03fc01a96dbdc6d0e"
+    },
+    {
+      "path": "docs/downloads/gemsdoe30-edge-hybrid-80k-02845bd4-nan.tif",
+      "sha256": "f87d3fc008230ec12a2b2ad260de643d15b8e474135d28020dafd2c784d2cbd5"
+    },
+    {
+      "path": "docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e-zeros.tif",
+      "sha256": "d7977d7b93287f17fbf3cb85f10fdbee4acc5c8453a7faa451e760363433a286"
+    },
+    {
+      "path": "docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif",
+      "sha256": "fed5232e8efeefef00728ce9d5884f08e007c542f317cb11419452d14ff866da"
+    }
+  ]
+}

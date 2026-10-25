@@ -1,27 +1,33 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-25T20:48:53Z",
+  "generated_utc": "2026-10-25T20:58:34Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
     "directory": "data/raw",
     "availability_scope": "This describes files present in the build worktree at generated_utc; data/raw and data/processed are Git-ignored and are not distributed by GitHub Pages.",
-    "required_files_present": false,
-    "sha256_verified_against_pins": false,
+    "required_files_present": true,
+    "sha256_verified_against_pins": true,
     "files": [
       {
         "dest": "training_features.tif",
         "path": "data/raw/training_features.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-        "expected_bytes": 418912844
+        "expected_bytes": 418912844,
+        "actual_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "actual_bytes": 418912844,
+        "sha256_matches_pin": true
       },
       {
         "dest": "labels.tif",
         "path": "data/raw/labels.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "expected_bytes": 425830
+        "expected_bytes": 425830,
+        "actual_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+        "actual_bytes": 425830,
+        "sha256_matches_pin": true
       },
       {
         "dest": "sample_submission.tif",
@@ -35,15 +41,17 @@
       }
     ],
     "prepared_dataset": {
-      "dataset_signature": null,
-      "matches_recorded_pin": null,
-      "positive_label_pixels": null,
-      "template_valid_pixels": null
+      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+      "matches_recorded_pin": true,
+      "positive_label_pixels": 60988,
+      "template_valid_pixels": 5167373
     },
     "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
   },
   "competition_data": {
     "owner_mirror_files_present": [
+      "training_features.tif",
+      "labels.tif",
       "sample_submission.tif"
     ],
     "organizer_authenticated": false,
@@ -228,6 +236,24 @@
       "submission_recommendation": false,
       "run_name": "edge-emitter-session30",
       "note": "GEMSDOE30 EDGE emitter, hybrid belief field, 80,000 dots; unpromoted research artifact (see docs/research/emitter-opt-holdout.md)",
+      "performance_status": "unscored; format validation is not a score"
+    },
+    {
+      "manifest": "gemsdoe30-h-cc1-dispersed3px-32058dots-nan.json",
+      "file": "docs/downloads/gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif",
+      "present": true,
+      "sha256": "837f555efe1c55f53258aa2fa8b5528684395cc1226a233cf8013690b6ac63ff",
+      "sha256_matches_manifest": true,
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "site_linked": true,
+      "submission_recommendation": false,
+      "run_name": "gemsdoe30-h-cc1-dispersed3px-32058dots",
+      "note": "H-CC1 dispersed 3px contact-coincidence, 32058 dots; catalogue-proxy holdout-DTI 0.0539 (unscored, not slot-approved)",
       "performance_status": "unscored; format validation is not a score"
     },
     {
@@ -678,6 +704,17 @@
         "notes": "Confirms no intraday change at the top; public leaderboard only",
         "evidence_class": "official-snapshot",
         "as_of_utc": "2026-10-03"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "xiaofanhu (rank 1)",
+        "score": "0.4413",
+        "provenance": "official page read 2026-10-25",
+        "status": "verified snapshot; public DW-Tversky; prompt's 0.3195 'highest' not present on pages 1-2",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "rank 2 = 0.3916; rank 24 = 0.3169",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-25"
       }
     ],
     "note": "DrivenData Terms of Use prohibit automated monitoring; snapshots are dated manual reads only",
@@ -686,7 +723,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "129 tests collected in 1.02s",
+      "pytest_collect": "134 tests collected in 0.64s",
       "exit_code": 0
     },
     "score_gain_claimed": false

@@ -1,9 +1,35 @@
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
 
-## START HERE — current submission decision (2026-10-25)
+## START HERE — 2026-10-25 session (branch `arena/6a157983-gemsdoe30`)
 
-**NOT APPROVED FOR SUBMISSION. No new unique TIFF was generated in this review.**
+**Read every session before working:** this README, [OWNER_BRIEF.md](OWNER_BRIEF.md),
+and the [session report](docs/research/2026-10-25/session-report.md).
+
+**Status in one place**
+
+- **Unique downloadable TIFF:** [gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif](docs/downloads/gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif).
+  It passes the local format validator (EPSG:32611, 3730×3292, float32, values 0–1, NaN outside) and is distinct from every
+  repo raster checked.
+- **Recommendation:** do **not** use it as the final entry. Holdout result is negative: HOLDOUT-DTI 0.0539 [0.0507, 0.0572], below a matched random
+  control at 0.0659 [0.0631, 0.0687]. Labels are HOLDOUT-DTI (catalogue proxy), not competition scores.
+- **Official leaderboard** (read 2026-10-25): #1 = 0.4413. The prompt's "0.3195 is highest" does not appear on the page.
+- **Blockers:** training data must come from the owner's own DrivenData download (current restored copy is from public mirrors; see IR-30-056).
+  The parallel-run method lane is not in the request (IR-30-058). The parallel registry is partial (IR-30-062).
+- **Rules that govern uploads** (official PDF): one final entry; up to three feedback submissions a week; an AI-use disclosure is required.
+  Source: <https://docs.nlr.gov/docs/fy26osti/96647.pdf>.
+
+**Standing request, condensed (not verbatim; the verbatim brief is in OWNER_BRIEF.md):**
+produce a unique, format-valid GeoTIFF that is easy to download and submit; explain why the
+GEMSDOE25/32 family scored well and whether a distinct method can beat 0.2778 (owner-reported)
+and the official top 0.4413; generate 3–5 ranked geological hypotheses before implementing; validate
+the top candidate on a spatially blocked holdout before spending any weekly slot; label every number
+as HOLDOUT-DTI or ORGANIZER-CONFIRMED; flag irregularities; no manual input; no hallucinated facts.
+Core values: *Maximize P(Win)* and *Own the Outcome*.
+
+## Previous decision (2026-10-25, before this session)
+
+**NOT APPROVED FOR SUBMISSION. No new unique TIFF was generated in that review.**
 Historical downloads are educational references, not new submissions. The current
 owner protocol takes precedence over contradictory ready-to-submit language in
 older sections below. Read the [current owner-request amendment](docs/research/2026-10-25/owner-request.md)
