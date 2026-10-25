@@ -92,3 +92,17 @@ below once observed; no unobserved remote success is claimed here.
 without violating the explicit duplicate-stop rule. The exact candidate was
 quarantined and no slot spent. This limitation must remain prominent in README,
 Pages, the status feed, PR and final response; it is not silently marked complete.
+
+
+## Delivery addendum — observed PR checks
+
+- PR [#30](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/30) was opened from
+  the assigned `arena/5ae77fc3-gemsdoe30` branch to `main`.
+- GitHub regression run [40244260198](https://github.com/buffedlizard55-lab/GEMSDOE30/actions/runs/40244260198)
+  **passed** (40 seconds) on the integrated code/evidence publication candidate
+  `9bc1334`. This is an observed check result, not a score or submission approval.
+- Local rechecks: expected exit 2 for both promotion commands; branch unchanged;
+  worktree clean at the pre-push checkpoint; no new TIFF differs from current main.
+- This documentation addendum is separately pushed/rechecked before the explicit
+  PR merge. The final PR timeline records the actual merge/check state; no future
+  success is assumed in this file.

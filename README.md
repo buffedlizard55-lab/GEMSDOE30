@@ -59,6 +59,8 @@ The accepted deliverable is the negative experiment and machine-bound JSON card,
 not a falsely certified upload. No current portal limit, eligibility, deadline,
 acceptance receipt or leaderboard value was invented.
 
+[PR #30 — verified code review and delivery timeline](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/30)
+
 ### Why H33 may have improved
 
 Reproduced again: its **37,654-dot support** equals the **40,199-dot GEMSDOE28 base**
