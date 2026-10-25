@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-25T20:12:39Z",
+  "experiment": "H-34-01 reduced-input basin-concealment screen (exploratory; no TIFF written)",
+  "evaluator": "scripts/concealment_holdout.py v1; exact binary triangular DTI, 100m pixels, 300m radius, alpha=.2 beta=.8; local owner-mirror inputs",
+  "holdout_protocol": {
+    "whole_connected_components": true,
+    "split_seed": 31,
+    "component_total": 3199,
+    "withheld_positive_pixels": 20870,
+    "visible_positive_pixels_masked_exactly": 40118,
+    "visible_positive_pixels_excluded_from_training_by_buffer": 1611,
+    "buffer_m": 300,
+    "buffer_note": "Whole connected components are withheld. A 300m exclusion buffer around hidden positives is applied to the hypothetical visible-label training set; this screen itself is label-blind and fits no supervised model. Visible known-fault pixels are separately masked pixel-exactly from evaluation."
+  },
+  "leakage_canary": {
+    "negative_sample_n": 200000,
+    "feature_auc": [
+      {
+        "band": "mag_anom - Magnetic anomaly - deviation from expected Earth's magnetic field",
+        "auc_higher_means_fault": 0.48259900420823737,
+        "leakage_canary": "below 0.90 threshold"
+      },
+      {
+        "band": "rtp - Reduced to pole magnetic data - magnetic anomaly corrected for latitude effects",
+        "auc_higher_means_fault": 0.49471427764304604,
+        "leakage_canary": "below 0.90 threshold"
+      },
+      {
+        "band": "tmi_hg - Total magnetic intensity horizontal gradient - rate of change in horizontal direction",
+        "auc_higher_means_fault": 0.5392472733152103,
+        "leakage_canary": "below 0.90 threshold"
+      },
+      {
+        "band": "geod_2ndinv - Geodetic second invariant - measure of strain rate tensor magnitude",
+        "auc_higher_means_fault": 0.5753081798975483,
+        "leakage_canary": "below 0.90 threshold"
+      },
+      {
+        "band": "iso_grav_anom_slope - Isostatic gravity anomaly slope - gradient of gravity after isostatic correction",
+        "auc_higher_means_fault": 0.5185234715320161,
+        "leakage_canary": "below 0.90 threshold"
+      },
+      {
+        "band": "tc - Tilt angle or total curvature - magnetic field derivative for edge detection",
+        "auc_higher_means_fault": 0.435995630901579,
+        "leakage_canary": "below 0.90 threshold"
+      },
+      {
+        "band": "geod_shearrate - Geodetic shear rate - rate of angular deformation from GPS/InSAR",
+        "auc_higher_means_fault": 0.573715333398324,
+        "leakage_canary": "below 0.90 threshold"
+      },
+      {
+        "band": "geod_dilaterate - Geodetic dilatation rate - rate of volumetric strain (expansion/contraction)",
+        "auc_higher_means_fault": 0.5369115941851337,
+        "leakage_canary": "below 0.90 threshold"
+      },
+      {
+        "band": "tmi_vg - Total magnetic intensity vertical gradient - rate of change in vertical direction",
+        "auc_higher_means_fault": 0.48009632963613347,
+        "leakage_canary": "below 0.90 threshold"
+      },
+      {
+        "band": "deq_n100a15 - Distance to earthquake (n=100km radius, a=15\u00b0 azimuth parameters)",
+        "auc_higher_means_fault": 0.5576309443545003,
+        "leakage_canary": "below 0.90 threshold"
+      },
+      {
+        "band": "iso_grav_anom_vg - Isostatic gravity anomaly vertical gradient - vertical rate of change",
+        "auc_higher_means_fault": 0.5317258174986965,
+        "leakage_canary": "below 0.90 threshold"
+      },
+      {
+        "band": "det_elev - Detrended elevation - topography with regional trends removed",
+        "auc_higher_means_fault": 0.48895584277214466,
+        "leakage_canary": "below 0.90 threshold"
+      },
+      {
+        "band": "iso_grav_anom - Isostatic gravity anomaly - gravity after compensating for topographic mass",
+        "auc_higher_means_fault": 0.45180078908658644,
+        "leakage_canary": "below 0.90 threshold"
+      },
+      {
+        "band": "tmi - Total magnetic intensity - total strength of magnetic field",
+        "auc_higher_means_fault": 0.4779760352195265,
+        "leakage_canary": "below 0.90 threshold"
+      },
+      {
+        "band": "depth_to_base_surf - Depth to basement surface - thickness of sedimentary cover",
+        "auc_higher_means_fault": 0.5198616070699686,
+        "leakage_canary": "below 0.90 threshold"
+      },
+      {
+        "band": "ieq_n100a15 - Earthquake intensity or density (n=100km radius, a=15\u00b0 parameters)",
+        "auc_higher_means_fault": 0.5716814994066703,
+        "leakage_canary": "below 0.90 threshold"
+      },
+      {
+        "band": "cond_surf - Conductivity surface - electrical conductivity of subsurface",
+        "auc_higher_means_fault": 0.4610488087306246,
+        "leakage_canary": "below 0.90 threshold"
+      },
+      {
+        "band": "iso_grav_anom_hg - Isostatic gravity anomaly horizontal gradient - horizontal rate of change",
+        "auc_higher_means_fault": 0.4988195505882744,
+        "leakage_canary": "below 0.90 threshold"
+      },
+      {
+        "band": "det_elev_slope - Detrended elevation slope - gradient of elevation after detrending",
+        "auc_higher_means_fault": 0.5566511850237997,
+        "leakage_canary": "below 0.90 threshold"
+      }
+    ],
+    "candidate_surface_auc_higher_means_fault": 0.47600462350263534,
+    "threshold": 0.9,
+    "status": "pass"
+  },
+  "hypothesis": {
+    "layers": [
+      "depth_to_base_surf",
+      "det_elev_slope"
+    ],
+    "signature": "equal-weight mean of empirical percentile rank for basement depth and inverse absolute detrended-elevation slope",
+    "mechanism": "thick basin fill and low surface relief may reduce mapping observability of blind/subdued faults",
+    "named_non_fault_mimic": "alluvial basin fill, lithologic contacts, and low-relief depositional surfaces; this score may primarily identify concealment rather than faults"
+  },
+  "emission_budget": {
+    "pixels": 37654,
+    "fixed_to_user-reported_H33-2-B2_count_for_comparison_only": true
+  },
+  "scores": {
+    "concealment_prior": {
+      "dti": 0.006789451497756288,
+      "tp_weight": 164.27239190936274,
+      "fp_weight": 37331.915421620884,
+      "hidden_positive_pixels": 20870,
+      "emitted_pixels": 37654,
+      "heldout_component_count": 1085,
+      "evaluator_parity_max_abs_error": 2.806175430913882e-14,
+      "component_bootstrap_95_ci": [
+        0.0029767829998901254,
+        0.011870632239816666
+      ]
+    },
+    "distance_profile_matched_random": {
+      "dti": 0.03691336934876444,
+      "tp_weight": 898.2095930902241,
+      "fp_weight": 37286.32671624526,
+      "hidden_positive_pixels": 20870,
+      "emitted_pixels": 37654,
+      "heldout_component_count": 1085,
+      "evaluator_parity_max_abs_error": 1.5170503742112373e-13,
+      "component_bootstrap_95_ci": [
+        0.03333407013378851,
+        0.040439460216267716
+      ]
+    }
+  },
+  "data_provenance": {
+    "mirror_status": "SHA-pinned owner mirrors, not organizer-authenticated",
+    "sha256": {
+      "training_features": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+      "labels": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "sample_submission": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc"
+    },
+    "prepared_manifest_dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed"
+  },
+  "submission": {
+    "written": false,
+    "reason": "negative screen; candidate DTI is below distance-matched random, is not comparable to the archived spatial-holdout best, and the complete registry-raster duplicate gate is unavailable"
+  },
+  "limitations": [
+    "Catalogued withheld components are a biased proxy for faults absent from USGS/INGENIOUS.",
+    "Owner-mirror score claims are not organizer receipts.",
+    "This first screen is not a confirmation split and does not establish hidden-test or leaderboard gain.",
+    "The D2.8 TIFF was not scored as a holdout comparator: it is a previous submission and its training provenance cannot be proven label-blind for this withheld split.",
+    "Rank-correlation/3px overlap checks against every requested site's registry must pass before any TIFF is written."
+  ]
+}

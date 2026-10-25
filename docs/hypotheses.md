@@ -1,6 +1,8 @@
 # Ranked geological hypotheses — preregistration candidates
 
-**Status of this file (reviewed 2026-10-03):** the active five-hypothesis shortlist immediately
+**Latest review (2026-10-25):** The active legacy shortlist below is dated 2026-10-03 and must not be mistaken for the current live run. The current nine-site review, new source-gated hypotheses, and negative H-34-01 screen are documented in [2026-10-25 review](research/session-review-2026-10-25.md); its machine-readable result is [candidate-screen JSON](research/candidate-screens/concealment-screen.json). H-34-01 reduced basin concealment failed against a matched random control; no candidate is promoted, no unique TIFF is cleared, and no weekly slot is approved. External-data candidates remain blocked pending actual coverage/access checks.
+
+**Historical status of this file (reviewed 2026-10-03):** the active five-hypothesis shortlist immediately
 below contains genuinely untried candidates bounded by inspected repository experiments and public
 owner summaries. H-31-01, H-31-02b, H-31-02r, H-32-01, H-32-05, H-32-05b, and H-33-01 have measured
 outcomes; none passed the complete promotion protocol. Older candidate registers and availability

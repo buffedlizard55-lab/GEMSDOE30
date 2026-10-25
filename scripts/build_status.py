@@ -127,7 +127,7 @@ def main() -> int:
             "range_error_immune": bool(manifest.get("range_error_immunity", {}).get("immune_to_whole_raster_range_check"))
             if isinstance(manifest.get("range_error_immunity"), dict)
             else None,
-            "site_linked": (tif_name in site_html) or None,
+            "site_linked": tif_name in site_html,
             "submission_recommendation": manifest.get("submission_recommendation", False),
             "run_name": manifest.get("run_name"),
             "note": manifest.get("note") or manifest.get("drivendata_note"),
@@ -233,6 +233,24 @@ def main() -> int:
         }
     else:
         gates["h33_01_placement_and_scarp"] = {"evidence": None, "promoted": False, "decision": "not run yet"}
+    concealment = load_json(research / "candidate-screens" / "concealment-screen.json") or {}
+    if concealment:
+        cdtis = concealment.get("scores", {})
+        candidate_dti = cdtis.get("concealment_prior", {})
+        candidate_ci = candidate_dti.get("component_bootstrap_95_ci")
+        gates["h34_01_concealment_screen"] = {
+            "evidence": "docs/research/candidate-screens/concealment-screen.json",
+            "promoted": False,
+            "holdout_dti": candidate_dti.get("dti"),
+            "component_bootstrap_95_ci": candidate_ci,
+            "withheld_positive_pixels": concealment.get("holdout_protocol", {}).get("withheld_positive_pixels"),
+            "leakage_canary_status": concealment.get("leakage_canary", {}).get("status"),
+            "decision": "negative: concealment prior below distance-profile-matched random; no TIFF generated",
+        }
+    else:
+        gates["h34_01_concealment_screen"] = {
+            "evidence": None, "promoted": False, "decision": "not run"
+        }
     vchecks = load_json(research / "verification-checks-results.json") or {}
     if vchecks:
         vsum = vchecks.get("overall_promotion_decision", {})
@@ -298,12 +316,15 @@ def main() -> int:
 
     # Score evidence: only dated snapshot rows from the ledger (never live scraping).
     ledger_rows = []
+    user_reported_score_rows = []
     ledger = ROOT / "docs" / "score-ledger.csv"
     if ledger.is_file():
         with ledger.open() as handle:
             for row in csv.DictReader(handle):
                 if row.get("evidence_class", "").startswith("official-snapshot"):
                     ledger_rows.append(row)
+                elif row.get("evidence_class", "") == "user-report":
+                    user_reported_score_rows.append(row)
 
     promoted = [name for name, gate in gates.items() if gate.get("promoted")]
     status = {
@@ -324,26 +345,17 @@ def main() -> int:
         "submission_format": {
             "published_outside_convention": "null/NaN outside the data bounds; finite probabilities in [0, 1] inside",
             "official_problem_description": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-            "builder_default": "zeros outside (range-error immune); --outside nan available for the literal spec reading",
-            "zero_outside": (
-                "primary published convention for this project since 2026-10-03. Legal on two verified "
-                "grounds: the organizer's own reference solution writes its example with no nodata tag and "
-                "finite values everywhere, and the owner ledger records r7-nms3-dem10-scarp_0c9199f14e62 = "
-                "0.1294 beside ..._allfinite = 0.1294, i.e. identical scores for both encodings. See IR-30-045."
-            ),
+            "builder_default": "NaN outside per published format; scripts/build_submission.py",
+            "zero_outside": "Not approved as a submission convention. Whole-array finite zero-outside files are nonstandard diagnostics unless the organizer clarifies otherwise.",
             "historical_range_error_file_identified": False,
-            "historical_range_error_cause_diagnosed": True,
+            "historical_range_error_cause_diagnosed": False,
             "historical_range_error_cause": (
-                "Two mechanisms measured on the pin-matched mirrors (IR-30-044): training_features.tif "
-                "declares nodata as the float32 sentinel -3.4028234663852886e+38 and carries it on 3,061 "
-                "pixels inside the 5,167,373-pixel scoring footprint per band (band 6 tc: 3,073; 58,171 "
-                "band-pixels total); and band 1 calls only 5,165,852 pixels valid against the template's "
-                "5,167,373, so a feature-derived footprint mask strands exactly 3,061 scored pixels as NaN. "
-                "Either alone produces the portal's range rejection. The specific trigger in the one "
-                "historical upload is still inferred, not proven: that file was never obtained."
+                "The exact uploaded TIFF and private portal validation path are unknown. Local audits measured "
+                "nodata sentinels and feature/template mask differences in owner-mirror inputs, which are "
+                "plausible failure modes but do not prove the trigger in the historical upload."
             ),
             "range_error_root_cause_record": "docs/research/range-error-root-cause-2026-10-03.md",
-            "hardened_builder": "scripts/build_portal_submission.py",
+            "hardened_builder": "scripts/build_submission.py",
             "known_faults_masked_from_scoring": {
                 "value": True,
                 "source": "https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516",
@@ -362,11 +374,31 @@ def main() -> int:
         "promotion_gates": gates,
         "any_candidate_promoted": bool(promoted),
         "promoted_gates": promoted,
+        "registry_uniqueness_audit": {
+            "projects": ["GEMSDOE24", "GEMSDOE25", "GEMSDOE27", "GEMSDOE28", "GEMSDOE30", "GEMSDOE31", "GEMSDOE32", "GEMSDOE33", "GEMSDOE36"],
+            "binary_rasters_available_for_full_comparison": False,
+            "correlation_threshold": 0.90,
+            "nearby_dot_threshold_fraction": 0.70,
+            "nearby_dot_radius_pixels": 3,
+            "status": "not-passed",
+            "blocker": "GitHub API rate-limit HTTP 403 blocked complete sibling registry TIFF retrieval; no full correlation or 3-pixel overlap test",
+            "evidence": "docs/research/session-review-2026-10-25.md",
+        },
+        "submission_readiness": {
+            "status": "not-ready",
+            "current_candidate_approved": False,
+            "reason": "latest H-34-01 screen is negative; registry-raster duplicate gate incomplete; no candidate TIFF generated",
+            "public_site_must_not_label_historical_downloads_as_submission-ready": True,
+            "evidence": "docs/research/session-review-2026-10-25.md",
+        },
         "submission_slot_status": "none approved or used by this repository",
         "score_evidence": {
+            "user_reported_claims_from_ledger": user_reported_score_rows,
             "official_leaderboard_snapshots_from_ledger": ledger_rows,
             "note": "DrivenData Terms of Use prohibit automated monitoring; snapshots are dated manual reads only",
-            "d2_8_attribution": "owner-reported 0.2600 unverified; GEMSDOE25 page calls the file unscored",
+            "d2_8_attribution": "user/owner-reported 0.2600 unverified; GEMSDOE25 page calls the file unscored",
+            "gemsdoe32_h33_2_b2": "user-reported 0.2778; inspected GEMSDOE32 build record labels file UNSCORED and reports 0.2747 as model projection; no organizer receipt observed",
+            "current_leader_claim": "not refreshed; user supplied conflicting 0.3195 and 0.4413; local official snapshot is dated 2026-10-03",
         },
         "verification": {
             "tests": "see verification.tests_collected",

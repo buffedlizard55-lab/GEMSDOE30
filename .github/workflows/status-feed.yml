@@ -20,7 +20,7 @@ on:
   push:
     branches:
       - main
-      - arena/01a103f1-gemsdoe30
+      - "arena/**"
     paths:
       - "docs/research/**"
       - "docs/downloads/**"
