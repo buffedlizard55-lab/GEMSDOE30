@@ -1,10 +1,11 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-25T20:58:00Z",
+  "generated_utc": "2026-10-25T20:58:34Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
     "directory": "data/raw",
+    "availability_scope": "This describes files present in the build worktree at generated_utc; data/raw and data/processed are Git-ignored and are not distributed by GitHub Pages.",
     "required_files_present": true,
     "sha256_verified_against_pins": true,
     "files": [
@@ -344,6 +345,19 @@
         "decision": "duplicate-stop",
         "receipt": "docs/research/h33-historical-duplicate-audit.json",
         "warning": "educational comparison of prior artifacts, not a generated candidate or surface-stage test"
+      },
+      "historical_dot_audit": {
+        "artifact": "GEMSDOE32 H33-B2 historical reference",
+        "reconstruction": "exactly reproduced by GEMSDOE28 reference with dots removed at catalogue distance <= 2 pixels",
+        "mismatching_pixels": 0,
+        "decision": "duplicate-stop",
+        "candidate_surface_checked": false,
+        "complete_registry": false,
+        "evidence": [
+          "docs/research/2026-10-25/recipe-reconstruction.json",
+          "docs/research/h33-historical-duplicate-audit.json"
+        ],
+        "interpretation": "historical educational artifact only; not a newly generated candidate and not an organizer score"
       }
     },
     "raster_sha256": null,
@@ -365,11 +379,40 @@
     "blockers": [
       "Missing assigned method lane",
       "Missing complete parallel-run surface/raster registry",
-      "Requested shared-template location not supplied; existing local shared tools used and fixed",
       "Buffered segment holdout and per-feature canaries not run",
       "Current best must be re-evaluated with the corrected shared footprint handling",
-      "Current portal cap, organizer receipt and acceptance not verified"
-    ]
+      "Current portal cap, organizer receipt and acceptance not verified",
+      "No identifiable single-method lane in the user-provided prompt; choosing one would violate the parallel-run protocol",
+      "The nine-site raster list is a partial educational registry, not the complete all-lane surface registry"
+    ],
+    "generated_utc": "2026-10-25T20:48:01Z",
+    "worktree_preflight": {
+      "status": "inputs restored and prepared in this worktree; no experiment run",
+      "restore_command": "python scripts/restore_public_mirrors.py",
+      "prepare_command": "python scripts/prepare_data.py",
+      "core_mirror_hashes_match_committed_pins": true,
+      "prepared_dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+      "cached_feature_shape_chw": [
+        19,
+        3730,
+        3292
+      ],
+      "organizer_authenticated": false,
+      "ignored_data_published": false,
+      "evidence": "docs/research/2026-10-25/prepared-manifest.json"
+    },
+    "shared_tools": {
+      "requested_names_present": {
+        "evaluate_holdout.py": false,
+        "submission_writer.py": false
+      },
+      "shared_local_equivalents": [
+        "src/gemsdoe30/holdout.py",
+        "src/gemsdoe30/submission.py"
+      ],
+      "private_fork_created": false,
+      "note": "Existing shared evaluator/writer were reused; evaluator footprint correction is recorded in the review."
+    }
   },
   "historical_promotion_warning": "Prior results require same-protocol re-evaluation after the shared footprint correction.",
   "promotion_gates": {
@@ -680,7 +723,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "134 tests collected in 0.62s",
+      "pytest_collect": "134 tests collected in 0.64s",
       "exit_code": 0
     },
     "score_gain_claimed": false
