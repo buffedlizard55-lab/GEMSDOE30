@@ -1,7 +1,11 @@
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
 
-## START HERE — 2026-10-25 (two candidates from two sessions, both negative; neither recommended for a slot)
+## START HERE — 2026-10-25 (Candidate C / Lane G30-S19 PROMOTED; A & B negative)
+
+**✅ OK TO DOWNLOAD & SUBMIT — Candidate C:** [gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif](docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif)
+(SHA-256 `8a0301d5…f43cc9`; note: `G30-S19 habitat GBM (19-band, no catalogue-distance inputs) + EDGE 60k, off-cat >2px`).
+HOLDOUT-DTI **0.2230 [0.2052–0.2396]** (component-holdout-v2, 20,870 withheld) vs proximity 0.1672 / Poisson 0.1945; canaries 43/43 clean; novelty vs H33 ρ=0.025/34.9% and vs A/B ρ≤0.007. Local proxy only — not a score; live leader 0.4413 (below). Evidence: [run card](docs/research/2026-10-25/lane-g30s19-run-card.json) · [analysis](docs/research/2026-10-25/lane-g30s19-analysis.md) · [preregistration](docs/research/2026-10-25/lane-g30s19-preregistration.md). No slot used; owner submits.
 
 **Read every session before working:** this README, [OWNER_BRIEF.md](OWNER_BRIEF.md), and the [session report](docs/research/2026-10-25/session-report.md).
 
