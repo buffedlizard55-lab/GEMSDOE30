@@ -1,0 +1,261 @@
+{
+  "evaluator_version": "component-holdout-v2-footprint-20261025",
+  "buffer_m": 0.0,
+  "withheld_positive_pixels": 20870,
+  "visible_catalogue_pixels": 40118,
+  "feature_visible_pixels": 40118,
+  "hidden_components": 3199,
+  "residual_fit": {
+    "fit_pixels": 5164312,
+    "coefficients": [
+      -112.12043240036735,
+      1.4450710244364944,
+      0.14834769821192922,
+      0.013167246611286971
+    ],
+    "r_squared": 0.054702063274739365
+  },
+  "dots": {
+    "A_residual_ridge_gate": 70488,
+    "B_proximity_comparator": 70488,
+    "D_ablation_raw_rtp_ridge": 70488,
+    "E_catalogue_free_residual_ridge": 70488,
+    "R_random_control": 70488
+  },
+  "arms": {
+    "A_residual_ridge_gate": {
+      "pooled_dti": 0.12222099422444767,
+      "tp_weight": 3816.3864095000204,
+      "fp_weight": 68830.0808028086,
+      "truth_pixels": 20870.0,
+      "emitted_pixels": 70488,
+      "ci95_tile_bootstrap": [
+        0.11394876954196306,
+        0.1306011664587049
+      ]
+    },
+    "B_proximity_comparator": {
+      "pooled_dti": 0.17703221961378632,
+      "tp_weight": 5560.432841963486,
+      "fp_weight": 68005.35391020027,
+      "truth_pixels": 20870.0,
+      "emitted_pixels": 70488,
+      "ci95_tile_bootstrap": [
+        0.1681419616274621,
+        0.18570274320154107
+      ]
+    },
+    "D_ablation_raw_rtp_ridge": {
+      "pooled_dti": 0.13069899761525153,
+      "tp_weight": 4085.2293619091693,
+      "fp_weight": 68718.65331644527,
+      "truth_pixels": 20870.0,
+      "emitted_pixels": 70488,
+      "ci95_tile_bootstrap": [
+        0.12193667488872248,
+        0.13973228770646595
+      ]
+    },
+    "E_catalogue_free_residual_ridge": {
+      "pooled_dti": 0.07939940601441416,
+      "tp_weight": 2467.3617996659477,
+      "fp_weight": 69429.22875128119,
+      "truth_pixels": 20870.0,
+      "emitted_pixels": 70488,
+      "ci95_tile_bootstrap": [
+        0.07215701420673253,
+        0.08705189567671728
+      ]
+    },
+    "R_random_control": {
+      "pooled_dti": 0.0831953551658536,
+      "tp_weight": 2588.522167970214,
+      "fp_weight": 69500.38926954706,
+      "truth_pixels": 20870.0,
+      "emitted_pixels": 70488,
+      "ci95_tile_bootstrap": [
+        0.0789397036400162,
+        0.08769917351885559
+      ]
+    }
+  },
+  "paired_A_minus_B_proximity_comparator": {
+    "delta_pooled": -0.05481122538933865,
+    "ci95_tile_bootstrap": [
+      -0.06596338776489513,
+      -0.04406122204742209
+    ],
+    "fraction_draws_A_above": 0.0
+  },
+  "paired_A_minus_D_ablation_raw_rtp_ridge": {
+    "delta_pooled": -0.00847800339080386,
+    "ci95_tile_bootstrap": [
+      -0.012758644623493756,
+      -0.004139656754691695
+    ],
+    "fraction_draws_A_above": 0.0
+  },
+  "paired_A_minus_E_catalogue_free_residual_ridge": {
+    "delta_pooled": 0.04282158821003351,
+    "ci95_tile_bootstrap": [
+      0.03716499615938905,
+      0.048749514186419665
+    ],
+    "fraction_draws_A_above": 1.0
+  },
+  "paired_A_minus_R_random_control": {
+    "delta_pooled": 0.039025639058594075,
+    "ci95_tile_bootstrap": [
+      0.030729908478058177,
+      0.047341477535389205
+    ],
+    "fraction_draws_A_above": 1.0
+  },
+  "feature_canaries": {
+    "mag_anom": {
+      "auc": 0.4824,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "rtp": {
+      "auc": 0.4949,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "tmi_hg": {
+      "auc": 0.5385,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "geod_2ndinv": {
+      "auc": 0.5756,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "iso_grav_anom_slope": {
+      "auc": 0.5168,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "tc": {
+      "auc": 0.4364,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399780
+    },
+    "geod_shearrate": {
+      "auc": 0.5739,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "geod_dilaterate": {
+      "auc": 0.5372,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "tmi_vg": {
+      "auc": 0.4796,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "deq_n100a15": {
+      "auc": 0.5575,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "iso_grav_anom_vg": {
+      "auc": 0.5305,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "det_elev": {
+      "auc": 0.4884,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "iso_grav_anom": {
+      "auc": 0.4532,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "tmi": {
+      "auc": 0.4775,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "depth_to_base_surf": {
+      "auc": 0.5184,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "ieq_n100a15": {
+      "auc": 0.5727,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "cond_surf": {
+      "auc": 0.4606,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "iso_grav_anom_hg": {
+      "auc": 0.4969,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "det_elev_slope": {
+      "auc": 0.556,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "residual_rtp": {
+      "auc": 0.5123,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "distance_to_visible_m": {
+      "auc": 0.2442,
+      "status": "ok",
+      "positives": 20870,
+      "negatives": 400000
+    },
+    "belief_A_residual_ridge": {
+      "auc": 0.5799,
+      "status": "ok",
+      "positives": 20870,
+      "negatives": 400000
+    },
+    "belief_B_proximity": {
+      "auc": 0.7482,
+      "status": "ok",
+      "positives": 20870,
+      "negatives": 400000
+    },
+    "belief_E_catalogue_free_ridge": {
+      "auc": 0.4958,
+      "status": "ok",
+      "positives": 20870,
+      "negatives": 400000
+    }
+  },
+  "generated_utc": "2026-10-25T20:54:12+00:00"
+}

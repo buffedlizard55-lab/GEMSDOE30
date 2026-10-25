@@ -1,0 +1,261 @@
+{
+  "evaluator_version": "component-holdout-v2-footprint-20261025",
+  "buffer_m": 3500.0,
+  "withheld_positive_pixels": 20870,
+  "visible_catalogue_pixels": 40118,
+  "feature_visible_pixels": 7981,
+  "hidden_components": 3199,
+  "residual_fit": {
+    "fit_pixels": 5164312,
+    "coefficients": [
+      -112.12043240036735,
+      1.4450710244364944,
+      0.14834769821192922,
+      0.013167246611286971
+    ],
+    "r_squared": 0.054702063274739365
+  },
+  "dots": {
+    "A_residual_ridge_gate": 24876,
+    "B_proximity_comparator": 24876,
+    "D_ablation_raw_rtp_ridge": 24582,
+    "E_catalogue_free_residual_ridge": 24876,
+    "R_random_control": 24876
+  },
+  "arms": {
+    "A_residual_ridge_gate": {
+      "pooled_dti": 0.0,
+      "tp_weight": 0.0,
+      "fp_weight": 24876.0,
+      "truth_pixels": 20870.0,
+      "emitted_pixels": 24876,
+      "ci95_tile_bootstrap": [
+        0.0,
+        0.0
+      ]
+    },
+    "B_proximity_comparator": {
+      "pooled_dti": 0.0,
+      "tp_weight": 0.0,
+      "fp_weight": 24876.0,
+      "truth_pixels": 20870.0,
+      "emitted_pixels": 24876,
+      "ci95_tile_bootstrap": [
+        0.0,
+        0.0
+      ]
+    },
+    "D_ablation_raw_rtp_ridge": {
+      "pooled_dti": 0.0,
+      "tp_weight": 0.0,
+      "fp_weight": 24582.0,
+      "truth_pixels": 20870.0,
+      "emitted_pixels": 24582,
+      "ci95_tile_bootstrap": [
+        0.0,
+        0.0
+      ]
+    },
+    "E_catalogue_free_residual_ridge": {
+      "pooled_dti": 0.04471462329227719,
+      "tp_weight": 974.0456838461619,
+      "fp_weight": 24463.978457254132,
+      "truth_pixels": 20870.0,
+      "emitted_pixels": 24876,
+      "ci95_tile_bootstrap": [
+        0.03767963215130271,
+        0.05200354833330204
+      ]
+    },
+    "R_random_control": {
+      "pooled_dti": 0.043675762835931504,
+      "tp_weight": 951.6582468531359,
+      "fp_weight": 24514.148884631115,
+      "truth_pixels": 20870.0,
+      "emitted_pixels": 24876,
+      "ci95_tile_bootstrap": [
+        0.040038380490813534,
+        0.047200151352604205
+      ]
+    }
+  },
+  "paired_A_minus_B_proximity_comparator": {
+    "delta_pooled": 0.0,
+    "ci95_tile_bootstrap": [
+      0.0,
+      0.0
+    ],
+    "fraction_draws_A_above": 0.0
+  },
+  "paired_A_minus_D_ablation_raw_rtp_ridge": {
+    "delta_pooled": 0.0,
+    "ci95_tile_bootstrap": [
+      0.0,
+      0.0
+    ],
+    "fraction_draws_A_above": 0.0
+  },
+  "paired_A_minus_E_catalogue_free_residual_ridge": {
+    "delta_pooled": -0.04471462329227719,
+    "ci95_tile_bootstrap": [
+      -0.05200354833330204,
+      -0.03767963215130271
+    ],
+    "fraction_draws_A_above": 0.0
+  },
+  "paired_A_minus_R_random_control": {
+    "delta_pooled": -0.043675762835931504,
+    "ci95_tile_bootstrap": [
+      -0.04720015135260421,
+      -0.040038380490813534
+    ],
+    "fraction_draws_A_above": 0.0
+  },
+  "feature_canaries": {
+    "mag_anom": {
+      "auc": 0.4824,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "rtp": {
+      "auc": 0.4949,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "tmi_hg": {
+      "auc": 0.5385,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "geod_2ndinv": {
+      "auc": 0.5756,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "iso_grav_anom_slope": {
+      "auc": 0.5168,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "tc": {
+      "auc": 0.4364,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399780
+    },
+    "geod_shearrate": {
+      "auc": 0.5739,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "geod_dilaterate": {
+      "auc": 0.5372,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "tmi_vg": {
+      "auc": 0.4796,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "deq_n100a15": {
+      "auc": 0.5575,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "iso_grav_anom_vg": {
+      "auc": 0.5305,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "det_elev": {
+      "auc": 0.4884,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "iso_grav_anom": {
+      "auc": 0.4532,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "tmi": {
+      "auc": 0.4775,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "depth_to_base_surf": {
+      "auc": 0.5184,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "ieq_n100a15": {
+      "auc": 0.5727,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "cond_surf": {
+      "auc": 0.4606,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "iso_grav_anom_hg": {
+      "auc": 0.4969,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "det_elev_slope": {
+      "auc": 0.556,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "residual_rtp": {
+      "auc": 0.5123,
+      "status": "ok",
+      "positives": 20852,
+      "negatives": 399781
+    },
+    "distance_to_visible_m": {
+      "auc": 0.5624,
+      "status": "ok",
+      "positives": 20870,
+      "negatives": 400000
+    },
+    "belief_A_residual_ridge": {
+      "auc": 0.4599,
+      "status": "ok",
+      "positives": 20870,
+      "negatives": 400000
+    },
+    "belief_B_proximity": {
+      "auc": 0.4074,
+      "status": "ok",
+      "positives": 20870,
+      "negatives": 400000
+    },
+    "belief_E_catalogue_free_ridge": {
+      "auc": 0.4958,
+      "status": "ok",
+      "positives": 20870,
+      "negatives": 400000
+    }
+  },
+  "generated_utc": "2026-10-25T20:53:32+00:00"
+}

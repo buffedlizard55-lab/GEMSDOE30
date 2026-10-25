@@ -1,39 +1,30 @@
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
 
-## START HERE — current submission decision (2026-10-25)
+## START HERE — current submission decision (2026-10-25, session 2)
 
-**NOT APPROVED FOR SUBMISSION. No new unique TIFF was generated in this review.**
-Historical downloads are educational references, not new submissions. The current
-owner protocol takes precedence over contradictory ready-to-submit language in
-older sections below. Read the [current owner-request amendment](docs/research/2026-10-25/owner-request.md)
-at the start of every session (a requirements record, not a verbatim transcript).
-The prior literal brief is preserved below for history.
+**A unique, format-valid TIFF now exists. Its holdout verdict is NEGATIVE, so it is NOT recommended for a weekly slot.**
 
-- [Current nine-site scientific review and four prospective hypotheses](docs/research/2026-10-25/review.md)
-- [Submission guide](executive-summary.html) · [Run card](docs/research/2026-10-25/run-card.json)
-- [Exact historical duplicate audit](docs/research/h33-historical-duplicate-audit.json)
-- [Pinned nine-site artifact registry — explicitly partial](docs/research/priority-site-pins.json)
+| Item | Value |
+|---|---|
+| Download | [`docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif`](docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif) |
+| Submission name | `gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b` |
+| Submission note (79 chars) | `GEMSDOE30 review-hyp3 residual-ridge gate, 3km catalogue corridor, 400m Poisson` |
+| SHA-256 and validator | in the [run card](docs/research/2026-10-25/run-card.json) (validator passed; independent rasterio re-read agrees) |
+| Holdout (HOLDOUT-DTI, `component-holdout-v2-footprint-20261025`, 20,870 withheld positives, stand-in split) | candidate **0.1222** [0.1139, 0.1306] vs count-matched proximity comparator **0.1770** [0.1681, 0.1857] — **not promoted** |
+| Duplicate checks | no duplicate (9-site registry and 11 repo TIFFs); surface-stage check blocked; registry partial, so **no novelty certificate** |
+| Organizer score | **none** — NOT ORGANIZER-CONFIRMED |
 
-Raw data placement and preparation succeeded using the existing hash-pinned owner
-mirrors. Do not treat the prompt's old data-placement blocker as still current.
-Organizer authentication is not established by mirror hashes. No new experiment
-was run because the current method lane and complete parallel registry are missing.
-Requested shared-template filenames are absent; existing shared modules were reused.
+Read first: [executive summary](executive-summary.html) · [candidate design, pre-registration and result](docs/research/2026-10-25/candidate-residual-gate.md) · [live official facts](docs/research/2026-10-25/live-verification.md) · [run card](docs/research/2026-10-25/run-card.json) · [irregularities IR-30-056 to IR-30-067](docs/irregularities.md).
 
-The shared pooled holdout footprint bug was fixed in
-`src/gemsdoe30/holdout.py` (version `component-holdout-v2-footprint-20261025`).
-Old metrics are historical, not automatically comparable or valid promotion gates.
-The GEMSDOE32 historical reference overlaps the GEMSDOE28 reference at **100% of
-its dots within 3 pixels**, with rank correlation **0.967587** (novelty diagnostics,
-not scores). Re-encoding/renaming that family does not satisfy the new protocol.
+- **Live public leaderboard** (retrieved 2026-10-25): #1 **0.4413**. The owner's **0.3195** matches a 2026-10-03 snapshot, not today's table.
+- **Historical 0.2778 claim** (GEMSDOE32 H33-B2): unverified. Its support matches a GEMSDOE28 reference after a 2-pixel catalogue-flank deletion (zero mismatching pixels), so it is emission pruning, not a new signal ([review](docs/research/2026-10-25/review.md)).
+- Data placement works: pinned owner mirrors restore with SHA-256 checks (`scripts/restore_public_mirrors.py`), and `scripts/prepare_data.py` completes. Mirror integrity is not organizer authentication.
+- Three experiments and the two-hour budget are used. Negative results are recorded as deliverables.
 
-**Next session:** resolve the assigned lane/shared-template location; synchronize
-all parallel registry rasters and surfaces; preregister buffered segment folds;
-run single-feature leakage canaries and rerun the best comparator with the fixed
-evaluator before any candidate experiment. Maximum three experiments/two hours.
-Research promotion is separate from weekly slot selection. No current leaderboard
-value or private portal acceptance is claimed here.
+**Next session (in order):** (1) assign or declare a method lane (IR-30-063); (2) decide the buffer rule for catalogue-gated features, since a 3.5 km strict buffer structurally zeroes them (IR-30-056), and preregister it before reading results; (3) confirm the known-fault mask rule against the rules or forum (IR-30-061); (4) rebuild continuous surfaces so the pre-placement duplicate check can run (IR-30-059); (5) implement review hypothesis 1 (cross-contact texture displacement) with feature canaries first; (6) a single organizer-authenticated format check is the only way to test the portal range error (IR-30-064), and it costs a slot. Promotion and slot selection remain separate, and no leaderboard value is claimed here.
+
+**Reproduce the candidate** (after `pip install numpy scipy rasterio shapely pyproj pytest` in a venv): `python scripts/restore_public_mirrors.py && python scripts/prepare_data.py && PYTHONPATH=src python scripts/residual_gate_holdout.py --buffer-m 0 --out docs/research/2026-10-25/residual-gate-holdout-buffer0.json && PYTHONPATH=src python scripts/build_residual_gate_candidate.py && python scripts/make_run_card.py`.
 
 ---
 

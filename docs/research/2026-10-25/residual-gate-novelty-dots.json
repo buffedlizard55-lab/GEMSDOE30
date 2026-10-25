@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "stage": "dots",
+  "candidate": "/home/user/GEMSDOE30/docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif",
+  "candidate_sha256": "a9f5b93ed286d5e0ef18f7312397106e10de87c9d50c7ad0936074429b2bdba1",
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "registry_sha256": "9e4b3f98f769b49df74171e926e77922b974eb3b15d33038c3f12fc1a46ce880",
+  "registry_complete": false,
+  "comparisons": [
+    {
+      "reference": "data/raw/registry/24.tif",
+      "spearman_full_footprint": 0.003227173239948793,
+      "candidate_dots": 78256,
+      "reference_dots": 60069,
+      "candidate_fraction_within_3px_of_reference": 0.21503782457575138,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/registry/25.tif",
+      "spearman_full_footprint": 0.003433451216447853,
+      "candidate_dots": 78256,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": 0.20477663054590065,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/registry/27.tif",
+      "spearman_full_footprint": 0.0032225601913945766,
+      "candidate_dots": 78256,
+      "reference_dots": 61328,
+      "candidate_fraction_within_3px_of_reference": 0.22160601104068697,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/registry/28.tif",
+      "spearman_full_footprint": 0.0022944867541958964,
+      "candidate_dots": 78256,
+      "reference_dots": 40199,
+      "candidate_fraction_within_3px_of_reference": 0.1855448783479861,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/registry/30.tif",
+      "spearman_full_footprint": 0.003433451216447853,
+      "candidate_dots": 78256,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": 0.20477663054590065,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/registry/31.tif",
+      "spearman_full_footprint": 0.0022944867541958964,
+      "candidate_dots": 78256,
+      "reference_dots": 40199,
+      "candidate_fraction_within_3px_of_reference": 0.1855448783479861,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/registry/32.tif",
+      "spearman_full_footprint": 0.0018213406696008941,
+      "candidate_dots": 78256,
+      "reference_dots": 37654,
+      "candidate_fraction_within_3px_of_reference": 0.1705172766305459,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/registry/33.tif",
+      "spearman_full_footprint": 0.0026688987792058633,
+      "candidate_dots": 78256,
+      "reference_dots": 41865,
+      "candidate_fraction_within_3px_of_reference": 0.19496268656716417,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/registry/36.tif",
+      "spearman_full_footprint": 0.0018083718931752332,
+      "candidate_dots": 78256,
+      "reference_dots": 38854,
+      "candidate_fraction_within_3px_of_reference": 0.17438918421590677,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    }
+  ],
+  "errors": [],
+  "decision": "blocked-incomplete-evidence",
+  "submission_approved": false
+}

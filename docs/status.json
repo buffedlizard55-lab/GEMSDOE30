@@ -1,26 +1,32 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-25T20:21:02Z",
+  "generated_utc": "2026-10-25T20:58:39Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
     "directory": "data/raw",
-    "required_files_present": false,
-    "sha256_verified_against_pins": false,
+    "required_files_present": true,
+    "sha256_verified_against_pins": true,
     "files": [
       {
         "dest": "training_features.tif",
         "path": "data/raw/training_features.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-        "expected_bytes": 418912844
+        "expected_bytes": 418912844,
+        "actual_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "actual_bytes": 418912844,
+        "sha256_matches_pin": true
       },
       {
         "dest": "labels.tif",
         "path": "data/raw/labels.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "expected_bytes": 425830
+        "expected_bytes": 425830,
+        "actual_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+        "actual_bytes": 425830,
+        "sha256_matches_pin": true
       },
       {
         "dest": "sample_submission.tif",
@@ -34,15 +40,17 @@
       }
     ],
     "prepared_dataset": {
-      "dataset_signature": null,
-      "matches_recorded_pin": null,
-      "positive_label_pixels": null,
-      "template_valid_pixels": null
+      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+      "matches_recorded_pin": true,
+      "positive_label_pixels": 60988,
+      "template_valid_pixels": 5167373
     },
     "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
   },
   "competition_data": {
     "owner_mirror_files_present": [
+      "training_features.tif",
+      "labels.tif",
       "sample_submission.tif"
     ],
     "organizer_authenticated": false,
@@ -230,6 +238,24 @@
       "performance_status": "unscored; format validation is not a score"
     },
     {
+      "manifest": "gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.json",
+      "file": "docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif",
+      "present": true,
+      "sha256": "a9f5b93ed286d5e0ef18f7312397106e10de87c9d50c7ad0936074429b2bdba1",
+      "sha256_matches_manifest": true,
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "site_linked": true,
+      "submission_recommendation": false,
+      "run_name": "residual-gate-session-2026-10-25",
+      "note": "GEMSDOE30 review-hyp3 residual-ridge gate, 3km catalogue corridor, 400m Poisson",
+      "performance_status": "unscored; format validation is not a score"
+    },
+    {
       "manifest": "gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e-zeros.json",
       "file": "docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e-zeros.tif",
       "present": true,
@@ -285,65 +311,173 @@
     "local_validation_guarantees_portal_acceptance": false
   },
   "current_readiness": {
-    "schema_version": 1,
-    "run_id": "gems30-readiness-audit-20261025",
-    "hypothesis": "Prospective: cross-contact magnetic texture displacement may recover buried faults independently of catalogue-flank pruning.",
-    "mechanism": "Matched magnetic texture offsets across independent gravity edges; proposed only, not implemented or tested.",
-    "non_fault_mimic": "Intrusive lithologic contact",
+    "schema_version": 2,
+    "run_id": "gems30-review-hyp3-residual-ridge-gate-20261025",
+    "generated_by": "scripts/make_run_card.py",
     "lane": null,
-    "lane_status": "blocked: the current prompt refers to but does not identify a method-lane paragraph",
-    "experiments_run": 0,
+    "lane_status": "No method-lane paragraph is identifiable in the current message. This session chose review hypothesis 3 (docs/research/2026-10-25/review.md) as its own method; no other session's lane was assumed.",
+    "hypothesis": "Review hypothesis 3 (docs/research/2026-10-25/review.md): magnetically quiet, gravity-consistent residual ridges of rtp after linear iso-gravity/elevation/basement removal, gated 3 km from mapped traces.",
+    "mechanism": "Gravity-consistent magnetically quiet corridors as fluid-altered or fractured zones.",
+    "non_fault_mimic": "Nonmagnetic sediment fill",
+    "experiments_run": 3,
     "experiment_cap": 3,
     "time_cap_hours": 2,
+    "design_doc": "docs/research/2026-10-25/candidate-residual-gate.md",
     "holdout": {
       "label": "HOLDOUT-DTI",
-      "value": null,
       "evaluator_version": "component-holdout-v2-footprint-20261025",
-      "withheld_positives": null,
-      "ci95": null,
-      "status": "not run; buffered-segment protocol and comparable best must be established after shared evaluator correction"
+      "protocol_0m_stand_in": {
+        "withheld_positives": 20870,
+        "dots_per_arm": 70488,
+        "candidate_A_dti": 0.12222099422444767,
+        "candidate_A_ci95": [
+          0.11394876954196306,
+          0.1306011664587049
+        ],
+        "comparator_B_proximity_dti": 0.17703221961378632,
+        "comparator_B_ci95": [
+          0.1681419616274621,
+          0.18570274320154107
+        ],
+        "ablation_D_raw_rtp_dti": 0.13069899761525153,
+        "random_control_R_dti": 0.0831953551658536,
+        "paired_A_minus_B": {
+          "delta_pooled": -0.05481122538933865,
+          "ci95_tile_bootstrap": [
+            -0.06596338776489513,
+            -0.04406122204742209
+          ],
+          "fraction_draws_A_above": 0.0
+        },
+        "paired_A_minus_D": {
+          "delta_pooled": -0.00847800339080386,
+          "ci95_tile_bootstrap": [
+            -0.012758644623493756,
+            -0.004139656754691695
+          ],
+          "fraction_draws_A_above": 0.0
+        }
+      },
+      "protocol_strict_buffer_3500m": {
+        "withheld_positives": 20870,
+        "candidate_A_dti": 0.0,
+        "note": "Gated arms are structurally zero under a 3.5 km buffer; see design doc.",
+        "catalogue_free_E_dti": 0.04471462329227719,
+        "catalogue_free_E_ci95": [
+          0.03767963215130271,
+          0.05200354833330204
+        ],
+        "random_control_R_dti": 0.043675762835931504,
+        "random_control_R_ci95": [
+          0.040038380490813534,
+          0.047200151352604205
+        ]
+      },
+      "stand_in_caveat": "Catalogue component split, not organizer labels; favours proximity; not a competition score."
     },
     "feature_canaries": {
-      "status": "not run; no candidate features generated"
+      "rule": "AUC outside [0.10, 0.90] = leakage review",
+      "flagged": [],
+      "max_auc_0m": 0.7482,
+      "min_auc_0m": 0.2442
     },
-    "registry": {
-      "complete": false,
-      "candidate_surface_correlation": null,
-      "candidate_final_dot_overlap": null,
-      "historical_reference_only": {
-        "artifact": "GEMSDOE32 H33-B2",
-        "compared_with": "GEMSDOE28 solo-d2.8",
-        "spearman": 0.9675873339320377,
-        "fraction_within_3px": 1.0,
-        "decision": "duplicate-stop",
-        "receipt": "docs/research/h33-historical-duplicate-audit.json",
-        "warning": "educational comparison of prior artifacts, not a generated candidate or surface-stage test"
-      }
+    "registry_comparison": {
+      "registry": "docs/research/priority-site-pins.json (complete=false, 9 rasters)",
+      "stage_dots": {
+        "decision": "blocked-incomplete-evidence",
+        "max_spearman": 0.003433451216447853,
+        "max_fraction_within_3px": 0.22160601104068697,
+        "thresholds": "Spearman > 0.90 or > 70% within 3 px = duplicate"
+      },
+      "stage_surface": "blocked: continuous surfaces for registry rasters not reconstructed"
     },
-    "raster_sha256": null,
+    "repository_downloads_comparison": {
+      "compared": 11,
+      "duplicates": [],
+      "max_spearman": 0.010325292092377989,
+      "max_fraction_within_3px": 0.45021468002453485
+    },
+    "raster": {
+      "path": "docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif",
+      "sha256": "a9f5b93ed286d5e0ef18f7312397106e10de87c9d50c7ad0936074429b2bdba1",
+      "dots": 78256
+    },
     "validator_output": {
-      "status": "not run on a new candidate: none generated",
-      "no_nan_inside_footprint": null,
-      "values_in_0_1": null,
-      "crs_match": null,
-      "shape_match": null,
-      "transform_match": null,
-      "historical_reference_diagnostic_only": "docs/research/2026-10-25/historical-h33-format.json"
+      "path": "/home/user/GEMSDOE30/docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif",
+      "passed": true,
+      "checks": [
+        {
+          "name": "template_single_band",
+          "passed": true,
+          "detail": "count=1"
+        },
+        {
+          "name": "single_band",
+          "passed": true,
+          "detail": "count=1"
+        },
+        {
+          "name": "float32",
+          "passed": true,
+          "detail": "dtypes=('float32',)"
+        },
+        {
+          "name": "epsg",
+          "passed": true,
+          "detail": "crs=EPSG:32611"
+        },
+        {
+          "name": "template_epsg",
+          "passed": true,
+          "detail": "crs=EPSG:32611"
+        },
+        {
+          "name": "shape_matches_template",
+          "passed": true,
+          "detail": "output=(3730, 3292) template=(3730, 3292)"
+        },
+        {
+          "name": "transform_matches_template",
+          "passed": true,
+          "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+        },
+        {
+          "name": "100m_north_up_grid",
+          "passed": true,
+          "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+        },
+        {
+          "name": "finite_and_in_range_inside_footprint",
+          "passed": true,
+          "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+        },
+        {
+          "name": "null_outside_template_footprint",
+          "passed": true,
+          "detail": "outside_pixels=7111787; null/NaN/nodata required"
+        },
+        {
+          "name": "whole_raster_finite_range_diagnostic_advisory",
+          "passed": true,
+          "detail": "advisory only: whole-array diagnostic found 7111787 NaN/Inf cell(s); this is not a diagnosis of portal behavior; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+        },
+        {
+          "name": "template_readable",
+          "passed": true,
+          "detail": "shape=(3730, 3292)"
+        }
+      ]
     },
-    "submission_name": null,
-    "note": "Readiness blocked: no assigned lane or complete registry; historical H33 is a duplicate. No new TIFF or slot approved.",
+    "submission_name": "gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b",
+    "submission_note": "GEMSDOE30 review-hyp3 residual-ridge gate, 3km catalogue corridor, 400m Poisson",
+    "note_length": 79,
+    "verdict": "negative",
+    "verdict_reason": "Below the count-matched proximity comparator on the 0 m stand-in and not distinguishable from random dot density under the strict buffer. File is valid and unique; not recommended for a weekly slot.",
+    "organizer_score": null,
+    "label": "NOT ORGANIZER-CONFIRMED",
     "submission_approved": false,
     "slot_selected": false,
-    "verdict": "negative",
-    "verdict_scope": "readiness, not an experimentally falsified geological hypothesis",
-    "blockers": [
-      "Missing assigned method lane",
-      "Missing complete parallel-run surface/raster registry",
-      "Requested shared-template location not supplied; existing local shared tools used and fixed",
-      "Buffered segment holdout and per-feature canaries not run",
-      "Current best must be re-evaluated with the corrected shared footprint handling",
-      "Current portal cap, organizer receipt and acceptance not verified"
-    ]
+    "generated_utc": "2026-10-25T20:56:25+00:00"
   },
   "historical_promotion_warning": "Prior results require same-protocol re-evaluation after the shared footprint correction.",
   "promotion_gates": {
@@ -643,7 +777,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "129 tests collected in 0.72s",
+      "pytest_collect": "135 tests collected in 0.64s",
       "exit_code": 0
     },
     "score_gain_claimed": false

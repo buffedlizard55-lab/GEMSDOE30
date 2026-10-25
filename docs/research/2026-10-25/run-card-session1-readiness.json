@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "run_id": "gems30-readiness-audit-20261025",
+  "hypothesis": "Prospective: cross-contact magnetic texture displacement may recover buried faults independently of catalogue-flank pruning.",
+  "mechanism": "Matched magnetic texture offsets across independent gravity edges; proposed only, not implemented or tested.",
+  "non_fault_mimic": "Intrusive lithologic contact",
+  "lane": null,
+  "lane_status": "blocked: the current prompt refers to but does not identify a method-lane paragraph",
+  "experiments_run": 0,
+  "experiment_cap": 3,
+  "time_cap_hours": 2,
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": null,
+    "evaluator_version": "component-holdout-v2-footprint-20261025",
+    "withheld_positives": null,
+    "ci95": null,
+    "status": "not run; buffered-segment protocol and comparable best must be established after shared evaluator correction"
+  },
+  "feature_canaries": {"status": "not run; no candidate features generated"},
+  "registry": {
+    "complete": false,
+    "candidate_surface_correlation": null,
+    "candidate_final_dot_overlap": null,
+    "historical_reference_only": {
+      "artifact": "GEMSDOE32 H33-B2",
+      "compared_with": "GEMSDOE28 solo-d2.8",
+      "spearman": 0.9675873339320377,
+      "fraction_within_3px": 1.0,
+      "decision": "duplicate-stop",
+      "receipt": "docs/research/h33-historical-duplicate-audit.json",
+      "warning": "educational comparison of prior artifacts, not a generated candidate or surface-stage test"
+    }
+  },
+  "raster_sha256": null,
+  "validator_output": {
+    "status": "not run on a new candidate: none generated",
+    "no_nan_inside_footprint": null,
+    "values_in_0_1": null,
+    "crs_match": null,
+    "shape_match": null,
+    "transform_match": null,
+    "historical_reference_diagnostic_only": "docs/research/2026-10-25/historical-h33-format.json"
+  },
+  "submission_name": null,
+  "note": "Readiness blocked: no assigned lane or complete registry; historical H33 is a duplicate. No new TIFF or slot approved.",
+  "submission_approved": false,
+  "slot_selected": false,
+  "verdict": "negative",
+  "verdict_scope": "readiness, not an experimentally falsified geological hypothesis",
+  "blockers": [
+    "Missing assigned method lane",
+    "Missing complete parallel-run surface/raster registry",
+    "Requested shared-template location not supplied; existing local shared tools used and fixed",
+    "Buffered segment holdout and per-feature canaries not run",
+    "Current best must be re-evaluated with the corrected shared footprint handling",
+    "Current portal cap, organizer receipt and acceptance not verified"
+  ]
+}

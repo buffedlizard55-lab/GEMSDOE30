@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "candidate": "docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif",
+  "references_compared": 11,
+  "errors": [],
+  "duplicates": [],
+  "max_spearman": 0.010325292092377989,
+  "max_fraction_within_3px": 0.45021468002453485,
+  "comparisons": [
+    {
+      "reference": "docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.tif",
+      "spearman_full_footprint": 0.004552789300674879,
+      "candidate_dots": 78256,
+      "reference_dots": 90358,
+      "candidate_fraction_within_3px_of_reference": 0.25255571457779596,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-zeros.tif",
+      "spearman_full_footprint": 0.004552789300674879,
+      "candidate_dots": 78256,
+      "reference_dots": 90358,
+      "candidate_fraction_within_3px_of_reference": 0.25255571457779596,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+      "spearman_full_footprint": 0.003433451216447853,
+      "candidate_dots": 78256,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": 0.20477663054590065,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+      "spearman_full_footprint": 0.003433451216447853,
+      "candidate_dots": 78256,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": 0.20477663054590065,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-d15-poisson200m-offcat-60069-20261003T233210Z-68d0e2e4.tif",
+      "spearman_full_footprint": 0.003227173239948793,
+      "candidate_dots": 78256,
+      "reference_dots": 60069,
+      "candidate_fraction_within_3px_of_reference": 0.21503782457575138,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca-nanoutside.tif",
+      "spearman_full_footprint": 0.003433451216447853,
+      "candidate_dots": 78256,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": 0.20477663054590065,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+      "spearman_full_footprint": 0.003433451216447853,
+      "candidate_dots": 78256,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": 0.20477663054590065,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-edge-hybrid-80k-02845bd4-20261003T234340Z-allfinite.tif",
+      "spearman_full_footprint": 0.010325292092377989,
+      "candidate_dots": 78256,
+      "reference_dots": 80000,
+      "candidate_fraction_within_3px_of_reference": 0.45021468002453485,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-edge-hybrid-80k-02845bd4-nan.tif",
+      "spearman_full_footprint": 0.010325292092377989,
+      "candidate_dots": 78256,
+      "reference_dots": 80000,
+      "candidate_fraction_within_3px_of_reference": 0.45021468002453485,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e-zeros.tif",
+      "spearman_full_footprint": 0.003238858663308094,
+      "candidate_dots": 78256,
+      "reference_dots": 85526,
+      "candidate_fraction_within_3px_of_reference": 0.37692956450623594,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif",
+      "spearman_full_footprint": 0.003238858663308094,
+      "candidate_dots": 78256,
+      "reference_dots": 85526,
+      "candidate_fraction_within_3px_of_reference": 0.37692956450623594,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    }
+  ],
+  "decision": "no-duplicate-in-repo-downloads",
+  "note": "Repository downloads only; not the organizer's full registry, so not a novelty certificate."
+}
