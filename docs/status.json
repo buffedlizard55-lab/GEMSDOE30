@@ -1,32 +1,26 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-25T20:11:29Z",
+  "generated_utc": "2026-10-25T20:21:02Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
     "directory": "data/raw",
-    "required_files_present": true,
-    "sha256_verified_against_pins": true,
+    "required_files_present": false,
+    "sha256_verified_against_pins": false,
     "files": [
       {
         "dest": "training_features.tif",
         "path": "data/raw/training_features.tif",
-        "present": true,
+        "present": false,
         "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-        "expected_bytes": 418912844,
-        "actual_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-        "actual_bytes": 418912844,
-        "sha256_matches_pin": true
+        "expected_bytes": 418912844
       },
       {
         "dest": "labels.tif",
         "path": "data/raw/labels.tif",
-        "present": true,
+        "present": false,
         "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "expected_bytes": 425830,
-        "actual_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "actual_bytes": 425830,
-        "sha256_matches_pin": true
+        "expected_bytes": 425830
       },
       {
         "dest": "sample_submission.tif",
@@ -40,17 +34,15 @@
       }
     ],
     "prepared_dataset": {
-      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
-      "matches_recorded_pin": true,
-      "positive_label_pixels": 60988,
-      "template_valid_pixels": 5167373
+      "dataset_signature": null,
+      "matches_recorded_pin": null,
+      "positive_label_pixels": null,
+      "template_valid_pixels": null
     },
     "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
   },
   "competition_data": {
     "owner_mirror_files_present": [
-      "training_features.tif",
-      "labels.tif",
       "sample_submission.tif"
     ],
     "organizer_authenticated": false,
@@ -651,7 +643,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "129 tests collected in 0.66s",
+      "pytest_collect": "129 tests collected in 0.72s",
       "exit_code": 0
     },
     "score_gain_claimed": false
