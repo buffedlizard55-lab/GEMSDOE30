@@ -1,6 +1,42 @@
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
-## START HERE — new TIFF available; **NOT APPROVED FOR SUBMISSION**
+## START HERE — 2026-10-25 (G30-LSM): **DO NOT SUBMIT — no unique file passed every automated gate**
+
+**Verdict:** the new LSM42 model passed the spatially blocked holdout gate. Its final dots then failed the owner's
+uniqueness rule: more than 70 % of the dots fall within 3 px of 5 earlier sparse rasters. Per protocol the run was
+**logged as a duplicate and stopped**. No TIFF was published, so there is **nothing new to download or upload this session**.
+The decision was machine-adjudicated, with no human inspector:
+
+```bash
+python scripts/verify_current_run.py                    # exit 0: evidence verified (decision may be DO NOT SUBMIT)
+python scripts/verify_current_run.py --require-promote  # exit 2 now: not OK to submit
+```
+
+| | Result (labelled) |
+|---|---|
+| Holdout gate (v3 spatially blocked; evaluator `component-holdout-v3-blockstats-20261025`; 60,988 withheld positives) | HOLDOUT-DTI lsm42 **0.1572** [0.1415, 0.1736] vs current best core19 **0.1398** [0.1242, 0.1559]; Δ **+0.0174 [+0.0066, +0.0279]**, **passed** |
+| Leakage canaries | 168 checks; max single-feature AUC 0.665 (limit 0.90), **passed** |
+| Uniqueness | Surface max ρ 0.218, passed. **Dots: 80.2 % within 3 px of G30-S19; 80.1 % of a GEMSDOE28 raster. FAILED** (chance level 14–18 %) |
+| Independent SGMC frame (not a leaderboard proxy) | lsm42 − H33 = −0.0215 [−0.0354, −0.0057] at equal budget |
+| E3 crest-line placement | Gate failed (+0.0016 [−0.0029, +0.0055]); negative result kept |
+
+**Why H33 (GEMSDOE32, owner-reported 0.2778) is the best so far.**
+- It is a byte-exact pruning of the h19-5 lineament support: D2.8 → drop d = 1 px → drop d ≤ 2 px.
+- Calibrating against the exact 5-px lattice implies hidden new-fault density ≈ 0.244 % of pixels.
+- D2.8, r1, H33 and PINN all cover the same ≈ 40.5 % of the hidden truth. H33 just wastes the fewest dots (0.134 hits/dot, 5.8× random).
+- Near-catalogue dots earned ≈ 0 on the leaderboard (projections from unverified owner scores).
+
+Full analysis: [why-h33-scored-0.2778.md](docs/research/2026-10-25-lsm/why-h33-scored-0.2778.md).
+Review: [G30-LSM review](docs/research/2026-10-25-lsm/review.md).
+Next-session plan: [review §5](docs/research/2026-10-25-lsm/review.md#5-what-a-future-session-should-do-ordered).
+Irregularities: IR-30-078…087 in [docs/irregularities.md](docs/irregularities.md).
+Pages: [overview](index.html) · [executive summary](executive-summary.html) · [status feed](docs/status.json).
+
+**Owner prompt:** the complete current owner prompt is preserved verbatim below (formatting normalized) in [Current owner prompt](#current-owner-prompt) and
+[`owner-prompt.txt`](docs/research/texture-displacement/owner-prompt.txt). It was re-read in full at the start of this
+session (2026-10-25, branch `arena/f7b53b40-gemsdoe30`). Its content matches this session's prompt, including the GEMSDOE37–92 lists. **Read it first every session.**
+
+## Previous decision — TDX-1 (2026-10-25): new TIFF available; **NOT APPROVED FOR SUBMISSION**
 
 **Download for research: [new TDX-1 TIFF](docs/downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.tif). Do not upload it to the competition.**
 The [live Pages overview](https://buffedlizard55-lab.github.io/GEMSDOE30/) and

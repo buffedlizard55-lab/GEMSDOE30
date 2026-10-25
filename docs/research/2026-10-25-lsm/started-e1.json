@@ -1,0 +1,11 @@
+{
+ "started_utc": "2026-10-25T23:22:56+00:00",
+ "preregistration_sha256": "6af7f5f0e8b78775c96e051e08bdff9a0540ae2fe691d9c7dd831e2299620e44",
+ "script_sha256": "8ba2d276150d832d1228c30025e6f3321f3fad24191ab186365c10d572add2f1",
+ "experiment": 1,
+ "arms": [
+  "core19",
+  "geo25",
+  "lsm42"
+ ]
+}

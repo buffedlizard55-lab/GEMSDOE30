@@ -1,6 +1,7 @@
 {
-  "schema_version": 1,
-  "run_card": "docs/research/texture-displacement/run-card.json",
-  "readiness": "docs/research/texture-displacement/readiness.json",
-  "purpose": "Current research artifact; this pointer does not allocate a competition slot"
+  "schema_version": 2,
+  "run_card": "docs/research/2026-10-25-lsm/run-card.json",
+  "readiness": "docs/research/2026-10-25-lsm/readiness.json",
+  "verifier": "scripts/verify_lsm_run.py",
+  "purpose": "Current research decision (G30-LSM). This pointer never allocates a competition slot."
 }
