@@ -282,6 +282,7 @@ def main() -> int:
     prepared_local_manifest = load_json(ROOT / "data" / "processed" / "manifest.json") or {}
     data_placement = {
         "directory": str(data_dir.relative_to(ROOT)),
+        "availability_scope": "This describes files present in the build worktree at generated_utc; data/raw and data/processed are Git-ignored and are not distributed by GitHub Pages.",
         "required_files_present": placement_ok,
         "sha256_verified_against_pins": hashes_ok,
         "files": placement,

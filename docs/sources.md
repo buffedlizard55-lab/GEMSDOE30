@@ -132,3 +132,15 @@ transferred (the SGMC, GDR and GeoDAWN archives above were already on disk from 
 the H-34-03 and H-34-04 gridded products have not been clipped, transferred, checksummed or aligned,
 and neither hypothesis may be run before that happens.
 
+
+## Session 2026-10-25 — live pages retrieved with the page-retrieval tool
+
+Retrieved 2026-10-25 (UTC). The bash sandbox cannot reach drivendata.org; these were read through the retrieval tool. Full claim-by-claim notes: [`docs/research/2026-10-25/live-verification.md`](research/2026-10-25/live-verification.md).
+
+| Source | Verified claim | Link |
+|---|---|---|
+| Problem description (page 967) | Distance-weighted Tversky with 300 m triangular kernel, α = 0.2, β = 0.8; one float32 layer in [0, 1]; EPSG 32611; 100 m; null/NaN outside bounds | [page/967](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) |
+| Public leaderboard | #1 xiaofanhu 0.4413; #2 cfld__ 0.3916; #8 DARD 0.3398 (public, not a submission-page receipt) | [leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) |
+| Official rules PDF (NLR, Sept 2026) | Single entry; Phase 1 $50k top 5 equal; Phase 2 $250k top 5; U.S. eligibility; penalty-of-perjury certification | [96647.pdf](https://docs.nlr.gov/docs/fy26osti/96647.pdf) |
+
+Not retrieved: the data page (login-walled), the submission page, the about page (page/968), the user forum, and the reference notebook in this session.

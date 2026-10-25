@@ -1,33 +1,72 @@
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
 
-## START HERE — current submission decision (2026-10-25, Lane G30-S19)
+## START HERE — 2026-10-25 (Candidate C / Lane G30-S19 PROMOTED; A & B negative)
 
-**✅ PROMOTED — OK TO DOWNLOAD & SUBMIT (owner chooses the slot; automation used none).**
-New unique candidate: `docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif`
-(SHA-256 `8a0301d5…f43cc9`, 60,000 dots, 0 on catalogue, all cells finite in [0,1]).
-DrivenData note (84 chars): `G30-S19 habitat GBM (19-band, no catalogue-distance inputs) + EDGE 60k, off-cat >2px`.
-Evidence: [run card](docs/research/2026-10-25/lane-g30s19-run-card.json) ·
-[analysis](docs/research/2026-10-25/lane-g30s19-analysis.md) ·
-[preregistration](docs/research/2026-10-25/lane-g30s19-preregistration.md) ·
-[submission guide](executive-summary.html).
+**✅ OK TO DOWNLOAD & SUBMIT — Candidate C:** [gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif](docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif)
+(SHA-256 `8a0301d5…f43cc9`; note: `G30-S19 habitat GBM (19-band, no catalogue-distance inputs) + EDGE 60k, off-cat >2px`).
+HOLDOUT-DTI **0.2230 [0.2052–0.2396]** (component-holdout-v2, 20,870 withheld) vs proximity 0.1672 / Poisson 0.1945; canaries 43/43 clean; novelty vs H33 ρ=0.025/34.9% and vs A/B ρ≤0.007. Local proxy only — not a score; live leader 0.4413 (below). Evidence: [run card](docs/research/2026-10-25/lane-g30s19-run-card.json) · [analysis](docs/research/2026-10-25/lane-g30s19-analysis.md) · [preregistration](docs/research/2026-10-25/lane-g30s19-preregistration.md). No slot used; owner submits.
 
-- **HOLDOUT-DTI 0.2230 [95% CI 0.2052–0.2396]** (evaluator
-  `component-holdout-v2-footprint-20261025`, 20,870 withheld positives, whole-component
-  hide-and-recover with 300 m buffer) vs proximity 0.1672 / Poisson 0.1945. This is a
-  local proxy measurement, **not** a competition score; >0.2778 (OWNER-REPORTED for
-  GEMSDOE32 H33) cannot be guaranteed before organizer scoring.
-- H33 won by emission pruning of the shared H19-5 family (exact byte reconstruction:
-  delete dots ≤2 px from catalogue). G30-S19 instead learns an independent 19-band
-  habitat belief (no catalogue-distance inputs, halo-excluded negatives) + EDGE
-  emission. Novelty vs H33: Spearman 0.025, ≤3 px dot overlap 34.9% (gates 0.90/70%).
-- Experiment budget honoured: E1 canaries (43/43 AUC ≤0.90), E2 failed design
-  (recorded negative), E3 habitat holdout (passed preregistered gate); final TIFF is
-  the production run of the frozen E3 recipe. Irregularities IR-S19-01…07 are in the
-  analysis (incl. self-assigned lane — the prompt's method paragraph was not
-  identifiable — and the still-incomplete parallel registry).
-- Superseded: the earlier 2026-10-25 "NOT APPROVED" readiness decision below and in
-  `docs/research/2026-10-25/run-card.json` (kept as history).
+**Read every session before working:** this README, [OWNER_BRIEF.md](OWNER_BRIEF.md), and the [session report](docs/research/2026-10-25/session-report.md).
+
+**Status in one place**
+
+- **Candidate A — branch `arena/6a5f04fe-gemsdoe30` (residual-ridge gate):** [gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif](docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif). Valid and unique in this repository. Holdout verdict negative: HOLDOUT-DTI 0.1222 [0.1139, 0.1306] against count-matched proximity 0.1770 [0.1681, 0.1857]. Not recommended.
+- **Candidate B — branch `arena/6a157983-gemsdoe30` (H-CC1 dispersed 3 px, PR #25, merged to `main`):** [gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif](docs/downloads/gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif). Passes the local format validator (EPSG:32611, 3730×3292, float32, values 0–1, NaN outside). Holdout negative: HOLDOUT-DTI 0.0539 [0.0507, 0.0572], below a matched random control at 0.0659 [0.0631, 0.0687]. Not recommended.
+- Labels are HOLDOUT-DTI (catalogue proxy), not competition scores. Neither candidate has an organizer score.
+- **Official leaderboard** (read 2026-10-25): #1 = 0.4413. The prompt's "0.3195 is highest" matches only a 2026-10-03 snapshot (IR-30-057, IR-30-072).
+- **Blockers:** training data must come from the owner's own DrivenData download (current restored copy is from public mirrors; see IR-30-056). The parallel-run method lane is not in the request (IR-30-058). The parallel registry is partial (IR-30-062).
+- **Rules that govern uploads** (official PDF, as recorded in branch `6a157983`): one final entry; up to three feedback submissions a week; an AI-use disclosure is required. Source: <https://docs.nlr.gov/docs/fy26osti/96647.pdf>. Session A's rules check confirmed a single entry scored in both phases and U.S. eligibility.
+
+**Standing request, condensed (not verbatim; the verbatim brief is in OWNER_BRIEF.md):**
+produce a unique, format-valid GeoTIFF that is easy to download and submit; explain why the
+GEMSDOE25/32 family scored well and whether a distinct method can beat 0.2778 (owner-reported)
+and the official top 0.4413; generate 3–5 ranked geological hypotheses before implementing; validate
+the top candidate on a spatially blocked holdout before spending any weekly slot; label every number
+as HOLDOUT-DTI or ORGANIZER-CONFIRMED; flag irregularities; no manual input; no hallucinated facts.
+Core values: *Maximize P(Win)* and *Own the Outcome*.
+
+## Previous decision (2026-10-25, before this session)
+
+**NOT APPROVED FOR SUBMISSION. No new unique TIFF was generated in that review.**
+Historical downloads are educational references, not new submissions. The current
+owner protocol takes precedence over contradictory ready-to-submit language in
+older sections below. Read the [current owner-request amendment](docs/research/2026-10-25/owner-request.md)
+at the start of every session (a requirements record, not a verbatim transcript).
+The prior literal brief is preserved below for history.
+
+
+**Candidate A — details**
+
+| Item | Value |
+|---|---|
+| Download | [`docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif`](docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif) |
+| Submission name | `gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b` |
+| Submission note (79 chars) | `GEMSDOE30 review-hyp3 residual-ridge gate, 3km catalogue corridor, 400m Poisson` |
+| SHA-256 and validator | in the [run card A](docs/research/2026-10-25/run-card-residual-gate.json) (validator passed; independent rasterio re-read agrees) |
+| Holdout (HOLDOUT-DTI, `component-holdout-v2-footprint-20261025`, 20,870 withheld positives, stand-in split) | candidate **0.1222** [0.1139, 0.1306] vs count-matched proximity comparator **0.1770** [0.1681, 0.1857] — **not promoted** |
+| Duplicate checks | no duplicate (9-site registry and 12 repo TIFFs, including candidate B: Spearman −0.001, 10.2 % within 3 px); surface-stage check blocked; registry partial, so **no novelty certificate** |
+| Organizer score | **none** — NOT ORGANIZER-CONFIRMED |
+
+Raw data placement and preparation succeeded using the existing hash-pinned owner
+mirrors; the current worktree was independently restored and prepared again on
+2026-10-25. Do not treat the prompt's old data-placement blocker as current.
+`data/raw/` and `data/processed/` are Git-ignored and are not distributed by
+GitHub Pages; status-feed availability means present in the builder worktree at
+generation time only. Organizer authentication is not established by mirror
+hashes. No new geological experiment was run because the current method lane and
+complete parallel registry are missing.
+Requested shared-template filenames are absent; existing shared modules were reused.
+Read first: [executive summary](executive-summary.html) · [candidate design, pre-registration and result](docs/research/2026-10-25/candidate-residual-gate.md) · [live official facts](docs/research/2026-10-25/live-verification.md) · [run card A](docs/research/2026-10-25/run-card-residual-gate.json) · [irregularities IR-30-066 to IR-30-077](docs/irregularities.md).
+
+- **Live public leaderboard** (retrieved 2026-10-25): #1 **0.4413**. The owner's **0.3195** matches a 2026-10-03 snapshot, not today's table.
+- **Historical 0.2778 claim** (GEMSDOE32 H33-B2): unverified. Its support matches a GEMSDOE28 reference after a 2-pixel catalogue-flank deletion (zero mismatching pixels), so it is emission pruning, not a new signal ([review](docs/research/2026-10-25/review.md)).
+- Data placement works: pinned owner mirrors restore with SHA-256 checks (`scripts/restore_public_mirrors.py`), and `scripts/prepare_data.py` completes. Mirror integrity is not organizer authentication.
+- Three experiments and the two-hour budget are used. Negative results are recorded as deliverables.
+
+**Next session (in order):** (1) assign or declare a method lane (IR-30-073); (2) decide the buffer rule for catalogue-gated features, since a 3.5 km strict buffer structurally zeroes them (IR-30-066), and preregister it before reading results; (3) confirm the known-fault mask rule against the rules or forum (IR-30-071); (4) rebuild continuous surfaces so the pre-placement duplicate check can run (IR-30-069); (5) implement review hypothesis 1 (cross-contact texture displacement) with feature canaries first; (6) a single organizer-authenticated format check is the only way to test the portal range error (IR-30-074), and it costs a slot. Promotion and slot selection remain separate, and no leaderboard value is claimed here.
+
+**Reproduce the candidate** (after `pip install numpy scipy rasterio shapely pyproj pytest` in a venv): `python scripts/restore_public_mirrors.py && python scripts/prepare_data.py && PYTHONPATH=src python scripts/residual_gate_holdout.py --buffer-m 0 --out docs/research/2026-10-25/residual-gate-holdout-buffer0.json && PYTHONPATH=src python scripts/build_residual_gate_candidate.py && python scripts/make_run_card.py`.
 
 ---
 

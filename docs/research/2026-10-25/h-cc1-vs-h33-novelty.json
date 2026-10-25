@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "stage": "dots",
+  "candidate": "docs/downloads/gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif",
+  "candidate_sha256": "837f555efe1c55f53258aa2fa8b5528684395cc1226a233cf8013690b6ac63ff",
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "registry_sha256": "2eb8032b931e0de5c870c47fda0eb31bdcea61ba39e678238c87540d5b6a5c1e",
+  "registry_complete": false,
+  "comparisons": [
+    {
+      "reference": "outputs/historical/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+      "spearman_full_footprint": 0.0038365870866785725,
+      "candidate_dots": 32058,
+      "reference_dots": 37654,
+      "candidate_fraction_within_3px_of_reference": 0.23354544887391604,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "outputs/historical/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif",
+      "spearman_full_footprint": 0.0038365870866785725,
+      "candidate_dots": 32058,
+      "reference_dots": 37654,
+      "candidate_fraction_within_3px_of_reference": 0.23354544887391604,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "outputs/historical/gemsdoe32-h33-h33-2b2-plus-h33-1-20261004T220000Z-31588dc7-nan.tif",
+      "spearman_full_footprint": 0.0037465223219225988,
+      "candidate_dots": 32058,
+      "reference_dots": 38554,
+      "candidate_fraction_within_3px_of_reference": 0.23547944350864058,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    }
+  ],
+  "errors": [],
+  "decision": "blocked-incomplete-evidence",
+  "submission_approved": false
+}

@@ -19,18 +19,25 @@
 <p class="lead">A clear path from geological hypotheses to a genuinely distinct, validated GeoTIFF. This review found shared predictions across the strongest reported historical submissions—and fixed a holdout masking defect.
 </p>
 </section>
-<section class="status-block" style="border-color:#1a7f37;background:#eafaf0;color:#10331c" aria-labelledby="submission-status"><span class="eyebrow">Submission decision · 25 October 2026 · Lane G30-S19</span>
-<h2 id="submission-status">✅ OK TO DOWNLOAD &amp; SUBMIT — all project gates passed</h2>
-<p><strong>Submit this file:</strong> <code>gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif</code><br>SHA-256 <code>8a0301d5606e39b114eca997cd43849531393bb3921db26a267478f915f43cc9</code> · 60,000 dots · 0 on catalogue · every cell finite in [0,1] (the portal range error cannot be triggered by its values).</p>
+<section class="status-block" style="border-color:#1a7f37;background:#eafaf0;color:#10331c" aria-labelledby="submission-status"><span class="eyebrow">Submission decision · 25 October 2026 · Candidate C · Lane G30-S19</span>
+<h2 id="submission-status">✅ OK TO DOWNLOAD &amp; SUBMIT — Candidate C passed all project gates</h2>
+<p><strong>Submit this file:</strong> <code>gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif</code><br>SHA-256 <code>8a0301d5606e39b114eca997cd43849531393bb3921db26a267478f915f43cc9</code> · 60,000 dots · 0 on catalogue · every cell finite in [0,1].</p>
 <p><a class="button" style="display:inline-block;padding:14px 22px;font-size:1.15rem;font-weight:700" href="docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif" download>⬇ DOWNLOAD SUBMISSION TIF (submit this one)</a></p>
 <p><strong>Paste this note on DrivenData (84 characters):</strong><br><code>G30-S19 habitat GBM (19-band, no catalogue-distance inputs) + EDGE 60k, off-cat &gt;2px</code></p>
-<p class="small">Why it passed: HOLDOUT-DTI <b>0.2230</b> [95% CI 0.205–0.240; 20,870 withheld fault pixels; evaluator component-holdout-v2] vs proximity 0.167 and Poisson 0.195 · leakage canaries 43/43 clean · novelty vs the 0.2778 winner: rank correlation 0.025, dot overlap 34.9% (gates: &lt;0.90 / &lt;70%) · format validator passed. HOLDOUT-DTI is a local hide-and-recover measurement, <b>not</b> a competition score — beating 0.2778 cannot be guaranteed before the organizer scores it. No weekly slot was used by automation; you choose when to submit. Full evidence: <a href="docs/research/2026-10-25/lane-g30s19-run-card.json">run card (JSON)</a> · <a href="docs/research/2026-10-25/lane-g30s19-analysis.md">analysis</a> · <a href="executive-summary.html">step-by-step submission guide</a>. Alternate encoding (same predictions, NaN outside): <a href="docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan.tif" download>-nan twin</a>.</p>
+<p class="small">HOLDOUT-DTI <b>0.2230</b> [95% CI 0.205–0.240; 20,870 withheld fault pixels; evaluator component-holdout-v2] vs proximity 0.167 / Poisson 0.195 — the only 2026-10-25 candidate that beat its comparators (A: 0.1222, B: 0.0539, both below). Leakage canaries 43/43 clean · novelty vs the 0.2778 winner: ρ=0.025, overlap 34.9% · validator passed. HOLDOUT-DTI is a local proxy, <b>not</b> a competition score; the live leader is 0.4413 (read 2026-10-25) and no score is promised. No slot was used; you choose when to submit. <a href="docs/research/2026-10-25/lane-g30s19-run-card.json">Run card</a> · <a href="docs/research/2026-10-25/lane-g30s19-analysis.md">Analysis</a> · <a href="executive-summary.html">Submission guide</a> · <a href="docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan.tif" download>NaN-outside twin</a></p>
+</section>
+<section class="status-block" aria-labelledby="submission-status"><span class="eyebrow">Readiness decision · 25 October 2026</span>
+<h2 id="submission-status">Candidates A &amp; B (parallel sessions) — both negative on holdout; neither is recommended for a slot</h2>
+<p><strong>Candidate A</strong> (branch <code>arena/6a5f04fe-gemsdoe30</code>, residual-ridge gate): <a href="docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif" download>download gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif</a>. Valid and unique in the repo. HOLDOUT-DTI 0.1222 [0.1139, 0.1306] against 0.1770 [0.1681, 0.1857] for the count-matched proximity comparator. <b>Not recommended.</b></p>
+<p><strong>Candidate B</strong> (branch <code>arena/6a157983-gemsdoe30</code>, H-CC1 dispersed 3 px, PR #25 merged): <a href="docs/downloads/gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif" download>download gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif</a> (SHA-256 837f555e…ec63ff). It passes the local format validator. HOLDOUT-DTI 0.0539 [0.0507, 0.0572], below a matched random control at 0.0659 [0.0631, 0.0687]. <b>Not recommended.</b></p>
+<p>Both labels are HOLDOUT-DTI (catalogue proxy). Neither has an organizer score. The public leaderboard was read on 2026-10-25 with #1 at 0.4413; the prompt's 0.3195 figure does not appear on it. Any upload must be made by you from your own DrivenData account, using official training files (see irregularity I-1 in the report). Automated checks, not a human inspector, establish research eligibility. No upload was made by this project and no slot was used.</p>
+<a href="docs/research/2026-10-25/session-report.md">Read the full session report (B)</a> · <a href="docs/research/2026-10-25/candidate-residual-gate.md">Design and result (A)</a> · <a href="docs/research/2026-10-25/run-card-residual-gate.json">Run card (A, JSON)</a> · <a href="docs/research/2026-10-25/run-card.json">Run card on main (JSON)</a> · <a href="docs/research/2026-10-25/live-verification.md">Live official facts</a>
 </section>
 <section class="section audit-grid">
-<article><span class="eyebrow">Data ready</span>
-<h2>Restored &amp; prepared
+<article><span class="eyebrow">Data preflight</span>
+<h2>Owner mirrors verified
 </h2>
-<p>Feature, label and template mirrors match existing SHA-256 pins. Prepared arrays are available locally; large inputs stay outside Git.
+<p>The pinned feature, label and template files were restored and prepared in the review worktree. Raw and prepared inputs are Git-ignored, not downloadable from this Pages site, and are not organizer-authenticated.
 </p><a href="docs/research/2026-10-25/prepared-manifest.json">Preparation receipt</a>
 </article>
 <article><span class="eyebrow">Novelty check</span>
@@ -55,7 +62,8 @@
 </p><a class="button secondary" href="docs/research/2026-10-25/review.md">Read the nine-site scientific review</a>
 </section>
 <section class="section">
-<h2>Earlier prospective hypotheses (superseded by Lane G30-S19 results above)</h2>
+<h2>What to test next—after lane allocation
+</h2>
 <div class="audit-grid">
 <article>
 <h3>1. Magnetic texture displacement
@@ -86,7 +94,8 @@
 </p>
 </section>
 <section class="section">
-<h2>Historical downloads: educational reference only</h2>
+<h2>Downloads: educational reference only
+</h2>
 <p><strong>This is an existing file, not a new submission.</strong> It remains downloadable for reproducibility and learning. A different name or zero/NaN encoding does not make its predictions unique.
 </p><a class="button secondary" href="docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif" download>Download historical D28 TIFF · DO NOT SUBMIT AS NEW</a>
 <p><a href="docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.json">Historical provenance</a> · <a href="executive-summary.html">How a future approved submission will be released</a>

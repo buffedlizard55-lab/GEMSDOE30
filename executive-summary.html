@@ -14,16 +14,26 @@
 </header>
 <main>
 <section class="page-intro"><span class="eyebrow">Executive summary</span>
-<h1>How to submit — the gates have passed.</h1>
+<h1>How to submit—only after the gates pass.
+</h1>
 <p class="lead">File validity, scientific readiness, novelty, and permission to spend a weekly slot are different decisions. A green format check alone is not approval.
 </p>
 </section>
-<section class="status-block" style="border-color:#1a7f37;background:#eafaf0;color:#10331c" aria-labelledby="submission-status"><span class="eyebrow">Submission decision · 25 October 2026 · Lane G30-S19</span>
-<h2 id="submission-status">✅ OK TO DOWNLOAD &amp; SUBMIT — all project gates passed</h2>
-<p><strong>Submit this file:</strong> <code>gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif</code><br>SHA-256 <code>8a0301d5606e39b114eca997cd43849531393bb3921db26a267478f915f43cc9</code> · 60,000 dots · 0 on catalogue · every cell finite in [0,1] (the portal range error cannot be triggered by its values).</p>
+<section class="status-block" style="border-color:#1a7f37;background:#eafaf0;color:#10331c" aria-labelledby="submission-status"><span class="eyebrow">Submission decision · 25 October 2026 · Candidate C · Lane G30-S19</span>
+<h2 id="submission-status">✅ OK TO DOWNLOAD &amp; SUBMIT — Candidate C passed all project gates</h2>
+<p><strong>Submit this file:</strong> <code>gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif</code><br>SHA-256 <code>8a0301d5606e39b114eca997cd43849531393bb3921db26a267478f915f43cc9</code> · 60,000 dots · 0 on catalogue · every cell finite in [0,1].</p>
 <p><a class="button" style="display:inline-block;padding:14px 22px;font-size:1.15rem;font-weight:700" href="docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif" download>⬇ DOWNLOAD SUBMISSION TIF (submit this one)</a></p>
 <p><strong>Paste this note on DrivenData (84 characters):</strong><br><code>G30-S19 habitat GBM (19-band, no catalogue-distance inputs) + EDGE 60k, off-cat &gt;2px</code></p>
-<p class="small">Why it passed: HOLDOUT-DTI <b>0.2230</b> [95% CI 0.205–0.240; 20,870 withheld fault pixels; evaluator component-holdout-v2] vs proximity 0.167 and Poisson 0.195 · leakage canaries 43/43 clean · novelty vs the 0.2778 winner: rank correlation 0.025, dot overlap 34.9% (gates: &lt;0.90 / &lt;70%) · format validator passed. HOLDOUT-DTI is a local hide-and-recover measurement, <b>not</b> a competition score — beating 0.2778 cannot be guaranteed before the organizer scores it. No weekly slot was used by automation; you choose when to submit. Full evidence: <a href="docs/research/2026-10-25/lane-g30s19-run-card.json">run card (JSON)</a> · <a href="docs/research/2026-10-25/lane-g30s19-analysis.md">analysis</a> · <a href="executive-summary.html">step-by-step submission guide</a>. Alternate encoding (same predictions, NaN outside): <a href="docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan.tif" download>-nan twin</a>.</p>
+<p class="small">HOLDOUT-DTI <b>0.2230</b> [95% CI 0.205–0.240; 20,870 withheld fault pixels; evaluator component-holdout-v2] vs proximity 0.167 / Poisson 0.195 — the only 2026-10-25 candidate that beat its comparators (A: 0.1222, B: 0.0539, both below). Leakage canaries 43/43 clean · novelty vs the 0.2778 winner: ρ=0.025, overlap 34.9% · validator passed. HOLDOUT-DTI is a local proxy, <b>not</b> a competition score; the live leader is 0.4413 (read 2026-10-25) and no score is promised. No slot was used; you choose when to submit. <a href="docs/research/2026-10-25/lane-g30s19-run-card.json">Run card</a> · <a href="docs/research/2026-10-25/lane-g30s19-analysis.md">Analysis</a> · <a href="executive-summary.html">Submission guide</a> · <a href="docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan.tif" download>NaN-outside twin</a></p>
+</section>
+<section class="status-block" aria-labelledby="submission-status"><span class="eyebrow">Download · 25 October 2026</span>
+<h2 id="submission-status">Unique TIFF available — holdout verdict: do not spend a slot on it</h2>
+<p><b>File:</b> <a href="docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif">gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif</a> — single-band float32 GeoTIFF, EPSG:32611, 3730 × 3292, values exactly 0 or 1, NaN outside the template footprint. Validated by the shared writer and re-read independently.</p>
+<p><b>Submission name:</b> <code>gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b</code><br><b>Note (79 characters):</b> <code>GEMSDOE30 review-hyp3 residual-ridge gate, 3km catalogue corridor, 400m Poisson</code></p>
+<p><b>Is it OK to download?</b> Yes: it is format-valid and has no dot-level duplicate among the nine pinned registry rasters or the 12 other TIFFs in this repository, including candidate B (Spearman −0.001; 10.2 % of dots within 3 px) (the registry is partial, so this is not a novelty certificate).</p>
+<p><b>Is it OK to submit?</b> <b>Not recommended.</b> The holdout verdict is negative. HOLDOUT-DTI 0.1222 [0.1139, 0.1306] against 0.1770 [0.1681, 0.1857] for the count-matched proximity comparator (stand-in split, 20,870 withheld positives, evaluator component-holdout-v2-footprint-20261025). It is <b>not ORGANIZER-CONFIRMED</b> and has no organizer score. If you choose to upload it, that is your decision and uses one of your weekly slots.</p>
+<p>No upload was made by this project. The public leaderboard was read on 2026-10-25 with #1 at 0.4413.</p>
+<a href="docs/research/2026-10-25/run-card-residual-gate.json">Run card A (JSON)</a> · <a href="docs/research/2026-10-25/candidate-residual-gate.md">Design and result</a> · <a href="docs/research/2026-10-25/live-verification.md">Live official facts</a>
 </section>
 <section class="section">
 <h2>Automated release gates
@@ -66,7 +76,7 @@
 </li>
 <li>Open the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">official competition</a> using an authorized account and select <b>New submission</b>.
 </li>
-<li>Choose the approved TIFF under <b>File to submit</b>. Use filename <code>gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif</code> and paste the note shown in the green box above.
+<li>Choose the approved TIFF under <b>File to submit</b>. Record the unique filename and copy its short note. Use the candidate name and note from the Download block at the top of this page (they are for your own team's reference).
 </li>
 <li>Save the organizer receipt, submission ID, exact file hash and returned result together. Only then label the result ORGANIZER-CONFIRMED.
 </li>
@@ -77,9 +87,9 @@
 <section class="section">
 <h2>What is available now
 </h2>
-<p><a href="docs/research/2026-10-25/review.md">Nine-site review and prospective hypotheses</a> · <a href="docs/research/2026-10-25/lane-g30s19-run-card.json">G30-S19 promotion run card</a> · <a href="docs/research/2026-10-25/run-card.json">Earlier negative readiness card (superseded)</a> · <a href="docs/research/priority-site-pins.json">Partial historical registry</a>
+<p><a href="docs/research/2026-10-25/review.md">Nine-site review and prospective hypotheses</a> · <a href="docs/research/2026-10-25/run-card.json">Negative readiness run card</a> · <a href="docs/research/priority-site-pins.json">Partial historical registry</a>
 </p>
-<p><a href="index.html">Return to the current download/status page</a>. Historical TIFFs remain educational references; the G30-S19 file above is the only newly promoted candidate.
+<p><a href="index.html">Return to the current download/status page</a>. Existing TIFFs are educational references only; none is newly approved by this review.
 </p>
 </section>
 </main>

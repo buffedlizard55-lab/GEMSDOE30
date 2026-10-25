@@ -75,9 +75,8 @@ best-validated unique entrant this repo has produced.
   `submission_writer.py` don't exist; shared equivalents in
   `src/gemsdoe30/{holdout,submission}.py` were reused (no private fork).
 - **IR-S19-03** All historical scores (0.2778, 0.3195, 0.4413…) remain
-  OWNER-REPORTED with no organizer receipts; the two "current leader" claims
-  in the prompt conflict. Live leaderboard/portal cap not re-verified
-  (login-walled).
+  OWNER-REPORTED with no organizer receipts; the prompt's leader claims conflicted; a parallel session read the
+  official leaderboard on 2026-10-25 as #1 = 0.4413 (IR-30-057/072), so 0.3195 is a stale snapshot. This session did not independently re-read it (login-walled here).
 - **IR-S19-04** Data are hash-pinned owner mirrors, not organizer-authenticated
   downloads. Template contains label pixels (footprint only was used).
 - **IR-S19-05** EDGE truth-mass prior = visible catalogue count (60,988);
