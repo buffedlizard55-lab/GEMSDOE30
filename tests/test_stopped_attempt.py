@@ -205,3 +205,19 @@ def test_late_arrivals_are_checked_without_rewriting_the_original_snapshot(isola
     (directory / 'registry-parallel-addendum.json').unlink()
     with pytest.raises(ValueError, match='late-registry audit'):
         verifier.verify(directory, template)
+
+
+@pytest.mark.parametrize('mutation', ['candidate', 'template', 'reference'])
+def test_late_receipts_bind_saved_bytes_template_and_every_reference(isolated, mutation):
+    verifier, directory, template, _ = isolated
+    path = directory / 'novelty-parallel-dots.json'
+    report = load(path)
+    if mutation == 'candidate':
+        report['candidate_sha256'] = '0' * 64
+    elif mutation == 'template':
+        report['template_sha256'] = '0' * 64
+    else:
+        report['comparisons'][0]['reference_sha256'] = '0' * 64
+    dump(path, report)
+    with pytest.raises(ValueError, match='post-stop novelty'):
+        verifier.verify(directory, template)

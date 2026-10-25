@@ -283,3 +283,10 @@ surface comparisons for those arrivals because that older private surface is
 unavailable. Its gate correctly remains unknown; no surface was reconstructed or
 number fabricated. All parallel reports retain their different evaluator/split/
 uncertainty scopes and are not cross-ranked as organizer scores.
+
+
+[Raw-label semantics audit](label-semantics-audit.json) independently verified
+that known-fault pixels use value 1 (-1 is nodata), prepared labels exactly agree
+inside the footprint, and the candidate contains no positive catalogue pixel.
+The source/template CRS, shape and transform agree exactly. This is a read-only
+post-stop quality audit, not another modeling experiment.

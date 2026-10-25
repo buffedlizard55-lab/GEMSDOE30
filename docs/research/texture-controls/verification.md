@@ -59,7 +59,7 @@ Completed implementation corrections; final regression count recorded below:
 
 Completed locally after integrating concurrent PR #29 records:
 
-- **218 passed, five optional torch skips, seven subtests passed**; two existing
+- **221 passed, five optional torch skips, seven subtests passed**; two existing
   rasterio deprecation warnings. No GPU/torch model training was represented as tested.
 - Shared current-archive verifier reopens the retained TIFF and checks its exact
   bytes/template/sidecar, recomputes pooled uncertainty and validates the negative decision.
@@ -106,3 +106,20 @@ Pages, the status feed, PR and final response; it is not silently marked complet
 - This documentation addendum is separately pushed/rechecked before the explicit
   PR merge. The final PR timeline records the actual merge/check state; no future
   success is assumed in this file.
+
+
+### Final read-only semantics and idempotency review
+
+[Label-semantics receipt](label-semantics-audit.json): reopened the pinned raw
+`labels.tif`. Its only values are **-1 (nodata), 0, 1**, not 255. All **60,988**
+positive pixels lie within the template footprint; the prepared Boolean labels
+match `raw == 1` at every valid cell (zero mismatches). The stopped TIFF has **zero**
+positive candidate pixels at those catalogue cells. This confirms the finalizer's
+explicit equality semantics rather than assuming an encoding.
+
+Repeated **audit-only** finalization using executed source commit `79d1be9` preserved
+the late-reference evidence and identical science/card/validator identities. No
+experiment, normalization fitting, prediction or dot placement was repeated.
+Additional adversarial tests reject changed candidate, template or reference hashes
+in each late-arrival receipt. The final integrated suite has **221 passed**, five
+optional skips and seven passing subtests (two existing rasterio warnings).
