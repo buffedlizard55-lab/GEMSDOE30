@@ -49,6 +49,14 @@ control. **No competition slot was selected or used.**
 [Latest scientific review](experiment-review.html) ·
 [Final JSON run card](docs/research/texture-controls/run-card.json)**
 
+**Public-registry refresh (not a score or new experiment):** the nine requested
+repositories were re-snapshotted at immutable commits on 2026-10-25. The
+[byte-verified registry](docs/research/2026-10-25/priority-site-public-snapshot.json)
+contains 205 public download TIFF source blobs, 190 distinct aligned byte sequences,
+one off-grid exclusion, and five metadata-only surface-path inspections. It remains
+partial; none of the discovered surfaces is comparison-approved. Read the
+[scope, H33 analysis, surface limitations and next action](docs/research/2026-10-25/priority-site-public-review.md).
+
 **Archived download only:** [previous-session TDX-1 research TIFF](docs/downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.tif).
 It remains format-valid and downloadable for reproducibility, **not approved for
 competition upload**, and is **not a new submission from this session**. The
