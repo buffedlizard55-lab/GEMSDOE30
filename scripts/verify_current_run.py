@@ -134,8 +134,67 @@ def verify(pointer: Path, template: Path, *, write=False):
             "errors": audit["errors"],
         }
         check_equal(card["registry"][stage], expected_summary, f"card/registry/{stage}")
+    # Integrating concurrent main must not silently drop new local references.
+    # Preserve the original pre-placement snapshot, then audit late arrivals on
+    # BOTH saved output states without refitting or changing any dots.
+    known = expected_registry | {row["sha256"] for row in registry.get("exclusions", [])} | {digest}
+    extra_hashes = set()
+    for path in raster.parent.iterdir():
+        if path.suffix.lower() not in (".tif", ".tiff"):
+            continue
+        with path.open("rb") as stream:
+            value = hashlib.file_digest(stream, "sha256").hexdigest()
+        if value not in known:
+            extra_hashes.add(value)
+    combined_surface, combined_dots = surface, dots
+    assessment_registry = registry
+    additional_path = directory / "registry-parallel-addendum.json"
+    if extra_hashes or additional_path.exists():
+        if not additional_path.is_file():
+            raise ValueError("new local reference TIFFs require an explicit late-registry audit")
+        additional = load(additional_path)
+        extra_rows = additional["rasters"]
+        expected_extra = {row["sha256"] for row in extra_rows}
+        if expected_extra != extra_hashes or len(extra_rows) != len(expected_extra):
+            raise ValueError("late registry no longer covers every new local reference identity")
+        parent_hash = hashlib.sha256((directory / "registry.json").read_bytes()).hexdigest()
+        if additional.get("original_registry_sha256") != parent_hash:
+            raise ValueError("late registry does not extend this exact frozen snapshot")
+        for row in extra_rows:
+            with local_path(row["path"]).open("rb") as stream:
+                if hashlib.file_digest(stream, "sha256").hexdigest() != row["sha256"]:
+                    raise ValueError("late reference file hash mismatch")
+        merged = {}
+        for stage, original in (("surface", surface), ("dots", dots)):
+            late = load(directory / f"novelty-parallel-{stage}.json")
+            rows = late["comparisons"]
+            if (late.get("stage") != stage or any(r.get("stage") != stage for r in rows)
+                    or len(rows) != len(expected_extra)
+                    or {r.get("reference_sha256") for r in rows} != expected_extra
+                    or late.get("registry_sha256") != hashlib.sha256(additional_path.read_bytes()).hexdigest()
+                    or late.get("template_sha256") != template_hash
+                    or late.get("candidate_sha256") != original.get("candidate_sha256")
+                    or late.get("registry_complete") is not False):
+                raise ValueError("late novelty receipt stage/inventory/identity mismatch")
+            merged[stage] = {**original, "comparisons": original["comparisons"] + rows,
+                             "errors": original.get("errors", []) + late.get("errors", [])}
+        combined_surface, combined_dots = merged["surface"], merged["dots"]
+        if additional.get("complete") is not True or additional.get("missing_evidence"):
+            assessment_registry = {**registry, "complete": False,
+                                   "missing_evidence": additional.get("missing_evidence", ["late coverage incomplete"])}
     readiness = assess(card, results, format_passed=report.passed, hash_matches=hashes_match,
-                       surface_audit=surface, dots_audit=dots, registry=registry)
+                       surface_audit=combined_surface, dots_audit=combined_dots, registry=assessment_registry)
+    if additional_path.exists():
+        addition = {"registry": "docs/research/texture-displacement/registry-parallel-addendum.json",
+                    "surface_receipt": "docs/research/texture-displacement/novelty-parallel-surface.json",
+                    "dots_receipt": "docs/research/texture-displacement/novelty-parallel-dots.json",
+                    "timing": "Late-arriving references; checked both saved states without refitting or replacing dots",
+                    "combined_observed_registry": readiness["observed_registry"]}
+        if write:
+            # Keep changes in memory until every assertion below has passed.
+            card["additional_novelty_evidence"] = addition
+        else:
+            check_equal(card.get("additional_novelty_evidence"), addition, "card/additional_novelty_evidence")
     if card.get("verdict") != readiness["research_verdict"] or card.get("submission_approved") is not False:
         raise ValueError("card approval/verdict contradicts machine-adjudicated gates")
     if manifest.get("submission_approved") is not False:
@@ -146,7 +205,13 @@ def verify(pointer: Path, template: Path, *, write=False):
     if card.get("download_ok") != readiness["download_ok"] or card.get("slot_selected") is not False:
         raise ValueError("card download/slot fields contradict automated research-only decision")
     if write:
-        target.write_text(json.dumps(readiness, indent=2, allow_nan=False) + "\n")
+        if additional_path.exists():
+            temp = card_path.with_suffix(".partial.json")
+            temp.write_text(json.dumps(card, indent=2, allow_nan=False) + "\n")
+            temp.replace(card_path)
+        temp = target.with_suffix(".partial.json")
+        temp.write_text(json.dumps(readiness, indent=2, allow_nan=False) + "\n")
+        temp.replace(target)
     elif not target.exists() or load(target) != readiness:
         raise ValueError("readiness receipt missing/stale; regenerate with --write")
     return readiness

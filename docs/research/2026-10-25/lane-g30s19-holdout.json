@@ -1,0 +1,102 @@
+{
+ "evaluator_version": "component-holdout-v2-footprint-20261025",
+ "withheld_positives": 20870,
+ "experiment": 3,
+ "design_fix_vs_v1": "no distance inputs to GBM; negatives >3px from known+hidden; proximity only in emission belief",
+ "proximity_only_edge": {
+  "dots": 72106,
+  "dti": 0.167181924631453,
+  "tp_weight": 5262.404955035283,
+  "fp_weight": 68643.17864257436,
+  "truth_pixels": 20870.0,
+  "emitted_pixels": 72106
+ },
+ "habitat_only_edge": {
+  "dots": 62779,
+  "dti": 0.22272559591471125,
+  "tp_weight": 6588.973027937236,
+  "fp_weight": 57847.86160561093,
+  "truth_pixels": 20870.0,
+  "emitted_pixels": 62779
+ },
+ "combined_edge": {
+  "dots": 64602,
+  "dti": 0.2150198406267889,
+  "tp_weight": 6468.051681758686,
+  "fp_weight": 60457.87511277876,
+  "truth_pixels": 20870.0,
+  "emitted_pixels": 64602
+ },
+ "combined_edge_curve": [
+  {
+   "keep": 10000,
+   "dti": 0.11960144192315071,
+   "tp_weight": 2269.809963067377,
+   "fp_weight": 9140.766879387043,
+   "truth_pixels": 20870.0,
+   "emitted_pixels": 10000
+  },
+  {
+   "keep": 20000,
+   "dti": 0.16857370285482418,
+   "tp_weight": 3560.008363875262,
+   "fp_weight": 18552.035459362312,
+   "truth_pixels": 20870.0,
+   "emitted_pixels": 20000
+  },
+  {
+   "keep": 30000,
+   "dti": 0.19401975443757608,
+   "tp_weight": 4497.748347140126,
+   "fp_weight": 27931.79808432464,
+   "truth_pixels": 20870.0,
+   "emitted_pixels": 30000
+  },
+  {
+   "keep": 38000,
+   "dti": 0.2048044663057846,
+   "tp_weight": 5080.068165182601,
+   "fp_weight": 35462.32882632861,
+   "truth_pixels": 20870.0,
+   "emitted_pixels": 38000
+  },
+  {
+   "keep": 44000,
+   "dti": 0.21027558461969761,
+   "tp_weight": 5468.801044490332,
+   "fp_weight": 41090.09658502108,
+   "truth_pixels": 20870.0,
+   "emitted_pixels": 44000
+  },
+  {
+   "keep": 60000,
+   "dti": 0.2154165648329761,
+   "tp_weight": 6285.562639720637,
+   "fp_weight": 56127.643033033106,
+   "truth_pixels": 20870.0,
+   "emitted_pixels": 60000
+  }
+ ],
+ "combined_poisson28": {
+  "dots": 41832,
+  "dti": 0.19452386073679992,
+  "tp_weight": 4969.074491909882,
+  "fp_weight": 39274.96082871911,
+  "truth_pixels": 20870.0,
+  "emitted_pixels": 41832
+ },
+ "combined_edge_best": {
+  "keep": 60000,
+  "dti": 0.2154165648329761,
+  "tp_weight": 6285.562639720637,
+  "fp_weight": 56127.643033033106,
+  "truth_pixels": 20870.0,
+  "emitted_pixels": 60000
+ },
+ "bootstrap_ci95_conditional_fp_fixed": [
+  0.20009347134205627,
+  0.23023970056034643
+ ],
+ "bootstrap_n_hidden_components": 1085,
+ "seconds": 217.6
+}

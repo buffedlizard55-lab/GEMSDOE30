@@ -1,0 +1,224 @@
+{
+ "evaluator": "component-holdout-v2-footprint-20261025",
+ "split_seed": 31,
+ "buffer_px": 3,
+ "hidden_px": 20870,
+ "neg_sampled": 300000,
+ "features": [
+  {
+   "feature": "mag_anom",
+   "auc_hidden": 0.4827,
+   "leakage_flag": false
+  },
+  {
+   "feature": "rtp",
+   "auc_hidden": 0.4956,
+   "leakage_flag": false
+  },
+  {
+   "feature": "tmi_hg",
+   "auc_hidden": 0.54,
+   "leakage_flag": false
+  },
+  {
+   "feature": "geod_2ndinv",
+   "auc_hidden": 0.5775,
+   "leakage_flag": false
+  },
+  {
+   "feature": "iso_grav_anom_slope",
+   "auc_hidden": 0.5172,
+   "leakage_flag": false
+  },
+  {
+   "feature": "tc",
+   "auc_hidden": 0.4343,
+   "leakage_flag": false
+  },
+  {
+   "feature": "geod_shearrate",
+   "auc_hidden": 0.5759,
+   "leakage_flag": false
+  },
+  {
+   "feature": "geod_dilaterate",
+   "auc_hidden": 0.5379,
+   "leakage_flag": false
+  },
+  {
+   "feature": "tmi_vg",
+   "auc_hidden": 0.4806,
+   "leakage_flag": false
+  },
+  {
+   "feature": "deq_n100a15",
+   "auc_hidden": 0.5597,
+   "leakage_flag": false
+  },
+  {
+   "feature": "iso_grav_anom_vg",
+   "auc_hidden": 0.5312,
+   "leakage_flag": false
+  },
+  {
+   "feature": "det_elev",
+   "auc_hidden": 0.4882,
+   "leakage_flag": false
+  },
+  {
+   "feature": "iso_grav_anom",
+   "auc_hidden": 0.4508,
+   "leakage_flag": false
+  },
+  {
+   "feature": "tmi",
+   "auc_hidden": 0.4777,
+   "leakage_flag": false
+  },
+  {
+   "feature": "depth_to_base_surf",
+   "auc_hidden": 0.5197,
+   "leakage_flag": false
+  },
+  {
+   "feature": "ieq_n100a15",
+   "auc_hidden": 0.5741,
+   "leakage_flag": false
+  },
+  {
+   "feature": "cond_surf",
+   "auc_hidden": 0.4606,
+   "leakage_flag": false
+  },
+  {
+   "feature": "iso_grav_anom_hg",
+   "auc_hidden": 0.4975,
+   "leakage_flag": false
+  },
+  {
+   "feature": "det_elev_slope",
+   "auc_hidden": 0.5574,
+   "leakage_flag": false
+  },
+  {
+   "feature": "gradmag_mag_anom",
+   "auc_hidden": 0.5322,
+   "leakage_flag": false
+  },
+  {
+   "feature": "gradmag_rtp",
+   "auc_hidden": 0.5472,
+   "leakage_flag": false
+  },
+  {
+   "feature": "gradmag_det_elev",
+   "auc_hidden": 0.5666,
+   "leakage_flag": false
+  },
+  {
+   "feature": "gradmag_iso_grav_anom",
+   "auc_hidden": 0.5187,
+   "leakage_flag": false
+  },
+  {
+   "feature": "gradmag_tmi",
+   "auc_hidden": 0.5412,
+   "leakage_flag": false
+  },
+  {
+   "feature": "gradmag_depth_to_base_surf",
+   "auc_hidden": 0.5313,
+   "leakage_flag": false
+  },
+  {
+   "feature": "gradmag_cond_surf",
+   "auc_hidden": 0.5076,
+   "leakage_flag": false
+  },
+  {
+   "feature": "abslap_rtp",
+   "auc_hidden": 0.5339,
+   "leakage_flag": false
+  },
+  {
+   "feature": "abslap_det_elev",
+   "auc_hidden": 0.5503,
+   "leakage_flag": false
+  },
+  {
+   "feature": "abslap_iso_grav_anom",
+   "auc_hidden": 0.5119,
+   "leakage_flag": false
+  },
+  {
+   "feature": "localstd_s1_rtp",
+   "auc_hidden": 0.5477,
+   "leakage_flag": false
+  },
+  {
+   "feature": "localstd_s3_rtp",
+   "auc_hidden": 0.548,
+   "leakage_flag": false
+  },
+  {
+   "feature": "localstd_s1_det_elev",
+   "auc_hidden": 0.5632,
+   "leakage_flag": false
+  },
+  {
+   "feature": "localstd_s3_det_elev",
+   "auc_hidden": 0.5704,
+   "leakage_flag": false
+  },
+  {
+   "feature": "localstd_s1_iso_grav_anom",
+   "auc_hidden": 0.52,
+   "leakage_flag": false
+  },
+  {
+   "feature": "localstd_s3_iso_grav_anom",
+   "auc_hidden": 0.5269,
+   "leakage_flag": false
+  },
+  {
+   "feature": "tensor_coherence_rtp",
+   "auc_hidden": 0.5099,
+   "leakage_flag": false
+  },
+  {
+   "feature": "tensor_energy_rtp",
+   "auc_hidden": 0.548,
+   "leakage_flag": false
+  },
+  {
+   "feature": "edge_coinc_mag_grav",
+   "auc_hidden": 0.5532,
+   "leakage_flag": false
+  },
+  {
+   "feature": "edge_coinc_mag_topo",
+   "auc_hidden": 0.5761,
+   "leakage_flag": false
+  },
+  {
+   "feature": "edge_coinc_grav_base",
+   "auc_hidden": 0.5284,
+   "leakage_flag": false
+  },
+  {
+   "feature": "dist_visible_catalogue_px_capped",
+   "auc_hidden": 0.2364,
+   "leakage_flag": false
+  },
+  {
+   "feature": "prox_exp_d10px",
+   "auc_hidden": 0.7636,
+   "leakage_flag": false
+  },
+  {
+   "feature": "log1p_dist_visible_px",
+   "auc_hidden": 0.2364,
+   "leakage_flag": false
+  }
+ ]
+}

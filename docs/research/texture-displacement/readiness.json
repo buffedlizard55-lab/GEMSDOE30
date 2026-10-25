@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "readiness_version": "research-readiness-v1-20261025",
+  "readiness_version": "research-readiness-v2-parallel-evidence-20261025",
   "raster_sha256": "9556e3ddd8ea7658ca510ab02d5b5304ac4c3332c54e7f86df5a24769bd03cdb",
   "gates": [
     {
@@ -31,12 +31,12 @@
     {
       "name": "surface_observed_registry",
       "status": "passed",
-      "detail": "104 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+      "detail": "108 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
     },
     {
       "name": "dots_observed_registry",
       "status": "passed",
-      "detail": "104 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+      "detail": "108 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
     },
     {
       "name": "complete_parallel_registry",
@@ -64,6 +64,20 @@
       "detail": "Named artifact and note of at most 140 characters"
     }
   ],
+  "observed_registry": {
+    "surface": {
+      "registry_entries_compared": 108,
+      "max_spearman": 0.05313281983245325,
+      "max_fraction_within_3px": null,
+      "status": "passed"
+    },
+    "dots": {
+      "registry_entries_compared": 108,
+      "max_spearman": 0.013710147110263877,
+      "max_fraction_within_3px": 0.4049217509639374,
+      "status": "passed"
+    }
+  },
   "download_ok": true,
   "research_verdict": "negative",
   "eligible_for_separate_slot_selector": false,

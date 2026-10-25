@@ -64,13 +64,13 @@ No human-inspector override, competition authentication, uploader or weekly-slot
 | HOLDOUT-DTI | Evaluator `component-holdout-v3-blockstats-20261025`; protocol `buffered-quadrant-whole-components-v1-20261025`, **17px guard**, 60,988 withheld positives, 371 geographic blocks / 2,000 paired bootstrap draws. Candidate **0.072844**, 95% CI **[0.063483, 0.083061]**. |
 | Same-protocol stronger comparator | Core19 HOLDOUT-DTI **0.139821**, 95% CI **[0.124178, 0.155905]**; same evaluator/guard/withheld positives. Candidate difference **−0.066977**, paired 95% CI **[−0.085747, −0.048300]**. Performance gate fails. |
 | Feature canaries | 22 features × four folds; no AUC >0.90. Maximum bidirectional raw/univariate AUC ≈0.643433. Diagnostic only, not proof against upstream leakage. |
-| Observed novelty | Surface max Spearman 0.042623; dots max Spearman 0.013575; maximum directional Euclidean ≤3px overlap 40.4922%. No observed stop threshold crossed in the frozen external snapshot; global coverage incomplete. |
+| Observed novelty | Across 108 observed comparisons: surface max Spearman 0.053133; dots max Spearman 0.013710; maximum directional Euclidean ≤3px overlap 40.4922%. No observed stop threshold crossed in the frozen external snapshot; global coverage incomplete. |
 | Automated decision | Eight gates passed, one failed, three unknown. Ordinary verifier exits 0 only for a consistent research receipt; `--require-promote` returns expected **2**. Submission approved false; slot selected false. |
-| H33 explanation | Exact support reconstruction and source-linked metric mechanism, not organizer-confirmed causation. Owner's 0.2778 remains unverified; 0.4413 was explicitly unreliable mirror drift, not a live leaderboard result. No higher-score forecast. |
+| H33 explanation | Exact support reconstruction and source-linked metric mechanism, not organizer-confirmed causation. Owner's 0.2778 remains unverified; G32’s historical 0.4413 was explicitly unreliable mirror drift, not an organizer file result; newer peer leaderboard claims are separate and not freshly fetched by this lane. No higher-score forecast. |
 | Complete owner/source record | Full task text preserved; 119 distinct named submission claims retained in quarantined CSV, including an unknown/blank result. No fabricated organizer receipts or current leader. Official/free-source review links distinguish freshly read GitHub code from hosts inaccessible here. |
 | User-facing download | Automated browser checks at 1440×1100 and 390×844: overview, guide, working TIFF download/hash, note copy warning, no page errors or horizontal overflow. No upload action. [Browser receipt](browser-check.json). |
 | Static/site regression | Local links and HTML anchors resolve; current artifact identity/note matches both pages; generated HTML and actual-raster PNG reproduce exactly. |
-| Tests | **166 passed, 5 skipped, 7 subtests passed**. Five skips are optional torch training/loss tests; no torch/GPU execution claimed. Two rasterio/Affine pending-deprecation warnings, not failures. |
+| Tests | **180 passed, 5 skipped, 7 subtests passed**. Five skips are optional torch training/loss tests; no torch/GPU execution claimed. Two rasterio/Affine pending-deprecation warnings, not failures. |
 | Experimental restraint | No further fitting, hyperparameter sweep or slot selection after the corrective negative result. Unknown historical-best checkpoint, external lane allocation, complete parallel registry and portal constraints remain blockers. |
 
 ### Commands actually verified
@@ -111,3 +111,20 @@ Concurrent main-branch history must be preserved, and unrelated open PRs are not
    guard and emission protocol; do not equate the core19 recipe control with that best.
 5. Keep the separate slot selector closed until its current portal/rules/entrant evidence
    exists. Neither a valid TIFF nor automated local inspection can invent organizer acceptance.
+
+
+## Concurrent-main integration check
+
+Integrated main through `7f3f4c7` without closing or merging unrelated PRs. Preserved
+#24's worktree-only availability scope, all peer code/results/downloads, and both
+score-ledger streams (136 rows total; current task claims remain unverified).
+Namespaced TDX irregularities (`IR-TDX-*`) to avoid collisions with concurrently
+assigned IDs. The shared max-kernel extraction merged cleanly; all pooled/tile
+regressions and recomputed TDX confidence intervals still pass unchanged.
+
+Four late TIFFs were checked against both saved TDX states, with no refit or dot
+changes. The exact addendum and its source commit are immutable evidence. Readiness
+now covers 108 observed references and blocks if a newly arrived or removed local
+reference lacks matching evidence. Local post-integration suite: **180 passed,
+5 optional torch skips, 7 subtests passed**, two rasterio deprecation warnings.
+Peer `promote` reports remain separate from the selected TDX negative decision.

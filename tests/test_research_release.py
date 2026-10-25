@@ -101,11 +101,16 @@ def isolated_evidence(tmp_path, monkeypatch):
     shutil.copy((ROOT / card["published_tiff"]).with_suffix(".json"), raster.with_suffix(".json"))
     template = tmp_path / "template.tif"; template.write_bytes(b"synthetic pinned-template bytes")
     directory = tmp_path / "docs/research/texture-displacement"
-    for name in ("novelty-surface.json", "novelty-dots.json"):
+    for name in ("novelty-surface.json", "novelty-dots.json", "novelty-parallel-surface.json", "novelty-parallel-dots.json"):
         d = json.loads((directory / name).read_text())
         d["template_sha256"] = hashlib.sha256(template.read_bytes()).hexdigest()
         (directory / name).write_text(json.dumps(d))
     recomputed = json.loads((directory / "results.json").read_text())["summary"]
+    additional = json.loads((directory / "registry-parallel-addendum.json").read_text())
+    for row in additional["rasters"]:
+        dest = tmp_path / row["path"]
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy(ROOT / row["path"], dest)
     (tmp_path / "src/gemsdoe30").mkdir(parents=True)
     shutil.copy(ROOT / "src/gemsdoe30/texture.py", tmp_path / "src/gemsdoe30/texture.py")
     monkeypatch.setattr(verifier, "ROOT", tmp_path)
@@ -189,3 +194,33 @@ def test_generated_site_is_exactly_reproducible_from_reopened_artifact():
         pytest.skip('small pinned template required; CI restores it before tests')
     for path, content in build(template).items():
         assert path.read_bytes() == (content.encode() if isinstance(content, str) else content)
+
+
+def test_new_local_rasters_cannot_be_silently_omitted_from_late_registry(isolated_evidence):
+    verifier, directory, pointer, template = isolated_evidence
+    decision = verifier.verify(pointer, template)
+    assert decision['observed_registry']['dots']['registry_entries_compared'] == 108
+    (directory / 'registry-parallel-addendum.json').unlink()
+    with pytest.raises(ValueError, match='explicit late-registry audit'):
+        verifier.verify(pointer, template)
+
+
+def test_late_reference_deletion_or_tampering_does_not_restore_a_green_old_snapshot(isolated_evidence):
+    verifier, directory, pointer, template = isolated_evidence
+    additional = json.loads((directory / 'registry-parallel-addendum.json').read_text())
+    path = verifier.local_path(additional['rasters'][0]['path'])
+    path.unlink()
+    with pytest.raises(ValueError, match='every new local reference identity'):
+        verifier.verify(pointer, template)
+
+
+def test_failed_write_verification_does_not_change_any_canonical_receipt(isolated_evidence):
+    verifier, directory, pointer, template = isolated_evidence
+    card_path = directory / 'run-card.json'
+    card = json.loads(card_path.read_text()); card['submission_approved'] = True
+    card_path.write_text(json.dumps(card))
+    before_card, before_ready = card_path.read_bytes(), (directory / 'readiness.json').read_bytes()
+    with pytest.raises(ValueError, match='approval/verdict'):
+        verifier.verify(pointer, template, write=True)
+    assert card_path.read_bytes() == before_card
+    assert (directory / 'readiness.json').read_bytes() == before_ready

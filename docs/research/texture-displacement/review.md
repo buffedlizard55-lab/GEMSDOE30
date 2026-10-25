@@ -210,6 +210,19 @@ were tested. No registry values were used to alter or avoid predictions.
 | Candidate dots within Euclidean 3 px of any one reference | 40.4922% | >70% |
 
 [Surface audit](novelty-surface.json) · [Final-dot audit](novelty-dots.json).
+
+**Concurrent-main addendum:** main advanced to `7f3f4c7` with four TIFFs from
+H-CC1, residual-ridge and G30-S19 lanes. Both saved TDX states were checked against
+all four **after they arrived**, with no refit or placement changes. This is additive
+late evidence, not a claim that these references existed before original placement.
+[Exact late registry](registry-parallel-addendum.json), [surface](novelty-parallel-surface.json),
+[dots](novelty-parallel-dots.json). **108 total observed comparisons:** maximum surface
+Spearman **0.053133**, final-dot Spearman **0.013710**, maximum 3px overlap still
+**40.4922%**. No observed duplicate stop fired; complete parallel/original-surface
+coverage is still unknown. The run card preserves the frozen-snapshot summaries
+and separately records the combined evidence; automated readiness uses all 108.
+New or removed local references without a matching addendum fail verification.
+
 Positive support of a dense surface is not treated as placed dots; the meaningful
 pre-placement statistic is rank correlation. Final support receives both tests.
 The file is distinct **against this observed inventory**, not certified globally unique.
@@ -313,8 +326,25 @@ shared tooling and machine-readable decision instead of outsourcing inspection.
 
 [The complete journal](verification.md) separates implementation/execution,
 bug discovery/correction, and the full requirements/reliability check. Latest local
-suite: **166 passed, 5 optional torch tests skipped, 7 subtests passed**; two
+suite: **180 passed, 5 optional torch tests skipped, 7 subtests passed**; two
 rasterio/Affine deprecation warnings. Ordinary exact-artifact verification and
 site staleness checks passed; promotion-required verification correctly exited 2.
 Desktop/mobile automated downloads both matched the corrected raster SHA-256.
 PR, CI and deployment results are reported only once independently observed.
+
+
+### Concurrent lanes and source claims are preserved, not selected
+
+The merge retains all three peer lanes' code, rasters and reports, the earlier
+worktree-readiness follow-up, and all score-ledger rows. G30-S19's `promote` is
+that lane's reported research verdict under a different, spatially interleaved
+v2 protocol and FP-conditioned uncertainty—not a head-to-head win against this
+v3 geographic trial, an organizer score or a slot selected here. H-CC1 and the
+residual-ridge negative findings remain visible too. The landing page and status
+feed link these records without re-adjudicating or hiding them.
+
+Peer sessions also record a newer official-leaderboard read at 0.4413. This lane
+has not independently fetched that host. A newer leaderboard-row claim would not
+authenticate the unrelated historical G32 mirror estimate of the same number or
+bind any owner TIFF to an organizer submission result. No current leader or higher
+hidden-test forecast is asserted by TDX-1.

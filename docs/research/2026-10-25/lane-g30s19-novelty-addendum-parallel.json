@@ -1,0 +1,22 @@
+{
+ "candidateA_residual_ridge": {
+  "spearman_full_footprint": 0.006912781581441324,
+  "candidate_dots": 60000,
+  "reference_dots": 78256,
+  "candidate_fraction_within_3px_of_reference": 0.44825,
+  "identical_inside_footprint": false,
+  "correlation_duplicate": false,
+  "dot_duplicate": false,
+  "undefined": false
+ },
+ "candidateB_hcc1": {
+  "spearman_full_footprint": 0.0035375252069016613,
+  "candidate_dots": 60000,
+  "reference_dots": 32058,
+  "candidate_fraction_within_3px_of_reference": 0.14881666666666668,
+  "identical_inside_footprint": false,
+  "correlation_duplicate": false,
+  "dot_duplicate": false,
+  "undefined": false
+ }
+}

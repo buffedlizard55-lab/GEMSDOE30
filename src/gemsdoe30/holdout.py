@@ -196,6 +196,68 @@ def distance_matched_draw(
     return out
 
 
+def max_kernel_credit(p: Any, *, pixel_m: float = PIXEL_M, radius_m: float = RADIUS_M) -> Any:
+    """Per-pixel ``max_x p(x) k(d)`` credit with the published triangular kernel.
+
+    Single shared implementation used by every holdout statistic, so pooled values and
+    per-tile sufficient statistics can never disagree.
+    """
+    import numpy as np
+
+    p = np.asarray(p, dtype=np.float64)
+    credit = np.zeros(p.shape, dtype=np.float64)
+    reach = int(math.ceil(radius_m / pixel_m))
+    height, width = p.shape
+    for dy in range(-reach, reach + 1):
+        for dx in range(-reach, reach + 1):
+            distance = pixel_m * math.hypot(dy, dx)
+            if distance > radius_m:
+                continue
+            kernel = 1.0 - distance / radius_m
+            y0d, y1d = max(0, -dy), min(height, height - dy)
+            x0d, x1d = max(0, -dx), min(width, width - dx)
+            if y0d >= y1d or x0d >= x1d:
+                continue
+            candidate = p[y0d + dy:y1d + dy, x0d + dx:x1d + dx] * kernel
+            np.maximum(credit[y0d:y1d, x0d:x1d], candidate, out=credit[y0d:y1d, x0d:x1d])
+    return credit
+
+
+def masked_tile_sums(prediction: Any, truth: Any, known: Any, valid: Any, *,
+                     tile_px: int = 32, pixel_m: float = PIXEL_M, radius_m: float = RADIUS_M,
+                     fp_weight: Any = None) -> dict[str, Any]:
+    """Per-tile sufficient statistics (TP credit, FP mass, truth count) for block bootstraps.
+
+    Pooling these tile sums reproduces the pooled full-grid statistics exactly, so a
+    bootstrap over whole spatial tiles can give pooled DTI confidence intervals without
+    recomputing the kernel for each resample.
+    """
+    import numpy as np
+
+    prediction = np.asarray(prediction)
+    truth = np.asarray(truth, dtype=bool)
+    known = np.asarray(known, dtype=bool)
+    valid = np.asarray(valid, dtype=bool)
+    scored = valid & ~known
+    positive = truth & scored
+    p = np.where(scored, prediction.astype(np.float64), 0.0)
+    credit = max_kernel_credit(p, pixel_m=pixel_m, radius_m=radius_m)
+    if fp_weight is None:
+        fp_weight = fp_weight_field(positive, ~scored, pixel_m=pixel_m, radius_m=radius_m)
+    fp_field = p * np.where(scored, np.asarray(fp_weight), 0.0)
+    height, width = p.shape
+    tile_rows = (height + tile_px - 1) // tile_px
+    tile_cols = (width + tile_px - 1) // tile_px
+    tile_id = (np.arange(height)[:, None] // tile_px) * tile_cols + (np.arange(width)[None, :] // tile_px)
+    n_tiles = tile_rows * tile_cols
+    tp = np.bincount(tile_id[positive], weights=credit[positive], minlength=n_tiles)
+    fp = np.bincount(tile_id.ravel(), weights=fp_field.ravel(), minlength=n_tiles)
+    truth_n = np.bincount(tile_id[positive], minlength=n_tiles).astype(np.float64)
+    occupied = np.bincount(tile_id.ravel(), weights=valid.ravel().astype(np.float64), minlength=n_tiles) > 0
+    return {"tp": tp, "fp": fp, "truth": truth_n, "occupied": occupied,
+            "tile_px": tile_px, "tile_rows": tile_rows, "tile_cols": tile_cols}
+
+
 def masked_dti_by_blocks(prediction: Any, truth: Any, known: Any, valid: Any, *,
                          pixel_m: float = PIXEL_M, radius_m: float = RADIUS_M,
                          alpha: float = ALPHA,
@@ -229,21 +291,8 @@ def masked_dti_by_blocks(prediction: Any, truth: Any, known: Any, valid: Any, *,
         raise ValueError("cached FP weights cannot be trusted with out-of-footprint truth")
     positive = truth & scored
     p = np.where(scored, prediction.astype(np.float64), 0.0)
-    credit = np.zeros(p.shape, dtype=np.float64)
-    reach = int(math.ceil(radius_m / pixel_m))
+    credit = max_kernel_credit(p, pixel_m=pixel_m, radius_m=radius_m)
     height, width = p.shape
-    for dy in range(-reach, reach + 1):
-        for dx in range(-reach, reach + 1):
-            distance = pixel_m * math.hypot(dy, dx)
-            if distance > radius_m:
-                continue
-            kernel = 1.0 - distance / radius_m
-            y0d, y1d = max(0, -dy), min(height, height - dy)
-            x0d, x1d = max(0, -dx), min(width, width - dx)
-            if y0d >= y1d or x0d >= x1d:
-                continue
-            candidate = p[y0d + dy:y1d + dy, x0d + dx:x1d + dx] * kernel
-            np.maximum(credit[y0d:y1d, x0d:x1d], candidate, out=credit[y0d:y1d, x0d:x1d])
     if fp_weight is None:
         fp_weight = fp_weight_field(positive, ~scored, pixel_m=pixel_m, radius_m=radius_m)
     fp_weight = np.asarray(fp_weight)

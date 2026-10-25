@@ -4,7 +4,7 @@ from __future__ import annotations
 import math
 from typing import Any
 
-READINESS_VERSION = "research-readiness-v1-20261025"
+READINESS_VERSION = "research-readiness-v2-parallel-evidence-20261025"
 EXPECTED_FEATURES = frozenset({
     "mag_anom", "rtp", "tmi_hg", "geod_2ndinv", "iso_grav_anom_slope", "tc",
     "geod_shearrate", "geod_dilaterate", "tmi_vg", "deq_n100a15", "iso_grav_anom_vg",
@@ -83,6 +83,7 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
         for fold in folds)
     gate("count_matched_construction", "passed" if counts_valid else "failed",
          "All fixed arms must realize the same predeclared active-domain budget in every fold")
+    observed = {}
     for stage, report in (("surface", surface_audit), ("dots", dots_audit)):
         rows = report.get("comparisons", [])
         duplicate = any(row.get("identical_inside_footprint")
@@ -96,6 +97,14 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
         status = "failed" if duplicate else "passed" if known_clear else "unknown"
         gate(f"{stage}_observed_registry", status,
              f"{len(rows)} recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop")
+        observed[stage] = {
+            "registry_entries_compared": len(rows),
+            "max_spearman": max((r["spearman_full_footprint"] for r in rows
+                                  if number(r.get("spearman_full_footprint"))), default=None),
+            "max_fraction_within_3px": max((r["candidate_fraction_within_3px_of_reference"] for r in rows
+                                            if number(r.get("candidate_fraction_within_3px_of_reference"))), default=None),
+            "status": status,
+        }
     complete = registry.get("complete") is True and not registry.get("missing_evidence")
     gate("complete_parallel_registry", "passed" if complete else "unknown",
          "Nine-site public snapshots cannot attest all parallel rasters or missing original surfaces")
@@ -119,6 +128,7 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
     promoted = all(row["status"] == "passed" for row in gates)
     return {"schema_version": 1, "readiness_version": READINESS_VERSION,
             "raster_sha256": card.get("raster_sha256"), "gates": gates,
+            "observed_registry": observed,
             "download_ok": bool(format_passed and hash_matches and named),
             "research_verdict": "promote" if promoted else "negative",
             "eligible_for_separate_slot_selector": promoted,

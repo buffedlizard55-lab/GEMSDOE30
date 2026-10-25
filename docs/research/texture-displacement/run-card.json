@@ -141,5 +141,25 @@
   ],
   "preregistration_sha256": "5d9e71a6a4cbb0f4aba2d15ab18173e0bca722287c391f718f205411fc1bab57",
   "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
-  "created_utc": "2026-10-25T21:29:01+00:00"
+  "created_utc": "2026-10-25T21:29:01+00:00",
+  "additional_novelty_evidence": {
+    "registry": "docs/research/texture-displacement/registry-parallel-addendum.json",
+    "surface_receipt": "docs/research/texture-displacement/novelty-parallel-surface.json",
+    "dots_receipt": "docs/research/texture-displacement/novelty-parallel-dots.json",
+    "timing": "Late-arriving references; checked both saved states without refitting or replacing dots",
+    "combined_observed_registry": {
+      "surface": {
+        "registry_entries_compared": 108,
+        "max_spearman": 0.05313281983245325,
+        "max_fraction_within_3px": null,
+        "status": "passed"
+      },
+      "dots": {
+        "registry_entries_compared": 108,
+        "max_spearman": 0.013710147110263877,
+        "max_fraction_within_3px": 0.4049217509639374,
+        "status": "passed"
+      }
+    }
+  }
 }

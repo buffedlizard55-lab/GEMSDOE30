@@ -286,6 +286,7 @@ def main() -> int:
     prepared_local_manifest = load_json(ROOT / "data" / "processed" / "manifest.json") or {}
     data_placement = {
         "directory": str(data_dir.relative_to(ROOT)),
+        "availability_scope": "This describes files present in the build worktree at generated_utc; data/raw and data/processed are Git-ignored and are not distributed by GitHub Pages.",
         "required_files_present": placement_ok,
         "sha256_verified_against_pins": hashes_ok,
         "files": placement,
@@ -334,6 +335,17 @@ def main() -> int:
             "decision": current_release.get("display_status") if current_release else "blocked: current inspection unavailable",
         }
     promoted = [name for name, gate in gates.items() if gate.get("promoted")]
+    peer_reports = []
+    for name, filename in (("G30-S19 habitat + EDGE", "lane-g30s19-run-card.json"),
+                           ("H-CC1 contact coincidence", "h-cc1-run-card.json"),
+                           ("Residual-ridge gate", "run-card-residual-gate.json")):
+        path = research / "2026-10-25" / filename
+        payload = load_json(path)
+        if payload:
+            peer_reports.append({"lane": name, "run_card": str(path.relative_to(ROOT)),
+                                 "recorded_research_verdict": payload.get("verdict"),
+                                 "reassessed_by_current_lane": False, "slot_selected_here": False,
+                                 "comparison_warning": "Different protocol; not ranked against the current artifact or treated as organizer confirmation"})
     status = {
         "schema_version": 3,
         "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
@@ -390,6 +402,9 @@ def main() -> int:
         "historical_promotion_warning": "Prior results require same-protocol re-evaluation after the shared footprint correction.",
         "promotion_gates": gates,
         "any_candidate_promoted": bool(promoted),
+        "promotion_scope": "Automatically adjudicated current artifact and listed legacy gates only; peer reports are separate, not re-adjudicated or selected",
+        "peer_lane_reports": peer_reports,
+        "any_peer_lane_reports_promotion": any(r["recorded_research_verdict"] == "promote" for r in peer_reports),
         "promoted_gates": promoted,
         "submission_slot_status": "none approved or used by this repository",
         "score_evidence": {
