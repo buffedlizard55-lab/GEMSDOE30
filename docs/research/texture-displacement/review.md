@@ -326,7 +326,7 @@ shared tooling and machine-readable decision instead of outsourcing inspection.
 
 [The complete journal](verification.md) separates implementation/execution,
 bug discovery/correction, and the full requirements/reliability check. Latest local
-suite: **180 passed, 5 optional torch tests skipped, 7 subtests passed**; two
+suite: **186 passed, 5 optional torch tests skipped, 7 subtests passed**; two
 rasterio/Affine deprecation warnings. Ordinary exact-artifact verification and
 site staleness checks passed; promotion-required verification correctly exited 2.
 Desktop/mobile automated downloads both matched the corrected raster SHA-256.

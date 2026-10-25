@@ -70,7 +70,7 @@ No human-inspector override, competition authentication, uploader or weekly-slot
 | Complete owner/source record | Full task text preserved; 119 distinct named submission claims retained in quarantined CSV, including an unknown/blank result. No fabricated organizer receipts or current leader. Official/free-source review links distinguish freshly read GitHub code from hosts inaccessible here. |
 | User-facing download | Automated browser checks at 1440×1100 and 390×844: overview, guide, working TIFF download/hash, note copy warning, no page errors or horizontal overflow. No upload action. [Browser receipt](browser-check.json). |
 | Static/site regression | Local links and HTML anchors resolve; current artifact identity/note matches both pages; generated HTML and actual-raster PNG reproduce exactly. |
-| Tests | **180 passed, 5 skipped, 7 subtests passed**. Five skips are optional torch training/loss tests; no torch/GPU execution claimed. Two rasterio/Affine pending-deprecation warnings, not failures. |
+| Tests | **186 passed, 5 skipped, 7 subtests passed**. Five skips are optional torch training/loss tests; no torch/GPU execution claimed. Two rasterio/Affine pending-deprecation warnings, not failures. |
 | Experimental restraint | No further fitting, hyperparameter sweep or slot selection after the corrective negative result. Unknown historical-best checkpoint, external lane allocation, complete parallel registry and portal constraints remain blockers. |
 
 ### Commands actually verified
@@ -126,7 +126,7 @@ regressions and recomputed TDX confidence intervals still pass unchanged.
 Four late TIFFs were checked against both saved TDX states, with no refit or dot
 changes. The exact addendum and its source commit are immutable evidence. Readiness
 now covers 108 observed references and blocks if a newly arrived or removed local
-reference lacks matching evidence. Local post-integration suite: **180 passed,
+reference lacks matching evidence. Local post-integration suite: **186 passed,
 5 optional torch skips, 7 subtests passed**, two rasterio deprecation warnings.
 Peer `promote` reports remain separate from the selected TDX negative decision.
 
@@ -135,3 +135,29 @@ Publication preflight caught a generated landing-page change left unstaged while
 resolving the concurrent merge. Included the generated root HTML in the follow-up
 publication commit and repeated the exact-site check; no model or raster changed.
 A clean-worktree assertion is required before the final push/merge verification.
+
+
+## Live CI defect, diagnosed and fixed without weakening checks
+
+PR checks initially failed **before artifact verification**, in the runner's
+`gh api` binary transfer with **`transform: short source buffer`**. A fresh local
+transfer matched the source pin. Added bounded, escaped check annotations so that
+actual failures—not guessed diagnoses—are readable through the GitHub API.
+
+The central `gemsdoe30.github_data` transport now handles that **specific** Go
+transform error by removing partial bytes and streaming the exact same immutable
+GitHub API URL through Python. Source loaders retain byte-count, Git-blob and SHA-256
+requirements. Authentication/HTTP failures are not hidden by fallback, API credentials
+never follow a cross-host redirect, and multipart order is preserved. Core mirror,
+priority-reference and expanded-registry restorers all reuse this one fix.
+
+The real Python HTTP transfer matched the 1,599,597-byte template and SHA-256
+`2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc`.
+CI run [40237841987](https://github.com/buffedlizard55-lab/GEMSDOE30/actions/runs/40237841987)
+at `d3e1cdf995da30b6c949104d48e6a92df1d57401` **passed** after this fix.
+The final publication commit is separately rechecked before merge; that run's state
+is recorded by the PR timeline and final response, not assumed here.
+
+Final local suite: **186 passed, five optional torch skips, seven subtests passed**.
+It includes four binary-stream/fallback guards and two CI-exit/annotation guards.
+No raster, fit, holdout value or slot decision changed during CI repair.

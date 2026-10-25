@@ -27,7 +27,7 @@ results and automated checks rather than outsourcing inspection.
 
 - [Final JSON run card](docs/research/texture-displacement/run-card.json) · [machine-adjudicated gates](docs/research/texture-displacement/readiness.json)
 - [Scientific review / H33 explanation / source links](docs/research/texture-displacement/review.md)
-- [Three-pass verification journal](docs/research/texture-displacement/verification.md) — **180 passed, 5 optional torch skips**, 7 subtests; desktop/mobile download verified
+- [Three-pass verification journal](docs/research/texture-displacement/verification.md) — **186 passed, 5 optional torch skips**, 7 subtests; desktop/mobile download verified
 - [Full results, canaries and pooled-bootstrap sufficient statistics](docs/research/texture-displacement/results.json)
 - [Expanded immutable registry](docs/research/texture-displacement/registry.json) · [exact format validation](docs/research/texture-displacement/validation.json)
 - [Current evidence pointer](docs/current-run.json) · [generated status feed](docs/status.json)

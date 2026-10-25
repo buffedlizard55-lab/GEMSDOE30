@@ -47,7 +47,7 @@ The [current three-pass journal](texture-displacement/verification.md) documents
 implementation, analytic guard-bound bug correction and full requirements review.
 A new corrected TIFF was produced by the fixed six-feature physical-data model;
 **NEGATIVE, DO NOT SUBMIT**. Automated exact-artifact and Pages checks passed;
-**180 tests passed, 5 optional torch tests skipped, 7 subtests passed**. Desktop/mobile
+**186 tests passed, 5 optional torch tests skipped, 7 subtests passed**. Desktop/mobile
 downloads matched the actual SHA-256; no slot selected or used. Full current owner
 prompt is retained in README, and all supplied named score claims are quarantined
 as unverified. Neither the local negative result nor a format pass is an organizer score.

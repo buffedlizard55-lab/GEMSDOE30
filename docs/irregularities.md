@@ -216,3 +216,9 @@ for research only. Earlier claims above retain their date/evidence limitations.
 
 Automated checks, numerical results and the three-pass journal:
 [TDX-1 verification](research/texture-displacement/verification.md).
+
+
+| ID | Severity | Observation | Resolution / boundary |
+|---|---|---|---|
+| IR-TDX-10 | High | GitHub runner `gh api` returned `transform: short source buffer` while streaming the exact pinned binary template; artifact verification never started. Local fresh bytes matched the pin. | Added API-readable failure annotations; one shared byte-safe fallback for this exact error. Rewinds partial bytes, retains size/blob/SHA gates, rejects cross-host credential redirects, never masks HTTP/auth failure. Real Python transfer and CI run 40237841987 passed. |
+| IR-TDX-11 | Medium | A regenerated root landing change remained unstaged during conflict resolution, so worktree checks alone were not sufficient publication evidence. | Generated HTML included in a follow-up commit; exact-site check rerun, clean-tree assertion before final push, actual PR CI required before merge. |

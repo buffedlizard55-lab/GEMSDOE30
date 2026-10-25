@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-25T21:47:12Z",
+  "generated_utc": "2026-10-25T21:59:20Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -1024,7 +1024,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "185 tests collected in 0.71s",
+      "pytest_collect": "191 tests collected in 0.54s",
       "exit_code": 0
     },
     "score_gain_claimed": false

@@ -15,15 +15,20 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from gemsdoe30.github_data import stream_raw
 
 
 def api(endpoint: str, *, raw: bool = False) -> bytes:
     command = ["gh", "api", endpoint]
     if raw:
-        command += ["-H", "Accept: application/vnd.github.raw+json"]
+        with tempfile.TemporaryFile() as stream:
+            stream_raw(endpoint, stream)
+            stream.seek(0)
+            return stream.read()
     return subprocess.check_output(command, timeout=120)
 
 
