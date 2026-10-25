@@ -1,26 +1,32 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-19T19:23:01Z",
+  "generated_utc": "2026-10-25T20:17:33Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
     "directory": "data/raw",
-    "required_files_present": false,
+    "required_files_present": true,
     "sha256_verified_against_pins": true,
     "files": [
       {
         "dest": "training_features.tif",
         "path": "data/raw/training_features.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-        "expected_bytes": 418912844
+        "expected_bytes": 418912844,
+        "actual_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "actual_bytes": 418912844,
+        "sha256_matches_pin": true
       },
       {
         "dest": "labels.tif",
         "path": "data/raw/labels.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "expected_bytes": 425830
+        "expected_bytes": 425830,
+        "actual_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+        "actual_bytes": 425830,
+        "sha256_matches_pin": true
       },
       {
         "dest": "sample_submission.tif",
@@ -34,15 +40,17 @@
       }
     ],
     "prepared_dataset": {
-      "dataset_signature": null,
-      "matches_recorded_pin": null,
-      "positive_label_pixels": null,
-      "template_valid_pixels": null
+      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+      "matches_recorded_pin": true,
+      "positive_label_pixels": 60988,
+      "template_valid_pixels": 5167373
     },
     "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
   },
   "competition_data": {
     "owner_mirror_files_present": [
+      "training_features.tif",
+      "labels.tif",
       "sample_submission.tif"
     ],
     "organizer_authenticated": false,
@@ -79,7 +87,7 @@
       "all_cells_finite_and_in_range": null,
       "nan_cells_anywhere": null,
       "range_error_immune": null,
-      "site_linked": true,
+      "site_linked": false,
       "submission_recommendation": false,
       "run_name": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13",
       "note": "4-fold OOF GBM; adaptive emission missed its proxy gate; unpromoted and unscored",
@@ -97,7 +105,7 @@
       "all_cells_finite_and_in_range": null,
       "nan_cells_anywhere": null,
       "range_error_immune": null,
-      "site_linked": null,
+      "site_linked": false,
       "submission_recommendation": false,
       "run_name": "GEMSDOE30_oof-gbm-adaptive-r5-zeros_20261003T172937560000Z",
       "note": "Archived zero-outside diagnostic; not published-format compliant or upload-recommended",
@@ -115,7 +123,7 @@
       "all_cells_finite_and_in_range": null,
       "nan_cells_anywhere": null,
       "range_error_immune": null,
-      "site_linked": true,
+      "site_linked": false,
       "submission_recommendation": false,
       "run_name": "GEMSDOE25_dotted-h19-5-d2-8_20261002_e56ea318af89",
       "note": "External D2.8 research reference; 0.2600 score attribution unverified; owner page says unscored/not slot-approved",
@@ -133,7 +141,7 @@
       "all_cells_finite_and_in_range": null,
       "nan_cells_anywhere": null,
       "range_error_immune": null,
-      "site_linked": null,
+      "site_linked": false,
       "submission_recommendation": false,
       "run_name": "gems25-dotted-h19-5-d2-8-zeros_20261003T172939460962Z",
       "note": "Archived zero-outside diagnostic; not published-format compliant or upload-recommended",
@@ -151,7 +159,7 @@
       "all_cells_finite_and_in_range": true,
       "nan_cells_anywhere": 0,
       "range_error_immune": true,
-      "site_linked": true,
+      "site_linked": false,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-d15-poisson200m-offcat-60069-20261003T233210Z-68d0e2e4",
       "note": "GEMSDOE30 d1.5 Poisson-200m off-catalogue 60069 dots; all-finite 0-1; range-error hardened",
@@ -169,7 +177,7 @@
       "all_cells_finite_and_in_range": false,
       "nan_cells_anywhere": 7111787,
       "range_error_immune": false,
-      "site_linked": true,
+      "site_linked": false,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca-nanoutside",
       "note": "GEMSDOE30 d2.8 Poisson-300m off-catalogue 44090 dots; NaN outside per published spec",
@@ -187,7 +195,7 @@
       "all_cells_finite_and_in_range": true,
       "nan_cells_anywhere": 0,
       "range_error_immune": true,
-      "site_linked": true,
+      "site_linked": false,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca",
       "note": "GEMSDOE30 d2.8 Poisson-300m off-catalogue 44090 dots; all-finite 0-1; range-error hardened",
@@ -205,7 +213,7 @@
       "all_cells_finite_and_in_range": true,
       "nan_cells_anywhere": 0,
       "range_error_immune": true,
-      "site_linked": true,
+      "site_linked": false,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-edge-hybrid-80k-02845bd4-20261003T234340Z-allfinite",
       "note": "GEMSDOE30 EDGE hybrid 80000 dots off-catalogue; all-finite 0-1; range-error hardened",
@@ -223,7 +231,7 @@
       "all_cells_finite_and_in_range": null,
       "nan_cells_anywhere": null,
       "range_error_immune": null,
-      "site_linked": true,
+      "site_linked": false,
       "submission_recommendation": false,
       "run_name": "edge-emitter-session30",
       "note": "GEMSDOE30 EDGE emitter, hybrid belief field, 80,000 dots; unpromoted research artifact (see docs/research/emitter-opt-holdout.md)",
@@ -241,7 +249,7 @@
       "all_cells_finite_and_in_range": null,
       "nan_cells_anywhere": null,
       "range_error_immune": null,
-      "site_linked": null,
+      "site_linked": false,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-sgmc-hedge-d10-85k_20261003T182842779739Z",
       "note": "Archived zero-outside diagnostic; not published-format compliant or upload-recommended",
@@ -259,7 +267,7 @@
       "all_cells_finite_and_in_range": null,
       "nan_cells_anywhere": null,
       "range_error_immune": null,
-      "site_linked": true,
+      "site_linked": false,
       "submission_recommendation": false,
       "run_name": "GEMSDOE30_sgmc-hedge-t04-s4-d10_20261003T174409650983Z_ac08b41e",
       "note": "SGMC-hedge research raster; SGMC holdout is tautological; not promoted or scored",
@@ -269,13 +277,13 @@
   "submission_format": {
     "published_outside_convention": "null/NaN outside the data bounds; finite probabilities in [0, 1] inside",
     "official_problem_description": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-    "builder_default": "zeros outside (range-error immune); --outside nan available for the literal spec reading",
-    "zero_outside": "primary published convention for this project since 2026-10-03. Legal on two verified grounds: the organizer's own reference solution writes its example with no nodata tag and finite values everywhere, and the owner ledger records r7-nms3-dem10-scarp_0c9199f14e62 = 0.1294 beside ..._allfinite = 0.1294, i.e. identical scores for both encodings. See IR-30-045.",
+    "builder_default": "NaN outside per published format; scripts/build_submission.py",
+    "zero_outside": "Not approved as a submission convention. Whole-array finite zero-outside files are nonstandard diagnostics unless the organizer clarifies otherwise.",
     "historical_range_error_file_identified": false,
-    "historical_range_error_cause_diagnosed": true,
-    "historical_range_error_cause": "Two mechanisms measured on the pin-matched mirrors (IR-30-044): training_features.tif declares nodata as the float32 sentinel -3.4028234663852886e+38 and carries it on 3,061 pixels inside the 5,167,373-pixel scoring footprint per band (band 6 tc: 3,073; 58,171 band-pixels total); and band 1 calls only 5,165,852 pixels valid against the template's 5,167,373, so a feature-derived footprint mask strands exactly 3,061 scored pixels as NaN. Either alone produces the portal's range rejection. The specific trigger in the one historical upload is still inferred, not proven: that file was never obtained.",
+    "historical_range_error_cause_diagnosed": false,
+    "historical_range_error_cause": "The exact uploaded TIFF and private portal validation path are unknown. Local audits measured nodata sentinels and feature/template mask differences in owner-mirror inputs, which are plausible failure modes but do not prove the trigger in the historical upload.",
     "range_error_root_cause_record": "docs/research/range-error-root-cause-2026-10-03.md",
-    "hardened_builder": "scripts/build_portal_submission.py",
+    "hardened_builder": "scripts/build_submission.py",
     "known_faults_masked_from_scoring": {
       "value": true,
       "source": "https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516",
@@ -388,6 +396,18 @@
       "promoted": false,
       "decision": "H-31-02r beats its step_max ablation (+22.4% / +20.2%) and is spatially positive on the SGMC frame (+0.03670, 4/4), but catalogue spatial checks are negative (-0.00073 / -0.00261, 2/4) and the SGMC top-decile calibration-ratio gate passes 2/4; H-32-05b falsified; H-31-02r not promoted"
     },
+    "h34_01_concealment_screen": {
+      "evidence": "docs/research/candidate-screens/concealment-screen.json",
+      "promoted": false,
+      "holdout_dti": 0.006789451497756288,
+      "component_bootstrap_95_ci": [
+        0.0029767829998901254,
+        0.011870632239816666
+      ],
+      "withheld_positive_pixels": 20870,
+      "leakage_canary_status": "pass",
+      "decision": "negative: concealment prior below distance-profile-matched random; no TIFF generated"
+    },
     "verification_checks_h31_02r": {
       "evidence": "docs/research/verification-checks-results.json",
       "report": "docs/research/verification-checks-results.md",
@@ -406,8 +426,521 @@
   },
   "any_candidate_promoted": false,
   "promoted_gates": [],
+  "registry_uniqueness_audit": {
+    "projects": [
+      "GEMSDOE24",
+      "GEMSDOE25",
+      "GEMSDOE27",
+      "GEMSDOE28",
+      "GEMSDOE30",
+      "GEMSDOE31",
+      "GEMSDOE32",
+      "GEMSDOE33",
+      "GEMSDOE36"
+    ],
+    "binary_rasters_available_for_full_comparison": false,
+    "correlation_threshold": 0.9,
+    "nearby_dot_threshold_fraction": 0.7,
+    "nearby_dot_radius_pixels": 3,
+    "status": "not-passed",
+    "blocker": "GitHub API rate-limit HTTP 403 blocked complete sibling registry TIFF retrieval; no full correlation or 3-pixel overlap test",
+    "evidence": "docs/research/session-review-2026-10-25.md"
+  },
+  "submission_readiness": {
+    "status": "not-ready",
+    "current_candidate_approved": false,
+    "reason": "latest H-34-01 screen is negative; registry-raster duplicate gate incomplete; no candidate TIFF generated",
+    "public_site_must_not_label_historical_downloads_as_submission-ready": true,
+    "evidence": "docs/research/session-review-2026-10-25.md"
+  },
   "submission_slot_status": "none approved or used by this repository",
   "score_evidence": {
+    "user_reported_claims_from_ledger": [
+      {
+        "site": "GEMSDOE",
+        "submission": "gems-submission-20260925T001403Z-7f00890a",
+        "score": "0.1563",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "6GEMSDOE",
+        "submission": "gems6_hgb88-topk03_33cec71ff0",
+        "score": "0.0286",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/6GEMSDOE/",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "GEMSDOE3",
+        "submission": "pindrop-v4-nodes-20260925T152420Z-f347b70daa",
+        "score": "0.1193",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE3/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "GEMSDOE3",
+        "submission": "pindrop-v4-discovery-20260925T152423Z-37f9d5b855",
+        "score": "0.0830",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE3/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "GEMSDOE3",
+        "submission": "pindrop-v4-ridge-20260925T152422Z-4e03fc9705",
+        "score": "0.1152",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE3/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "GEMSDOE2",
+        "submission": "gemsdoe2-dual-family-union-20260925T160406Z-f68e590f",
+        "score": "0.1560",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE2/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "GEMSDOE4",
+        "submission": "gems-submission-20260926T163915Z-237f0063",
+        "score": "0.0343",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE4/",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "5GEMSDOE",
+        "submission": "gems-submission-20260926T175114Z-7f00890a",
+        "score": "0.1563",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/5GEMSDOE/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "7GEMSDOE",
+        "submission": "lidarscarp-ridge-top2pct-36c3a3f341c8",
+        "score": "0.1461",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/7GEMSDOE/",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "8GEMSDOE",
+        "submission": "Hedge-v2_submission",
+        "score": "0.1563",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/8GEMSDOE/",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "GEMSDOE9",
+        "submission": "2314b599",
+        "score": "0.0107",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE9/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "11GEMSDOE",
+        "submission": "gems-structural-area06-v1",
+        "score": "0.0202",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/11GEMSDOE/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "12GEMSDOE",
+        "submission": "r7-nms3-dem10-scarp_0c9199f14e62",
+        "score": "0.1294",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/12GEMSDOE/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "12GEMSDOE",
+        "submission": "r7-nms3-dem10-scarp_0c9199f14e62_allfinite",
+        "score": "0.1294",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/12GEMSDOE/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "15GEMSDOE",
+        "submission": "gems-tso1-20260929T005627Z-conj_alteration_mag",
+        "score": "0.0782",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/15GEMSDOE/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "14GEMSDOE",
+        "submission": "GEMS_r5-geom-horse-ensemble_20260929T154852Z_ccbe1de0_site_e96e942f",
+        "score": "0.0020",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/14GEMSDOE/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "17GEMSDOE",
+        "submission": "17GEMSDOE_F-ensemble-2pct_20260930T050626Z",
+        "score": "0.0187",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/17GEMSDOE/",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "18GEMSDOE",
+        "submission": "H19-C_20260930T212401Z_c11e495e",
+        "score": "0.0297",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/18GEMSDOE/",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "19GEMSDOE",
+        "submission": "h19-4-multiline-corroborated-openness-thermal-pop-20260930-691e4dfa-nan",
+        "score": "0.1894",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/19GEMSDOE/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "19GEMSDOE",
+        "submission": "h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan",
+        "score": "0.1922",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/19GEMSDOE/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "GEMSDOE10",
+        "submission": "h16-continuation-20260927T065521077735Z-3431b83c7c",
+        "score": "0.0461",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE10/",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "GEMSDOE10",
+        "submission": "h20-dem10-scarp-thin-20260927T155223039488Z-ffc91a1686",
+        "score": "0.0921",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE10/",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "GEMSDOE10",
+        "submission": "H25-ctx-ridge-20260927T232947704150Z-6452ae1d00",
+        "score": "0.1280",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE10/",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "GEMSDOE10",
+        "submission": "h28-dotted-ridge-20260928T020256236880Z-6452ae1d00",
+        "score": "0.1839",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE10/",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "13GEMSDOE",
+        "submission": "20261001_r13-lattice-s5_v2_nan-outside",
+        "score": "0.0904",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/13GEMSDOE/",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "16GEMSDOE",
+        "submission": "h16-1-topo-geophys-baseline-ridges-20260930-df20f65e-nan",
+        "score": "0.1855",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/16GEMSDOE/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "16GEMSDOE",
+        "submission": "h18-3a-topo-geophys-x-complexity-prior-20260930-c502dfab-nan",
+        "score": "0.0976",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/16GEMSDOE/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "16GEMSDOE",
+        "submission": "h18-4-usgs-geologic-map-faults-gap-20260930-aef8f42c-nan",
+        "score": "0.0360",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/16GEMSDOE/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "21GEMSDOE",
+        "submission": "h19-4-reference-20260930-691e4dfa",
+        "score": "0.1894",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE21/",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "20GEMSDOE",
+        "submission": "h20-1-sarnnpu-powerlaw-pi0363-tilt-wingcrack-20260930-be0e8f6b-nan",
+        "score": "0.1890",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/20GEMSDOE/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "20GEMSDOE",
+        "submission": "h20-5-continuous-pu-proxy-unverified-20260930-824ce73a-nan",
+        "score": "0.1859",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/20GEMSDOE/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "GEMSDOE22",
+        "submission": "h23-a-dti-optimal-emission-6pct-20261002-e2ec4b49-nan",
+        "score": "0.1002",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE22/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "GEMSDOE22",
+        "submission": "h23-b-dti-optimal-emission-10pct-20261002-86176698-nan",
+        "score": "0.0748",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE22/docs/index.html",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "GEMSDOE23",
+        "submission": "h30-arrangement-matched-habitat-20261002-0d4e02e8-nan",
+        "score": "0.1352",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE23/",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "GEMSDOE24",
+        "submission": "h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan",
+        "score": "0.2477",
+        "provenance": "user brief; owner page also reports anchor",
+        "status": "attribution not authenticated; owner-reported",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE24/",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "GEMSDOE25",
+        "submission": "dotted-h19-5-d2-8-20261002-e56ea318af89-nan",
+        "score": "0.2600",
+        "provenance": "user brief",
+        "status": "user-reported; conflicting owner page says unscored/not slot-approved",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE25/",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "GEMSDOE26",
+        "submission": "dilcond-oof-v1-20261003-47629f496133-nan",
+        "score": "0.1223",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE26/",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "GEMSDOE27",
+        "submission": "topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan",
+        "score": "0.2449",
+        "provenance": "user brief",
+        "status": "user-reported; not independently authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE27/",
+        "notes": "",
+        "evidence_class": "user-report",
+        "as_of_utc": ""
+      },
+      {
+        "site": "GEMSDOE28",
+        "submission": "h36-1-rung30-blind-r1-20261003-b531dae0a36f",
+        "score": "0.2710",
+        "provenance": "user prompt 2026-10-25",
+        "status": "user-reported; exact file/score receipt not authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE28/",
+        "notes": "Public owner records describe local/unscored artifacts; no organizer receipt inspected",
+        "evidence_class": "user-report",
+        "as_of_utc": "2026-10-25"
+      },
+      {
+        "site": "GEMSDOE30",
+        "submission": "d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca",
+        "score": "0.2600",
+        "provenance": "user prompt 2026-10-25",
+        "status": "user-reported; attribution unresolved",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE30/",
+        "notes": "Historical local bytes audited; exact score-to-file receipt absent; not a new submission",
+        "evidence_class": "user-report",
+        "as_of_utc": "2026-10-25"
+      },
+      {
+        "site": "GEMSDOE31",
+        "submission": "h27-4-solo-d28-20261004-8acb75e1-nan",
+        "score": "0.2708",
+        "provenance": "user prompt 2026-10-25",
+        "status": "user-reported; public source does not authenticate the claim",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE31/docs/",
+        "notes": "Sibling materials say no score for this artifact; no organizer receipt inspected",
+        "evidence_class": "user-report",
+        "as_of_utc": "2026-10-25"
+      },
+      {
+        "site": "GEMSDOE32",
+        "submission": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
+        "score": "0.2778",
+        "provenance": "user prompt 2026-10-25",
+        "status": "user-reported; conflicts with owner build record status UNSCORED",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html",
+        "notes": "Inspected owner build record reports 0.2747 as a model projection, not a score; no organizer receipt observed",
+        "evidence_class": "user-report",
+        "as_of_utc": "2026-10-25"
+      },
+      {
+        "site": "GEMSDOE33",
+        "submission": "h33d-analog-tip-stepover-r30-20261004-cb490425926e",
+        "score": "0.2632",
+        "provenance": "user prompt 2026-10-25",
+        "status": "user-reported; exact file/score receipt not authenticated",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE33/",
+        "notes": "Binary TIFF not retrieved in this review; do not infer organizer score",
+        "evidence_class": "user-report",
+        "as_of_utc": "2026-10-25"
+      },
+      {
+        "site": "GEMSDOE36",
+        "submission": "anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6",
+        "score": "0.2750",
+        "provenance": "user prompt 2026-10-25",
+        "status": "user-reported; not organizer-confirmed here",
+        "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE36/docs/",
+        "notes": "Owner build contains local holdout/projection values; user-listed value is not authenticated as an organizer score",
+        "evidence_class": "user-report",
+        "as_of_utc": "2026-10-25"
+      }
+    ],
     "official_leaderboard_snapshots_from_ledger": [
       {
         "site": "DrivenData official leaderboard",
@@ -576,12 +1109,14 @@
       }
     ],
     "note": "DrivenData Terms of Use prohibit automated monitoring; snapshots are dated manual reads only",
-    "d2_8_attribution": "owner-reported 0.2600 unverified; GEMSDOE25 page calls the file unscored"
+    "d2_8_attribution": "user/owner-reported 0.2600 unverified; GEMSDOE25 page calls the file unscored",
+    "gemsdoe32_h33_2_b2": "user-reported 0.2778; inspected GEMSDOE32 build record labels file UNSCORED and reports 0.2747 as model projection; no organizer receipt observed",
+    "current_leader_claim": "not refreshed; user supplied conflicting 0.3195 and 0.4413; local official snapshot is dated 2026-10-03"
   },
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "119 tests collected in 0.56s",
+      "pytest_collect": "121 tests collected in 0.74s",
       "exit_code": 0
     },
     "score_gain_claimed": false
