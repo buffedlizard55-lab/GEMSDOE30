@@ -1,27 +1,33 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-25T20:59:42Z",
+  "generated_utc": "2026-10-25T21:04:50Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
     "directory": "data/raw",
     "availability_scope": "This describes files present in the build worktree at generated_utc; data/raw and data/processed are Git-ignored and are not distributed by GitHub Pages.",
-    "required_files_present": false,
-    "sha256_verified_against_pins": false,
+    "required_files_present": true,
+    "sha256_verified_against_pins": true,
     "files": [
       {
         "dest": "training_features.tif",
         "path": "data/raw/training_features.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-        "expected_bytes": 418912844
+        "expected_bytes": 418912844,
+        "actual_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "actual_bytes": 418912844,
+        "sha256_matches_pin": true
       },
       {
         "dest": "labels.tif",
         "path": "data/raw/labels.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "expected_bytes": 425830
+        "expected_bytes": 425830,
+        "actual_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+        "actual_bytes": 425830,
+        "sha256_matches_pin": true
       },
       {
         "dest": "sample_submission.tif",
@@ -35,15 +41,17 @@
       }
     ],
     "prepared_dataset": {
-      "dataset_signature": null,
-      "matches_recorded_pin": null,
-      "positive_label_pixels": null,
-      "template_valid_pixels": null
+      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+      "matches_recorded_pin": true,
+      "positive_label_pixels": 60988,
+      "template_valid_pixels": 5167373
     },
     "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
   },
   "competition_data": {
     "owner_mirror_files_present": [
+      "training_features.tif",
+      "labels.tif",
       "sample_submission.tif"
     ],
     "organizer_authenticated": false,
@@ -246,6 +254,24 @@
       "submission_recommendation": false,
       "run_name": "gemsdoe30-h-cc1-dispersed3px-32058dots",
       "note": "H-CC1 dispersed 3px contact-coincidence, 32058 dots; catalogue-proxy holdout-DTI 0.0539 (unscored, not slot-approved)",
+      "performance_status": "unscored; format validation is not a score"
+    },
+    {
+      "manifest": "gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.json",
+      "file": "docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif",
+      "present": true,
+      "sha256": "a9f5b93ed286d5e0ef18f7312397106e10de87c9d50c7ad0936074429b2bdba1",
+      "sha256_matches_manifest": true,
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "site_linked": true,
+      "submission_recommendation": false,
+      "run_name": "residual-gate-session-2026-10-25",
+      "note": "GEMSDOE30 review-hyp3 residual-ridge gate, 3km catalogue corridor, 400m Poisson",
       "performance_status": "unscored; format validation is not a score"
     },
     {
@@ -715,7 +741,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "134 tests collected in 0.62s",
+      "pytest_collect": "140 tests collected in 0.65s",
       "exit_code": 0
     },
     "score_gain_claimed": false

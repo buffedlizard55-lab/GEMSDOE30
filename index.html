@@ -20,15 +20,11 @@
 </p>
 </section>
 <section class="status-block" aria-labelledby="submission-status"><span class="eyebrow">Readiness decision · 25 October 2026</span>
-<h2 id="submission-status">NOT APPROVED FOR SUBMISSION
-</h2>
-<p><strong>A new, unique, format-valid TIFF now exists:</strong> <a href="docs/downloads/gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif" download>download gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif</a> (SHA-256 837f555e…ec63ff). It passes the local format validator and is not a near-duplicate of any repo raster checked (max Spearman 0.0072; max dot overlap 51.5 %; top H33 reference Spearman 0.0038).
-</p>
-<p><strong>Recommendation: do not use it as your final entry.</strong> On the catalogue-proxy holdout it scores HOLDOUT-DTI 0.0539 [0.0507, 0.0572], below a matched random control at 0.0659 [0.0631, 0.0687]. It is a negative research result, not a leaderboard score. The official leaderboard's top score is 0.4413, and the prompt's 0.3195 figure does not appear on it. Any upload must be made by you from your own DrivenData account, with official training files (see irregularity I-1 in the report).
-</p><a class="button" href="docs/research/2026-10-25/session-report.md">Read the full session report</a>
-
-<p>Automated checks—not a human inspector—must establish research eligibility. Slot selection is a separate step. No slot was selected or used.
-</p><a href="docs/research/2026-10-25/run-card.json">Download decision / run card (JSON)</a>
+<h2 id="submission-status">Two unique TIFFs now exist — both negative on holdout; neither is recommended for a slot</h2>
+<p><strong>Candidate A</strong> (branch <code>arena/6a5f04fe-gemsdoe30</code>, residual-ridge gate): <a href="docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif" download>download gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif</a>. Valid and unique in the repo. HOLDOUT-DTI 0.1222 [0.1139, 0.1306] against 0.1770 [0.1681, 0.1857] for the count-matched proximity comparator. <b>Not recommended.</b></p>
+<p><strong>Candidate B</strong> (branch <code>arena/6a157983-gemsdoe30</code>, H-CC1 dispersed 3 px, PR #25 merged): <a href="docs/downloads/gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif" download>download gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif</a> (SHA-256 837f555e…ec63ff). It passes the local format validator. HOLDOUT-DTI 0.0539 [0.0507, 0.0572], below a matched random control at 0.0659 [0.0631, 0.0687]. <b>Not recommended.</b></p>
+<p>Both labels are HOLDOUT-DTI (catalogue proxy). Neither has an organizer score. The public leaderboard was read on 2026-10-25 with #1 at 0.4413; the prompt's 0.3195 figure does not appear on it. Any upload must be made by you from your own DrivenData account, using official training files (see irregularity I-1 in the report). Automated checks, not a human inspector, establish research eligibility. No upload was made by this project and no slot was used.</p>
+<a href="docs/research/2026-10-25/session-report.md">Read the full session report (B)</a> · <a href="docs/research/2026-10-25/candidate-residual-gate.md">Design and result (A)</a> · <a href="docs/research/2026-10-25/run-card-residual-gate.json">Run card (A, JSON)</a> · <a href="docs/research/2026-10-25/run-card.json">Run card on main (JSON)</a> · <a href="docs/research/2026-10-25/live-verification.md">Live official facts</a>
 </section>
 <section class="section audit-grid">
 <article><span class="eyebrow">Data preflight</span>
