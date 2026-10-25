@@ -1,6 +1,6 @@
 {
   "path": "docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif",
-  "passed": true,
+  "passed": false,
   "checks": [
     {
       "name": "template_single_band",
@@ -48,14 +48,14 @@
       "detail": "valid_pixels=5167373 min=0.0 max=1.0"
     },
     {
-      "name": "finite_in_range_outside_footprint_diagnostic",
-      "passed": true,
-      "detail": "outside_pixels=7111787; finite in-range values required for the nonstandard whole-array diagnostic (finite=7111787)"
+      "name": "null_outside_template_footprint",
+      "passed": false,
+      "detail": "outside_pixels=7111787; null/NaN/nodata required"
     },
     {
-      "name": "whole_raster_finite_range_diagnostic",
+      "name": "whole_raster_finite_range_diagnostic_advisory",
       "passed": true,
-      "detail": "all_pixels=12279160 finite and in [0, 1]"
+      "detail": "advisory only: all_pixels=12279160 finite and in [0, 1]; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
     },
     {
       "name": "template_readable",
