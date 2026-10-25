@@ -320,3 +320,28 @@ class SubmissionOutsideConventionTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def test_conversion_rejects_crs_mismatch(tmp_path):
+    import numpy as np
+    import pytest
+    import rasterio
+    from affine import Affine
+    from gemsdoe30.submission import convert_to_portal_safe
+    profile = dict(driver='GTiff', height=5, width=5, count=1, dtype='float32',
+                   transform=Affine.translation(0, 500) @ Affine.scale(100, -100))
+    for name, crs in [('template', 'EPSG:32611'), ('source', 'EPSG:32612')]:
+        with rasterio.open(tmp_path / f'{name}.tif', 'w', crs=crs, **profile) as ds:
+            ds.write(np.zeros((5, 5), dtype='float32'), 1)
+    with pytest.raises(ValueError, match='CRS'):
+        convert_to_portal_safe(tmp_path / 'source.tif', tmp_path / 'template.tif',
+                               tmp_path / 'output.tif', note='test', run_name='test')
+
+
+def test_shared_writer_checks_name_and_note_before_io(tmp_path):
+    import pytest
+    from gemsdoe30.submission import write_submission_file
+    with pytest.raises(ValueError, match='140'):
+        write_submission_file(None, 'absent.tif', tmp_path / 'a.tif', run_name='x', note='x' * 141)
+    with pytest.raises(ValueError, match='run_name'):
+        write_submission_file(None, 'absent.tif', tmp_path / 'a.tif', run_name=' ', note='x')

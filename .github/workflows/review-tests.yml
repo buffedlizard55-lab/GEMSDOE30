@@ -13,21 +13,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install numpy scipy rasterio pytest shapely pyproj
-      - name: Run tests with API-readable failure diagnostics
-        shell: python
+      - run: pip install -e '.[research,test]' -c requirements-tdx1.txt
+      - name: Restore only the hash-pinned output template
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/ci_check.py python scripts/restore_public_mirrors.py --ids sample_submission
+      - name: Verify the current research artifact and negative decision
         run: |
-          import subprocess, sys
-          result = subprocess.run([sys.executable, '-m', 'pytest', '-q'],
-                                  stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-          print(result.stdout)
-          if result.returncode:
-              # Logs are hosted outside the sandbox allowlist. Check annotations
-              # make failures inspectable via GitHub API without masking exit status.
-              output = result.stdout[-24000:]
-              for start in range(0, len(output), 4000):
-                  chunk = output[start:start + 4000]
-                  chunk = chunk.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
-                  print('::error title=pytest failure::' + chunk)
-          sys.exit(result.returncode)
+          python scripts/ci_check.py python scripts/verify_current_run.py
+          python scripts/ci_check.py python scripts/build_research_site.py --check
+      - name: Run tests with API-readable failure diagnostics
+        run: python scripts/ci_check.py python -m pytest -q
       - run: git diff --check

@@ -15,7 +15,7 @@ from __future__ import annotations
 import math
 from typing import Any
 
-EVALUATOR_VERSION = "component-holdout-v2-footprint-20261025"
+EVALUATOR_VERSION = "component-holdout-v3-blockstats-20261025"
 
 PIXEL_M = 100.0
 RADIUS_M = 300.0
@@ -261,7 +261,8 @@ def masked_tile_sums(prediction: Any, truth: Any, known: Any, valid: Any, *,
 def masked_dti_by_blocks(prediction: Any, truth: Any, known: Any, valid: Any, *,
                          pixel_m: float = PIXEL_M, radius_m: float = RADIUS_M,
                          alpha: float = ALPHA,
-                         fp_weight: Any = None) -> dict[str, Any]:
+                         fp_weight: Any = None,
+                         block_size_px: int | None = None) -> dict[str, Any]:
     """Full-grid masked DTI plus per-quadrant diagnostics from one kernel pass.
 
     Quadrant diagnostics keep cross-quadrant 300 m credit (predictions in one
@@ -323,4 +324,148 @@ def masked_dti_by_blocks(prediction: Any, truth: Any, known: Any, valid: Any, *,
         n = float(truth_block.sum())
         result[f"quadrant_{qi}"] = {"dti": dti_from_components(tp, fp, n, alpha=alpha),
                                     "tp_weight": tp, "fp_weight": fp, "truth_pixels": n}
+    if block_size_px is not None:
+        if not isinstance(block_size_px, int) or block_size_px < 1:
+            raise ValueError("block_size_px must be a positive integer")
+        blocks = []
+        for r0 in range(0, height, block_size_px):
+            for c0 in range(0, width, block_size_px):
+                section = np.s_[r0:r0 + block_size_px, c0:c0 + block_size_px]
+                active = scored[section]
+                if not active.any():
+                    continue
+                positives = positive[section]
+                blocks.append({"block_row": r0 // block_size_px,
+                               "block_col": c0 // block_size_px,
+                               "tp_weight": float(credit[section][positives].sum()),
+                               "fp_weight": float(fp_field[section].sum()),
+                               "truth_pixels": int(positives.sum()),
+                               "scored_pixels": int(active.sum())})
+        result["spatial_blocks"] = blocks
+        result["block_size_px"] = block_size_px
     return result
+
+
+SEGMENT_PROTOCOL_VERSION = "buffered-quadrant-whole-components-v1-20261025"
+
+
+def spatial_segment_folds(catalogue: Any, valid: Any, *, buffer_px: int = 16,
+                          kernel_radius_px: int = 3):
+    """Yield four spatially blocked trials without cutting catalogue components.
+
+    Each complete 8-connected segment is assigned once, by its centroid quadrant.
+    A fold scores that quadrant plus a metric halo around its complete withheld
+    segments. Whole other segments that touch the training guard are withheld
+    from *both* features/training and truth; only their exact pixels are excluded
+    from scoring. This is a defined regional-trial protocol, not a disjoint OOF
+    mosaic: a few negative/halo pixels can appear in more than one fold.
+    """
+    import numpy as np
+    from scipy.ndimage import distance_transform_edt, label
+
+    cat, valid = np.asarray(catalogue, dtype=bool), np.asarray(valid, dtype=bool)
+    if cat.ndim != 2 or cat.shape != valid.shape or np.any(cat & ~valid):
+        raise ValueError("catalogue must be a 2D subset of the same-shaped footprint")
+    if not isinstance(buffer_px, int) or buffer_px < kernel_radius_px or kernel_radius_px < 1:
+        raise ValueError("integer guard must cover the positive metric radius")
+    components, count = label(cat, structure=np.ones((3, 3), dtype=int))
+    if not count:
+        raise ValueError("empty catalogue")
+    rr, cc = np.nonzero(cat)
+    ids = components[rr, cc]
+    sizes = np.bincount(ids, minlength=count + 1)
+    cy = np.bincount(ids, weights=rr, minlength=count + 1) / np.maximum(sizes, 1)
+    cx = np.bincount(ids, weights=cc, minlength=count + 1) / np.maximum(sizes, 1)
+    height, width = cat.shape
+    assignment = (cy >= height // 2).astype(int) * 2 + (cx >= width // 2).astype(int)
+    assignment[0] = -1
+    for fold in range(4):
+        core = np.zeros(cat.shape, dtype=bool)
+        y0, y1 = (0, height // 2) if fold < 2 else (height // 2, height)
+        x0, x1 = (0, width // 2) if fold % 2 == 0 else (width // 2, width)
+        core[y0:y1, x0:x1] = True
+        hidden_ids = np.flatnonzero(assignment == fold)
+        hidden = assignment[components] == fold
+        if not hidden.any():
+            raise ValueError(f"fold {fold} has no complete withheld segments")
+        region = valid & (core | (distance_transform_edt(~hidden) <= kernel_radius_px))
+        near = distance_transform_edt(~region) <= buffer_px
+        guard_ids = np.unique(components[near & cat & ~hidden])
+        guard_lookup = np.zeros(count + 1, dtype=bool)
+        guard_lookup[guard_ids] = True
+        guard_lookup[0] = False
+        guard = guard_lookup[components]
+        visible = cat & ~hidden & ~guard
+        train = valid & ~near & ~guard
+        scored = region & ~guard
+        if np.any(hidden & ~scored) or np.any(visible & near) or np.any(train & hidden):
+            raise AssertionError("whole-segment/guard invariant failed")
+        yield {
+            "fold": fold, "hidden": hidden, "visible": visible, "guard": guard,
+            "train_mask": train, "score_valid": scored,
+            "metadata": {"protocol_version": SEGMENT_PROTOCOL_VERSION,
+                         "fold": fold, "buffer_px": buffer_px,
+                         "metric_halo_px": kernel_radius_px,
+                         "withheld_components": int(hidden_ids.size),
+                         "withheld_positives": int(hidden.sum()),
+                         "visible_positives": int(visible.sum()),
+                         "guard_positives_not_truth": int(guard.sum()),
+                         "training_pixels": int(train.sum()),
+                         "scored_pixels": int(scored.sum()),
+                         "hidden_component_ids": hidden_ids.tolist()},
+        }
+
+
+def spatial_bootstrap(comparisons: dict[str, list[dict]], *, candidate: str,
+                      replicates: int = 2000, seed: int = 3071) -> dict[str, Any]:
+    """Paired geographic-block bootstrap of pooled sufficient statistics.
+
+    Rows must come from ``masked_dti_by_blocks(..., block_size_px=...)``. The same
+    geographic block is aggregated across trials before resampling, so overlapping
+    fold regions do not masquerade as independent bootstrap units. All arms must
+    include exactly the same geographic blocks, including truth-empty FP blocks.
+    """
+    import numpy as np
+    from .emission import dti_from_components
+
+    if candidate not in comparisons or replicates < 2 or not comparisons:
+        raise ValueError("candidate and at least two bootstrap replicates required")
+    aggregated = {}
+    for name, rows in comparisons.items():
+        blocks = {}
+        for row in rows:
+            key = (int(row["block_row"]), int(row["block_col"]))
+            triple = np.array([row["tp_weight"], row["fp_weight"], row["truth_pixels"]], dtype=float)
+            if not np.isfinite(triple).all() or np.any(triple < 0) or triple[0] > triple[2] + 1e-6:
+                raise ValueError("invalid bootstrap sufficient statistics")
+            blocks[key] = blocks.get(key, np.zeros(3)) + triple
+        aggregated[name] = blocks
+    keys = sorted(aggregated[candidate])
+    if not keys or any(set(rows) != set(keys) for rows in aggregated.values()):
+        raise ValueError("arms must have identical nonempty geographic block inventories")
+    arrays = {name: np.array([rows[key] for key in keys]) for name, rows in aggregated.items()}
+    rng = np.random.default_rng(seed)
+    draws = rng.integers(0, len(keys), size=(replicates, len(keys)))
+    samples, results = {}, {}
+    for name, a in arrays.items():
+        total = a.sum(axis=0)
+        sample = a[draws].sum(axis=1)
+        denominator = 0.2 * sample[:, 0] + 0.2 * sample[:, 1] + 0.8 * sample[:, 2] + 1e-7
+        samples[name] = sample[:, 0] / denominator
+        results[name] = {"label": "HOLDOUT-DTI", "value": dti_from_components(*total),
+                         "withheld_positives": int(round(total[2])),
+                         "ci95": np.quantile(samples[name], [0.025, 0.975]).tolist(),
+                         "tp_weight": float(total[0]), "fp_weight": float(total[1])}
+    deltas = {}
+    for name in comparisons:
+        if name == candidate:
+            continue
+        delta = samples[candidate] - samples[name]
+        deltas[name] = {"label": "HOLDOUT-DTI difference",
+                        "value": results[candidate]["value"] - results[name]["value"],
+                        "ci95": np.quantile(delta, [0.025, 0.975]).tolist()}
+    return {"evaluator_version": EVALUATOR_VERSION, "protocol_version": SEGMENT_PROTOCOL_VERSION,
+            "bootstrap": {"unit": "geographic block aggregated across folds", "blocks": len(keys),
+                          "replicates": replicates, "seed": seed,
+                          "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"},
+            "arms": results, "candidate_minus": deltas}

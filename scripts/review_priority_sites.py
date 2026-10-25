@@ -7,9 +7,11 @@ organizer receipts. All downloaded rasters stay in ignored data/raw/registry.
 import hashlib
 import json
 from pathlib import Path
-import subprocess
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from gemsdoe30.github_data import stream_raw
 PINS = ROOT / 'docs/research/priority-site-pins.json'
 
 
@@ -23,8 +25,7 @@ def main():
             temp = path.with_suffix('.partial')
             try:
                 with temp.open('wb') as stream:
-                    subprocess.run(['gh', 'api', f"repos/{row['repo']}/contents/{row['source_path']}?ref={row['ref']}",
-                                    '-H', 'Accept: application/vnd.github.raw+json'], stdout=stream, check=True)
+                    stream_raw(f"repos/{row['repo']}/contents/{row['source_path']}?ref={row['ref']}", stream)
                 with temp.open('rb') as stream:
                     digest = hashlib.file_digest(stream, 'sha256').hexdigest()
                 if digest != row['sha256']:

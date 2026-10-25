@@ -20,13 +20,18 @@ on:
   push:
     branches:
       - main
-      - arena/01a103f1-gemsdoe30
     paths:
       - "docs/research/**"
       - "docs/downloads/**"
       - "scripts/**.py"
       - "src/**.py"
       - "docs/score-ledger.csv"
+      - "docs/current-run.json"
+      - "requirements-tdx1.txt"
+      - "pyproject.toml"
+      - "docs/assets/**"
+      - "index.html"
+      - "executive-summary.html"
       - ".github/workflows/status-feed.yml"
   schedule:
     # Weekly refresh so a stale feed is visible even when nothing is pushed.
@@ -59,19 +64,17 @@ jobs:
       - name: Install readers and test dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install numpy scipy rasterio shapely pyproj pytest
+          python -m pip install numpy scipy rasterio shapely pyproj pytest -c requirements-tdx1.txt
 
-      - name: Fetch the hash-pinned competition template (public mirror)
-        continue-on-error: true
+      - name: Fetch only the hash-pinned competition template (public mirror)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/ci_check.py python scripts/restore_public_mirrors.py --ids sample_submission
+
+      - name: Verify current artifact, automatic decision and generated site
         run: |
-          set -x
-          mkdir -p data/raw
-          curl -fSL --retry 3 -o data/raw/sample_submission.tif \
-            "https://raw.githubusercontent.com/buffedlizard55-lab/GEMSDOE24/07345ea0604953d7efb858d9cfbc21e20c7aca0b/data/bridge/sample_submission.tif"
-          echo "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc  data/raw/sample_submission.tif" | sha256sum -c -
-
-      - name: Regenerate the status feed from repository artifacts
-        run: python scripts/build_status.py --output docs/status.json
+          python scripts/ci_check.py python scripts/verify_current_run.py
+          python scripts/ci_check.py python scripts/build_research_site.py --check
 
       - name: Re-run GeoTIFF format checks on every published research file
         continue-on-error: true
@@ -91,6 +94,9 @@ jobs:
               && echo "OK $file" || echo "::warning file=$file::local format check failed or template missing"
           done
 
+      - name: Regenerate status after validation (not before it)
+        run: python scripts/build_status.py --output docs/status.json
+
       - name: Commit the refreshed feed
         run: |
           set -x
@@ -102,6 +108,6 @@ jobs:
           else
             git commit -m "status feed: regenerate from artifacts [skip ci]"
             # Rebase first: a sibling workflow may have pushed since checkout.
-            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git pull --rebase origin "${GITHUB_REF_NAME}"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi

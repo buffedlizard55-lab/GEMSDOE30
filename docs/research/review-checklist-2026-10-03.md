@@ -39,3 +39,17 @@
 ## Remaining blockers
 
 Organizer-authenticated training files and hidden expert labels remain unavailable; D2.8 score/hash attribution remains unresolved; zero-outside portal acceptance and the historical range-error cause are unverified; official deadline clocks conflict; entrant eligibility and the final AI-use narrative need authorized sign-off. H-31-04 still needs a GeoDAWN band-lineage/schema audit; H-31-03 needs full-ROI NHD/DEM coverage; H-32-03 needs chemistry provenance/schema review; H-32-04 needs an independent inventory such as OSTI 1148722 or GDR 616, not Qfaults alone. Current candidates are not promoted. Do not retune on inspected SGMC labels. No weekly slot is justified without comparable blocked-holdout improvement, confirmation, full three-check evidence, and exact-file audit.
+
+
+## 2026-10-25 — current TDX-1 continuation (supersedes archived readiness text)
+
+The [current three-pass journal](texture-displacement/verification.md) documents
+implementation, analytic guard-bound bug correction and full requirements review.
+A new corrected TIFF was produced by the fixed six-feature physical-data model;
+**NEGATIVE, DO NOT SUBMIT**. Automated exact-artifact and Pages checks passed;
+**186 tests passed, 5 optional torch tests skipped, 7 subtests passed**. Desktop/mobile
+downloads matched the actual SHA-256; no slot selected or used. Full current owner
+prompt is retained in README, and all supplied named score claims are quarantined
+as unverified. Neither the local negative result nor a format pass is an organizer score.
+For current hash, HOLDOUT-DTI/CI, limitations and delivery receipt, follow
+[the explicit current pointer](../current-run.json), not archived statements above.

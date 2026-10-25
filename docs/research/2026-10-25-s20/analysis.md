@@ -278,3 +278,25 @@ git-ignored work arrays).
 *Budget used: 3 experiments (E1, E2, E3) as preregistered. Negative
 sub-results recorded: line coherence (both seeds), S20 uniqueness vs
 Candidate C. No submission slot used; nothing uploaded.*
+
+## Post-merge addendum (PR #29 conflict resolution, 2026-10-25 late)
+
+Between this lane's branch point and its PR, a concurrent session merged
+PR #28 (TDX-1 gravity-normal magnetic texture-lag lane — an implementation
+of this document's deferred hypothesis 2) with a generated research-site
+builder (`scripts/build_research_site.py`) that renders `index.html` /
+`executive-summary.html` from `docs/current-run.json` and is test-locked to
+exactly one (negative) artifact download. Merge resolution therefore kept
+main's generated landing pages un-forked: the S20 verdict block added by
+this lane's session commit remains in that commit's history, while on
+merged `main` the S20 verdict is published in the README's "Parallel lane
+addendum", in `run-card.json`, and in the regenerated `docs/status.json`
+(`lane_g30s20_run_card`); the landing fronts TDX-1's do-not-submit
+decision. The S20 verdict itself is unchanged. A post-merge cross-lane
+novelty check (both lanes ran blind to each other) found 32.7 % of S20 dots
+within 3 px of TDX-1 dots — no cross-lane duplication
+([`novelty-cross-lane-tdx1.json`](novelty-cross-lane-tdx1.json)). TDX-1's
+own negative (HOLDOUT-DTI 0.07284 vs core19 0.13982, evaluator
+`component-holdout-v3-blockstats-20261025`) also closes deferred
+hypothesis 2 as a standalone belief: the texture-lag signal exists but was
+far weaker than the 19-band habitat.

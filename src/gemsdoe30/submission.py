@@ -282,6 +282,10 @@ def write_submission_file(
       diagnostic.
     """
 
+    if not isinstance(run_name, str) or not run_name.strip():
+        raise ValueError("run_name must be a nonempty string")
+    if not isinstance(note, str) or len(note) > 140:
+        raise ValueError("submission note must be a string of at most 140 characters")
     np, rasterio = _rasterio_modules()
     outside = float(outside_value)
     if not (math.isnan(outside) or outside == 0.0):
@@ -399,6 +403,8 @@ def convert_to_portal_safe(
             raise ValueError("source raster grid does not match the template")
         if source.transform != template.transform:
             raise ValueError("source raster transform does not match the template")
+        if source.crs != template.crs:
+            raise ValueError("source raster CRS does not match the template")
         valid = valid_template_mask(template, np)
         values = np.asarray(source.read(1, masked=False), dtype=np.float32)
     validate_probability_values(values, valid)

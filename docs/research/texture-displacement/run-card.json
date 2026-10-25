@@ -1,0 +1,165 @@
+{
+  "schema_version": 2,
+  "run_id": "gems30-TDX1-44090-20261025-5fc508ea81ac",
+  "hypothesis": "Magnetic texture correspondence with a persistent nonzero lag across gravity edges improves recovery of concealed faults.",
+  "mechanism": "Opposite-flank normalized profile matching at two scales; raw physics plus displacement features in a fixed six-feature HGB.",
+  "non_fault_mimic": "Intrusive lithologic contact; gridding seam",
+  "lane": "TDX-1 gravity-normal magnetic profile displacement (research continuation, not externally assigned)",
+  "experiments_run": 2,
+  "fixed_arms": [
+    "physics3",
+    "core19",
+    "tdx6"
+  ],
+  "experiment_cap": 3,
+  "experimental_elapsed_seconds": 401.18,
+  "time_cap_hours": 2,
+  "this_execution_seconds": 204.86,
+  "corrective_execution": true,
+  "physical_support_px": 17,
+  "confirmation_scope": "Corrective guard-bound bug fix on previously inspected folds; not fresh independent confirmation",
+  "previous_execution_receipt": "docs/research/texture-displacement/correction-v1-retirement.json",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.07284403971883661,
+    "withheld_positives": 60988,
+    "ci95": [
+      0.0634833756035183,
+      0.08306069340489113
+    ],
+    "tp_weight": 4231.248128771639,
+    "fp_weight": 42248.758737962,
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "scope": "buffered whole-segment catalogue-recovery proxy; NOT organizer performance",
+    "comparators": {
+      "physics3": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.06459100987774002,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.05537292313708799,
+          0.07430093984458654
+        ],
+        "tp_weight": 3747.2294012850048,
+        "fp_weight": 42374.37436891643
+      },
+      "core19": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.13982063017811727,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.12417754876614995,
+          0.15590471896182123
+        ],
+        "tp_weight": 8181.277496788421,
+        "fp_weight": 40430.04046109527
+      }
+    },
+    "candidate_minus": {
+      "physics3": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.00825302984109659,
+        "ci95": [
+          0.004207994501731344,
+          0.01219685109477477
+        ]
+      },
+      "core19": {
+        "label": "HOLDOUT-DTI difference",
+        "value": -0.06697659045928066,
+        "ci95": [
+          -0.08574676486261167,
+          -0.04829962001789458
+        ]
+      }
+    },
+    "bootstrap": {
+      "unit": "geographic block aggregated across folds",
+      "blocks": 371,
+      "replicates": 2000,
+      "seed": 3071,
+      "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+    }
+  },
+  "feature_canaries": {
+    "features_per_fold": 22,
+    "folds": 4,
+    "alarm_count": 0,
+    "alarms": [],
+    "receipt": "docs/research/texture-displacement/results.json"
+  },
+  "registry": {
+    "complete": false,
+    "surface": {
+      "decision": "blocked-incomplete-evidence",
+      "registry_entries_compared": 104,
+      "max_spearman": 0.0426226523243077,
+      "max_fraction_within_3px": null,
+      "errors": []
+    },
+    "dots": {
+      "decision": "blocked-incomplete-evidence",
+      "registry_entries_compared": 104,
+      "max_spearman": 0.013574547776137823,
+      "max_fraction_within_3px": 0.4049217509639374,
+      "errors": []
+    },
+    "coverage": "all published aligned TIFFs at nine recorded repository snapshots; missing other sessions and most original surfaces",
+    "receipt_surface": "docs/research/texture-displacement/novelty-surface.json",
+    "receipt_dots": "docs/research/texture-displacement/novelty-dots.json"
+  },
+  "raster_sha256": "9556e3ddd8ea7658ca510ab02d5b5304ac4c3332c54e7f86df5a24769bd03cdb",
+  "validator_output": {
+    "status": "passed",
+    "no_nan_inside_footprint": true,
+    "values_in_0_1": true,
+    "crs_match": true,
+    "shape_match": true,
+    "transform_match": true,
+    "single_float32_band": true,
+    "nan_nodata_outside_footprint": true,
+    "positive_catalogue_pixels": 0,
+    "emitted_dots": 44090,
+    "organizer_acceptance_confirmed": false
+  },
+  "submission_name": "gems30-TDX1-44090-20261025-5fc508ea81ac",
+  "note": "TDX1 gravity-normal magnetic texture lag; 6-feature HGB; negative research result, NOT approved for competition upload.",
+  "published_tiff": "docs/downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.tif",
+  "download_ok": true,
+  "submission_approved": false,
+  "slot_selected": false,
+  "verdict": "negative",
+  "scientific_gate_passed": false,
+  "verdict_scope": "scientific and/or readiness gates; no competition performance claim",
+  "blockers": [
+    "Candidate failed paired HOLDOUT-DTI improvement gate or feature leakage canary",
+    "Complete parallel-run raster/surface registry unavailable",
+    "No externally assigned lane paragraph was supplied; research lane selected autonomously",
+    "Historical best UNet checkpoints absent: comparable historical-best rerun unavailable",
+    "Current portal cap, eligibility, deadline and organizer acceptance unverified"
+  ],
+  "preregistration_sha256": "5d9e71a6a4cbb0f4aba2d15ab18173e0bca722287c391f718f205411fc1bab57",
+  "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+  "created_utc": "2026-10-25T21:29:01+00:00",
+  "additional_novelty_evidence": {
+    "registry": "docs/research/texture-displacement/registry-parallel-addendum.json",
+    "surface_receipt": "docs/research/texture-displacement/novelty-parallel-surface.json",
+    "dots_receipt": "docs/research/texture-displacement/novelty-parallel-dots.json",
+    "timing": "Late-arriving references; checked both saved states without refitting or replacing dots",
+    "combined_observed_registry": {
+      "surface": {
+        "registry_entries_compared": 110,
+        "max_spearman": 0.05313281983245325,
+        "max_fraction_within_3px": null,
+        "status": "unknown"
+      },
+      "dots": {
+        "registry_entries_compared": 110,
+        "max_spearman": 0.013710147110263877,
+        "max_fraction_within_3px": 0.4049217509639374,
+        "status": "passed"
+      }
+    }
+  }
+}

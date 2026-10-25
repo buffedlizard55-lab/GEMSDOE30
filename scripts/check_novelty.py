@@ -14,7 +14,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
 import numpy as np
 import rasterio
-from gemsdoe30.novelty import compare, decision
+from gemsdoe30.novelty import compare, decision, rank_cache
 from gemsdoe30.submission import valid_template_mask
 
 
@@ -36,6 +36,10 @@ def audit(candidate, template, registry, stage):
     a = read(candidate)
     comparisons, errors = [], []
     seen = set()
+    cached = rank_cache(a, mask)
+    # Encoding variants often share identical in-footprint values. Reuse exact
+    # results, but retain a comparison row for EVERY hash-verified registry entry.
+    by_values = {}
     for row in manifest['rasters']:
         try:
             path = row['path']
@@ -44,7 +48,14 @@ def audit(candidate, template, registry, stage):
             seen.add(path)
             if digest(path) != row['sha256']:
                 raise ValueError(f'hash mismatch: {path}')
-            comparisons.append({'reference': path, **compare(a, read(path), mask)})
+            reference = read(path)
+            value_hash = hashlib.sha256(np.ascontiguousarray(reference[mask], dtype=np.float64).tobytes()).hexdigest()
+            if value_hash not in by_values:
+                by_values[value_hash] = compare(a, reference, mask, stage=stage, cached_ranks=cached)
+            comparisons.append({'reference': path, 'site': row.get('site'),
+                                'reference_sha256': row['sha256'],
+                                'reference_values_sha256': value_hash,
+                                **by_values[value_hash]})
         except (ValueError, OSError, KeyError) as exc:
             errors.append(str(exc))
     result = decision(comparisons, stage=stage,

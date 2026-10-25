@@ -1,0 +1,48 @@
+{
+  "python": "3.11.2",
+  "packages": {
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "rasterio": "1.4.4",
+    "sklearn": "1.9.1",
+    "threadpoolctl": "3.7.0",
+    "pytest": "9.1.1",
+    "shapely": "2.2.0",
+    "pyproj": "3.7.2"
+  },
+  "sources": [
+    {
+      "url": "https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/unet-mc-cv-reference-solution.ipynb",
+      "sha256": "1a7622732ba00f67237058bc0efe79b45ba4e87c449fc9c1e5d6ea659de92ca0",
+      "read_scope": "cells 0,5,6,16 and final GeoTIFF export cell",
+      "evidence_class": "OFFICIAL reference implementation",
+      "verified_here": "19 input-band descriptions; source grid; reference training method; not the organizer distance evaluator or portal acceptance"
+    }
+  ],
+  "source_band_metadata": {
+    "1": {
+      "band_name": "mag_anom",
+      "data_category": "magnetic_data",
+      "data_type": "numeric",
+      "description": "Magnetic anomaly - deviation from expected Earth's magnetic field"
+    },
+    "2": {
+      "band_name": "rtp",
+      "data_category": "magnetic_data",
+      "data_type": "numeric",
+      "description": "Reduced to pole magnetic data - magnetic anomaly corrected for latitude effects"
+    },
+    "13": {
+      "band_name": "iso_grav_anom",
+      "data_category": "gravity_data",
+      "data_type": "numeric",
+      "description": "Isostatic gravity anomaly - gravity after compensating for topographic mass"
+    }
+  },
+  "access_limits": [
+    "Network permits GitHub and package registries, not DrivenData/USGS/GDR/NLR web hosts",
+    "No organizer-authenticated data or submission-page receipt",
+    "No fresh current leaderboard/cap/deadline verification",
+    "Scientific mechanisms remain falsifiable hypotheses; no claimed discovery of geothermal vents"
+  ]
+}

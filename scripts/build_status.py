@@ -124,9 +124,13 @@ def main() -> int:
             "whole_raster_range_diagnostic_passed": strict_passed,
             "all_cells_finite_and_in_range": all_in_range,
             "nan_cells_anywhere": nan_cells,
-            "range_error_immune": bool(manifest.get("range_error_immunity", {}).get("immune_to_whole_raster_range_check"))
+            # A legacy sidecar's whole-array diagnostic is not immunity from
+            # an unobserved private portal validator. Retain it as a named claim.
+            "range_error_immune": None,
+            "legacy_manifest_claim_range_error_immunity": bool(manifest.get("range_error_immunity", {}).get("immune_to_whole_raster_range_check"))
             if isinstance(manifest.get("range_error_immunity"), dict)
             else None,
+            "organizer_acceptance_confirmed": False,
             "site_linked": (tif_name in site_html) or None,
             "submission_recommendation": manifest.get("submission_recommendation", False),
             "run_name": manifest.get("run_name"),
@@ -308,7 +312,40 @@ def main() -> int:
                 if row.get("evidence_class", "").startswith("official-snapshot"):
                     ledger_rows.append(row)
 
+    # Current artifact is selected by one explicit evidence pointer, not a stale
+    # hard-coded dated card. Re-inspect its exact TIFF without training data.
+    selection = load_json(ROOT / "docs/current-run.json") or {}
+    current_card = load_json(ROOT / selection.get("run_card", "docs/research/2026-10-25/run-card.json"))
+    current_release = None
+    current_inspection = {"verified_now": False, "error": "no current artifact pointer"}
+    if selection:
+        try:
+            if str(ROOT) not in sys.path:
+                sys.path.insert(0, str(ROOT))
+            from scripts.verify_current_run import verify
+            current_release = verify(ROOT / "docs/current-run.json", data_dir / "sample_submission.tif")
+            current_inspection = {"verified_now": True, "error": None}
+        except Exception as exc:
+            # The feed records missing access instead of laundering a previously
+            # green receipt into a current validation result.
+            current_inspection = {"verified_now": False, "error": str(exc)}
+        gates["current_research_artifact"] = {
+            "evidence": selection.get("run_card"),
+            "promoted": bool(current_release and current_release.get("research_verdict") == "promote"),
+            "decision": current_release.get("display_status") if current_release else "blocked: current inspection unavailable",
+        }
     promoted = [name for name, gate in gates.items() if gate.get("promoted")]
+    peer_reports = []
+    for name, filename in (("G30-S19 habitat + EDGE", "lane-g30s19-run-card.json"),
+                           ("H-CC1 contact coincidence", "h-cc1-run-card.json"),
+                           ("Residual-ridge gate", "run-card-residual-gate.json")):
+        path = research / "2026-10-25" / filename
+        payload = load_json(path)
+        if payload:
+            peer_reports.append({"lane": name, "run_card": str(path.relative_to(ROOT)),
+                                 "recorded_research_verdict": payload.get("verdict"),
+                                 "reassessed_by_current_lane": False, "slot_selected_here": False,
+                                 "comparison_warning": "Different protocol; not ranked against the current artifact or treated as organizer confirmation"})
     status = {
         "schema_version": 3,
         "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
@@ -319,7 +356,8 @@ def main() -> int:
             "owner_mirror_files_present": present,
             "organizer_authenticated": False,
             "prepared_dataset_signature": prepared.get("dataset_signature"),
-            "pins_core_sha256_verified_at_restore": True,
+            "pins_core_sha256_verified_now": hashes_ok,
+            "historical_restore_receipt": "docs/research/2026-10-25/prepared-manifest.json",
             "pins_note": core_pins.get("warning", ""),
             "extra_pins_files": [row["dest"] for row in extra_pins.get("files", [])],
         },
@@ -327,7 +365,7 @@ def main() -> int:
         "submission_format": {
             "published_outside_convention": "null/NaN outside the data bounds; finite probabilities in [0, 1] inside",
             "official_problem_description": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-            "builder_default": "zeros outside (range-error immune); --outside nan available for the literal spec reading",
+            "builder_default": "Current shared writer / TDX1: NaN nodata outside, finite [0,1] inside; no range-error-immunity claim",
             "zero_outside": (
                 "Historical all-finite convention. The official reference notebook writes without an "
                 "explicit nodata argument; owner-reported scores are not organizer confirmation. "
@@ -340,7 +378,8 @@ def main() -> int:
                 "documented possible failure modes, not a proven diagnosis of the historical rejection."
             ),
             "range_error_root_cause_record": "docs/research/range-error-root-cause-2026-10-03.md",
-            "hardened_builder": "scripts/build_portal_submission.py",
+            "shared_writer": "src/gemsdoe30/submission.py",
+            "legacy_diagnostic_builder": "scripts/build_portal_submission.py",
             "known_faults_masked_from_scoring": {
                 "value": True,
                 "source": "https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516",
@@ -356,7 +395,11 @@ def main() -> int:
             },
             "local_validation_guarantees_portal_acceptance": False,
         },
-        "current_readiness": load_json(research / "2026-10-25" / "run-card.json"),
+        "current_run_pointer": selection,
+        "current_readiness": current_card,
+        "current_artifact_inspection": current_inspection,
+        "current_release_decision": current_release,
+        "legacy_readiness_2026_10_25": load_json(research / "2026-10-25" / "run-card.json"),
         "lane_g30s19_run_card": load_json(
             research / "2026-10-25" / "lane-g30s19-run-card.json"
         ),
@@ -366,11 +409,15 @@ def main() -> int:
         "historical_promotion_warning": "Prior results require same-protocol re-evaluation after the shared footprint correction.",
         "promotion_gates": gates,
         "any_candidate_promoted": bool(promoted),
+        "promotion_scope": "Automatically adjudicated current artifact and listed legacy gates only; peer reports are separate, not re-adjudicated or selected",
+        "peer_lane_reports": peer_reports,
+        "any_peer_lane_reports_promotion": any(r["recorded_research_verdict"] == "promote" for r in peer_reports),
         "promoted_gates": promoted,
         "submission_slot_status": "none approved or used by this repository",
         "score_evidence": {
-            "official_leaderboard_snapshots_from_ledger": ledger_rows,
-            "note": "DrivenData Terms of Use prohibit automated monitoring; snapshots are dated manual reads only",
+            "historical_leaderboard_snapshot_claims_from_ledger": ledger_rows,
+            "validated_organizer_submission_receipts": [],
+            "note": "Historical ledger assertions are not freshly verified or submission-page receipts. No current leaderboard scraping or score projection.",
             "d2_8_attribution": "owner-reported 0.2600 unverified; GEMSDOE25 page calls the file unscored",
         },
         "verification": {
