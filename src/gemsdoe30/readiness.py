@@ -5,12 +5,9 @@ import math
 from typing import Any
 
 READINESS_VERSION = "research-readiness-v2-parallel-evidence-20261025"
-EXPECTED_FEATURES = frozenset({
-    "mag_anom", "rtp", "tmi_hg", "geod_2ndinv", "iso_grav_anom_slope", "tc",
-    "geod_shearrate", "geod_dilaterate", "tmi_vg", "deq_n100a15", "iso_grav_anom_vg",
-    "det_elev", "iso_grav_anom", "tmi", "depth_to_base_surf", "ieq_n100a15", "cond_surf",
-    "iso_grav_anom_hg", "det_elev_slope", "mag_texture", "rtp_texture", "texture_consensus",
-})
+from .experiments import contract
+
+EXPECTED_FEATURES = frozenset(contract({})["features"])
 
 
 def number(value):
@@ -29,6 +26,10 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
     selector must separately verify current portal constraints and allocation;
     this function cannot approve or spend a competition slot.
     """
+    spec = contract(card)
+    expected_arms = set(spec["arms"])
+    expected_features = set(spec["features"])
+    comparators = expected_arms - {spec["candidate"]}
     gates = []
 
     def gate(name, status, detail):
@@ -40,7 +41,7 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
          "Reopened shared-writer GeoTIFF matches template; SHA-256 binds this decision to its exact bytes")
     summary = results.get("summary", {})
     arms = summary.get("arms", {})
-    measures_valid = set(arms) == {"tdx6", "physics3", "core19"}
+    measures_valid = set(arms) == expected_arms
     for arm in arms.values():
         ci = arm.get("ci95", [])
         value = arm.get("value")
@@ -53,15 +54,16 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
     gate("labelled_holdout_evidence", "passed" if measures_valid else "failed",
          "HOLDOUT-DTI requires evaluator/protocol, withheld positives and spatial-bootstrap 95% CI")
     deltas = summary.get("candidate_minus", {})
-    wins = set(deltas) == {"physics3", "core19"} and all(
+    wins = set(deltas) == comparators and all(
         number(row.get("value")) and row["value"] > 0
         and interval(row.get("ci95"), -1, 1) and row["ci95"][0] > 0 for row in deltas.values())
     gate("paired_improvement", "passed" if wins else "failed",
-         "Fixed candidate must improve both same-protocol controls with positive paired CI lower bound")
+         ("Fixed candidate must improve both same-protocol controls with positive paired CI lower bound"
+          if spec["id"] == "tdx1" else "Fixed full-stack candidate must improve core19, zero-lag and phase-null controls with positive paired CI lower bounds"))
     features = results.get("feature_canaries", [])
     complete_canaries = (len(features) == 4 and {f.get("fold") for f in features} == set(range(4))
-                         and all(len(fold.get("features", [])) == len(EXPECTED_FEATURES)
-                                 and {r.get("feature") for r in fold["features"]} == EXPECTED_FEATURES
+                         and all(len(fold.get("features", [])) == len(expected_features)
+                                 and {r.get("feature") for r in fold["features"]} == expected_features
                                  for fold in features))
     alarm = False
     for fold in features:
@@ -72,12 +74,12 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
             if not valid_auc or max(raw, 1 - raw, uni, 1 - uni) > .90 or row.get("alarm_above_0_90") is not False:
                 alarm = True
     gate("single_feature_leakage_canaries", "passed" if complete_canaries and not alarm else "failed",
-         "All 22 raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC")
+         f"All {len(expected_features)} raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC")
     folds = results.get("folds", [])
     counts_valid = len(folds) == 4 and {f.get("fold") for f in folds} == set(range(4)) and all(
         isinstance(fold.get("dot_budget_each_arm"), int) and not isinstance(fold["dot_budget_each_arm"], bool)
         and fold["dot_budget_each_arm"] > 0
-        and set(fold.get("arms", {})) == {"tdx6", "physics3", "core19"}
+        and set(fold.get("arms", {})) == expected_arms
         and all(isinstance(arm.get("emitted_pixels"), int) and not isinstance(arm["emitted_pixels"], bool)
                 and arm["emitted_pixels"] == fold["dot_budget_each_arm"] for arm in fold["arms"].values())
         for fold in folds)
@@ -126,7 +128,7 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
              and isinstance(card.get("note"), str) and len(card["note"]) <= 140)
     gate("artifact_identity", "passed" if named else "failed", "Named artifact and note of at most 140 characters")
     promoted = all(row["status"] == "passed" for row in gates)
-    return {"schema_version": 1, "readiness_version": READINESS_VERSION,
+    return {"schema_version": 1, "readiness_version": READINESS_VERSION if spec["id"] == "tdx1" else "research-readiness-v3-matched-controls-20261025",
             "raster_sha256": card.get("raster_sha256"), "gates": gates,
             "observed_registry": observed,
             "download_ok": bool(format_passed and hash_matches and named),

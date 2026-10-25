@@ -19,7 +19,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from gemsdoe30.holdout import spatial_bootstrap
 from gemsdoe30.readiness import assess
 from gemsdoe30.submission import validate_submission_file
-from gemsdoe30.texture import SUPPORT_PX, TRANSFORM_VERSION
+from gemsdoe30.experiments import contract
 
 
 def local_path(relative: str) -> Path:
@@ -61,7 +61,11 @@ def verify(pointer: Path, template: Path, *, write=False):
     card_path = local_path(selection["run_card"])
     directory = card_path.parent
     card = load(card_path)
+    spec = contract(card)
+    candidate = spec["candidate"]
     results = load(directory / "results.json")
+    if results.get("experiment_spec", "tdx1") != spec["id"]:
+        raise ValueError("card/results experiment contract mismatch")
     raster = local_path(card["published_tiff"])
     with raster.open("rb") as stream:
         digest = hashlib.file_digest(stream, "sha256").hexdigest()
@@ -74,14 +78,14 @@ def verify(pointer: Path, template: Path, *, write=False):
     report = validate_submission_file(raster, template)
     if not report.passed:
         raise ValueError("published TIFF fails the shared format validator")
-    recomputed = spatial_bootstrap(results["bootstrap_sufficient_statistics"], candidate="tdx6",
+    recomputed = spatial_bootstrap(results["bootstrap_sufficient_statistics"], candidate=candidate,
                                     replicates=2000, seed=3071)
     # Check the complete pooled summary, not only the candidate point estimate.
     # A changed paired CI must not silently turn a negative result into promotion.
     check_equal(results["summary"], recomputed, "results/summary")
     h = card["holdout"]
     card_summary = {key: h[key] for key in ("evaluator_version", "protocol_version", "bootstrap", "candidate_minus")}
-    card_summary["arms"] = {"tdx6": {key: h[key] for key in recomputed["arms"]["tdx6"]},
+    card_summary["arms"] = {candidate: {key: h[key] for key in recomputed["arms"][candidate]},
                             **h["comparators"]}
     check_equal(card_summary, recomputed, "card/holdout")
     preregistration = hashlib.sha256((directory / "preregistration.md").read_bytes()).hexdigest()
@@ -92,13 +96,18 @@ def verify(pointer: Path, template: Path, *, write=False):
         raise ValueError("holdout results do not bind to the published TIFF")
     features = load(directory / "feature-receipt.json")
     cache = load(directory / "cache-verification.json")
-    transform_hash = hashlib.sha256((ROOT / "src/gemsdoe30/texture.py").read_bytes()).hexdigest()
+    transform_hash = hashlib.sha256((ROOT / spec["transform_path"]).read_bytes()).hexdigest()
     if (features["signature"]["transform_code_sha256"] != transform_hash
-            or features["signature"]["transform_version"] != TRANSFORM_VERSION
-            or features.get("support_px") != SUPPORT_PX
-            or card.get("physical_support_px") != SUPPORT_PX
-            or any(fold.get("buffer_px") != SUPPORT_PX for fold in results["folds"])):
+            or features["signature"]["transform_version"] != spec["transform_version"]
+            or features.get("support_px") != spec["support_px"]
+            or card.get("physical_support_px") != spec["support_px"]
+            or any(fold.get("buffer_px") != spec["support_px"] for fold in results["folds"])):
         raise ValueError("transform identity or physical-support/training guard mismatch")
+    if "parent_transform_path" in spec:
+        parent_hash = hashlib.sha256((ROOT / spec["parent_transform_path"]).read_bytes()).hexdigest()
+        if (features["signature"].get("parent_transform_code_sha256") != parent_hash
+                or features["signature"].get("parent_transform_version") != spec["parent_transform_version"]):
+            raise ValueError("parent transform identity mismatch")
     if (cache.get("all_cells_match_raw_sources") is not True
             or cache.get("dataset_signature") != card.get("dataset_signature")
             or features["signature"].get("dataset_signature") != card.get("dataset_signature")):
@@ -185,9 +194,9 @@ def verify(pointer: Path, template: Path, *, write=False):
     readiness = assess(card, results, format_passed=report.passed, hash_matches=hashes_match,
                        surface_audit=combined_surface, dots_audit=combined_dots, registry=assessment_registry)
     if additional_path.exists():
-        addition = {"registry": "docs/research/texture-displacement/registry-parallel-addendum.json",
-                    "surface_receipt": "docs/research/texture-displacement/novelty-parallel-surface.json",
-                    "dots_receipt": "docs/research/texture-displacement/novelty-parallel-dots.json",
+        addition = {"registry": str((directory / "registry-parallel-addendum.json").relative_to(ROOT)),
+                    "surface_receipt": str((directory / "novelty-parallel-surface.json").relative_to(ROOT)),
+                    "dots_receipt": str((directory / "novelty-parallel-dots.json").relative_to(ROOT)),
                     "timing": "Late-arriving references; checked both saved states without refitting or replacing dots",
                     "combined_observed_registry": readiness["observed_registry"]}
         if write:

@@ -1,0 +1,1145 @@
+{
+  "folds": [
+    {
+      "fold": 0,
+      "features": [
+        {
+          "feature": "mag_anom",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4962114158713929,
+          "raw_auc_either_direction": 0.5037885841286072,
+          "univariate_training_only_hgb_auc": 0.5035301553624176,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "rtp",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.504950634514883,
+          "raw_auc_either_direction": 0.504950634514883,
+          "univariate_training_only_hgb_auc": 0.5039346540558963,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "tmi_hg",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5263976732560782,
+          "raw_auc_either_direction": 0.5263976732560782,
+          "univariate_training_only_hgb_auc": 0.5241213917291525,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "geod_2ndinv",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.571729003351511,
+          "raw_auc_either_direction": 0.571729003351511,
+          "univariate_training_only_hgb_auc": 0.499112363383322,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "iso_grav_anom_slope",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.526883458588957,
+          "raw_auc_either_direction": 0.526883458588957,
+          "univariate_training_only_hgb_auc": 0.5105675931606453,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "tc",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.46343236877982275,
+          "raw_auc_either_direction": 0.5365676312201773,
+          "univariate_training_only_hgb_auc": 0.5612513434446716,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "geod_shearrate",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5762289150193137,
+          "raw_auc_either_direction": 0.5762289150193137,
+          "univariate_training_only_hgb_auc": 0.4918689823335606,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "geod_dilaterate",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4952576704158146,
+          "raw_auc_either_direction": 0.5047423295841854,
+          "univariate_training_only_hgb_auc": 0.5152350960009089,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "tmi_vg",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.49266220574869346,
+          "raw_auc_either_direction": 0.5073377942513065,
+          "univariate_training_only_hgb_auc": 0.5119809304703477,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "deq_n100a15",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5301143197568735,
+          "raw_auc_either_direction": 0.5301143197568735,
+          "univariate_training_only_hgb_auc": 0.5583870333446944,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "iso_grav_anom_vg",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.511879516303113,
+          "raw_auc_either_direction": 0.511879516303113,
+          "univariate_training_only_hgb_auc": 0.5144351749602362,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "det_elev",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5005112531242899,
+          "raw_auc_either_direction": 0.5005112531242899,
+          "univariate_training_only_hgb_auc": 0.570269541013406,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "iso_grav_anom",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4573662008634402,
+          "raw_auc_either_direction": 0.5426337991365597,
+          "univariate_training_only_hgb_auc": 0.5210059097364236,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "tmi",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4953190416950693,
+          "raw_auc_either_direction": 0.5046809583049308,
+          "univariate_training_only_hgb_auc": 0.5164905433424223,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "depth_to_base_surf",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5151440081799591,
+          "raw_auc_either_direction": 0.5151440081799591,
+          "univariate_training_only_hgb_auc": 0.531558656271302,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "ieq_n100a15",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5524402914110429,
+          "raw_auc_either_direction": 0.5524402914110429,
+          "univariate_training_only_hgb_auc": 0.5436885332878891,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "cond_surf",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5068028314587594,
+          "raw_auc_either_direction": 0.5068028314587594,
+          "univariate_training_only_hgb_auc": 0.485024474267212,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "iso_grav_anom_hg",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.46732050272665304,
+          "raw_auc_either_direction": 0.532679497273347,
+          "univariate_training_only_hgb_auc": 0.5003008486707567,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "det_elev_slope",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5498446321858669,
+          "raw_auc_either_direction": 0.5498446321858669,
+          "univariate_training_only_hgb_auc": 0.6048553280504432,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "mag_texture",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4982387926039537,
+          "raw_auc_either_direction": 0.5017612073960462,
+          "univariate_training_only_hgb_auc": 0.49710781470120424,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "rtp_texture",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.49772162065439673,
+          "raw_auc_either_direction": 0.5022783793456033,
+          "univariate_training_only_hgb_auc": 0.49848702482390356,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "texture_consensus",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5005937218813906,
+          "raw_auc_either_direction": 0.5005937218813906,
+          "univariate_training_only_hgb_auc": 0.5072969617700522,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "zero_mag",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4970148929220632,
+          "raw_auc_either_direction": 0.5029851070779368,
+          "univariate_training_only_hgb_auc": 0.49930116507611905,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "zero_rtp",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.49035014996591686,
+          "raw_auc_either_direction": 0.5096498500340831,
+          "univariate_training_only_hgb_auc": 0.4949222162576688,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "zero_consensus",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5090570861735969,
+          "raw_auc_either_direction": 0.5090570861735969,
+          "univariate_training_only_hgb_auc": 0.5098815465235174,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "phase_mag",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5010769853442398,
+          "raw_auc_either_direction": 0.5010769853442398,
+          "univariate_training_only_hgb_auc": 0.4972281021358782,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "phase_rtp",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4999568152124517,
+          "raw_auc_either_direction": 0.5000431847875483,
+          "univariate_training_only_hgb_auc": 0.5007553587252896,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "phase_consensus",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5049007381845034,
+          "raw_auc_either_direction": 0.5049007381845034,
+          "univariate_training_only_hgb_auc": 0.5100368322540331,
+          "alarm_above_0_90": false,
+          "heldout_positives": 29340,
+          "sampled_negatives": 60000
+        }
+      ]
+    },
+    {
+      "fold": 1,
+      "features": [
+        {
+          "feature": "mag_anom",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5184475522574142,
+          "raw_auc_either_direction": 0.5184475522574142,
+          "univariate_training_only_hgb_auc": 0.5134684048225371,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "rtp",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.49741843532813407,
+          "raw_auc_either_direction": 0.5025815646718659,
+          "univariate_training_only_hgb_auc": 0.49176860642474407,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "tmi_hg",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.49015967823226697,
+          "raw_auc_either_direction": 0.509840321767733,
+          "univariate_training_only_hgb_auc": 0.4901778071780996,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "geod_2ndinv",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5344882745769007,
+          "raw_auc_either_direction": 0.5344882745769007,
+          "univariate_training_only_hgb_auc": 0.500785797655048,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "iso_grav_anom_slope",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5779105509576105,
+          "raw_auc_either_direction": 0.5779105509576105,
+          "univariate_training_only_hgb_auc": 0.5322713320335295,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "tc",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4276880809326755,
+          "raw_auc_either_direction": 0.5723119190673245,
+          "univariate_training_only_hgb_auc": 0.5648201104833148,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "geod_shearrate",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5017079075813041,
+          "raw_auc_either_direction": 0.5017079075813041,
+          "univariate_training_only_hgb_auc": 0.5078257036182293,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "geod_dilaterate",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5395492585813572,
+          "raw_auc_either_direction": 0.5395492585813572,
+          "univariate_training_only_hgb_auc": 0.5022702351583639,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "tmi_vg",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4898544279537376,
+          "raw_auc_either_direction": 0.5101455720462624,
+          "univariate_training_only_hgb_auc": 0.49378594288821687,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "deq_n100a15",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5578908098572869,
+          "raw_auc_either_direction": 0.5578908098572869,
+          "univariate_training_only_hgb_auc": 0.5505039776645976,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "iso_grav_anom_vg",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.531180257573346,
+          "raw_auc_either_direction": 0.531180257573346,
+          "univariate_training_only_hgb_auc": 0.5311413178417954,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "det_elev",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.45332948100695003,
+          "raw_auc_either_direction": 0.54667051899305,
+          "univariate_training_only_hgb_auc": 0.5775868573929651,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "iso_grav_anom",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4832558391691867,
+          "raw_auc_either_direction": 0.5167441608308133,
+          "univariate_training_only_hgb_auc": 0.5094867055281447,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "tmi",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5087498938935753,
+          "raw_auc_either_direction": 0.5087498938935753,
+          "univariate_training_only_hgb_auc": 0.5124848652448405,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "depth_to_base_surf",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.51805728951138,
+          "raw_auc_either_direction": 0.51805728951138,
+          "univariate_training_only_hgb_auc": 0.5824533350575627,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "ieq_n100a15",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5421254595734522,
+          "raw_auc_either_direction": 0.5421254595734522,
+          "univariate_training_only_hgb_auc": 0.5055930420711974,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "cond_surf",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4697253726988169,
+          "raw_auc_either_direction": 0.5302746273011831,
+          "univariate_training_only_hgb_auc": 0.46059921282296146,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "iso_grav_anom_hg",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5693708883760412,
+          "raw_auc_either_direction": 0.5693708883760412,
+          "univariate_training_only_hgb_auc": 0.5023776009337365,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "det_elev_slope",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5543639576370099,
+          "raw_auc_either_direction": 0.5543639576370099,
+          "univariate_training_only_hgb_auc": 0.6123388409199426,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "mag_texture",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4998691283357208,
+          "raw_auc_either_direction": 0.5001308716642792,
+          "univariate_training_only_hgb_auc": 0.5072896672237253,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "rtp_texture",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.502575998726723,
+          "raw_auc_either_direction": 0.502575998726723,
+          "univariate_training_only_hgb_auc": 0.5015056800095495,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "texture_consensus",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5049490019364423,
+          "raw_auc_either_direction": 0.5049490019364423,
+          "univariate_training_only_hgb_auc": 0.5014878150034485,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "zero_mag",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5031336569579288,
+          "raw_auc_either_direction": 0.5031336569579288,
+          "univariate_training_only_hgb_auc": 0.5066473858029603,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "zero_rtp",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5107594839248767,
+          "raw_auc_either_direction": 0.5107594839248767,
+          "univariate_training_only_hgb_auc": 0.503072564194387,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "zero_consensus",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5456282395617804,
+          "raw_auc_either_direction": 0.5456282395617804,
+          "univariate_training_only_hgb_auc": 0.5394881273542362,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "phase_mag",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4980528078412648,
+          "raw_auc_either_direction": 0.5019471921587352,
+          "univariate_training_only_hgb_auc": 0.5128651141970396,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "phase_rtp",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.49662800480131575,
+          "raw_auc_either_direction": 0.5033719951986843,
+          "univariate_training_only_hgb_auc": 0.5096528403363574,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "phase_consensus",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4974127281288132,
+          "raw_auc_either_direction": 0.5025872718711868,
+          "univariate_training_only_hgb_auc": 0.5173954792031408,
+          "alarm_above_0_90": false,
+          "heldout_positives": 12566,
+          "sampled_negatives": 60000
+        }
+      ]
+    },
+    {
+      "fold": 2,
+      "features": [
+        {
+          "feature": "mag_anom",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.46236791272288985,
+          "raw_auc_either_direction": 0.5376320872771101,
+          "univariate_training_only_hgb_auc": 0.5077998847885428,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "rtp",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5426247669183594,
+          "raw_auc_either_direction": 0.5426247669183594,
+          "univariate_training_only_hgb_auc": 0.46837363252862557,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "tmi_hg",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5362340051047538,
+          "raw_auc_either_direction": 0.5362340051047538,
+          "univariate_training_only_hgb_auc": 0.5283976027154454,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "geod_2ndinv",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5693100916374207,
+          "raw_auc_either_direction": 0.5693100916374207,
+          "univariate_training_only_hgb_auc": 0.47649945850615055,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "iso_grav_anom_slope",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.45860473784962247,
+          "raw_auc_either_direction": 0.5413952621503775,
+          "univariate_training_only_hgb_auc": 0.46115200999680955,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "tc",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.42530445513843107,
+          "raw_auc_either_direction": 0.5746955448615689,
+          "univariate_training_only_hgb_auc": 0.5833935871530362,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "geod_shearrate",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5853511981991563,
+          "raw_auc_either_direction": 0.5853511981991563,
+          "univariate_training_only_hgb_auc": 0.5860584467723068,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "geod_dilaterate",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4615914681484633,
+          "raw_auc_either_direction": 0.5384085318515367,
+          "univariate_training_only_hgb_auc": 0.49964290917792187,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "tmi_vg",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4765058580594846,
+          "raw_auc_either_direction": 0.5234941419405155,
+          "univariate_training_only_hgb_auc": 0.5335183372327981,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "deq_n100a15",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4893209684852352,
+          "raw_auc_either_direction": 0.5106790315147648,
+          "univariate_training_only_hgb_auc": 0.5178458390939062,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "iso_grav_anom_vg",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5176363004714808,
+          "raw_auc_either_direction": 0.5176363004714808,
+          "univariate_training_only_hgb_auc": 0.49129245719451237,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "det_elev",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5372946798893969,
+          "raw_auc_either_direction": 0.5372946798893969,
+          "univariate_training_only_hgb_auc": 0.5737547086036371,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "iso_grav_anom",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.45513634478357967,
+          "raw_auc_either_direction": 0.5448636552164203,
+          "univariate_training_only_hgb_auc": 0.42057117497961644,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "tmi",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.47088701921372617,
+          "raw_auc_either_direction": 0.5291129807862738,
+          "univariate_training_only_hgb_auc": 0.5404187945336595,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "depth_to_base_surf",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.46787586763089795,
+          "raw_auc_either_direction": 0.532124132369102,
+          "univariate_training_only_hgb_auc": 0.5442676698925875,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "ieq_n100a15",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.505018123648481,
+          "raw_auc_either_direction": 0.505018123648481,
+          "univariate_training_only_hgb_auc": 0.4306024805913005,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "cond_surf",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.45912640469353755,
+          "raw_auc_either_direction": 0.5408735953064625,
+          "univariate_training_only_hgb_auc": 0.5187996570243538,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "iso_grav_anom_hg",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4961484224892765,
+          "raw_auc_either_direction": 0.5038515775107235,
+          "univariate_training_only_hgb_auc": 0.4947999096033181,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "det_elev_slope",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5912614280903258,
+          "raw_auc_either_direction": 0.5912614280903258,
+          "univariate_training_only_hgb_auc": 0.6434328379240668,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "mag_texture",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.49472568595129224,
+          "raw_auc_either_direction": 0.5052743140487077,
+          "univariate_training_only_hgb_auc": 0.522686283632883,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "rtp_texture",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.49421932805133123,
+          "raw_auc_either_direction": 0.5057806719486688,
+          "univariate_training_only_hgb_auc": 0.528239970399518,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "texture_consensus",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4724186341238612,
+          "raw_auc_either_direction": 0.5275813658761388,
+          "univariate_training_only_hgb_auc": 0.4892827138501897,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "zero_mag",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.49637487060867097,
+          "raw_auc_either_direction": 0.503625129391329,
+          "univariate_training_only_hgb_auc": 0.509498314367755,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "zero_rtp",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4954692598106987,
+          "raw_auc_either_direction": 0.5045307401893013,
+          "univariate_training_only_hgb_auc": 0.5083848550108122,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "zero_consensus",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.48054514073522636,
+          "raw_auc_either_direction": 0.5194548592647736,
+          "univariate_training_only_hgb_auc": 0.4784313490375412,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "phase_mag",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.51448754475522,
+          "raw_auc_either_direction": 0.51448754475522,
+          "univariate_training_only_hgb_auc": 0.5317878097415717,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "phase_rtp",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5044873825729377,
+          "raw_auc_either_direction": 0.5044873825729377,
+          "univariate_training_only_hgb_auc": 0.5218915106880783,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "phase_consensus",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4931415098018363,
+          "raw_auc_either_direction": 0.5068584901981636,
+          "univariate_training_only_hgb_auc": 0.4995579876989613,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9403,
+          "sampled_negatives": 60000
+        }
+      ]
+    },
+    {
+      "fold": 3,
+      "features": [
+        {
+          "feature": "mag_anom",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4964826876054689,
+          "raw_auc_either_direction": 0.5035173123945311,
+          "univariate_training_only_hgb_auc": 0.4900347358542549,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "rtp",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5024456460722526,
+          "raw_auc_either_direction": 0.5024456460722526,
+          "univariate_training_only_hgb_auc": 0.5012638013568894,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "tmi_hg",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5025520112270552,
+          "raw_auc_either_direction": 0.5025520112270552,
+          "univariate_training_only_hgb_auc": 0.503124115783311,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "geod_2ndinv",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5247695956882598,
+          "raw_auc_either_direction": 0.5247695956882598,
+          "univariate_training_only_hgb_auc": 0.4592605554981576,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "iso_grav_anom_slope",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5656070943968041,
+          "raw_auc_either_direction": 0.5656070943968041,
+          "univariate_training_only_hgb_auc": 0.5542631366876742,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "tc",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.3840632692771292,
+          "raw_auc_either_direction": 0.6159367307228708,
+          "univariate_training_only_hgb_auc": 0.608805143437683,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "geod_shearrate",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5100799075317698,
+          "raw_auc_either_direction": 0.5100799075317698,
+          "univariate_training_only_hgb_auc": 0.4318366213796191,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "geod_dilaterate",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5609302260908496,
+          "raw_auc_either_direction": 0.5609302260908496,
+          "univariate_training_only_hgb_auc": 0.5569217016220682,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "tmi_vg",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4759177265213348,
+          "raw_auc_either_direction": 0.5240822734786652,
+          "univariate_training_only_hgb_auc": 0.5177350242793677,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "deq_n100a15",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4774086338120329,
+          "raw_auc_either_direction": 0.5225913661879671,
+          "univariate_training_only_hgb_auc": 0.5266539854323793,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "iso_grav_anom_vg",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.569797703791714,
+          "raw_auc_either_direction": 0.569797703791714,
+          "univariate_training_only_hgb_auc": 0.5519748562179289,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "det_elev",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.46611184867582733,
+          "raw_auc_either_direction": 0.5338881513241727,
+          "univariate_training_only_hgb_auc": 0.5495036952853257,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "iso_grav_anom",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4762726082239901,
+          "raw_auc_either_direction": 0.5237273917760099,
+          "univariate_training_only_hgb_auc": 0.5046672710679477,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "tmi",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.48674703912249884,
+          "raw_auc_either_direction": 0.5132529608775012,
+          "univariate_training_only_hgb_auc": 0.5435569945242278,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "depth_to_base_surf",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5244562781967834,
+          "raw_auc_either_direction": 0.5244562781967834,
+          "univariate_training_only_hgb_auc": 0.5534892283982505,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "ieq_n100a15",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5716721889313634,
+          "raw_auc_either_direction": 0.5716721889313634,
+          "univariate_training_only_hgb_auc": 0.4879929219616352,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "cond_surf",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5373170566862967,
+          "raw_auc_either_direction": 0.5373170566862967,
+          "univariate_training_only_hgb_auc": 0.4890551632400041,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "iso_grav_anom_hg",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5026669533698385,
+          "raw_auc_either_direction": 0.5026669533698385,
+          "univariate_training_only_hgb_auc": 0.5219890915039432,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "det_elev_slope",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5716140493163894,
+          "raw_auc_either_direction": 0.5716140493163894,
+          "univariate_training_only_hgb_auc": 0.6051959017804869,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "mag_texture",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.49134566243069183,
+          "raw_auc_either_direction": 0.5086543375693082,
+          "univariate_training_only_hgb_auc": 0.5096181354823156,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "rtp_texture",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.503317372662465,
+          "raw_auc_either_direction": 0.503317372662465,
+          "univariate_training_only_hgb_auc": 0.5060923304749112,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "texture_consensus",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4998209319144539,
+          "raw_auc_either_direction": 0.500179068085546,
+          "univariate_training_only_hgb_auc": 0.5018416804421943,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "zero_mag",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.511862299824362,
+          "raw_auc_either_direction": 0.511862299824362,
+          "univariate_training_only_hgb_auc": 0.505883407376795,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "zero_rtp",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5097993086406998,
+          "raw_auc_either_direction": 0.5097993086406998,
+          "univariate_training_only_hgb_auc": 0.5033525915211626,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "zero_consensus",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5345165883183525,
+          "raw_auc_either_direction": 0.5345165883183525,
+          "univariate_training_only_hgb_auc": 0.5404480283775872,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "phase_mag",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.5004008678582499,
+          "raw_auc_either_direction": 0.5004008678582499,
+          "univariate_training_only_hgb_auc": 0.5060233254124049,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "phase_rtp",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.4970847625443399,
+          "raw_auc_either_direction": 0.50291523745566,
+          "univariate_training_only_hgb_auc": 0.5085523891930984,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        },
+        {
+          "feature": "phase_consensus",
+          "label": "LEAKAGE-CANARY AUC (not DTI)",
+          "raw_auc": 0.501692066156972,
+          "raw_auc_either_direction": 0.501692066156972,
+          "univariate_training_only_hgb_auc": 0.5157449090815167,
+          "alarm_above_0_90": false,
+          "heldout_positives": 9679,
+          "sampled_negatives": 60000
+        }
+      ]
+    }
+  ],
+  "status": "partial until results.json exists"
+}
