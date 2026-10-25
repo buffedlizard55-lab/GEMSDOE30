@@ -1,7 +1,30 @@
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
 
-## START HERE — 2026-10-25 (Candidate C / Lane G30-S19 PROMOTED; A & B negative)
+## START HERE — 2026-10-25 S20 session (Lane G30-S20: science passed, uniqueness FAILED — Candidate C still the submit-this file)
+
+**Read first every session:** the [S20 owner-request distillation](docs/research/2026-10-25-s20/owner-request.md), the
+[S20 analysis](docs/research/2026-10-25-s20/analysis.md), and this README. Standing brief (verbatim) is below and in
+[OWNER_BRIEF.md](OWNER_BRIEF.md). Core values: *Maximize P(Win)*, *Own the Outcome*.
+
+- **❌ S20 — DO NOT SUBMIT as a new unique submission (duplicate-stop):**
+  [gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif](docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif)
+  (SHA-256 `1b07820d0066e56442ade4f4a3880af92f50b4ca9cac528ccf59696ec5299cd6`; note: `G30-S20 19-band+lidar scarp+GeoDAWN rad GBM + EDGE 60k off-cat>2px`).
+  It beat Candidate C's exact recipe head-to-head under a frozen preregistration on **two** component holdouts —
+  HOLDOUT-DTI @60k: seed 31 **0.22960 vs 0.22304 (Δ +0.00655 [0.00067, 0.01245])**, seed 47 **0.23707 vs 0.22444
+  (Δ +0.01263 [0.00616, 0.01990])**, evaluator `component-holdout-v2-footprint-20261025`, 20,870 / 20,364 withheld
+  positives; canaries 69/69 clean; validator passed — **but 89.58 % of its dots are within 3 px of Candidate C's**
+  (frozen gate 70 %), so it is C's successor, not a unique parallel submission. Unique vs every scored registry
+  raster incl. the 0.2778 H33 winner (36.8 %). Never submit both as separate discoveries. Whether to retire C in
+  favour of S20 as a single-file replacement is the owner's explicit selector decision (analysis §5, IR-S20-05);
+  no slot was used. Evidence: [run card](docs/research/2026-10-25-s20/run-card.json) ·
+  [analysis](docs/research/2026-10-25-s20/analysis.md) · [preregistration](docs/research/2026-10-25-s20/preregistration.md) ·
+  [ranked hypotheses](docs/research/2026-10-25-s20/hypotheses.md) · [novelty](docs/research/2026-10-25-s20/novelty.json).
+- **✅ Candidate C (below) remains the only OK-TO-SUBMIT file.** HOLDOUT-DTI is a local proxy, never a competition
+  score. Official leaderboard fetched 2026-10-25: **#1 = 0.4413** (0.3195 was the 2026-10-03 leader).
+- Negative sub-result recorded: oriented 900 m line-coherence reweighting hurt both beliefs on both seeds — rejected.
+
+## Previous START HERE — 2026-10-25 (Candidate C / Lane G30-S19 PROMOTED; A & B negative) — still the submission decision
 
 **✅ OK TO DOWNLOAD & SUBMIT — Candidate C:** [gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif](docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif)
 (SHA-256 `8a0301d5…f43cc9`; note: `G30-S19 habitat GBM (19-band, no catalogue-distance inputs) + EDGE 60k, off-cat >2px`).

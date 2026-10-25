@@ -1,27 +1,33 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-25T21:09:30Z",
+  "generated_utc": "2026-10-25T22:49:33Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
     "directory": "data/raw",
     "availability_scope": "This describes files present in the build worktree at generated_utc; data/raw and data/processed are Git-ignored and are not distributed by GitHub Pages.",
-    "required_files_present": false,
-    "sha256_verified_against_pins": false,
+    "required_files_present": true,
+    "sha256_verified_against_pins": true,
     "files": [
       {
         "dest": "training_features.tif",
         "path": "data/raw/training_features.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-        "expected_bytes": 418912844
+        "expected_bytes": 418912844,
+        "actual_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "actual_bytes": 418912844,
+        "sha256_matches_pin": true
       },
       {
         "dest": "labels.tif",
         "path": "data/raw/labels.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "expected_bytes": 425830
+        "expected_bytes": 425830,
+        "actual_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+        "actual_bytes": 425830,
+        "sha256_matches_pin": true
       },
       {
         "dest": "sample_submission.tif",
@@ -35,15 +41,17 @@
       }
     ],
     "prepared_dataset": {
-      "dataset_signature": null,
-      "matches_recorded_pin": null,
-      "positive_label_pixels": null,
-      "template_valid_pixels": null
+      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+      "matches_recorded_pin": true,
+      "positive_label_pixels": 60988,
+      "template_valid_pixels": 5167373
     },
     "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
   },
   "competition_data": {
     "owner_mirror_files_present": [
+      "training_features.tif",
+      "labels.tif",
       "sample_submission.tif"
     ],
     "organizer_authenticated": false,
@@ -267,6 +275,42 @@
       "performance_status": "unscored; format validation is not a score"
     },
     {
+      "manifest": "gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.json",
+      "file": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif",
+      "present": true,
+      "sha256": "12bd6196cdebfbaa39960d0d6f600fde498f1fb7675321222ba49489dec69b22",
+      "sha256_matches_manifest": true,
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "site_linked": true,
+      "submission_recommendation": false,
+      "run_name": "gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan",
+      "note": "G30-S20 19-band+lidar scarp+GeoDAWN rad GBM + EDGE 60k off-cat>2px",
+      "performance_status": "unscored; format validation is not a score"
+    },
+    {
+      "manifest": "gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.json",
+      "file": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
+      "present": true,
+      "sha256": "1b07820d0066e56442ade4f4a3880af92f50b4ca9cac528ccf59696ec5299cd6",
+      "sha256_matches_manifest": true,
+      "outside_convention": "0.0 outside; nonstandard diagnostic only; does not match published null/NaN-outside format",
+      "published_format_compliant": false,
+      "whole_raster_range_diagnostic_passed": true,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "site_linked": true,
+      "submission_recommendation": false,
+      "run_name": "gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros",
+      "note": "G30-S20 19-band+lidar scarp+GeoDAWN rad GBM + EDGE 60k off-cat>2px",
+      "performance_status": "unscored; format validation is not a score"
+    },
+    {
       "manifest": "gemsdoe30-h-cc1-dispersed3px-32058dots-nan.json",
       "file": "docs/downloads/gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif",
       "present": true,
@@ -459,6 +503,229 @@
       "private_fork_created": false,
       "note": "Existing shared evaluator/writer were reused; evaluator footprint correction is recorded in the review."
     }
+  },
+  "lane_g30s19_run_card": {
+    "schema_version": 1,
+    "run_id": "lane-g30s19-habitat-edge-20261025",
+    "lane": "G30-S19 (self-assigned and frozen in lane-g30s19-preregistration.md; prompt's method paragraph was not identifiable \u2014 IR-S19-01)",
+    "hypothesis": "H-A: unmapped faults are persistent linear discontinuities coincident across magnetic, gravity and topographic fields; a habitat model using only the 19 competition bands and label-free edge/coherence transforms (no catalogue-distance inputs) recovers hidden whole fault components better per false-positive unit than proximity or belief-ordered thinning.",
+    "mechanism": "HistGradientBoosting habitat belief from 40 features (19 robust-normalized bands + gradient magnitudes, |Laplacian|, multi-scale local std, structure-tensor coherence/energy on RTP, cross-physics edge-coincidence products); negatives sampled >3 px from all catalogue traces (halo treated as unlabelled); prevalence-corrected probabilities; EDGE expected-marginal-DTI greedy emission (shared emitter_opt); support restricted to footprint pixels >2 px from the catalogue (mechanism learned from H33 forensics, dots independently generated).",
+    "non_fault_mimic": "Lithologic contacts and dike edges produce coincident magnetic/gravity gradients without fault offset; saline facies mimic conductivity structure.",
+    "experiments_run": 3,
+    "experiments": {
+      "E1_canaries": "43 single-feature AUCs on hidden components; none >0.90 or <0.10 (max: visible-only proximity 0.7636); file lane-g30s19-canaries.json",
+      "E2_holdout_v1_FAILED": "GBM with catalogue-distance inputs traced the visible catalogue (belief on scored domain ~0); best HOLDOUT-DTI 0.0296; recorded negative in lane-g30s19-holdout-v1-failed.json",
+      "E3_holdout_v2": "habitat-only design; results in lane-g30s19-holdout.json; final file is the production run of this frozen recipe (no further holdout search)"
+    },
+    "holdout": {
+      "label": "HOLDOUT-DTI",
+      "value_at_final_operating_point_60000_dots": 0.223,
+      "value_exact": 0.22304474656620646,
+      "evaluator_version": "component-holdout-v2-footprint-20261025",
+      "protocol": "whole 8-connected catalogue components withheld (split_components seed=31, spatially interleaved); 300 m (3 px) training buffer around hidden pixels; catalogue features from visible faults only; visible faults masked pixel-exactly; pooled DTI alpha=0.2 beta=0.8 R=300 m triangular",
+      "withheld_positives": 20870,
+      "withheld_components": 1085,
+      "ci95": [
+        0.2052,
+        0.2396
+      ],
+      "ci_method": "component bootstrap, 500 draws, seed 7, conditional on observed FP weight (FP held fixed)",
+      "comparators_same_holdout": {
+        "proximity_only_EDGE": 0.1672,
+        "combined_habitat_x_proximity_EDGE_selfstop": 0.215,
+        "combined_PoissonDisk_r2.8": 0.1945,
+        "habitat_EDGE_selfstop_62779_dots": 0.2227,
+        "registry_D28_leaky_reference_not_a_gate": 0.1176,
+        "registry_H33_leaky_reference_not_a_gate": 0.0054,
+        "leaky_note": "Registry rasters were built with full-catalogue knowledge. H33 scores ~0 here by construction (its >2 px prune used the full catalogue including hidden components). This is the known catalogue-frame inversion (IR-30-039), not evidence about hidden-test performance."
+      },
+      "gate": "preregistered: beat best non-leaky comparator by >=+0.005 and beat proximity \u2014 PASSED (+0.0285 over Poisson, +0.0558 over proximity at 60k)",
+      "warning": "Catalogue hide-and-recover is a biased proxy: the organizer scores expert-labelled faults outside the catalogue. HOLDOUT-DTI is not a competition score or a forecast."
+    },
+    "registry_novelty": {
+      "stage_surface": "belief vs registry dots: max Spearman 0.1162 (threshold 0.90) \u2014 registry continuous surfaces unavailable, dots used as reference (IR-S19-06)",
+      "stage_dots": "max Spearman 0.0293; max fraction of candidate dots within 3 px of any single reference 0.6507 vs edge-hybrid-80k (threshold 0.70); vs GEMSDOE32 H33 winner: Spearman 0.0251, overlap 0.3495",
+      "decision": "novelty-check-passed vs the 9 pinned priority-site rasters + 9 local download rasters; complete parallel-lane registry still unavailable (IR-S19-06)",
+      "file": "lane-g30s19-novelty.json"
+    },
+    "raster": {
+      "primary_file_submit_this": "docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif",
+      "sha256": "8a0301d5606e39b114eca997cd43849531393bb3921db26a267478f915f43cc9",
+      "bytes": 449412,
+      "dots": 60000,
+      "dots_on_catalogue": 0,
+      "dots_within_2px_of_catalogue": 0,
+      "alternate_nan_outside_twin": "docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan.tif",
+      "alternate_sha256": "51ca48a5157a737f33f53bbf2985fdfa93816adc5913a87736366390e063fcf3",
+      "twins_identical_inside_footprint": true
+    },
+    "validator_output": {
+      "zeros_twin": "validate_submission.py --finite-all-cells PASSED (all 12,279,160 cells finite in [0,1]; min 0.0 max 1.0; values are exactly {0,1})",
+      "nan_twin": "validate_submission.py (published format) PASSED (0 NaN inside footprint; NaN outside)",
+      "no_nan_inside_footprint": true,
+      "values_in_0_1": true,
+      "crs_match": "EPSG:32611",
+      "shape_match": "3730x3292",
+      "transform_match": "(100, 0, 243350, 0, -100, 4508550)",
+      "single_band_float32": true,
+      "receipts": [
+        "docs/research/format-checks/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.json",
+        "docs/research/format-checks/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan.json"
+      ],
+      "portal_note": "Submit the -zeros twin: the owner's prior '[0,1]' portal error cannot be triggered by its values (whole array finite in [0,1]), and the scored H33 winner used the same -zeros convention (owner-reported). Portal acceptance still cannot be guaranteed without an organizer receipt."
+    },
+    "submission_name": "gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros",
+    "note": "G30-S19 habitat GBM (19-band, no catalogue-distance inputs) + EDGE 60k, off-cat >2px",
+    "note_chars": 84,
+    "verdict": "promote",
+    "slot_selected": false,
+    "slot_note": "Research promotion only. Spending a weekly slot is the owner's separate selector step; no slot was used and nothing was uploaded by this session.",
+    "organizer_confirmed_score": null,
+    "owner_reported_reference_scores_not_verified": {
+      "GEMSDOE32_H33": 0.2778,
+      "leaderboard_claims_in_prompt_conflict": [
+        0.4413,
+        0.3195
+      ]
+    }
+  },
+  "lane_g30s20_run_card": {
+    "schema": "run-card-v1 (parallel-run protocol)",
+    "lane": "G30-S20",
+    "lane_status": "self-assigned and frozen in preregistration before experiments; the prompt's single method paragraph was not identifiable (IR-S20-01)",
+    "branch": "arena/15a1706d-gemsdoe30",
+    "hypothesis": "Adding 1 m-DEM lidar scarp morphology and GeoDAWN radiometric composition to the 19-band habitat GBM recovers withheld whole fault components better than the identical GBM without them, because expert-labelled new faults are enriched for sub-100 m surface scarps and altered traces diluted in the 100 m bands.",
+    "mechanism": "HistGradientBoosting habitat belief on 66 features (40 habitat derivatives + 15 lidar-scarp incl. sqrt(lapneg*lappos) dipole and step*coherence + 11 radiometric), no catalogue-distance inputs, halo-excluded negatives, prevalence correction, EDGE expected-marginal-DTI emission, support >2 px off-catalogue, 60000 dots. Oriented line-coherence arm tested and rejected (hurt on both seeds).",
+    "non_fault_mimic": "Fluvial terrace risers and Lake Lahontan paleo-shoreline scarps (identical topographic dipoles); lithologic contacts (identical radiometric ratio steps)",
+    "experiments_run": 3,
+    "experiment_cap": 3,
+    "holdout": {
+      "label": "HOLDOUT-DTI",
+      "evaluator_version": "component-holdout-v2-footprint-20261025",
+      "primary_endpoint": "pooled DTI at matched 60000 dots (alpha 0.2, beta 0.8, 300 m triangular kernel)",
+      "seed31": {
+        "withheld_positives": 20870,
+        "candidate_B_combined": 0.22959546363839015,
+        "candidate_ci95_conditional_fp_fixed": [
+          0.21024817834166834,
+          0.24535554007902505
+        ],
+        "control_A_habitat": 0.2230445513918443,
+        "control_ci95": [
+          0.20516950887762725,
+          0.239587193318406
+        ],
+        "delta_B_minus_A": 0.006550912246545859,
+        "delta_ci95": [
+          0.0006736338740560969,
+          0.012446012459199003
+        ],
+        "line_arm_C": 0.2251841492530345
+      },
+      "seed47_replication": {
+        "withheld_positives": 20364,
+        "candidate_B_combined": 0.23707092849336275,
+        "candidate_ci95_conditional_fp_fixed": [
+          0.21808279177267376,
+          0.25652214446348043
+        ],
+        "control_A_habitat": 0.22443969334749395,
+        "delta_B_minus_A": 0.012631235145868808,
+        "delta_ci95": [
+          0.00616009221852607,
+          0.01989790070091464
+        ]
+      },
+      "gate": "preregistered: seed31 delta >= +0.005 and seed47 delta > 0 -- PASSED (+0.00655, +0.01263)",
+      "feature_canaries": "69/69 features with AUC in [0.10, 0.90] on both seeds (max non-distance single: lid_upface_max 0.5808); distance features excluded from all models",
+      "warning": "Catalogue hide-and-recover is a biased proxy: the organizer scores expert-labelled faults outside the catalogue and masks catalogue pixels. HOLDOUT-DTI is not a competition score or forecast."
+    },
+    "registry_novelty": {
+      "surface_stage": "max Spearman 0.1584 vs 24 registry rasters (gate 0.90) -- passed; registry continuous surfaces unavailable, belief compared with registry dots",
+      "dots_stage": "DUPLICATE-STOP: 0.8958 of candidate dots within 3 px of G30-S19 Candidate C (unsubmitted predecessor; frozen gate 0.70). Versus the 0.2778 GEMSDOE32 H33 winner: Spearman 0.0297, overlap 0.3677. Versus the 9 priority winners: max overlap 0.4488. Exact same-pixel overlap vs Candidate C: 0.2238 (context only).",
+      "vs_H33_winner": {
+        "spearman_full_footprint": 0.029709462735654713,
+        "candidate_dots": 60000,
+        "reference_dots": 37654,
+        "candidate_fraction_within_3px_of_reference": 0.36766666666666664,
+        "identical_inside_footprint": false,
+        "correlation_duplicate": false,
+        "dot_duplicate": false,
+        "undefined": false
+      },
+      "vs_candidate_C": {
+        "spearman_full_footprint": 0.214698280365135,
+        "candidate_dots": 60000,
+        "reference_dots": 60000,
+        "candidate_fraction_within_3px_of_reference": 0.8958166666666667,
+        "identical_inside_footprint": false,
+        "correlation_duplicate": false,
+        "dot_duplicate": true,
+        "undefined": false
+      },
+      "decision": "duplicate-stop (dots stage) against Candidate C only; novelty passed against every scored registry raster",
+      "registry_complete": false,
+      "file": "novelty.json"
+    },
+    "raster": {
+      "primary_file": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
+      "sha256": "1b07820d0066e56442ade4f4a3880af92f50b4ca9cac528ccf59696ec5299cd6",
+      "bytes": 451460,
+      "dots": 60000,
+      "dots_on_catalogue": 0,
+      "dots_within_2px_of_catalogue": 0,
+      "alternate_nan_outside_twin": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif",
+      "alternate_sha256": "12bd6196cdebfbaa39960d0d6f600fde498f1fb7675321222ba49489dec69b22",
+      "twins_identical_inside_footprint": true,
+      "median_dot_distance_to_catalogue_px": 5.0
+    },
+    "validator_output": {
+      "zeros_twin": "validate_submission.py --finite-all-cells PASSED (all 12,279,160 cells finite in [0,1]; values exactly {0,1})",
+      "nan_twin": "validate_submission.py (published format) PASSED (0 NaN inside footprint; NaN outside)",
+      "no_nan_inside_footprint": true,
+      "values_in_0_1": true,
+      "crs_match": "EPSG:32611",
+      "shape_match": "3730x3292",
+      "transform_match": "(100, 0, 243350, 0, -100, 4508550)",
+      "single_band_float32": true,
+      "receipts": [
+        "docs/research/2026-10-25-s20/format-checks/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.json",
+        "docs/research/2026-10-25-s20/format-checks/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.json",
+        "docs/research/2026-10-25-s20/independent-reread.json"
+      ],
+      "portal_note": "The zeros twin's whole array is finite in [0,1], so the historical range error cannot be triggered by its values. Portal acceptance is still not guaranteed without an organizer receipt."
+    },
+    "submission_name": "gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros",
+    "note": "G30-S20 19-band+lidar scarp+GeoDAWN rad GBM + EDGE 60k off-cat>2px",
+    "note_chars": 66,
+    "verdict": "negative",
+    "verdict_scope": "duplicate-stop under the frozen novelty gate vs the unsubmitted G30-S19 Candidate C only. Scientific gates (canary, E1 +0.00655, E2 replication +0.01263, validator) all passed; novelty passed vs all 9 priority scored winners and 13 other local rasters. Not approved as an additional unique submission; never submit alongside Candidate C as a separate discovery.",
+    "submission_approved_as_unique": false,
+    "selector_note": "Owner-as-selector may explicitly retire Candidate C in favour of S20 as a single-file replacement (Candidate C was never uploaded). That allocation is outside this lane and is not made here; the site keeps Candidate C as the only OK-TO-SUBMIT file until the owner rules (IR-S20-05).",
+    "slot_selected": false,
+    "organizer_confirmed_score": null,
+    "owner_reported_reference_scores_not_verified": {
+      "GEMSDOE32_H33": 0.2778,
+      "GEMSDOE36": 0.275,
+      "GEMSDOE28_solo_d2.8": 0.2708
+    },
+    "official_leaderboard_snapshot_2026_10_25": {
+      "rank1": 0.4413,
+      "rank2": 0.3916,
+      "rank3": 0.3904,
+      "note": "0.3195 was the verified 2026-10-03 leader; stale"
+    },
+    "irregularities": [
+      "IR-S20-01 lane self-assigned",
+      "IR-S20-02 owner-mirror data not organizer-authenticated",
+      "IR-S20-03 requested shared filenames absent; repo equivalents reused",
+      "IR-S20-04 sample template values identical to labels (footprint only used)",
+      "IR-S20-05 registry-membership governance ruling needed for Candidate C",
+      "IR-S20-06 surface-stage novelty computed after E3 on frozen belief",
+      "IR-S20-07 catalogue holdout is a biased proxy",
+      "IR-S20-08 no lidar-vs-radiometric ablation within budget"
+    ],
+    "tests": "137 passed, 5 skipped (torch absent) -- .venv/bin/python -m pytest -q"
   },
   "historical_promotion_warning": "Prior results require same-protocol re-evaluation after the shared footprint correction.",
   "promotion_gates": {
@@ -761,6 +1028,17 @@
         "notes": "rank 2 = 0.3916; rank 24 = 0.3169",
         "evidence_class": "official-snapshot",
         "as_of_utc": "2026-10-25"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "rank-1 xiaofanhu re-read (best public DW-Tversky)",
+        "score": "0.4413",
+        "provenance": "official page fetched 2026-10-25 (S20 session)",
+        "status": "verified snapshot; dynamic; public test chunk only; not private-test performance",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "rank-2 cfld__ 0.3916; rank-3 Batik Shirt Brothers 0.3904; rank-4 BrandenKMurray 0.3724; rank-5 No Fault of Our Own 0.3539; 0.3195 not at top (stale 2026-10-03 leader)",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-25"
       }
     ],
     "note": "DrivenData Terms of Use prohibit automated monitoring; snapshots are dated manual reads only",
@@ -769,7 +1047,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "140 tests collected in 1.01s",
+      "pytest_collect": "142 tests collected in 0.69s",
       "exit_code": 0
     },
     "score_gain_claimed": false

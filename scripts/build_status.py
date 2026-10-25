@@ -357,6 +357,12 @@ def main() -> int:
             "local_validation_guarantees_portal_acceptance": False,
         },
         "current_readiness": load_json(research / "2026-10-25" / "run-card.json"),
+        "lane_g30s19_run_card": load_json(
+            research / "2026-10-25" / "lane-g30s19-run-card.json"
+        ),
+        "lane_g30s20_run_card": load_json(
+            research / "2026-10-25-s20" / "run-card.json"
+        ),
         "historical_promotion_warning": "Prior results require same-protocol re-evaluation after the shared footprint correction.",
         "promotion_gates": gates,
         "any_candidate_promoted": bool(promoted),
