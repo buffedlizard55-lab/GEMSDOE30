@@ -46,3 +46,21 @@ authenticity, and authorship representations.
 **Before use:** the final sentence is appropriate only if the entrant has in fact independently
 reviewed and accepts responsibility for all submission elements. Expand or correct the description to
 cover all actual AI use by the entrant/team.
+
+## 2026-10-25 TDX-C2 continuation — additional AI assistance
+
+An Arena.ai coding agent reviewed the standing owner prompt, prior negative
+TDX-1 experiment, shared evaluator/writer and nine priority repositories. It
+proposed four prospective conditional profile-displacement hypotheses and
+implemented one preregistered four-arm test with matched zero-lag and local
+Fourier-phase controls on the existing cached feature stack. It implemented
+feature canaries, evidence verification, duplicate-stop logging, tests and
+research-only Pages/guide/feed updates, then performed three review passes.
+
+The new candidate failed its improvement gate and exceeded the mandatory dot
+similarity limit. It was not published as a new unique TIFF, not selected for a
+competition slot and not uploaded. A previously generated negative TDX-1 TIFF
+remains an explicitly archived research download. This entry describes assistance
+and repository outputs, not an entrant-approved final narrative, a newly verified
+rules interpretation or organizer acceptance. Include these contributions if a
+later authorized final entry builds on this work.

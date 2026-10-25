@@ -36,92 +36,150 @@ Pages: [overview](index.html) · [executive summary](executive-summary.html) · 
 [`owner-prompt.txt`](docs/research/texture-displacement/owner-prompt.txt). It was re-read in full at the start of this
 session (2026-10-25, branch `arena/f7b53b40-gemsdoe30`). Its content matches this session's prompt, including the GEMSDOE37–92 lists. **Read it first every session.**
 
-## Previous decision — TDX-1 (2026-10-25): new TIFF available; **NOT APPROVED FOR SUBMISSION**
+**Cross-lane confirmation.** Three independent lanes, run concurrently today, stopped for the same reason: TDX-C2 (79.09 %), G30-S20 and G30-LSM (80.2 %) each collided with G30-S19's near-catalogue dots. Catalogue-trained habitat models concentrate dots beside mapped faults, which is where the leaderboard differentials show the hidden truth is not (IR-30-079/087). The G30-LSM pointer is [`docs/research/2026-10-25-lsm/current-run.json`](docs/research/2026-10-25-lsm/current-run.json); verify with `python scripts/verify_lsm_run.py`.
 
-**Download for research: [new TDX-1 TIFF](docs/downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.tif). Do not upload it to the competition.**
-The [live Pages overview](https://buffedlizard55-lab.github.io/GEMSDOE30/) and
-[executive submission guide](executive-summary.html) put the download and automated
-verdict first. This is a new six-feature model output, not a copied/re-encoded
-previous submission. Local format and observed-registry novelty checks passed;
-the required performance gate **failed**. No slot was selected or used.
+## Earlier today — TDX-C2 attempt: **DUPLICATE-STOP; DO NOT SUBMIT**
+**No new unique/approved competition TIFF was published.** The fixed TDX-C2
+candidate crossed the mandatory duplicate limit, so all experimentation stopped.
+It was **not** re-encoded, renamed, perturbed, or replaced with a better-looking
+control. **No competition slot was selected or used.**
 
-**Read the [complete current owner prompt](#current-owner-prompt)
-and [frozen scientific plan](docs/research/texture-displacement/preregistration.md)
-at the start of every session.** Core values: **Maximize P(Win)** by preserving slots
-for reproducible improvements; **Own the Outcome** by delivering honest negative
-results and automated checks rather than outsourcing inspection.
+**[Open the site](https://buffedlizard55-lab.github.io/GEMSDOE30/) ·
+[Executive submission guide](executive-summary.html) ·
+[Latest scientific review](experiment-review.html) ·
+[Final JSON run card](docs/research/texture-controls/run-card.json)**
 
-| Current evidence | Result |
+**Archived download only:** [previous-session TDX-1 research TIFF](docs/downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.tif).
+It remains format-valid and downloadable for reproducibility, **not approved for
+competition upload**, and is **not a new submission from this session**. The
+latest duplicate's TIFF is deliberately private under ignored `outputs/`.
+
+Read the [complete owner prompt](#current-owner-prompt), [current pointers](docs/current-run.json)
+and [frozen TDX-C2 plan](docs/research/texture-controls/preregistration.md) before
+working on this project. **Maximize P(Win):** protect organizer feedback slots for
+unique reproducible improvements. **Own the Outcome:** deliver honest negative
+results and automated decisions, not a manual-inspector handoff.
+
+### Latest evidence — one fixed experiment, four arms, no tuning
+
+All performance numbers in this table are **HOLDOUT-DTI**, evaluator
+`component-holdout-v3-blockstats-20261025`, protocol
+`buffered-quadrant-whole-components-v1-20261025`, **60,988** withheld positive pixels,
+with **95% paired spatial-bootstrap CI**. This is a catalogue proxy on previously
+inspected folds—not an organizer score, projection, or independent confirmation.
+
+| Fixed arm / difference | HOLDOUT-DTI | 95% CI |
+|---|---:|---|
+| **TDX-C2: core19 + three magnetic displacement features** | **0.136061** | **[0.120028, 0.152034]** |
+| Same-protocol core19 comparator | 0.139821 | [0.124178, 0.155905] |
+| Matched zero-lag control | 0.136713 | [0.122039, 0.151906] |
+| Matched local Fourier-phase control | 0.140185 | [0.124203, 0.155878] |
+| Candidate − core19 (paired HOLDOUT-DTI difference) | −0.003760 | [−0.008176, 0.000704] |
+
+**Interpretation:** no positive paired lower bound against any control; no
+established incremental displacement benefit. The intervals cross zero: do not
+call this statistically significant inferiority or select the phase control.
+
+| Automated diagnostic (not a performance score) | Result |
 |---|---|
-| **HOLDOUT-DTI**, `component-holdout-v3-blockstats-20261025`; **60,988** withheld positives | **0.072844**, spatial-bootstrap **95% CI [0.063483, 0.083061]** |
-| Same-protocol core19 comparator — **HOLDOUT-DTI**, same evaluator/positives | **0.139821**, **95% CI [0.124178, 0.155905]** |
-| Paired candidate − core19 — **HOLDOUT-DTI difference**, same evaluator/positives | **−0.066977**, paired **95% CI [−0.085747, −0.048300]** |
-| Feature canaries — AUC diagnostics, not DTI | All 22 inputs tested alone in four folds; no alarm above 0.90 |
-| Observed novelty — diagnostics, not scores | 108 aligned comparisons (104 frozen + 4 late); max surface rho **0.053133**, final-dot overlap **40.4922%** within 3 px |
-| GeoTIFF contract | One float32 band; no NaN inside; values [0,1]; CRS/shape/transform match; NaN nodata outside; no positive catalogue pixels |
-| Approval | **Negative.** Complete parallel registry, external lane allocation, historical-best rerun and current portal evidence remain unavailable |
+| Observed registry | 179 source TIFFs; 164 distinct aligned byte sequences; one unaligned exclusion; all nine priority sites snapshotted; +2 post-stop S20 arrivals = 166 observed comparisons |
+| Before-placement surface comparison | Max Spearman 0.156573; threshold not crossed; original/private surfaces still missing |
+| Final-dot comparison | Max Spearman 0.063833; **79.090497%** within 3 px of G30-S19 — **DUPLICATE-STOP** (>70%) |
+| Individual canaries | 28 distinct features × 4 folds; max bidirectional AUC 0.643433; no alarm above .90 |
+| Local stopped-file validator | Passed: no NaN inside, values [0,1], exact CRS/shape/transform, one float32 band, NaN outside, zero positive catalogue pixels |
+| Artifact distribution | **Not published; not downloadable.** Stored validator receipt is not a current public-byte reinspection |
+| Execution budget | One experiment/four frozen arms; 373 seconds UTC start-to-stop; no second experiment |
+| Approval | **Negative.** Format validity and a new SHA-256 cannot rescue duplicate/performance failures |
 
-- [Final JSON run card](docs/research/texture-displacement/run-card.json) · [machine-adjudicated gates](docs/research/texture-displacement/readiness.json)
-- [Scientific review / H33 explanation / source links](docs/research/texture-displacement/review.md)
-- [Three-pass verification journal](docs/research/texture-displacement/verification.md) — **186 passed, 5 optional torch skips**, 7 subtests; desktop/mobile download verified
-- [Full results, canaries and pooled-bootstrap sufficient statistics](docs/research/texture-displacement/results.json)
-- [Expanded immutable registry](docs/research/texture-displacement/registry.json) · [exact format validation](docs/research/texture-displacement/validation.json)
-- [Current evidence pointer](docs/current-run.json) · [generated status feed](docs/status.json)
-- [PR #28 — code review, CI and delivery timeline](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/28)
-- [All 119 owner-reported submission claims](docs/research/texture-displacement/owner-claims.csv) — **unverified**, not organizer receipts
+The mandatory stop takes precedence over manufacturing a “unique TIFF” delivery.
+The accepted deliverable is the negative experiment and machine-bound JSON card,
+not a falsely certified upload. No current portal limit, eligibility, deadline,
+acceptance receipt or leaderboard value was invented.
 
-**Review correction:** the square Gaussian's diagonal reach required a 17-pixel
-finite-data/training guard, not 16. One preregistered corrective execution followed
-the first negative result; both remain negative. Total experimental time was
-**401.18 seconds across two executions**, with no geological/model/emitter tuning.
-The [retirement receipt](docs/research/texture-displacement/correction-v1-retirement.json)
-preserves the first run's commit, hash and statistics. Current values/download above
-are the corrected run, not fresh independent confirmation.
+[PR #30 — verified code review and delivery timeline](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/30)
 
-### Reproduce and inspect autonomously (Python 3.11+, CPU)
+### Why H33 may have improved
+
+Reproduced again: its **37,654-dot support** equals the **40,199-dot GEMSDOE28 base**
+with all dots at catalogue distance ≤2 px deleted—**zero support mismatches**.
+GEMSDOE25/30 and GEMSDOE28/31 references also have identical in-footprint values.
+These are raster diagnostics, not scores. Pruning can save FP mass while preserving
+max-kernel truth coverage; it can also remove genuine splays. This does not identify
+a hidden-test cause or establish a new geological discovery. The owner's **0.2778**
+attribution remains **unverified**, not ORGANIZER-CONFIRMED. [Detailed mathematical
+analysis and all nine audited references](docs/research/texture-controls/review.md).
+
+### Autonomous inspection (CPU, Python 3.11+)
 
 ```bash
 python -m venv .venv
 .venv/bin/pip install -e '.[research,test]' -c requirements-tdx1.txt
-.venv/bin/python scripts/restore_public_mirrors.py
-.venv/bin/python scripts/prepare_data.py
-.venv/bin/python scripts/verify_prepared_cache.py
-# Registry already pinned in docs/research/texture-displacement/registry.json.
-# A fresh sync is a NEW snapshot, not an exact historical reproduction.
-.venv/bin/python scripts/sync_priority_registry.py --restore-only
-.venv/bin/python scripts/run_texture_displacement.py --max-seconds 5400
-.venv/bin/python scripts/verify_current_run.py --write
-.venv/bin/python scripts/build_research_site.py
+# Only the small pinned template is required for all publication checks.
+.venv/bin/python scripts/restore_public_mirrors.py --ids sample_submission
+.venv/bin/python scripts/verify_current_run.py
+.venv/bin/python scripts/verify_stopped_attempt.py
+.venv/bin/python scripts/build_research_site.py --check
 .venv/bin/python -m pytest -q
-# EXPECTED exit 2: valid research download, NOT eligible for a competition slot.
+# Both deliberately exit 2: no eligible competition candidate.
 .venv/bin/python scripts/verify_current_run.py --require-promote
+.venv/bin/python scripts/verify_stopped_attempt.py --require-promote
 ```
 
-For inspection of the committed artifact only, restore **just** the small template:
-`python scripts/restore_public_mirrors.py --ids sample_submission`, then run
-`python scripts/verify_current_run.py`. Exit 0 verifies the research decision,
-**not submission approval**. CI repeats this inspection and checks generated Pages
-for staleness. There is no human-inspector override or competition uploader.
+`verify_current_run.py` reopens the actual **retained archive**, rechecks its hash
+and recomputes its uncertainty. `verify_stopped_attempt.py` recomputes the latest
+holdout/canary/duplicate decision from immutable receipts, without claiming the
+private TIFF is distributed. Add `--inspect-quarantine` only where ignored local
+bytes exist to reopen them too. No human-inspector override, clipping workaround,
+competition authentication or uploader exists.
 
-The nine priority sites were audited through GitHub, including all published TIFFs
-at recorded snapshots. The new method passed the observed duplicate-stop tests,
-but incomplete parallel/original-surface coverage does not certify global novelty.
-The restricted physics model improves on its three-band ablation but loses to the
-stronger comparator. That does not establish a higher hidden-test score. The owner's
-H33 attribution remains unverified; projections are never organizer scores.
+The builder `scripts/run_texture_controls.py` intentionally refuses to overwrite
+an already registered/stopped execution. Its exact executed version is frozen at
+commit `79d1be92e578f4e555fe5a5ae8d273728221c8af`. A subsequent audit-only finalizer
+fixed negative run-card logging; **no refit or replacement TIFF followed the stop**.
+The shared evaluator/writer are `src/gemsdoe30/{holdout,submission}.py`; the literal
+template filenames in the prompt are absent, so those shared equivalents are reused.
 
-Raw/core data were restored and prepared in this worktree, not distributed with
-Pages. Large rasters, arrays, models and intermediate outputs stay Git-ignored.
-Mirror hashes verify consistency, not organizer origin. Network access excludes
-DrivenData/USGS/GDR/NLR web hosts; no current leaderboard, portal limit or acceptance
-receipt was invented. GPU training is not needed for TDX-1; legacy UNet training,
-missing best-model checkpoints and hidden expert labels remain separate limitations.
+### Sources, constraints and next session
 
-**Next session:** preserve the negative result; obtain programmatically shared lane/
-registry evidence; preregister matched zero-lag/phase-scrambled controls; only then
-consider adding this mechanism to the full feature stack. Reusing inspected folds
-with a new seed is not independent confirmation. See the review for prioritized
-next work and the three-pass verification record.
+- Official GitHub [reference notebook](https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/unet-mc-cv-reference-solution.ipynb)
+  retrieved again: [hashes, saved band metadata and exact excerpts](docs/research/texture-controls/official-source-audit.json).
+- Four ranked prospective geological hypotheses were frozen before implementation;
+  only the habitat-conditioned displacement-specificity test ran. All use existing
+  cached bands; no inaccessible external dataset was claimed viable.
+- [Full results / bootstrap statistics](docs/research/texture-controls/results.json),
+  [registry](docs/research/texture-controls/registry.json),
+  [readiness](docs/research/texture-controls/readiness.json),
+  [three-pass journal](docs/research/texture-controls/verification.md),
+  [source/irregularity boundaries](docs/irregularities.md).
+- Data placement is not the old blocker: pinned owner mirrors were restored and
+  prepared, then verified cell-for-cell. Integrity ≠ organizer authentication.
+  Large training data, arrays and stopped TIFFs remain ignored.
+- The prompt omits an identifiable assigned-lane paragraph. This was an autonomous
+  continuation of the previous next step, not an asserted external allocation.
+- Complete private/parallel surfaces, the historical-best checkpoint, untouched
+  evaluation regions and current organizer constraints remain unavailable. GPU is
+  not required for this fixed CPU experiment; legacy UNet training is separate.
+- Network access excludes DrivenData/USGS/GDR/NLR hosts. Official links are retained
+  for review, not freshly verified claims. Fault mapping is not geothermal-vent
+  detection: no temperature, permeability, flow or vent observations were used.
+
+**Next session, in order:** preserve the stop; synchronize externally assigned lanes
+and original continuous surfaces; restore a comparable historical-best model;
+reserve untouched spatial evaluation; only then preregister a distinct mechanism
+with matched physical controls. Do not move dots or rename this duplicate to pass.
+Research promotion and a real weekly slot remain separate decisions.
+
+### Concurrent PR #29 records retained (G30-S20)
+
+Main advanced during this audit. The [G30-S20 run card](docs/research/2026-10-25-s20/run-card.json),
+[analysis](docs/research/2026-10-25-s20/analysis.md) and two research TIFFs are
+preserved as **peer records**, not new outputs or approved selections by this lane.
+S20 also records a duplicate-stop against G30-S19; its different component-holdout
+results are not ranked against the buffered TDX-C2 regional trials. No peer
+`promote` claim allocates a weekly slot here. The retained TDX-1 addendum honestly
+marks its missing continuous-surface comparisons against those arrivals unknown.
+TDX-C2's saved states were checked against both post-stop arrivals: 166 total
+observed comparisons, same maximum overlap. No model or dot changes followed.
 
 ---
 
@@ -149,7 +207,7 @@ selected here; TDX-1 remains negative. The current pointer above selects only TD
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
 
-## START HERE — 2026-10-25 (Candidate C / Lane G30-S19 PROMOTED; A & B negative)
+## Archived lane record — G30-S19 Candidate C (2026-10-25; its proxy "promotion" is not leaderboard evidence, see IR-30-079)
 
 **✅ OK TO DOWNLOAD & SUBMIT — Candidate C:** [gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif](docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif)
 (SHA-256 `8a0301d5…f43cc9`; note: `G30-S19 habitat GBM (19-band, no catalogue-distance inputs) + EDGE 60k, off-cat >2px`).

@@ -62,7 +62,11 @@ def check_time(deadline):
         raise TimeoutError("Experimental time cap reached; stop, do not retune or spend a slot")
 
 
-def load_cache(base, valid, manifest):
+def load_cache(base, valid, manifest, *, report_dir=REPORT):
+    """Reuse the hash-pinned source-independent cache; optionally record elsewhere.
+
+    A continuation must not overwrite the original experiment's frozen receipts.
+    """
     CACHE.mkdir(parents=True, exist_ok=True)
     signature = {"transform_version": TRANSFORM_VERSION,
                  "transform_code_sha256": sha(ROOT / "src/gemsdoe30/texture.py"),
@@ -89,7 +93,8 @@ def load_cache(base, valid, manifest):
                    "uses_template_values_as_features": False}
         dump(receipt_path, receipt)
     fields = {name: np.load(CACHE / f"{name}.npy", mmap_mode="r") for name in names}
-    dump(REPORT / "feature-receipt.json", receipt)
+    if report_dir is not None:
+        dump(report_dir / "feature-receipt.json", receipt)
     return fields
 
 

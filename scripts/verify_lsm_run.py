@@ -309,7 +309,7 @@ def verify_duplicate_stop(pointer, template, selection, card, report, *, write=F
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--pointer", type=Path, default=ROOT / "docs/current-run.json")
+    ap.add_argument("--pointer", type=Path, default=ROOT / "docs/research/2026-10-25-lsm/current-run.json")
     ap.add_argument("--template", type=Path, default=ROOT / "data/raw/sample_submission.tif")
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--require-promote", action="store_true")

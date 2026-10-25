@@ -31,7 +31,7 @@ class Links(HTMLParser):
             self.downloads.append(attrs.get("href"))
 
 
-@pytest.mark.parametrize("relative", ["index.html", "executive-summary.html", "docs/index.html"])
+@pytest.mark.parametrize("relative", ["index.html", "executive-summary.html", "experiment-review.html", "docs/index.html"])
 def test_generated_pages_have_real_local_links_and_valid_html_anchors(relative):
     path = ROOT / relative
     page = Links(path.read_text())
@@ -47,25 +47,21 @@ def test_generated_pages_have_real_local_links_and_valid_html_anchors(relative):
 
 
 @pytest.mark.parametrize("relative", ["index.html", "executive-summary.html"])
-def test_download_controls_follow_the_current_machine_decision(relative):
-    pointer = json.loads((ROOT / "docs/current-run.json").read_text())
-    readiness = json.loads((ROOT / pointer["readiness"]).read_text())
-    card = json.loads((ROOT / pointer["run_card"]).read_text())
+def test_download_and_copy_controls_bind_to_the_current_negative_artifact(relative):
+    card = json.loads((RESEARCH / "run-card.json").read_text())
     html = (ROOT / relative).read_text()
     parsed = Links(html)
+    assert parsed.downloads == [card["published_tiff"]]
+    assert "NOT APPROVED FOR SUBMISSION" in html and "Do not submit." in html
+    assert "DUPLICATE-STOP" in html and "Download archived research TIFF" in html
+    assert "not a new submission" in html
+    assert card["submission_name"] in html
     assert "No competition slot selected or used" in html
-    assert card["run_id"] in html
-    if readiness["ok_to_submit"]:
-        assert parsed.downloads == [readiness["primary_file"], readiness["alternate_file"]]
-        assert "OK TO SUBMIT" in html and "DO NOT SUBMIT" not in html
-        assert all((ROOT / f).is_file() for f in parsed.downloads)
-        if relative == "executive-summary.html":
-            assert card["submission_note"] in html and len(card["submission_note"]) <= 140
-            assert {"submission-name", "submission-note", "copy-status"} <= parsed.ids
-    else:
-        # A stopped or negative run must never offer a download that looks submittable.
-        assert parsed.downloads == []
-        assert "DO NOT SUBMIT" in html and "OK TO SUBMIT</span>" not in html
+    assert (ROOT / card["published_tiff"]).is_file()
+    if relative == "executive-summary.html":
+        assert card["note"] in html
+        assert {"submission-name", "submission-note", "copy-status"} <= parsed.ids
+        assert len(card["note"]) <= 140
 
 
 def test_complete_current_prompt_and_every_reported_claim_remain_quarantined():
@@ -99,12 +95,7 @@ def test_recomputed_evidence_cannot_use_a_truncated_ci_or_a_changed_paired_delta
 def isolated_evidence(tmp_path, monkeypatch):
     from scripts import verify_current_run as verifier
     shutil.copytree(RESEARCH, tmp_path / "docs/research/texture-displacement")
-    # Regression fixture for the TDX-1 verifier path: pin its own pointer (the live
-    # pointer may select a different lane verifier).
-    (tmp_path / "docs/current-run.json").write_text(json.dumps({
-        "schema_version": 1, "run_card": "docs/research/texture-displacement/run-card.json",
-        "readiness": "docs/research/texture-displacement/readiness.json",
-        "purpose": "TDX-1 regression fixture"}))
+    shutil.copy(ROOT / "docs/current-run.json", tmp_path / "docs/current-run.json")
     card = json.loads((RESEARCH / "run-card.json").read_text())
     raster = tmp_path / card["published_tiff"]
     raster.parent.mkdir(parents=True)
@@ -156,7 +147,7 @@ def test_full_verifier_rejects_changed_template_bytes(isolated_evidence):
         verifier.verify(pointer, template)
 
 
-def test_published_file_is_new_binary_support_and_matches_its_exact_hash():
+def test_retained_file_keeps_original_binary_support_and_exact_hash():
     np = pytest.importorskip("numpy"); rasterio = pytest.importorskip("rasterio")
     card = json.loads((RESEARCH / "run-card.json").read_text())
     raster = ROOT / card["published_tiff"]
@@ -187,12 +178,16 @@ def test_status_feed_uses_current_pointer_and_never_advertises_range_immunity(tm
                              '--skip-tests', '--output', str(output)], cwd=ROOT, capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
     status = json.loads(output.read_text())
-    pointer = json.loads((ROOT / 'docs/current-run.json').read_text())
-    card = json.loads((ROOT / pointer['run_card']).read_text())
+    card = json.loads((RESEARCH / 'run-card.json').read_text())
     assert status['current_artifact_inspection']['verified_now'] is True
-    assert status['current_release_decision']['research_verdict'] == card['verdict']
-    assert status['current_release_decision']['ok_to_submit'] is card['ok_to_submit']
-    assert status['any_candidate_promoted'] is (card['verdict'] == 'promote')
+    assert status['current_release_decision']['raster_sha256'] == card['raster_sha256']
+    assert status['current_release_decision']['research_verdict'] == 'negative'
+    assert status['current_release_decision']['submission_approved'] is False
+    assert not status['any_candidate_promoted']
+    assert status['latest_scientific_attempt']['receipt_inspection']['verified_now'] is True
+    assert status['latest_scientific_attempt']['decision']['download_ok'] is False
+    assert status['latest_scientific_attempt']['decision']['research_verdict'] == 'negative'
+    assert status['latest_scientific_attempt']['public_download'] is False
     assert all(row['range_error_immune'] is None for row in status['downloads'])
     assert status['submission_format']['local_validation_guarantees_portal_acceptance'] is False
     assert status['score_evidence']['validated_organizer_submission_receipts'] == []
@@ -210,7 +205,9 @@ def test_generated_site_is_exactly_reproducible_from_reopened_artifact():
 def test_new_local_rasters_cannot_be_silently_omitted_from_late_registry(isolated_evidence):
     verifier, directory, pointer, template = isolated_evidence
     decision = verifier.verify(pointer, template)
-    assert decision['observed_registry']['dots']['registry_entries_compared'] == 108
+    # 104 frozen + 4 late (PR #28) + 2 G30-S20 late twins (PR #29); the count is
+    # registry data and must grow explicitly whenever a late raster is audited in.
+    assert decision['observed_registry']['dots']['registry_entries_compared'] == 110
     (directory / 'registry-parallel-addendum.json').unlink()
     with pytest.raises(ValueError, match='explicit late-registry audit'):
         verifier.verify(pointer, template)
