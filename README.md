@@ -31,6 +31,7 @@ results and automated checks rather than outsourcing inspection.
 - [Full results, canaries and pooled-bootstrap sufficient statistics](docs/research/texture-displacement/results.json)
 - [Expanded immutable registry](docs/research/texture-displacement/registry.json) · [exact format validation](docs/research/texture-displacement/validation.json)
 - [Current evidence pointer](docs/current-run.json) · [generated status feed](docs/status.json)
+- [PR #28 — code review, CI and delivery timeline](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/28)
 - [All 119 owner-reported submission claims](docs/research/texture-displacement/owner-claims.csv) — **unverified**, not organizer receipts
 
 **Review correction:** the square Gaussian's diagonal reach required a 17-pixel

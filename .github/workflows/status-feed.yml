@@ -27,6 +27,8 @@ on:
       - "src/**.py"
       - "docs/score-ledger.csv"
       - "docs/current-run.json"
+      - "requirements-tdx1.txt"
+      - "pyproject.toml"
       - "docs/assets/**"
       - "index.html"
       - "executive-summary.html"

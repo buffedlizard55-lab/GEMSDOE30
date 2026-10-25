@@ -96,9 +96,10 @@ Bitwise reproduction across different platforms/versions is not promised.
 
 ## Delivery state
 
-Local three-pass checks above are complete. Pull-request checks, merge and deployment
-must be verified separately before they are reported as completed; the PR timeline and
-final run card carry the actual delivery receipt, not a prediction that they will succeed.
+Local three-pass checks above are complete. [PR #28](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/28)
+was opened from the assigned session branch. The PR timeline is the authoritative
+GitHub checks/merge receipt; CI, merge and deployment are not presumed successful
+by this pre-merge journal. The final response records the separately observed result.
 Concurrent main-branch history must be preserved, and unrelated open PRs are not closed.
 
 ## Remaining work (not performed experiments)
@@ -128,3 +129,9 @@ now covers 108 observed references and blocks if a newly arrived or removed loca
 reference lacks matching evidence. Local post-integration suite: **180 passed,
 5 optional torch skips, 7 subtests passed**, two rasterio deprecation warnings.
 Peer `promote` reports remain separate from the selected TDX negative decision.
+
+
+Publication preflight caught a generated landing-page change left unstaged while
+resolving the concurrent merge. Included the generated root HTML in the follow-up
+publication commit and repeated the exact-site check; no model or raster changed.
+A clean-worktree assertion is required before the final push/merge verification.
