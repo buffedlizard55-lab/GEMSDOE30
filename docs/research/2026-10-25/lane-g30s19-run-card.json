@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "run_id": "lane-g30s19-habitat-edge-20261025",
+  "lane": "G30-S19 (self-assigned and frozen in lane-g30s19-preregistration.md; prompt's method paragraph was not identifiable — IR-S19-01)",
+  "hypothesis": "H-A: unmapped faults are persistent linear discontinuities coincident across magnetic, gravity and topographic fields; a habitat model using only the 19 competition bands and label-free edge/coherence transforms (no catalogue-distance inputs) recovers hidden whole fault components better per false-positive unit than proximity or belief-ordered thinning.",
+  "mechanism": "HistGradientBoosting habitat belief from 40 features (19 robust-normalized bands + gradient magnitudes, |Laplacian|, multi-scale local std, structure-tensor coherence/energy on RTP, cross-physics edge-coincidence products); negatives sampled >3 px from all catalogue traces (halo treated as unlabelled); prevalence-corrected probabilities; EDGE expected-marginal-DTI greedy emission (shared emitter_opt); support restricted to footprint pixels >2 px from the catalogue (mechanism learned from H33 forensics, dots independently generated).",
+  "non_fault_mimic": "Lithologic contacts and dike edges produce coincident magnetic/gravity gradients without fault offset; saline facies mimic conductivity structure.",
+  "experiments_run": 3,
+  "experiments": {
+    "E1_canaries": "43 single-feature AUCs on hidden components; none >0.90 or <0.10 (max: visible-only proximity 0.7636); file lane-g30s19-canaries.json",
+    "E2_holdout_v1_FAILED": "GBM with catalogue-distance inputs traced the visible catalogue (belief on scored domain ~0); best HOLDOUT-DTI 0.0296; recorded negative in lane-g30s19-holdout-v1-failed.json",
+    "E3_holdout_v2": "habitat-only design; results in lane-g30s19-holdout.json; final file is the production run of this frozen recipe (no further holdout search)"
+  },
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value_at_final_operating_point_60000_dots": 0.2230,
+    "value_exact": 0.22304474656620646,
+    "evaluator_version": "component-holdout-v2-footprint-20261025",
+    "protocol": "whole 8-connected catalogue components withheld (split_components seed=31, spatially interleaved); 300 m (3 px) training buffer around hidden pixels; catalogue features from visible faults only; visible faults masked pixel-exactly; pooled DTI alpha=0.2 beta=0.8 R=300 m triangular",
+    "withheld_positives": 20870,
+    "withheld_components": 1085,
+    "ci95": [0.2052, 0.2396],
+    "ci_method": "component bootstrap, 500 draws, seed 7, conditional on observed FP weight (FP held fixed)",
+    "comparators_same_holdout": {
+      "proximity_only_EDGE": 0.1672,
+      "combined_habitat_x_proximity_EDGE_selfstop": 0.2150,
+      "combined_PoissonDisk_r2.8": 0.1945,
+      "habitat_EDGE_selfstop_62779_dots": 0.2227,
+      "registry_D28_leaky_reference_not_a_gate": 0.1176,
+      "registry_H33_leaky_reference_not_a_gate": 0.0054,
+      "leaky_note": "Registry rasters were built with full-catalogue knowledge. H33 scores ~0 here by construction (its >2 px prune used the full catalogue including hidden components). This is the known catalogue-frame inversion (IR-30-039), not evidence about hidden-test performance."
+    },
+    "gate": "preregistered: beat best non-leaky comparator by >=+0.005 and beat proximity — PASSED (+0.0285 over Poisson, +0.0558 over proximity at 60k)",
+    "warning": "Catalogue hide-and-recover is a biased proxy: the organizer scores expert-labelled faults outside the catalogue. HOLDOUT-DTI is not a competition score or a forecast."
+  },
+  "registry_novelty": {
+    "stage_surface": "belief vs registry dots: max Spearman 0.1162 (threshold 0.90) — registry continuous surfaces unavailable, dots used as reference (IR-S19-06)",
+    "stage_dots": "max Spearman 0.0293; max fraction of candidate dots within 3 px of any single reference 0.6507 vs edge-hybrid-80k (threshold 0.70); vs GEMSDOE32 H33 winner: Spearman 0.0251, overlap 0.3495",
+    "decision": "novelty-check-passed vs the 9 pinned priority-site rasters + 9 local download rasters; complete parallel-lane registry still unavailable (IR-S19-06)",
+    "file": "lane-g30s19-novelty.json"
+  },
+  "raster": {
+    "primary_file_submit_this": "docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif",
+    "sha256": "8a0301d5606e39b114eca997cd43849531393bb3921db26a267478f915f43cc9",
+    "bytes": 449412,
+    "dots": 60000,
+    "dots_on_catalogue": 0,
+    "dots_within_2px_of_catalogue": 0,
+    "alternate_nan_outside_twin": "docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan.tif",
+    "alternate_sha256": "51ca48a5157a737f33f53bbf2985fdfa93816adc5913a87736366390e063fcf3",
+    "twins_identical_inside_footprint": true
+  },
+  "validator_output": {
+    "zeros_twin": "validate_submission.py --finite-all-cells PASSED (all 12,279,160 cells finite in [0,1]; min 0.0 max 1.0; values are exactly {0,1})",
+    "nan_twin": "validate_submission.py (published format) PASSED (0 NaN inside footprint; NaN outside)",
+    "no_nan_inside_footprint": true,
+    "values_in_0_1": true,
+    "crs_match": "EPSG:32611",
+    "shape_match": "3730x3292",
+    "transform_match": "(100, 0, 243350, 0, -100, 4508550)",
+    "single_band_float32": true,
+    "receipts": ["docs/research/format-checks/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.json", "docs/research/format-checks/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan.json"],
+    "portal_note": "Submit the -zeros twin: the owner's prior '[0,1]' portal error cannot be triggered by its values (whole array finite in [0,1]), and the scored H33 winner used the same -zeros convention (owner-reported). Portal acceptance still cannot be guaranteed without an organizer receipt."
+  },
+  "submission_name": "gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros",
+  "note": "G30-S19 habitat GBM (19-band, no catalogue-distance inputs) + EDGE 60k, off-cat >2px",
+  "note_chars": 84,
+  "verdict": "promote",
+  "slot_selected": false,
+  "slot_note": "Research promotion only. Spending a weekly slot is the owner's separate selector step; no slot was used and nothing was uploaded by this session.",
+  "organizer_confirmed_score": null,
+  "owner_reported_reference_scores_not_verified": {"GEMSDOE32_H33": 0.2778, "leaderboard_claims_in_prompt_conflict": [0.4413, 0.3195]}
+}

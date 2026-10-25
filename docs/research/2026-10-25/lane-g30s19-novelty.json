@@ -1,0 +1,243 @@
+{
+ "candidate": "gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f",
+ "registry_complete": false,
+ "registry_note": "9 pinned priority-site rasters + local downloads; parallel-lane surfaces unavailable, so a pass is vs this registry only",
+ "surface_decision_vs_registry_dots": "novelty-check-passed-not-submission-approval",
+ "dots_decision": "novelty-check-passed-not-submission-approval",
+ "detail": {
+  "registry_24": {
+   "surface_spearman_belief_vs_refdots": 0.08957311004004226,
+   "dots": {
+    "spearman_full_footprint": 0.027293587472836476,
+    "candidate_dots": 60000,
+    "reference_dots": 60069,
+    "candidate_fraction_within_3px_of_reference": 0.41518333333333335,
+    "identical_inside_footprint": false,
+    "correlation_duplicate": false,
+    "dot_duplicate": false,
+    "undefined": false
+   }
+  },
+  "registry_25": {
+   "surface_spearman_belief_vs_refdots": 0.07502818850574844,
+   "dots": {
+    "spearman_full_footprint": 0.02176272682248407,
+    "candidate_dots": 60000,
+    "reference_dots": 44090,
+    "candidate_fraction_within_3px_of_reference": 0.40013333333333334,
+    "identical_inside_footprint": false,
+    "correlation_duplicate": false,
+    "dot_duplicate": false,
+    "undefined": false
+   }
+  },
+  "registry_27": {
+   "surface_spearman_belief_vs_refdots": 0.09072993753407613,
+   "dots": {
+    "spearman_full_footprint": 0.0277723193432075,
+    "candidate_dots": 60000,
+    "reference_dots": 61328,
+    "candidate_fraction_within_3px_of_reference": 0.42988333333333334,
+    "identical_inside_footprint": false,
+    "correlation_duplicate": false,
+    "dot_duplicate": false,
+    "undefined": false
+   }
+  },
+  "registry_28": {
+   "surface_spearman_belief_vs_refdots": 0.06548442035859126,
+   "dots": {
+    "spearman_full_footprint": 0.023711946447633536,
+    "candidate_dots": 60000,
+    "reference_dots": 40199,
+    "candidate_fraction_within_3px_of_reference": 0.37765,
+    "identical_inside_footprint": false,
+    "correlation_duplicate": false,
+    "dot_duplicate": false,
+    "undefined": false
+   }
+  },
+  "registry_30": {
+   "surface_spearman_belief_vs_refdots": 0.07502818850574844,
+   "dots": {
+    "spearman_full_footprint": 0.02176272682248407,
+    "candidate_dots": 60000,
+    "reference_dots": 44090,
+    "candidate_fraction_within_3px_of_reference": 0.40013333333333334,
+    "identical_inside_footprint": false,
+    "correlation_duplicate": false,
+    "dot_duplicate": false,
+    "undefined": false
+   }
+  },
+  "registry_31": {
+   "surface_spearman_belief_vs_refdots": 0.06548442035859126,
+   "dots": {
+    "spearman_full_footprint": 0.023711946447633536,
+    "candidate_dots": 60000,
+    "reference_dots": 40199,
+    "candidate_fraction_within_3px_of_reference": 0.37765,
+    "identical_inside_footprint": false,
+    "correlation_duplicate": false,
+    "dot_duplicate": false,
+    "undefined": false
+   }
+  },
+  "registry_32": {
+   "surface_spearman_belief_vs_refdots": 0.05915271029879349,
+   "dots": {
+    "spearman_full_footprint": 0.025121743807125545,
+    "candidate_dots": 60000,
+    "reference_dots": 37654,
+    "candidate_fraction_within_3px_of_reference": 0.34945,
+    "identical_inside_footprint": false,
+    "correlation_duplicate": false,
+    "dot_duplicate": false,
+    "undefined": false
+   }
+  },
+  "registry_33": {
+   "surface_spearman_belief_vs_refdots": 0.06852556996180506,
+   "dots": {
+    "spearman_full_footprint": 0.02226492952391475,
+    "candidate_dots": 60000,
+    "reference_dots": 41865,
+    "candidate_fraction_within_3px_of_reference": 0.3876833333333333,
+    "identical_inside_footprint": false,
+    "correlation_duplicate": false,
+    "dot_duplicate": false,
+    "undefined": false
+   }
+  },
+  "registry_36": {
+   "surface_spearman_belief_vs_refdots": 0.059542624679082695,
+   "dots": {
+    "spearman_full_footprint": 0.024755954037565454,
+    "candidate_dots": 60000,
+    "reference_dots": 38854,
+    "candidate_fraction_within_3px_of_reference": 0.35373333333333334,
+    "identical_inside_footprint": false,
+    "correlation_duplicate": false,
+    "dot_duplicate": false,
+    "undefined": false
+   }
+  },
+  "downloads_GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d1": {
+   "surface_spearman_belief_vs_refdots": 0.11617149533584362,
+   "dots": {
+    "spearman_full_footprint": 0.02783694388290494,
+    "candidate_dots": 60000,
+    "reference_dots": 90358,
+    "candidate_fraction_within_3px_of_reference": 0.46273333333333333,
+    "identical_inside_footprint": false,
+    "correlation_duplicate": false,
+    "dot_duplicate": false,
+    "undefined": false
+   }
+  },
+  "downloads_gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan": {
+   "surface_spearman_belief_vs_refdots": 0.07502818850574844,
+   "dots": {
+    "spearman_full_footprint": 0.02176272682248407,
+    "candidate_dots": 60000,
+    "reference_dots": 44090,
+    "candidate_fraction_within_3px_of_reference": 0.40013333333333334,
+    "identical_inside_footprint": false,
+    "correlation_duplicate": false,
+    "dot_duplicate": false,
+    "undefined": false
+   }
+  },
+  "downloads_gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros": {
+   "surface_spearman_belief_vs_refdots": 0.07502818850574844,
+   "dots": {
+    "spearman_full_footprint": 0.02176272682248407,
+    "candidate_dots": 60000,
+    "reference_dots": 44090,
+    "candidate_fraction_within_3px_of_reference": 0.40013333333333334,
+    "identical_inside_footprint": false,
+    "correlation_duplicate": false,
+    "dot_duplicate": false,
+    "undefined": false
+   }
+  },
+  "downloads_gemsdoe30-d15-poisson200m-offcat-60069-20261003T233210Z-68d0": {
+   "surface_spearman_belief_vs_refdots": 0.08957311004004226,
+   "dots": {
+    "spearman_full_footprint": 0.027293587472836476,
+    "candidate_dots": 60000,
+    "reference_dots": 60069,
+    "candidate_fraction_within_3px_of_reference": 0.41518333333333335,
+    "identical_inside_footprint": false,
+    "correlation_duplicate": false,
+    "dot_duplicate": false,
+    "undefined": false
+   }
+  },
+  "downloads_gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91ea": {
+   "surface_spearman_belief_vs_refdots": 0.07502818850574844,
+   "dots": {
+    "spearman_full_footprint": 0.02176272682248407,
+    "candidate_dots": 60000,
+    "reference_dots": 44090,
+    "candidate_fraction_within_3px_of_reference": 0.40013333333333334,
+    "identical_inside_footprint": false,
+    "correlation_duplicate": false,
+    "dot_duplicate": false,
+    "undefined": false
+   }
+  },
+  "downloads_gemsdoe30-edge-hybrid-80k-02845bd4-20261003T234340Z-allfinit": {
+   "surface_spearman_belief_vs_refdots": 0.09954266616352868,
+   "dots": {
+    "spearman_full_footprint": 0.02929464486064897,
+    "candidate_dots": 60000,
+    "reference_dots": 80000,
+    "candidate_fraction_within_3px_of_reference": 0.6506833333333333,
+    "identical_inside_footprint": false,
+    "correlation_duplicate": false,
+    "dot_duplicate": false,
+    "undefined": false
+   }
+  },
+  "downloads_gemsdoe30-edge-hybrid-80k-02845bd4-nan": {
+   "surface_spearman_belief_vs_refdots": 0.09954266616352868,
+   "dots": {
+    "spearman_full_footprint": 0.02929464486064897,
+    "candidate_dots": 60000,
+    "reference_dots": 80000,
+    "candidate_fraction_within_3px_of_reference": 0.6506833333333333,
+    "identical_inside_footprint": false,
+    "correlation_duplicate": false,
+    "dot_duplicate": false,
+    "undefined": false
+   }
+  },
+  "downloads_gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e-zeros": {
+   "surface_spearman_belief_vs_refdots": 0.05235008285661367,
+   "dots": {
+    "spearman_full_footprint": 0.021280138602198267,
+    "candidate_dots": 60000,
+    "reference_dots": 85526,
+    "candidate_fraction_within_3px_of_reference": 0.57325,
+    "identical_inside_footprint": false,
+    "correlation_duplicate": false,
+    "dot_duplicate": false,
+    "undefined": false
+   }
+  },
+  "downloads_gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e": {
+   "surface_spearman_belief_vs_refdots": 0.05235008285661367,
+   "dots": {
+    "spearman_full_footprint": 0.021280138602198267,
+    "candidate_dots": 60000,
+    "reference_dots": 85526,
+    "candidate_fraction_within_3px_of_reference": 0.57325,
+    "identical_inside_footprint": false,
+    "correlation_duplicate": false,
+    "dot_duplicate": false,
+    "undefined": false
+   }
+  }
+ }
+}

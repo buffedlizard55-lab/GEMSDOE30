@@ -1,39 +1,33 @@
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
 
-## START HERE — current submission decision (2026-10-25)
+## START HERE — current submission decision (2026-10-25, Lane G30-S19)
 
-**NOT APPROVED FOR SUBMISSION. No new unique TIFF was generated in this review.**
-Historical downloads are educational references, not new submissions. The current
-owner protocol takes precedence over contradictory ready-to-submit language in
-older sections below. Read the [current owner-request amendment](docs/research/2026-10-25/owner-request.md)
-at the start of every session (a requirements record, not a verbatim transcript).
-The prior literal brief is preserved below for history.
+**✅ PROMOTED — OK TO DOWNLOAD & SUBMIT (owner chooses the slot; automation used none).**
+New unique candidate: `docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif`
+(SHA-256 `8a0301d5…f43cc9`, 60,000 dots, 0 on catalogue, all cells finite in [0,1]).
+DrivenData note (84 chars): `G30-S19 habitat GBM (19-band, no catalogue-distance inputs) + EDGE 60k, off-cat >2px`.
+Evidence: [run card](docs/research/2026-10-25/lane-g30s19-run-card.json) ·
+[analysis](docs/research/2026-10-25/lane-g30s19-analysis.md) ·
+[preregistration](docs/research/2026-10-25/lane-g30s19-preregistration.md) ·
+[submission guide](executive-summary.html).
 
-- [Current nine-site scientific review and four prospective hypotheses](docs/research/2026-10-25/review.md)
-- [Submission guide](executive-summary.html) · [Run card](docs/research/2026-10-25/run-card.json)
-- [Exact historical duplicate audit](docs/research/h33-historical-duplicate-audit.json)
-- [Pinned nine-site artifact registry — explicitly partial](docs/research/priority-site-pins.json)
-
-Raw data placement and preparation succeeded using the existing hash-pinned owner
-mirrors. Do not treat the prompt's old data-placement blocker as still current.
-Organizer authentication is not established by mirror hashes. No new experiment
-was run because the current method lane and complete parallel registry are missing.
-Requested shared-template filenames are absent; existing shared modules were reused.
-
-The shared pooled holdout footprint bug was fixed in
-`src/gemsdoe30/holdout.py` (version `component-holdout-v2-footprint-20261025`).
-Old metrics are historical, not automatically comparable or valid promotion gates.
-The GEMSDOE32 historical reference overlaps the GEMSDOE28 reference at **100% of
-its dots within 3 pixels**, with rank correlation **0.967587** (novelty diagnostics,
-not scores). Re-encoding/renaming that family does not satisfy the new protocol.
-
-**Next session:** resolve the assigned lane/shared-template location; synchronize
-all parallel registry rasters and surfaces; preregister buffered segment folds;
-run single-feature leakage canaries and rerun the best comparator with the fixed
-evaluator before any candidate experiment. Maximum three experiments/two hours.
-Research promotion is separate from weekly slot selection. No current leaderboard
-value or private portal acceptance is claimed here.
+- **HOLDOUT-DTI 0.2230 [95% CI 0.2052–0.2396]** (evaluator
+  `component-holdout-v2-footprint-20261025`, 20,870 withheld positives, whole-component
+  hide-and-recover with 300 m buffer) vs proximity 0.1672 / Poisson 0.1945. This is a
+  local proxy measurement, **not** a competition score; >0.2778 (OWNER-REPORTED for
+  GEMSDOE32 H33) cannot be guaranteed before organizer scoring.
+- H33 won by emission pruning of the shared H19-5 family (exact byte reconstruction:
+  delete dots ≤2 px from catalogue). G30-S19 instead learns an independent 19-band
+  habitat belief (no catalogue-distance inputs, halo-excluded negatives) + EDGE
+  emission. Novelty vs H33: Spearman 0.025, ≤3 px dot overlap 34.9% (gates 0.90/70%).
+- Experiment budget honoured: E1 canaries (43/43 AUC ≤0.90), E2 failed design
+  (recorded negative), E3 habitat holdout (passed preregistered gate); final TIFF is
+  the production run of the frozen E3 recipe. Irregularities IR-S19-01…07 are in the
+  analysis (incl. self-assigned lane — the prompt's method paragraph was not
+  identifiable — and the still-incomplete parallel registry).
+- Superseded: the earlier 2026-10-25 "NOT APPROVED" readiness decision below and in
+  `docs/research/2026-10-25/run-card.json` (kept as history).
 
 ---
 
