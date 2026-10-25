@@ -336,6 +336,23 @@ def main() -> int:
         }
     # A stopped latest attempt is not the retained downloadable artifact. Verify
     # its receipts without pretending unavailable private bytes were reopened.
+    additional_attempts = []
+    for extra in selection.get("additional_stopped_attempts", []):
+        row = {"lane": extra.get("lane"), "pointer": extra.get("pointer"), "verifier": extra.get("verifier")}
+        try:
+            if str(ROOT) not in sys.path:
+                sys.path.insert(0, str(ROOT))
+            from scripts.verify_lsm_run import verify as verify_lsm
+            ready = verify_lsm(ROOT / extra["pointer"], data_dir / "sample_submission.tif")
+            row.update({"verified_now": True, "error": None, "decision": ready["decision"],
+                        "ok_to_submit": ready["ok_to_submit"], "research_verdict": ready["research_verdict"],
+                        "gates": ready["gates"]})
+        except Exception as exc:  # record missing access, never a stale green receipt
+            row.update({"verified_now": False, "error": str(exc), "ok_to_submit": False})
+        additional_attempts.append(row)
+        gates[f"stopped_attempt_{str(extra.get('lane')).lower()}"] = {
+            "evidence": extra.get("pointer"), "promoted": False,
+            "decision": row.get("decision", "blocked: inspection unavailable")}
     latest_attempt = None
     if selection.get("latest_attempt"):
         latest_path = ROOT / selection["latest_attempt"]
@@ -420,6 +437,7 @@ def main() -> int:
         "current_artifact_inspection": current_inspection,
         "current_release_decision": current_release,
         "latest_scientific_attempt": latest_attempt,
+        "additional_stopped_attempts": additional_attempts,
         "legacy_readiness_2026_10_25": load_json(research / "2026-10-25" / "run-card.json"),
         "lane_g30s19_run_card": load_json(
             research / "2026-10-25" / "lane-g30s19-run-card.json"

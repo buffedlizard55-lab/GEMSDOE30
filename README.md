@@ -1,7 +1,44 @@
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
-## START HERE — latest attempt **DUPLICATE-STOP; DO NOT SUBMIT**
+## START HERE — 2026-10-25 (G30-LSM): **DO NOT SUBMIT — no unique file passed every automated gate**
 
+**Verdict:** the new LSM42 model passed the spatially blocked holdout gate. Its final dots then failed the owner's
+uniqueness rule: more than 70 % of the dots fall within 3 px of 5 earlier sparse rasters. Per protocol the run was
+**logged as a duplicate and stopped**. No TIFF was published, so there is **nothing new to download or upload this session**.
+The decision was machine-adjudicated, with no human inspector:
+
+```bash
+python scripts/verify_current_run.py                    # exit 0: evidence verified (decision may be DO NOT SUBMIT)
+python scripts/verify_current_run.py --require-promote  # exit 2 now: not OK to submit
+```
+
+| | Result (labelled) |
+|---|---|
+| Holdout gate (v3 spatially blocked; evaluator `component-holdout-v3-blockstats-20261025`; 60,988 withheld positives) | HOLDOUT-DTI lsm42 **0.1572** [0.1415, 0.1736] vs current best core19 **0.1398** [0.1242, 0.1559]; Δ **+0.0174 [+0.0066, +0.0279]**, **passed** |
+| Leakage canaries | 168 checks; max single-feature AUC 0.665 (limit 0.90), **passed** |
+| Uniqueness | Surface max ρ 0.218, passed. **Dots: 80.2 % within 3 px of G30-S19; 80.1 % of a GEMSDOE28 raster. FAILED** (chance level 14–18 %) |
+| Independent SGMC frame (not a leaderboard proxy) | lsm42 − H33 = −0.0215 [−0.0354, −0.0057] at equal budget |
+| E3 crest-line placement | Gate failed (+0.0016 [−0.0029, +0.0055]); negative result kept |
+
+**Why H33 (GEMSDOE32, owner-reported 0.2778) is the best so far.**
+- It is a byte-exact pruning of the h19-5 lineament support: D2.8 → drop d = 1 px → drop d ≤ 2 px.
+- Calibrating against the exact 5-px lattice implies hidden new-fault density ≈ 0.244 % of pixels.
+- D2.8, r1, H33 and PINN all cover the same ≈ 40.5 % of the hidden truth. H33 just wastes the fewest dots (0.134 hits/dot, 5.8× random).
+- Near-catalogue dots earned ≈ 0 on the leaderboard (projections from unverified owner scores).
+
+Full analysis: [why-h33-scored-0.2778.md](docs/research/2026-10-25-lsm/why-h33-scored-0.2778.md).
+Review: [G30-LSM review](docs/research/2026-10-25-lsm/review.md).
+Next-session plan: [review §5](docs/research/2026-10-25-lsm/review.md#5-what-a-future-session-should-do-ordered).
+Irregularities: IR-30-078…087 in [docs/irregularities.md](docs/irregularities.md).
+Pages: [overview](index.html) · [executive summary](executive-summary.html) · [status feed](docs/status.json).
+
+**Owner prompt:** the complete current owner prompt is preserved verbatim below (formatting normalized) in [Current owner prompt](#current-owner-prompt) and
+[`owner-prompt.txt`](docs/research/texture-displacement/owner-prompt.txt). It was re-read in full at the start of this
+session (2026-10-25, branch `arena/f7b53b40-gemsdoe30`). Its content matches this session's prompt, including the GEMSDOE37–92 lists. **Read it first every session.**
+
+**Cross-lane confirmation.** Three independent lanes, run concurrently today, stopped for the same reason: TDX-C2 (79.09 %), G30-S20 and G30-LSM (80.2 %) each collided with G30-S19's near-catalogue dots. Catalogue-trained habitat models concentrate dots beside mapped faults, which is where the leaderboard differentials show the hidden truth is not (IR-30-079/087). The G30-LSM pointer is [`docs/research/2026-10-25-lsm/current-run.json`](docs/research/2026-10-25-lsm/current-run.json); verify with `python scripts/verify_lsm_run.py`.
+
+## Earlier today — TDX-C2 attempt: **DUPLICATE-STOP; DO NOT SUBMIT**
 **No new unique/approved competition TIFF was published.** The fixed TDX-C2
 candidate crossed the mandatory duplicate limit, so all experimentation stopped.
 It was **not** re-encoded, renamed, perturbed, or replaced with a better-looking
@@ -178,7 +215,7 @@ selected here; TDX-1 remains negative. The current pointer above selects only TD
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
 
-## START HERE — 2026-10-25 (Candidate C / Lane G30-S19 PROMOTED; A & B negative)
+## Archived lane record — G30-S19 Candidate C (2026-10-25; its proxy "promotion" is not leaderboard evidence, see IR-30-079)
 
 **✅ OK TO DOWNLOAD & SUBMIT — Candidate C:** [gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif](docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif)
 (SHA-256 `8a0301d5…f43cc9`; note: `G30-S19 habitat GBM (19-band, no catalogue-distance inputs) + EDGE 60k, off-cat >2px`).

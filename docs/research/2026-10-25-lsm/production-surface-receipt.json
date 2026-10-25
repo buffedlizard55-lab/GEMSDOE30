@@ -1,0 +1,7 @@
+{
+ "label": "deterministic recomputation of the E2 production surface (IR-30-084)",
+ "surface_sha256": "ac17277b91343b1fd9c2c50b57adc99478c8957ac3d864f3af997564f8b85a96",
+ "reproduces_e2_dots_exactly": true,
+ "seed": 3070,
+ "row0_zero_pixels_inside_footprint": 0
+}

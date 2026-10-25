@@ -1,0 +1,388 @@
+{
+ "schema_version": 3,
+ "run_id": "gems30-LSM42-38000-20261025-eb81d4c94efc",
+ "lane": "G30-LSM (self-assigned; no lane paragraph supplied, IR-30-078)",
+ "hypothesis": "H-LSM-1: 1 m-LiDAR scarp morphology fused with GeoDAWN geophysics finds unmapped faults better than geophysics alone, without any catalogue-proximity input.",
+ "mechanism": "HGB on 19 raw bands + 6 geophysical edge transforms + 17 decoded 3DEP-LiDAR scarp descriptors; Poisson r=300 m dots, >200 m off catalogue.",
+ "non_fault_mimic": "Lake Lahontan paleo-shorelines; fluvial terrace risers/channel banks; roads, canals, mines",
+ "verdict": "duplicate-stop",
+ "ok_to_submit": false,
+ "stop_reason": "Dot-stage duplicate under the owner protocol: >70 % of the 38,000 final dots fall within 3 px of 5 sparse registry rasters (chance level 14-18 %). The habitat model learned that catalogue-like pixels sit next to mapped faults, so its dots concentrate where proximity-based lanes already placed theirs.",
+ "duplicate_references": [
+  {
+   "reference": "data/raw/scored/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+   "source": "owner-scored",
+   "reference_dots": 206895,
+   "fraction_within_3px": 0.9913947368421052,
+   "spearman": 0.0006415436153751992,
+   "dense_reference_non_discriminating": true
+  },
+  {
+   "reference": "docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan.tif",
+   "source": "addendum:GEMSDOE30-parallel-merged",
+   "reference_dots": 60000,
+   "fraction_within_3px": 0.8017894736842105,
+   "spearman": 0.08281319278480116,
+   "dense_reference_non_discriminating": false
+  },
+  {
+   "reference": "data/raw/registry-expanded/GEMSDOE28-e74ff9758011b76c25f9c2de6e97d69fc1a0f357.tif",
+   "source": "registry:GEMSDOE28",
+   "reference_dots": 38545,
+   "fraction_within_3px": 0.8011578947368421,
+   "spearman": 0.056690075104715035,
+   "dense_reference_non_discriminating": false
+  },
+  {
+   "reference": "data/raw/registry-expanded/GEMSDOE27-137a898e10865cac77d9ce46eb859b9a572bacbc.tif",
+   "source": "registry:GEMSDOE27",
+   "reference_dots": 59243,
+   "fraction_within_3px": 0.7981052631578948,
+   "spearman": 0.07926143466217786,
+   "dense_reference_non_discriminating": false
+  },
+  {
+   "reference": "data/raw/registry-expanded/GEMSDOE27-0d409af9b3bc43d2063bef5d097c4e321cd2bae6.tif",
+   "source": "registry:GEMSDOE27",
+   "reference_dots": 59075,
+   "fraction_within_3px": 0.7961842105263158,
+   "spearman": 0.08052830388464494,
+   "dense_reference_non_discriminating": false
+  },
+  {
+   "reference": "data/raw/scored/gems10-h25-ctx-ridge-20260927T232947704150Z-6452ae1d00.tif",
+   "source": "owner-scored",
+   "reference_dots": 174232,
+   "fraction_within_3px": 0.7815263157894737,
+   "spearman": 0.05697972898516842,
+   "dense_reference_non_discriminating": true
+  },
+  {
+   "reference": "data/raw/scored/gems10-h28-dotted-ridge-20260928T020256236880Z-6452ae1d00.tif",
+   "source": "owner-scored",
+   "reference_dots": 69281,
+   "fraction_within_3px": 0.7494736842105263,
+   "spearman": 0.03278111639111271,
+   "dense_reference_non_discriminating": false
+  }
+ ],
+ "dots_by_catalogue_distance_px": {
+  "1": 0,
+  "2": 5565,
+  "3-5": 11879,
+  "6-10": 9389,
+  "11-15": 4424,
+  "16-30": 4496,
+  "31-50": 1325,
+  ">50": 922
+ },
+ "candidate_values_sha256": "eb81d4c94efc9012ff5023fa78bba1a0d588c31a2f04061f403107deffdd83e0",
+ "tiff_published": false,
+ "holdout": {
+  "label": "HOLDOUT-DTI",
+  "evaluator_version": "component-holdout-v3-blockstats-20261025",
+  "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+  "withheld_positives": 60988,
+  "lsm42": {
+   "label": "HOLDOUT-DTI",
+   "value": 0.15717417937817968,
+   "withheld_positives": 60988,
+   "ci95": [
+    0.141517305868638,
+    0.1735594545972723
+   ],
+   "tp_weight": 9216.788319524636,
+   "fp_weight": 40034.2160153106
+  },
+  "core19": {
+   "label": "HOLDOUT-DTI",
+   "value": 0.13982063017811727,
+   "withheld_positives": 60988,
+   "ci95": [
+    0.12417754876614995,
+    0.15590471896182123
+   ],
+   "tp_weight": 8181.277496788421,
+   "fp_weight": 40430.04046109527
+  },
+  "geo25": {
+   "label": "HOLDOUT-DTI",
+   "value": 0.14868047181506955,
+   "withheld_positives": 60988,
+   "ci95": [
+    0.13414251865472696,
+    0.16414892338017834
+   ],
+   "tp_weight": 8706.693855737352,
+   "fp_weight": 40140.1434573419
+  },
+  "lsm42_minus": {
+   "core19": {
+    "label": "HOLDOUT-DTI difference",
+    "value": 0.017353549200062407,
+    "ci95": [
+     0.006615090073542207,
+     0.027861024598166754
+    ]
+   },
+   "geo25": {
+    "label": "HOLDOUT-DTI difference",
+    "value": 0.008493707563110131,
+    "ci95": [
+     -0.0015993659164857147,
+     0.0187821176280189
+    ]
+   }
+  },
+  "production_emission": {
+   "evaluator_version": "component-holdout-v3-blockstats-20261025",
+   "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+   "bootstrap": {
+    "unit": "geographic block aggregated across folds",
+    "blocks": 371,
+    "replicates": 2000,
+    "seed": 3071,
+    "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+   },
+   "arms": {
+    "core19": {
+     "label": "HOLDOUT-DTI",
+     "value": 0.1267958680427721,
+     "withheld_positives": 60988,
+     "ci95": [
+      0.11151520100178385,
+      0.14309585661796098
+     ],
+     "tp_weight": 7252.3831298283,
+     "fp_weight": 34782.18889983638
+    },
+    "geo25": {
+     "label": "HOLDOUT-DTI",
+     "value": 0.13652964237007356,
+     "withheld_positives": 60988,
+     "ci95": [
+      0.1221398776142188,
+      0.15178325784538085
+     ],
+     "tp_weight": 7816.1684112088005,
+     "fp_weight": 34476.205906012765
+    },
+    "lsm42": {
+     "label": "HOLDOUT-DTI",
+     "value": 0.1459682713421956,
+     "withheld_positives": 60988,
+     "ci95": [
+      0.13005781166032038,
+      0.16209685238399313
+     ],
+     "tp_weight": 8369.034625319835,
+     "fp_weight": 34352.03988433115
+    }
+   },
+   "candidate_minus": {
+    "core19": {
+     "label": "HOLDOUT-DTI difference",
+     "value": 0.01917240329942349,
+     "ci95": [
+      0.008469357814910263,
+      0.029853973765411667
+     ]
+    },
+    "geo25": {
+     "label": "HOLDOUT-DTI difference",
+     "value": 0.009438628972122026,
+     "ci95": [
+      -0.0006852797257532355,
+      0.019494648347824717
+     ]
+    }
+   }
+  },
+  "gate": {
+   "primary_beats_core19_ci": true,
+   "production_point_ge_core19": true,
+   "no_canary_alarm": true,
+   "core19_reproduces_recorded": true,
+   "passed": true
+  },
+  "scope": "spatially blocked whole-segment catalogue-recovery proxy; NOT organizer performance"
+ },
+ "independent_frame": {
+  "label": "HOLDOUT-DTI (SGMC-new frame)",
+  "arms": {
+   "core19": {
+    "dti": 0.06792205190352046,
+    "tp_weight": 3893.322354240003,
+    "fp_weight": 36052.91102376958,
+    "truth_pixels": 61664.0,
+    "emitted_pixels": 38000
+   },
+   "lsm42": {
+    "dti": 0.07248489377362881,
+    "tp_weight": 4158.209365972006,
+    "fp_weight": 36018.61534305598,
+    "truth_pixels": 61664.0,
+    "emitted_pixels": 38000
+   }
+  },
+  "owner_scored_frame_spearman": -0.30593607305936077,
+  "bootstrap": {
+   "lsm42": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.07248489377362878,
+    "withheld_positives": 61664,
+    "ci95": [
+     0.060459921322304704,
+     0.08673192369190372
+    ],
+    "tp_weight": 4158.209365972005,
+    "fp_weight": 36018.615343056
+   },
+   "core19": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.06792205190352044,
+    "withheld_positives": 61664,
+    "ci95": [
+     0.055015745447301506,
+     0.08302261935592567
+    ],
+    "tp_weight": 3893.322354240001,
+    "fp_weight": 36052.911023769564
+   },
+   "GEMSDOE32 H33-B2": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.0939654172893637,
+    "withheld_positives": 61664,
+    "ci95": [
+     0.08461463591971818,
+     0.10370508395366669
+    ],
+    "tp_weight": 5399.782592048418,
+    "fp_weight": 35272.404085958435
+   },
+   "GEMSDOE25/30 d2.8": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.0927384608134144,
+    "withheld_positives": 61664,
+    "ci95": [
+     0.0835460994213147,
+     0.10224188704353526
+    ],
+    "tp_weight": 5448.406693134417,
+    "fp_weight": 41646.785926241195
+   }
+  },
+  "lsm42_minus": {
+   "core19": {
+    "label": "HOLDOUT-DTI difference",
+    "value": 0.0045628418701083445,
+    "ci95": [
+     -0.0010809908494783956,
+     0.010252016043796539
+    ]
+   },
+   "GEMSDOE32 H33-B2": {
+    "label": "HOLDOUT-DTI difference",
+    "value": -0.021480523515734914,
+    "ci95": [
+     -0.035348271499693995,
+     -0.005684264485368721
+    ]
+   },
+   "GEMSDOE25/30 d2.8": {
+    "label": "HOLDOUT-DTI difference",
+    "value": -0.02025356703978562,
+    "ci95": [
+     -0.03400128785335961,
+     -0.004765399786772173
+    ]
+   }
+  }
+ },
+ "e3_crest_line_emission": {
+  "verdict": "negative (gate failed; plain emission kept per amendment)",
+  "gate": {
+   "primary_beats_lsm42_ci": false,
+   "production_point_ge_lsm42": false,
+   "plain_reproduces_e1": true,
+   "passed": false
+  },
+  "v3_primary_ridge_minus_plain": {
+   "label": "HOLDOUT-DTI difference",
+   "value": 0.001551162104055509,
+   "ci95": [
+    -0.002872558293836397,
+    0.005524585845387431
+   ]
+  },
+  "v3_production_ridge_minus_plain": {
+   "label": "HOLDOUT-DTI difference",
+   "value": -0.0002593037688705113,
+   "ci95": [
+    -0.0047299738158502695,
+    0.0035484905529109146
+   ]
+  },
+  "sgmc_frame_reported_not_gated": {
+   "lsm42": {
+    "label": "HOLDOUT-DTI difference",
+    "value": 0.008725648664645022,
+    "ci95": [
+     0.005427331880016786,
+     0.01222030337843609
+    ]
+   },
+   "GEMSDOE32 H33-B2": {
+    "label": "HOLDOUT-DTI difference",
+    "value": -0.012754874851089892,
+    "ci95": [
+     -0.02562941990656593,
+     0.0015270984950009547
+    ]
+   },
+   "GEMSDOE25/30 d2.8": {
+    "label": "HOLDOUT-DTI difference",
+    "value": -0.011527918375140597,
+    "ci95": [
+     -0.024202203108103143,
+     0.00261745532779886
+    ]
+   }
+  }
+ },
+ "feature_canaries": {
+  "alarms": 0,
+  "features_per_fold": 42,
+  "max_auc": 0.6647491430040059
+ },
+ "novelty": {
+  "surface": {
+   "decision": "novelty-check-passed-not-submission-approval",
+   "max_spearman": 0.2181482322417262,
+   "references_compared": 131,
+   "scope": "observed inventory: 105 hash-pinned priority-site rasters + addendum + 11 owner-scored + repo downloads"
+  },
+  "dots": {
+   "decision": "duplicate-stop",
+   "max_spearman": 0.08281319278480116,
+   "max_fraction_within_3px": 0.9913947368421052,
+   "references_compared": 131,
+   "scope": "observed inventory: 105 hash-pinned priority-site rasters + addendum + 11 owner-scored + repo downloads"
+  }
+ },
+ "validator": "not run: protocol stops at a dot-stage duplicate before any TIFF is written",
+ "submission_name": null,
+ "submission_note": null,
+ "experiments_run": 3,
+ "experiment_cap": 3,
+ "time_cap_hours": 2,
+ "executions": {
+  "E1": "2 (second = deterministic re-execution to persist block statistics; identical)",
+  "E2": 1,
+  "E3": 1
+ },
+ "experiment_seconds": 457.4,
+ "slot_selection": "not performed",
+ "organizer_score": null,
+ "lesson": "Run the dot-stage novelty check on full-catalogue production dots BEFORE spending experiments; a catalogue-trained habitat model needs an explicit far-field allocation to be unique."
+}

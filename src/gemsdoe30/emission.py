@@ -517,3 +517,51 @@ def poisson_disk_select_ordered(score: Any, radius_px: float, *, threshold: floa
                    max_kept=int(max_kept) if max_kept is not None else None)
     accepted = np.nonzero(kept[rows, cols])[0]
     return rows[accepted], cols[accepted]
+
+
+def crest_mask(surface: Any, valid: Any = None, *, sigma: float = 1.0) -> Any:
+    """Crest-line (ridge) pixels of a 2D score surface.
+
+    A pixel is a crest pixel when the most negative eigenvalue of the Gaussian
+    (``sigma``) Hessian is negative, dominates the other eigenvalue in magnitude
+    (concave across, not a convex tail) and exceeds a 1e-6 relative noise floor,
+    and the smoothed surface is a local maximum along that eigenvector
+    (quantised to 0/45/90/135 degrees; one-sided strict to break plateau ties).
+    Restricting dot candidates to crest pixels places dots on line-like maxima
+    instead of filling broad high-score zones. Pure image operation: no labels.
+    """
+    import numpy as np
+    from scipy.ndimage import gaussian_filter
+
+    p = np.asarray(surface, dtype=np.float32)
+    if p.ndim != 2:
+        raise ValueError("surface must be two-dimensional")
+    if not sigma > 0:
+        raise ValueError("sigma must be positive")
+    inside = np.ones(p.shape, dtype=bool) if valid is None else np.asarray(valid, dtype=bool)
+    p = np.where(inside & np.isfinite(p), p, 0.0).astype(np.float32)
+    s = gaussian_filter(p, sigma)
+    hrr = gaussian_filter(p, sigma, order=(2, 0))
+    hcc = gaussian_filter(p, sigma, order=(0, 2))
+    hrc = gaussian_filter(p, sigma, order=(1, 1))
+    root = np.sqrt((0.5 * (hrr - hcc)) ** 2 + hrc ** 2)
+    lam_min = 0.5 * (hrr + hcc) - root
+    lam_max = 0.5 * (hrr + hcc) + root
+    span = float(np.ptp(s)) if s.size else 0.0
+    floor = 1e-6 * span if span > 0 else np.inf
+    # Eigenvector of the largest eigenvalue has angle 0.5*atan2(2b, a-c) in (row, col);
+    # the across-crest direction (smallest eigenvalue) is perpendicular to it.
+    phi = 0.5 * np.arctan2(2.0 * hrc, hrr - hcc) + np.pi / 2.0
+    q = np.round((phi % np.pi) / (np.pi / 4.0)).astype(np.int8) % 4
+    steps = ((1, 0), (1, 1), (0, 1), (1, -1))
+    padded = np.pad(s, 1, mode="constant", constant_values=-np.inf)
+    h, w = s.shape
+    keep = np.zeros(s.shape, dtype=bool)
+    for k, (dr, dc) in enumerate(steps):
+        plus = padded[1 + dr:1 + dr + h, 1 + dc:1 + dc + w]
+        minus = padded[1 - dr:1 - dr + h, 1 - dc:1 - dc + w]
+        sel = q == k
+        # One-sided strictness keeps exactly one pixel of a two-pixel plateau.
+        keep |= sel & (s >= plus) & (s > minus)
+    concave = (lam_min < -floor) & (np.abs(lam_min) > np.abs(lam_max))
+    return keep & concave & inside

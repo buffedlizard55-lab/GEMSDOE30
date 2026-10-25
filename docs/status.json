@@ -1,27 +1,33 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-25T23:48:31Z",
+  "generated_utc": "2026-10-25T23:49:37Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
     "directory": "data/raw",
     "availability_scope": "This describes files present in the build worktree at generated_utc; data/raw and data/processed are Git-ignored and are not distributed by GitHub Pages.",
-    "required_files_present": false,
-    "sha256_verified_against_pins": false,
+    "required_files_present": true,
+    "sha256_verified_against_pins": true,
     "files": [
       {
         "dest": "training_features.tif",
         "path": "data/raw/training_features.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-        "expected_bytes": 418912844
+        "expected_bytes": 418912844,
+        "actual_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "actual_bytes": 418912844,
+        "sha256_matches_pin": true
       },
       {
         "dest": "labels.tif",
         "path": "data/raw/labels.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "expected_bytes": 425830
+        "expected_bytes": 425830,
+        "actual_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+        "actual_bytes": 425830,
+        "sha256_matches_pin": true
       },
       {
         "dest": "sample_submission.tif",
@@ -35,20 +41,22 @@
       }
     ],
     "prepared_dataset": {
-      "dataset_signature": null,
-      "matches_recorded_pin": null,
-      "positive_label_pixels": null,
-      "template_valid_pixels": null
+      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+      "matches_recorded_pin": true,
+      "positive_label_pixels": 60988,
+      "template_valid_pixels": 5167373
     },
     "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
   },
   "competition_data": {
     "owner_mirror_files_present": [
+      "training_features.tif",
+      "labels.tif",
       "sample_submission.tif"
     ],
     "organizer_authenticated": false,
     "prepared_dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
-    "pins_core_sha256_verified_now": false,
+    "pins_core_sha256_verified_now": true,
     "historical_restore_receipt": "docs/research/2026-10-25/prepared-manifest.json",
     "pins_note": "Owner mirrors, not organizer-authenticated. Hash pins verify consistency only. Template values must never be used as features or predictions.",
     "extra_pins_files": [
@@ -454,7 +462,15 @@
     "run_card": "docs/research/texture-displacement/run-card.json",
     "readiness": "docs/research/texture-displacement/readiness.json",
     "purpose": "Retained TDX-1 archive for research download; latest TDX-C2 attempt is duplicate-stopped, not a new downloadable submission",
-    "latest_attempt": "docs/research/texture-controls/run-card.json"
+    "latest_attempt": "docs/research/texture-controls/run-card.json",
+    "additional_stopped_attempts": [
+      {
+        "lane": "G30-LSM",
+        "pointer": "docs/research/2026-10-25-lsm/current-run.json",
+        "verifier": "scripts/verify_lsm_run.py",
+        "decision": "DO NOT SUBMIT (duplicate-stop; holdout gate passed; no TIFF published)"
+      }
+    ]
   },
   "current_readiness": {
     "schema_version": 2,
@@ -1007,6 +1023,55 @@
     },
     "public_download": false
   },
+  "additional_stopped_attempts": [
+    {
+      "lane": "G30-LSM",
+      "pointer": "docs/research/2026-10-25-lsm/current-run.json",
+      "verifier": "scripts/verify_lsm_run.py",
+      "verified_now": true,
+      "error": null,
+      "decision": "DO NOT SUBMIT",
+      "ok_to_submit": false,
+      "research_verdict": "duplicate-stop",
+      "gates": [
+        {
+          "name": "preregistration_binding",
+          "status": "passed",
+          "detail": "Frozen preregistration and E3 amendment hashes match every start receipt and result"
+        },
+        {
+          "name": "beats_current_holdout_best",
+          "status": "passed",
+          "detail": "HOLDOUT-DTI (component-holdout-v3-blockstats-20261025, 60,988 withheld positives): lsm42 - core19 = +0.01735 [+0.00662, +0.02786]; production-emission delta +0.01917"
+        },
+        {
+          "name": "single_feature_leakage_canaries",
+          "status": "passed",
+          "detail": "168 checks (42 inputs x 4 folds); max AUC 0.6647 <= 0.90"
+        },
+        {
+          "name": "experiment_budget",
+          "status": "passed",
+          "detail": "3 experiments, 457 s of experiment compute (cap 3 / 7,200 s)"
+        },
+        {
+          "name": "novelty_surface",
+          "status": "passed",
+          "detail": "max surface rank correlation 0.218 vs 131 references (limit 0.90)"
+        },
+        {
+          "name": "novelty_dots",
+          "status": "failed",
+          "detail": "DUPLICATE: 5 distinct sparse registry rasters (9 files) hold >70% of the dots within 3 px (max 0.802); protocol stop"
+        },
+        {
+          "name": "file_contract",
+          "status": "failed",
+          "detail": "No TIFF published: the protocol stops at a dot-stage duplicate before writing"
+        }
+      ]
+    }
+  ],
   "legacy_readiness_2026_10_25": {
     "schema_version": 1,
     "run_id": "gems30-readiness-audit-20261025",
@@ -1458,6 +1523,11 @@
       "promoted": false,
       "decision": "NOT APPROVED FOR SUBMISSION"
     },
+    "stopped_attempt_g30-lsm": {
+      "evidence": "docs/research/2026-10-25-lsm/current-run.json",
+      "promoted": false,
+      "decision": "DO NOT SUBMIT"
+    },
     "latest_scientific_attempt": {
       "evidence": "docs/research/texture-controls/run-card.json",
       "promoted": false,
@@ -1692,7 +1762,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "230 tests collected in 1.14s",
+      "pytest_collect": "242 tests collected in 0.87s",
       "exit_code": 0
     },
     "score_gain_claimed": false
