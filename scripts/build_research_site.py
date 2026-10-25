@@ -13,6 +13,7 @@ import zlib
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT), str(ROOT / "src")]
 from scripts.verify_current_run import verify, local_path
+from scripts.verify_lsm_run import verify as verify_lsm
 
 STYLE = "docs/assets/research.css"
 
@@ -190,10 +191,33 @@ def build(template: Path) -> dict[Path, str | bytes]:
 <section class="section"><p class="eyebrow">02 /Nine priority sites &amp; H33 forensic audit</p><h2>Educational audit of GEMSDOE24, 25, 27, 28, 30, 31, 32, 33, 36.</h2><p>No historical raster was reused as predictions. Byte-exact reconstruction (<a href="docs/research/2026-10-25/recipe-reconstruction.json">receipt</a>) proved <code>GEMSDOE32</code> <code>H33</code> (<code>37,654</code> dots) equals <code>GEMSDOE28</code> solo <code>d=2.8</code> (<code>40,199</code> dots) minus <code>2,545</code> dots within <code>&le; 2 px</code> (<code>200 m</code>) of <code>labels.tif</code>.</p><div class="table-wrap"><table><caption>Pinned priority-site reference diagnostics (counts &amp; format checks, not organizer scores)</caption><thead><tr><th>Priority site</th><th>Positive pixels</th><th>Published-spec format</th><th>SHA-256 prefix</th></tr></thead><tbody>{sites_rows}</tbody></table></div></section>
 <section class="section"><p class="eyebrow">03 / Preserved negative &amp; duplicate-stopped peer lanes</p><h2>Falsification and novelty enforcement across concurrent runs.</h2><ul class="spaced"><li><strong>MSDB-1 Experiment 1 (<a href="docs/research/msdb-piedmont/experiment-1-duplicate-stop/receipt.json">archived pre-holdout stop</a>):</strong> Including 6 regional DC-level/coordinate bands caused <code>71.44%</code> dot overlap with <code>G30-S19</code>; halted before any holdout fold ran.</li><li><strong>TDX-C2 (<a href="docs/research/texture-controls/review.md">PR #30</a>):</strong> Conditional magnetic-displacement features did not improve <code>core19</code> (<code>-0.003760</code>) and hit <code>79.09%</code> dot overlap; quarantined with no public TIFF.</li><li><strong>G30-S20 (<a href="docs/research/2026-10-25-s20/analysis.md">PR #29</a>) &amp; TDX-1 (<a href="docs/research/texture-displacement/review.md">PR #28</a>):</strong> Preserved intact with immutable pre-placement registries and post-merge late-reference audits.</li></ul><p><a href="docs/irregularities.md">Complete irregularities ledger ↗</a> · <a href="docs/status.json">Machine status JSON ↗</a></p></section>'''
 
+    for extra in selected.get("additional_stopped_attempts", []):
+        if extra.get("lane") == "G30-LSM":
+            lsm_ready = verify_lsm(local_path(extra["pointer"]), template)
+            if lsm_ready["ok_to_submit"] is not False:
+                raise ValueError("G30-LSM stopped attempt must remain non-submittable")
+
+    public_snapshot = json.loads((ROOT / "docs/research/2026-10-25/priority-site-public-snapshot.json").read_text())
+    pub_rows = "".join(
+        f'<tr><th scope="row"><a href="https://github.com/{e(row["repo"])}/tree/{e(row["ref"])}">{e(row["site"])}</a></th>'
+        f'<td><code>{e(row["ref"][:12])}…</code></td><td>{row["published_tiffs"]}</td><td>{len(row["continuous_surface_path_candidates"])}</td></tr>'
+        for row in public_snapshot["snapshots"]
+    )
+    inspected = public_snapshot["continuous_surface_discovery"].get("inspections") or []
+    surf_rows = "".join(
+        f'<tr><th scope="row">{e(row["site"])}</th><td><a href="{e(row["source_url"])}"><code>{e(row["source_path"])}</code></a></td>'
+        f'<td>{e(row.get("format", "not inspected"))}</td><td>{e(row.get("future_surface_comparison_eligibility", "unknown"))}</td></tr>'
+        for row in inspected
+    ) or '<tr><td colspan="4">No surface metadata inspection recorded.</td></tr>'
+    registry_review_html = f'''<section class="intro"><div><p class="eyebrow">Public Source Registry · 25 October 2026</p><h1>Immutable nine-site inventory.<br>Metadata, not scores.</h1><p class="lead">Immutable GitHub snapshots across all nine priority sites (<code>{public_snapshot["source_files"]}</code> TIFF source blobs, <code>{public_snapshot["unique_aligned_byte_sequences"]}</code> unique aligned byte sequences) preserved without altering any frozen experiment registry.</p></div><a class="text-link" href="docs/research/2026-10-25/priority-site-public-snapshot.json">Open machine receipt ↗</a></section>
+<section class="section"><p class="eyebrow">01 / Byte-verified public inventory</p><h2>Nine requested repositories at immutable commits.</h2><div class="table-wrap"><table><caption>Public source scope only</caption><thead><tr><th>Repository</th><th>Immutable commit</th><th>TIFF source blobs</th><th>Candidate surface paths</th></tr></thead><tbody>{pub_rows}</tbody></table></div></section>
+<section class="section"><p class="eyebrow">02 / Surface metadata groundwork</p><h2>Inspected public arrays remain conservatively marked unknown.</h2><div class="table-wrap"><table><caption>Potential public surfaces · never used as predictions</caption><thead><tr><th>Repository</th><th>Object</th><th>Container</th><th>Eligibility</th></tr></thead><tbody>{surf_rows}</tbody></table></div><p><a href="docs/research/2026-10-25/priority-site-public-review.md">Full source-sync review ↗</a> · <a href="experiment-review.html">Back to scientific review ↗</a></p></section>'''
+
     return {
         ROOT / "index.html": page("MSDB-1v2 unique GeoTIFF & automated gate decision", home, card, research_dir, active="home"),
         ROOT / "executive-summary.html": page("Executive summary & validation guide", guide, card, research_dir, active="guide"),
         ROOT / "experiment-review.html": page("Scientific review & nine-site audit", research_html, card, research_dir, active="research"),
+        ROOT / "priority-registry-review.html": page("Public priority registry review", registry_review_html, card, research_dir, active="research"),
         ROOT / preview_rel: png_preview(template, local_path(card["published_tiff"])),
         ROOT / "docs/index.html": '<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=../index.html"><title>GEMSDOE30</title><link rel="canonical" href="../index.html"></head><body><p><a href="../index.html">Open current research download and submission decision.</a></p></body></html>\n',
     }

@@ -1,0 +1,186 @@
+{
+ "schema_version": 1,
+ "experiment": 2,
+ "label": "HOLDOUT-DTI on independent SGMC-new frame (proxy; NOT organizer score)",
+ "frame": {
+  "truth": "SGMC fault pixels > 3 px from catalogue",
+  "truth_pixels": 61664,
+  "mask": "catalogue pixels (pixel-exact)",
+  "emission": "38000 dots, r=3.0, dist>2px"
+ },
+ "arms": {
+  "core19": {
+   "dti": 0.06792205190352046,
+   "tp_weight": 3893.322354240003,
+   "fp_weight": 36052.91102376958,
+   "truth_pixels": 61664.0,
+   "emitted_pixels": 38000
+  },
+  "lsm42": {
+   "dti": 0.07248489377362881,
+   "tp_weight": 4158.209365972006,
+   "fp_weight": 36018.61534305598,
+   "truth_pixels": 61664.0,
+   "emitted_pixels": 38000
+  }
+ },
+ "bootstrap_vs_references": {
+  "evaluator_version": "component-holdout-v3-blockstats-20261025",
+  "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+  "bootstrap": {
+   "unit": "geographic block aggregated across folds",
+   "blocks": 371,
+   "replicates": 2000,
+   "seed": 3072,
+   "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+  },
+  "arms": {
+   "lsm42": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.07248489377362878,
+    "withheld_positives": 61664,
+    "ci95": [
+     0.060459921322304704,
+     0.08673192369190372
+    ],
+    "tp_weight": 4158.209365972005,
+    "fp_weight": 36018.615343056
+   },
+   "core19": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.06792205190352044,
+    "withheld_positives": 61664,
+    "ci95": [
+     0.055015745447301506,
+     0.08302261935592567
+    ],
+    "tp_weight": 3893.322354240001,
+    "fp_weight": 36052.911023769564
+   },
+   "GEMSDOE32 H33-B2": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.0939654172893637,
+    "withheld_positives": 61664,
+    "ci95": [
+     0.08461463591971818,
+     0.10370508395366669
+    ],
+    "tp_weight": 5399.782592048418,
+    "fp_weight": 35272.404085958435
+   },
+   "GEMSDOE25/30 d2.8": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.0927384608134144,
+    "withheld_positives": 61664,
+    "ci95": [
+     0.0835460994213147,
+     0.10224188704353526
+    ],
+    "tp_weight": 5448.406693134417,
+    "fp_weight": 41646.785926241195
+   }
+  },
+  "candidate_minus": {
+   "core19": {
+    "label": "HOLDOUT-DTI difference",
+    "value": 0.0045628418701083445,
+    "ci95": [
+     -0.0010809908494783956,
+     0.010252016043796539
+    ]
+   },
+   "GEMSDOE32 H33-B2": {
+    "label": "HOLDOUT-DTI difference",
+    "value": -0.021480523515734914,
+    "ci95": [
+     -0.035348271499693995,
+     -0.005684264485368721
+    ]
+   },
+   "GEMSDOE25/30 d2.8": {
+    "label": "HOLDOUT-DTI difference",
+    "value": -0.02025356703978562,
+    "ci95": [
+     -0.03400128785335961,
+     -0.004765399786772173
+    ]
+   }
+  }
+ },
+ "owner_scored_frame_validity": {
+  "rows": [
+   {
+    "raster": "GEMSDOE24 d1.5",
+    "owner_reported_score": 0.2477,
+    "frame_dti": 0.09838854407946906,
+    "dots": 60069
+   },
+   {
+    "raster": "GEMSDOE25/30 d2.8",
+    "owner_reported_score": 0.26,
+    "frame_dti": 0.09273846081341434,
+    "dots": 44090
+   },
+   {
+    "raster": "GEMSDOE28 r1-solo-d2.8",
+    "owner_reported_score": 0.2708,
+    "frame_dti": 0.09384814898717253,
+    "dots": 40199
+   },
+   {
+    "raster": "GEMSDOE31 solo-d28",
+    "owner_reported_score": 0.2708,
+    "frame_dti": 0.09384814898717253,
+    "dots": 40199
+   },
+   {
+    "raster": "GEMSDOE32 H33-B2",
+    "owner_reported_score": 0.2778,
+    "frame_dti": 0.09396541728936361,
+    "dots": 37654
+   },
+   {
+    "raster": "GEMSDOE28 prethin-tip-euler",
+    "owner_reported_score": 0.2649,
+    "frame_dti": 0.09331671648367136,
+    "dots": 42294
+   },
+   {
+    "raster": "GEMSDOE28 rung30-blind-r1",
+    "owner_reported_score": 0.271,
+    "frame_dti": 0.09186668228402539,
+    "dots": 37660
+   },
+   {
+    "raster": "GEMSDOE28 hf-euler-r30-r1",
+    "owner_reported_score": 0.2707,
+    "frame_dti": 0.0921216104399326,
+    "dots": 37860
+   },
+   {
+    "raster": "GEMSDOE33 tip-stepover-r30",
+    "owner_reported_score": 0.2632,
+    "frame_dti": 0.09424537701945356,
+    "dots": 41865
+   },
+   {
+    "raster": "GEMSDOE36 anderson-pinn",
+    "owner_reported_score": 0.275,
+    "frame_dti": 0.09536457384397079,
+    "dots": 38854
+   },
+   {
+    "raster": "GEMSDOE27 gap-closure-on-d1.5",
+    "owner_reported_score": 0.2449,
+    "frame_dti": 0.09962268324252034,
+    "dots": 61328
+   }
+  ],
+  "spearman": -0.30593607305936077,
+  "p_value": 0.36021643303794865,
+  "n": 11,
+  "note": "owner scores UNVERIFIED; small, highly correlated set"
+ },
+ "confirmation_lsm42_ge_core19": true,
+ "elapsed_seconds": 80.2
+}

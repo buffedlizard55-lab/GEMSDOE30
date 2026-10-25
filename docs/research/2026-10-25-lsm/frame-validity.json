@@ -1,0 +1,161 @@
+{
+ "label": "DIAGNOSTIC; owner scores UNVERIFIED; frame = SGMC fault px >3 px from catalogue, catalogue masked",
+ "n": 19,
+ "spearman": -0.18349429323968391,
+ "kendall": -0.18823529411764703,
+ "spearman_non_d_family": 0.2605042016806723,
+ "rows": [
+  {
+   "raster": "GEMSDOE19 h19-5 (continuous)",
+   "owner_reported_score": 0.1922,
+   "frame_dti": 0.09752107258949314,
+   "tp_weight": 7176.849101384106,
+   "fp_weight": 114131.16681878033,
+   "positive_mass": 121131.0
+  },
+  {
+   "raster": "GEMSDOE19 h19-4 (continuous)",
+   "owner_reported_score": 0.1894,
+   "frame_dti": 0.10351289051184878,
+   "tp_weight": 7676.483149160818,
+   "fp_weight": 116465.93196570667,
+   "positive_mass": 123779.0
+  },
+  {
+   "raster": "GEMSDOE16 h16-1 ridges",
+   "owner_reported_score": 0.1855,
+   "frame_dti": 0.1097597308030369,
+   "tp_weight": 8149.7732128606285,
+   "fp_weight": 116449.3835383146,
+   "positive_mass": 123939.0
+  },
+  {
+   "raster": "GEMSDOE10 h28 dotted-ridge",
+   "owner_reported_score": 0.1839,
+   "frame_dti": 0.08920466509874443,
+   "tp_weight": 5620.628218923413,
+   "fp_weight": 62764.530934175804,
+   "positive_mass": 65236.0
+  },
+  {
+   "raster": "GEMSDOE8 Hedge-v2",
+   "owner_reported_score": 0.1563,
+   "frame_dti": 0.10146961152646237,
+   "tp_weight": 8382.32636625263,
+   "fp_weight": 158007.8181957794,
+   "positive_mass": 166519.0
+  },
+  {
+   "raster": "GEMSDOE ens12",
+   "owner_reported_score": 0.1563,
+   "frame_dti": 0.10146961152646237,
+   "tp_weight": 8382.32636625263,
+   "fp_weight": 158007.8181957794,
+   "positive_mass": 166519.0
+  },
+  {
+   "raster": "GEMSDOE10 h25 ctx-ridge",
+   "owner_reported_score": 0.128,
+   "frame_dti": 0.08282740153536362,
+   "tp_weight": 6765.598349866732,
+   "fp_weight": 154993.86709062755,
+   "positive_mass": 161366.0
+  },
+  {
+   "raster": "GEMSDOE13 lattice-s5",
+   "owner_reported_score": 0.0904,
+   "frame_dti": 0.24907433292260106,
+   "tp_weight": 23221.103688414325,
+   "fp_weight": 196270.9617488479,
+   "positive_mass": 204504.0
+  },
+  {
+   "raster": "GEMSDOE9 PLACEHOLDER",
+   "owner_reported_score": 0.0107,
+   "frame_dti": 0.0337564114645967,
+   "tp_weight": 2630.7764176743312,
+   "fp_weight": 140383.85258714168,
+   "positive_mass": 145610.0
+  },
+  {
+   "raster": "GEMSDOE24 d1.5",
+   "owner_reported_score": 0.2477,
+   "frame_dti": 0.09838854407946906,
+   "tp_weight": 6089.847331529805,
+   "fp_weight": 56733.64484395944,
+   "positive_mass": 60069.0
+  },
+  {
+   "raster": "GEMSDOE25/30 d2.8",
+   "owner_reported_score": 0.26,
+   "frame_dti": 0.09273846081341434,
+   "tp_weight": 5448.406693134413,
+   "fp_weight": 41646.7859262412,
+   "positive_mass": 44090.0
+  },
+  {
+   "raster": "GEMSDOE28 r1-solo-d2.8",
+   "owner_reported_score": 0.2708,
+   "frame_dti": 0.09384814898717253,
+   "tp_weight": 5440.668009944882,
+   "fp_weight": 37768.825803851345,
+   "positive_mass": 40199.0
+  },
+  {
+   "raster": "GEMSDOE32 H33-B2",
+   "owner_reported_score": 0.2778,
+   "frame_dti": 0.09396541728936361,
+   "tp_weight": 5399.782592048414,
+   "fp_weight": 35272.40408595845,
+   "positive_mass": 37654.0
+  },
+  {
+   "raster": "GEMSDOE28 prethin-tip-euler",
+   "owner_reported_score": 0.2649,
+   "frame_dti": 0.09331671648367136,
+   "tp_weight": 5448.866825769032,
+   "fp_weight": 39850.69221456365,
+   "positive_mass": 42294.0
+  },
+  {
+   "raster": "GEMSDOE28 rung30-blind-r1",
+   "owner_reported_score": 0.271,
+   "frame_dti": 0.09186668228402539,
+   "tp_weight": 5278.897070659179,
+   "fp_weight": 35378.029629423356,
+   "positive_mass": 37660.0
+  },
+  {
+   "raster": "GEMSDOE28 hf-euler-r30-r1",
+   "owner_reported_score": 0.2707,
+   "frame_dti": 0.0921216104399326,
+   "tp_weight": 5297.398323096142,
+   "fp_weight": 35568.62272000481,
+   "positive_mass": 37860.0
+  },
+  {
+   "raster": "GEMSDOE33 tip-stepover-r30",
+   "owner_reported_score": 0.2632,
+   "frame_dti": 0.09424537701945356,
+   "tp_weight": 5495.73856359933,
+   "fp_weight": 39413.68020784385,
+   "positive_mass": 41865.0
+  },
+  {
+   "raster": "GEMSDOE36 anderson-pinn",
+   "owner_reported_score": 0.275,
+   "frame_dti": 0.09536457384397079,
+   "tp_weight": 5504.1357640934675,
+   "fp_weight": 36423.74513749968,
+   "positive_mass": 38854.0
+  },
+  {
+   "raster": "GEMSDOE27 gap-closure-on-d1.5",
+   "owner_reported_score": 0.2449,
+   "frame_dti": 0.09962268324252034,
+   "tp_weight": 6192.232959857726,
+   "fp_weight": 57936.05623527775,
+   "positive_mass": 61328.0
+  }
+ ]
+}

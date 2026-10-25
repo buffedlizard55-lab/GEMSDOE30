@@ -63,6 +63,12 @@ def check_equal(left, right, label: str = "summary", tol: float = 1e-12) -> None
 
 def verify(pointer: Path, template: Path, *, write=False):
     selection = load(pointer)
+    # Lane-specific verifiers are selected by the pointer, never by a human flag.
+    if selection.get("verifier") == "scripts/verify_lsm_run.py":
+        if str(ROOT) not in sys.path:
+            sys.path.insert(0, str(ROOT))
+        from scripts.verify_lsm_run import verify as verify_lsm
+        return verify_lsm(pointer, template, write=write)
     card_path = local_path(selection["run_card"])
     directory = card_path.parent
     card = load(card_path)
