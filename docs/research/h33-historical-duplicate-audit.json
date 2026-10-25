@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "stage": "dots",
+  "candidate": "data/raw/registry/32.tif",
+  "candidate_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "registry_sha256": "9e4b3f98f769b49df74171e926e77922b974eb3b15d33038c3f12fc1a46ce880",
+  "registry_complete": false,
+  "comparisons": [
+    {
+      "reference": "data/raw/registry/24.tif",
+      "spearman_full_footprint": 0.5323675249041245,
+      "candidate_dots": 37654,
+      "reference_dots": 60069,
+      "candidate_fraction_within_3px_of_reference": 1.0,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": true,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/registry/25.tif",
+      "spearman_full_footprint": 0.9235552787928604,
+      "candidate_dots": 37654,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": 1.0,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": true,
+      "dot_duplicate": true,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/registry/27.tif",
+      "spearman_full_footprint": 0.5267469064436088,
+      "candidate_dots": 37654,
+      "reference_dots": 61328,
+      "candidate_fraction_within_3px_of_reference": 1.0,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": true,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/registry/28.tif",
+      "spearman_full_footprint": 0.9675873339320377,
+      "candidate_dots": 37654,
+      "reference_dots": 40199,
+      "candidate_fraction_within_3px_of_reference": 1.0,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": true,
+      "dot_duplicate": true,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/registry/30.tif",
+      "spearman_full_footprint": 0.9235552787928604,
+      "candidate_dots": 37654,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": 1.0,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": true,
+      "dot_duplicate": true,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/registry/31.tif",
+      "spearman_full_footprint": 0.9675873339320377,
+      "candidate_dots": 37654,
+      "reference_dots": 40199,
+      "candidate_fraction_within_3px_of_reference": 1.0,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": true,
+      "dot_duplicate": true,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/registry/32.tif",
+      "spearman_full_footprint": 1.0,
+      "candidate_dots": 37654,
+      "reference_dots": 37654,
+      "candidate_fraction_within_3px_of_reference": 1.0,
+      "identical_inside_footprint": true,
+      "correlation_duplicate": true,
+      "dot_duplicate": true,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/registry/33.tif",
+      "spearman_full_footprint": 0.794679031600615,
+      "candidate_dots": 37654,
+      "reference_dots": 41865,
+      "candidate_fraction_within_3px_of_reference": 0.9998406543793488,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": true,
+      "undefined": false
+    },
+    {
+      "reference": "data/raw/registry/36.tif",
+      "spearman_full_footprint": 0.9843213108530421,
+      "candidate_dots": 37654,
+      "reference_dots": 38854,
+      "candidate_fraction_within_3px_of_reference": 1.0,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": true,
+      "dot_duplicate": true,
+      "undefined": false
+    }
+  ],
+  "errors": [],
+  "decision": "duplicate-stop",
+  "submission_approved": false
+}

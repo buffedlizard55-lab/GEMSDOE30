@@ -1,0 +1,200 @@
+[
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/07345ea0604953d7efb858d9cfbc21e20c7aca0b/README.md",
+    "sha256": "80990aea274d3940eddced0ff1e546d039aa458d66fc68d9e2f82ffc9f375e71",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/index.html",
+    "sha256": "09206e88822ca970919b6e77e83664d39b3baf9194328ab4f628c99cc5bd9125",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/07345ea0604953d7efb858d9cfbc21e20c7aca0b/index.html",
+    "sha256": "50a59ad84fa7aad9867dcdd3f67d736e33a1fb89d47e19319d874876bb6865f8",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE25/blob/04333cc3fbf7486c56e0324fd07aee684be614dc/README.md",
+    "sha256": "b46771693e07afec79524e0a77192fa9d3d03fdd814dabb6a57294f9b0f48bb2",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE25/blob/04333cc3fbf7486c56e0324fd07aee684be614dc/docs/index.html",
+    "sha256": "417059238cc9e0a132fe7f19313a372466aebda6a03fd2f10e3c74a719794dff",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE25/blob/04333cc3fbf7486c56e0324fd07aee684be614dc/index.html",
+    "sha256": "16653f78ae2a34699cf3e1422c1486f6915c85b87105098fbc9f66cca4dfd144",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE27/blob/b8dd298e10884afffa05436673ac73aeaf850b8c/README.md",
+    "sha256": "02a0ba0f9d1e1353610b203b973d2caa068a2476f4484513fd20a0c529a7867f",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE27/blob/b8dd298e10884afffa05436673ac73aeaf850b8c/docs/index.html",
+    "sha256": "3b3e3568691cd6520334b9af255cf3411d392203867d43fbad75063afa4ec306",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE27/blob/b8dd298e10884afffa05436673ac73aeaf850b8c/index.html",
+    "sha256": "7884e5d4e4372358d38b118cfcb75365d47f795dec42f19b8824536e69812566",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/78e724f95337a6528b1248be5c113c6d6d502891/README.md",
+    "sha256": "72ad74ad2a7a596e57aa656aaa71cafc5f2c3c05a028cce742756e003c93387b",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/78e724f95337a6528b1248be5c113c6d6d502891/docs/index.html",
+    "sha256": "c592de5edb95b68bac61d5820c2a57902661a4fb3dbdcebc25d4a62ad3f5e689",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/78e724f95337a6528b1248be5c113c6d6d502891/index.html",
+    "sha256": "e4210517238b66c6fc6790bdccc41f0eae5b26cc72d7d386f545e0057c3a18f0",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/3d5bec2af5f29291617f97c9e2dfe443be6f55c3/README.md",
+    "sha256": "422e21d96bff3c9c57ee994d27f38dee42b54f272cf7083193bf4a88087f749a",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/3d5bec2af5f29291617f97c9e2dfe443be6f55c3/index.html",
+    "sha256": "9fb4d67b8f3f910c294a19e41a94c8f56e1e88b254085e0f4b16c2829f130780",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/cf13282fcd86290f1539f0a86446c8ba7205a79b/README.md",
+    "sha256": "46d10756d232a9696846052b136a06698c87bf8e4598a95c917218c197f5f2b9",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/cf13282fcd86290f1539f0a86446c8ba7205a79b/docs/index.html",
+    "sha256": "90977969e12dfb746af787452034ebeecaf3b1fe15aef4d64bdee4a115c341c9",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/cf13282fcd86290f1539f0a86446c8ba7205a79b/index.html",
+    "sha256": "317a591311da033cfa38d9d71b3e51d0f13cf1127c5cf03adbbfc9b413049045",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/012e17b2a115c3c0d5e7885bea625bf9657c99fc/README.md",
+    "sha256": "4b58a9f14d016d71906a7d07d4c9ce41079eb3f2f48187ed91e8020cafbb143a",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/012e17b2a115c3c0d5e7885bea625bf9657c99fc/docs/downloads_gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-audit.json",
+    "sha256": "e4db14f2e369b1db37870d8d1a31035f730512309a88810d99ff705782e28212",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/012e17b2a115c3c0d5e7885bea625bf9657c99fc/docs/downloads_gemsdoe32-h33-h33-2b2-plus-h33-1-20261004T220000Z-31588dc7-audit.json",
+    "sha256": "c633349d040c42b39a302aa284950614a5fa2ed44c1001e3c57fbd7ca2be4933",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/012e17b2a115c3c0d5e7885bea625bf9657c99fc/docs/index.html",
+    "sha256": "b88a7f10d064ae33c757d9273ab0d73d1fe29de8ea69029ddfd468bcd73560b1",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/012e17b2a115c3c0d5e7885bea625bf9657c99fc/index.html",
+    "sha256": "d729ce5e005bda8e0bb65e2020beb43667b68e9a92560eefbb2682e8337316c6",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/012e17b2a115c3c0d5e7885bea625bf9657c99fc/scripts/build_h33_candidates.py",
+    "sha256": "624986e243da63576ace5ec8af63f08c4551c4093cda2acdbbc02c8fe6ab5f40",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/012e17b2a115c3c0d5e7885bea625bf9657c99fc/scripts/run_h33_validation.py",
+    "sha256": "bb695285cf8da0f0eae68ce7e1cae3d98232aacf072d4af1fd8e82d08a526628",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/012e17b2a115c3c0d5e7885bea625bf9657c99fc/src/gems32/h33.py",
+    "sha256": "e478a6f4cb5beb6dd79f711cde43b77748010154d73d1e11b33cf3df47301516",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE33/blob/f52533110fe62cd03e77f1228e9e5ecac412c463/README.md",
+    "sha256": "602ffa8dd654f1f20c915bb13f02b32286ea13a8f8bba1b314a06bd5ef39152c",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE33/blob/f52533110fe62cd03e77f1228e9e5ecac412c463/docs/index.html",
+    "sha256": "53a37a0cd150511433a4e93632e4c416c68cf9e79491e6a9d4f6ce25bd7a9cb1",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE33/blob/f52533110fe62cd03e77f1228e9e5ecac412c463/index.html",
+    "sha256": "8adf6a087f93f378de538d8908b52745cb59409ea5ace9f811278ce9a1548848",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE36/blob/c9ad59ec6f969ed931d089a03044c1567a633e84/README.md",
+    "sha256": "8721ef6355fe7baa263c9d23653f82424399bf172368b737fd154ee9ff08d235",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE36/blob/c9ad59ec6f969ed931d089a03044c1567a633e84/docs/index.html",
+    "sha256": "5ca9cd7902124d0c704fb91c07ccbf728510db87bbba51f6771796cd3c0d2548",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE36/blob/c9ad59ec6f969ed931d089a03044c1567a633e84/index.html",
+    "sha256": "7167063f8b8c90fbf6fe6429ec4d1df118b7aa85dd030e5ccc245a13b0cd9ef5",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "owner repository, not organizer confirmation"
+  },
+  {
+    "url": "https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/README.md",
+    "sha256": "cfa4d55559c9128313beb9417eae7e0a94c31677132afb1120f9e86222804239",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "official reference implementation"
+  },
+  {
+    "url": "https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/unet-mc-cv-reference-solution.ipynb",
+    "sha256": "1a7622732ba00f67237058bc0efe79b45ba4e87c449fc9c1e5d6ea659de92ca0",
+    "retrieved_via": "gh api contents at immutable ref",
+    "evidence_class": "official reference implementation"
+  }
+]

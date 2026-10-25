@@ -262,7 +262,11 @@ class PortalSubmissionBuilderTests(unittest.TestCase):
                 "staging raster was left behind after a rejected build",
             )
             self.assertFalse(sidecar.exists(), "a sidecar was written for a rejected build")
-            self.assertEqual([p.name for p in root.iterdir() if p.suffix == ".tif"], ["template.tif", "dirty_source.tif"])
+            # Directory iteration order is filesystem-dependent (CI is not the sandbox).
+            self.assertCountEqual(
+                [p.name for p in root.iterdir() if p.suffix == ".tif"],
+                ["template.tif", "dirty_source.tif"],
+            )
 
     def test_successful_build_leaves_no_staging_file(self) -> None:
         builder = _load_builder()

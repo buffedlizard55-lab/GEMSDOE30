@@ -1,52 +1,15 @@
 #!/usr/bin/env python3
-"""Build a range-error-hardened GEMS submission GeoTIFF from any prediction source.
+"""Historical range-sanitizing builder; not a scientific promotion mechanism.
 
-Why this script exists
-----------------------
-The DrivenData GEMS portal rejects an upload with ``Predicted values must be in
-range [0, 1]`` when the raster contains anything that is not a finite float in
-``[0, 1]``.  Two independent, locally measured mechanisms produce that condition
-on this competition's own data (verified 2026-10-03 against the SHA-256-pinned
-owner mirrors):
-
-1. ``training_features.tif`` stores its nodata as the float32 sentinel
-   ``-3.4028234663852886e+38``.  Every one of its 19 bands carries that
-   sentinel on **3,061 pixels inside the scoring footprint** (band 6 ``tc``:
-   3,073).  Any pipeline that forgets to sanitise it emits values near
-   -3.4e38 -- wildly outside ``[0, 1]``.
-2. The feature raster's own valid mask is *smaller* than the template's: band 1
-   calls 5,165,852 pixels valid against the template's 5,167,373, i.e. **3,061
-   template-valid pixels are sentinel in band 1**.  A footprint mask derived
-   from a feature band therefore leaves those 3,061 scored pixels as NaN.
-
-Both are eliminated here by construction: the footprint is taken *only* from
-``np.isfinite(sample_submission.tif)``, every value is sanitised and clipped
-before writing, and the default ``--outside zeros`` mode writes a raster in
-which **all 12,279,160 cells** are finite floats in ``[0, 1]`` with no NaN
-anywhere and no nodata tag.
-
-Is the all-finite variant legal?
---------------------------------
-Yes, on two independently verified grounds:
-
-* The organiser's own reference solution
-  (``drivendataorg/gems-prize-reference-solution``, notebook cell
-  "Save final prediction in required format") writes its example prediction
-  with ``rasterio.open(..., "w", driver="GTiff", count=1, dtype=..., crs=...,
-  transform=...)`` and **never sets a nodata value**; its sigmoid output is
-  finite everywhere.
-* The owner's own submission ledger records
-  ``r7-nms3-dem10-scarp_0c9199f14e62`` = 0.1294 and
-  ``r7-nms3-dem10-scarp_0c9199f14e62_allfinite`` = 0.1294 -- the identical
-  score for the NaN-outside and all-finite encodings of the same prediction.
-  Cells outside the template footprint therefore carry no scoring weight.
-
-``--outside nan`` remains available for a literal reading of the published
-specification ("data outside the bounds is null or nan").  Both variants are
-validated; only the all-finite one is immune to a whole-raster range check.
-
-The script fails closed: any failed assertion or validation check exits
-non-zero and writes no sidecar claiming success.
+This script clips/sanitizes a source raster and can write an all-finite variant.
+It does not establish novelty, holdout quality, eligibility, or portal acceptance.
+For new model outputs prefer the strict shared submission writer, which rejects
+invalid in-footprint values instead of silently repairing them. The exact file
+that caused the historical portal rejection is unavailable; input nodata sentinels
+and an incorrect footprint mask are possible failure modes, not a proven diagnosis.
+The official reference notebook writes without an explicit nodata argument, but
+this does not prove legal acceptance of every zero-outside artifact. Owner-reported
+scores are not organizer receipts. See docs/research/2026-10-25/review.md.
 """
 
 from __future__ import annotations

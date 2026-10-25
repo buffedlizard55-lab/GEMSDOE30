@@ -1,0 +1,33 @@
+name: Review regression tests
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install numpy scipy rasterio pytest shapely pyproj
+      - name: Run tests with API-readable failure diagnostics
+        shell: python
+        run: |
+          import subprocess, sys
+          result = subprocess.run([sys.executable, '-m', 'pytest', '-q'],
+                                  stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+          print(result.stdout)
+          if result.returncode:
+              # Logs are hosted outside the sandbox allowlist. Check annotations
+              # make failures inspectable via GitHub API without masking exit status.
+              output = result.stdout[-24000:]
+              for start in range(0, len(output), 4000):
+                  chunk = output[start:start + 4000]
+                  chunk = chunk.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+                  print('::error title=pytest failure::' + chunk)
+          sys.exit(result.returncode)
+      - run: git diff --check
