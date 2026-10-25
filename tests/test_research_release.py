@@ -31,7 +31,7 @@ class Links(HTMLParser):
             self.downloads.append(attrs.get("href"))
 
 
-@pytest.mark.parametrize("relative", ["index.html", "executive-summary.html", "docs/index.html"])
+@pytest.mark.parametrize("relative", ["index.html", "executive-summary.html", "experiment-review.html", "docs/index.html"])
 def test_generated_pages_have_real_local_links_and_valid_html_anchors(relative):
     path = ROOT / relative
     page = Links(path.read_text())
@@ -53,6 +53,8 @@ def test_download_and_copy_controls_bind_to_the_current_negative_artifact(relati
     parsed = Links(html)
     assert parsed.downloads == [card["published_tiff"]]
     assert "NOT APPROVED FOR SUBMISSION" in html and "Do not submit." in html
+    assert "DUPLICATE-STOP" in html and "Download archived research TIFF" in html
+    assert "not a new submission" in html
     assert card["submission_name"] in html
     assert "No competition slot selected or used" in html
     assert (ROOT / card["published_tiff"]).is_file()
@@ -145,7 +147,7 @@ def test_full_verifier_rejects_changed_template_bytes(isolated_evidence):
         verifier.verify(pointer, template)
 
 
-def test_published_file_is_new_binary_support_and_matches_its_exact_hash():
+def test_retained_file_keeps_original_binary_support_and_exact_hash():
     np = pytest.importorskip("numpy"); rasterio = pytest.importorskip("rasterio")
     card = json.loads((RESEARCH / "run-card.json").read_text())
     raster = ROOT / card["published_tiff"]
@@ -182,6 +184,10 @@ def test_status_feed_uses_current_pointer_and_never_advertises_range_immunity(tm
     assert status['current_release_decision']['research_verdict'] == 'negative'
     assert status['current_release_decision']['submission_approved'] is False
     assert not status['any_candidate_promoted']
+    assert status['latest_scientific_attempt']['receipt_inspection']['verified_now'] is True
+    assert status['latest_scientific_attempt']['decision']['download_ok'] is False
+    assert status['latest_scientific_attempt']['decision']['research_verdict'] == 'negative'
+    assert status['latest_scientific_attempt']['public_download'] is False
     assert all(row['range_error_immune'] is None for row in status['downloads'])
     assert status['submission_format']['local_validation_guarantees_portal_acceptance'] is False
     assert status['score_evidence']['validated_organizer_submission_receipts'] == []

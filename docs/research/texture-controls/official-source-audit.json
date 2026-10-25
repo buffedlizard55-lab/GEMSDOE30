@@ -1,0 +1,115 @@
+{
+  "retrieved_utc": "2026-10-25T22:49:59+00:00",
+  "reference_commit": "aebe92f7c8a990f0e3443451b7a825d9afd6336b",
+  "files": [
+    {
+      "path": "data/raw/official-reference/README.md",
+      "bytes": 2367,
+      "sha256": "cfa4d55559c9128313beb9417eae7e0a94c31677132afb1120f9e86222804239",
+      "url": "https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/README.md"
+    },
+    {
+      "path": "data/raw/official-reference/unet-mc-cv-reference-solution.ipynb",
+      "bytes": 1578736,
+      "sha256": "1a7622732ba00f67237058bc0efe79b45ba4e87c449fc9c1e5d6ea659de92ca0",
+      "url": "https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/unet-mc-cv-reference-solution.ipynb"
+    }
+  ],
+  "extracts": [
+    {
+      "cell_index": 0,
+      "cell_type": "markdown",
+      "text": "# GEMS Prize Reference Solution\n\n_author_: John Lipor, Associate Professor at Portland State University\n\n# Fault Detection Using U-Net with Monte Carlo Cross-Validation\n\nThis benchmark notebook implements a deep learning approach to geological fault detection. \nThe solution uses an ensemble of U-Net models trained across multiple train/test splits to \nproduce predictions.\n\n### Approach Overview:\n\n1. Load and pre-process multi-channel geospatial features (elevation, gradients, etc.) and fault labels\n\n1. Split feature and fault label rasters into patches\n\n1. Train U-Net models on patches with data augmentation, applying random train/test splits for cross-validation, and using a Tversky loss function weighted to penalize false negatives more than false positives\n\n1. Average predictions from best model across each iteration for final output\n\n### Steps to run this notebook\n\n1. Create a python environment and install the required dependencies using your chosen package manager.\n1. Download the feature data and fault label GeoTIFFs from the [data download page](https://www.drivendata.org/competitions/306/competition-doe-gems/data/) into the `data/` directory.\n1. Run the notebook!"
+    },
+    {
+      "cell_index": 16,
+      "cell_type": "code",
+      "text": "# set up parameters for training model\nMC = 5  # number of Monte Carlo iterations (train/test splits)\npatch_size = 128  # size of patches (inputs to model)\ntest_proportion = 0.5  # proportion of data to use for testing in each split\nbatch_size = 32\nepochs = 5\ninit_lr = 1e-4\nalpha = 0.2  # weight for false positives in Tversky loss\nbeta = 0.8  # weight for false negatives in Tversky loss\n\n# image augmentations for training set\ntrain_transform = v2.Compose(\n    [\n        v2.RandomResizedCrop(\n            patch_size,\n            scale=(0.5, 1.0),\n            ratio=(0.75, 1.33),\n            interpolation=InterpolationMode.BILINEAR,\n        ),\n        v2.RandomHorizontalFlip(p=0.5),\n        v2.RandomVerticalFlip(p=0.5),\n        v2.RandomRotation(30),\n    ]\n)\n\n# set up arrays for output image\n# pad image to be divisible by patch_size\npad = patch_size - np.array(X_orig.shape[:2]) % patch_size\ny_viz = np.pad(\n    y_orig, ((0, pad[0]), (0, pad[1])), mode=\"constant\", constant_values=0\n)  # y_viz is the padded version of y_orig used for compiling patches\n\n# get shape of patchified version\npatch_shape_labels = (patch_size, patch_size)\nstep = patch_size\ny_patches = patchify(y_viz, patch_shape_labels, step)\ny_out = np.zeros(y_patches.shape)\n\n# train model over multiple Monte Carlo iterations\nfor mc in range(MC):\n    print(f\"Running Monte Carlo iteration {mc + 1}/{MC}...\")\n\n    # generate new dataset and create dataloaders\n    X_train, y_train, X_test, y_test, test_inds = make_patches(\n        X_orig, y_orig, patch_size, test_proportion=test_proportion, seed=10 * mc\n    )\n    X_train = X_train[:, good_channels, :, :]\n    X_test = X_test[:, good_channels, :, :]\n\n    train_dataset = ImageDataset(X_train, y_train, transform=None)\n    train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)\n    test_dataset = ImageDataset(X_test, tv_tensors.Mask(y_test), transform=None)\n    test_dataloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)\n\n    # load UNet model from segmentation_models_pytorch\n    in_channels = X_train.shape[1]\n    out_channels = 1\n    model = smp.Unet(\n        encoder_name=\"resnet18\",  # choose encoder, e.g. mobilenet_v2 or efficientnet-b7\n        encoder_weights=\"imagenet\",  # can use `imagenet` pre-trained weights for encoder initialization\n        in_channels=in_channels,  # model input channels\n        classes=out_channels,  # model output channels (number of classes in your dataset)\n    ).to(device)\n\n    # optimizer and loss function\n    optimizer = optim.AdamW(model.parameters(), lr=init_lr)  # try adamw or others\n    criterion = TverskyLoss(alpha=alpha, beta=beta, mode=\"binary\")\n\n    # track training and test losses\n    train_batches = len(train_dataloader)\n    test_batches = len(test_dataloader)\n    train_losses = []\n    test_losses = []\n\n    # main training loop\n    for epoch in range(epochs):\n        # training loop\n        model.train()\n        running_loss = 0\n        running_tversky = 0\n        for i, (X, y) in enumerate(train_dataloader):\n            # move data to device and apply transformations\n            X = X.to(device)\n            y = y.to(device)\n            X, y = train_transform(X, tv_tensors.Mask(y))\n\n            # compute prediction and loss\n            outputs = model(X)[:, 0, :, :]\n            train_loss = criterion(outputs, y[:, :, :])\n\n            # backpropagation\n            train_loss.backward()\n            optimizer.step()\n            optimizer.zero_grad()\n\n            # compute scoring metrics\n            yp = F.sigmoid(outputs).squeeze()\n            yt = y.squeeze().int()\n\n            running_loss += train_loss.item()\n        train_losses.append(running_loss / train_batches)\n\n        # test loop\n        model.eval()\n        running_loss = 0\n        with torch.no_grad():\n            for i, (X, y) in enumerate(test_dataloader):\n                X = X.to(device)\n                y = y.to(device)\n                outputs = model(X)[:, 0, :, :]\n\n                # compute scoring metrics\n                yp = F.sigmoid(outputs).squeeze()\n                yt = y.squeeze().int()\n\n                running_loss += criterion(outputs, y).item()\n        test_losses.append(running_loss / test_batches)\n\n        # save model if loss is lower than previous best\n        if epoch == 0:\n            best_loss = test_losses[-1]\n            best_model = copy.deepcopy(model)\n        elif test_losses[-1] < best_loss:\n            best_loss = test_losses[-1]\n            best_model = copy.deepcopy(model)\n\n        # print epoch information\n        print(f\"epoch {epoch}\")\n        print(30 * \"-\")\n        print(f\"train loss: {train_losses[-1]}\")\n        print(f\"test loss: {test_losses[-1]}\")\n        print(30 * \"-\")\n        print(f\"learning rate: {optimizer.param_groups[0]['lr']}\")\n        time.sleep(0.0001)\n\n    # save prediction on test_inds on full image\n    best_model.eval()\n    test_preds = []\n    with torch.no_grad():\n        for i, (X, y) in enumerate(test_dataloader):\n            X = X.to(device)\n            y = y.to(device)\n            outputs = best_model(X)[:, 0, :, :]\n\n            # compute scoring metrics\n            yp = F.sigmoid(outputs).squeeze()\n            test_preds.append(yp.cpu())\n\n    # add test predictions to y_out\n    test_preds = torch.cat(test_preds, dim=0).numpy()\n    for ii in range(len(test_inds)):\n        y_out[test_inds[ii][0], test_inds[ii][1], :, :] += test_preds[ii] / MC\n\n# output map from aggregated best models\ny_combined = unpatchify(y_out, (y_viz.shape[0], y_viz.shape[1]))"
+    }
+  ],
+  "blocked_hosts_not_attempted": [
+    "www.drivendata.org",
+    "www.usgs.gov",
+    "gdr.openei.org",
+    "docs.nlr.gov"
+  ],
+  "claims_scope": "Official GitHub reference re-read; no fresh leaderboard, rules PDF, eligibility, portal limits or organizer receipts",
+  "band_metadata_cell": {
+    "cell_index": 5,
+    "source": [
+      "# Load feature data, print out band information\n",
+      "bands = []\n",
+      "with rasterio.open(FEATURE_DATA_PATH) as src:\n",
+      "    feature_meta = src.meta.copy()\n",
+      "    feature_nodata = src.nodata\n",
+      "    feature_transform = src.transform\n",
+      "    feature_crs = src.crs\n",
+      "    print(\"Feature data metadata:\")\n",
+      "    print(f\"  Width: {src.width}\")\n",
+      "    print(f\"  Height: {src.height}\")\n",
+      "    print(f\"  CRS: {src.crs}\")\n",
+      "    print(f\"  Resolution: {src.res[0]} x {src.res[1]}\")\n",
+      "    print(f\"  Data type: {src.dtypes[0]}\")\n",
+      "    print(f\"  nodata value: {src.nodata}\")\n",
+      "    print(\"Feature data bands:\")\n",
+      "    for i in range(1, src.count + 1):\n",
+      "        band_meta = src.tags(i)\n",
+      "        print(\n",
+      "            f\"Band {i}: {band_meta['description']} (Category: {band_meta['data_category']})\"\n",
+      "        )\n",
+      "        bands.append(band_meta)\n",
+      "\n",
+      "    feature_data = src.read()\n",
+      "\n",
+      "X_orig = feature_data\n",
+      "X_orig[X_orig < -1e38] = np.nan\n",
+      "\n",
+      "# reshape to (height, width, n_features)\n",
+      "X_orig = np.moveaxis(X_orig, 0, -1)\n",
+      "\n",
+      "\n",
+      "# normalize all channels to [0, 1]\n",
+      "X_orig = (X_orig - np.nanmin(X_orig, axis=(0, 1))) / (\n",
+      "    np.nanmax(X_orig, axis=(0, 1)) - np.nanmin(X_orig, axis=(0, 1))\n",
+      ")\n",
+      "n_features = X_orig.shape[-1]\n",
+      "print(f\"Feature data shape after loading: {X_orig.shape}\")"
+    ],
+    "outputs": [
+      {
+        "name": "stdout",
+        "output_type": "stream",
+        "text": [
+          "Feature data metadata:\n",
+          "  Width: 3292\n",
+          "  Height: 3730\n",
+          "  CRS: EPSG:32611\n",
+          "  Resolution: 100.0 x 100.0\n",
+          "  Data type: float32\n",
+          "  nodata value: -3.4028234663852886e+38\n",
+          "Feature data bands:\n",
+          "Band 1: Magnetic anomaly - deviation from expected Earth's magnetic field (Category: magnetic_data)\n",
+          "Band 2: Reduced to pole magnetic data - magnetic anomaly corrected for latitude effects (Category: magnetic_data)\n",
+          "Band 3: Total magnetic intensity horizontal gradient - rate of change in horizontal direction (Category: magnetic_data)\n",
+          "Band 4: Geodetic second invariant - measure of strain rate tensor magnitude (Category: geodetic_strain)\n",
+          "Band 5: Isostatic gravity anomaly slope - gradient of gravity after isostatic correction (Category: gravity_data)\n",
+          "Band 6: Tilt angle or total curvature - magnetic field derivative for edge detection (Category: magnetic_data)\n",
+          "Band 7: Geodetic shear rate - rate of angular deformation from GPS/InSAR (Category: geodetic_strain)\n",
+          "Band 8: Geodetic dilatation rate - rate of volumetric strain (expansion/contraction) (Category: geodetic_strain)\n",
+          "Band 9: Total magnetic intensity vertical gradient - rate of change in vertical direction (Category: magnetic_data)\n",
+          "Band 10: Distance to earthquake (n=100km radius, a=15\u00b0 azimuth parameters) (Category: seismic)\n",
+          "Band 11: Isostatic gravity anomaly vertical gradient - vertical rate of change (Category: gravity_data)\n",
+          "Band 12: Detrended elevation - topography with regional trends removed (Category: topographic)\n",
+          "Band 13: Isostatic gravity anomaly - gravity after compensating for topographic mass (Category: gravity_data)\n",
+          "Band 14: Total magnetic intensity - total strength of magnetic field (Category: magnetic_data)\n",
+          "Band 15: Depth to basement surface - thickness of sedimentary cover (Category: subsurface)\n",
+          "Band 16: Earthquake intensity or density (n=100km radius, a=15\u00b0 parameters) (Category: seismic)\n",
+          "Band 17: Conductivity surface - electrical conductivity of subsurface (Category: subsurface)\n",
+          "Band 18: Isostatic gravity anomaly horizontal gradient - horizontal rate of change (Category: gravity_data)\n",
+          "Band 19: Detrended elevation slope - gradient of elevation after detrending (Category: topographic)\n",
+          "Feature data shape after loading: (3730, 3292, 19)\n"
+        ]
+      }
+    ]
+  }
+}

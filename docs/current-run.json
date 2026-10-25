@@ -2,5 +2,6 @@
   "schema_version": 1,
   "run_card": "docs/research/texture-displacement/run-card.json",
   "readiness": "docs/research/texture-displacement/readiness.json",
-  "purpose": "Current research artifact; this pointer does not allocate a competition slot"
+  "purpose": "Retained TDX-1 archive for research download; latest TDX-C2 attempt is duplicate-stopped, not a new downloadable submission",
+  "latest_attempt": "docs/research/texture-controls/run-card.json"
 }
