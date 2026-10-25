@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "generated_utc": "2026-10-25T21:40:50+00:00",
+  "generated_utc": "2026-10-25T22:56:52+00:00",
   "complete": false,
-  "coverage": "Four newly merged parallel-lane TIFFs; additive to the frozen 104 references, not global certification.",
+  "coverage": "Six newly merged parallel-lane TIFFs (4 at PR #28 + 2 G30-S20 twins at PR #29); additive to the frozen 104 references, not global certification.",
   "missing_evidence": [
     "Other parallel sessions and most original continuous surfaces"
   ],
@@ -73,8 +73,51 @@
         3292
       ],
       "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/7f3f4c75a4fb6086471d658467293403365589a7/docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif"
+    },
+    {
+      "site": "GEMSDOE30-parallel-merged",
+      "repo": "buffedlizard55-lab/GEMSDOE30",
+      "ref": "3f4c42f57104952e17d44798774d1f6b5d08d823",
+      "source_path": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
+      "path": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
+      "git_blob_sha1": "7c8a85452ec98317b60712872871d3a8bb35d36e",
+      "expected_bytes": 451460,
+      "sha256": "1b07820d0066e56442ade4f4a3880af92f50b4ca9cac528ccf59696ec5299cd6",
+      "aligned": true,
+      "shape": [
+        3730,
+        3292
+      ],
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/3f4c42f57104952e17d44798774d1f6b5d08d823/docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif"
+    },
+    {
+      "site": "GEMSDOE30-parallel-merged",
+      "repo": "buffedlizard55-lab/GEMSDOE30",
+      "ref": "3f4c42f57104952e17d44798774d1f6b5d08d823",
+      "source_path": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif",
+      "path": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif",
+      "git_blob_sha1": "ce374c22b67046f83e9f8acdb89d752f1d3faa39",
+      "expected_bytes": 525874,
+      "sha256": "12bd6196cdebfbaa39960d0d6f600fde498f1fb7675321222ba49489dec69b22",
+      "aligned": true,
+      "shape": [
+        3730,
+        3292
+      ],
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/3f4c42f57104952e17d44798774d1f6b5d08d823/docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif"
     }
   ],
   "exclusions": [],
-  "organizer_authenticated": false
+  "organizer_authenticated": false,
+  "extensions": [
+    {
+      "pr": "https://github.com/buffedlizard55-lab/GEMSDOE30/pull/29",
+      "added": [
+        "gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
+        "gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif"
+      ],
+      "dots_stage": "Measured exactly with shared gemsdoe30.novelty.compare (candidate=TDX-1 published dots).",
+      "surface_stage": "UNDEFINED post-merge: candidate continuous surface outputs/texture-displacement/tdx1-surface.tif is git-ignored and its bytes are unavailable in this worktree (identity sha256 b5545eae3898e96cdf00a5898b63d52a616024e795f9e7a98fd822573fffa275 preserved in receipts). Rows are recorded undefined so the surface gate fails closed to unknown; no value was fabricated."
+    }
+  ]
 }

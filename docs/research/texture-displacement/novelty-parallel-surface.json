@@ -4,7 +4,7 @@
   "candidate": "outputs/texture-displacement/tdx1-surface.tif",
   "candidate_sha256": "b5545eae3898e96cdf00a5898b63d52a616024e795f9e7a98fd822573fffa275",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "registry_sha256": "491dc91676062d13aee3212c98edc8ff0a91ed117134e165d111baec5b7c122a",
+  "registry_sha256": "01ca9c60052d0f0bf04a6a3c32cbd1be1dba637507e6ed6678790668b275538c",
   "registry_complete": false,
   "comparisons": [
     {
@@ -70,9 +70,43 @@
       "correlation_duplicate": false,
       "dot_duplicate": false,
       "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
+      "site": "GEMSDOE30-parallel-merged",
+      "reference_sha256": "1b07820d0066e56442ade4f4a3880af92f50b4ca9cac528ccf59696ec5299cd6",
+      "reference_values_sha256": "9f937933d36b3d2f73cb2780be05de8fb1b6e0634888094ec1bbdc79d7174ae3",
+      "stage": "surface",
+      "spearman_full_footprint": null,
+      "candidate_dots": null,
+      "candidate_positive_support": 5167373,
+      "reference_dots": 60000,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": true
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif",
+      "site": "GEMSDOE30-parallel-merged",
+      "reference_sha256": "12bd6196cdebfbaa39960d0d6f600fde498f1fb7675321222ba49489dec69b22",
+      "reference_values_sha256": "9f937933d36b3d2f73cb2780be05de8fb1b6e0634888094ec1bbdc79d7174ae3",
+      "stage": "surface",
+      "spearman_full_footprint": null,
+      "candidate_dots": null,
+      "candidate_positive_support": 5167373,
+      "reference_dots": 60000,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": true
     }
   ],
-  "errors": [],
+  "errors": [
+    "G30-S20 late references (PR #29): surface-stage Spearman undefined; tdx1-surface.tif bytes unavailable (git-ignored outputs/) in the post-merge worktree. Recorded undefined; gate must fail closed."
+  ],
   "decision": "blocked-incomplete-evidence",
   "submission_approved": false
 }

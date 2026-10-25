@@ -1,0 +1,9 @@
+{
+  "reference": "docs/downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.tif",
+  "s20_dots": 60000,
+  "tdx_dots": 44090,
+  "fraction_s20_dots_within_3px_of_tdx": 0.32748333333333335,
+  "spearman_on_binary_sample2m": 0.011428415091268119,
+  "duplicate_stop": false,
+  "note": "Post-merge cross-lane check (PR #29): both lanes finished blind; sparse binary Spearman insensitive, 3px fraction is the informative statistic."
+}

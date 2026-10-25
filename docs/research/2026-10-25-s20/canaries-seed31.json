@@ -1,0 +1,355 @@
+{
+ "evaluator": "component-holdout-v2-footprint-20261025",
+ "split_seed": 31,
+ "buffer_px": 3,
+ "hidden_px": 20870,
+ "neg_sampled": 300000,
+ "lane": "G30-S20",
+ "features": [
+  {
+   "feature": "mag_anom",
+   "auc_hidden": 0.4821,
+   "leakage_flag": false
+  },
+  {
+   "feature": "rtp",
+   "auc_hidden": 0.495,
+   "leakage_flag": false
+  },
+  {
+   "feature": "tmi_hg",
+   "auc_hidden": 0.5399,
+   "leakage_flag": false
+  },
+  {
+   "feature": "geod_2ndinv",
+   "auc_hidden": 0.5768,
+   "leakage_flag": false
+  },
+  {
+   "feature": "iso_grav_anom_slope",
+   "auc_hidden": 0.5173,
+   "leakage_flag": false
+  },
+  {
+   "feature": "tc",
+   "auc_hidden": 0.4334,
+   "leakage_flag": false
+  },
+  {
+   "feature": "geod_shearrate",
+   "auc_hidden": 0.5748,
+   "leakage_flag": false
+  },
+  {
+   "feature": "geod_dilaterate",
+   "auc_hidden": 0.5386,
+   "leakage_flag": false
+  },
+  {
+   "feature": "tmi_vg",
+   "auc_hidden": 0.4799,
+   "leakage_flag": false
+  },
+  {
+   "feature": "deq_n100a15",
+   "auc_hidden": 0.559,
+   "leakage_flag": false
+  },
+  {
+   "feature": "iso_grav_anom_vg",
+   "auc_hidden": 0.5314,
+   "leakage_flag": false
+  },
+  {
+   "feature": "det_elev",
+   "auc_hidden": 0.4879,
+   "leakage_flag": false
+  },
+  {
+   "feature": "iso_grav_anom",
+   "auc_hidden": 0.4518,
+   "leakage_flag": false
+  },
+  {
+   "feature": "tmi",
+   "auc_hidden": 0.4771,
+   "leakage_flag": false
+  },
+  {
+   "feature": "depth_to_base_surf",
+   "auc_hidden": 0.5188,
+   "leakage_flag": false
+  },
+  {
+   "feature": "ieq_n100a15",
+   "auc_hidden": 0.574,
+   "leakage_flag": false
+  },
+  {
+   "feature": "cond_surf",
+   "auc_hidden": 0.46,
+   "leakage_flag": false
+  },
+  {
+   "feature": "iso_grav_anom_hg",
+   "auc_hidden": 0.4972,
+   "leakage_flag": false
+  },
+  {
+   "feature": "det_elev_slope",
+   "auc_hidden": 0.5569,
+   "leakage_flag": false
+  },
+  {
+   "feature": "gradmag_mag_anom",
+   "auc_hidden": 0.5317,
+   "leakage_flag": false
+  },
+  {
+   "feature": "gradmag_rtp",
+   "auc_hidden": 0.5474,
+   "leakage_flag": false
+  },
+  {
+   "feature": "gradmag_det_elev",
+   "auc_hidden": 0.5661,
+   "leakage_flag": false
+  },
+  {
+   "feature": "gradmag_iso_grav_anom",
+   "auc_hidden": 0.5191,
+   "leakage_flag": false
+  },
+  {
+   "feature": "gradmag_tmi",
+   "auc_hidden": 0.541,
+   "leakage_flag": false
+  },
+  {
+   "feature": "gradmag_depth_to_base_surf",
+   "auc_hidden": 0.5312,
+   "leakage_flag": false
+  },
+  {
+   "feature": "gradmag_cond_surf",
+   "auc_hidden": 0.5071,
+   "leakage_flag": false
+  },
+  {
+   "feature": "abslap_rtp",
+   "auc_hidden": 0.5331,
+   "leakage_flag": false
+  },
+  {
+   "feature": "abslap_det_elev",
+   "auc_hidden": 0.5496,
+   "leakage_flag": false
+  },
+  {
+   "feature": "abslap_iso_grav_anom",
+   "auc_hidden": 0.5123,
+   "leakage_flag": false
+  },
+  {
+   "feature": "localstd_s1_rtp",
+   "auc_hidden": 0.5477,
+   "leakage_flag": false
+  },
+  {
+   "feature": "localstd_s3_rtp",
+   "auc_hidden": 0.548,
+   "leakage_flag": false
+  },
+  {
+   "feature": "localstd_s1_det_elev",
+   "auc_hidden": 0.5627,
+   "leakage_flag": false
+  },
+  {
+   "feature": "localstd_s3_det_elev",
+   "auc_hidden": 0.5701,
+   "leakage_flag": false
+  },
+  {
+   "feature": "localstd_s1_iso_grav_anom",
+   "auc_hidden": 0.5203,
+   "leakage_flag": false
+  },
+  {
+   "feature": "localstd_s3_iso_grav_anom",
+   "auc_hidden": 0.5271,
+   "leakage_flag": false
+  },
+  {
+   "feature": "tensor_coherence_rtp",
+   "auc_hidden": 0.5104,
+   "leakage_flag": false
+  },
+  {
+   "feature": "tensor_energy_rtp",
+   "auc_hidden": 0.5479,
+   "leakage_flag": false
+  },
+  {
+   "feature": "edge_coinc_mag_grav",
+   "auc_hidden": 0.5536,
+   "leakage_flag": false
+  },
+  {
+   "feature": "edge_coinc_mag_topo",
+   "auc_hidden": 0.5759,
+   "leakage_flag": false
+  },
+  {
+   "feature": "edge_coinc_grav_base",
+   "auc_hidden": 0.5286,
+   "leakage_flag": false
+  },
+  {
+   "feature": "dist_visible_catalogue_px_capped",
+   "auc_hidden": 0.2375,
+   "leakage_flag": false
+  },
+  {
+   "feature": "prox_exp_d10px",
+   "auc_hidden": 0.7625,
+   "leakage_flag": false
+  },
+  {
+   "feature": "log1p_dist_visible_px",
+   "auc_hidden": 0.2375,
+   "leakage_flag": false
+  },
+  {
+   "feature": "lid_ex_max",
+   "auc_hidden": 0.5651,
+   "leakage_flag": false
+  },
+  {
+   "feature": "lid_ex_mean",
+   "auc_hidden": 0.5572,
+   "leakage_flag": false
+  },
+  {
+   "feature": "lid_step_max",
+   "auc_hidden": 0.5671,
+   "leakage_flag": false
+  },
+  {
+   "feature": "lid_lapneg_max",
+   "auc_hidden": 0.5693,
+   "leakage_flag": false
+  },
+  {
+   "feature": "lid_lappos_max",
+   "auc_hidden": 0.5704,
+   "leakage_flag": false
+  },
+  {
+   "feature": "lid_downface_max",
+   "auc_hidden": 0.5786,
+   "leakage_flag": false
+  },
+  {
+   "feature": "lid_upface_max",
+   "auc_hidden": 0.5808,
+   "leakage_flag": false
+  },
+  {
+   "feature": "lid_cross_max",
+   "auc_hidden": 0.5726,
+   "leakage_flag": false
+  },
+  {
+   "feature": "lid_relief",
+   "auc_hidden": 0.5676,
+   "leakage_flag": false
+  },
+  {
+   "feature": "lid_coh100",
+   "auc_hidden": 0.5076,
+   "leakage_flag": false
+  },
+  {
+   "feature": "lidar_present",
+   "auc_hidden": 0.5223,
+   "leakage_flag": false
+  },
+  {
+   "feature": "lid_sin2strike",
+   "auc_hidden": 0.4844,
+   "leakage_flag": false
+  },
+  {
+   "feature": "lid_cos2strike",
+   "auc_hidden": 0.4766,
+   "leakage_flag": false
+  },
+  {
+   "feature": "scarp_dipole",
+   "auc_hidden": 0.5703,
+   "leakage_flag": false
+  },
+  {
+   "feature": "step_x_coh",
+   "auc_hidden": 0.5572,
+   "leakage_flag": false
+  },
+  {
+   "feature": "rad_K",
+   "auc_hidden": 0.4334,
+   "leakage_flag": false
+  },
+  {
+   "feature": "rad_Th",
+   "auc_hidden": 0.4334,
+   "leakage_flag": false
+  },
+  {
+   "feature": "rad_U",
+   "auc_hidden": 0.4626,
+   "leakage_flag": false
+  },
+  {
+   "feature": "rad_TC",
+   "auc_hidden": 0.4332,
+   "leakage_flag": false
+  },
+  {
+   "feature": "rad_ThK",
+   "auc_hidden": 0.4629,
+   "leakage_flag": false
+  },
+  {
+   "feature": "rad_UK",
+   "auc_hidden": 0.5301,
+   "leakage_flag": false
+  },
+  {
+   "feature": "rad_UTh",
+   "auc_hidden": 0.5518,
+   "leakage_flag": false
+  },
+  {
+   "feature": "rad_TMI_up150",
+   "auc_hidden": 0.4784,
+   "leakage_flag": false
+  },
+  {
+   "feature": "gradmag_rad_TC",
+   "auc_hidden": 0.5017,
+   "leakage_flag": false
+  },
+  {
+   "feature": "gradmag_rad_ThK",
+   "auc_hidden": 0.5129,
+   "leakage_flag": false
+  },
+  {
+   "feature": "rad_present",
+   "auc_hidden": 0.4998,
+   "leakage_flag": false
+  }
+ ]
+}

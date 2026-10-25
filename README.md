@@ -21,7 +21,7 @@ results and automated checks rather than outsourcing inspection.
 | Same-protocol core19 comparator — **HOLDOUT-DTI**, same evaluator/positives | **0.139821**, **95% CI [0.124178, 0.155905]** |
 | Paired candidate − core19 — **HOLDOUT-DTI difference**, same evaluator/positives | **−0.066977**, paired **95% CI [−0.085747, −0.048300]** |
 | Feature canaries — AUC diagnostics, not DTI | All 22 inputs tested alone in four folds; no alarm above 0.90 |
-| Observed novelty — diagnostics, not scores | 108 aligned comparisons (104 frozen + 4 late); max surface rho **0.053133**, final-dot overlap **40.4922%** within 3 px |
+| Observed novelty — diagnostics, not scores | 110 aligned comparisons (104 frozen + 6 late; surface stage for the two PR #29 G30-S20 arrivals is undefined — TDX surface bytes are git-ignored — so that gate fails closed to unknown); max defined surface rho **0.053133**, final-dot overlap **40.4922%** within 3 px |
 | GeoTIFF contract | One float32 band; no NaN inside; values [0,1]; CRS/shape/transform match; NaN nodata outside; no positive catalogue pixels |
 | Approval | **Negative.** Complete parallel registry, external lane allocation, historical-best rerun and current portal evidence remain unavailable |
 
@@ -33,6 +33,32 @@ results and automated checks rather than outsourcing inspection.
 - [Current evidence pointer](docs/current-run.json) · [generated status feed](docs/status.json)
 - [PR #28 — code review, CI and delivery timeline](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/28)
 - [All 119 owner-reported submission claims](docs/research/texture-displacement/owner-claims.csv) — **unverified**, not organizer receipts
+
+### Parallel lane addendum — Lane G30-S20 (2026-10-25, merged via PR #29): also negative as a unique submission
+
+A concurrent preregistered lane (same owner brief, branch `arena/15a1706d-gemsdoe30`)
+added 1 m-DEM lidar scarp morphology + GeoDAWN radiometrics to the 19-band habitat
+GBM and **beat its exact Candidate-C control on two component holdouts**
+(HOLDOUT-DTI @60k, evaluator `component-holdout-v2-footprint-20261025`: seed 31
+**0.22960 vs 0.22304**, Δ +0.00655 [0.00067, 0.01245]; seed 47 **0.23707 vs
+0.22444**, Δ +0.01263 [0.00616, 0.01990]; canaries 69/69 clean) — **but 89.58 % of
+its final dots fall within 3 px of the unsubmitted Candidate C's dots**, breaching
+the frozen 70 % novelty gate. **Verdict: duplicate-stop; do not submit S20 as a
+unique submission, and never submit both S20 and Candidate C as separate
+discoveries.** It passes novelty vs all nine priority scored winners (max 44.9 %;
+vs the OWNER-REPORTED 0.2778 H33 winner 36.8 %). The generated landing pages front
+the TDX-1 current run only (the site builder enforces a single artifact and is
+kept un-forked); S20's downloadable education/selector file and full receipts live
+in [docs/research/2026-10-25-s20/](docs/research/2026-10-25-s20/run-card.json)
+(run card · [analysis](docs/research/2026-10-25-s20/analysis.md) ·
+[preregistration](docs/research/2026-10-25-s20/preregistration.md) ·
+[novelty](docs/research/2026-10-25-s20/novelty.json)); its TIF is
+`docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif`
+(SHA-256 `1b07820d…5299cd6`). Whether S20 may one day *replace* Candidate C as the
+single submitted file is the owner's explicit selector ruling (IR-S20-05); this
+repo used no slot for it. Post-merge cross-lane check (both lanes finished blind
+to each other): [32.7 %](docs/research/2026-10-25-s20/novelty-cross-lane-tdx1.json)
+of S20 dots fall within 3 px of TDX-1 dots — no cross-lane duplication.
 
 **Review correction:** the square Gaussian's diagonal reach required a 17-pixel
 finite-data/training guard, not 16. One preregistered corrective execution followed
@@ -113,7 +139,30 @@ selected here; TDX-1 remains negative. The current pointer above selects only TD
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
 
-## START HERE — 2026-10-25 (Candidate C / Lane G30-S19 PROMOTED; A & B negative)
+## START HERE — 2026-10-25 S20 session (Lane G30-S20: science passed, uniqueness FAILED — Candidate C still the submit-this file)
+
+**Read first every session:** the [S20 owner-request distillation](docs/research/2026-10-25-s20/owner-request.md), the
+[S20 analysis](docs/research/2026-10-25-s20/analysis.md), and this README. Standing brief (verbatim) is below and in
+[OWNER_BRIEF.md](OWNER_BRIEF.md). Core values: *Maximize P(Win)*, *Own the Outcome*.
+
+- **❌ S20 — DO NOT SUBMIT as a new unique submission (duplicate-stop):**
+  [gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif](docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif)
+  (SHA-256 `1b07820d0066e56442ade4f4a3880af92f50b4ca9cac528ccf59696ec5299cd6`; note: `G30-S20 19-band+lidar scarp+GeoDAWN rad GBM + EDGE 60k off-cat>2px`).
+  It beat Candidate C's exact recipe head-to-head under a frozen preregistration on **two** component holdouts —
+  HOLDOUT-DTI @60k: seed 31 **0.22960 vs 0.22304 (Δ +0.00655 [0.00067, 0.01245])**, seed 47 **0.23707 vs 0.22444
+  (Δ +0.01263 [0.00616, 0.01990])**, evaluator `component-holdout-v2-footprint-20261025`, 20,870 / 20,364 withheld
+  positives; canaries 69/69 clean; validator passed — **but 89.58 % of its dots are within 3 px of Candidate C's**
+  (frozen gate 70 %), so it is C's successor, not a unique parallel submission. Unique vs every scored registry
+  raster incl. the 0.2778 H33 winner (36.8 %). Never submit both as separate discoveries. Whether to retire C in
+  favour of S20 as a single-file replacement is the owner's explicit selector decision (analysis §5, IR-S20-05);
+  no slot was used. Evidence: [run card](docs/research/2026-10-25-s20/run-card.json) ·
+  [analysis](docs/research/2026-10-25-s20/analysis.md) · [preregistration](docs/research/2026-10-25-s20/preregistration.md) ·
+  [ranked hypotheses](docs/research/2026-10-25-s20/hypotheses.md) · [novelty](docs/research/2026-10-25-s20/novelty.json).
+- **✅ Candidate C (below) remains the only OK-TO-SUBMIT file.** HOLDOUT-DTI is a local proxy, never a competition
+  score. Official leaderboard fetched 2026-10-25: **#1 = 0.4413** (0.3195 was the 2026-10-03 leader).
+- Negative sub-result recorded: oriented 900 m line-coherence reweighting hurt both beliefs on both seeds — rejected.
+
+## Previous START HERE — 2026-10-25 (Candidate C / Lane G30-S19 PROMOTED; A & B negative) — still the submission decision
 
 **✅ OK TO DOWNLOAD & SUBMIT — Candidate C:** [gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif](docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif)
 (SHA-256 `8a0301d5…f43cc9`; note: `G30-S19 habitat GBM (19-band, no catalogue-distance inputs) + EDGE 60k, off-cat >2px`).

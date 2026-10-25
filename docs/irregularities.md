@@ -196,6 +196,20 @@ has a competition score.
 
 
 
+## Session 2026-10-25 S20 (branch `arena/15a1706d-gemsdoe30`) — Lane G30-S20
+
+| ID | Severity | Status | Observation / evidence | Action or consequence |
+| --- | --- | --- | --- | --- |
+| IR-S20-01 | High | Open | Prompt's "single method paragraph" lane again not identifiable in received text. | Lane G30-S20 self-assigned and frozen in `docs/research/2026-10-25-s20/preregistration.md` before any result. Owner may reassign future lanes. |
+| IR-S20-02 | High | Open | Training + external rasters are hash-pinned owner mirrors, not organizer-authenticated downloads (official origins: DrivenData files; USGS 3DEP; USGS GeoDAWN DOI 10.5066/P93LGLVQ, CC0 on official page). | Local git-ignored use only. Replace with owner's authorized DrivenData download and re-verify SHA-256 pins before any upload. |
+| IR-S20-03 | Medium | Closed-workaround | Requested shared files `evaluate_holdout.py` / `submission_writer.py` do not exist. | Reused shared equivalents `src/gemsdoe30/{holdout,submission,emitter_opt,fields}.py` + `scripts/lane_g30s19.py` stack builder; no private fork. New transform added once to shared `fields.py` with tests. |
+| IR-S20-04 | High | Open | `sample_submission.tif` values inside footprint are identical to labels (60,988 ones; re-measured this session), contradicting the problem page's "predicts total fault absence" wording. | Template used for footprint/grid only, never as features or predictions. Flagged for organizer clarification. |
+| IR-S20-05 | High | Open — owner ruling needed | S20 final dots: 89.58% within 3 px of unsubmitted Candidate C (duplicate-stop under frozen gate), but ≤44.9% vs all nine priority scored winners and 36.8% vs H33. Whether unsubmitted same-project candidates belong in the "registry" decides successor-vs-duplicate status. | Verdict recorded negative (duplicate-stop); site keeps Candidate C as only OK-to-submit. Owner/selector may explicitly retire C for S20 as single-file replacement; never submit both as separate discoveries. |
+| IR-S20-06 | Low | Open | Surface-stage novelty statistic computed after E3 on the frozen pre-emission belief, not as a hard stop before E3 emission. | Nothing tuned after seeing novelty; E3 runs regardless for the education file. Future lanes should hard-gate final emission on the surface stage. |
+| IR-S20-07 | Medium | Open | Catalogue component holdout is a biased proxy for expert-labelled off-catalogue faults; lidar/radiometric value could be over- or under-stated by this frame. | All numbers labelled HOLDOUT-DTI with evaluator/CI; no score forecast. One feedback-slot receipt is the only antidote. |
+| IR-S20-08 | Low | Open | No lidar-only vs radiometrics-only ablation inside the 3-experiment budget (E1/E2/E3 spent). Canary AUCs suggest lidar carries more signal; not claimed as attribution. | Preregister as first experiment of a future session; stacks are cached in the worktree (git-ignored). |
+| IR-S20-09 | Medium | Open | Post-merge integration (PR #29): the two new S20 TIFs triggered main's TDX-1 late-registry audit. Dots-stage novelty vs TDX-1 measured exactly (31.46 % of TDX dots within 3 px of S20; Spearman 0.0125), but the TDX continuous surface (`outputs/texture-displacement/tdx1-surface.tif`, sha256 b5545eae…) is git-ignored and unavailable, so the two new surface-stage rows are recorded **undefined** and the TDX surface-observed-registry gate now reads **unknown** (fail-closed) in the regenerated readiness/site. | No value fabricated; TDX verdict unchanged (negative). To restore a defined surface gate, rerun the pinned TDX pipeline in a worktree that retains `outputs/` and re-audit the two arrivals, or accept unknown permanently. Extension recorded inside `registry-parallel-addendum.json` (`extensions`). |
+
 ## 2026-10-25 TDX-1 experiment and final reliability review
 
 Current decision: **NEGATIVE, NOT APPROVED FOR SUBMISSION**. The corrected new

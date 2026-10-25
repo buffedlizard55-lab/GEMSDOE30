@@ -128,6 +128,17 @@ wins and the distilled list must be corrected.
 >
 > **Current-status pointer:** this duplicate persistent brief retains earlier session narratives for audit. The authoritative current status is maintained in [README.md](README.md), [the submission-format review](docs/research/submission-format-review-2026-10-03.md), and [docs/status.json](docs/status.json). Later correction records supersede stale earlier operational guidance below.
 
+> **S20 addendum (2026-10-25, branch `arena/15a1706d-gemsdoe30`):** the owner's S20 prompt (focus sites
+> GEMSDOE24/25/27/28/30/31/32/33/36; explain and try to beat the 0.2778 OWNER-REPORTED GEMSDOE32 H33 result;
+> generate a unique, machine-validated TIF; parallel-run protocol with leakage canaries, HOLDOUT-DTI labelling
+> and a JSON run card; 3–5 ranked untried hypotheses first) is distilled in
+> [docs/research/2026-10-25-s20/owner-request.md](docs/research/2026-10-25-s20/owner-request.md) and must be
+> read with this brief every session. Outcome: Lane G30-S20 (lidar scarp + GeoDAWN radiometrics) beat the
+> G30-S19 Candidate-C recipe on two preregistered holdouts but is **duplicate-stop vs Candidate C**
+> (89.58 % of dots within 3 px); Candidate C remains the only OK-to-submit file. See
+> [the S20 analysis](docs/research/2026-10-25-s20/analysis.md) and
+> [run card](docs/research/2026-10-25-s20/run-card.json).
+
 ## Mission and non-negotiable requirements
 
 1. **Objective and historical review:** build an auditable, scientifically grounded workflow to identify previously unmapped geological faults in the DOE GEMS / GeoDAWN region and pursue a result above the user-reported 0.3195 public-leader score. Study the reported GEMSDOE25 D2.8 result and historical submissions; authenticate score-to-file attribution using a submission receipt, ID, hash, or equivalent evidence rather than assuming a score belongs to a named TIFF. Treat public leaderboard snapshots as dynamic feedback, not the private test set or the final award decision. Develop a defensible path to improvement, but never promise a score or prize.
