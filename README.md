@@ -38,8 +38,9 @@ exact late-registry evidence for the artifacts affected (see IR-FFL-05).
 ## START HERE — Unique `G30-TAD` & `PTA-1` GeoTIFFs Validated (`download_ok = true`) · **NOT APPROVED FOR SUBMISSION (`verdict = negative`)**
 
 
-- **`G30-TAD` dual-variant 38,000-dot GeoTIFFs (`verify_tad_run.py`, zero human inspection required):**
-  - Primary range-safe all-finite file: [`docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif`](docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif) (`234.6 KiB`, SHA-256 `3077db43ee72ee526d8b943d1db40f19ce49be9d8ccd3109068ca442964f26cc`; all `12,279,160` cells finite `{0.0, 1.0}` in `[0, 1]`, `nodata=None`) and spec-strict companion [`docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif`](docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif) (`273.5 KiB`, SHA-256 `54139f2cf86f75ba96bddba0f49409e934c77d716eb39150dbd04daf23b6b7e4`; `12/12` checks of `validate_submission_file` passed).
+- **`G30-TAD` dual-variant 38,000-dot research GeoTIFFs (`verify_tad_run.py`, zero human inspection required):**
+  - **Published-format file:** [`docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif`](docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif) (`273.5 KiB`, SHA-256 `54139f2cf86f75ba96bddba0f49409e934c77d716eb39150dbd04daf23b6b7e4`; passes all `12` checks of `validate_submission_file`, with finite in-footprint values in `[0, 1]` and NaN outside as permitted by format).
+  - The separate all-finite [`-zeros.tif`](docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif) copy has `12,279,160` finite `{0.0, 1.0}` cells and addresses whole-array range diagnostics, but **fails the shared format validator** because `7,111,787` out-of-footprint cells are zero rather than null/NaN/nodata. Do not present it as the format-validated file.
   - **193-raster two-stage novelty PASSED:** Pre-placement OOF surface `max Spearman = 0.1637 ≤ 0.90`; post-placement 38,000 dots **`max 3 px overlap = 51.44% ≤ 70%`** (`37.25%` vs `MSDB-1v2`, `21.36%` vs `H-NEARSPLAY`, `22.67%` vs `PTA-1`, `15.63%` vs `TDX-1`).
   - **Holdout & slot decision (`ok_to_submit = false`):** Coordinate-free 3D tilt-depth + fold-regressed radiometric potassium alteration (`rad_kd`) + MT clay-cap gradient + 1 m LiDAR dip-slip step scored **`HOLDOUT-DTI = 0.14405 [0.12717, 0.16007]`** vs `core19 = 0.13982` (`+0.00423`, Fold 0 NW Nevada `+0.01801`; pure-geophysical zero-DEM `subsurface16 = 0.10959`, `+0.03445`), **but** paired 95% CI vs `core19` `[-0.01554, +0.02398]` crosses zero → **do not spend a weekly submission slot** (`gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros`; note `82/140` chars: `G30-TAD OOF tilt-depth+Kd-alt+dip-slip 38k; negative gate (0.1440); DO NOT SUBMIT.`).
 - **`PTA-1` 44,090-dot subsurface GeoTIFF (`verify_current_run.py`, zero human inspection required):** [`docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif`](docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif) (`0.38 MiB`, SHA-256 `958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827`). Re-opened from disk and verified: 1 `float32` band, `EPSG:32611`, `3,730 × 3,292`, `100 m` north-up `(100, 0, 243350, 0, -100, 4508550)`, **`5,167,373` finite cells strictly in `[0.0, 1.0]` inside footprint**, `0` NaN inside footprint, `NaN` nodata outside, `0` positive catalogue pixels, `44,090` `3.0 px` Poisson-thinned dots.
@@ -50,6 +51,8 @@ exact late-registry evidence for the artifacts affected (see IR-FFL-05).
   - `PTA-1`: `gems30-PTA1-44090-20261025-9a3f7f9535a4` (`PTA1 subsurface 3D tilt-phase + dip-asymmetry 18-feat HGB; 44090d; research artifact, NOT slot-approved.`)
 
 **[Open GitHub Pages Site](https://buffedlizard55-lab.github.io/GEMSDOE30/) ·
+[Current Executive Review (26 Oct 2026)](review-2026-10-26.html) ·
+[Nine-Site Submission Review](priority-site-review.html) ·
 [Executive Submission Guide](executive-summary.html) ·
 [G30-TAD & PhD H33 Review](geothermal-tilt-alteration-review.html) ·
 [PTA-1 & 9-Site Audit](experiment-review.html) ·
