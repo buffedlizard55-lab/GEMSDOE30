@@ -1,5 +1,18 @@
 # GEMSDOE30 — DOE GEMS Concealed Fault Discovery & Automated Submission Lab
 
+## LATEST 2026-10-26 — Unique Geothermal-Corridor GeoTIFF: **DOWNLOAD OK · NOT OK TO SUBMIT (holdout-gated)**
+
+- **One-click download (research artifact):** [`GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif`](docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif) (375,154 bytes; SHA-256 `0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564`; 40,000 dots) — also featured at the top of the [site](index.html) and the [Executive Submission Guide](executive-summary.html).
+- **Unique submission name:** `GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z`
+- **Note (110/140 chars):** `Geothermal corridor off-cat: Q-volcanics x paleo-springs x 2m probes, SGMC-gated, 3px Poisson disk, 40000 dots`
+- **Machine verdict, obvious by design:** `download_ok=true` but **`ok_to_submit=false`**, `submission_approved=false`, `slot_selected=false`, `verdict=negative`; **organizer score: none**. Do not upload it to spend a weekly slot.
+- **Format (no human inspection):** 12/12 `validate_submission_file` checks passed ([receipt](docs/research/geothermal-corridor/validation.json)): 1 `float32` band, `EPSG:32611`, `3,730 × 3,292`, 100 m north-up transform identical to template, finite `[0, 1]` on all 5,167,373 footprint cells (fixes the portal *"Predicted values must be in range [0, 1]"* failure mode inside the footprint), `NaN` nodata outside, 0 dots on or within 2 px of SGMC mapped structure.
+- **Uniqueness (lane rule ≤0.90 rho / ≤70% dots within 3 px):** vs all 23 submission rasters in `docs/downloads/` max Spearman `0.018`, max 3 px overlap `60.6%` (next 39.2% vs G30-TAD; 17.2% vs the GEMSDOE25 0.2600 file; 17.2% vs d28; 19.8% vs PTA-1) — [audit](docs/research/geothermal-corridor/novelty-downloads-audit.json). Pinned-registry decision is honestly `blocked-incomplete-evidence` (registry incomplete; 3 scored files absent) — [receipt](docs/research/geothermal-corridor/novelty-dots.json). Best-submission files for GEMSDOE27/28/31/32/33/36 are not present locally, so no direct file comparison against those six is claimed.
+- **Why not submit:** HOLDOUT-DTI and leakage canaries require organizer `labels.tif`/`training_features.tif` behind the DrivenData login; they are absent in this checkout, so no holdout number exists for this lane. Per protocol, no holdout pass means no slot.
+- **Lane (distinct from every shipped lane):** distance-decay proximity pool of Quaternary volcanics + paleogeothermal springs + 2 m temperature probes (DOE GDR 1391 / USGS SGMC), gently boosted near SGMC structure, gated >2 px off mapped structure, 3 px Poisson-disk emission. Builder: `scripts/build_geothermal_corridor_submission.py`; [run card](docs/research/geothermal-corridor/run-card.json); science basis: [verified vents knowledge base](docs/research/geothermal-vents-knowledge.md).
+
+---
+
 ## Verification follow-up — 2026-10-26: **NO NEW TIFF; DO NOT SUBMIT**
 
 The expanded-registry receipt is now verified even on FFL-1's negative path.

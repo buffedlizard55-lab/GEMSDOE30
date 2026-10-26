@@ -37,6 +37,16 @@
       "decision": "Registered full-stack peer artifact (HOLDOUT-DTI 0.170462 vs core19 0.133628; max 64.78% <= 70% across 198 rasters; readiness negative pending complete registry; no slot selected)"
     },
     {
+      "lane": "geothermal-corridor",
+      "run_card": "docs/research/geothermal-corridor/run-card.json",
+      "submission_tif": "docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif",
+      "validation": "docs/research/geothermal-corridor/validation.json",
+      "novelty_registry": "docs/research/geothermal-corridor/novelty-dots.json",
+      "novelty_downloads_audit": "docs/research/geothermal-corridor/novelty-downloads-audit.json",
+      "verifier": "scripts/validate_submission.py docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif --template docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "decision": "DOWNLOAD OK; NOT OK TO SUBMIT (unique Q-volcanics x paleo-springs x 2m-probe off-SGMC corridor, 40,000 dots >2px off SGMC; 12/12 format checks; max rho 0.018 and max 60.6% <= 70% 3px overlap vs all 23 downloads rasters; HOLDOUT-DTI not computable without organizer labels; verdict negative, no slot selected)"
+    },
+    {
       "lane": "H-NEARSPLAY",
       "run_card": "docs/research/nearsplay/run-card.json",
       "readiness": "docs/research/nearsplay/readiness.json",
