@@ -39,6 +39,38 @@
         3292
       ],
       "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/3f4c42f57104952e17d44798774d1f6b5d08d823/docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif"
+    },
+    {
+      "site": "GEMSDOE30-parallel-merged",
+      "repo": "buffedlizard55-lab/GEMSDOE30",
+      "ref": "HEAD",
+      "source_path": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif",
+      "path": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif",
+      "git_blob_sha1": "8620e9b47cbb09f1a93591d40c800a52a8698539",
+      "expected_bytes": 144910,
+      "sha256": "3077db43ee72ee526d8b943d1db40f19ce49be9d8ccd3109068ca442964f26cc",
+      "aligned": true,
+      "shape": [
+        3730,
+        3292
+      ],
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/main/docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif"
+    },
+    {
+      "site": "GEMSDOE30-parallel-merged",
+      "repo": "buffedlizard55-lab/GEMSDOE30",
+      "ref": "HEAD",
+      "source_path": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif",
+      "path": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif",
+      "git_blob_sha1": "6685e5b7a199c6a6e792a226e2b4e7099cceb49a",
+      "expected_bytes": 462334,
+      "sha256": "54139f2cf86f75ba96bddba0f49409e934c77d716eb39150dbd04daf23b6b7e4",
+      "aligned": true,
+      "shape": [
+        3730,
+        3292
+      ],
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/main/docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif"
     }
   ]
 }

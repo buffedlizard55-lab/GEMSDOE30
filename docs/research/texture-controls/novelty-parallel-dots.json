@@ -4,7 +4,7 @@
   "candidate": "/home/user/GEMSDOE30/outputs/texture-controls/gems30-TDXC2-44090-20261025-d87627b24504.tif",
   "candidate_sha256": "af499375cec73f42f98f398370b390e96c3d3b23943477eb1f613570baa98e0d",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "registry_sha256": "bd9ea6e411de3021f70293f9e40f00755f093c26a0cf54c2d75dd570a28a8850",
+  "registry_sha256": "768c40fdb1fc942d8aefda79e8d47090673ae992c0fe1f71237b6f7b6c4489b5",
   "registry_complete": false,
   "comparisons": [
     {
@@ -37,6 +37,38 @@
       "identical_inside_footprint": false,
       "correlation_duplicate": false,
       "dot_duplicate": true,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif",
+      "site": "GEMSDOE30-parallel-merged",
+      "reference_sha256": "3077db43ee72ee526d8b943d1db40f19ce49be9d8ccd3109068ca442964f26cc",
+      "reference_values_sha256": "8fe67802fccd0c06f0ab900ecccaa1a557b79bfb85ecbef5230ed1c72682e463",
+      "stage": "dots",
+      "spearman_full_footprint": 0.014868693567193954,
+      "candidate_dots": 44090,
+      "candidate_positive_support": 44090,
+      "reference_dots": 38000,
+      "candidate_fraction_within_3px_of_reference": 0.27790882286232704,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif",
+      "site": "GEMSDOE30-parallel-merged",
+      "reference_sha256": "54139f2cf86f75ba96bddba0f49409e934c77d716eb39150dbd04daf23b6b7e4",
+      "reference_values_sha256": "8fe67802fccd0c06f0ab900ecccaa1a557b79bfb85ecbef5230ed1c72682e463",
+      "stage": "dots",
+      "spearman_full_footprint": 0.014868693567193954,
+      "candidate_dots": 44090,
+      "candidate_positive_support": 44090,
+      "reference_dots": 38000,
+      "candidate_fraction_within_3px_of_reference": 0.27790882286232704,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
       "undefined": false
     }
   ],

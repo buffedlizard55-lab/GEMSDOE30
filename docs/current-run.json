@@ -2,7 +2,7 @@
   "schema_version": 1,
   "run_card": "docs/research/texture-displacement/run-card.json",
   "readiness": "docs/research/texture-displacement/readiness.json",
-  "purpose": "Retained TDX-1 archive for research download; latest TDX-C2 attempt is duplicate-stopped, not a new downloadable submission",
+  "purpose": "Retained TDX-1 archive for research download; latest TDX-C2 attempt is duplicate-stopped; G30-TAD published unique validated dual GeoTIFFs (-zeros/-nan) with negative paired holdout CI gate (do not spend weekly slot)",
   "latest_attempt": "docs/research/texture-controls/run-card.json",
   "additional_stopped_attempts": [
     {
@@ -10,6 +10,14 @@
       "pointer": "docs/research/2026-10-25-lsm/current-run.json",
       "verifier": "scripts/verify_lsm_run.py",
       "decision": "DO NOT SUBMIT (duplicate-stop; holdout gate passed; no TIFF published)"
+    }
+  ],
+  "additional_verified_lanes": [
+    {
+      "lane": "G30-TAD",
+      "pointer": "docs/research/tilt-alteration-discontinuity/current-run.json",
+      "verifier": "scripts/verify_tad_run.py",
+      "decision": "DOWNLOAD OK (format & 190-raster novelty passed); DO NOT SPEND WEEKLY SLOT (HOLDOUT-DTI 0.14405 vs core19 0.13982, paired 95% CI [-0.01554, +0.02398])"
     }
   ]
 }

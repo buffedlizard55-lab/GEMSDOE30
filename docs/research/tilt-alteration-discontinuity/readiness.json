@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "readiness_version": "tad-readiness-v1-20261025",
+  "lane": "G30-TAD",
+  "run_id": "gems30-TAD24-decensored-38000-20261025-ea3669f488ea",
+  "submission_name": "gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros",
+  "note": "G30-TAD OOF tilt-depth+Kd-alt+dip-slip 38k; negative gate (0.1440); DO NOT SUBMIT.",
+  "raster_sha256": "3077db43ee72ee526d8b943d1db40f19ce49be9d8ccd3109068ca442964f26cc",
+  "companion_nan_sha256": "54139f2cf86f75ba96bddba0f49409e934c77d716eb39150dbd04daf23b6b7e4",
+  "values_identity_sha256": "ea3669f488eabd35ff8a9c8a8df738155a9967f131cb6fad003dd9535ea65dcd",
+  "primary_file": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif",
+  "companion_nan_file": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif",
+  "download_ok": true,
+  "ok_to_submit": false,
+  "research_verdict": "negative",
+  "eligible_for_separate_slot_selector": false,
+  "submission_approved": false,
+  "slot_selected": false,
+  "decision": "DO NOT SPEND WEEKLY SUBMISSION SLOT",
+  "display_status": "TECHNICAL FORMAT & NOVELTY VALIDATED (DOWNLOAD OK) \u2014 NEGATIVE HOLDOUT CI GATE: DO NOT SPEND WEEKLY SLOT",
+  "gates": [
+    {
+      "name": "file_contract",
+      "status": "passed",
+      "detail": "Reopened both -zeros.tif (all 12,279,160 cells finite in [0, 1]) and -nan.tif (shared validator passed): exact EPSG:32611 / (3730, 3292) / transform match, 38,000 {0,1} dots, 0 on or <=2 px of catalogue"
+    },
+    {
+      "name": "preregistration_and_support_guard",
+      "status": "passed",
+      "detail": "Preregistration 9c7e91953be2 locked before start; transform tilt-alt-v1-20261025 (6f3cdfebe6fe) verified with impulse support 15 px <= 17 px fold guard"
+    },
+    {
+      "name": "paired_holdout_improvement",
+      "status": "failed",
+      "detail": "HOLDOUT-DTI tilt_alt24=0.14405 vs core19=0.13982 (delta=+0.00423, 95% CI [-0.01554, +0.02398]); subsurface16=0.10959; CI lower bound vs core19 <= 0"
+    },
+    {
+      "name": "single_feature_leakage_canaries",
+      "status": "passed",
+      "detail": "144 univariate checks (36 unique features x 4 folds); max bidirectional AUC = 0.6434 <= 0.90"
+    },
+    {
+      "name": "novelty_surface",
+      "status": "passed",
+      "detail": "Pre-placement OOF surface max Spearman = 0.1637 <= 0.90 across 190 registry rasters"
+    },
+    {
+      "name": "novelty_dots",
+      "status": "passed",
+      "detail": "Post-placement 38,000 dots max 3-px overlap = 0.5144 <= 0.70 (max Spearman = 0.0397 <= 0.90) across 190 registry rasters"
+    },
+    {
+      "name": "budget_and_identity",
+      "status": "passed",
+      "detail": "3/3 experiments in 769.0s <= 7,200s; note 82/140 chars"
+    }
+  ],
+  "organizer_score": null,
+  "organizer_acceptance_confirmed": false
+}

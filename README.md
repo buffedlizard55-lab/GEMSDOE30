@@ -1,6 +1,28 @@
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
-## START HERE — 2026-10-25 (G30-LSM): **DO NOT SUBMIT — no unique file passed every automated gate**
+## START HERE — 2026-10-25 / 2026-10-26 (`G30-TAD`): **UNIQUE VALIDATED GEOTIFF PUBLISHED (`DOWNLOAD OK`) — NEGATIVE CI GATE (`DO NOT SPEND WEEKLY SUBMISSION SLOT`)**
+
+**Automated Gate Summary (zero human inspection):**
+- **Technical GeoTIFF & 190-Raster Novelty Gates — PASSED (`download_ok = true`)**:
+  - Primary range-hardened file (all `12,279,160` cells finite in `[0, 1]`, `0.0` outside footprint, `nodata=None`): [`docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif`](docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif) (`sha256 = 3077db43ee72ee526d8b943d1db40f19ce49be9d8ccd3109068ca442964f26cc`)
+  - Companion documented-spec file (`NaN` outside footprint, passes all 12 checks of `gemsdoe30.submission.validate_submission_file`): [`docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif`](docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif) (`sha256 = 54139f2cf86f75ba96bddba0f49409e934c77d716eb39150dbd04daf23b6b7e4`)
+  - Pre-placement continuous OOF surface Spearman vs **190** registry rasters: **`0.1637 <= 0.90` (PASSED)**
+  - Post-placement `38,000`-dot 3-px overlap vs **190** registry rasters: **`51.44% <= 70.0%` (`max Spearman = 0.0397 <= 0.90`, PASSED — broke the `< 1 km` crowding collision that stopped `TDX-C2`, `G30-S20`, and `G30-LSM`!)**
+- **Weekly-Slot Scientific Promotion Gate — NEGATIVE (`verdict = "negative"`, `ok_to_submit = false`)**:
+  - Pooled `HOLDOUT-DTI` (`component-holdout-v3-blockstats-20261025`, `60,988` withheld positives, `17 px` fold guard): **`tilt_alt24 = 0.14405` `[0.12717, 0.16007]`** vs `core19 = 0.13982` `[0.12418, 0.15590]` (**`Δ = +0.00423`, paired 95% block-bootstrap CI `[-0.01554, +0.02398]`**; Fold 0 NW Nevada `+0.01801`), `subsurface16 = 0.10959` (`Δ = +0.03445` `[+0.02272, +0.04592]`), `random_dispersed = 0.08253` (`Δ = +0.06152` `[+0.04472, +0.07844]`), `144/144` single-feature canaries `<= 0.6434`.
+  - Because the paired 95% CI against `core19` crosses zero (and trails duplicate-stopped `lsm42 = 0.15717` on catalogue recovery), **do NOT spend one of the 3 weekly DrivenData submission slots on this file**.
+
+```bash
+python scripts/verify_tad_run.py                    # exit 0: all receipts, hashes, novelty & TIFFs verified
+python scripts/verify_tad_run.py --require-promote  # exit 2: scientific CI gate is negative (do not spend weekly slot)
+```
+
+- **Pages & Guides**: [Overview](index.html) · [Executive Submission Guide & DrivenData Upload Steps](executive-summary.html) · [G30-TAD, PhD H33 Proof & Geothermal Knowledge Base](geothermal-tilt-alteration-review.html) · [G30-TAD Run Card](docs/research/tilt-alteration-discontinuity/run-card.json) · [G30-TAD Readiness](docs/research/tilt-alteration-discontinuity/readiness.json) · [Synthesis & 5 Ranked Hypotheses](docs/research/tilt-alteration-discontinuity/geothermal-and-h33-synthesis.md) · [Scientific Review](docs/research/tilt-alteration-discontinuity/review.md).
+- **Verified Official Competition Facts (2026-10-25)**: Live DrivenData `#1` is **`0.4413`** (`xiaofanhu`, 30 subs; `0.3195` in prompt is an Oct 3 snapshot). **Deadline warning (`IR-TAD-02`)**: DrivenData homepage lists `Dec. 3, 2026, 11:59 p.m. UTC`, whereas official DOE/NLR Rules PDF ([`96647.pdf`](https://docs.nlr.gov/docs/fy26osti/96647.pdf), Appendix A.1) specifies **`5:00 p.m. ET` (`22:00 UTC`)** — submit before `5:00 p.m. ET`!
+
+---
+
+## Earlier today — 2026-10-25 (G30-LSM): **DO NOT SUBMIT — duplicate-stop (`80.2% > 70%`)**
 
 **Verdict:** the new LSM42 model passed the spatially blocked holdout gate. Its final dots then failed the owner's
 uniqueness rule: more than 70 % of the dots fall within 3 px of 5 earlier sparse rasters. Per protocol the run was
