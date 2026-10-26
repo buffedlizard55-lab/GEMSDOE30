@@ -78,9 +78,9 @@ def test_fflidar_final_artifact_is_duplicate_stopped_and_never_submittable():
     assert len(card["note"]) <= 140
 
 
-def test_fflidar_banner_is_first_and_download_is_marked_do_not_upload():
+def test_fflidar_archive_download_is_marked_do_not_upload():
     card = json.loads((FFL_DIR / "run-card.json").read_text())
-    for relative in ("index.html", "executive-summary.html", "experiment-review.html"):
+    for relative in ("research-history.html", "experiment-review.html"):
         html = (ROOT / relative).read_text()
         main = html[html.index('<main id="main">'):]
         assert main.index("Latest lane FFL-1") < main.index('<section class="intro"')
@@ -128,3 +128,11 @@ def test_stratified_select_respects_strata_exclusion_and_spacing():
             dist2 = (diff ** 2).sum(-1)
             dist2[dist2 == 0] = 10**9
             assert dist2.min() >= 9
+
+
+def test_current_front_pages_do_not_offer_stopped_ffl_as_the_new_submission():
+    card = json.loads((FFL_DIR / "run-card.json").read_text())
+    for name in ("index.html", "executive-summary.html"):
+        html = (ROOT / name).read_text()
+        assert card["published_tiff"] not in html
+        assert "GDX-1" in html and "NOT APPROVED FOR SUBMISSION" in html

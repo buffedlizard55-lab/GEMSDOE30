@@ -220,3 +220,36 @@ signature. Fault labels alone contain no temperature, permeability or flow
 observation. Future vent-oriented work must verify appropriate official physical
 observations and their use terms; the current network cannot newly obtain the
 USGS/GDR sources linked in the historical table above.
+
+## 2026-10-26 update — site-normalized paired chemistry [MEASURED / HYPOTHESIS]
+
+This update does not recertify the 2026-10-03 official-source observations above.
+Only the pinned organizer GitHub reference was freshly retrieved; non-GitHub
+source hosts were not newly reachable. See
+[`2026-10-26-gdx/sources.json`](2026-10-26-gdx/sources.json).
+
+- **Hypothesis:** co-measured quartz/cation/measured-temperature contrasts,
+  deduplicated to equal site weights and normalized by each mark's observation
+  effort, might detect concealed cooling/mixing upflow rather than simply dense
+  geothermal sampling. Aquifer mixing, steam loss, lithologic contacts and
+  developed-field sampling can mimic that signature. This interpretation is not
+  a claim of a new field-validated geothermal diagnostic.
+- **Local data observation:** 27,092 records, 2,398 unique sites; 539 / 551 / 526
+  sites with paired chemistry marks. Forbidden catalogue-distance fields were
+  not read. Observation-location rasters alone are not measured heat anomalies.
+- **Falsification:** GDX-1 **HOLDOUT-DTI .11965057 [.10769925,.13232384]** against
+  same-run effort-only **.12149272 [.10946138,.13475734]** and core19 **.13690536
+  [.12095606,.15334760]**; evaluator component-holdout-v3-blockstats-20261025,
+  60,988 withheld positives, 46 px component buffer. Neither paired CI lower
+  bound exceeded zero; no demonstrated chemical increment. Not a leaderboard
+  score or calibrated prediction of unmapped-fault performance.
+- **Outcome:** negative, research TIFF downloadable, global novelty unknown,
+  no slot. Four hypotheses were ranked before execution; no second scientific
+  mechanism or post-result tuning was attempted. A1 exact-surface technical
+  recovery and archive parity conservatively exhaust the three-experiment cap.
+- **Next useful question:** a separately preregistered well-versus-spring thermal
+  population contrast, controlling effort and acknowledging unknown well depth,
+  after complete registry / assignment and comparable-control prerequisites.
+  This is unexecuted and has no claimed DTI improvement.
+
+[Full mechanism, CI, source limits and run card](2026-10-26-gdx/review.md).

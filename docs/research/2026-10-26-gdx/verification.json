@@ -1,0 +1,69 @@
+{
+  "verified_utc": "2026-10-26T20:55:41.786472+00:00",
+  "commands": [
+    {
+      "command": "python -m pytest -q",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 50.101,
+      "summary": "329 passed, 5 skipped, 2 warnings, 7 subtests passed in 49.76s"
+    },
+    {
+      "command": "python scripts/build_research_site.py --check",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 7.499
+    },
+    {
+      "command": "python scripts/verify_current_run.py",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.723
+    },
+    {
+      "command": "python scripts/verify_stopped_attempt.py",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.286
+    },
+    {
+      "command": "python scripts/verify_lsm_run.py",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.482
+    },
+    {
+      "command": "python scripts/verify_tad_run.py",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 2.185
+    },
+    {
+      "command": "python scripts/verify_geothermal_chemistry_run.py",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 2.52
+    },
+    {
+      "command": "python scripts/verify_geothermal_chemistry_run.py --require-promote",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "elapsed_seconds": 2.459
+    },
+    {
+      "command": "python scripts/audit_priority_fleet.py --check",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 16.603
+    },
+    {
+      "command": "python -m compileall -q scripts src",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.039
+    }
+  ],
+  "original_runner_hash_verified_at_commit": "00b8509",
+  "organizer_confirmation": false,
+  "scope": "Local tests, reopened final raster/catalogue, recomputed CIs, immutable archived coverage and source locks. Not model refitting or a fourth scientific experiment."
+}

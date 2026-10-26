@@ -5,9 +5,12 @@ The complete latest task text (formatting normalized) is now embedded in
 [the task-text record](docs/research/texture-displacement/owner-prompt.txt).
 Read that record and the current run pointer before every session. The older
 brief below is retained as historical owner text, not the current status or a
-verified score/approval statement. Latest TDX-C2 attempt: **duplicate-stopped, no new public TIFF**;
-[automated decision](docs/research/texture-controls/readiness.json) is negative.
-The previous TDX-1 TIFF remains an explicitly archived research-only download.
+verified score/approval statement. The newest GDX-1 report is **negative / DO NOT SUBMIT**:
+[run card](docs/research/2026-10-26-gdx/run-card.json), [review](docs/research/2026-10-26-gdx/review.md).
+Its 3/3 experiment cap is exhausted; keep started/resumed guards. Read-only nine-site
+executive reviews and the shared live-coverage UNKNOWN overlay supersede blanket historical
+novelty claims. No slot is approved. The legacy PTA pointer remains for compatibility;
+`latest_review` in `docs/current-run.json` selects GDX, not a submission.
 
 ---
 

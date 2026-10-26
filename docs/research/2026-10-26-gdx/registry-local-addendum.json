@@ -1,0 +1,14 @@
+{
+  "rasters": [
+    {
+      "site": "GEMSDOE30",
+      "path": "docs/research/2026-10-26-fflidar/gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3.tif",
+      "source_path": "docs/research/2026-10-26-fflidar/gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3.tif",
+      "sha256": "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07",
+      "scope": "local published research artifact, absent frozen public-downloads snapshot"
+    }
+  ],
+  "registry_complete": false,
+  "original_registry_sha256": "447f6062686215a20703cec5ace121a279e44619dd6f079438e1e34a7c8c386a",
+  "scope": "Additional local artifacts only; frozen registry unchanged; not an experiment or global coverage"
+}

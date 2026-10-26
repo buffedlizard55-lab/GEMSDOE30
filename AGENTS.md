@@ -10,3 +10,8 @@
 5. Distinguish stored receipts, current byte inspection, research promotion and
    organizer slot selection. Unknown is never approved. No uploader/override.
 6. Keep large data/caches and quarantined predictions ignored; no credentials.
+
+Current continuation: GDX-1 is negative; 3/3 experiments exhausted. Never remove its
+`started.json` or `resumed.json`. Use `scripts/verify_geothermal_chemistry_run.py`;
+exit 0 verifies the negative finding, while `--require-promote` must exit 2.
+Archived novelty receipts remain unchanged; live additions are blocking UNKNOWN.

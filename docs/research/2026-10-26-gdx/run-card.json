@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "experiment_spec": "gdx1",
+  "run_id": "gems30-GDX1-44090-20261026-2992ee3619f5",
+  "lane": "GDX-1 autonomous geothermal-corridor continuation; not externally assigned",
+  "hypothesis": "Effort-normalized paired geothermal chemistry localizes cooling/mixing upflow conduits beyond surface-mapped faults.",
+  "mechanism": "Site-median reservoir/surface temperature contrasts and cation-quartz discordance normalized by chemical sampling effort; 12-channel local-physics HGB, 3px Poisson dots.",
+  "non_fault_mimic": "Aquifer mixing or steam loss at a lithologic contact; preferential sampling around developed geothermal fields.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.11965057235973826,
+    "withheld_positives": 60988,
+    "ci95": [
+      0.10769925077601022,
+      0.13232384036729036
+    ],
+    "tp_weight": 6986.215594286964,
+    "fp_weight": 41004.207099288884,
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "buffer_px": 46,
+    "scope": "catalogue hide-and-recover proxy; NOT organizer performance or leaderboard estimate",
+    "bootstrap": {
+      "unit": "geographic block aggregated across folds",
+      "blocks": 371,
+      "replicates": 2000,
+      "seed": 3071,
+      "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+    },
+    "comparators": {
+      "core19": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.13690536488571922,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.1209560629688432,
+          0.15334760284600843
+        ],
+        "tp_weight": 8007.4718728300295,
+        "fp_weight": 40486.03891853005
+      },
+      "effort6": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.12149271765054521,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.10946137772383079,
+          0.13475733811551627
+        ],
+        "tp_weight": 7095.821619902705,
+        "fp_weight": 40978.80174943272
+      }
+    },
+    "candidate_minus": {
+      "core19": {
+        "label": "HOLDOUT-DTI difference",
+        "value": -0.017254792525980958,
+        "ci95": [
+          -0.035453211957097976,
+          0.0017652626493339294
+        ]
+      },
+      "effort6": {
+        "label": "HOLDOUT-DTI difference",
+        "value": -0.0018421452908069513,
+        "ci95": [
+          -0.006235423612023698,
+          0.002651796661684326
+        ]
+      }
+    }
+  },
+  "feature_canaries": {
+    "features_per_fold": 28,
+    "folds": 4,
+    "alarm_count": 0,
+    "alarms": []
+  },
+  "registry": {
+    "complete": false,
+    "receipt_surface": "docs/research/2026-10-26-gdx/novelty-surface.json",
+    "receipt_dots": "docs/research/2026-10-26-gdx/novelty-dots.json",
+    "surface": {
+      "registry_entries_compared": 327,
+      "max_spearman": 0.1647020229678713,
+      "max_fraction_within_3px": null,
+      "status": "unknown"
+    },
+    "dots": {
+      "registry_entries_compared": 327,
+      "max_spearman": 0.09179766302937646,
+      "max_fraction_within_3px": 0.5424586073939669,
+      "status": "unknown"
+    },
+    "additional_local_evidence": {
+      "registry": "docs/research/2026-10-26-gdx/registry-local-addendum.json",
+      "surface": "docs/research/2026-10-26-gdx/novelty-local-surface.json",
+      "dots": "docs/research/2026-10-26-gdx/novelty-local-dots.json",
+      "successful_comparisons_per_stage": 1,
+      "chronology": "Post-run audit of the exact saved states; no refit; not part of frozen pre-placement coverage"
+    },
+    "global_uniqueness": "unknown"
+  },
+  "raster_sha256": "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
+  "surface_sha256": "80c1c5096958fbacd5addfb5afd3563417d544663e5d7c71a052fcc67e2980be",
+  "validator_output": {
+    "status": "passed",
+    "no_nan_inside_footprint": true,
+    "values_in_0_1": true,
+    "crs_match": true,
+    "shape_match": true,
+    "transform_match": true,
+    "single_float32_band": true,
+    "nan_nodata_outside_footprint": true,
+    "positive_catalogue_pixels": 0,
+    "emitted_dots": 44090,
+    "dots_within_2px_of_catalogue": 0,
+    "organizer_acceptance_confirmed": false
+  },
+  "submission_name": "gems30-GDX1-44090-20261026-2992ee3619f5",
+  "note": "GDX1 site-deduped, effort-normalized geothermal chemistry + local edges; 44090 dots; research only, NOT slot-approved.",
+  "published_tiff": "docs/research/2026-10-26-gdx/gems30-GDX1-44090-20261026-2992ee3619f5.tif",
+  "download_ok": true,
+  "organizer_score": null,
+  "leaderboard_estimate": null,
+  "externally_assigned_lane_verified": false,
+  "scientific_gate_passed": false,
+  "experiments_run": 3,
+  "experiment_cap": 3,
+  "protocol_deviation": "Amendment A1: pinned malformed reference unresolved; exact saved-surface recovery",
+  "amendment_sha256": "277b60374c94f54a7d808d40c60734b6282488d19d364d855e1b4e7b71a8282b",
+  "experimental_elapsed_seconds": 603.478,
+  "time_cap_hours": 2,
+  "archive_core19_parity_verified": true,
+  "preregistration_sha256": "aa3da2e3b6b794b95f6d720eefbb8443716af74abaab6398f7895ba3f52dc0d5",
+  "registry_sha256": "447f6062686215a20703cec5ace121a279e44619dd6f079438e1e34a7c8c386a",
+  "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+  "submission_approved": false,
+  "slot_selected": false,
+  "ok_to_submit": false,
+  "created_utc": "2026-10-26T20:32:49.301630+00:00",
+  "verdict": "negative",
+  "blockers": [
+    "paired_improvement: Fixed GDX-1 candidate must improve all 2 comparators (core19, effort6) with positive paired CI lower bounds",
+    "surface_observed_registry: 327 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop",
+    "dots_observed_registry: 327 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop",
+    "complete_parallel_registry: Nine-site public snapshots cannot attest all parallel rasters or missing original surfaces",
+    "assigned_lane: Autonomous research continuation is not an externally supplied lane assignment",
+    "comparable_historical_best: Do not substitute an archived metric or a new comparator for a missing historical-best rerun",
+    "Calibration and perturbation confirmation not completed; not eligible for slot selection",
+    "Current portal weekly cap, deadline and eligibility unverified"
+  ]
+}

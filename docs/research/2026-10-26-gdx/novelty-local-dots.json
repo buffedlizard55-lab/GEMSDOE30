@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "stage": "dots",
+  "candidate": "docs/research/2026-10-26-gdx/gems30-GDX1-44090-20261026-2992ee3619f5.tif",
+  "candidate_sha256": "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "registry_sha256": "259f702e22b42c5255c8f11436820a427317453072096fb47ed0e669d44ef7b1",
+  "registry_complete": false,
+  "comparisons": [
+    {
+      "reference": "docs/research/2026-10-26-fflidar/gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3.tif",
+      "site": "GEMSDOE30",
+      "reference_sha256": "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07",
+      "reference_values_sha256": "3255f91d4522157b54a7f84af7c03fb07cf71f3e5eabd4de34560b7704e2b9a5",
+      "stage": "dots",
+      "spearman_full_footprint": 0.02026378702518806,
+      "candidate_dots": 44090,
+      "candidate_positive_support": 44090,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": 0.44533907915627124,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    }
+  ],
+  "errors": [],
+  "decision": "blocked-incomplete-evidence",
+  "submission_approved": false
+}

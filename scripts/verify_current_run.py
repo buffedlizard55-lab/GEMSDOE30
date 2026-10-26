@@ -187,14 +187,12 @@ def verify(pointer: Path, template: Path, *, write=False):
     combined_surface, combined_dots = surface, dots
     assessment_registry = registry
     additional_path = directory / "registry-parallel-addendum.json"
-    if extra_hashes or additional_path.exists():
-        if not additional_path.is_file():
-            raise ValueError("new local reference TIFFs require an explicit late-registry audit")
+    if additional_path.is_file():
         additional = load(additional_path)
         extra_rows = additional["rasters"]
         expected_extra = {row["sha256"] for row in extra_rows}
-        if expected_extra != extra_hashes or len(extra_rows) != len(expected_extra):
-            raise ValueError("late registry no longer covers every new local reference identity")
+        if not expected_extra <= extra_hashes or len(extra_rows) != len(expected_extra):
+            raise ValueError("recorded late registry references are missing from current local identities")
         parent_hash = hashlib.sha256((directory / "registry.json").read_bytes()).hexdigest()
         if additional.get("original_registry_sha256") != parent_hash:
             raise ValueError("late registry does not extend this exact frozen snapshot")
@@ -251,7 +249,18 @@ def verify(pointer: Path, template: Path, *, write=False):
         temp.replace(target)
     elif not target.exists() or load(target) != readiness:
         raise ValueError("readiness receipt missing/stale; regenerate with --write")
-    return readiness
+    # Keep the verified archived receipt immutable. A new published reference
+    # makes *current* coverage unknown, rather than corrupting old evidence or
+    # silently inheriting its novelty pass. The common overlay blocks selection.
+    from gemsdoe30.readiness import with_current_inventory
+    recorded_hashes = known | (expected_extra if additional_path.is_file() else set())
+    current_hashes = set()
+    for path in (ROOT / "docs").rglob("*"):
+        if path.is_file() and path.suffix.lower() in (".tif", ".tiff"):
+            with path.open("rb") as stream:
+                current_hashes.add(hashlib.file_digest(stream, "sha256").hexdigest())
+    return with_current_inventory(readiness, recorded_hashes=recorded_hashes,
+                                  current_hashes=current_hashes)
 
 
 def main():

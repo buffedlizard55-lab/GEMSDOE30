@@ -1,6 +1,61 @@
 # GEMSDOE30 — DOE GEMS Concealed Fault Discovery & Automated Submission Lab
 
-## LATEST 2026-10-26 — Unique Geothermal-Corridor GeoTIFF: **DOWNLOAD OK · NOT OK TO SUBMIT (holdout-gated)**
+## Current decision — 2026-10-26 GDX-1: **RESEARCH DOWNLOAD OK · DO NOT SUBMIT**
+
+**Maximize P(Win):** reject a mechanism that did not beat its controls. **Own the Outcome:**
+ship the audited negative result, repair shared coverage checks, and do not spend a slot.
+This is the current decision; all older “LATEST” / “START HERE” sections below are
+historical lane records, not fresh global uniqueness or upload approval.
+
+- **New single-band TIFF (research only):** [`gems30-GDX1-44090-20261026-2992ee3619f5.tif`](docs/research/2026-10-26-gdx/gems30-GDX1-44090-20261026-2992ee3619f5.tif) · 44,090 dots · 474 KiB · SHA-256 `3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac`.
+- **Automated format:** 1 float32 band, EPSG:32611, 3730 × 3292, exact template transform,
+  finite `[0,1]` inside all 5,167,373 footprint cells, NaN outside, zero dots on / within
+  2 px of the catalogue, ≥3 px dot spacing. No human-inspector gate. Not portal acceptance.
+- **HOLDOUT-DTI:** GDX-1 **0.11965057 [0.10769925,0.13232384]** vs same-protocol
+  Core19 **0.13690536 [0.12095606,0.15334760]** and effort-only **0.12149272
+  [0.10946138,0.13475734]**; 60,988 withheld positives, evaluator
+  `component-holdout-v3-blockstats-20261025`, four whole-component folds with 46 px guard.
+  Paired deltas: Core19 **−0.01725479 [−0.03545321,+0.00176526]**; effort-only
+  **−0.00184215 [−0.00623542,+0.00265180]**. Both positive-lower-CI gates failed.
+- **Observed novelty, NOT global clearance:** 327 valid frozen references per stage,
+  maximum surface ρ .164702, final-dot ρ .091798, 3 px overlap 54.2459%; one malformed
+  GEMSDOE31 reference remains UNKNOWN. One additional local FFL comparison per stage:
+  surface ρ .077351, dot overlap 44.5339%. No observed duplicate, but private/parallel
+  inventory and original surfaces are incomplete. Original attempt stopped; documented
+  A1 allowed only exact-surface exploratory recovery, no retuning. Approval stays blocked.
+- **Machine verdict:** `negative`, `download_ok=true`, `ok_to_submit=false`,
+  `submission_approved=false`, `slot_selected=false`; organizer score / leaderboard
+  estimate **none**. Conservative experiment accounting **3/3**, original timer **603.478 s**.
+- **Name:** `gems30-GDX1-44090-20261026-2992ee3619f5`.
+- **Note (118/140 characters):** `GDX1 site-deduped, effort-normalized geothermal chemistry + local edges; 44090 dots; research only, NOT slot-approved.`
+
+[Clean overview](index.html) · [Executive submission decision](executive-summary.html) ·
+[GDX-1 science / four ranked hypotheses](geothermal-chemistry-review.html) ·
+[Nine-site executive reviews](priority-executive-summary.html) ·
+[Canonical JSON run card](docs/research/2026-10-26-gdx/run-card.json) ·
+[Full review / reproduction / next steps](docs/research/2026-10-26-gdx/review.md) ·
+[Three-pass review](docs/research/2026-10-26-gdx/three-pass-review.md).
+
+**Nine-site finding:** exact prediction-value aliases G25=G30 and earlier G28 r1=G31;
+H33-B2 is the exact >2 px distance-pruned r1 subset (44,090 → 40,199 → 37,654 dots),
+not independent new physics. The claimed .2778 / .2750 are owner-reported, not organizer
+receipts. No calibrated leaderboard forecast is defensible. Separate pinned reviews for
+GEMSDOE24/25/27/28/30/31/32/33/36 live here; those other sites were not modified.
+
+**Verify:** restore pinned `sample_submission` and `labels` with the existing mirror tool,
+then `python scripts/verify_geothermal_chemistry_run.py` (exit 0 validates a negative);
+`--require-promote` exits **2**. CIs are recomputed from sufficient statistics; original
+surface receipts are verified, and local surface bytes are reopened if retained. No refit
+or uploader. Do not remove `started.json` / `resumed.json` to run a fourth experiment.
+
+**Next session:** resolve the malformed reference, obtain the actual lane + complete
+parallel registry, restore the strongest comparable control, then preregister the next
+population-contrast test under a fresh budget. No rescue of negative/stopped predictions.
+The entire [owner prompt](#current-owner-prompt) remains below, unchanged; reread it each session.
+
+---
+
+## Archived 2026-10-26 — Geothermal-Corridor GeoTIFF: **DOWNLOAD OK · NOT OK TO SUBMIT (holdout-gated)**
 
 - **One-click download (research artifact):** [`GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif`](docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif) (375,154 bytes; SHA-256 `0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564`; 40,000 dots) — also featured at the top of the [site](index.html) and the [Executive Submission Guide](executive-summary.html).
 - **Unique submission name:** `GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z`
@@ -28,7 +83,7 @@ objective; it preserves an honest negative decision rather than fabricating one.
 Read the complete [current owner prompt](#current-owner-prompt) every session;
 its full text remains below, including the conflicting, unverified leader claims.
 
-## LATEST 2026-10-26 — FFL-1 MSDB × LiDAR Fusion: **DO NOT SUBMIT — DUPLICATE-STOPPED**
+## Archived 2026-10-26 — FFL-1 MSDB × LiDAR Fusion: **DO NOT SUBMIT — DUPLICATE-STOPPED**
 
 - **Generated GeoTIFF (research artifact only):** [`gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3.tif`](docs/research/2026-10-26-fflidar/gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3.tif) (`SHA-256: 7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07`; 44,090 dots)
 - **Submission name:** `gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3`
@@ -48,7 +103,7 @@ exact late-registry evidence for the artifacts affected (see IR-FFL-05).
 
 ---
 
-## START HERE — Unique `G30-TAD` & `PTA-1` GeoTIFFs Validated (`download_ok = true`) · **NOT APPROVED FOR SUBMISSION (`verdict = negative`)**
+## Archived `G30-TAD` & `PTA-1` GeoTIFFs Validated (`download_ok = true`) · **NOT APPROVED FOR SUBMISSION (`verdict = negative`)**
 
 
 - **`G30-TAD` dual-variant 38,000-dot research GeoTIFFs (`verify_tad_run.py`, zero human inspection required):**

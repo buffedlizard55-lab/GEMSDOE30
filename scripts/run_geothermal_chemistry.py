@@ -85,9 +85,26 @@ def canaries(x, y, stack, names, fold, *, seed, columns=None):
     return {"fold": fold["fold"], "features": rows}
 
 
-def assert_clear(report):
+def assert_clear(report, *, incomplete_recovery=False):
     if report["decision"] == "duplicate-stop":
         raise DuplicateStop(report["stage"])
+    if report.get("errors") and incomplete_recovery:
+        # Amendment A1: exactly this immutable invalid reference remains UNKNOWN.
+        # Never impute its values or pretend 327 comparisons cover all 328.
+        registry = json.loads((REPORT / "registry.json").read_text())
+        observed = {row["reference_sha256"] for row in report["comparisons"]}
+        expected = {row["sha256"] for row in registry["rasters"]}
+        allowed_missing = "774c7c5aa3784d7c52dc67870e1cc8b0e0a34d1697092ad9f3b08c33dcaf2546"
+        if (expected - observed != {allowed_missing} or len(report["errors"]) != 1
+                or len(observed) != 327 or len(report["comparisons"]) != 327):
+            raise ValueError("A1 recovery only permits the single pinned invalid reference")
+        row = next(r for r in registry["rasters"] if r["sha256"] == allowed_missing)
+        with rasterio.open(row["path"]) as ds:
+            a = ds.read(1)
+        valid = np.load(ROOT / "data/processed/valid.npy")
+        if sha(row["path"]) != allowed_missing or np.count_nonzero(~np.isfinite(a[valid])) != 2610312:
+            raise ValueError("A1 invalid-reference byte/footprint evidence changed")
+        return
     if report.get("errors") or not report.get("comparisons"):
         raise ValueError("registry errors/missing observations: do not continue placement")
 
@@ -96,31 +113,42 @@ class DuplicateStop(Exception):
     pass
 
 
-def run(seconds):
+def run(seconds, *, incomplete_recovery=False):
     # Guard BEFORE any fitting or overwriting locked scientific evidence.
-    if (REPORT / "started.json").exists():
+    if (REPORT / "resumed.json").exists():
+        raise FileExistsError("A1 recovery was already started; experiment cap reached")
+    if (REPORT / "started.json").exists() and not incomplete_recovery:
         raise FileExistsError("GDX-1 was already started; no rerun/retuning is allowed")
+    if incomplete_recovery:
+        original = json.loads((REPORT / "started.json").read_text())
+        if (not (REPORT / "amendment-A1.md").exists()
+                or original["preregistration_sha256"] != sha(REPORT / "preregistration.md")
+                or original["registry_sha256"] != sha(REPORT / "registry.json")):
+            raise ValueError("A1 frozen prerequisites changed")
     for name in ("preregistration.md", "registry.json"):
         if not (REPORT / name).is_file():
             raise FileNotFoundError(name)
     if not 0 < seconds <= 7200 or len(NOTE) > 140:
         raise ValueError("time or note budget invalid")
     spec = contract({"experiment_spec": "gdx1"})
-    started = time.monotonic()
-    deadline = started + seconds
+    prior_elapsed = ((datetime.now(timezone.utc) - datetime.fromisoformat(original["started_utc"])).total_seconds()
+                     if incomplete_recovery else 0.0)
+    started = time.monotonic() - prior_elapsed
+    deadline = started + min(seconds, 7200)
 
     def time_check():
         if time.monotonic() >= deadline:
             raise TimeoutError("two-hour cap reached; no further experiments")
 
     WORK.mkdir(parents=True, exist_ok=True)
-    dump(REPORT / "started.json", {
+    dump(REPORT / ("resumed.json" if incomplete_recovery else "started.json"), {
+        "amendment_sha256": sha(REPORT / "amendment-A1.md") if incomplete_recovery else None,
         "started_utc": datetime.now(timezone.utc).isoformat(),
         "preregistration_sha256": sha(REPORT / "preregistration.md"),
         "registry_sha256": sha(REPORT / "registry.json"),
         "runner_sha256": sha(__file__),
         "transform_sha256": sha(ROOT / spec["transform_path"]),
-        "experiment_cap": 3, "planned_experiments": 2, "max_seconds": seconds,
+        "experiment_cap": 3, "planned_experiments": 3 if incomplete_recovery else 2, "max_seconds": seconds,
         "externally_assigned_lane_verified": False,
     })
     dump(REPORT / "cache-verification.json", verify_cache(ROOT / "data/processed"))
@@ -137,13 +165,21 @@ def run(seconds):
     pin = next(r for r in pins["files"] if r["id"] == "ext_gdr_wellspring_in_footprint")
     if sha(csv_file) != pin["sha256"]:
         raise ValueError("chemistry mirror SHA mismatch")
-    print("Build site-deduplicated, paired chemistry maps (no catalogue inputs)...", flush=True)
-    fields, features_receipt = build_features(base, valid, csv_file)
-    extra = np.lib.format.open_memmap(WORK / "extra.npy", mode="w+", dtype=np.float32,
-                                     shape=(len(EXTRA_NAMES), *valid.shape))
-    for j, name in enumerate(EXTRA_NAMES):
-        extra[j] = fields.pop(name)
-    extra.flush()
+    if incomplete_recovery:
+        features_receipt = json.loads((REPORT / "feature-receipt.json").read_text())
+        if (features_receipt["all_feature_array_sha256"] != sha(WORK / "extra.npy")
+                or features_receipt["transform_sha256"] != sha(ROOT / spec["transform_path"])):
+            raise ValueError("saved GDX-1 features/transform changed; no recovery")
+        extra = np.load(WORK / "extra.npy", mmap_mode="r")
+        print("A1: reuse exact saved feature maps and surface; no refitting...", flush=True)
+    else:
+        print("Build site-deduplicated, paired chemistry maps (no catalogue inputs)...", flush=True)
+        fields, features_receipt = build_features(base, valid, csv_file)
+        extra = np.lib.format.open_memmap(WORK / "extra.npy", mode="w+", dtype=np.float32,
+                                         shape=(len(EXTRA_NAMES), *valid.shape))
+        for j, name in enumerate(EXTRA_NAMES):
+            extra[j] = fields.pop(name)
+        extra.flush()
     stack = LayerStack([base[i] for i in range(19)] + [extra[i] for i in range(len(EXTRA_NAMES))])
     stacks = {name: LayerStack([stack.layers[j] for j in columns]) for name, columns in ARMS.items()}
     names = CORE_FEATURES + EXTRA_NAMES
@@ -155,19 +191,26 @@ def run(seconds):
         "all_feature_array_sha256": sha(WORK / "extra.npy"),
     })
     time_check()
-    x, y = sample_training_pixels(stacks["gdx12"], labels, valid,
-                                  negatives_per_positive=6, seed=SEED)
-    model, med, scale = fit_model(x, y, seed=SEED)
-    with threadpool_limits(limits=2):
-        surface = predict_grid(model, stacks["gdx12"], med, scale, valid)
-    del model, x, y
     surface_path = WORK / "gdx1-surface.tif"
-    write_submission_file(surface, TEMPLATE, surface_path, run_name="gems30-GDX1-surface",
-                          note="Saved pre-placement continuous research surface, NOT a submission.")
-    print("Pre-placement audit against all public-snapshot registry rasters...", flush=True)
-    surface_audit = audit(surface_path, TEMPLATE, REPORT / "registry.json", "surface")
-    dump(REPORT / "novelty-surface.json", surface_audit)
-    assert_clear(surface_audit)
+    if incomplete_recovery:
+        surface_audit = json.loads((REPORT / "novelty-surface.json").read_text())
+        if surface_audit["candidate_sha256"] != sha(surface_path):
+            raise ValueError("saved pre-placement surface changed")
+        with rasterio.open(surface_path) as ds:
+            surface = np.where(valid, ds.read(1), 0).astype(np.float32)
+    else:
+        x, y = sample_training_pixels(stacks["gdx12"], labels, valid,
+                                      negatives_per_positive=6, seed=SEED)
+        model, med, scale = fit_model(x, y, seed=SEED)
+        with threadpool_limits(limits=2):
+            surface = predict_grid(model, stacks["gdx12"], med, scale, valid)
+        del model, x, y
+        write_submission_file(surface, TEMPLATE, surface_path, run_name="gems30-GDX1-surface",
+                              note="Saved pre-placement continuous research surface, NOT a submission.")
+        print("Pre-placement audit against all public-snapshot registry rasters...", flush=True)
+        surface_audit = audit(surface_path, TEMPLATE, REPORT / "registry.json", "surface")
+        dump(REPORT / "novelty-surface.json", surface_audit)
+    assert_clear(surface_audit, incomplete_recovery=incomplete_recovery)
     time_check()
     final_domain = valid & (distance_transform_edt(~labels) > 2)
     dots = select_dots(surface, final_domain, DOT_BUDGET)
@@ -178,7 +221,7 @@ def run(seconds):
     sidecar = write_submission_file(dots, TEMPLATE, output, run_name=run_name, note=NOTE)
     dots_audit = audit(output, TEMPLATE, REPORT / "registry.json", "dots")
     dump(REPORT / "novelty-dots.json", dots_audit)
-    assert_clear(dots_audit)
+    assert_clear(dots_audit, incomplete_recovery=incomplete_recovery)
     del dots
     time_check()
     # No metric is inspected before BOTH novelty gates. Every feature is tested
@@ -299,7 +342,9 @@ def run(seconds):
         "organizer_score": None, "leaderboard_estimate": None,
         "externally_assigned_lane_verified": False,
         "scientific_gate_passed": results["scientific_gate_passed"],
-        "experiments_run": 2, "experiment_cap": 3,
+        "experiments_run": 3 if incomplete_recovery else 2, "experiment_cap": 3,
+        "protocol_deviation": "Amendment A1: pinned malformed reference unresolved; exact saved-surface recovery" if incomplete_recovery else None,
+        "amendment_sha256": sha(REPORT / "amendment-A1.md") if incomplete_recovery else None,
         "experimental_elapsed_seconds": round(elapsed, 3), "time_cap_hours": 2,
         "archive_core19_parity_verified": parity_ok,
         "preregistration_sha256": sha(REPORT / "preregistration.md"),
@@ -329,9 +374,11 @@ def run(seconds):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--max-seconds", type=int, default=6000)
+    p.add_argument("--resume-after-registry-error", action="store_true",
+                   help="one A1 recovery only; frozen features/surface, incomplete evidence blocks approval")
     args = p.parse_args()
     try:
-        run(args.max_seconds)
+        run(args.max_seconds, incomplete_recovery=args.resume_after_registry_error)
     except DuplicateStop as exc:
         stage = str(exc)
         dump(REPORT / "duplicate-stop.json", {"stage": stage, "decision": "duplicate-stop", "no_further_experiment": True})

@@ -1,0 +1,12 @@
+{
+  "amendment_sha256": "277b60374c94f54a7d808d40c60734b6282488d19d364d855e1b4e7b71a8282b",
+  "started_utc": "2026-10-26T20:27:17.834803+00:00",
+  "preregistration_sha256": "aa3da2e3b6b794b95f6d720eefbb8443716af74abaab6398f7895ba3f52dc0d5",
+  "registry_sha256": "447f6062686215a20703cec5ace121a279e44619dd6f079438e1e34a7c8c386a",
+  "runner_sha256": "ccf1f64a147f040199919fab105247668aaf3d9bd6b5a15f2337c2a51ef71886",
+  "transform_sha256": "700e3bc348dd4e2b9090485f775f33dcc0249646a7f474151e002d9c5d219161",
+  "experiment_cap": 3,
+  "planned_experiments": 3,
+  "max_seconds": 6000,
+  "externally_assigned_lane_verified": false
+}

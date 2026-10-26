@@ -1,0 +1,98 @@
+{
+  "retrieved_utc": "2026-10-26T20:31:02.436260+00:00",
+  "official_reference_commit": "aebe92f7c8a990f0e3443451b7a825d9afd6336b",
+  "official_url": "https://github.com/drivendataorg/gems-prize-reference-solution/tree/aebe92f7c8a990f0e3443451b7a825d9afd6336b",
+  "files": [
+    {
+      "local_cache": "outputs/source-review/reference-README.md",
+      "sha256": "cfa4d55559c9128313beb9417eae7e0a94c31677132afb1120f9e86222804239",
+      "bytes": 2367
+    },
+    {
+      "local_cache": "outputs/source-review/reference.ipynb",
+      "sha256": "1a7622732ba00f67237058bc0efe79b45ba4e87c449fc9c1e5d6ea659de92ca0",
+      "bytes": 1578736
+    }
+  ],
+  "extracts": [
+    {
+      "cell": 5,
+      "description": "Exact metadata output; units/physical semantics are not independently established by generic descriptions.",
+      "output": "Feature data metadata:\n  Width: 3292\n  Height: 3730\n  CRS: EPSG:32611\n  Resolution: 100.0 x 100.0\n  Data type: float32\n  nodata value: -3.4028234663852886e+38\nFeature data bands:\nBand 1: Magnetic anomaly - deviation from expected Earth's magnetic field (Category: magnetic_data)\nBand 2: Reduced to pole magnetic data - magnetic anomaly corrected for latitude effects (Category: magnetic_data)\nBand 3: Total magnetic intensity horizontal gradient - rate of change in horizontal direction (Category: magnetic_data)\nBand 4: Geodetic second invariant - measure of strain rate tensor magnitude (Category: geodetic_strain)\nBand 5: Isostatic gravity anomaly slope - gradient of gravity after isostatic correction (Category: gravity_data)\nBand 6: Tilt angle or total curvature - magnetic field derivative for edge detection (Category: magnetic_data)\nBand 7: Geodetic shear rate - rate of angular deformation from GPS/InSAR (Category: geodetic_strain)\nBand 8: Geodetic dilatation rate - rate of volumetric strain (expansion/contraction) (Category: geodetic_strain)\nBand 9: Total magnetic intensity vertical gradient - rate of change in vertical direction (Category: magnetic_data)\nBand 10: Distance to earthquake (n=100km radius, a=15\u00b0 azimuth parameters) (Category: seismic)\nBand 11: Isostatic gravity anomaly vertical gradient - vertical rate of change (Category: gravity_data)\nBand 12: Detrended elevation - topography with regional trends removed (Category: topographic)\nBand 13: Isostatic gravity anomaly - gravity after compensating for topographic mass (Category: gravity_data)\nBand 14: Total magnetic intensity - total strength of magnetic field (Category: magnetic_data)\nBand 15: Depth to basement surface - thickness of sedimentary cover (Category: subsurface)\nBand 16: Earthquake intensity or density (n=100km radius, a=15\u00b0 parameters) (Category: seismic)\nBand 17: Conductivity surface - electrical conductivity of subsurface (Category: subsurface)\nBand 18: Isostatic gravity anomaly horizontal gradient - horizontal rate of change (Category: gravity_data)\nBand 19: Detrended elevation slope - gradient of elevation after detrending (Category: topographic)\nFeature data shape after loading: (3730, 3292, 19)\n"
+    },
+    {
+      "cell": 16,
+      "description": "Reference training Tversky loss alpha/beta, not proof of hidden scoring implementation.",
+      "relevant_lines": [
+        "alpha = 0.2  # weight for false positives in Tversky loss",
+        "beta = 0.8  # weight for false negatives in Tversky loss"
+      ]
+    }
+  ],
+  "network_scope": "Only GitHub/API, package registries reachable. DrivenData/USGS/GDR/PDF were not freshly fetched; prior notes are archived evidence, not current authentication.",
+  "fleet_readme_sources": [
+    {
+      "site": "GEMSDOE24",
+      "ref": "5cfab74597cd1d0a271e4640b4cc34511e56ca59",
+      "path": "outputs/fleet-source/GEMSDOE24-README.md",
+      "sha256": "97d21098fb2e39de153171f80744180a47045e647b4f14d2d2560ba23c10b0a9",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/5cfab74597cd1d0a271e4640b4cc34511e56ca59/README.md"
+    },
+    {
+      "site": "GEMSDOE25",
+      "ref": "606eef45e669a6da061ec24be4a3d870addadb0f",
+      "path": "outputs/fleet-source/GEMSDOE25-README.md",
+      "sha256": "d1f4349f2eaeabcf0a969ff301088b9765061d1007c6ec33fab0753196e3bad6",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE25/blob/606eef45e669a6da061ec24be4a3d870addadb0f/README.md"
+    },
+    {
+      "site": "GEMSDOE27",
+      "ref": "78289f21fc5106f98c0b5baacba96415aee45756",
+      "path": "outputs/fleet-source/GEMSDOE27-README.md",
+      "sha256": "f6dbc96f430cf80af1f3657c88f151a0c30b364a4f3740846d188d25d24d2641",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE27/blob/78289f21fc5106f98c0b5baacba96415aee45756/README.md"
+    },
+    {
+      "site": "GEMSDOE28",
+      "ref": "12ec4fea4c97a7887a7ca8a06f9bd94c7609ea07",
+      "path": "outputs/fleet-source/GEMSDOE28-README.md",
+      "sha256": "eea06b47fc45d23431e7f0239affb45b2e80d32cc0f43320b0def80d87edb33d",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/12ec4fea4c97a7887a7ca8a06f9bd94c7609ea07/README.md"
+    },
+    {
+      "site": "GEMSDOE30",
+      "ref": "35ce8911e2c3287eed973eacd12c252e8cb3f34c",
+      "path": "outputs/fleet-source/GEMSDOE30-README.md",
+      "sha256": "0a8817ca5475af08c2c9c0036e6f5612db8aec023128dee5323dee44da520647",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/35ce8911e2c3287eed973eacd12c252e8cb3f34c/README.md"
+    },
+    {
+      "site": "GEMSDOE31",
+      "ref": "78f9bf3ae82e5c78ca348aa37c0660c339e72f0e",
+      "path": "outputs/fleet-source/GEMSDOE31-README.md",
+      "sha256": "b21202b59559ae3b4db67dd0efc510eddaec89b1ed900e14a3c43550c5e6e164",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/78f9bf3ae82e5c78ca348aa37c0660c339e72f0e/README.md"
+    },
+    {
+      "site": "GEMSDOE32",
+      "ref": "45ee207185f72804497f7a7a392ad2c43e168f02",
+      "path": "outputs/fleet-source/GEMSDOE32-README.md",
+      "sha256": "56c883f6139aba6a93e193923121e1f7c7a56ade84fcf77527abf279db4ad4b7",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/45ee207185f72804497f7a7a392ad2c43e168f02/README.md"
+    },
+    {
+      "site": "GEMSDOE33",
+      "ref": "0384d793b5a23151425f45505ac745b54f84c7c9",
+      "path": "outputs/fleet-source/GEMSDOE33-README.md",
+      "sha256": "ae94be3fd037385b9da89edad7153ca156175ac998305f7670a888e91b5cb4cc",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE33/blob/0384d793b5a23151425f45505ac745b54f84c7c9/README.md"
+    },
+    {
+      "site": "GEMSDOE36",
+      "ref": "b90418f852615aa0974cf9a53b92fa569ed133fc",
+      "path": "outputs/fleet-source/GEMSDOE36-README.md",
+      "sha256": "2a0d226cf54ad0f156bf71027e43cf2df96c5aa65ed22a03361b34435f1a6ee8",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE36/blob/b90418f852615aa0974cf9a53b92fa569ed133fc/README.md"
+    }
+  ]
+}

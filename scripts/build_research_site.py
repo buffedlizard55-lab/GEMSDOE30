@@ -421,7 +421,7 @@ def build(template: Path) -> dict[Path, str | bytes]:
 <section class="section"><p class="eyebrow">03 / PTA-1 experiment &amp; 9-priority-site novelty audit</p><h2>Statistically significant subsurface gain (+0.00887) &amp; genuine cross-site uniqueness.</h2>{scores}<p>Across <code>148</code> univariate canary evaluations (<code>37</code> features × <code>4</code> folds; <a href="{CURRENT}/results.json">full JSON</a>), zero features approached the <code>0.90</code> leakage threshold (max <code>0.6434</code> on <code>det_elev_slope</code>). Among all 18 subsurface inputs, <strong><code>pta_dip_cover_step</code></strong>—signed hanging-wall thickening of MT conductive cover (<code>depth_to_base_surf</code>) across <code>300–600 m</code> down the gravity dip vector—achieved the strongest fault signal (bidirectional raw AUC <code>0.5988</code> in Fold 3, <code>0.5933</code> in Fold 1 vs <code>0.5181</code> for raw <code>depth_to_base_surf</code>).</p>{priority_nine_table()}<p class="fine">Across the entire 9-repo expanded registry + concurrent main arrivals (<code>{n_reg}</code> unique grid-aligned TIFFs; <a href="{CURRENT}/registry.json">registry.json</a> + <a href="{CURRENT}/registry-parallel-addendum.json">late addendum</a>), max surface Spearman is <code>0.1055</code> and max 3 px dot overlap is <code>54.60%</code>. All 119 owner-supplied historical claims remain quarantined as unverified in <a href="{PREVIOUS}/owner-claims.csv">owner-claims.csv</a>.</p></section>
 <section class="section"><p class="eyebrow">04 / Newly flagged irregularities &amp; next-session roadmap</p><h2>Dataset unit/sign traps discovered (`IR-PTA-01..05`, `IR-TAD-01..06`) &amp; remaining limitations.</h2><ul class="spaced"><li><strong><code>IR-PTA-01</code> — 1,000× unit mismatch (<code>tmi_hg</code> nT/km vs <code>tmi_vg</code> nT/m):</strong> Unscaled <code>atan2(tmi_vg, tmi_hg)</code> collapses magnetic tilt dynamic range by <code>&gt;20×</code> and saturates zero-crest features; fixed and unit-tested in <code>src/gemsdoe30/phase_tilt.py</code>.</li><li><strong><code>IR-PTA-02</code> — Three-way <code>tc</code> metadata contradiction &amp; MT conductive-base semantics:</strong> <code>tc</code> carries GDAL tag <code>"Tilt angle or total curvature"</code>, DrivenData <code>/page/967/</code> label <code>"Terrain correction"</code>, and <code>0.999957</code> Spearman match to USGS GeoDAWN Radiometric Total Count (<code>IR-MSDB-01</code>); <code>depth_to_base_surf</code> is MT conductive-base depth; <code>deq</code>/<code>ieq</code> are earthquake rate densities (Forum 11557).</li><li><strong><code>IR-PTA-03</code> — Signed image-axis gravity derivatives:</strong> Confirming <code>IR-MSDB-02</code>, <code>iso_grav_anom_hg</code> and <code>iso_grav_anom_vg</code> are signed grid derivatives rather than unsigned magnitudes.</li><li><strong><code>IR-TAD-01..06</code> — Deadline discrepancy &amp; decensored collar uniqueness:</strong> Rules PDF Appendix A.1 specifies <code>5:00 p.m. ET (22:00 UTC)</code> vs DrivenData <code>11:59 p.m. UTC</code>; <code>decensored_30_40_30</code> cleared all <code>193</code> aligned rasters (<code>max 51.44% ≤ 70%</code>).</li><li><strong>Next session:</strong> Combine <code>MSDB-1v2</code>'s steerable piedmont discontinuities (upgraded with <code>1000× tmi_vg</code>) + <code>G30-TAD</code>'s Kd-alteration + <code>PTA-1</code>'s signed hanging-wall conductive-cover step (<code>pta_dip_cover_step</code>) inside a multi-km 2D UNet on GPU, evaluated on reserved geographic folds before any slot promotion.</li></ul><p><a href="geothermal-tilt-alteration-review.html">G30-TAD &amp; H33 review</a> · <a href="{CURRENT}/analysis.md">PTA-1 scientific analysis</a> · <a href="{CURRENT}/verification.md">PTA-1 verification journal</a> · <a href="{MSDB}/review.md">MSDB-1v2 technical report</a> · <a href="docs/research/2026-10-25-lsm/review.md">G30-LSM duplicate-stop review</a> · <a href="{STOPPED}/review.md">TDX-C2 duplicate-stop review</a> · <a href="docs/irregularities.md">Complete irregularities ledger</a></p></section>'''
 
-    return {
+    result = {
         ROOT / "index.html": page("G30-TAD & PTA-1 GeoTIFFs validated; slot protected", home),
         ROOT / "executive-summary.html": page("Executive submission guide", guide, active="guide"),
         ROOT / "geothermal-tilt-alteration-review.html": page("G30-TAD, PhD H33 proof & geothermal synthesis", tad_review_page(tad_card, tad_ready), active="tad"),
@@ -433,6 +433,19 @@ def build(template: Path) -> dict[Path, str | bytes]:
         ROOT / "docs/executive-summary.html": redirect_html("../executive-summary.html", "Executive submission guide · GEMSDOE30"),
         ROOT / "docs/geothermal-tilt-alteration-review.html": redirect_html("../geothermal-tilt-alteration-review.html", "G30-TAD & PhD H33 analysis · GEMSDOE30"),
     }
+    # Historical dashboards remain auditable, but never lead the current UI.
+    archive_notice = '<section class="stop-notice"><h2>Historical archive — not the current recommendation</h2><p>Contains superseded claims and assumptions, not fresh leaderboard / global uniqueness clearance. <a href="executive-summary.html">Read the current GDX-1 decision</a>; no archived file is slot-approved.</p></section>'
+    result[ROOT / "research-history.html"] = result[ROOT / "executive-summary.html"].replace('<main id="main">', '<main id="main">' + archive_notice, 1)
+    for historical in ("experiment-review.html", "geothermal-tilt-alteration-review.html"):
+        result[ROOT / historical] = result[ROOT / historical].replace('<main id="main">', '<main id="main">' + archive_notice, 1)
+    from scripts.verify_geothermal_chemistry_run import verify as verify_gdx
+    from scripts.render_gdx_review import pages as gdx_pages
+    review = selection.get("latest_review", {})
+    if review.get("run_card") != "docs/research/2026-10-26-gdx/run-card.json" or review.get("verifier") != "scripts/verify_geothermal_chemistry_run.py":
+        raise ValueError("latest-review pointer does not select the verified GDX-1 report")
+    result.update({ROOT / name: content for name, content in gdx_pages(verify_gdx(template=template)).items()})
+    return result
+
 
 
 def main() -> None:
@@ -448,7 +461,7 @@ def main() -> None:
         else:
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(data)
-    print("Site receipts, download link, and deterministic generated pages verified" if args.check else "Built PTA-1 research Pages")
+    print("Site receipts, download link, and deterministic generated pages verified" if args.check else "Built receipt-driven GDX-1 Pages and preserved historical dashboards")
 
 
 if __name__ == "__main__":

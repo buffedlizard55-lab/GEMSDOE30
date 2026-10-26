@@ -31,3 +31,6 @@ venv/
 # Small audited reference deliverable, not training data
 !docs/downloads/*.tif
 !docs/research/2026-10-26-fflidar/*.tif
+
+# Small negative GDX research deliverable; no feature arrays or fitted surface.
+!docs/research/2026-10-26-gdx/gems30-GDX1-44090-20261026-2992ee3619f5.tif
