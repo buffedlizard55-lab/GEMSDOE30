@@ -1,0 +1,52 @@
+{
+  "generated_utc": "2026-10-26T00:34:02.799659+00:00",
+  "scope": "Current local TIFF bytes and archived receipts only; no model/holdout rerun or live leaderboard read",
+  "artifacts": [
+    {
+      "name": "H-NEARSPLAY",
+      "file": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "card": "docs/research/nearsplay/run-card.json",
+      "readiness": "docs/research/nearsplay/readiness.json",
+      "validation_errors": [],
+      "sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+      "format_passed": true,
+      "hash_matches": true,
+      "download_ok": true,
+      "recorded_research_verdict": "promote",
+      "recorded_failed_or_unknown_gates": {},
+      "assigned_lane_verified": false,
+      "complete_parallel_registry_verified": false,
+      "identical_protocol_current_best_beaten": false,
+      "submission_approved": false,
+      "slot_selected": false,
+      "decision": "DO NOT SUBMIT: full scientific and selector gates unresolved"
+    },
+    {
+      "name": "MSDB-1v2",
+      "file": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+      "card": "docs/research/msdb-piedmont/run-card.json",
+      "readiness": "docs/research/msdb-piedmont/readiness.json",
+      "validation_errors": [],
+      "sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+      "format_passed": true,
+      "hash_matches": true,
+      "download_ok": true,
+      "recorded_research_verdict": "negative",
+      "recorded_failed_or_unknown_gates": {
+        "complete_parallel_registry": "unknown",
+        "assigned_lane": "unknown",
+        "comparable_historical_best": "unknown"
+      },
+      "assigned_lane_verified": false,
+      "complete_parallel_registry_verified": false,
+      "identical_protocol_current_best_beaten": false,
+      "submission_approved": false,
+      "slot_selected": false,
+      "decision": "DO NOT SUBMIT: full scientific and selector gates unresolved"
+    }
+  ],
+  "new_experiments": 0,
+  "new_tiff_generated": false,
+  "verdict": "negative",
+  "submission_approved": false
+}

@@ -1,0 +1,123 @@
+{
+  "schema_version": 2,
+  "lane_id": "MSDB-1",
+  "title": "Multi-Scale Steerable Discontinuity & Piedmont Cover-Breach Habitat with Bayes-Calibrated 300 m Submodular Coverage",
+  "preregistered_utc": "2026-10-25T23:00:00Z",
+  "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+  "frozen_registry_path": "docs/research/msdb-piedmont/registry.json",
+  "frozen_registry_sha256": "c978bdd07c90f1cb1060e15c857d460bb9fe4050d63055072bdd467859235a89",
+  "frozen_registry_source_files": 180,
+  "frozen_registry_unique_aligned": 165,
+  "transform_module": "src/gemsdoe30/msdb.py",
+  "transform_version": "msdb-piedmont-v1-20261025",
+  "max_axial_halfwidth_px": 9,
+  "euclidean_support_px_exact": 12.727922061357855,
+  "physical_support_px": 13,
+  "holdout_guard_px": 17,
+  "evaluator_version": "component-holdout-v3-blockstats-20261025",
+  "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+  "fixed_arms": [
+    "core19",
+    "msdb_poisson",
+    "msdb_edge"
+  ],
+  "candidate_arm": "msdb_edge",
+  "comparator_arms": [
+    "core19",
+    "msdb_poisson"
+  ],
+  "raw_feature_names": [
+    "mag_anom",
+    "rtp",
+    "tmi_hg",
+    "geod_2ndinv",
+    "iso_grav_anom_slope",
+    "tc",
+    "geod_shearrate",
+    "geod_dilaterate",
+    "tmi_vg",
+    "deq_n100a15",
+    "iso_grav_anom_vg",
+    "det_elev",
+    "iso_grav_anom",
+    "tmi",
+    "depth_to_base_surf",
+    "ieq_n100a15",
+    "cond_surf",
+    "iso_grav_anom_hg",
+    "det_elev_slope"
+  ],
+  "derived_feature_names": [
+    "msdb_mag_tilt_rad",
+    "msdb_mag_tilt_zero_crest",
+    "msdb_mag_contact_invdepth",
+    "msdb_topo_tubularity_100m",
+    "msdb_topo_tubularity_300m",
+    "msdb_topo_saddle_300m",
+    "msdb_rtp_tubularity_300m",
+    "msdb_grav_tubularity_300m",
+    "msdb_base_tubularity_300m",
+    "msdb_cond_saddle_300m",
+    "msdb_topo_coherence",
+    "msdb_grav_coherence",
+    "msdb_align_grav_basement",
+    "msdb_align_rtp_grav",
+    "msdb_align_topo_radtc",
+    "msdb_piedmont_ramp_index",
+    "msdb_radtc_grad_300m",
+    "msdb_transtensional_index"
+  ],
+  "total_features": 37,
+  "training_sampler": {
+    "function": "gemsdoe30.holdout.sample_training_pixels",
+    "negatives_per_positive": 6,
+    "base_seed": 3041
+  },
+  "models": {
+    "core19": {
+      "estimator": "HistGradientBoostingClassifier",
+      "max_iter": 120,
+      "learning_rate": 0.1,
+      "max_leaf_nodes": 31,
+      "early_stopping": false
+    },
+    "msdb": {
+      "estimator": "HistGradientBoostingClassifier",
+      "max_iter": 200,
+      "learning_rate": 0.06,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 100,
+      "l2_regularization": 1.0,
+      "early_stopping": false
+    }
+  },
+  "placement": {
+    "full_footprint_dot_budget": 44090,
+    "fold_budget_rule": "round(44090 * count(active) / count(valid))",
+    "active_domain_rule": "score_valid & ~visible (folds) and valid & ~labels (full footprint)",
+    "poisson_radius_px": 3.0,
+    "edge_calibration": "Prentice-Pyke exact case-control Bayes odds recalibration from fold-local train_mask prevalence",
+    "edge_kernel_radius_m": 300.0,
+    "edge_pixel_m": 100.0
+  },
+  "gates": {
+    "single_feature_canary_auc_max": 0.90,
+    "surface_spearman_max": 0.90,
+    "dots_3px_overlap_max": 0.70,
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 3071,
+    "bootstrap_block_size_px": 128,
+    "promotion_requires": [
+      "msdb_edge pooled HOLDOUT-DTI > core19 pooled HOLDOUT-DTI with 95% paired spatial bootstrap lower bound > 0",
+      "msdb_edge pooled HOLDOUT-DTI > msdb_poisson pooled HOLDOUT-DTI with 95% paired spatial bootstrap lower bound > 0",
+      "0 single-feature leakage canary alarms across 37 features x 4 folds (148 checks)",
+      "surface novelty Spearman <= 0.90 and dots 3-px overlap <= 0.70 across all 165 unique aligned registry rasters"
+    ]
+  },
+  "budget": {
+    "experiment_cap": 3,
+    "planned_experiments": 1,
+    "time_cap_hours": 2
+  },
+  "note": "MSDB-1: 37-feat steerable discontinuity+piedmont ramp+true mag tilt/grav vec HGB + Bayes-cal 300m EDGE, 44090 off-catalogue dots"
+}

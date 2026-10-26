@@ -18,7 +18,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python scripts/ci_check.py python scripts/restore_public_mirrors.py --ids sample_submission
-      - name: Verify the current research artifact and negative decision
+      - name: Verify the current research artifact and the preserved negative decisions
         run: |
           python scripts/ci_check.py python scripts/verify_current_run.py
           python scripts/ci_check.py python scripts/verify_stopped_attempt.py

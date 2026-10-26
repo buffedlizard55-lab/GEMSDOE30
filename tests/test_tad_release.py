@@ -43,7 +43,12 @@ class PageLinks(HTMLParser):
 @pytest.mark.parametrize(
     "relative",
     [
+        "index.html",
+        "executive-summary.html",
         "geothermal-tilt-alteration-review.html",
+        "experiment-review.html",
+        "priority-registry-review.html",
+        "docs/index.html",
         "docs/executive-summary.html",
         "docs/geothermal-tilt-alteration-review.html",
     ],
@@ -170,6 +175,13 @@ def isolated_tad(tmp_path, monkeypatch):
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy(ROOT / rel, dst)
         shutil.copy((ROOT / rel).with_suffix(".json"), dst.with_suffix(".json"))
+
+    add_path = tad_dst / "registry-parallel-addendum.json"
+    if add_path.is_file():
+        for row in json.loads(add_path.read_text())["rasters"]:
+            dst = tmp_path / row["path"]
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy(ROOT / row["path"], dst)
 
     monkeypatch.setattr(vtad, "ROOT", tmp_path)
     return vtad, tad_dst, tad_dst / "current-run.json", TEMPLATE

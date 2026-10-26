@@ -1,0 +1,181 @@
+{
+  "schema_version": 2,
+  "run_id": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a",
+  "hypothesis": "Concealed Great Basin piedmont splays, breached relay ramps, and shallow-cover basement step-overs produce aligned 100-300 m curvilinear discontinuities across detrended elevation, true potential-field magnetic tilt, reconstructed 2-D vector gravity gradients, basement cover ramps, and GeoDAWN radiometric total count; gating a stationary 31-feature HGB posterior by a fold-local Rayleigh curvilinear-discontinuity envelope and allocating dots via Prentice-Pyke Bayes-calibrated 300 m submodular coverage improves buffered whole-segment fault recovery over both raw-band Poisson-disk (`core19`) and MSDB Poisson-disk (`msdb_poisson`).",
+  "mechanism": "18 bounded-support (`<= 12.73 px < 17 px` guard) steerable Hessian tubularity/saddle, structure-tensor coherence, true Miller-Singh magnetic tilt, reconstructed (dg/dx, dg/dy) strike concordance, and thin-cover piedmont ramp features + 13 stationary local/tectonic raw bands in a regularized HGB + Prentice-Pyke Bayes prevalence calibration x Rayleigh curvilinear discontinuity gate + exact 300 m `edge_select` submodular coverage.",
+  "non_fault_mimic": "Volcanic lava-flow fronts, non-tectonic intrusive pluton contacts, paleoshoreline/playa benches, and lithologically contrasting adjacent bajada fan catchments",
+  "lane": "MSDB-1v2 curvilinear discontinuity-gated piedmont habitat + Bayes-calibrated 300 m EDGE",
+  "experiments_run": 2,
+  "previous_execution_receipt": "docs/research/msdb-piedmont/experiment-1-duplicate-stop/receipt.json",
+  "fixed_arms": [
+    "core19",
+    "msdb_poisson",
+    "msdb_edge"
+  ],
+  "candidate_arm": "msdb_edge",
+  "comparator_arms": [
+    "core19",
+    "msdb_poisson"
+  ],
+  "experiment_cap": 3,
+  "experimental_elapsed_seconds": 571.07,
+  "time_cap_hours": 2,
+  "this_execution_seconds": 376.45,
+  "corrective_execution": false,
+  "physical_support_px": 13,
+  "holdout_guard_px": 17,
+  "confirmation_scope": "Single preregistered 4-fold spatially buffered whole-component holdout execution",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.1704616131030584,
+    "withheld_positives": 60988,
+    "ci95": [
+      0.15622652622271732,
+      0.18416757014609178
+    ],
+    "tp_weight": 10006.69118890733,
+    "fp_weight": 39558.74674711629,
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "scope": "buffered whole-segment catalogue-recovery proxy; NOT organizer performance",
+    "comparators": {
+      "core19": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.13362778873908637,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.11828522390010657,
+          0.1488749805646302
+        ],
+        "tp_weight": 7813.020600502169,
+        "fp_weight": 40577.637846987476
+      },
+      "msdb_poisson": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.16932622608562317,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.15479745226057037,
+          0.18327252056481164
+        ],
+        "tp_weight": 9940.917245984185,
+        "fp_weight": 39650.42437849725
+      }
+    },
+    "candidate_minus": {
+      "core19": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.036833824363972034,
+        "ci95": [
+          0.022321931701094682,
+          0.05031469880668008
+        ]
+      },
+      "msdb_poisson": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.0011353870174352354,
+        "ci95": [
+          -0.0021729500779855263,
+          0.004628178060411529
+        ]
+      }
+    },
+    "feature_only_ablation_msdb_poisson_minus_core19": {
+      "label": "HOLDOUT-DTI difference",
+      "value": 0.0356984373465368,
+      "ci95": [
+        0.02162240201956155,
+        0.04884135005788337
+      ]
+    },
+    "bootstrap": {
+      "unit": "geographic block aggregated across folds",
+      "blocks": 371,
+      "replicates": 2000,
+      "seed": 3071,
+      "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+    }
+  },
+  "feature_canaries": {
+    "features_per_fold": 37,
+    "folds": 4,
+    "alarm_count": 0,
+    "alarms": [],
+    "receipt": "docs/research/msdb-piedmont/results.json"
+  },
+  "registry": {
+    "complete": false,
+    "surface": {
+      "decision": "blocked-incomplete-evidence",
+      "registry_entries_compared": 165,
+      "max_spearman": 0.1545037513302229,
+      "max_fraction_within_3px": null,
+      "errors": []
+    },
+    "dots": {
+      "decision": "blocked-incomplete-evidence",
+      "registry_entries_compared": 165,
+      "max_spearman": 0.06337779887839463,
+      "max_fraction_within_3px": 0.6477886141982309,
+      "errors": []
+    },
+    "coverage": "all published aligned TIFFs at nine recorded repository snapshots; missing other sessions and most original surfaces",
+    "receipt_surface": "docs/research/msdb-piedmont/novelty-surface.json",
+    "receipt_dots": "docs/research/msdb-piedmont/novelty-dots.json"
+  },
+  "raster_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+  "validator_output": {
+    "status": "passed",
+    "no_nan_inside_footprint": true,
+    "values_in_0_1": true,
+    "crs_match": true,
+    "shape_match": true,
+    "transform_match": true,
+    "single_float32_band": true,
+    "nan_nodata_outside_footprint": true,
+    "positive_catalogue_pixels": 0,
+    "emitted_dots": 44090,
+    "organizer_acceptance_confirmed": false
+  },
+  "submission_name": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a",
+  "note": "MSDB-1v2: 31-feat stationary discontinuity+piedmont ramp HGB x Rayleigh curv gate + Bayes 300m EDGE, 44090 off-cat dots",
+  "published_tiff": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+  "download_ok": true,
+  "submission_approved": false,
+  "slot_selected": false,
+  "verdict": "negative",
+  "scientific_gate_passed": false,
+  "verdict_scope": "machine-adjudicated research readiness gates; no competition performance projection",
+  "blockers": [
+    "Candidate failed paired HOLDOUT-DTI improvement gate or feature leakage canary",
+    "Complete parallel-run raster/surface registry unavailable beyond nine-site snapshot (165 unique aligned files)",
+    "No externally assigned lane paragraph supplied; Rank-1 MSDB-1 lane selected autonomously from four-hypothesis ranking",
+    "Historical UNet checkpoints absent in repository: same-protocol historical-best neural rerun unavailable",
+    "Organizer portal upload receipt not confirmable offline inside sandbox"
+  ],
+  "preregistration_sha256": "4d25d98efe73260e3781c2c7c6167d182233c4cc97f6c6895a380f55bb19fa19",
+  "preregistration_json_sha256": "1d7ea105fab669a3006bf34298eed693e4c8682d81249bbcf5c940ea88e58f38",
+  "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+  "created_utc": "2026-10-25T23:29:53+00:00",
+  "experiment_spec": "msdb1v2",
+  "additional_novelty_evidence": {
+    "registry": "docs/research/msdb-piedmont/registry-parallel-addendum.json",
+    "surface_receipt": "docs/research/msdb-piedmont/novelty-parallel-surface.json",
+    "dots_receipt": "docs/research/msdb-piedmont/novelty-parallel-dots.json",
+    "timing": "Late-arriving references; checked both saved states without refitting or replacing dots",
+    "combined_observed_registry": {
+      "surface": {
+        "registry_entries_compared": 171,
+        "max_spearman": 0.1545037513302229,
+        "max_fraction_within_3px": null,
+        "status": "unknown"
+      },
+      "dots": {
+        "registry_entries_compared": 171,
+        "max_spearman": 0.06337779887839463,
+        "max_fraction_within_3px": 0.6477886141982309,
+        "status": "passed"
+      }
+    }
+  }
+}

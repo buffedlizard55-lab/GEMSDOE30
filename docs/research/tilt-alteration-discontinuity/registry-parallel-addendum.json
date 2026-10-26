@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "purpose": "Post-merge cross-audit of concurrent origin/main arrivals (MSDB-1v2, H-NEARSPLAY, PTA-1) against frozen G30-TAD saved states",
+  "original_registry_sha256": "bec529994d009be6cedd23c35d0e788f876ae62bb4d2f86f3491c90915bdc527",
+  "complete": false,
+  "missing_evidence": [
+    "Nine-site public snapshots and local peer merges cannot attest unobserved external private worktrees."
+  ],
+  "rasters": [
+    {
+      "path": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+      "sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+      "values_sha256": "e7856ec3f14a722d16e1661d6d5d6f32790a3f530e47b20067bc369893674695",
+      "site": "GEMSDOE30-parallel-merged",
+      "dots": 44090
+    },
+    {
+      "path": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+      "values_sha256": "3626548fcdd9aad1741e714160c6a01cce199d7d10ed43333408c06f0b8bfefd",
+      "site": "GEMSDOE30-nearslay-lane",
+      "dots": 40000
+    },
+    {
+      "path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "values_sha256": "9a3f7f9535a4405f08d854394a1dbb94ef801975163b1a35dc18eb455c6b810b",
+      "site": "GEMSDOE30-parallel-merged",
+      "dots": 44090
+    }
+  ]
+}

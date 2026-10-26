@@ -299,5 +299,14 @@
   "slot_selected": false,
   "verdict": "negative",
   "scientific_gate_passed": false,
-  "created_utc": "2026-10-26T00:29:08+00:00"
+  "created_utc": "2026-10-26T00:29:08+00:00",
+  "additional_novelty_evidence": {
+    "registry": "docs/research/tilt-alteration-discontinuity/registry-parallel-addendum.json",
+    "surface_receipt": "docs/research/tilt-alteration-discontinuity/novelty-parallel-surface.json",
+    "dots_receipt": "docs/research/tilt-alteration-discontinuity/novelty-parallel-dots.json",
+    "combined_entries_compared": 193,
+    "combined_surface_max_spearman": 0.1636955830461162,
+    "combined_dots_max_spearman": 0.039691018236228164,
+    "combined_dots_max_fraction_within_3px": 0.5144473684210527
+  }
 }

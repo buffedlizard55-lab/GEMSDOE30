@@ -390,7 +390,7 @@ def main() -> int:
                           "decision": None, "public_download": False}
         try:
             from scripts.verify_stopped_attempt import verify as verify_stopped
-            latest_attempt["decision"] = verify_stopped(latest_path.parent, data_dir / "sample_submission.tif")
+            latest_attempt["decision"] = verify_stopped(latest_path.resolve().parent, data_dir / "sample_submission.tif")
             latest_attempt["receipt_inspection"] = {"verified_now": True, "error": None,
                                                     "private_raster_reopened": False}
         except Exception as exc:

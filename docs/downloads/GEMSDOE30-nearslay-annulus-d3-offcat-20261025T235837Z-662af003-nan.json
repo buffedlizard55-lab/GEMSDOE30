@@ -1,0 +1,310 @@
+{
+  "schema_version": 3,
+  "run_name": "GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan",
+  "note": "NEARSPLAY annulus 300m-1.5km off-cat dots; holdout DTI +0.066 [0.057,0.074] vs matched control; proxy holdout, not org-confirmed",
+  "output_file": "GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+  "output_sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+  "prediction_array_sha256": "662af003a07558a71a419ab71215fea6b8c0011a3c33bff7f24c1c159e2fe0d4",
+  "outside_convention": "NaN outside; matches published GEMS format",
+  "published_format_compliant": true,
+  "template_file": "/home/user/GEMSDOE30/data/raw/sample_submission.tif",
+  "created_utc": "2026-10-25T23:58:38+00:00",
+  "format_validation": {
+    "path": "/home/user/GEMSDOE30/docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+    "passed": true,
+    "checks": [
+      {
+        "name": "template_single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "float32",
+        "passed": true,
+        "detail": "dtypes=('float32',)"
+      },
+      {
+        "name": "epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "template_epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "shape_matches_template",
+        "passed": true,
+        "detail": "output=(3730, 3292) template=(3730, 3292)"
+      },
+      {
+        "name": "transform_matches_template",
+        "passed": true,
+        "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "100m_north_up_grid",
+        "passed": true,
+        "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "finite_and_in_range_inside_footprint",
+        "passed": true,
+        "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+      },
+      {
+        "name": "null_outside_template_footprint",
+        "passed": true,
+        "detail": "outside_pixels=7111787; null/NaN/nodata required"
+      },
+      {
+        "name": "whole_raster_finite_range_diagnostic_advisory",
+        "passed": true,
+        "detail": "advisory only: whole-array diagnostic found 7111787 NaN/Inf cell(s); this is not a diagnosis of portal behavior; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+      },
+      {
+        "name": "template_readable",
+        "passed": true,
+        "detail": "shape=(3730, 3292)"
+      }
+    ]
+  },
+  "whole_raster_range_diagnostic": {
+    "path": "/home/user/GEMSDOE30/docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+    "passed": false,
+    "checks": [
+      {
+        "name": "template_single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "float32",
+        "passed": true,
+        "detail": "dtypes=('float32',)"
+      },
+      {
+        "name": "epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "template_epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "shape_matches_template",
+        "passed": true,
+        "detail": "output=(3730, 3292) template=(3730, 3292)"
+      },
+      {
+        "name": "transform_matches_template",
+        "passed": true,
+        "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "100m_north_up_grid",
+        "passed": true,
+        "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "finite_and_in_range_inside_footprint",
+        "passed": true,
+        "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+      },
+      {
+        "name": "finite_in_range_outside_footprint_diagnostic",
+        "passed": false,
+        "detail": "outside_pixels=7111787; finite in-range values required for the nonstandard whole-array diagnostic (finite=0)"
+      },
+      {
+        "name": "whole_raster_finite_range_diagnostic",
+        "passed": false,
+        "detail": "whole-array diagnostic found 7111787 NaN/Inf cell(s); this is not a diagnosis of portal behavior"
+      },
+      {
+        "name": "template_readable",
+        "passed": true,
+        "detail": "shape=(3730, 3292)"
+      }
+    ]
+  },
+  "whole_raster_range_diagnostic_passed": false,
+  "performance_status": "unscored; format validation is not a score",
+  "uniqueness_vs_local_registry": {
+    "max_fraction_within_3px_vs_any_reference": 0.6808,
+    "max_spearman_rho_vs_any_reference": 0.07027108336531361,
+    "lane_collision": false,
+    "references_compared": 21
+  },
+  "uniqueness_details": [
+    {
+      "file": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.tif",
+      "my_dots_within_3px_of_reference": 13004,
+      "fraction_of_my_dots_within_3px": 0.3251,
+      "spearman_rho_full_raster": 0.008247108776302272
+    },
+    {
+      "file": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-zeros.tif",
+      "my_dots_within_3px_of_reference": 13004,
+      "fraction_of_my_dots_within_3px": 0.3251,
+      "spearman_rho_full_raster": 0.014960779187484284
+    },
+    {
+      "file": "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+      "my_dots_within_3px_of_reference": 11784,
+      "fraction_of_my_dots_within_3px": 0.2946,
+      "spearman_rho_full_raster": 0.004458318452601827
+    },
+    {
+      "file": "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+      "my_dots_within_3px_of_reference": 11784,
+      "fraction_of_my_dots_within_3px": 0.2946,
+      "spearman_rho_full_raster": 0.009160366422054254
+    },
+    {
+      "file": "gems30-TDX1-44090-20261025-5fc508ea81ac.tif",
+      "my_dots_within_3px_of_reference": 10091,
+      "fraction_of_my_dots_within_3px": 0.252275,
+      "spearman_rho_full_raster": 0.005202553008862754
+    },
+    {
+      "file": "gemsdoe30-d15-poisson200m-offcat-60069-20261003T233210Z-68d0e2e4.tif",
+      "my_dots_within_3px_of_reference": 12346,
+      "fraction_of_my_dots_within_3px": 0.30865,
+      "spearman_rho_full_raster": 0.010555941883241854
+    },
+    {
+      "file": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca-nanoutside.tif",
+      "my_dots_within_3px_of_reference": 11784,
+      "fraction_of_my_dots_within_3px": 0.2946,
+      "spearman_rho_full_raster": 0.004458318452601827
+    },
+    {
+      "file": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+      "my_dots_within_3px_of_reference": 11784,
+      "fraction_of_my_dots_within_3px": 0.2946,
+      "spearman_rho_full_raster": 0.009160366422054254
+    },
+    {
+      "file": "gemsdoe30-edge-hybrid-80k-02845bd4-20261003T234340Z-allfinite.tif",
+      "my_dots_within_3px_of_reference": 27232,
+      "fraction_of_my_dots_within_3px": 0.6808,
+      "spearman_rho_full_raster": 0.01643919128808691
+    },
+    {
+      "file": "gemsdoe30-edge-hybrid-80k-02845bd4-nan.tif",
+      "my_dots_within_3px_of_reference": 27232,
+      "fraction_of_my_dots_within_3px": 0.6808,
+      "spearman_rho_full_raster": 0.010136234329768234
+    },
+    {
+      "file": "gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan.tif",
+      "my_dots_within_3px_of_reference": 23339,
+      "fraction_of_my_dots_within_3px": 0.583475,
+      "spearman_rho_full_raster": 0.06458835303075519
+    },
+    {
+      "file": "gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif",
+      "my_dots_within_3px_of_reference": 23339,
+      "fraction_of_my_dots_within_3px": 0.583475,
+      "spearman_rho_full_raster": 0.0697381905026304
+    },
+    {
+      "file": "gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif",
+      "my_dots_within_3px_of_reference": 23345,
+      "fraction_of_my_dots_within_3px": 0.583625,
+      "spearman_rho_full_raster": 0.0651242623318068
+    },
+    {
+      "file": "gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
+      "my_dots_within_3px_of_reference": 23345,
+      "fraction_of_my_dots_within_3px": 0.583625,
+      "spearman_rho_full_raster": 0.07027108336531361
+    },
+    {
+      "file": "gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif",
+      "my_dots_within_3px_of_reference": 5259,
+      "fraction_of_my_dots_within_3px": 0.131475,
+      "spearman_rho_full_raster": 0.0018234901422554556
+    },
+    {
+      "file": "gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif",
+      "my_dots_within_3px_of_reference": 18468,
+      "fraction_of_my_dots_within_3px": 0.4617,
+      "spearman_rho_full_raster": 0.006386601105376793
+    },
+    {
+      "file": "gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e-zeros.tif",
+      "my_dots_within_3px_of_reference": 17552,
+      "fraction_of_my_dots_within_3px": 0.4388,
+      "spearman_rho_full_raster": 0.04226446907378351
+    },
+    {
+      "file": "gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif",
+      "my_dots_within_3px_of_reference": 17552,
+      "fraction_of_my_dots_within_3px": 0.4388,
+      "spearman_rho_full_raster": 0.03592941590609341
+    },
+    {
+      "file": "gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
+      "my_dots_within_3px_of_reference": 13273,
+      "fraction_of_my_dots_within_3px": 0.331825,
+      "spearman_rho_full_raster": 0.008250689294552633
+    },
+    {
+      "file": "gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+      "my_dots_within_3px_of_reference": 12346,
+      "fraction_of_my_dots_within_3px": 0.30865,
+      "spearman_rho_full_raster": 0.005067920517214008
+    },
+    {
+      "file": "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+      "my_dots_within_3px_of_reference": 11784,
+      "fraction_of_my_dots_within_3px": 0.2946,
+      "spearman_rho_full_raster": 0.004458318452601827
+    }
+  ],
+  "holdout": {
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol": "buffered-quadrant-whole-components-v1-20261025",
+    "kernel": "triangular 300 m, alpha=0.2, beta=0.8",
+    "screen_seed_31": {
+      "dti": 0.08502081258697522,
+      "control_dti": 0.019653522940025436,
+      "delta": 0.06536728964694978,
+      "ci95": [
+        0.056983238130653695,
+        0.07434696611947941
+      ],
+      "withheld_positives": 20870,
+      "quadrants": "4/4"
+    },
+    "confirmation_seed_41": {
+      "dti": 0.0878801185469148,
+      "control_dti": 0.019941819710194774,
+      "delta": 0.06793829883672002,
+      "ci95": [
+        0.05897694667908524,
+        0.07724278724681792
+      ],
+      "withheld_positives": 20247,
+      "quadrants": "4/4"
+    },
+    "verdict": "promoted on catalogue-proxy holdout; NOT ORGANIZER-CONFIRMED"
+  },
+  "submission_name": "GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan",
+  "note_length": 128
+}

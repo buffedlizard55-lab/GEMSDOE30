@@ -1,0 +1,19 @@
+{
+  "passes_completed": 3,
+  "pytest": {
+    "passed": 250,
+    "skipped": 6,
+    "warnings": 2,
+    "subtests_passed": 7,
+    "skips": "Five optional torch tests; one non-current preregistration schema test"
+  },
+  "git_diff_check": "passed",
+  "primary_tiffs_reopened": 2,
+  "hash_matches": 2,
+  "shared_format_validation_passed": 2,
+  "holdout_rerun": false,
+  "novelty_rerun": false,
+  "official_non_github_sources_fetched": false,
+  "new_experiments": 0,
+  "new_tiff_generated": false
+}

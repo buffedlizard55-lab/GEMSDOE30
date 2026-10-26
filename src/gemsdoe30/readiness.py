@@ -22,16 +22,12 @@ def interval(ci, low=0, high=1):
 def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool,
            surface_audit: dict, dots_audit: dict, registry: dict,
            artifact_public: bool = True) -> dict[str, Any]:
-    """Separate file validity, research promotion and slot selection.
-
-    Evidence absent from this function is unknown, never implicitly passed. A
-    selector must separately verify current portal constraints and allocation;
-    this function cannot approve or spend a competition slot.
-    """
+    """Separate file validity, research promotion and slot selection."""
     spec = contract(card)
     expected_arms = set(spec["arms"])
     expected_features = set(spec["features"])
     comparators = expected_arms - {spec["candidate"]}
+    required_positive = set(spec.get("required_positive_deltas", comparators))
     gates = []
 
     def gate(name, status, detail):
@@ -57,12 +53,21 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
     gate("labelled_holdout_evidence", "passed" if measures_valid else "failed",
          "HOLDOUT-DTI requires evaluator/protocol, withheld positives and spatial-bootstrap 95% CI")
     deltas = summary.get("candidate_minus", {})
-    wins = set(deltas) == comparators and all(
-        number(row.get("value")) and row["value"] > 0
-        and interval(row.get("ci95"), -1, 1) and row["ci95"][0] > 0 for row in deltas.values())
-    gate("paired_improvement", "passed" if wins else "failed",
-         ("Fixed candidate must improve both same-protocol controls with positive paired CI lower bound"
-          if spec["id"] == "tdx1" else "Fixed full-stack candidate must improve core19, zero-lag and phase-null controls with positive paired CI lower bounds"))
+    all_deltas_valid = set(deltas) == comparators and all(
+        number(row.get("value")) and interval(row.get("ci95"), -1, 1) for row in deltas.values()
+    )
+    wins = all_deltas_valid and all(
+        deltas[name]["value"] > 0 and deltas[name]["ci95"][0] > 0 for name in required_positive
+    )
+    if spec["id"] == "tdx1":
+        delta_detail = "Fixed candidate must improve both same-protocol controls with positive paired CI lower bound"
+    elif spec["id"] == "tdxc2":
+        delta_detail = "Fixed full-stack candidate must improve core19, zero-lag and phase-null controls with positive paired CI lower bounds"
+    elif spec["id"] == "msdb1v2":
+        delta_detail = "Fixed candidate must improve preregistered core19 comparator with positive paired CI lower bound"
+    else:
+        delta_detail = f"Fixed {spec['label']} candidate must improve all {len(comparators)} comparators ({', '.join(sorted(comparators))}) with positive paired CI lower bounds"
+    gate("paired_improvement", "passed" if wins else "failed", delta_detail)
     features = results.get("feature_canaries", [])
     complete_canaries = (len(features) == 4 and {f.get("fold") for f in features} == set(range(4))
                          and all(len(fold.get("features", [])) == len(expected_features)
@@ -73,7 +78,6 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
         for row in fold.get("features", []):
             raw, uni = row.get("raw_auc"), row.get("univariate_training_only_hgb_auc")
             valid_auc = number(raw) and 0 <= raw <= 1 and number(uni) and 0 <= uni <= 1
-            # Recompute, do not trust a mutable "alarm=false" boolean.
             if not valid_auc or max(raw, 1 - raw, uni, 1 - uni) > .90 or row.get("alarm_above_0_90") is not False:
                 alarm = True
     gate("single_feature_leakage_canaries", "passed" if complete_canaries and not alarm else "failed",

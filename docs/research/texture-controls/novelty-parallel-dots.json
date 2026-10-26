@@ -4,7 +4,7 @@
   "candidate": "/home/user/GEMSDOE30/outputs/texture-controls/gems30-TDXC2-44090-20261025-d87627b24504.tif",
   "candidate_sha256": "af499375cec73f42f98f398370b390e96c3d3b23943477eb1f613570baa98e0d",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "registry_sha256": "768c40fdb1fc942d8aefda79e8d47090673ae992c0fe1f71237b6f7b6c4489b5",
+  "registry_sha256": "e3995fcef09da9481e2429d6341cd3a24570b83084183a7abedcf500144bcfb4",
   "registry_complete": false,
   "comparisons": [
     {
@@ -40,12 +40,47 @@
       "undefined": false
     },
     {
+      "reference": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+      "site": "GEMSDOE30-parallel-merged",
+      "reference_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+      "reference_values_sha256": "7a89266115d3d8badd92301198711c8d617ce2b739f4755e36d6c04d5dfa1ee7",
+      "stage": "dots",
+      "spearman_full_footprint": null,
+      "candidate_dots": 60000,
+      "candidate_positive_support": 60000,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": true
+    },
+    {
+      "stage": "dots",
+      "reference_sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+      "reference_path": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "spearman_full_footprint": null,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "comparison_note": "The stopped candidate's private bytes are quarantined under ignored outputs/ and are not reopened here, so the saved-state correlation and 3-px overlap cannot be recomputed for this reference. The stopped TDX-C2 decision was already frozen and negative (79.09% overlap with G30-S19) and is unchanged by this arrival. This reference is nevertheless registered so no local raster is silently omitted; the reverse direction (this reference against the registry) is computed and published in docs/research/nearsplay/run-card.json."
+    },
+    {
+      "reference_path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "reference_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "site": "GEMSDOE30-parallel-merged",
+      "stage": "dots",
+      "spearman_full_footprint": null,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "error": "Stopped TDX-C2 candidate raster is quarantined out of git; reverse comparison recorded in PTA-1."
+    },
+    {
       "reference": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif",
       "site": "GEMSDOE30-parallel-merged",
       "reference_sha256": "3077db43ee72ee526d8b943d1db40f19ce49be9d8ccd3109068ca442964f26cc",
-      "reference_values_sha256": "8fe67802fccd0c06f0ab900ecccaa1a557b79bfb85ecbef5230ed1c72682e463",
+      "reference_values_sha256": "ea3669f488eabd35ff8a9c8a8df738155a9967f131cb6fad003dd9535ea65dcd",
       "stage": "dots",
-      "spearman_full_footprint": 0.014868693567193954,
+      "spearman_full_footprint": 0.011052325108785482,
       "candidate_dots": 44090,
       "candidate_positive_support": 44090,
       "reference_dots": 38000,
@@ -59,9 +94,9 @@
       "reference": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif",
       "site": "GEMSDOE30-parallel-merged",
       "reference_sha256": "54139f2cf86f75ba96bddba0f49409e934c77d716eb39150dbd04daf23b6b7e4",
-      "reference_values_sha256": "8fe67802fccd0c06f0ab900ecccaa1a557b79bfb85ecbef5230ed1c72682e463",
+      "reference_values_sha256": "ea3669f488eabd35ff8a9c8a8df738155a9967f131cb6fad003dd9535ea65dcd",
       "stage": "dots",
-      "spearman_full_footprint": 0.014868693567193954,
+      "spearman_full_footprint": 0.011052325108785482,
       "candidate_dots": 44090,
       "candidate_positive_support": 44090,
       "reference_dots": 38000,
@@ -73,6 +108,6 @@
     }
   ],
   "errors": [],
-  "decision": "duplicate-stop",
+  "decision": "blocked-incomplete-evidence",
   "submission_approved": false
 }

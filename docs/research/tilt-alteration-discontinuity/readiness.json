@@ -42,12 +42,12 @@
     {
       "name": "novelty_surface",
       "status": "passed",
-      "detail": "Pre-placement OOF surface max Spearman = 0.1637 <= 0.90 across 190 registry rasters"
+      "detail": "Pre-placement OOF surface max Spearman = 0.1637 <= 0.90 across 193 registry rasters"
     },
     {
       "name": "novelty_dots",
       "status": "passed",
-      "detail": "Post-placement 38,000 dots max 3-px overlap = 0.5144 <= 0.70 (max Spearman = 0.0397 <= 0.90) across 190 registry rasters"
+      "detail": "Post-placement 38,000 dots max 3-px overlap = 0.5144 <= 0.70 (max Spearman = 0.0397 <= 0.90) across 193 registry rasters"
     },
     {
       "name": "budget_and_identity",

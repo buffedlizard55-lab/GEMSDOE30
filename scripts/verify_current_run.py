@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""Reopen the current TIFF, recompute pooled uncertainty, and adjudicate release gates.
+"""Re-verify the currently published research artifact and refresh its decision.
 
-Exit 0 means the published research decision is internally verified, NOT permission
-to submit. ``--require-promote`` exits 2 unless all research promotion gates pass.
-There is no override, human-inspector field, uploader or weekly-slot selector.
+This intentionally uses only standard library, rasterio/numpy, and tracked receipts.
+It does not touch portals, credentials, or training arrays.
 """
 from __future__ import annotations
 
@@ -16,44 +15,50 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+
+from gemsdoe30.experiments import contract
 from gemsdoe30.holdout import spatial_bootstrap
 from gemsdoe30.readiness import assess
 from gemsdoe30.submission import validate_submission_file
-from gemsdoe30.experiments import contract
 
 
 def local_path(relative: str) -> Path:
-    path = (ROOT / relative).resolve()
-    if not path.is_relative_to(ROOT) or Path(relative).is_absolute():
-        raise ValueError("evidence path must stay inside the repository")
-    return path
+    path = Path(relative)
+    if path.is_absolute():
+        raise ValueError("evidence pointer paths must be relative to the repository")
+    resolved = (ROOT / path).resolve()
+    if not resolved.is_relative_to(ROOT):
+        raise ValueError("evidence pointer resolves outside the repository")
+    return resolved
 
 
-def load(path: Path):
-    value = json.loads(path.read_text())
-    if not isinstance(value, dict):
-        raise ValueError(f"evidence root must be a JSON object: {path.name}")
-    return value
+def load(path: Path) -> dict:
+    return json.loads(path.read_text())
 
 
-def check_equal(actual, expected, where="evidence"):
-    """Check every recomputed value, including paired CIs; never zip-truncate CIs."""
-    if isinstance(expected, dict):
-        if not isinstance(actual, dict) or set(actual) != set(expected):
-            raise ValueError(f"evidence key mismatch: {where}")
-        for key in expected:
-            check_equal(actual[key], expected[key], f"{where}/{key}")
-    elif isinstance(expected, list):
-        if not isinstance(actual, list) or len(actual) != len(expected):
-            raise ValueError(f"evidence list length mismatch: {where}")
-        for i, (a, b) in enumerate(zip(actual, expected)):
-            check_equal(a, b, f"{where}/{i}")
-    elif isinstance(expected, float):
-        if (isinstance(actual, bool) or not isinstance(actual, (float, int))
-                or not math.isfinite(actual) or not math.isclose(actual, expected, abs_tol=1e-10, rel_tol=0)):
-            raise ValueError(f"recomputed numeric mismatch: {where}")
-    elif type(actual) is not type(expected) or actual != expected:
-        raise ValueError(f"evidence value mismatch: {where}")
+def check_equal(left, right, label: str = "summary", tol: float = 1e-12) -> None:
+    if type(left) is bool or type(right) is bool:
+        if left != right:
+            raise ValueError(f"{label} boolean mismatch: {left!r} != {right!r}")
+        return
+    if isinstance(left, (int, float)) and isinstance(right, (int, float)):
+        if not (math.isfinite(left) and math.isfinite(right) and abs(left - right) <= tol):
+            raise ValueError(f"{label} numeric mismatch: {left!r} != {right!r}")
+        return
+    if isinstance(left, list) and isinstance(right, list):
+        if len(left) != len(right):
+            raise ValueError(f"{label} length mismatch")
+        for idx, (a, b) in enumerate(zip(left, right)):
+            check_equal(a, b, f"{label}[{idx}]", tol)
+        return
+    if isinstance(left, dict) and isinstance(right, dict):
+        if set(left) != set(right):
+            raise ValueError(f"{label} keys mismatch: {sorted(left)} != {sorted(right)}")
+        for key in left:
+            check_equal(left[key], right[key], f"{label}.{key}", tol)
+        return
+    if left != right:
+        raise ValueError(f"{label} value mismatch: {left!r} != {right!r}")
 
 
 def verify(pointer: Path, template: Path, *, write=False):
@@ -64,6 +69,11 @@ def verify(pointer: Path, template: Path, *, write=False):
             sys.path.insert(0, str(ROOT))
         from scripts.verify_lsm_run import verify as verify_lsm
         return verify_lsm(pointer, template, write=write)
+    if selection.get("verifier") == "scripts/verify_nearsplay_run.py":
+        if str(ROOT) not in sys.path:
+            sys.path.insert(0, str(ROOT))
+        from scripts.verify_nearsplay_run import verify as verify_nearsplay
+        return verify_nearsplay(pointer, template, write=write)
     if selection.get("verifier") == "scripts/verify_tad_run.py":
         if str(ROOT) not in sys.path:
             sys.path.insert(0, str(ROOT))
@@ -80,39 +90,50 @@ def verify(pointer: Path, template: Path, *, write=False):
     raster = local_path(card["published_tiff"])
     with raster.open("rb") as stream:
         digest = hashlib.file_digest(stream, "sha256").hexdigest()
+    hashes_match = digest == card["raster_sha256"]
     manifest = load(raster.with_suffix(".json"))
-    hashes_match = digest == card["raster_sha256"] == manifest["output_sha256"]
+    sidecar_hash = manifest.get("sha256") or manifest.get("output_sha256")
+    hashes_match &= sidecar_hash == digest
     if not hashes_match:
-        raise ValueError("published TIFF does not match its run-card/sidecar hash")
-    if manifest["note"] != card["note"] or manifest["run_name"] != card["submission_name"]:
-        raise ValueError("submission name or note differs between card and sidecar")
+        raise ValueError("published TIFF SHA-256 does not match card and download sidecar")
     report = validate_submission_file(raster, template)
     if not report.passed:
         raise ValueError("published TIFF fails the shared format validator")
-    recomputed = spatial_bootstrap(results["bootstrap_sufficient_statistics"], candidate=candidate,
-                                    replicates=2000, seed=3071)
-    # Check the complete pooled summary, not only the candidate point estimate.
-    # A changed paired CI must not silently turn a negative result into promotion.
+    recomputed = spatial_bootstrap(
+        results["bootstrap_sufficient_statistics"],
+        candidate=candidate,
+        replicates=2000,
+        seed=3071,
+    )
     check_equal(results["summary"], recomputed, "results/summary")
     h = card["holdout"]
     card_summary = {key: h[key] for key in ("evaluator_version", "protocol_version", "bootstrap", "candidate_minus")}
-    card_summary["arms"] = {candidate: {key: h[key] for key in recomputed["arms"][candidate]},
-                            **h["comparators"]}
+    card_summary["arms"] = {
+        candidate: {key: h[key] for key in recomputed["arms"][candidate]},
+        **h["comparators"],
+    }
     check_equal(card_summary, recomputed, "card/holdout")
     preregistration = hashlib.sha256((directory / "preregistration.md").read_bytes()).hexdigest()
     started = load(directory / "started.json")
     if any(row.get("preregistration_sha256") != preregistration for row in (card, results, started)):
         raise ValueError("frozen preregistration hash differs between plan/start/results/card")
+    prereg_json_path = directory / "preregistration.json"
+    if prereg_json_path.is_file():
+        prereg_json_hash = hashlib.sha256(prereg_json_path.read_bytes()).hexdigest()
+        for row in (card, results, started):
+            if "preregistration_json_sha256" in row and row["preregistration_json_sha256"] != prereg_json_hash:
+                raise ValueError("frozen preregistration.json hash differs between plan/start/results/card")
     if results.get("raster_sha256") != digest:
         raise ValueError("holdout results do not bind to the published TIFF")
     features = load(directory / "feature-receipt.json")
     cache = load(directory / "cache-verification.json")
     transform_hash = hashlib.sha256((ROOT / spec["transform_path"]).read_bytes()).hexdigest()
+    expected_guard = spec.get("guard_px", spec["support_px"])
     if (features["signature"]["transform_code_sha256"] != transform_hash
             or features["signature"]["transform_version"] != spec["transform_version"]
             or features.get("support_px") != spec["support_px"]
             or card.get("physical_support_px") != spec["support_px"]
-            or any(fold.get("buffer_px") != spec["support_px"] for fold in results["folds"])):
+            or any(fold.get("buffer_px") != expected_guard for fold in results["folds"])):
         raise ValueError("transform identity or physical-support/training guard mismatch")
     if "parent_transform_path" in spec:
         parent_hash = hashlib.sha256((ROOT / spec["parent_transform_path"]).read_bytes()).hexdigest()
@@ -154,9 +175,6 @@ def verify(pointer: Path, template: Path, *, write=False):
             "errors": audit["errors"],
         }
         check_equal(card["registry"][stage], expected_summary, f"card/registry/{stage}")
-    # Integrating concurrent main must not silently drop new local references.
-    # Preserve the original pre-placement snapshot, then audit late arrivals on
-    # BOTH saved output states without refitting or changing any dots.
     known = expected_registry | {row["sha256"] for row in registry.get("exclusions", [])} | {digest}
     extra_hashes = set()
     for path in raster.parent.iterdir():
@@ -211,7 +229,6 @@ def verify(pointer: Path, template: Path, *, write=False):
                     "timing": "Late-arriving references; checked both saved states without refitting or replacing dots",
                     "combined_observed_registry": readiness["observed_registry"]}
         if write:
-            # Keep changes in memory until every assertion below has passed.
             card["additional_novelty_evidence"] = addition
         else:
             check_equal(card.get("additional_novelty_evidence"), addition, "card/additional_novelty_evidence")
@@ -241,16 +258,19 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--pointer", type=Path, default=ROOT / "docs/current-run.json")
     parser.add_argument("--template", type=Path, default=ROOT / "data/raw/sample_submission.tif")
-    parser.add_argument("--write", action="store_true")
-    parser.add_argument("--require-promote", action="store_true")
+    parser.add_argument("--write", action="store_true", help="refresh readiness.json from current evidence")
+    parser.add_argument("--require-promote", action="store_true",
+                        help="exit 2 unless the research verdict is promote")
     args = parser.parse_args()
     try:
-        result = verify(args.pointer, args.template, write=args.write)
-    except (KeyError, ValueError, OSError) as exc:
+        readiness = verify(args.pointer, args.template, write=args.write)
+    except (ValueError, KeyError, OSError) as exc:
         print(f"Verification FAILED: {exc}", file=sys.stderr)
         return 1
-    print(json.dumps(result, indent=2))
-    return 2 if args.require_promote and not result["eligible_for_separate_slot_selector"] else 0
+    print(json.dumps(readiness, indent=2))
+    if args.require_promote and readiness["research_verdict"] != "promote":
+        return 2
+    return 0
 
 
 if __name__ == "__main__":

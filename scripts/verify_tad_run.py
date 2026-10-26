@@ -345,18 +345,87 @@ def verify(pointer: Path, template: Path, *, write: bool = False) -> dict:
     surf_rho = card["registry"]["surface"]["max_spearman"]
     dots_rho = card["registry"]["dots"]["max_spearman"]
     dots_ov = card["registry"]["dots"]["max_fraction_within_3px"]
+
+    known_hashes = expected_refs | {r["sha256"] for r in reg_doc.get("exclusions", [])} | {z_sha, n_sha}
+    extra_hashes: set[str] = set()
+    for p in n_path.parent.iterdir():
+        if p.suffix.lower() in (".tif", ".tiff"):
+            h_val = sha(p)
+            if h_val not in known_hashes:
+                extra_hashes.add(h_val)
+
+    add_path = report_dir / "registry-parallel-addendum.json"
+    total_compared = len(expected_refs)
+    if extra_hashes or add_path.exists():
+        if not add_path.is_file():
+            raise ValueError("new local reference TIFFs require registry-parallel-addendum.json in tilt-alteration-discontinuity")
+        add_doc = load(add_path)
+        add_sha = sha(add_path)
+        add_rows = add_doc.get("rasters", [])
+        expected_extra = {r["sha256"] for r in add_rows}
+        if expected_extra != extra_hashes or len(add_rows) != len(expected_extra):
+            raise ValueError("G30-TAD late registry does not match current new local reference TIFFs")
+        if add_doc.get("original_registry_sha256") != reg_sha:
+            raise ValueError("G30-TAD late registry does not extend frozen registry.json")
+        for r in add_rows:
+            if sha(inside(r["path"])) != r["sha256"]:
+                raise ValueError("G30-TAD late reference file hash mismatch")
+        for stage_name, orig_doc in (("surface", surf_doc), ("dots", dots_doc)):
+            late_doc = load(report_dir / f"novelty-parallel-{stage_name}.json")
+            l_rows = late_doc.get("comparisons", [])
+            if (
+                late_doc.get("stage") != stage_name
+                or any(r.get("stage") != stage_name for r in l_rows)
+                or len(l_rows) != len(expected_extra)
+                or {r.get("reference_sha256") for r in l_rows} != expected_extra
+                or late_doc.get("registry_sha256") != add_sha
+                or late_doc.get("template_sha256") != tpl_sha
+                or late_doc.get("candidate_sha256") != orig_doc.get("candidate_sha256")
+                or late_doc.get("registry_complete") is not False
+                or bool(late_doc.get("errors"))
+            ):
+                raise ValueError(f"G30-TAD novelty-parallel-{stage_name} inventory/hash/error check failed")
+            l_rho = max(r["spearman_full_footprint"] for r in l_rows if r["spearman_full_footprint"] is not None)
+            if stage_name == "surface":
+                surf_rho = max(surf_rho, l_rho)
+            else:
+                l_ov = max(
+                    r["candidate_fraction_within_3px_of_reference"]
+                    for r in l_rows
+                    if r["candidate_fraction_within_3px_of_reference"] is not None
+                )
+                dots_rho = max(dots_rho, l_rho)
+                dots_ov = max(dots_ov, l_ov)
+        total_compared += len(expected_extra)
+        addition = {
+            "registry": str(add_path.relative_to(ROOT)),
+            "surface_receipt": str((report_dir / "novelty-parallel-surface.json").relative_to(ROOT)),
+            "dots_receipt": str((report_dir / "novelty-parallel-dots.json").relative_to(ROOT)),
+            "combined_entries_compared": total_compared,
+            "combined_surface_max_spearman": surf_rho,
+            "combined_dots_max_spearman": dots_rho,
+            "combined_dots_max_fraction_within_3px": dots_ov,
+        }
+        if write:
+            card["additional_novelty_evidence"] = addition
+            tmp_c = card_path.with_suffix(".partial.json")
+            tmp_c.write_text(json.dumps(card, indent=2, allow_nan=False) + "\n")
+            tmp_c.replace(card_path)
+        else:
+            close(card.get("additional_novelty_evidence"), addition, "card/additional_novelty_evidence")
+
     surf_ok = surf_rho <= THRESH_RHO and surf_doc.get("decision") != "duplicate-stop"
     dots_ok = dots_rho <= THRESH_RHO and dots_ov <= THRESH_OVERLAP and dots_doc.get("decision") != "duplicate-stop"
     gate(
         "novelty_surface",
         surf_ok,
-        f"Pre-placement OOF surface max Spearman = {surf_rho:.4f} <= {THRESH_RHO:.2f} across {len(expected_refs)} registry rasters",
+        f"Pre-placement OOF surface max Spearman = {surf_rho:.4f} <= {THRESH_RHO:.2f} across {total_compared} registry rasters",
     )
     gate(
         "novelty_dots",
         dots_ok,
         f"Post-placement 38,000 dots max 3-px overlap = {dots_ov:.4f} <= {THRESH_OVERLAP:.2f} "
-        f"(max Spearman = {dots_rho:.4f} <= {THRESH_RHO:.2f}) across {len(expected_refs)} registry rasters",
+        f"(max Spearman = {dots_rho:.4f} <= {THRESH_RHO:.2f}) across {total_compared} registry rasters",
     )
 
     # ------------------------------------------------------------------
