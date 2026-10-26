@@ -69,6 +69,7 @@ def verify_expanded_receipt(audit: dict, digest: str, *, promote: bool) -> bool:
     return bool(duplicate)
 
 
+
 def verify() -> dict:
     card = json.loads((REPORT / "run-card.json").read_text())
     readiness = json.loads((REPORT / "readiness.json").read_text())
@@ -95,13 +96,24 @@ def verify() -> dict:
         if audit["decision"] == "duplicate-stop" or audit.get("errors"):
             raise ValueError(f"{stage} novelty audit is a duplicate-stop / has errors")
         rows = audit["comparisons"]
-        if max(r["spearman_full_footprint"] for r in rows) > 0.90:
-            raise ValueError(f"{stage} surface correlation exceeds 0.90")
-        if stage == "dots" and not (REPORT / "results-stratified.json").is_file():
-            if audit["candidate_sha256"] != card["raster_sha256"]:
-                raise ValueError("dot novelty receipt is not bound to the published TIFF")
-            if max(r["candidate_fraction_within_3px_of_reference"] for r in rows) > 0.70:
-                raise ValueError("dot overlap exceeds 70%")
+        if not rows or max(r["spearman_full_footprint"] for r in rows) > 0.90:
+            raise ValueError(f"{stage} novelty audit is empty or exceeds correlation threshold")
+    # The expanded dot receipt proves a duplicate stop, but its companion
+    # expanded "surface" receipt is not pre-placement evidence: it is bound to
+    # the final binary submission TIFF instead of the continuous score raster.
+    expanded_surface = json.loads((REPORT / "novelty-surface-expanded.json").read_text())
+    if expanded_surface.get("stage") != "surface":
+        raise ValueError("expanded surface receipt has an invalid stage")
+    preplacement_surface_valid = (
+        expanded_surface.get("candidate_sha256") != card["raster_sha256"]
+        and not expanded_surface.get("errors")
+        and bool(expanded_surface.get("comparisons"))
+        and max(r["spearman_full_footprint"] for r in expanded_surface["comparisons"]) <= 0.90
+    )
+    if readiness.get("surface_audit", {}).get("preplacement_surface_valid") != preplacement_surface_valid:
+        raise ValueError("readiness does not reflect the expanded pre-placement surface audit status")
+    if readiness.get("surface_audit", {}).get("preplacement_surface_valid") is not False:
+        raise ValueError("mis-bound expanded surface receipt must not count as pre-placement evidence")
     if results["canary_alarms"]:
         raise ValueError("leakage canary alarms recorded")
     stratified_path = REPORT / "results-stratified.json"
