@@ -1,0 +1,93 @@
+{
+  "schema_version": 2,
+  "lane": "blind-thermal-corridor-h1-annulus",
+  "experiment_spec": "h1-annulus-paleo-probes-volcanics-excluded",
+  "run_id": "GEMSDOE30-blind-thermal-corridor-h1-annulus-20261026T202136Z",
+  "hypothesis": "Concealed intrabasin faults hosting blind Great Basin geothermal systems co-locate with paleogeothermal sinter/tufa springs and shallow 2 m temperature anomalies WITHOUT young Quaternary volcanism; dots placed in the 3-30 px (300 m-3 km) off-SGMC concealed-splay annulus, SGMC core (0-2 px) excluded, volcanics excluded.",
+  "mechanism": "Equal-weight (0.5/0.5) exp(-distance/1000 m) linear pool of GDR paleo-springs and 2 m probe proximity; domain = valid footprint AND 3 < d_SGMC <= 30 px AND belief > 0.15; binary {0,1} Poisson-disk emission at 3 px (300 m DTI kernel scale), capped at 40,000 dots; NaN outside the template footprint.",
+  "non_fault_mimic": "Non-tectonic volcanic centers/caldera rings (excluded by volcanics removal), paleospring clusters and shallow thermal anomalies with no Quaternary fault control.",
+  "experiments_run": 1,
+  "experiment_cap": 3,
+  "time_cap_hours": 2,
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": null,
+    "note": "NOT COMPUTABLE: organizer labels.tif / training_features.tif are behind the DrivenData login and absent. No HOLDOUT-DTI, CI, or leakage-canary AUC is claimed. Holdout-gated: no weekly slot may be selected.",
+    "withheld_positives": null,
+    "ci95": null,
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "scope": "holdout gated on organizer data access; not a score, not a projection"
+  },
+  "organizer_score": null,
+  "organizer_score_label": "none (no submission-page receipt exists)",
+  "feature_canaries": {
+    "note": "Single-feature leakage canaries require labels.tif (organizer-controlled, absent). Not run; no AUC claimed."
+  },
+  "registry": {
+    "pinned_snapshot": "docs/research/2026-10-25/novelty-registry-partial.json",
+    "registry_complete": false,
+    "dots": {
+      "decision": "duplicate-stop",
+      "registry_entries_compared": 16,
+      "errors": 3,
+      "max_spearman_any_reference": 0.1747,
+      "max_fraction_within_3px": 0.7498,
+      "closest_reference": "docs/downloads/gemsdoe30-edge-hybrid-80k-02845bd4-20261003T234340Z-allfinite.tif",
+      "lane_check": "FAIL: 74.98% of H1 dots within 3 px of edge-hybrid-80k registry raster dots, above the 70% duplicate-stop limit. Lane drifted into the EDGE-emitter belief-field zone; per Protocol Rule 1, logged as duplicate and stopped. Not perturbed, not re-encoded.",
+      "receipt": "docs/research/blind-thermal-corridor/novelty-dots.json"
+    }
+  },
+  "files": {
+    "submission_tif": "docs/downloads/GEMSDOE30-blind-thermal-corridor-h1-annulus-20261026T202136Z.tif",
+    "submission_json": "docs/downloads/GEMSDOE30-blind-thermal-corridor-h1-annulus-20261026T202136Z.json",
+    "novelty_json": "docs/research/blind-thermal-corridor/novelty-dots.json"
+  },
+  "raster_sha256": "20fc7b107e9e1a3a19e5e082d41720f0ce2204ad0ae8ca632b9884d16534af26",
+  "prediction_array_sha256": null,
+  "file_bytes": 329554,
+  "validator_output": {
+    "status": "passed",
+    "checks_passed": "12/12",
+    "no_nan_inside_footprint": true,
+    "values_in_0_1": true,
+    "footprint_cells": 5167373,
+    "outside_cells_nan": 7111787,
+    "crs_match": true,
+    "crs": "EPSG:32611",
+    "shape_match": true,
+    "shape": [3730, 3292],
+    "transform_match": true,
+    "single_float32_band": true,
+    "published_format_compliant": true,
+    "emitted_dots": 18766,
+    "dots_on_sgmc_core": 0,
+    "dots_within_2px_of_sgmc": 0,
+    "dots_by_sgmc_distance_px": {
+      "le_2px": 0,
+      "gt_2_le_10px": null,
+      "gt_10_le_30px": null,
+      "gt_30px": 0
+    }
+  },
+  "submission_name": "GEMSDOE30-blind-thermal-corridor-h1-annulus-20261026T202136Z",
+  "note": "Blind thermal corridor off-cat: paleo-springs x 2m probes, SGMC 3-30px annulus, volcanics-excluded, 3px Poisson disk, 18766 dots",
+  "note_chars": 128,
+  "published_tiff": "docs/downloads/GEMSDOE30-blind-thermal-corridor-h1-annulus-20261026T202136Z.tif",
+  "download_ok": true,
+  "ok_to_submit": false,
+  "submission_approved": false,
+  "slot_selected": false,
+  "verdict": "negative",
+  "scientific_gate_passed": false,
+  "duplicate_stopped": true,
+  "stop_stage": "dots",
+  "reason": "Protocol Rule 1 duplicate-stop: 74.98% of dots within 3 px of one registry raster (edge-hybrid-80k) > 70% limit. Format-valid (12/12) but a duplicate lane; not a unique submission.",
+  "verdict_scope": "machine-adjudicated; no competition performance claim",
+  "blockers": [
+    "Protocol Rule 1 duplicate-stop vs edge-hybrid-80k registry raster (74.98% > 70%); lane stopped, not perturbed",
+    "No organizer labels.tif / training_features.tif (DrivenData login) -> no HOLDOUT-DTI, no slot",
+    "Registry incomplete (GEMSDOE27/28/31/32/33/36 best files absent locally)"
+  ],
+  "created_utc": "2026-10-26T20:21:37+00:00"
+}

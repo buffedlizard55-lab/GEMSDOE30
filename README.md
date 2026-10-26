@@ -13,6 +13,15 @@
 
 ---
 
+## LATEST 2026-10-26 (this session) — H1 blind-thermal-corridor: DUPLICATE-STOP · NEGATIVE · NOT OFFERED
+
+- **Built & validated:** `GEMSDOE30-blind-thermal-corridor-h1-annulus-20261026T202136Z.tif` (18,766 dots; 12/12 format checks passed; NaN outside; EPSG:32611; 3,730×3,292; 100 m; SHA-256 `20fc7b10…16534af26`; note 128/140 chars). Builder: `scripts/build_blind_thermal_corridor_submission.py`; ranked hypothesis H1 in `docs/research/blind-thermal-corridor/hypotheses.md`.
+- **Result:** **Protocol Rule 1 duplicate-stop** — 74.98% of H1 dots fall within 3 px of the edge-hybrid-80k registry raster (>70% limit), so the lane drifted into the EDGE-emitter belief-field zone. Logged as a **negative deliverable** at `docs/research/blind-thermal-corridor/run-card.json`; the raster was **not perturbed or re-encoded** and is **not offered as a unique submission**.
+- **Featured unique downloadable artifact remains** `GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif` (download_ok=true, format-validated, lane-clear at 60.6% ≤ 70% overlap, but **ok_to_submit=false** — holdout-gated; no organizer labels present).
+- **Executive summary rewritten:** `executive-summary.html` now carries the nine-site (GEMSDOE 24/25/27/28/30/31/32/33/36) file-to-download / owner-reported-score / uniqueness table, the submission how-to, and the GEMSDOE32 0.2778 mechanics. None of the nine scores is organizer-confirmed; none is OK to submit without a holdout pass.
+
+---
+
 ## Verification follow-up — 2026-10-26: **NO NEW TIFF; DO NOT SUBMIT**
 
 The expanded-registry receipt is now verified even on FFL-1's negative path.
