@@ -26,6 +26,8 @@ from scripts.verify_current_run import verify, local_path
 
 STYLE = "docs/assets/research.css"
 
+LATEST_REVIEW = '<section class="release" aria-label="Latest executive review"><h2>26 October: NOT cleared to submit</h2><p>Both existing primary downloads pass current local format and SHA checks. No new TIFF or experiment was generated: assigned lane, complete parallel registry and comparable-best validation remain unresolved. MSDB has a recorded negative overall readiness verdict.</p><p><a href="review-2026-10-26.html">Nine-site executive summary and next steps</a> · <a href="docs/research/review-2026-10-26/readiness.json">Current machine inspection</a></p></section>'
+
 
 def png_preview(template: Path, candidate: Path) -> bytes:
     import numpy as np
@@ -66,7 +68,7 @@ def page(title: str, content: str, *, active: str = "home", research_dir: str = 
 <body><a class="skip" href="#main">Skip to content</a>
 <header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html"><span class="brand-mark">G30</span> Fault discovery lab</a>
 <nav aria-label="Main navigation"><a href="index.html"{' aria-current="page"' if active == "home" else ''}>Overview</a><a href="executive-summary.html"{' aria-current="page"' if active == "guide" else ''}>Submission guide</a><a href="experiment-review.html"{' aria-current="page"' if active == "research" else ''}>Research</a><a href="README.md">Project brief</a></nav></div></header>
-<main id="main">{content}</main>
+<main id="main">{LATEST_REVIEW if active in ("home", "guide") else ""}{content}</main>
 <footer><div><strong>GEMSDOE30</strong><p>Evidence before claims. Automated machine gates require zero human raster inspection.</p></div>
 <div><a href="docs/status.json">Evidence feed (JSON)</a><a href="{e(research_dir)}/run-card.json">Run card</a><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Official competition ↗</a></div>
 <p class="fine">Repository evidence only; not a live leaderboard projection. No competition slot selected or used by this repository. Local validation and holdout results are <strong>not</strong> organizer acceptance.</p></footer>
