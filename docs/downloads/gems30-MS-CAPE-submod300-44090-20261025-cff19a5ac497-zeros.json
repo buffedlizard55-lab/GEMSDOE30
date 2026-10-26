@@ -1,0 +1,155 @@
+{
+  "schema_version": 3,
+  "run_name": "gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-zeros",
+  "note": "MS-CAPE 2-stage multi-physics tilt+piedmont+8az lineament+GDR/GeoDAWN upflow + 300m submodular DTI cover (44090 off-cat dots)",
+  "output_file": "gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-zeros.tif",
+  "output_sha256": "3ee82868d595304ec7001df55cdee2810b8ff63e31799dc676349fe20825231a",
+  "prediction_array_sha256": "7bf816613fdbb0d3d8ea1ce5f599c10fbc4819aab946d748a02c22af011948f2",
+  "outside_convention": "0.0 outside; nonstandard diagnostic only; does not match published null/NaN-outside format",
+  "published_format_compliant": false,
+  "template_file": "data/raw/sample_submission.tif",
+  "created_utc": "2026-10-26T00:01:29+00:00",
+  "format_validation": {
+    "path": "docs/downloads/gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-zeros.tif",
+    "passed": false,
+    "checks": [
+      {
+        "name": "template_single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "float32",
+        "passed": true,
+        "detail": "dtypes=('float32',)"
+      },
+      {
+        "name": "epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "template_epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "shape_matches_template",
+        "passed": true,
+        "detail": "output=(3730, 3292) template=(3730, 3292)"
+      },
+      {
+        "name": "transform_matches_template",
+        "passed": true,
+        "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "100m_north_up_grid",
+        "passed": true,
+        "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "finite_and_in_range_inside_footprint",
+        "passed": true,
+        "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+      },
+      {
+        "name": "null_outside_template_footprint",
+        "passed": false,
+        "detail": "outside_pixels=7111787; null/NaN/nodata required"
+      },
+      {
+        "name": "whole_raster_finite_range_diagnostic_advisory",
+        "passed": true,
+        "detail": "advisory only: all_pixels=12279160 finite and in [0, 1]; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+      },
+      {
+        "name": "template_readable",
+        "passed": true,
+        "detail": "shape=(3730, 3292)"
+      }
+    ]
+  },
+  "whole_raster_range_diagnostic": {
+    "path": "docs/downloads/gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-zeros.tif",
+    "passed": true,
+    "checks": [
+      {
+        "name": "template_single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "float32",
+        "passed": true,
+        "detail": "dtypes=('float32',)"
+      },
+      {
+        "name": "epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "template_epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "shape_matches_template",
+        "passed": true,
+        "detail": "output=(3730, 3292) template=(3730, 3292)"
+      },
+      {
+        "name": "transform_matches_template",
+        "passed": true,
+        "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "100m_north_up_grid",
+        "passed": true,
+        "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "finite_and_in_range_inside_footprint",
+        "passed": true,
+        "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+      },
+      {
+        "name": "finite_in_range_outside_footprint_diagnostic",
+        "passed": true,
+        "detail": "outside_pixels=7111787; finite in-range values required for the nonstandard whole-array diagnostic (finite=7111787)"
+      },
+      {
+        "name": "whole_raster_finite_range_diagnostic",
+        "passed": true,
+        "detail": "all_pixels=12279160 finite and in [0, 1]"
+      },
+      {
+        "name": "template_readable",
+        "passed": true,
+        "detail": "shape=(3730, 3292)"
+      }
+    ]
+  },
+  "whole_raster_range_diagnostic_passed": true,
+  "performance_status": "unscored; format validation is not a score",
+  "submission_approved": false,
+  "download_ok": true,
+  "eligible_for_separate_slot_selector": true,
+  "scientific_gate_passed": true,
+  "run_card": "docs/research/ms-cape/run-card.json",
+  "lineage": "Fresh MS-CAPE multi-physics fit; zero historical submission rasters read as inputs or masks",
+  "method": "ms-cape-multiphysics-trace-v1-20261025",
+  "preregistration_sha256": "9fd9195854b5fb1d060c7615496e17e83cc9525d8fd27e7657cc5eeefce047fc",
+  "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed"
+}

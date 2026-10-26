@@ -1,7 +1,7 @@
 """Explicit supported experiment contracts; unknown experiment IDs fail closed.
 
 Contracts are code-reviewed, not arbitrary mutable JSON that can redefine a failed
-promotion gate. Old TDX-1, TDX-C2, and MSDB-1v2 receipts keep their original schema and expectations.
+promotion gate. Old TDX-1, TDX-C2, MSDB-1v2, and PTA-1 receipts keep their original schema and expectations.
 """
 from __future__ import annotations
 
@@ -43,10 +43,24 @@ PTA_CONTROL_FEATURES = (
     "ctrl_sym_cover_step",
     "ctrl_sym_cond_step",
 )
+MS_CAPE_FEATURES = (
+    "grav_tilt", "grav_tilt_zero_prox", "grav_verduzco_hd_tilt", "mag_tilt",
+    "mag_verduzco_hd_tilt", "rtp_total_horiz_grad", "tmi_upward_residual", "basement_step_grad",
+    "piedmont_concavity_300m", "piedmont_concavity_900m", "deconfounded_slope_prominence",
+    "slope_break_gradient", "basin_margin_transition", "lidar_scarp_step",
+    "lidar_signed_polarity", "lidar_valid_flag", "surf_axial_max_1p1km", "surf_axial_aniso_1p1km",
+    "surf_axial_max_2p5km", "surf_axial_aniso_2p5km", "surf_cross_ridge_nms",
+    "sub_axial_max_2p5km", "sub_axial_aniso_2p5km", "sub_cross_ridge_nms",
+    "cross_modal_strike_consilience", "great_basin_anderson_strike", "rad_k_th_alteration",
+    "rad_u_th_fracture_radon", "mt_clay_cap_edge", "hydro_upflow_thermal_plume",
+    "hydro_upgradient_source_focus", "paleo_probe_geothermal_halo",
+)
 
 
 def contract(card: dict) -> dict:
-    name = card.get("experiment_spec", "tdx1")
+    name = card.get("experiment_spec")
+    if name is None:
+        name = "ms_cape" if card.get("candidate_arm") == "ms_cape_e3" else "tdx1"
     if name == "tdx1":
         return {
             "id": name,
@@ -105,6 +119,20 @@ def contract(card: dict) -> dict:
             "transform_version": "phase-tilt-dip-asymmetry-v1-support17px-20261025",
             "label": "PTA-1",
             "image_name": "pta1-support.png",
+        }
+    if name == "ms_cape":
+        return {
+            "id": name,
+            "candidate": "ms_cape_e3",
+            "arms": ("physics_tilt8", "core19", "g30s19_hist_best", "ms_cape_e3"),
+            "required_positive_deltas": ("physics_tilt8", "core19", "g30s19_hist_best"),
+            "features": CORE_FEATURES + MS_CAPE_FEATURES,
+            "support_px": 20,
+            "guard_px": 20,
+            "transform_path": "src/gemsdoe30/ms_cape.py",
+            "transform_version": "ms-cape-multiphysics-trace-v1-20261025",
+            "label": "MS-CAPE",
+            "image_name": "ms-cape-support.png",
         }
     raise ValueError(f"unknown research experiment contract: {name!r}")
 

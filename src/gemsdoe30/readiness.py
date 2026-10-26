@@ -22,7 +22,12 @@ def interval(ci, low=0, high=1):
 def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool,
            surface_audit: dict, dots_audit: dict, registry: dict,
            artifact_public: bool = True) -> dict[str, Any]:
-    """Separate file validity, research promotion and slot selection."""
+    """Separate file validity, research promotion and slot selection.
+
+    Evidence absent from this function is unknown, never implicitly passed. A
+    selector must separately verify current portal constraints and allocation;
+    this function cannot approve or spend a competition slot.
+    """
     spec = contract(card)
     expected_arms = set(spec["arms"])
     expected_features = set(spec["features"])
@@ -65,6 +70,8 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
         delta_detail = "Fixed full-stack candidate must improve core19, zero-lag and phase-null controls with positive paired CI lower bounds"
     elif spec["id"] == "msdb1v2":
         delta_detail = "Fixed candidate must improve preregistered core19 comparator with positive paired CI lower bound"
+    elif spec["id"] == "ms_cape":
+        delta_detail = "Fixed candidate must improve all same-protocol comparators with positive paired CI lower bound"
     else:
         delta_detail = f"Fixed {spec['label']} candidate must improve all {len(comparators)} comparators ({', '.join(sorted(comparators))}) with positive paired CI lower bounds"
     gate("paired_improvement", "passed" if wins else "failed", delta_detail)
@@ -137,7 +144,7 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
              and isinstance(card.get("note"), str) and len(card["note"]) <= 140)
     gate("artifact_identity", "passed" if named else "failed", "Named artifact and note of at most 140 characters")
     promoted = all(row["status"] == "passed" for row in gates)
-    return {"schema_version": 1, "readiness_version": READINESS_VERSION if spec["id"] == "tdx1" else "research-readiness-v3-matched-controls-20261025",
+    return {"schema_version": 1, "readiness_version": READINESS_VERSION if spec["id"] in ("tdx1", "ms_cape") else "research-readiness-v3-matched-controls-20261025",
             "raster_sha256": card.get("raster_sha256"), "gates": gates,
             "observed_registry": observed,
             "download_ok": bool(artifact_public and format_passed and hash_matches and named and not duplicate_detected),

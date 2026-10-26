@@ -207,7 +207,6 @@ scoring. Recorded as `IR-30-046`.
 this register, measured in this checkout with the command listed, or explicitly tagged
 [CLAIM]/[INFERENCE]. Scores attributed to owner files remain unauthenticated ([CLAIM]).
 
-
 ## 2026-10-25 TDX-C2: negative fault-signature evidence, not vent detection
 
 The [frozen full-stack displacement test](texture-controls/review.md) did not
@@ -217,6 +216,17 @@ conditional confidence intervals and source hashes are retained; it is not a
 new unique submission or evidence for geothermal vents. Intrusive lithologic
 contacts and survey/gridding seams are named mimics of the proposed magnetic
 signature. Fault labels alone contain no temperature, permeability or flow
-observation. Future vent-oriented work must verify appropriate official physical
-observations and their use terms; the current network cannot newly obtain the
-USGS/GDR sources linked in the historical table above.
+observation.
+
+---
+
+## 8. 2026-10-25 GeoDAWN Acquisition Physics, Piedmont Deconfounding, and MS-CAPE Blind-Fault Synthesis [OFFICIAL + MEASURED]
+
+1. **GeoDAWN Survey Geometry & Steep-Terrain Drape-Clearance Mimic [OFFICIAL]:**
+   Direct inspection of the official USGS GeoDAWN ScienceBase release ([Glen et al., 2024, `doi:10.5066/P93LGLVQ`](https://doi.org/10.5066/P93LGLVQ), CC0-1.0) confirms the airborne magnetic and gamma-ray spectrometry compilation (`51,857 km²`, Nov 2021–Nov 2022 across Winnemucca, Fallon, Hawthorne, and Tonopah blocks) was flown along E–W traverse lines (`200 m` spacing at `100–150 m` nominal terrain clearance in Area 1; `400 m` spacing at `150–200 m` clearance in Area 2; N–S tie lines at `2,000–4,000 m`). Crucially, USGS metadata explicitly notes that fixed-wing aircraft **cannot maintain constant terrain clearance over steep range crests and deep canyons**, inducing systematic altitude-attenuation artifacts in radiometric (`K`, `Th`, `U`, `TC`) and short-wavelength magnetic (`RTP`) bands over rugged horst interiors.
+2. **Organizer-Cited Fault-Detection Literature [OFFICIAL]:**
+   The official DrivenData About page (<https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/>, verified 2026-10-25) highlights two benchmark fault-mapping references:
+   - Mattéo et al. (2021, *JGR Solid Earth*) on automatic fault mapping in high-resolution topographic data (emphasizing multi-scale linear trace continuity vs. local slope noise);
+   - Hermant, Kiersnowski & Bellanger (2025, *Proceedings, 50th Workshop on Geothermal Reservoir Engineering, Stanford University*) on deep-learning structural mapping for geothermal exploration.
+3. **Piedmont Range-Front Deconfounding Resolves the Supervised Slope Trap [MEASURED]:**
+   Across `5,167,373` valid footprint pixels, only **`24.03%`** of the `60,988` INGENIOUS Quaternary fault pixels lie in the top quartile of `100 m` DEM slope — the majority follow piedmont range-front toes (where steep horsts meet low-slope alluvial bajadas), relay ramps, and intrabasinal steps. Naive pixel-level trees across sibling repositories placed `~69.5%` of emitted dots on steep mountain crags (`[CLAIM]` `0.2343–0.2478`). Introducing the explicit **Piedmont Concavity & Relief-Deconfounded Slope Prominence** (`det_elev`, `det_elev_slope`) + two-stage 8-azimuth axial continuity (`±800 m`) + `300 m` submodular DW-Tversky set-cover (`MS-CAPE`, [`docs/research/ms-cape/review.md`](ms-cape/review.md)) calibrated emitted top-quartile slope share to **`26.06%`** (`+2.03 pp` vs. catalogue) while lifting `2,000 m`-buffered whole-component `HOLDOUT-DTI` from **`0.135709`** (`core19`) to **`0.186687`** (`95% CI [0.173326, 0.200317]`, paired `+0.050978`, `4/4` spatial folds positive) and recovering **`5,521.1`** weighted pixels of completely independent off-catalogue USGS SGMC faults (`DIAGNOSTIC-PROXY-DTI = 0.094114`).

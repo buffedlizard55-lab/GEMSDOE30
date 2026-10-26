@@ -4,7 +4,7 @@
   "candidate": "/home/user/GEMSDOE30/outputs/texture-controls/gems30-TDXC2-44090-20261025-d87627b24504.tif",
   "candidate_sha256": "af499375cec73f42f98f398370b390e96c3d3b23943477eb1f613570baa98e0d",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "registry_sha256": "9c10ba6e7f2ae42cb1ed833304623cfb5c661712a9ea6b85adf2029b5e0480d4",
+  "registry_sha256": "d70eaeacba7fb77ab97979bd716c00e5f9cdd858a7c3e42972f615d539d4932a",
   "registry_complete": false,
   "comparisons": [
     {
@@ -73,6 +73,26 @@
       "candidate_fraction_within_3px_of_reference": null,
       "identical_inside_footprint": false,
       "error": "Stopped TDX-C2 candidate raster is quarantined out of git; reverse comparison recorded in PTA-1."
+    },
+    {
+      "site": "GEMSDOE30-MS-CAPE",
+      "reference": "docs/downloads/gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-nan.tif",
+      "reference_sha256": "002c5158103419d3c99ac48a09998113efc2e473520e78a349af36996ceb56a2",
+      "stage": "dots",
+      "identical_inside_footprint": false,
+      "spearman_full_footprint": null,
+      "candidate_fraction_within_3px_of_reference": null,
+      "undefined": true
+    },
+    {
+      "site": "GEMSDOE30-MS-CAPE",
+      "reference": "docs/downloads/gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-zeros.tif",
+      "reference_sha256": "3ee82868d595304ec7001df55cdee2810b8ff63e31799dc676349fe20825231a",
+      "stage": "dots",
+      "identical_inside_footprint": false,
+      "spearman_full_footprint": null,
+      "candidate_fraction_within_3px_of_reference": null,
+      "undefined": true
     }
   ],
   "errors": [],

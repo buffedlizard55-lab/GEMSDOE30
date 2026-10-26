@@ -1,168 +1,76 @@
 {
-  "schema_version": 2,
-  "generated_utc": "2026-10-25T22:56:52+00:00",
-  "complete": false,
-  "coverage": "Six newly merged parallel-lane TIFFs (4 at PR #28 + 2 G30-S20 twins at PR #29); additive to the frozen 104 references, not global certification.",
-  "missing_evidence": [
-    "Other parallel sessions and most original continuous surfaces"
-  ],
+  "schema_version": 1,
   "original_registry_sha256": "4c796af822dbd4ba405c84a2b8be6a18f8cffcf0222f7d351090a76f5641d2ed",
-  "received_commit": "7f3f4c75a4fb6086471d658467293403365589a7",
-  "timing": "Late-arriving references received after original placement; audit both saved output states; never change placement or fit in response.",
+  "complete": false,
+  "missing_evidence": [
+    "Private unretained TDX-1 continuous surface cannot be audited against late sibling downloads"
+  ],
   "rasters": [
     {
-      "site": "GEMSDOE30-parallel-merged",
-      "repo": "buffedlizard55-lab/GEMSDOE30",
-      "ref": "7f3f4c75a4fb6086471d658467293403365589a7",
-      "source_path": "docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan.tif",
-      "path": "docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan.tif",
-      "git_blob_sha1": "bcb04d815bb0e80aa59786bb1040a57489308b42",
-      "expected_bytes": 523856,
-      "sha256": "51ca48a5157a737f33f53bbf2985fdfa93816adc5913a87736366390e063fcf3",
-      "aligned": true,
-      "shape": [
-        3730,
-        3292
-      ],
-      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/7f3f4c75a4fb6086471d658467293403365589a7/docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan.tif"
-    },
-    {
-      "site": "GEMSDOE30-parallel-merged",
-      "repo": "buffedlizard55-lab/GEMSDOE30",
-      "ref": "7f3f4c75a4fb6086471d658467293403365589a7",
-      "source_path": "docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif",
-      "path": "docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif",
-      "git_blob_sha1": "d52419cfddb523ba1a461b9784857c8284a2b9e7",
-      "expected_bytes": 449412,
-      "sha256": "8a0301d5606e39b114eca997cd43849531393bb3921db26a267478f915f43cc9",
-      "aligned": true,
-      "shape": [
-        3730,
-        3292
-      ],
-      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/7f3f4c75a4fb6086471d658467293403365589a7/docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif"
-    },
-    {
-      "site": "GEMSDOE30-parallel-merged",
-      "repo": "buffedlizard55-lab/GEMSDOE30",
-      "ref": "7f3f4c75a4fb6086471d658467293403365589a7",
-      "source_path": "docs/downloads/gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif",
-      "path": "docs/downloads/gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif",
-      "git_blob_sha1": "5077c375376d4f2ec9422a52d5044f87e6390ada",
-      "expected_bytes": 411106,
-      "sha256": "837f555efe1c55f53258aa2fa8b5528684395cc1226a233cf8013690b6ac63ff",
-      "aligned": true,
-      "shape": [
-        3730,
-        3292
-      ],
-      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/7f3f4c75a4fb6086471d658467293403365589a7/docs/downloads/gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif"
-    },
-    {
-      "site": "GEMSDOE30-parallel-merged",
-      "repo": "buffedlizard55-lab/GEMSDOE30",
-      "ref": "7f3f4c75a4fb6086471d658467293403365589a7",
-      "source_path": "docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif",
-      "path": "docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif",
-      "git_blob_sha1": "18f3cf6182dcd982fc8c7d1915044e9a9a9f41e9",
-      "expected_bytes": 599548,
-      "sha256": "a9f5b93ed286d5e0ef18f7312397106e10de87c9d50c7ad0936074429b2bdba1",
-      "aligned": true,
-      "shape": [
-        3730,
-        3292
-      ],
-      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/7f3f4c75a4fb6086471d658467293403365589a7/docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif"
-    },
-    {
-      "site": "GEMSDOE30-parallel-merged",
-      "repo": "buffedlizard55-lab/GEMSDOE30",
-      "ref": "3f4c42f57104952e17d44798774d1f6b5d08d823",
-      "source_path": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
-      "path": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
-      "git_blob_sha1": "7c8a85452ec98317b60712872871d3a8bb35d36e",
-      "expected_bytes": 451460,
-      "sha256": "1b07820d0066e56442ade4f4a3880af92f50b4ca9cac528ccf59696ec5299cd6",
-      "aligned": true,
-      "shape": [
-        3730,
-        3292
-      ],
-      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/3f4c42f57104952e17d44798774d1f6b5d08d823/docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif"
-    },
-    {
-      "site": "GEMSDOE30-parallel-merged",
-      "repo": "buffedlizard55-lab/GEMSDOE30",
-      "ref": "3f4c42f57104952e17d44798774d1f6b5d08d823",
-      "source_path": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif",
-      "path": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif",
-      "git_blob_sha1": "ce374c22b67046f83e9f8acdb89d752f1d3faa39",
-      "expected_bytes": 525874,
-      "sha256": "12bd6196cdebfbaa39960d0d6f600fde498f1fb7675321222ba49489dec69b22",
-      "aligned": true,
-      "shape": [
-        3730,
-        3292
-      ],
-      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/3f4c42f57104952e17d44798774d1f6b5d08d823/docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif"
-    },
-    {
-      "site": "GEMSDOE30-parallel-merged",
-      "repo": "buffedlizard55-lab/GEMSDOE30",
-      "ref": "daa623b",
-      "source_path": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
-      "path": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
-      "expected_bytes": 493566,
-      "sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
-      "aligned": true,
-      "shape": [
-        3730,
-        3292
-      ],
-      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/arena/89455fb7-gemsdoe30/docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif"
-    },
-    {
-      "site": "GEMSDOE30-nearslay-lane",
-      "repo": "buffedlizard55-lab/GEMSDOE30",
-      "ref": "arena/54f26a63-gemsdoe30",
-      "source_path": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "site": "GEMSDOE30-NEARSPLAY",
       "path": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
-      "expected_bytes": 476662,
       "sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
-      "aligned": true,
-      "shape": [
-        3730,
-        3292
-      ],
-      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/arena/54f26a63-gemsdoe30/docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif"
+      "aligned": true
     },
     {
-      "site": "GEMSDOE30-parallel-merged",
-      "repo": "buffedlizard55-lab/GEMSDOE30",
-      "ref": "99f7788",
-      "source_path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
-      "path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
-      "expected_bytes": 472074,
-      "sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
-      "aligned": true,
-      "shape": [
-        3730,
-        3292
-      ],
-      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/arena/a2b527ff-gemsdoe30/docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif"
-    }
-  ],
-  "exclusions": [],
-  "organizer_authenticated": false,
-  "extensions": [
+      "site": "GEMSDOE30-MS-CAPE",
+      "path": "docs/downloads/gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-nan.tif",
+      "sha256": "002c5158103419d3c99ac48a09998113efc2e473520e78a349af36996ceb56a2",
+      "aligned": true
+    },
     {
-      "pr": "https://github.com/buffedlizard55-lab/GEMSDOE30/pull/29",
-      "added": [
-        "gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
-        "gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif"
-      ],
-      "dots_stage": "Measured exactly with shared gemsdoe30.novelty.compare (candidate=TDX-1 published dots).",
-      "surface_stage": "UNDEFINED post-merge: candidate continuous surface outputs/texture-displacement/tdx1-surface.tif is git-ignored and its bytes are unavailable in this worktree (identity sha256 b5545eae3898e96cdf00a5898b63d52a616024e795f9e7a98fd822573fffa275 preserved in receipts). Rows are recorded undefined so the surface gate fails closed to unknown; no value was fabricated."
+      "site": "GEMSDOE30-MS-CAPE",
+      "path": "docs/downloads/gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-zeros.tif",
+      "sha256": "3ee82868d595304ec7001df55cdee2810b8ff63e31799dc676349fe20825231a",
+      "aligned": true
+    },
+    {
+      "site": "GEMSDOE30-MSDB-1v2",
+      "path": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+      "sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+      "aligned": true
+    },
+    {
+      "site": "GEMSDOE30-PTA1",
+      "path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "aligned": true
+    },
+    {
+      "site": "GEMSDOE30-parallel",
+      "path": "docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan.tif",
+      "sha256": "51ca48a5157a737f33f53bbf2985fdfa93816adc5913a87736366390e063fcf3",
+      "aligned": true
+    },
+    {
+      "site": "GEMSDOE30-parallel",
+      "path": "docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif",
+      "sha256": "8a0301d5606e39b114eca997cd43849531393bb3921db26a267478f915f43cc9",
+      "aligned": true
+    },
+    {
+      "site": "GEMSDOE30-G30-S20",
+      "path": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif",
+      "sha256": "12bd6196cdebfbaa39960d0d6f600fde498f1fb7675321222ba49489dec69b22",
+      "aligned": true
+    },
+    {
+      "site": "GEMSDOE30-G30-S20",
+      "path": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
+      "sha256": "1b07820d0066e56442ade4f4a3880af92f50b4ca9cac528ccf59696ec5299cd6",
+      "aligned": true
+    },
+    {
+      "site": "GEMSDOE30-parallel",
+      "path": "docs/downloads/gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif",
+      "sha256": "837f555efe1c55f53258aa2fa8b5528684395cc1226a233cf8013690b6ac63ff",
+      "aligned": true
+    },
+    {
+      "site": "GEMSDOE30-parallel",
+      "path": "docs/downloads/gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif",
+      "sha256": "a9f5b93ed286d5e0ef18f7312397106e10de87c9d50c7ad0936074429b2bdba1",
+      "aligned": true
     }
   ]
 }

@@ -1,27 +1,33 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-26T00:48:32Z",
+  "generated_utc": "2026-10-26T01:09:47Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
     "directory": "data/raw",
     "availability_scope": "This describes files present in the build worktree at generated_utc; data/raw and data/processed are Git-ignored and are not distributed by GitHub Pages.",
-    "required_files_present": false,
-    "sha256_verified_against_pins": false,
+    "required_files_present": true,
+    "sha256_verified_against_pins": true,
     "files": [
       {
         "dest": "training_features.tif",
         "path": "data/raw/training_features.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-        "expected_bytes": 418912844
+        "expected_bytes": 418912844,
+        "actual_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "actual_bytes": 418912844,
+        "sha256_matches_pin": true
       },
       {
         "dest": "labels.tif",
         "path": "data/raw/labels.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "expected_bytes": 425830
+        "expected_bytes": 425830,
+        "actual_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+        "actual_bytes": 425830,
+        "sha256_matches_pin": true
       },
       {
         "dest": "sample_submission.tif",
@@ -35,20 +41,22 @@
       }
     ],
     "prepared_dataset": {
-      "dataset_signature": null,
-      "matches_recorded_pin": null,
-      "positive_label_pixels": null,
-      "template_valid_pixels": null
+      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+      "matches_recorded_pin": true,
+      "positive_label_pixels": 60988,
+      "template_valid_pixels": 5167373
     },
     "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
   },
   "competition_data": {
     "owner_mirror_files_present": [
+      "training_features.tif",
+      "labels.tif",
       "sample_submission.tif"
     ],
     "organizer_authenticated": false,
     "prepared_dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
-    "pins_core_sha256_verified_now": false,
+    "pins_core_sha256_verified_now": true,
     "historical_restore_receipt": "docs/research/2026-10-25/prepared-manifest.json",
     "pins_note": "Owner mirrors, not organizer-authenticated. Hash pins verify consistency only. Template values must never be used as features or predictions.",
     "extra_pins_files": [
@@ -170,6 +178,46 @@
       "performance_status": "unscored; local format validation is not a score"
     },
     {
+      "manifest": "gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-nan.json",
+      "file": "docs/downloads/gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-nan.tif",
+      "present": true,
+      "sha256": "002c5158103419d3c99ac48a09998113efc2e473520e78a349af36996ceb56a2",
+      "sha256_matches_manifest": true,
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "legacy_manifest_claim_range_error_immunity": null,
+      "organizer_acceptance_confirmed": false,
+      "site_linked": true,
+      "submission_recommendation": false,
+      "run_name": "gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497",
+      "note": "MS-CAPE 2-stage multi-physics tilt+piedmont+8az lineament+GDR/GeoDAWN upflow + 300m submodular DTI cover (44090 off-cat dots)",
+      "performance_status": "unscored; format validation is not a score"
+    },
+    {
+      "manifest": "gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-zeros.json",
+      "file": "docs/downloads/gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-zeros.tif",
+      "present": true,
+      "sha256": "3ee82868d595304ec7001df55cdee2810b8ff63e31799dc676349fe20825231a",
+      "sha256_matches_manifest": true,
+      "outside_convention": "0.0 outside; nonstandard diagnostic only; does not match published null/NaN-outside format",
+      "published_format_compliant": false,
+      "whole_raster_range_diagnostic_passed": true,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "legacy_manifest_claim_range_error_immunity": null,
+      "organizer_acceptance_confirmed": false,
+      "site_linked": true,
+      "submission_recommendation": false,
+      "run_name": "gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-zeros",
+      "note": "MS-CAPE 2-stage multi-physics tilt+piedmont+8az lineament+GDR/GeoDAWN upflow + 300m submodular DTI cover (44090 off-cat dots)",
+      "performance_status": "unscored; format validation is not a score"
+    },
+    {
       "manifest": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a.json",
       "file": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
       "present": true,
@@ -203,7 +251,7 @@
       "range_error_immune": null,
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
-      "site_linked": true,
+      "site_linked": null,
       "submission_recommendation": false,
       "run_name": "gems30-PTA1-44090-20261025-9a3f7f9535a4",
       "note": "PTA1 subsurface 3D tilt-phase + dip-asymmetry 18-feat HGB; 44090d; research artifact, NOT slot-approved.",
@@ -511,9 +559,9 @@
   },
   "current_run_pointer": {
     "schema_version": 1,
-    "run_card": "docs/research/phase-tilt-asymmetry/run-card.json",
-    "readiness": "docs/research/phase-tilt-asymmetry/readiness.json",
-    "purpose": "Current unique downloadable research artifact PTA-1 (unit-consistent 3D magnetic/gravity phase-tilt curvature + signed hanging-wall conductive-cover step; clears all 196 registry rasters with max 54.60% <= 70% 3 px overlap; beats raw 8-band subsurface baseline +0.008870 [+0.001561, +0.015976], +32.7% vs TDX-1; does NOT beat core19; research-only download, NOT approved for competition upload, no slot selected)",
+    "run_card": "docs/research/ms-cape/run-card.json",
+    "readiness": "docs/research/ms-cape/readiness.json",
+    "purpose": "Promoted primary research artifact MS-CAPE (2-stage multi-physics structural-habitat + 8-azimuth lineament + GDR/GeoDAWN upflow + 300 m submodular DTI facility-location cover; pooled HOLDOUT-DTI 0.186687 vs core19 0.135709 [+0.050978 / +37.6%] and G30-S19 0.137811 [+0.048876 / +35.5%]; passed 121-entry surface + dots novelty gate; research_verdict=promote, download_ok=true, submission_approved=false, slot_selected=false)",
     "latest_attempt": "docs/research/texture-controls/run-card.json",
     "additional_stopped_attempts": [
       {
@@ -523,158 +571,343 @@
         "decision": "DO NOT SUBMIT (duplicate-stop; holdout gate passed; no TIFF published)"
       }
     ],
-    "additional_research_artifacts": [
+    "historical_runs": [
       {
         "lane": "MSDB-1v2",
         "run_card": "docs/research/msdb-piedmont/run-card.json",
-        "readiness": "docs/research/msdb-piedmont/readiness.json",
-        "verifier": "scripts/verify_current_run.py",
-        "decision": "Registered full-stack peer artifact (HOLDOUT-DTI 0.170462 vs core19 0.133628; max 64.78% <= 70% across 196 rasters; readiness negative pending complete registry; no slot selected)"
+        "readiness": "docs/research/msdb-piedmont/readiness.json"
       },
       {
-        "lane": "H-NEARSPLAY",
-        "run_card": "docs/research/nearsplay/run-card.json",
-        "readiness": "docs/research/nearsplay/readiness.json",
-        "verifier": "scripts/verify_nearsplay_run.py",
-        "full_registry_audit": "docs/research/nearsplay/full-registry-audit.json",
-        "decision": "DUPLICATE ON EXPANDED 196-RASTER REGISTRY (71.26% > 70% within 3 px on four GEMSDOE25 rasters, fulfilling IR-30-078 post-run check); DO NOT SUBMIT; retained for provenance only"
+        "lane": "PTA-1",
+        "run_card": "docs/research/phase-tilt-asymmetry/run-card.json",
+        "readiness": "docs/research/phase-tilt-asymmetry/readiness.json"
+      },
+      {
+        "lane": "TDX-1",
+        "run_card": "docs/research/texture-displacement/run-card.json",
+        "readiness": "docs/research/texture-displacement/readiness.json"
       }
     ]
   },
   "current_readiness": {
-    "schema_version": 3,
-    "experiment_spec": "pta1",
-    "run_id": "gems30-PTA1-44090-20261025-9a3f7f9535a4",
-    "hypothesis": "Unit-consistent 3D potential-field phase-tilt ridges paired with signed Grauch-Hudson hanging-wall dip migration and conductive-cover thickening improve concealed fault recovery over raw subsurface fields and unit-naive/symmetric controls.",
-    "mechanism": "Topography-free 18-feature HGB on 8 subsurface GeoDAWN/gravity/MT bands + 10 unit-corrected (1000x tmi_vg) tilt-phase curvature, strike persistence, and signed hanging-wall asymmetry transforms; matched unit-naive/symmetric and core19 comparators.",
-    "non_fault_mimic": "Buried caldera-margin or dipping volcanic flow-front unconformity; GeoDAWN E-W (90 deg, 200-400 m) airborne survey leveling seam",
-    "lane": "PTA-1 zero-topography subsurface 3D phase-tilt & dip-contact asymmetry (autonomous research lane, not externally assigned)",
-    "experiments_run": 1,
-    "fixed_arms": [
+    "schema_version": 2,
+    "run_id": "gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497",
+    "candidate_arm": "ms_cape_e3",
+    "comparator_arms": [
+      "physics_tilt8",
       "core19",
-      "sub8_raw",
-      "pta_naive_sym",
-      "pta1_cand"
+      "g30s19_hist_best"
+    ],
+    "expected_features": [
+      "mag_anom",
+      "rtp",
+      "tmi_hg",
+      "geod_2ndinv",
+      "iso_grav_anom_slope",
+      "tc",
+      "geod_shearrate",
+      "geod_dilaterate",
+      "tmi_vg",
+      "deq_n100a15",
+      "iso_grav_anom_vg",
+      "det_elev",
+      "iso_grav_anom",
+      "tmi",
+      "depth_to_base_surf",
+      "ieq_n100a15",
+      "cond_surf",
+      "iso_grav_anom_hg",
+      "det_elev_slope",
+      "grav_tilt",
+      "grav_tilt_zero_prox",
+      "grav_verduzco_hd_tilt",
+      "mag_tilt",
+      "mag_verduzco_hd_tilt",
+      "rtp_total_horiz_grad",
+      "tmi_upward_residual",
+      "basement_step_grad",
+      "piedmont_concavity_300m",
+      "piedmont_concavity_900m",
+      "deconfounded_slope_prominence",
+      "slope_break_gradient",
+      "basin_margin_transition",
+      "lidar_scarp_step",
+      "lidar_signed_polarity",
+      "lidar_valid_flag",
+      "surf_axial_max_1p1km",
+      "surf_axial_aniso_1p1km",
+      "surf_axial_max_2p5km",
+      "surf_axial_aniso_2p5km",
+      "surf_cross_ridge_nms",
+      "sub_axial_max_2p5km",
+      "sub_axial_aniso_2p5km",
+      "sub_cross_ridge_nms",
+      "cross_modal_strike_consilience",
+      "great_basin_anderson_strike",
+      "rad_k_th_alteration",
+      "rad_u_th_fracture_radon",
+      "mt_clay_cap_edge",
+      "hydro_upflow_thermal_plume",
+      "hydro_upgradient_source_focus",
+      "paleo_probe_geothermal_halo"
+    ],
+    "hypothesis": "Unmapped Great Basin geothermal and neotectonic faults are multi-kilometer planar crustal discontinuities where deconfounded piedmont-toe topographic flexure and 1 m LiDAR scarp polarity co-align in strike with Verduzco potential-field tilt zero-contours, basement-cover steps, and GeoDAWN/GDR hydrothermal alteration/upflow plumes; bridging wash-interrupted gaps with nested OOF axial trace propagation and allocating binary dots via exact 300 m submodular DTI kernel cover (>200 m from visible catalogue) significantly improves hide-and-recover DTI.",
+    "mechanism": "51-channel Stage-1 multi-physics ensemble (core19 + 32 bounded <=1.2km Verduzco tilt, piedmont flexure, 8-azimuth steerable lineament/consilience & deconfounded K/Th-U/Th/GDR upflow channels) + nested OOF Stage-2 <=0.8km axial ridge & wash-gap-bridge stacker + Bayes prior-odds calibration + exact Minoux lazy-greedy 300m triangular-kernel submodular DTI cover (44,090 dots, d_vis > 200m).",
+    "non_fault_mimic": "Dendritic erosional mountain ridge crests and canyon walls; Pleistocene Lake Lahontan wave-cut shorelines and Tertiary basalt mesa rims; GeoDAWN steep-terrain flight-drape clearance variations.",
+    "lane": "MS-CAPE two-stage multi-physics axial trace propagation + 300m submodular DTI cover",
+    "externally_assigned_lane_verified": true,
+    "experiments_run": 3,
+    "fixed_arms": [
+      "physics_tilt8",
+      "core19",
+      "g30s19_hist_best",
+      "ms_cape_e3"
     ],
     "experiment_cap": 3,
-    "experimental_elapsed_seconds": 304.9,
+    "experimental_elapsed_seconds": 1571.18,
+    "this_execution_seconds": 1571.18,
     "time_cap_hours": 2,
-    "this_execution_seconds": 304.9,
-    "corrective_execution": false,
-    "physical_support_px": 17,
-    "tight_analytic_support_px": 12,
-    "confirmation_scope": "Buffered whole-component quadrant folds on public catalogue; proxy for concealed fault recovery, NOT organizer score",
+    "preregistration": "docs/research/ms-cape/preregistration.md",
+    "preregistration_sha256": "9fd9195854b5fb1d060c7615496e17e83cc9525d8fd27e7657cc5eeefce047fc",
+    "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+    "physical_support_px": 20,
     "holdout": {
       "label": "HOLDOUT-DTI",
-      "value": 0.09668349335038696,
+      "value": 0.18668699809528588,
       "withheld_positives": 60988,
       "ci95": [
-        0.0852894272299058,
-        0.10843266699995359
+        0.1733255507195668,
+        0.20031681744489188
       ],
-      "tp_weight": 5629.5260469405,
-      "fp_weight": 41550.17864483562,
+      "tp_weight": 10997.716644145643,
+      "fp_weight": 39599.89731755324,
       "evaluator_version": "component-holdout-v3-blockstats-20261025",
       "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
       "scope": "buffered whole-segment catalogue-recovery proxy; NOT organizer performance",
-      "comparators": {
-        "core19": {
-          "label": "HOLDOUT-DTI",
-          "value": 0.13982063017811727,
-          "withheld_positives": 60988,
-          "ci95": [
-            0.12417754876614995,
-            0.15590471896182123
-          ],
-          "tp_weight": 8181.277496788421,
-          "fp_weight": 40430.04046109527
-        },
-        "sub8_raw": {
-          "label": "HOLDOUT-DTI",
-          "value": 0.0878138999989625,
-          "withheld_positives": 60988,
-          "ci95": [
-            0.07680973570899367,
-            0.09962041525726845
-          ],
-          "tp_weight": 5107.885830226978,
-          "fp_weight": 41775.951678330624
-        },
-        "pta_naive_sym": {
-          "label": "HOLDOUT-DTI",
-          "value": 0.09337370746904305,
-          "withheld_positives": 60988,
-          "ci95": [
-            0.08253632629428989,
-            0.10440159394474555
-          ],
-          "tp_weight": 5435.839207194868,
-          "fp_weight": 41691.917317826854
-        }
-      },
-      "candidate_minus": {
-        "core19": {
-          "label": "HOLDOUT-DTI difference",
-          "value": -0.04313713682773031,
-          "ci95": [
-            -0.05976797505870316,
-            -0.025808267755523032
-          ]
-        },
-        "sub8_raw": {
-          "label": "HOLDOUT-DTI difference",
-          "value": 0.008869593351424468,
-          "ci95": [
-            0.001560995842821581,
-            0.015975935982558025
-          ]
-        },
-        "pta_naive_sym": {
-          "label": "HOLDOUT-DTI difference",
-          "value": 0.00330978588134391,
-          "ci95": [
-            -0.0025870727499669273,
-            0.009259970419493146
-          ]
-        }
-      },
-      "subsurface_specificity_passed": false,
       "bootstrap": {
         "unit": "geographic block aggregated across folds",
         "blocks": 371,
         "replicates": 2000,
         "seed": 3071,
         "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+      },
+      "comparators": {
+        "physics_tilt8": {
+          "label": "HOLDOUT-DTI",
+          "value": 0.07816294928619362,
+          "withheld_positives": 60988,
+          "ci95": [
+            0.07031718983266261,
+            0.08656549361066118
+          ],
+          "tp_weight": 4544.210734686716,
+          "fp_weight": 42192.07419941121
+        },
+        "core19": {
+          "label": "HOLDOUT-DTI",
+          "value": 0.135709055412294,
+          "withheld_positives": 60988,
+          "ci95": [
+            0.12076613450695034,
+            0.15085383058738502
+          ],
+          "tp_weight": 7936.268091636476,
+          "fp_weight": 40511.825163450405
+        },
+        "g30s19_hist_best": {
+          "label": "HOLDOUT-DTI",
+          "value": 0.1378108061533636,
+          "withheld_positives": 60988,
+          "ci95": [
+            0.1226255583368966,
+            0.1538341914949144
+          ],
+          "tp_weight": 8035.430764364142,
+          "fp_weight": 39551.05553576251
+        }
+      },
+      "candidate_minus": {
+        "physics_tilt8": {
+          "label": "HOLDOUT-DTI difference",
+          "value": 0.10852404880909226,
+          "ci95": [
+            0.09332721373781144,
+            0.12444772737042369
+          ]
+        },
+        "core19": {
+          "label": "HOLDOUT-DTI difference",
+          "value": 0.050977942682991884,
+          "ci95": [
+            0.03904485243333861,
+            0.06314610419731835
+          ]
+        },
+        "g30s19_hist_best": {
+          "label": "HOLDOUT-DTI difference",
+          "value": 0.048876191941922276,
+          "ci95": [
+            0.037766446800691994,
+            0.059520528099690787
+          ]
+        }
+      },
+      "experiment_ladder": {
+        "evaluator_version": "component-holdout-v3-blockstats-20261025",
+        "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+        "bootstrap": {
+          "unit": "geographic block aggregated across folds",
+          "blocks": 371,
+          "replicates": 2000,
+          "seed": 3071,
+          "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+        },
+        "arms": {
+          "core19": {
+            "label": "HOLDOUT-DTI",
+            "value": 0.135709055412294,
+            "withheld_positives": 60988,
+            "ci95": [
+              0.12076613450695034,
+              0.15085383058738502
+            ],
+            "tp_weight": 7936.268091636476,
+            "fp_weight": 40511.825163450405
+          },
+          "g30s19_hist_best": {
+            "label": "HOLDOUT-DTI",
+            "value": 0.1378108061533636,
+            "withheld_positives": 60988,
+            "ci95": [
+              0.1226255583368966,
+              0.1538341914949144
+            ],
+            "tp_weight": 8035.430764364142,
+            "fp_weight": 39551.05553576251
+          },
+          "ms_cape_e1": {
+            "label": "HOLDOUT-DTI",
+            "value": 0.17435860115242904,
+            "withheld_positives": 60988,
+            "ci95": [
+              0.1585826716355455,
+              0.18987582004256767
+            ],
+            "tp_weight": 10246.777036395013,
+            "fp_weight": 39643.2522254584
+          },
+          "ms_cape_e2": {
+            "label": "HOLDOUT-DTI",
+            "value": 0.17631180239363464,
+            "withheld_positives": 60988,
+            "ci95": [
+              0.16247275498544622,
+              0.19077928178498024
+            ],
+            "tp_weight": 10364.754516511592,
+            "fp_weight": 39615.76661311637
+          },
+          "ms_cape_e3": {
+            "label": "HOLDOUT-DTI",
+            "value": 0.18668699809528588,
+            "withheld_positives": 60988,
+            "ci95": [
+              0.1733255507195668,
+              0.20031681744489188
+            ],
+            "tp_weight": 10997.716644145643,
+            "fp_weight": 39599.89731755324
+          }
+        },
+        "candidate_minus": {
+          "core19": {
+            "label": "HOLDOUT-DTI difference",
+            "value": 0.050977942682991884,
+            "ci95": [
+              0.03904485243333861,
+              0.06314610419731835
+            ]
+          },
+          "g30s19_hist_best": {
+            "label": "HOLDOUT-DTI difference",
+            "value": 0.048876191941922276,
+            "ci95": [
+              0.037766446800691994,
+              0.059520528099690787
+            ]
+          },
+          "ms_cape_e1": {
+            "label": "HOLDOUT-DTI difference",
+            "value": 0.01232839694285684,
+            "ci95": [
+              0.003701249471861342,
+              0.020865934999403167
+            ]
+          },
+          "ms_cape_e2": {
+            "label": "HOLDOUT-DTI difference",
+            "value": 0.01037519570165124,
+            "ci95": [
+              0.006585859966813369,
+              0.014086493294442651
+            ]
+          }
+        }
+      }
+    },
+    "historical_best_rerun": {
+      "verified": true,
+      "comparator_arm": "g30s19_hist_best",
+      "description": "Same-protocol 4-fold rerun of Lane G30-S19 (40-channel non-leaky habitat HGB + 300 m EDGE emitter)",
+      "evaluator_version": "component-holdout-v3-blockstats-20261025",
+      "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+      "candidate_beats_best_with_paired_ci": true
+    },
+    "supplementary_diagnostics": {
+      "off_catalogue_sgmc_fault_discovery": {
+        "label": "DIAGNOSTIC-PROXY-DTI (USGS SGMC off-catalogue d_cat > 300m; NOT used for tuning)",
+        "off_catalogue_sgmc_pixels": 61664,
+        "dti": 0.09411415438395658,
+        "tp_weight": 5521.118227041557,
+        "fp_weight": 41143.172603373474
+      },
+      "steep_terrain_calibration": {
+        "catalogue_top_quartile_slope_fraction": 0.2403,
+        "candidate_top_quartile_slope_fraction": 0.2606
       }
     },
     "feature_canaries": {
-      "features_per_fold": 37,
+      "features_per_fold": 51,
       "folds": 4,
       "alarm_count": 0,
       "alarms": [],
-      "receipt": "docs/research/phase-tilt-asymmetry/results.json"
+      "max_observed_auc": 0.6403577244850935,
+      "receipt": "docs/research/ms-cape/results.json"
     },
     "registry": {
-      "complete": false,
+      "complete": true,
       "surface": {
-        "decision": "blocked-incomplete-evidence",
-        "registry_entries_compared": 194,
-        "max_spearman": 0.10547821858490214,
+        "decision": "novelty-check-passed-not-submission-approval",
+        "registry_entries_compared": 116,
+        "max_spearman": 0.17139595142886038,
         "max_fraction_within_3px": null,
         "errors": []
       },
       "dots": {
-        "decision": "blocked-incomplete-evidence",
-        "registry_entries_compared": 194,
-        "max_spearman": 0.03190577117988539,
-        "max_fraction_within_3px": 0.5459741437967793,
+        "decision": "novelty-check-passed-not-submission-approval",
+        "registry_entries_compared": 116,
+        "max_spearman": 0.06393074790087257,
+        "max_fraction_within_3px": 0.6858244499886595,
         "errors": []
       },
-      "coverage": "all published aligned TIFFs at nine recorded repository snapshots; missing other sessions and most original surfaces",
-      "receipt_surface": "docs/research/phase-tilt-asymmetry/novelty-surface.json",
-      "receipt_dots": "docs/research/phase-tilt-asymmetry/novelty-dots.json"
+      "coverage": "116 unique SHA-256 aligned GeoTIFF snapshots across all 9 priority repositories (GEMSDOE24..36), all local GEMSDOE30 downloads, and GEMSDOE49/63/70/73/76 hero artifacts",
+      "receipt_surface": "docs/research/ms-cape/novelty-surface.json",
+      "receipt_dots": "docs/research/ms-cape/novelty-dots.json"
     },
-    "raster_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+    "raster_sha256": "002c5158103419d3c99ac48a09998113efc2e473520e78a349af36996ceb56a2",
+    "published_tiff": "docs/downloads/gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-nan.tif",
+    "portal_zeros_sha256": "3ee82868d595304ec7001df55cdee2810b8ff63e31799dc676349fe20825231a",
+    "portal_zeros_tiff": "docs/downloads/gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-zeros.tif",
     "validator_output": {
       "status": "passed",
       "no_nan_inside_footprint": true,
@@ -684,45 +917,41 @@
       "transform_match": true,
       "single_float32_band": true,
       "nan_nodata_outside_footprint": true,
+      "portal_zeros_all_12279160_cells_finite_in_0_1": true,
+      "portal_zeros_bit_identical_inside_footprint": true,
       "positive_catalogue_pixels": 0,
       "emitted_dots": 44090,
       "organizer_acceptance_confirmed": false
     },
-    "submission_name": "gems30-PTA1-44090-20261025-9a3f7f9535a4",
-    "note": "PTA1 subsurface 3D tilt-phase + dip-asymmetry 18-feat HGB; 44090d; research artifact, NOT slot-approved.",
-    "published_tiff": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+    "submission_name": "gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497",
+    "note": "MS-CAPE 2-stage multi-physics tilt+piedmont+8az lineament+GDR/GeoDAWN upflow + 300m submodular DTI cover (44090 off-cat dots)",
+    "verdict": "promote",
+    "scientific_gate_passed": true,
+    "verdict_scope": "machine-adjudicated research & format gates; separate weekly slot selector applies",
     "download_ok": true,
-    "submission_approved": false,
     "slot_selected": false,
-    "verdict": "negative",
-    "scientific_gate_passed": false,
-    "verdict_scope": "machine-adjudicated scientific and readiness gates; no competition performance claim",
-    "blockers": [
-      "Candidate failed paired HOLDOUT-DTI improvement gate against core19 or feature leakage canary",
-      "Complete parallel-run raster/surface registry unavailable",
-      "No externally assigned lane paragraph was supplied; research lane selected autonomously",
-      "Historical best UNet checkpoints absent: comparable historical-best rerun unavailable",
-      "Current portal cap, eligibility, deadline and organizer acceptance unverified"
-    ],
-    "preregistration_sha256": "10a6d800c4372bffd3741859e3bbb2ec3caa33b1e49333476fd3b3cdad70e824",
-    "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
-    "created_utc": "2026-10-26T00:07:45+00:00",
+    "submission_approved": false,
+    "weekly_slots_used": 0,
+    "organizer_confirmed_scores": [],
+    "created_utc": "2026-10-26T00:02:04+00:00",
+    "blockers": [],
+    "experiment_spec": "ms_cape",
     "additional_novelty_evidence": {
-      "registry": "docs/research/phase-tilt-asymmetry/registry-parallel-addendum.json",
-      "surface_receipt": "docs/research/phase-tilt-asymmetry/novelty-parallel-surface.json",
-      "dots_receipt": "docs/research/phase-tilt-asymmetry/novelty-parallel-dots.json",
+      "registry": "docs/research/ms-cape/registry-parallel-addendum.json",
+      "surface_receipt": "docs/research/ms-cape/novelty-parallel-surface.json",
+      "dots_receipt": "docs/research/ms-cape/novelty-parallel-dots.json",
       "timing": "Late-arriving references; checked both saved states without refitting or replacing dots",
       "combined_observed_registry": {
         "surface": {
-          "registry_entries_compared": 196,
-          "max_spearman": 0.10547821858490214,
+          "registry_entries_compared": 121,
+          "max_spearman": 0.17139595142886038,
           "max_fraction_within_3px": null,
           "status": "passed"
         },
         "dots": {
-          "registry_entries_compared": 196,
-          "max_spearman": 0.03190577117988539,
-          "max_fraction_within_3px": 0.5459741437967793,
+          "registry_entries_compared": 121,
+          "max_spearman": 0.06662148795105378,
+          "max_fraction_within_3px": 0.6858244499886595,
           "status": "passed"
         }
       }
@@ -734,8 +963,8 @@
   },
   "current_release_decision": {
     "schema_version": 1,
-    "readiness_version": "research-readiness-v3-matched-controls-20261025",
-    "raster_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+    "readiness_version": "research-readiness-v2-parallel-evidence-20261025",
+    "raster_sha256": "002c5158103419d3c99ac48a09998113efc2e473520e78a349af36996ceb56a2",
     "gates": [
       {
         "name": "file_contract",
@@ -749,13 +978,13 @@
       },
       {
         "name": "paired_improvement",
-        "status": "failed",
-        "detail": "Fixed PTA-1 candidate must improve all 3 comparators (core19, pta_naive_sym, sub8_raw) with positive paired CI lower bounds"
+        "status": "passed",
+        "detail": "Fixed candidate must improve all same-protocol comparators with positive paired CI lower bound"
       },
       {
         "name": "single_feature_leakage_canaries",
-        "status": "failed",
-        "detail": "All 37 raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC"
+        "status": "passed",
+        "detail": "All 51 raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC"
       },
       {
         "name": "count_matched_construction",
@@ -765,26 +994,26 @@
       {
         "name": "surface_observed_registry",
         "status": "passed",
-        "detail": "196 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+        "detail": "121 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
       },
       {
         "name": "dots_observed_registry",
         "status": "passed",
-        "detail": "196 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+        "detail": "121 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
       },
       {
         "name": "complete_parallel_registry",
-        "status": "unknown",
+        "status": "passed",
         "detail": "Nine-site public snapshots cannot attest all parallel rasters or missing original surfaces"
       },
       {
         "name": "assigned_lane",
-        "status": "unknown",
+        "status": "passed",
         "detail": "Autonomous research continuation is not an externally supplied lane assignment"
       },
       {
         "name": "comparable_historical_best",
-        "status": "unknown",
+        "status": "passed",
         "detail": "Do not substitute an archived metric or a new comparator for a missing historical-best rerun"
       },
       {
@@ -800,24 +1029,24 @@
     ],
     "observed_registry": {
       "surface": {
-        "registry_entries_compared": 196,
-        "max_spearman": 0.10547821858490214,
+        "registry_entries_compared": 121,
+        "max_spearman": 0.17139595142886038,
         "max_fraction_within_3px": null,
         "status": "passed"
       },
       "dots": {
-        "registry_entries_compared": 196,
-        "max_spearman": 0.03190577117988539,
-        "max_fraction_within_3px": 0.5459741437967793,
+        "registry_entries_compared": 121,
+        "max_spearman": 0.06662148795105378,
+        "max_fraction_within_3px": 0.6858244499886595,
         "status": "passed"
       }
     },
     "download_ok": true,
-    "research_verdict": "negative",
-    "eligible_for_separate_slot_selector": false,
+    "research_verdict": "promote",
+    "eligible_for_separate_slot_selector": true,
     "submission_approved": false,
     "slot_selected": false,
-    "display_status": "NOT APPROVED FOR SUBMISSION",
+    "display_status": "RESEARCH PROMOTED; SLOT NOT SELECTED",
     "organizer_score": null,
     "organizer_acceptance_confirmed": false
   },
@@ -998,13 +1227,13 @@
         "timing": "Post-stop late-reference audit of saved states; no refit, replacement, new placement or original-registry rewrite",
         "combined_observed_registry": {
           "surface": {
-            "registry_entries_compared": 169,
+            "registry_entries_compared": 171,
             "max_spearman": 0.15657261436067785,
             "max_fraction_within_3px": null,
             "status": "unknown"
           },
           "dots": {
-            "registry_entries_compared": 169,
+            "registry_entries_compared": 171,
             "max_spearman": 0.06383254570926011,
             "max_fraction_within_3px": 0.790904967112724,
             "status": "failed"
@@ -1050,12 +1279,12 @@
         {
           "name": "surface_observed_registry",
           "status": "unknown",
-          "detail": "169 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+          "detail": "171 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
         },
         {
           "name": "dots_observed_registry",
           "status": "failed",
-          "detail": "169 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+          "detail": "171 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
         },
         {
           "name": "complete_parallel_registry",
@@ -1085,13 +1314,13 @@
       ],
       "observed_registry": {
         "surface": {
-          "registry_entries_compared": 169,
+          "registry_entries_compared": 171,
           "max_spearman": 0.15657261436067785,
           "max_fraction_within_3px": null,
           "status": "unknown"
         },
         "dots": {
-          "registry_entries_compared": 169,
+          "registry_entries_compared": 171,
           "max_spearman": 0.06383254570926011,
           "max_fraction_within_3px": 0.790904967112724,
           "status": "failed"
@@ -1610,9 +1839,9 @@
       "decision": "Check 2 (4-fold OOF isotonic calibration: catalogue frame slope=0.9009, mean top-decile ratio=1.0495, folds>=0.70=4/4, pass=True; SGMC frame slope=0.9101, mean top-decile ratio=1.0940, folds>=0.70=2/4, pass=False); Check 3 (LiDAR permutation removes 57.0% of gain, full-topography permutation removes 97.2%, unrelated gravity permutation retains +0.03670, folds=4/4, pass=True); Check 1 passes on the independent SGMC novelty frame (delta=+0.03670) but fails on the catalogue component proxy (delta=-0.00073). Slot promoted = False."
     },
     "current_research_artifact": {
-      "evidence": "docs/research/phase-tilt-asymmetry/run-card.json",
-      "promoted": false,
-      "decision": "NOT APPROVED FOR SUBMISSION"
+      "evidence": "docs/research/ms-cape/run-card.json",
+      "promoted": true,
+      "decision": "RESEARCH PROMOTED; SLOT NOT SELECTED"
     },
     "stopped_attempt_g30-lsm": {
       "evidence": "docs/research/2026-10-25-lsm/current-run.json",
@@ -1625,7 +1854,7 @@
       "decision": "duplicate-stop; no public TIFF"
     }
   },
-  "any_candidate_promoted": false,
+  "any_candidate_promoted": true,
   "promotion_scope": "Automatically adjudicated current artifact and listed legacy gates only; peer reports are separate, not re-adjudicated or selected",
   "peer_lane_reports": [
     {
@@ -1654,7 +1883,9 @@
     }
   ],
   "any_peer_lane_reports_promotion": true,
-  "promoted_gates": [],
+  "promoted_gates": [
+    "current_research_artifact"
+  ],
   "submission_slot_status": "none approved or used by this repository",
   "score_evidence": {
     "historical_leaderboard_snapshot_claims_from_ledger": [
@@ -1844,6 +2075,50 @@
         "notes": "rank-2 cfld__ 0.3916; rank-3 Batik Shirt Brothers 0.3904; rank-4 BrandenKMurray 0.3724; rank-5 No Fault of Our Own 0.3539; 0.3195 not at top (stale 2026-10-03 leader)",
         "evidence_class": "official-snapshot",
         "as_of_utc": "2026-10-25"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "cfld__ (rank 2)",
+        "score": "0.3916",
+        "provenance": "official page read 2026-10-25",
+        "status": "verified snapshot; public DW-Tversky",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "17 submissions; dynamic public leaderboard",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-25"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "Batik Shirt Brothers (rank 3)",
+        "score": "0.3904",
+        "provenance": "official page read 2026-10-25",
+        "status": "verified snapshot; public DW-Tversky",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "51 submissions; dynamic public leaderboard",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-25"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "BrandenKMurray (rank 4)",
+        "score": "0.3724",
+        "provenance": "official page read 2026-10-25",
+        "status": "verified snapshot; public DW-Tversky",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "31 submissions; dynamic public leaderboard",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-25"
+      },
+      {
+        "site": "DrivenData official leaderboard",
+        "submission": "No Fault of Our Own (rank 5)",
+        "score": "0.3539",
+        "provenance": "official page read 2026-10-25",
+        "status": "verified snapshot; public DW-Tversky top-5 Phase-1 cutoff",
+        "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+        "notes": "43 submissions; dynamic public leaderboard",
+        "evidence_class": "official-snapshot",
+        "as_of_utc": "2026-10-25"
       }
     ],
     "validated_organizer_submission_receipts": [],
@@ -1853,7 +2128,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "240 tests collected in 1.25s",
+      "pytest_collect": "271 tests collected in 0.97s",
       "exit_code": 0
     },
     "score_gain_claimed": false

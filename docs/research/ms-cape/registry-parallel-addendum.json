@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "original_registry_sha256": "4c30a765e89baf8e0914241f437082b462cf90ec52ce18df64337acb7913820e",
+  "complete": true,
+  "rasters": [
+    {
+      "site": "GEMSDOE30-NEARSPLAY",
+      "path": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+      "aligned": true
+    },
+    {
+      "site": "GEMSDOE30-MSDB-1v2",
+      "path": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+      "sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+      "aligned": true
+    },
+    {
+      "site": "GEMSDOE30-PTA1",
+      "path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "aligned": true
+    },
+    {
+      "site": "GEMSDOE30-G30-S20",
+      "path": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif",
+      "sha256": "12bd6196cdebfbaa39960d0d6f600fde498f1fb7675321222ba49489dec69b22",
+      "aligned": true
+    },
+    {
+      "site": "GEMSDOE30-G30-S20",
+      "path": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
+      "sha256": "1b07820d0066e56442ade4f4a3880af92f50b4ca9cac528ccf59696ec5299cd6",
+      "aligned": true
+    }
+  ]
+}

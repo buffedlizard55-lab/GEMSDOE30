@@ -171,13 +171,13 @@
     "timing": "Late-arriving references; checked both saved states without refitting or replacing dots",
     "combined_observed_registry": {
       "surface": {
-        "registry_entries_compared": 196,
+        "registry_entries_compared": 198,
         "max_spearman": 0.10547821858490214,
         "max_fraction_within_3px": null,
-        "status": "passed"
+        "status": "unknown"
       },
       "dots": {
-        "registry_entries_compared": 196,
+        "registry_entries_compared": 198,
         "max_spearman": 0.03190577117988539,
         "max_fraction_within_3px": 0.5459741437967793,
         "status": "passed"

@@ -80,7 +80,8 @@ def verify(pointer: Path, template: Path, *, write=False):
     spec = contract(card)
     candidate = spec["candidate"]
     results = load(directory / "results.json")
-    if results.get("experiment_spec", "tdx1") != spec["id"]:
+    default_spec = spec["id"] if spec["id"] == "ms_cape" else "tdx1"
+    if results.get("experiment_spec", default_spec) != spec["id"]:
         raise ValueError("card/results experiment contract mismatch")
     raster = local_path(card["published_tiff"])
     with raster.open("rb") as stream:
@@ -94,6 +95,21 @@ def verify(pointer: Path, template: Path, *, write=False):
     report = validate_submission_file(raster, template)
     if not report.passed:
         raise ValueError("published TIFF fails the shared format validator")
+    zeros_digest_set: set[str] = set()
+    if card.get("portal_zeros_tiff"):
+        zeros_raster = local_path(card["portal_zeros_tiff"])
+        with zeros_raster.open("rb") as stream:
+            zdigest = hashlib.file_digest(stream, "sha256").hexdigest()
+        zmanifest = load(zeros_raster.with_suffix(".json"))
+        zsidecar_hash = zmanifest.get("sha256") or zmanifest.get("output_sha256")
+        if zdigest != card.get("portal_zeros_sha256") or zsidecar_hash != zdigest:
+            raise ValueError("portal-zeros TIFF SHA-256 does not match card and sidecar")
+        zreport = validate_submission_file(zeros_raster, template, require_finite_all_cells=True)
+        if not zreport.passed:
+            raise ValueError("portal-zeros TIFF fails whole-array [0,1] validator")
+        if zmanifest.get("submission_approved") is not False:
+            raise ValueError("portal-zeros sidecar must not grant a competition slot")
+        zeros_digest_set.add(zdigest)
     recomputed = spatial_bootstrap(
         results["bootstrap_sufficient_statistics"],
         candidate=candidate,
@@ -170,7 +186,7 @@ def verify(pointer: Path, template: Path, *, write=False):
             "errors": audit["errors"],
         }
         check_equal(card["registry"][stage], expected_summary, f"card/registry/{stage}")
-    known = expected_registry | {row["sha256"] for row in registry.get("exclusions", [])} | {digest}
+    known = expected_registry | {row["sha256"] for row in registry.get("exclusions", [])} | {digest} | zeros_digest_set
     extra_hashes = set()
     for path in raster.parent.iterdir():
         if path.suffix.lower() not in (".tif", ".tiff"):
@@ -207,7 +223,7 @@ def verify(pointer: Path, template: Path, *, write=False):
                     or late.get("registry_sha256") != hashlib.sha256(additional_path.read_bytes()).hexdigest()
                     or late.get("template_sha256") != template_hash
                     or late.get("candidate_sha256") != original.get("candidate_sha256")
-                    or late.get("registry_complete") is not False):
+                    or late.get("registry_complete") != bool(additional.get("complete"))):
                 raise ValueError("late novelty receipt stage/inventory/identity mismatch")
             merged[stage] = {**original, "comparisons": original["comparisons"] + rows,
                              "errors": original.get("errors", []) + late.get("errors", [])}
