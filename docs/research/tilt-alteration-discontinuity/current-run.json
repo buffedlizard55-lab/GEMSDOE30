@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "lane": "G30-TAD",
+  "verifier": "scripts/verify_tad_run.py",
+  "run_card": "docs/research/tilt-alteration-discontinuity/run-card.json",
+  "readiness": "docs/research/tilt-alteration-discontinuity/readiness.json"
+}

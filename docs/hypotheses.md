@@ -1,5 +1,16 @@
 # Ranked geological hypotheses — preregistration candidates
 
+**2026-10-25 session results.** Two holdout experiments ran within the three-experiment / two-hour
+cap (docs/research/h-vent-feeder-holdout.json, docs/research/h-nearsplay-holdout.json). H-VENT
+(volcanic-vent feeder alignment) was negative on the catalogue proxy and is not promoted. H-NEARSPLAY
+(near-splay annulus, 300 m–1.5 km off-catalogue, inner-edge weighted) passed screen and confirmation
+(Δ +0.066, CI entirely above 0, 4/4 quadrants on both splits) and is promoted on holdout; its TIFF
+is published at docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif
+with SHA-256 f877c278…623c52. The holdout is a catalogue proxy (HOLDOUT-DTI), not an organizer score;
+the file is NOT ORGANIZER-CONFIRMED and no competition slot was used. The file is unique vs the 21
+locally available registry rasters (max Spearman rho 0.070 < 0.90; max dot overlap 68.1% < 70% within
+3 px). No candidate below may consume a weekly slot without its own holdout pass.
+
 **Status of this file (reviewed 2026-10-03):** the active five-hypothesis shortlist immediately
 below contains genuinely untried candidates bounded by inspected repository experiments and public
 owner summaries. H-31-01, H-31-02b, H-31-02r, H-32-01, H-32-05, H-32-05b, and H-33-01 have measured
@@ -367,3 +378,14 @@ H-34-01 is the next action because its data are already on disk.
 | H-LSM-4 | Lake Lahontan shoreline rejection using absolute elevation (3DEP 1/3″ via TNM Access) | Not run (rank 4). Needs a GitHub Actions fetch. |
 | H-LSM-5 | Side-of-fault (hanging-wall) relative elevation | Not run (rank 5). Catalogue-relative, which conflicts with the leaderboard evidence. |
 | M-LB-1 (meta) | Leaderboard calibration: a uniform lattice fixes ρ; nested pairs give marginal hit rates | ρ ≈ 0.244 % (PROJECTION). Near-catalogue dots ≈ 0 hits; D-family coverage ≈ 40.5 %. See `leaderboard-calibration.json`. |
+
+## 2026-10-25 / 2026-10-26 — lane G30-TAD (ranked before implementation; see `docs/research/tilt-alteration-discontinuity/geothermal-and-h33-synthesis.md` & `preregistration.md`)
+
+| Rank / ID | Hypothesis (layers -> physical signature -> non-fault mimic) | Status & Labelled Evidence |
+|---|---|---|
+| **1 · H-TAD-1** | **Coordinate-free multi-physics tilt-depth, potassic alteration & dip-slip scarp discontinuity (`tilt_alt24` + `decensored_30_40_30` OOF emission)**: Salem magnetic/gravity tilt-angle & tilt-depth (`h_tilt`), 150 m FFT upward-continuation residual, fold-safe OLS `K_d` & Efimov `F` potassic alteration (`derived_radiometric_100m_f32.tif`), MT clay-cap conductance edge, basement hinge strike-lock, sinter/2m-probe/SiO2 impulse (bands 1–4 only), and 1 m LiDAR dip-slip scarp polarity (`scarp_signed_step * sign(n · grad det_elev)`). Mimic: tilted welded ash-flow tuff / caldera ring-fracture lithologic contacts with vapor-phase potassic crystallization. | **Executed (E1 + E2 + E3):** `HOLDOUT-DTI` (`component-holdout-v3-blockstats-20261025`, 60,988 withheld positives): `tilt_alt24` = **0.14405** `[0.12717, 0.16007]` vs `core19` = **0.13982** `[0.12418, 0.15590]` (`Δ = +0.00423`, `95% CI [-0.01554, +0.02398]`; Fold 0 NW Nevada `+0.01801`), `subsurface16` = **0.10959** `[0.09685, 0.12264]` (`Δ = +0.03445`, `[+0.02272, +0.04592]`), `random_dispersed` = **0.08253** (`Δ = +0.06152`, `[+0.04472, +0.07844]`). `144/144` canaries `<= 0.6434`. **Passed BOTH 190-raster novelty gates:** surface Spearman `0.1637 <= 0.90`, dot 3-px overlap **`51.44% <= 70.0%`**. Unique dual GeoTIFFs (`-zeros.tif` & `-nan.tif`) published (`download_ok = true`), **verdict = `negative` (`ok_to_submit = false` — CI vs `core19` crosses zero; do not spend weekly slot)**. |
+| **1b · H-TAD-1s** | **Pure subsurface potential-field tilt-depth + potassic alteration + clay-cap ablation (`subsurface16`, zero elevation/slope/LiDAR)** | **Executed (E1 + E2):** `HOLDOUT-DTI` = **0.10959** `[0.09685, 0.12264]`, beating `random_dispersed` (`0.08253`) by `+0.02706` (`+32.8%`) and `TDX-1` (`0.07284`) by `+0.03675` (`+50.5%`), proving buried geophysical + radiometric alteration signal without surface relief. |
+| **2 · H-TAD-2** | **Tensor geodetic Riedel/normal principal-strain azimuth alignment (`geod_dilaterate`, `geod_shearrate`, `geod_2ndinv` vs geophysical strike)** | Ranked #2 pre-implementation; deferred for `G30-FUSION` next session (E1 Fold 1–2Walker Lane ablation confirmed regional strain rate carries real tectonic density information when combined with local discontinuity physics). |
+| **3 · H-TAD-3** | **3D Poisson pseudo-gravity remnant magnetization & Curie/hydrothermal demagnetization trough (`rtp` vs pseudo-gravity from `iso_grav_anom`)** | Ranked #3 pre-implementation; not run (medium FFT edge-padding cost; `tmi_up150_res` + `rad_kd` already captured shallow demagnetization/alteration coupling). |
+| **4 · H-TAD-4** | **USGS SGMC Quaternary alluvial-cover observability prior (`NV.zip` + `CA.zip` polygons in `data/external/`)** | Ranked #4 pre-implementation; radial `decensored_30_40_30` proxy tested in E2 improved off-catalogue `SGMC-new` (`0.08178` vs plain `0.08117`) and lowered 190-raster dot overlap from `G30-LSM`'s `80.2%` to **`51.44%`**. Polygon rasterization recommended for `G30-FUSION`. |
+| **5 · H-TAD-5** | **Multi-azimuth 1 m LiDAR piedmont fan-incision break (`derived_1m_dem_100m_f32.tif` + `1m_DEM_links.csv`)** | Ranked #5 pre-implementation; not run (requires raw 1 m tile re-streaming outside 2-hour cap). |

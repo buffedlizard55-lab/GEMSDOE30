@@ -1,0 +1,21 @@
+{
+  "run_name": "gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros",
+  "note": "G30-TAD OOF tilt-depth+Kd-alt+dip-slip 38k; negative gate (0.1440); DO NOT SUBMIT.",
+  "note_length": 82,
+  "output_path": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif",
+  "output_sha256": "3077db43ee72ee526d8b943d1db40f19ce49be9d8ccd3109068ca442964f26cc",
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "outside_encoding": "zeros",
+  "whole_array_in_0_1": true,
+  "emitted_dots": 38000,
+  "submission_approved": false,
+  "slot_selected": false,
+  "schema_version": 3,
+  "output_file": "gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif",
+  "outside_convention": "0.0 outside; all-finite [0, 1] across full 3730x3292 frame",
+  "published_format_compliant": false,
+  "whole_raster_range_diagnostic_passed": true,
+  "all_cells_in_0_1": true,
+  "nan_cells_anywhere": 0,
+  "performance_status": "unscored; format validation is not a score"
+}

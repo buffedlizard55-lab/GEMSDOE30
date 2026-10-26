@@ -1,0 +1,16 @@
+{
+  "started_utc": "2026-10-26T00:13:46+00:00",
+  "lane": "G30-TAD",
+  "experiment_cap": 3,
+  "fixed_arms_e1": [
+    "random_dispersed",
+    "subsurface16",
+    "core19",
+    "tilt_alt24"
+  ],
+  "preregistration_sha256": "9c7e91953be22f435d0113f8a9ce95d19cfc9aa86f7c3120d33052e91ef0c3d2",
+  "registry_sha256": "bec529994d009be6cedd23c35d0e788f876ae62bb4d2f86f3491c90915bdc527",
+  "script_sha256": "24c71761dea7299e35810abc6d5900976501d44d7a23765818541f8c388a4f78",
+  "transform_code_sha256": "6f3cdfebe6fe1c43bd09f1e7b2f948556a6051990efc078605a4792540596c79",
+  "max_experimental_seconds": 6600.0
+}

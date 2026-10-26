@@ -182,7 +182,7 @@ the central procedural error (IR-FFL-01).
 ### 4.2 Expanded audit
 
 The corrected audit uses the pinned registry plus every TIFF in
-`docs/downloads/`, excluding only the candidate's own SHA-256: **168
+`docs/downloads/`, excluding only the candidate's own SHA-256: **172
 comparisons**. Results:
 
 | Stage | Max Spearman | Reference at maximum | Max FFL dots within 3 px | Decision |
@@ -334,7 +334,7 @@ Key receipts:
    expert-labelled new faults may have a different distance distribution.
 3. **No score inference:** HOLDOUT-DTI gains cannot be converted into a
    leaderboard forecast. There is no ORGANIZER-CONFIRMED FFL score.
-4. **Incomplete global registry:** 168 observed comparisons are broad local
+4. **Incomplete global registry:** 172 observed comparisons are broad local
    evidence, not proof about unexported private or parallel-session rasters.
 5. **Placement remains the bottleneck:** the next experiment should audit a
    proposed dot set against all current downloads *before* spending holdout

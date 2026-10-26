@@ -353,6 +353,34 @@ def main() -> int:
         gates[f"stopped_attempt_{str(extra.get('lane')).lower()}"] = {
             "evidence": extra.get("pointer"), "promoted": False,
             "decision": row.get("decision", "blocked: inspection unavailable")}
+    additional_verified_lanes = []
+    for extra in selection.get("additional_verified_lanes", []):
+        row = {"lane": extra.get("lane"), "pointer": extra.get("pointer"), "verifier": extra.get("verifier")}
+        try:
+            if str(ROOT) not in sys.path:
+                sys.path.insert(0, str(ROOT))
+            from scripts.verify_current_run import verify as verify_by_pointer
+            ready = verify_by_pointer(ROOT / extra["pointer"], data_dir / "sample_submission.tif")
+            row.update({
+                "verified_now": True,
+                "error": None,
+                "decision": ready.get("decision", ready.get("display_status")),
+                "download_ok": ready.get("download_ok"),
+                "ok_to_submit": ready.get("ok_to_submit", False),
+                "research_verdict": ready.get("research_verdict"),
+                "primary_file": ready.get("primary_file"),
+                "companion_nan_file": ready.get("companion_nan_file"),
+                "raster_sha256": ready.get("raster_sha256"),
+                "gates": ready.get("gates", []),
+            })
+        except Exception as exc:
+            row.update({"verified_now": False, "error": str(exc), "ok_to_submit": False})
+        additional_verified_lanes.append(row)
+        gates[f"verified_lane_{str(extra.get('lane')).lower().replace('-', '_')}"] = {
+            "evidence": extra.get("pointer"),
+            "promoted": bool(row.get("ok_to_submit") is True and row.get("research_verdict") == "promote"),
+            "decision": row.get("decision", "blocked: inspection unavailable"),
+        }
     latest_attempt = None
     if selection.get("latest_attempt"):
         latest_path = ROOT / selection["latest_attempt"]
@@ -362,7 +390,7 @@ def main() -> int:
                           "decision": None, "public_download": False}
         try:
             from scripts.verify_stopped_attempt import verify as verify_stopped
-            latest_attempt["decision"] = verify_stopped(latest_path.parent, data_dir / "sample_submission.tif")
+            latest_attempt["decision"] = verify_stopped(latest_path.resolve().parent, data_dir / "sample_submission.tif")
             latest_attempt["receipt_inspection"] = {"verified_now": True, "error": None,
                                                     "private_raster_reopened": False}
         except Exception as exc:
@@ -438,6 +466,10 @@ def main() -> int:
         "current_release_decision": current_release,
         "latest_scientific_attempt": latest_attempt,
         "additional_stopped_attempts": additional_attempts,
+        "additional_verified_lanes": additional_verified_lanes,
+        "lane_g30_tad_run_card": load_json(
+            research / "tilt-alteration-discontinuity" / "run-card.json"
+        ),
         "legacy_readiness_2026_10_25": load_json(research / "2026-10-25" / "run-card.json"),
         "lane_g30s19_run_card": load_json(
             research / "2026-10-25" / "lane-g30s19-run-card.json"

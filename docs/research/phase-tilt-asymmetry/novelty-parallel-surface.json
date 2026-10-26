@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "stage": "surface",
+  "candidate": "/home/user/GEMSDOE30/outputs/phase-tilt-asymmetry/pta1-surface.tif",
+  "candidate_sha256": "d1470fc4bc01b95c8d0b30b25f218a05378ee7c43c442a117134ca1b65a83bb0",
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "registry_sha256": "902f06d718053963267844632b5c68a3d9925673ba0cbc93f764a767da462965",
+  "registry_complete": false,
+  "comparisons": [
+    {
+      "reference_path": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+      "reference_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+      "site": "GEMSDOE30-parallel-merged",
+      "stage": "surface",
+      "spearman_full_footprint": 0.07607721278271032,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false
+    },
+    {
+      "reference_path": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "reference_sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+      "site": "GEMSDOE30-nearslay-lane",
+      "stage": "surface",
+      "spearman_full_footprint": 0.06084814442748575,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false
+    },
+    {
+      "reference_path": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif",
+      "reference_sha256": "3077db43ee72ee526d8b943d1db40f19ce49be9d8ccd3109068ca442964f26cc",
+      "site": "GEMSDOE30-parallel-merged",
+      "stage": "surface",
+      "spearman_full_footprint": 0.027426124994432182,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false
+    },
+    {
+      "reference_path": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif",
+      "reference_sha256": "54139f2cf86f75ba96bddba0f49409e934c77d716eb39150dbd04daf23b6b7e4",
+      "site": "GEMSDOE30-parallel-merged",
+      "stage": "surface",
+      "spearman_full_footprint": 0.027426124994432182,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false
+    }
+  ],
+  "errors": [],
+  "decision": "passed"
+}

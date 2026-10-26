@@ -22,12 +22,7 @@ def interval(ci, low=0, high=1):
 def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool,
            surface_audit: dict, dots_audit: dict, registry: dict,
            artifact_public: bool = True) -> dict[str, Any]:
-    """Separate file validity, research promotion and slot selection.
-
-    Evidence absent from this function is unknown, never implicitly passed. A
-    selector must separately verify current portal constraints and allocation;
-    this function cannot approve or spend a competition slot.
-    """
+    """Separate file validity, research promotion and slot selection."""
     spec = contract(card)
     expected_arms = set(spec["arms"])
     expected_features = set(spec["features"])
@@ -68,10 +63,12 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
         delta_detail = "Fixed candidate must improve both same-protocol controls with positive paired CI lower bound"
     elif spec["id"] == "tdxc2":
         delta_detail = "Fixed full-stack candidate must improve core19, zero-lag and phase-null controls with positive paired CI lower bounds"
+    elif spec["id"] == "msdb1v2":
+        delta_detail = "Fixed candidate must improve preregistered core19 comparator with positive paired CI lower bound"
     elif spec["id"] == "fflidar1":
         delta_detail = "Fixed candidate must improve msdb_edge (historical best, rerun same-protocol) and fusion_edge with positive paired CI lower bounds"
     else:
-        delta_detail = "Fixed candidate must improve preregistered core19 comparator with positive paired CI lower bound"
+        delta_detail = f"Fixed {spec['label']} candidate must improve all {len(comparators)} comparators ({', '.join(sorted(comparators))}) with positive paired CI lower bounds"
     gate("paired_improvement", "passed" if wins else "failed", delta_detail)
     features = results.get("feature_canaries", [])
     complete_canaries = (len(features) == 4 and {f.get("fold") for f in features} == set(range(4))
@@ -83,7 +80,6 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
         for row in fold.get("features", []):
             raw, uni = row.get("raw_auc"), row.get("univariate_training_only_hgb_auc")
             valid_auc = number(raw) and 0 <= raw <= 1 and number(uni) and 0 <= uni <= 1
-            # Recompute, do not trust a mutable "alarm=false" boolean.
             if not valid_auc or max(raw, 1 - raw, uni, 1 - uni) > .90 or row.get("alarm_above_0_90") is not False:
                 alarm = True
     gate("single_feature_leakage_canaries", "passed" if complete_canaries and not alarm else "failed",
@@ -125,12 +121,9 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
     complete = registry.get("complete") is True and not registry.get("missing_evidence")
     complete_detail = "Nine-site public snapshots cannot attest all parallel rasters or missing original surfaces"
     if spec["id"] == "fflidar1":
-        # FFL-1 scope fix (2026-10-26, reported in its review.md): the owner
-        # protocol defines the registry as the pinned nine-site inventory and
-        # the lane as a preregistration frozen before any fold is scored.
-        # Within that declared scope both gates are decidable; the card and
-        # registry must say so explicitly, and unobserved sessions outside the
-        # nine named sites remain out of scope (never claimed as covered).
+        # FFL-1 declares a narrower, decidable scope: the pinned nine-site
+        # registry restored and hash-verified for this lane. Sessions outside
+        # those sites remain out of scope and are never claimed as covered.
         complete = (registry.get("complete_scope") == "nine_priority_sites_pinned_20261026"
                     and bool(registry.get("rasters")))
         complete_detail = ("Pinned nine-site registry (GEMSDOE24,25,27,28,30,31,32,33,36) "

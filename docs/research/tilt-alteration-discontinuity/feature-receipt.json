@@ -1,0 +1,45 @@
+{
+  "signature": {
+    "transform_version": "tilt-alt-v1-20261025",
+    "transform_code_sha256": "6f3cdfebe6fe1c43bd09f1e7b2f948556a6051990efc078605a4792540596c79",
+    "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+    "external_sha256": {
+      "lidar_scarp": "d580bb8bdcdb941e32fefb8b38044bc5bf04e199bf2e83498c3576e6fc465568",
+      "geodawn_rad": "c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682",
+      "geodawn_ext": "a35a9c6d2a14786f4dab85481ee59769213072f5dab5b2535ea82ae4d9bb7d9b",
+      "wellspring_csv": "122718e65bdf55aab0ee12ad20d80062f0deb1de957225a61ad880dd5dc196ea",
+      "gdr_paleo": "d6a3609bd7943fa5f1126a3cc688441aeceee261a76cd6a90a206830400066a4",
+      "gdr_2m_probes": "7ac3cfdf2412f7f8a8b82d928115888c510f106f0254fb0b3988448db2f3b6ec"
+    }
+  },
+  "support_px": 17,
+  "measured_impulse_support_px": 15,
+  "hydrothermal_source_counts": {
+    "paleo_sinter_pixels": 244,
+    "probe_2m_pixels": 2700,
+    "geothermometer_upflow_pixels": 203
+  },
+  "sha256": {
+    "mag_tilt_cos": "3a745dc82d9f9c527eed6487d5337df5b0c19cb829a8fde40d0d71e4cff1a945",
+    "mag_salem_tilt_hgrad": "bc86c868f0d77c82db8c1fde86dd9ad606633e8e1afc14f271a31fa1e101876e",
+    "mag_buried_contact_score": "48f72b52806ce7d5d453e2bc9f47982f1dd713f4da35dcf149dd3e76baa2408e",
+    "mag_up150_persistence": "b624d344874372c07876f05e4ad70ab81a9b7bcd809b1f026a7a3780ecc640d6",
+    "grav_tilt_cos": "8c31a5cca1205a8afa623b3fac3b557a2fa12f0b1f8dc779a4e771f4b23457cd",
+    "mag_grav_tilt_strike_lock": "86033ee5d4033a666d2a82863b6cb2f1a1cabf572c9624a3f502067833beb4d0",
+    "rad_efimov_f_local": "426b375091687de2de2123fc2762a1a66f0d445be127ddb87c55216299cc499a",
+    "cond_claycap_boundary": "cfcb6ef6a3553b7045b5257f7a9d770aeac389ff73a3c3b5c382885dd9464deb",
+    "bdepth_hinge_lap": "c2f44d33f6f5ab22a53ec7eac4165452b6cb76a2033145f7f51721204f471e54",
+    "local_slope_highpass": "525588682e7639dbeba45f51d603cfef9473265640e7fac1bdb9657c525a631c",
+    "lidar_valid": "8f58757e8d6e80f65cacf4a00554d741f87e8cb3e275a199a5d4ab2973e60b96",
+    "lidar_dip_slip_polarity": "659d2e1e0586c0c035f8097307f71194e00443bbc33961b74fd87ee47fadfa9b",
+    "lidar_step_vs_cross_aniso": "ca7cdd4ebd69d5997367ebbaeb81358034276d7313914c95cfede22cece8eb3e",
+    "lidar_subcell_peakedness": "02f12d440a6ac7bad77e6014600cb6495f0fdeaa1c809e7bb8d53c1654cb7814",
+    "lidar_subsurface_strike_lock": "30776cb7df67e9526ec9f6606ac20dea09eda57da44dcfb47d33524dfae98f1a",
+    "hydrothermal_upflow_halo": "dafd7009b96e54ba5a4234dea477294c543bc14160c3d3619e3662febb5ae2f3"
+  },
+  "uses_catalogue_geometry": false,
+  "uses_dist_known_fault_px": false,
+  "uses_sgmc_or_qfaults_as_features": false,
+  "uses_registry_values": false,
+  "uses_template_values_as_features": false
+}

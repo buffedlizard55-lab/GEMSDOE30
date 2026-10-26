@@ -55,6 +55,19 @@ def test_fflidar_final_artifact_is_duplicate_stopped_and_never_submittable():
     assert len(card["note"]) <= 140
 
 
+def test_fflidar_banner_is_first_and_download_is_marked_do_not_upload():
+    card = json.loads((FFL_DIR / "run-card.json").read_text())
+    for relative in ("index.html", "executive-summary.html", "experiment-review.html"):
+        html = (ROOT / relative).read_text()
+        main = html[html.index('<main id="main">'):]
+        assert main.index("Latest lane FFL-1") < main.index('<section class="intro"')
+        assert "Do not submit it." in html
+        assert "78.280789%" in html
+        assert card["published_tiff"] in html
+        assert "Download FFL-1 research artifact — do not upload" in html
+        assert card["submission_name"] in html
+
+
 def test_fflidar_stratified_experiment_records_v3_infeasibility_without_production():
     receipt = json.loads((FFL_DIR / "results-stratified.json").read_text())
     assert receipt["infeasible_as_frozen"] is True

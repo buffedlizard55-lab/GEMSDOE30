@@ -1,0 +1,312 @@
+{
+  "schema_version": 2,
+  "lane": "G30-TAD",
+  "experiment_spec": "tad24",
+  "run_id": "gems30-TAD24-decensored-38000-20261025-ea3669f488ea",
+  "hypothesis": "Removing the 12 regional coordinate-proxy bands of core19 and replacing them with 17 local potential-field tilt-depth, 150 m upward-continuation, fold-safe Th-normalized K-Th-U alteration, clay-cap conductance edge, 1 m LiDAR dip-slip polarity, basement strike-lock, and hydrothermal sinter/probe/geothermometer features (tilt_alt24) improves cross-quadrant fault recovery (HOLDOUT-DTI) over core19, subsurface16, and random_dispersed, while 30/40/30 collar-decensored OOF emission avoids <1 km range-front crowding.",
+  "mechanism": "4-fold buffered spatial-quadrant HGB out-of-fold probability surface (quantile-calibrated strictly on training folds) over 24 translation-invariant multi-physics discontinuity features, emitted as 38,000 binary {0,1} dots (3.0 px Euclidean Poisson-disk spacing, 0% at d_cat <= 2 px, 30% in 2-10 px, 40% in 10-30 px, 30% in >30 px).",
+  "non_fault_mimic": "Sub-vertical tilted welded ash-flow tuff / caldera ring-fracture lithologic contacts with primary vapor-phase potassic crystallization and differential caprock cuesta erosion.",
+  "experiments_run": 3,
+  "experiment_cap": 3,
+  "experimental_elapsed_seconds": 768.9776444170001,
+  "time_cap_hours": 2,
+  "physical_support_px": 17,
+  "measured_impulse_support_px": 15,
+  "preregistration_sha256": "9c7e91953be22f435d0113f8a9ce95d19cfc9aa86f7c3120d33052e91ef0c3d2",
+  "registry_sha256": "bec529994d009be6cedd23c35d0e788f876ae62bb4d2f86f3491c90915bdc527",
+  "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.1440474420240244,
+    "withheld_positives": 60988,
+    "ci95": [
+      0.12717073397709677,
+      0.16007019615515658
+    ],
+    "tp_weight": 8435.317795633453,
+    "fp_weight": 40409.19691832432,
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "scope": "buffered 4-quadrant whole-component catalogue-recovery proxy; NOT organizer performance",
+    "comparators": {
+      "core19": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.13982063017811727,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.12417754876614995,
+          0.15590471896182123
+        ],
+        "tp_weight": 8181.277496788421,
+        "fp_weight": 40430.04046109527
+      },
+      "subsurface16": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.10959344720862702,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.09685284946303331,
+          0.12263580599913203
+        ],
+        "tp_weight": 6391.186309537274,
+        "fp_weight": 41242.96561429831
+      },
+      "random_dispersed": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.08253075526586916,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.07922749100261554,
+          0.08562859706151375
+        ],
+        "tp_weight": 4804.499714635788,
+        "fp_weight": 42316.79163899671
+      }
+    },
+    "candidate_minus": {
+      "random_dispersed": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.061516686758155234,
+        "ci95": [
+          0.0447167470351502,
+          0.07844413047375957
+        ]
+      },
+      "subsurface16": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.034453994815397376,
+        "ci95": [
+          0.022722847869304612,
+          0.04591755040660039
+        ]
+      },
+      "core19": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.004226811845907119,
+        "ci95": [
+          -0.015539109239074199,
+          0.023979448906920435
+        ]
+      }
+    },
+    "bootstrap": {
+      "unit": "geographic block aggregated across folds",
+      "blocks": 371,
+      "replicates": 2000,
+      "seed": 3071,
+      "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+    }
+  },
+  "e2_diagnostics": {
+    "schema_version": 1,
+    "experiment_id": "E2",
+    "preregistration_sha256": "9c7e91953be22f435d0113f8a9ce95d19cfc9aa86f7c3120d33052e91ef0c3d2",
+    "precommitted_production_policy": "decensored_30_40_30 (S_oof + P1, 38,000 dots, d_cat > 2 px, 3.0 px spacing)",
+    "interleaved_component_oof_holdout": {
+      "seed": 42,
+      "dot_budget": 37697,
+      "realized_strata_tilt_alt24": {
+        "far_gt_30px": 11309,
+        "mid_10_to_30px": 15079,
+        "near_2_to_10px": 11309,
+        "fallback_rollover": 0
+      },
+      "summary": {
+        "evaluator_version": "component-holdout-v3-blockstats-20261025",
+        "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+        "bootstrap": {
+          "unit": "geographic block aggregated across folds",
+          "blocks": 371,
+          "replicates": 2000,
+          "seed": 3071,
+          "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+        },
+        "arms": {
+          "tilt_alt24_oof_p1": {
+            "label": "HOLDOUT-DTI",
+            "value": 0.11291473517222614,
+            "withheld_positives": 19732,
+            "ci95": [
+              0.09796175810785682,
+              0.12819654692945218
+            ],
+            "tp_weight": 2667.0960690371026,
+            "fp_weight": 36507.119065141495
+          },
+          "subsurface16_oof_p1": {
+            "label": "HOLDOUT-DTI",
+            "value": 0.08219935938014972,
+            "withheld_positives": 19732,
+            "ci95": [
+              0.06936484338737288,
+              0.09546870123196108
+            ],
+            "tp_weight": 1934.681904297791,
+            "fp_weight": 36819.61628382995
+          },
+          "random_p1": {
+            "label": "HOLDOUT-DTI",
+            "value": 0.07710631277802545,
+            "withheld_positives": 19732,
+            "ci95": [
+              0.0712279744511265,
+              0.08264453217891624
+            ],
+            "tp_weight": 1815.8252060953116,
+            "fp_weight": 37004.32930072307
+          }
+        },
+        "candidate_minus": {
+          "subsurface16_oof_p1": {
+            "label": "HOLDOUT-DTI difference",
+            "value": 0.03071537579207642,
+            "ci95": [
+              0.017821675955907182,
+              0.04334065327135349
+            ]
+          },
+          "random_p1": {
+            "label": "HOLDOUT-DTI difference",
+            "value": 0.03580842239420069,
+            "ci95": [
+              0.02067943294263168,
+              0.0511025319941388
+            ]
+          }
+        }
+      }
+    },
+    "sgmc_new_offcatalogue_diagnostic": {
+      "tilt_alt24_oof_p1_decensored": {
+        "label": "SGMC-NEW-OFFCAT-DIAGNOSTIC-DTI (not leaderboard proxy; IR-30-081)",
+        "dti": 0.08177805811847436,
+        "tp_weight": 4699.335188321742,
+        "fp_weight": 35967.16282853592,
+        "truth_pixels": 61664,
+        "emitted_dots": 38000
+      },
+      "tilt_alt24_oof_p0_plain_d2": {
+        "label": "SGMC-NEW-OFFCAT-DIAGNOSTIC-DTI (not leaderboard proxy; IR-30-081)",
+        "dti": 0.08116993581435704,
+        "tp_weight": 4663.83311115606,
+        "fp_weight": 35968.376763405715,
+        "truth_pixels": 61664,
+        "emitted_dots": 38000
+      },
+      "core19_oof_p0_plain_d2": {
+        "label": "SGMC-NEW-OFFCAT-DIAGNOSTIC-DTI (not leaderboard proxy; IR-30-081)",
+        "dti": 0.08698862780924467,
+        "tp_weight": 4999.150783811971,
+        "fp_weight": 35689.9257913579,
+        "truth_pixels": 61664,
+        "emitted_dots": 38000
+      }
+    },
+    "full_grid_distance_profiles_38000": {
+      "p0_plain_d2": {
+        "le_2px": 0,
+        "gt_2_le_10px": 13462,
+        "gt_10_le_30px": 13130,
+        "gt_30px": 11408
+      },
+      "p1_decensored_30_40_30": {
+        "le_2px": 0,
+        "gt_2_le_10px": 11400,
+        "gt_10_le_30px": 15200,
+        "gt_30px": 11400
+      },
+      "p1_realized_strata": {
+        "far_gt_30px": 11400,
+        "mid_10_to_30px": 15200,
+        "near_2_to_10px": 11400,
+        "fallback_rollover": 0
+      }
+    }
+  },
+  "feature_canaries": {
+    "unique_features_per_fold": 36,
+    "folds": 4,
+    "total_checks": 144,
+    "max_bidirectional_auc": 0.6434328379240668,
+    "alarm_count": 0,
+    "alarms": [],
+    "receipt": "docs/research/tilt-alteration-discontinuity/results-e1.json"
+  },
+  "registry": {
+    "pinned_snapshot": "docs/research/tilt-alteration-discontinuity/registry.json",
+    "surface": {
+      "decision": "blocked-incomplete-evidence",
+      "registry_entries_compared": 190,
+      "max_spearman": 0.1636955830461162,
+      "max_fraction_within_3px": null,
+      "errors": [],
+      "closest_reference": "data/raw/registry-expanded/GEMSDOE24-918e6e23d71e27475e784fa4593c866d2d915743.tif",
+      "receipt": "docs/research/tilt-alteration-discontinuity/novelty-surface.json"
+    },
+    "dots": {
+      "decision": "blocked-incomplete-evidence",
+      "registry_entries_compared": 190,
+      "max_spearman": 0.039691018236228164,
+      "max_fraction_within_3px": 0.5144473684210527,
+      "errors": [],
+      "closest_reference": "data/raw/registry-expanded/GEMSDOE30-b73517951cc3728a405e0f08a155624c02c0acb5.tif",
+      "receipt": "docs/research/tilt-alteration-discontinuity/novelty-dots.json"
+    }
+  },
+  "files": {
+    "primary_zeros_outside": {
+      "path": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif",
+      "sha256": "3077db43ee72ee526d8b943d1db40f19ce49be9d8ccd3109068ca442964f26cc",
+      "outside_encoding": "zeros"
+    },
+    "companion_nan_outside": {
+      "path": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif",
+      "sha256": "54139f2cf86f75ba96bddba0f49409e934c77d716eb39150dbd04daf23b6b7e4",
+      "outside_encoding": "nan"
+    },
+    "values_identity_sha256": "ea3669f488eabd35ff8a9c8a8df738155a9967f131cb6fad003dd9535ea65dcd"
+  },
+  "published_tiff": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif",
+  "companion_nan_tiff": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif",
+  "raster_sha256": "3077db43ee72ee526d8b943d1db40f19ce49be9d8ccd3109068ca442964f26cc",
+  "companion_nan_sha256": "54139f2cf86f75ba96bddba0f49409e934c77d716eb39150dbd04daf23b6b7e4",
+  "validator_output": {
+    "status": "passed",
+    "primary_zeros_outside_passed": true,
+    "companion_nan_outside_passed": true,
+    "whole_array_finite_in_0_1": true,
+    "no_nan_inside_footprint": true,
+    "values_in_0_1": true,
+    "crs_match": true,
+    "shape_match": true,
+    "transform_match": true,
+    "single_float32_band": true,
+    "emitted_dots": 38000,
+    "positive_catalogue_pixels": 0,
+    "dots_within_2px_of_catalogue": 0
+  },
+  "dots_by_catalogue_distance_px": {
+    "le_2px": 0,
+    "gt_2_le_10px": 11400,
+    "gt_10_le_30px": 15200,
+    "gt_30px": 11400
+  },
+  "submission_name": "gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros",
+  "note": "G30-TAD OOF tilt-depth+Kd-alt+dip-slip 38k; negative gate (0.1440); DO NOT SUBMIT.",
+  "download_ok": true,
+  "ok_to_submit": false,
+  "submission_approved": false,
+  "slot_selected": false,
+  "verdict": "negative",
+  "scientific_gate_passed": false,
+  "created_utc": "2026-10-26T00:29:08+00:00",
+  "additional_novelty_evidence": {
+    "registry": "docs/research/tilt-alteration-discontinuity/registry-parallel-addendum.json",
+    "surface_receipt": "docs/research/tilt-alteration-discontinuity/novelty-parallel-surface.json",
+    "dots_receipt": "docs/research/tilt-alteration-discontinuity/novelty-parallel-dots.json",
+    "combined_entries_compared": 193,
+    "combined_surface_max_spearman": 0.1636955830461162,
+    "combined_dots_max_spearman": 0.039691018236228164,
+    "combined_dots_max_fraction_within_3px": 0.5144473684210527
+  }
+}

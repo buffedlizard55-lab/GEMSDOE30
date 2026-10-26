@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "experiment_id": "E2",
+  "preregistration_sha256": "9c7e91953be22f435d0113f8a9ce95d19cfc9aa86f7c3120d33052e91ef0c3d2",
+  "precommitted_production_policy": "decensored_30_40_30 (S_oof + P1, 38,000 dots, d_cat > 2 px, 3.0 px spacing)",
+  "interleaved_component_oof_holdout": {
+    "seed": 42,
+    "dot_budget": 37697,
+    "realized_strata_tilt_alt24": {
+      "far_gt_30px": 11309,
+      "mid_10_to_30px": 15079,
+      "near_2_to_10px": 11309,
+      "fallback_rollover": 0
+    },
+    "summary": {
+      "evaluator_version": "component-holdout-v3-blockstats-20261025",
+      "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+      "bootstrap": {
+        "unit": "geographic block aggregated across folds",
+        "blocks": 371,
+        "replicates": 2000,
+        "seed": 3071,
+        "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+      },
+      "arms": {
+        "tilt_alt24_oof_p1": {
+          "label": "HOLDOUT-DTI",
+          "value": 0.11291473517222614,
+          "withheld_positives": 19732,
+          "ci95": [
+            0.09796175810785682,
+            0.12819654692945218
+          ],
+          "tp_weight": 2667.0960690371026,
+          "fp_weight": 36507.119065141495
+        },
+        "subsurface16_oof_p1": {
+          "label": "HOLDOUT-DTI",
+          "value": 0.08219935938014972,
+          "withheld_positives": 19732,
+          "ci95": [
+            0.06936484338737288,
+            0.09546870123196108
+          ],
+          "tp_weight": 1934.681904297791,
+          "fp_weight": 36819.61628382995
+        },
+        "random_p1": {
+          "label": "HOLDOUT-DTI",
+          "value": 0.07710631277802545,
+          "withheld_positives": 19732,
+          "ci95": [
+            0.0712279744511265,
+            0.08264453217891624
+          ],
+          "tp_weight": 1815.8252060953116,
+          "fp_weight": 37004.32930072307
+        }
+      },
+      "candidate_minus": {
+        "subsurface16_oof_p1": {
+          "label": "HOLDOUT-DTI difference",
+          "value": 0.03071537579207642,
+          "ci95": [
+            0.017821675955907182,
+            0.04334065327135349
+          ]
+        },
+        "random_p1": {
+          "label": "HOLDOUT-DTI difference",
+          "value": 0.03580842239420069,
+          "ci95": [
+            0.02067943294263168,
+            0.0511025319941388
+          ]
+        }
+      }
+    }
+  },
+  "sgmc_new_offcatalogue_diagnostic": {
+    "tilt_alt24_oof_p1_decensored": {
+      "label": "SGMC-NEW-OFFCAT-DIAGNOSTIC-DTI (not leaderboard proxy; IR-30-081)",
+      "dti": 0.08177805811847436,
+      "tp_weight": 4699.335188321742,
+      "fp_weight": 35967.16282853592,
+      "truth_pixels": 61664,
+      "emitted_dots": 38000
+    },
+    "tilt_alt24_oof_p0_plain_d2": {
+      "label": "SGMC-NEW-OFFCAT-DIAGNOSTIC-DTI (not leaderboard proxy; IR-30-081)",
+      "dti": 0.08116993581435704,
+      "tp_weight": 4663.83311115606,
+      "fp_weight": 35968.376763405715,
+      "truth_pixels": 61664,
+      "emitted_dots": 38000
+    },
+    "core19_oof_p0_plain_d2": {
+      "label": "SGMC-NEW-OFFCAT-DIAGNOSTIC-DTI (not leaderboard proxy; IR-30-081)",
+      "dti": 0.08698862780924467,
+      "tp_weight": 4999.150783811971,
+      "fp_weight": 35689.9257913579,
+      "truth_pixels": 61664,
+      "emitted_dots": 38000
+    }
+  },
+  "full_grid_distance_profiles_38000": {
+    "p0_plain_d2": {
+      "le_2px": 0,
+      "gt_2_le_10px": 13462,
+      "gt_10_le_30px": 13130,
+      "gt_30px": 11408
+    },
+    "p1_decensored_30_40_30": {
+      "le_2px": 0,
+      "gt_2_le_10px": 11400,
+      "gt_10_le_30px": 15200,
+      "gt_30px": 11400
+    },
+    "p1_realized_strata": {
+      "far_gt_30px": 11400,
+      "mid_10_to_30px": 15200,
+      "near_2_to_10px": 11400,
+      "fallback_rollover": 0
+    }
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "schema_version": 3,
+  "experiment_spec": "pta1",
+  "run_id": "gems30-PTA1-44090-20261025-9a3f7f9535a4",
+  "hypothesis": "Unit-consistent 3D potential-field phase-tilt ridges paired with signed Grauch-Hudson hanging-wall dip migration and conductive-cover thickening improve concealed fault recovery over raw subsurface fields and unit-naive/symmetric controls.",
+  "mechanism": "Topography-free 18-feature HGB on 8 subsurface GeoDAWN/gravity/MT bands + 10 unit-corrected (1000x tmi_vg) tilt-phase curvature, strike persistence, and signed hanging-wall asymmetry transforms; matched unit-naive/symmetric and core19 comparators.",
+  "non_fault_mimic": "Buried caldera-margin or dipping volcanic flow-front unconformity; GeoDAWN E-W (90 deg, 200-400 m) airborne survey leveling seam",
+  "lane": "PTA-1 zero-topography subsurface 3D phase-tilt & dip-contact asymmetry (autonomous research lane, not externally assigned)",
+  "experiments_run": 1,
+  "fixed_arms": [
+    "core19",
+    "sub8_raw",
+    "pta_naive_sym",
+    "pta1_cand"
+  ],
+  "experiment_cap": 3,
+  "experimental_elapsed_seconds": 304.9,
+  "time_cap_hours": 2,
+  "this_execution_seconds": 304.9,
+  "corrective_execution": false,
+  "physical_support_px": 17,
+  "tight_analytic_support_px": 12,
+  "confirmation_scope": "Buffered whole-component quadrant folds on public catalogue; proxy for concealed fault recovery, NOT organizer score",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.09668349335038696,
+    "withheld_positives": 60988,
+    "ci95": [
+      0.0852894272299058,
+      0.10843266699995359
+    ],
+    "tp_weight": 5629.5260469405,
+    "fp_weight": 41550.17864483562,
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "scope": "buffered whole-segment catalogue-recovery proxy; NOT organizer performance",
+    "comparators": {
+      "core19": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.13982063017811727,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.12417754876614995,
+          0.15590471896182123
+        ],
+        "tp_weight": 8181.277496788421,
+        "fp_weight": 40430.04046109527
+      },
+      "sub8_raw": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.0878138999989625,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.07680973570899367,
+          0.09962041525726845
+        ],
+        "tp_weight": 5107.885830226978,
+        "fp_weight": 41775.951678330624
+      },
+      "pta_naive_sym": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.09337370746904305,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.08253632629428989,
+          0.10440159394474555
+        ],
+        "tp_weight": 5435.839207194868,
+        "fp_weight": 41691.917317826854
+      }
+    },
+    "candidate_minus": {
+      "core19": {
+        "label": "HOLDOUT-DTI difference",
+        "value": -0.04313713682773031,
+        "ci95": [
+          -0.05976797505870316,
+          -0.025808267755523032
+        ]
+      },
+      "sub8_raw": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.008869593351424468,
+        "ci95": [
+          0.001560995842821581,
+          0.015975935982558025
+        ]
+      },
+      "pta_naive_sym": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.00330978588134391,
+        "ci95": [
+          -0.0025870727499669273,
+          0.009259970419493146
+        ]
+      }
+    },
+    "subsurface_specificity_passed": false,
+    "bootstrap": {
+      "unit": "geographic block aggregated across folds",
+      "blocks": 371,
+      "replicates": 2000,
+      "seed": 3071,
+      "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+    }
+  },
+  "feature_canaries": {
+    "features_per_fold": 37,
+    "folds": 4,
+    "alarm_count": 0,
+    "alarms": [],
+    "receipt": "docs/research/phase-tilt-asymmetry/results.json"
+  },
+  "registry": {
+    "complete": false,
+    "surface": {
+      "decision": "blocked-incomplete-evidence",
+      "registry_entries_compared": 194,
+      "max_spearman": 0.10547821858490214,
+      "max_fraction_within_3px": null,
+      "errors": []
+    },
+    "dots": {
+      "decision": "blocked-incomplete-evidence",
+      "registry_entries_compared": 194,
+      "max_spearman": 0.03190577117988539,
+      "max_fraction_within_3px": 0.5459741437967793,
+      "errors": []
+    },
+    "coverage": "all published aligned TIFFs at nine recorded repository snapshots; missing other sessions and most original surfaces",
+    "receipt_surface": "docs/research/phase-tilt-asymmetry/novelty-surface.json",
+    "receipt_dots": "docs/research/phase-tilt-asymmetry/novelty-dots.json"
+  },
+  "raster_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+  "validator_output": {
+    "status": "passed",
+    "no_nan_inside_footprint": true,
+    "values_in_0_1": true,
+    "crs_match": true,
+    "shape_match": true,
+    "transform_match": true,
+    "single_float32_band": true,
+    "nan_nodata_outside_footprint": true,
+    "positive_catalogue_pixels": 0,
+    "emitted_dots": 44090,
+    "organizer_acceptance_confirmed": false
+  },
+  "submission_name": "gems30-PTA1-44090-20261025-9a3f7f9535a4",
+  "note": "PTA1 subsurface 3D tilt-phase + dip-asymmetry 18-feat HGB; 44090d; research artifact, NOT slot-approved.",
+  "published_tiff": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+  "download_ok": true,
+  "submission_approved": false,
+  "slot_selected": false,
+  "verdict": "negative",
+  "scientific_gate_passed": false,
+  "verdict_scope": "machine-adjudicated scientific and readiness gates; no competition performance claim",
+  "blockers": [
+    "Candidate failed paired HOLDOUT-DTI improvement gate against core19 or feature leakage canary",
+    "Complete parallel-run raster/surface registry unavailable",
+    "No externally assigned lane paragraph was supplied; research lane selected autonomously",
+    "Historical best UNet checkpoints absent: comparable historical-best rerun unavailable",
+    "Current portal cap, eligibility, deadline and organizer acceptance unverified"
+  ],
+  "preregistration_sha256": "10a6d800c4372bffd3741859e3bbb2ec3caa33b1e49333476fd3b3cdad70e824",
+  "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+  "created_utc": "2026-10-26T00:07:45+00:00",
+  "additional_novelty_evidence": {
+    "registry": "docs/research/phase-tilt-asymmetry/registry-parallel-addendum.json",
+    "surface_receipt": "docs/research/phase-tilt-asymmetry/novelty-parallel-surface.json",
+    "dots_receipt": "docs/research/phase-tilt-asymmetry/novelty-parallel-dots.json",
+    "timing": "Late-arriving references; checked both saved states without refitting or replacing dots",
+    "combined_observed_registry": {
+      "surface": {
+        "registry_entries_compared": 198,
+        "max_spearman": 0.10547821858490214,
+        "max_fraction_within_3px": null,
+        "status": "passed"
+      },
+      "dots": {
+        "registry_entries_compared": 198,
+        "max_spearman": 0.03190577117988539,
+        "max_fraction_within_3px": 0.5459741437967793,
+        "status": "passed"
+      }
+    }
+  }
+}
