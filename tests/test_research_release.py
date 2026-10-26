@@ -1,4 +1,4 @@
-"""Regression checks for a real, downloadable but explicitly unapproved release."""
+"""Regression checks for the promoted MS-CAPE release and preserved TDX-1 audit trail."""
 from __future__ import annotations
 
 from copy import deepcopy
@@ -13,12 +13,16 @@ from urllib.parse import unquote, urlsplit
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-RESEARCH = ROOT / "docs/research/texture-displacement"
+CURRENT_RESEARCH = ROOT / "docs/research/ms-cape"
+TDX_RESEARCH = ROOT / "docs/research/texture-displacement"
 
 
 class Links(HTMLParser):
     def __init__(self, text):
-        super().__init__(); self.urls = []; self.ids = set(); self.downloads = []
+        super().__init__()
+        self.urls = []
+        self.ids = set()
+        self.downloads = []
         self.feed(text)
 
     def handle_starttag(self, tag, attrs):
@@ -31,7 +35,7 @@ class Links(HTMLParser):
             self.downloads.append(attrs.get("href"))
 
 
-@pytest.mark.parametrize("relative", ["index.html", "executive-summary.html", "docs/index.html"])
+@pytest.mark.parametrize("relative", ["index.html", "executive-summary.html", "docs/index.html", "docs/executive-summary.html"])
 def test_generated_pages_have_real_local_links_and_valid_html_anchors(relative):
     path = ROOT / relative
     page = Links(path.read_text())
@@ -47,29 +51,31 @@ def test_generated_pages_have_real_local_links_and_valid_html_anchors(relative):
 
 
 @pytest.mark.parametrize("relative", ["index.html", "executive-summary.html"])
-def test_download_and_copy_controls_bind_to_the_current_negative_artifact(relative):
-    card = json.loads((RESEARCH / "run-card.json").read_text())
+def test_download_and_copy_controls_bind_to_current_promoted_ms_cape_artifact(relative):
+    card = json.loads((CURRENT_RESEARCH / "run-card.json").read_text())
     html = (ROOT / relative).read_text()
     parsed = Links(html)
-    assert parsed.downloads == [card["published_tiff"]]
-    assert "NOT APPROVED FOR SUBMISSION" in html and "Do not submit." in html
+    assert parsed.downloads == [card["published_tiff"], card["portal_zeros_tiff"]]
+    assert "AUTOMATED VERDICT: PROMOTED" in html
+    assert "Zero human-inspector intervention" in html
     assert card["submission_name"] in html
     assert "No competition slot selected or used" in html
     assert (ROOT / card["published_tiff"]).is_file()
+    assert (ROOT / card["portal_zeros_tiff"]).is_file()
+    assert card["note"] in html
+    assert len(card["note"]) <= 140
     if relative == "executive-summary.html":
-        assert card["note"] in html
         assert {"submission-name", "submission-note", "copy-status"} <= parsed.ids
-        assert len(card["note"]) <= 140
 
 
 def test_complete_current_prompt_and_every_reported_claim_remain_quarantined():
     import csv
-    text = (RESEARCH / "owner-prompt.txt").read_text()
+    text = (TDX_RESEARCH / "owner-prompt.txt").read_text()
     readme = (ROOT / "README.md").read_text()
     assert text.strip() in readme
     assert '<a id="current-owner-prompt"></a>' in readme
     assert "Maximize P(Win)" in text and "Own the Outcome" in text
-    rows = list(csv.DictReader((RESEARCH / "owner-claims.csv").open()))
+    rows = list(csv.DictReader((TDX_RESEARCH / "owner-claims.csv").open()))
     assert len(rows) == 119
     assert all("UNVERIFIED" in r["evidence"] and not r["organizer_receipt_url"] for r in rows)
     assert any(r["site"] == "GEMSDOE91" and r["claimed_score"] == "" for r in rows)
@@ -92,14 +98,20 @@ def test_recomputed_evidence_cannot_use_a_truncated_ci_or_a_changed_paired_delta
 @pytest.fixture
 def isolated_evidence(tmp_path, monkeypatch):
     from scripts import verify_current_run as verifier
-    shutil.copytree(RESEARCH, tmp_path / "docs/research/texture-displacement")
-    shutil.copy(ROOT / "docs/current-run.json", tmp_path / "docs/current-run.json")
-    card = json.loads((RESEARCH / "run-card.json").read_text())
+    shutil.copytree(TDX_RESEARCH, tmp_path / "docs/research/texture-displacement")
+    (tmp_path / "docs").mkdir(parents=True, exist_ok=True)
+    (tmp_path / "docs/current-run.json").write_text(json.dumps({
+        "schema_version": 1,
+        "run_card": "docs/research/texture-displacement/run-card.json",
+        "readiness": "docs/research/texture-displacement/readiness.json",
+    }))
+    card = json.loads((TDX_RESEARCH / "run-card.json").read_text())
     raster = tmp_path / card["published_tiff"]
     raster.parent.mkdir(parents=True)
     shutil.copy(ROOT / card["published_tiff"], raster)
     shutil.copy((ROOT / card["published_tiff"]).with_suffix(".json"), raster.with_suffix(".json"))
-    template = tmp_path / "template.tif"; template.write_bytes(b"synthetic pinned-template bytes")
+    template = tmp_path / "template.tif"
+    template.write_bytes(b"synthetic pinned-template bytes")
     directory = tmp_path / "docs/research/texture-displacement"
     for name in ("novelty-surface.json", "novelty-dots.json", "novelty-parallel-surface.json", "novelty-parallel-dots.json"):
         d = json.loads((directory / name).read_text())
@@ -145,53 +157,81 @@ def test_full_verifier_rejects_changed_template_bytes(isolated_evidence):
         verifier.verify(pointer, template)
 
 
-def test_published_file_is_new_binary_support_and_matches_its_exact_hash():
-    np = pytest.importorskip("numpy"); rasterio = pytest.importorskip("rasterio")
-    card = json.loads((RESEARCH / "run-card.json").read_text())
-    raster = ROOT / card["published_tiff"]
-    with raster.open("rb") as stream:
+def test_published_ms_cape_twins_match_hashes_and_are_bit_identical_in_footprint():
+    np = pytest.importorskip("numpy")
+    rasterio = pytest.importorskip("rasterio")
+    card = json.loads((CURRENT_RESEARCH / "run-card.json").read_text())
+    readiness = json.loads((CURRENT_RESEARCH / "readiness.json").read_text())
+    assert card["verdict"] == "promote" and card["scientific_gate_passed"] is True
+    assert readiness["research_verdict"] == "promote"
+    assert readiness["eligible_for_separate_slot_selector"] is True
+    assert card["submission_approved"] is False and card["slot_selected"] is False
+
+    nan_raster = ROOT / card["published_tiff"]
+    zeros_raster = ROOT / card["portal_zeros_tiff"]
+    with nan_raster.open("rb") as stream:
         assert hashlib.file_digest(stream, "sha256").hexdigest() == card["raster_sha256"]
-    manifest = json.loads(raster.with_suffix(".json").read_text())
-    assert manifest["output_sha256"] == card["raster_sha256"]
-    assert manifest["submission_approved"] is card["submission_approved"] is False
-    assert card["slot_selected"] is False and card["verdict"] == "negative"
-    with rasterio.open(raster) as ds:
-        values = ds.read(1); finite = np.isfinite(values)
-        assert ds.count == 1 and ds.dtypes == ("float32",) and ds.crs.to_epsg() == 32611
-        assert ds.shape == (3730, 3292)
-        assert np.array_equal(np.unique(values[finite]), [0., 1.])
-        assert np.count_nonzero(values[finite]) == card["validator_output"]["emitted_dots"]
-    registry = json.loads((RESEARCH / "registry.json").read_text())
-    assert card["raster_sha256"] not in {r["sha256"] for r in registry["rasters"]}
+    with zeros_raster.open("rb") as stream:
+        assert hashlib.file_digest(stream, "sha256").hexdigest() == card["portal_zeros_sha256"]
+
+    for rpath, expected_sha in ((nan_raster, card["raster_sha256"]), (zeros_raster, card["portal_zeros_sha256"])):
+        manifest = json.loads(rpath.with_suffix(".json").read_text())
+        assert manifest["output_sha256"] == expected_sha
+        assert manifest["submission_approved"] is False
+
+    with rasterio.open(nan_raster) as ds_nan, rasterio.open(zeros_raster) as ds_zeros:
+        v_nan = ds_nan.read(1)
+        v_zeros = ds_zeros.read(1)
+        assert ds_nan.count == ds_zeros.count == 1
+        assert ds_nan.dtypes == ds_zeros.dtypes == ("float32",)
+        assert ds_nan.crs.to_epsg() == ds_zeros.crs.to_epsg() == 32611
+        assert ds_nan.shape == ds_zeros.shape == (3730, 3292)
+        in_foot = np.isfinite(v_nan)
+        assert int(in_foot.sum()) == 5_167_373
+        assert np.array_equal(v_nan[in_foot], v_zeros[in_foot])
+        assert np.all(np.isfinite(v_zeros)) and np.all((v_zeros >= 0.0) & (v_zeros <= 1.0))
+        assert np.all(v_zeros[~in_foot] == 0.0)
+        assert np.array_equal(np.unique(v_nan[in_foot]), [0.0, 1.0])
+        assert np.count_nonzero(v_nan[in_foot]) == card["validator_output"]["emitted_dots"] == 44_090
+
+    registry = json.loads((CURRENT_RESEARCH / "registry.json").read_text())
+    reg_hashes = {r["sha256"] for r in registry["rasters"]}
+    assert card["raster_sha256"] not in reg_hashes
+    assert card["portal_zeros_sha256"] not in reg_hashes
 
 
-def test_status_feed_uses_current_pointer_and_never_advertises_range_immunity(tmp_path):
+def test_status_feed_uses_current_pointer_and_reports_promoted_candidate(tmp_path):
     import subprocess
     import sys
-    template = ROOT / 'data/raw/sample_submission.tif'
+    template = ROOT / "data/raw/sample_submission.tif"
     if not template.exists():
-        pytest.skip('small pinned template required; CI restores it before tests')
-    output = tmp_path / 'status.json'
-    result = subprocess.run([sys.executable, str(ROOT / 'scripts/build_status.py'),
-                             '--skip-tests', '--output', str(output)], cwd=ROOT, capture_output=True, text=True)
+        pytest.skip("small pinned template required; CI restores it before tests")
+    output = tmp_path / "status.json"
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "scripts/build_status.py"), "--skip-tests", "--output", str(output)],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
     assert result.returncode == 0, result.stderr
     status = json.loads(output.read_text())
-    card = json.loads((RESEARCH / 'run-card.json').read_text())
-    assert status['current_artifact_inspection']['verified_now'] is True
-    assert status['current_release_decision']['raster_sha256'] == card['raster_sha256']
-    assert status['current_release_decision']['research_verdict'] == 'negative'
-    assert status['current_release_decision']['submission_approved'] is False
-    assert not status['any_candidate_promoted']
-    assert all(row['range_error_immune'] is None for row in status['downloads'])
-    assert status['submission_format']['local_validation_guarantees_portal_acceptance'] is False
-    assert status['score_evidence']['validated_organizer_submission_receipts'] == []
+    card = json.loads((CURRENT_RESEARCH / "run-card.json").read_text())
+    assert status["current_artifact_inspection"]["verified_now"] is True
+    assert status["current_release_decision"]["raster_sha256"] == card["raster_sha256"]
+    assert status["current_release_decision"]["research_verdict"] == "promote"
+    assert status["current_release_decision"]["eligible_for_separate_slot_selector"] is True
+    assert status["current_release_decision"]["submission_approved"] is False
+    assert status["any_candidate_promoted"] is True
+    assert all(row["range_error_immune"] is None for row in status["downloads"])
+    assert status["submission_format"]["local_validation_guarantees_portal_acceptance"] is False
+    assert status["score_evidence"]["validated_organizer_submission_receipts"] == []
 
 
 def test_generated_site_is_exactly_reproducible_from_reopened_artifact():
     from scripts.build_research_site import build
-    template = ROOT / 'data/raw/sample_submission.tif'
+    template = ROOT / "data/raw/sample_submission.tif"
     if not template.exists():
-        pytest.skip('small pinned template required; CI restores it before tests')
+        pytest.skip("small pinned template required; CI restores it before tests")
     for path, content in build(template).items():
         assert path.read_bytes() == (content.encode() if isinstance(content, str) else content)
 
@@ -199,28 +239,29 @@ def test_generated_site_is_exactly_reproducible_from_reopened_artifact():
 def test_new_local_rasters_cannot_be_silently_omitted_from_late_registry(isolated_evidence):
     verifier, directory, pointer, template = isolated_evidence
     decision = verifier.verify(pointer, template)
-    assert decision['observed_registry']['dots']['registry_entries_compared'] == 108
-    (directory / 'registry-parallel-addendum.json').unlink()
-    with pytest.raises(ValueError, match='explicit late-registry audit'):
+    assert decision["observed_registry"]["dots"]["registry_entries_compared"] == 108
+    (directory / "registry-parallel-addendum.json").unlink()
+    with pytest.raises(ValueError, match="explicit late-registry audit"):
         verifier.verify(pointer, template)
 
 
 def test_late_reference_deletion_or_tampering_does_not_restore_a_green_old_snapshot(isolated_evidence):
     verifier, directory, pointer, template = isolated_evidence
-    additional = json.loads((directory / 'registry-parallel-addendum.json').read_text())
-    path = verifier.local_path(additional['rasters'][0]['path'])
+    additional = json.loads((directory / "registry-parallel-addendum.json").read_text())
+    path = verifier.local_path(additional["rasters"][0]["path"])
     path.unlink()
-    with pytest.raises(ValueError, match='every new local reference identity'):
+    with pytest.raises(ValueError, match="every new local reference identity"):
         verifier.verify(pointer, template)
 
 
 def test_failed_write_verification_does_not_change_any_canonical_receipt(isolated_evidence):
     verifier, directory, pointer, template = isolated_evidence
-    card_path = directory / 'run-card.json'
-    card = json.loads(card_path.read_text()); card['submission_approved'] = True
+    card_path = directory / "run-card.json"
+    card = json.loads(card_path.read_text())
+    card["submission_approved"] = True
     card_path.write_text(json.dumps(card))
-    before_card, before_ready = card_path.read_bytes(), (directory / 'readiness.json').read_bytes()
-    with pytest.raises(ValueError, match='approval/verdict'):
+    before_card, before_ready = card_path.read_bytes(), (directory / "readiness.json").read_bytes()
+    with pytest.raises(ValueError, match="approval/verdict"):
         verifier.verify(pointer, template, write=True)
     assert card_path.read_bytes() == before_card
-    assert (directory / 'readiness.json').read_bytes() == before_ready
+    assert (directory / "readiness.json").read_bytes() == before_ready

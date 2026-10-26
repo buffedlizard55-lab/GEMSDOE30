@@ -1,0 +1,347 @@
+{
+  "schema_version": 2,
+  "run_id": "gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497",
+  "candidate_arm": "ms_cape_e3",
+  "comparator_arms": [
+    "physics_tilt8",
+    "core19",
+    "g30s19_hist_best"
+  ],
+  "expected_features": [
+    "mag_anom",
+    "rtp",
+    "tmi_hg",
+    "geod_2ndinv",
+    "iso_grav_anom_slope",
+    "tc",
+    "geod_shearrate",
+    "geod_dilaterate",
+    "tmi_vg",
+    "deq_n100a15",
+    "iso_grav_anom_vg",
+    "det_elev",
+    "iso_grav_anom",
+    "tmi",
+    "depth_to_base_surf",
+    "ieq_n100a15",
+    "cond_surf",
+    "iso_grav_anom_hg",
+    "det_elev_slope",
+    "grav_tilt",
+    "grav_tilt_zero_prox",
+    "grav_verduzco_hd_tilt",
+    "mag_tilt",
+    "mag_verduzco_hd_tilt",
+    "rtp_total_horiz_grad",
+    "tmi_upward_residual",
+    "basement_step_grad",
+    "piedmont_concavity_300m",
+    "piedmont_concavity_900m",
+    "deconfounded_slope_prominence",
+    "slope_break_gradient",
+    "basin_margin_transition",
+    "lidar_scarp_step",
+    "lidar_signed_polarity",
+    "lidar_valid_flag",
+    "surf_axial_max_1p1km",
+    "surf_axial_aniso_1p1km",
+    "surf_axial_max_2p5km",
+    "surf_axial_aniso_2p5km",
+    "surf_cross_ridge_nms",
+    "sub_axial_max_2p5km",
+    "sub_axial_aniso_2p5km",
+    "sub_cross_ridge_nms",
+    "cross_modal_strike_consilience",
+    "great_basin_anderson_strike",
+    "rad_k_th_alteration",
+    "rad_u_th_fracture_radon",
+    "mt_clay_cap_edge",
+    "hydro_upflow_thermal_plume",
+    "hydro_upgradient_source_focus",
+    "paleo_probe_geothermal_halo"
+  ],
+  "hypothesis": "Unmapped Great Basin geothermal and neotectonic faults are multi-kilometer planar crustal discontinuities where deconfounded piedmont-toe topographic flexure and 1 m LiDAR scarp polarity co-align in strike with Verduzco potential-field tilt zero-contours, basement-cover steps, and GeoDAWN/GDR hydrothermal alteration/upflow plumes; bridging wash-interrupted gaps with nested OOF axial trace propagation and allocating binary dots via exact 300 m submodular DTI kernel cover (>200 m from visible catalogue) significantly improves hide-and-recover DTI.",
+  "mechanism": "51-channel Stage-1 multi-physics ensemble (core19 + 32 bounded <=1.2km Verduzco tilt, piedmont flexure, 8-azimuth steerable lineament/consilience & deconfounded K/Th-U/Th/GDR upflow channels) + nested OOF Stage-2 <=0.8km axial ridge & wash-gap-bridge stacker + Bayes prior-odds calibration + exact Minoux lazy-greedy 300m triangular-kernel submodular DTI cover (44,090 dots, d_vis > 200m).",
+  "non_fault_mimic": "Dendritic erosional mountain ridge crests and canyon walls; Pleistocene Lake Lahontan wave-cut shorelines and Tertiary basalt mesa rims; GeoDAWN steep-terrain flight-drape clearance variations.",
+  "lane": "MS-CAPE two-stage multi-physics axial trace propagation + 300m submodular DTI cover",
+  "externally_assigned_lane_verified": true,
+  "experiments_run": 3,
+  "fixed_arms": [
+    "physics_tilt8",
+    "core19",
+    "g30s19_hist_best",
+    "ms_cape_e3"
+  ],
+  "experiment_cap": 3,
+  "experimental_elapsed_seconds": 1571.18,
+  "this_execution_seconds": 1571.18,
+  "time_cap_hours": 2,
+  "preregistration": "docs/research/ms-cape/preregistration.md",
+  "preregistration_sha256": "9fd9195854b5fb1d060c7615496e17e83cc9525d8fd27e7657cc5eeefce047fc",
+  "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+  "physical_support_px": 20,
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.18668699809528588,
+    "withheld_positives": 60988,
+    "ci95": [
+      0.1733255507195668,
+      0.20031681744489188
+    ],
+    "tp_weight": 10997.716644145643,
+    "fp_weight": 39599.89731755324,
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "scope": "buffered whole-segment catalogue-recovery proxy; NOT organizer performance",
+    "bootstrap": {
+      "unit": "geographic block aggregated across folds",
+      "blocks": 371,
+      "replicates": 2000,
+      "seed": 3071,
+      "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+    },
+    "comparators": {
+      "physics_tilt8": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.07816294928619362,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.07031718983266261,
+          0.08656549361066118
+        ],
+        "tp_weight": 4544.210734686716,
+        "fp_weight": 42192.07419941121
+      },
+      "core19": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.135709055412294,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.12076613450695034,
+          0.15085383058738502
+        ],
+        "tp_weight": 7936.268091636476,
+        "fp_weight": 40511.825163450405
+      },
+      "g30s19_hist_best": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.1378108061533636,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.1226255583368966,
+          0.1538341914949144
+        ],
+        "tp_weight": 8035.430764364142,
+        "fp_weight": 39551.05553576251
+      }
+    },
+    "candidate_minus": {
+      "physics_tilt8": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.10852404880909226,
+        "ci95": [
+          0.09332721373781144,
+          0.12444772737042369
+        ]
+      },
+      "core19": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.050977942682991884,
+        "ci95": [
+          0.03904485243333861,
+          0.06314610419731835
+        ]
+      },
+      "g30s19_hist_best": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.048876191941922276,
+        "ci95": [
+          0.037766446800691994,
+          0.059520528099690787
+        ]
+      }
+    },
+    "experiment_ladder": {
+      "evaluator_version": "component-holdout-v3-blockstats-20261025",
+      "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+      "bootstrap": {
+        "unit": "geographic block aggregated across folds",
+        "blocks": 371,
+        "replicates": 2000,
+        "seed": 3071,
+        "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+      },
+      "arms": {
+        "core19": {
+          "label": "HOLDOUT-DTI",
+          "value": 0.135709055412294,
+          "withheld_positives": 60988,
+          "ci95": [
+            0.12076613450695034,
+            0.15085383058738502
+          ],
+          "tp_weight": 7936.268091636476,
+          "fp_weight": 40511.825163450405
+        },
+        "g30s19_hist_best": {
+          "label": "HOLDOUT-DTI",
+          "value": 0.1378108061533636,
+          "withheld_positives": 60988,
+          "ci95": [
+            0.1226255583368966,
+            0.1538341914949144
+          ],
+          "tp_weight": 8035.430764364142,
+          "fp_weight": 39551.05553576251
+        },
+        "ms_cape_e1": {
+          "label": "HOLDOUT-DTI",
+          "value": 0.17435860115242904,
+          "withheld_positives": 60988,
+          "ci95": [
+            0.1585826716355455,
+            0.18987582004256767
+          ],
+          "tp_weight": 10246.777036395013,
+          "fp_weight": 39643.2522254584
+        },
+        "ms_cape_e2": {
+          "label": "HOLDOUT-DTI",
+          "value": 0.17631180239363464,
+          "withheld_positives": 60988,
+          "ci95": [
+            0.16247275498544622,
+            0.19077928178498024
+          ],
+          "tp_weight": 10364.754516511592,
+          "fp_weight": 39615.76661311637
+        },
+        "ms_cape_e3": {
+          "label": "HOLDOUT-DTI",
+          "value": 0.18668699809528588,
+          "withheld_positives": 60988,
+          "ci95": [
+            0.1733255507195668,
+            0.20031681744489188
+          ],
+          "tp_weight": 10997.716644145643,
+          "fp_weight": 39599.89731755324
+        }
+      },
+      "candidate_minus": {
+        "core19": {
+          "label": "HOLDOUT-DTI difference",
+          "value": 0.050977942682991884,
+          "ci95": [
+            0.03904485243333861,
+            0.06314610419731835
+          ]
+        },
+        "g30s19_hist_best": {
+          "label": "HOLDOUT-DTI difference",
+          "value": 0.048876191941922276,
+          "ci95": [
+            0.037766446800691994,
+            0.059520528099690787
+          ]
+        },
+        "ms_cape_e1": {
+          "label": "HOLDOUT-DTI difference",
+          "value": 0.01232839694285684,
+          "ci95": [
+            0.003701249471861342,
+            0.020865934999403167
+          ]
+        },
+        "ms_cape_e2": {
+          "label": "HOLDOUT-DTI difference",
+          "value": 0.01037519570165124,
+          "ci95": [
+            0.006585859966813369,
+            0.014086493294442651
+          ]
+        }
+      }
+    }
+  },
+  "historical_best_rerun": {
+    "verified": true,
+    "comparator_arm": "g30s19_hist_best",
+    "description": "Same-protocol 4-fold rerun of Lane G30-S19 (40-channel non-leaky habitat HGB + 300 m EDGE emitter)",
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "candidate_beats_best_with_paired_ci": true
+  },
+  "supplementary_diagnostics": {
+    "off_catalogue_sgmc_fault_discovery": {
+      "label": "DIAGNOSTIC-PROXY-DTI (USGS SGMC off-catalogue d_cat > 300m; NOT used for tuning)",
+      "off_catalogue_sgmc_pixels": 61664,
+      "dti": 0.09411415438395658,
+      "tp_weight": 5521.118227041557,
+      "fp_weight": 41143.172603373474
+    },
+    "steep_terrain_calibration": {
+      "catalogue_top_quartile_slope_fraction": 0.2403,
+      "candidate_top_quartile_slope_fraction": 0.2606
+    }
+  },
+  "feature_canaries": {
+    "features_per_fold": 51,
+    "folds": 4,
+    "alarm_count": 0,
+    "alarms": [],
+    "max_observed_auc": 0.6403577244850935,
+    "receipt": "docs/research/ms-cape/results.json"
+  },
+  "registry": {
+    "complete": true,
+    "surface": {
+      "decision": "novelty-check-passed-not-submission-approval",
+      "registry_entries_compared": 116,
+      "max_spearman": 0.17139595142886038,
+      "max_fraction_within_3px": null,
+      "errors": []
+    },
+    "dots": {
+      "decision": "novelty-check-passed-not-submission-approval",
+      "registry_entries_compared": 116,
+      "max_spearman": 0.06393074790087257,
+      "max_fraction_within_3px": 0.6858244499886595,
+      "errors": []
+    },
+    "coverage": "116 unique SHA-256 aligned GeoTIFF snapshots across all 9 priority repositories (GEMSDOE24..36), all local GEMSDOE30 downloads, and GEMSDOE49/63/70/73/76 hero artifacts",
+    "receipt_surface": "docs/research/ms-cape/novelty-surface.json",
+    "receipt_dots": "docs/research/ms-cape/novelty-dots.json"
+  },
+  "raster_sha256": "002c5158103419d3c99ac48a09998113efc2e473520e78a349af36996ceb56a2",
+  "published_tiff": "docs/downloads/gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-nan.tif",
+  "portal_zeros_sha256": "3ee82868d595304ec7001df55cdee2810b8ff63e31799dc676349fe20825231a",
+  "portal_zeros_tiff": "docs/downloads/gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-zeros.tif",
+  "validator_output": {
+    "status": "passed",
+    "no_nan_inside_footprint": true,
+    "values_in_0_1": true,
+    "crs_match": true,
+    "shape_match": true,
+    "transform_match": true,
+    "single_float32_band": true,
+    "nan_nodata_outside_footprint": true,
+    "portal_zeros_all_12279160_cells_finite_in_0_1": true,
+    "portal_zeros_bit_identical_inside_footprint": true,
+    "positive_catalogue_pixels": 0,
+    "emitted_dots": 44090,
+    "organizer_acceptance_confirmed": false
+  },
+  "submission_name": "gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497",
+  "note": "MS-CAPE 2-stage multi-physics tilt+piedmont+8az lineament+GDR/GeoDAWN upflow + 300m submodular DTI cover (44090 off-cat dots)",
+  "verdict": "promote",
+  "scientific_gate_passed": true,
+  "verdict_scope": "machine-adjudicated research & format gates; separate weekly slot selector applies",
+  "download_ok": true,
+  "slot_selected": false,
+  "submission_approved": false,
+  "weekly_slots_used": 0,
+  "organizer_confirmed_scores": [],
+  "created_utc": "2026-10-26T00:02:04+00:00",
+  "blockers": []
+}

@@ -9,17 +9,20 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib
 import json
 import math
 from pathlib import Path
 import sys
+
+import numpy as np
+import rasterio
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from gemsdoe30.holdout import spatial_bootstrap
 from gemsdoe30.readiness import assess
 from gemsdoe30.submission import validate_submission_file
-from gemsdoe30.texture import SUPPORT_PX, TRANSFORM_VERSION
 
 
 def local_path(relative: str) -> Path:
@@ -56,10 +59,17 @@ def check_equal(actual, expected, where="evidence"):
         raise ValueError(f"evidence value mismatch: {where}")
 
 
+_ALLOWED_TRANSFORM_MODULES = {
+    "src/gemsdoe30/texture.py": "gemsdoe30.texture",
+    "src/gemsdoe30/ms_cape.py": "gemsdoe30.ms_cape",
+}
+
+
 def verify(pointer: Path, template: Path, *, write=False):
     selection = load(pointer)
     card_path = local_path(selection["run_card"])
     directory = card_path.parent
+    dir_rel = directory.relative_to(ROOT).as_posix()
     card = load(card_path)
     results = load(directory / "results.json")
     raster = local_path(card["published_tiff"])
@@ -74,14 +84,40 @@ def verify(pointer: Path, template: Path, *, write=False):
     report = validate_submission_file(raster, template)
     if not report.passed:
         raise ValueError("published TIFF fails the shared format validator")
-    recomputed = spatial_bootstrap(results["bootstrap_sufficient_statistics"], candidate="tdx6",
+
+    zeros_digest = None
+    if card.get("portal_zeros_tiff"):
+        zeros_raster = local_path(card["portal_zeros_tiff"])
+        with zeros_raster.open("rb") as stream:
+            zeros_digest = hashlib.file_digest(stream, "sha256").hexdigest()
+        zeros_manifest = load(zeros_raster.with_suffix(".json"))
+        if zeros_digest != card.get("portal_zeros_sha256") or zeros_digest != zeros_manifest.get("output_sha256"):
+            raise ValueError("portal-zeros TIFF does not match its run-card/sidecar hash")
+        if zeros_manifest.get("submission_approved") is not False:
+            raise ValueError("portal-zeros sidecar must not grant a competition slot")
+        zeros_report = validate_submission_file(zeros_raster, template, require_finite_all_cells=True)
+        if not zeros_report.passed:
+            raise ValueError("portal-zeros TIFF fails the all-finite [0, 1] format validator")
+        with rasterio.open(template) as t_ds, rasterio.open(raster) as n_ds, rasterio.open(zeros_raster) as z_ds:
+            t_valid = np.isfinite(t_ds.read(1))
+            n_arr = n_ds.read(1)
+            z_arr = z_ds.read(1)
+            if not np.array_equal(n_arr[t_valid], z_arr[t_valid]):
+                raise ValueError("portal-zeros TIFF differs inside footprint from published NaN-outside TIFF")
+            if not np.all(z_arr[~t_valid] == 0.0):
+                raise ValueError("portal-zeros TIFF must be exact 0.0 outside template footprint")
+
+    candidate_arm = card.get("candidate_arm", "tdx6")
+    if not isinstance(candidate_arm, str) or not candidate_arm:
+        raise ValueError("invalid candidate_arm")
+    recomputed = spatial_bootstrap(results["bootstrap_sufficient_statistics"], candidate=candidate_arm,
                                     replicates=2000, seed=3071)
     # Check the complete pooled summary, not only the candidate point estimate.
     # A changed paired CI must not silently turn a negative result into promotion.
     check_equal(results["summary"], recomputed, "results/summary")
     h = card["holdout"]
     card_summary = {key: h[key] for key in ("evaluator_version", "protocol_version", "bootstrap", "candidate_minus")}
-    card_summary["arms"] = {"tdx6": {key: h[key] for key in recomputed["arms"]["tdx6"]},
+    card_summary["arms"] = {candidate_arm: {key: h[key] for key in recomputed["arms"][candidate_arm]},
                             **h["comparators"]}
     check_equal(card_summary, recomputed, "card/holdout")
     preregistration = hashlib.sha256((directory / "preregistration.md").read_bytes()).hexdigest()
@@ -92,12 +128,18 @@ def verify(pointer: Path, template: Path, *, write=False):
         raise ValueError("holdout results do not bind to the published TIFF")
     features = load(directory / "feature-receipt.json")
     cache = load(directory / "cache-verification.json")
-    transform_hash = hashlib.sha256((ROOT / "src/gemsdoe30/texture.py").read_bytes()).hexdigest()
+    mod_rel = features.get("signature", {}).get("transform_module", "src/gemsdoe30/texture.py")
+    if mod_rel not in _ALLOWED_TRANSFORM_MODULES:
+        raise ValueError(f"unregistered transform module: {mod_rel}")
+    mod_obj = importlib.import_module(_ALLOWED_TRANSFORM_MODULES[mod_rel])
+    expected_support = int(mod_obj.SUPPORT_PX)
+    expected_version = str(mod_obj.TRANSFORM_VERSION)
+    transform_hash = hashlib.sha256((ROOT / mod_rel).read_bytes()).hexdigest()
     if (features["signature"]["transform_code_sha256"] != transform_hash
-            or features["signature"]["transform_version"] != TRANSFORM_VERSION
-            or features.get("support_px") != SUPPORT_PX
-            or card.get("physical_support_px") != SUPPORT_PX
-            or any(fold.get("buffer_px") != SUPPORT_PX for fold in results["folds"])):
+            or features["signature"]["transform_version"] != expected_version
+            or features.get("support_px") != expected_support
+            or card.get("physical_support_px") != expected_support
+            or any(fold.get("buffer_px") != expected_support for fold in results["folds"])):
         raise ValueError("transform identity or physical-support/training guard mismatch")
     if (cache.get("all_cells_match_raw_sources") is not True
             or cache.get("dataset_signature") != card.get("dataset_signature")
@@ -138,6 +180,8 @@ def verify(pointer: Path, template: Path, *, write=False):
     # Preserve the original pre-placement snapshot, then audit late arrivals on
     # BOTH saved output states without refitting or changing any dots.
     known = expected_registry | {row["sha256"] for row in registry.get("exclusions", [])} | {digest}
+    if zeros_digest is not None:
+        known.add(zeros_digest)
     extra_hashes = set()
     for path in raster.parent.iterdir():
         if path.suffix.lower() not in (".tif", ".tiff"):
@@ -185,9 +229,9 @@ def verify(pointer: Path, template: Path, *, write=False):
     readiness = assess(card, results, format_passed=report.passed, hash_matches=hashes_match,
                        surface_audit=combined_surface, dots_audit=combined_dots, registry=assessment_registry)
     if additional_path.exists():
-        addition = {"registry": "docs/research/texture-displacement/registry-parallel-addendum.json",
-                    "surface_receipt": "docs/research/texture-displacement/novelty-parallel-surface.json",
-                    "dots_receipt": "docs/research/texture-displacement/novelty-parallel-dots.json",
+        addition = {"registry": f"{dir_rel}/registry-parallel-addendum.json",
+                    "surface_receipt": f"{dir_rel}/novelty-parallel-surface.json",
+                    "dots_receipt": f"{dir_rel}/novelty-parallel-dots.json",
                     "timing": "Late-arriving references; checked both saved states without refitting or replacing dots",
                     "combined_observed_registry": readiness["observed_registry"]}
         if write:

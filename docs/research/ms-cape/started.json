@@ -1,0 +1,18 @@
+{
+  "started_utc": "2026-10-25T23:35:53+00:00",
+  "preregistration_sha256": "9fd9195854b5fb1d060c7615496e17e83cc9525d8fd27e7657cc5eeefce047fc",
+  "experiment_count": 3,
+  "candidate_arm": "ms_cape_e3",
+  "comparator_arms": [
+    "physics_tilt8",
+    "core19",
+    "g30s19_hist_best"
+  ],
+  "experiment_ladder": [
+    "ms_cape_e1",
+    "ms_cape_e2",
+    "ms_cape_e3"
+  ],
+  "script_sha256": "e6804b02e89067d19641d6b64d9978cf1bbd345659b0e0bb2e111cada743e784",
+  "max_experimental_seconds": 7000.0
+}
