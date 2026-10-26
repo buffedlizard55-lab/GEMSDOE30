@@ -1,8 +1,10 @@
-# Executive review — 26 October 2026
+# Executive review — 26 October 2026 (00:34 UTC snapshot; superseded)
+
+> **Historical snapshot only.** This review was written at 00:34 UTC, before the FFL-1 lane run recorded at 00:50 UTC. Its statement that no TIFF was generated describes that earlier audit only. The current lane decision is the later [FFL-1 review](../2026-10-26-fflidar/review.md): one unique research TIFF was generated, then duplicate-stopped; do not submit it.
 
 ## Decision first
 
-**OK to download existing format-valid research TIFFs. NOT cleared to submit. No new TIFF generated this session.** This is a negative, audit-only deliverable, not a claim of a better model. The prompt supplies no identifiable single-method lane paragraph; assigning ourselves a new lane would violate the parallel protocol. Complete parallel surfaces and an identical-protocol best-model comparison are also missing. Zero experiments and zero weekly slots were used.
+**At the 00:34 UTC snapshot: existing format-valid research TIFFs were downloadable but not cleared to submit; no new TIFF had yet been generated in that audit.** This was a negative, audit-only deliverable, not a claim of a better model. At that snapshot the prompt supplied no identifiable single-method lane paragraph, complete parallel surfaces, or identical-protocol best-model comparison. Zero experiments and zero weekly slots were used in that audit.
 
 Current bytes were reopened with the shared `gemsdoe30.submission` validator against the SHA-pinned owner-mirror template. Both H-NEARSPLAY and MSDB-1v2 pass format and SHA checks: [machine report](readiness.json). Neither is approved. These checks do not rerun training, holdout, canaries, or novelty. Template provenance remains an owner mirror, not organizer authentication.
 

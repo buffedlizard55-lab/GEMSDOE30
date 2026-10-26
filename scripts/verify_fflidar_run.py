@@ -10,6 +10,8 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
+from numbers import Real
 from pathlib import Path
 import sys
 
@@ -27,6 +29,47 @@ REPORT = ROOT / "docs/research/2026-10-26-fflidar"
 def sha(path: Path) -> str:
     with path.open("rb") as stream:
         return hashlib.file_digest(stream, "sha256").hexdigest()
+
+
+def validate_expanded_dot_receipt(audit: dict, expected_sha256: str) -> dict:
+    """Check that expanded-registry evidence is bound to the file and decision.
+
+    A negative duplicate-stop is a valid verified outcome: this function checks
+    that the recorded decision agrees with the measured maximum, rather than
+    treating a duplicate as a verifier failure.
+    """
+    if audit.get("stage") != "dots":
+        raise ValueError("expanded novelty receipt is not a dot-stage audit")
+    if audit.get("candidate_sha256") != expected_sha256:
+        raise ValueError("expanded dot novelty receipt is not bound to the published TIFF")
+    if audit.get("errors"):
+        raise ValueError("expanded dot novelty receipt records errors")
+    rows = audit.get("comparisons")
+    if not isinstance(rows, list) or not rows:
+        raise ValueError("expanded dot novelty receipt has no comparisons")
+    correlations = []
+    overlaps = []
+    for row in rows:
+        rho = row.get("spearman_full_footprint")
+        overlap = row.get("candidate_fraction_within_3px_of_reference")
+        if (not isinstance(rho, Real) or isinstance(rho, bool)
+                or not math.isfinite(float(rho))):
+            raise ValueError("expanded dot novelty receipt has undefined/non-finite correlation")
+        if (not isinstance(overlap, Real) or isinstance(overlap, bool)
+                or not math.isfinite(float(overlap)) or not 0.0 <= float(overlap) <= 1.0):
+            raise ValueError("expanded dot novelty receipt has undefined/invalid dot overlap")
+        correlations.append(float(rho))
+        overlaps.append(float(overlap))
+    max_rho = max(correlations)
+    max_overlap = max(overlaps)
+    duplicate = max_rho > 0.90 or max_overlap > 0.70
+    expected_decision = "duplicate-stop" if duplicate else None
+    if duplicate and audit.get("decision") != expected_decision:
+        raise ValueError("expanded dot novelty decision contradicts measured duplicate threshold")
+    if not duplicate and audit.get("decision") == "duplicate-stop":
+        raise ValueError("expanded dot novelty reports duplicate-stop without a threshold breach")
+    return {"comparisons": len(rows), "max_spearman": max_rho,
+            "max_fraction_within_3px": max_overlap, "duplicate": duplicate}
 
 
 def verify() -> dict:
@@ -57,6 +100,17 @@ def verify() -> dict:
                 raise ValueError("dot overlap exceeds 70%")
     if results["canary_alarms"]:
         raise ValueError("leakage canary alarms recorded")
+    expanded_dots_path = REPORT / "novelty-dots-expanded.json"
+    expanded_dots = json.loads(expanded_dots_path.read_text())
+    expanded_stats = validate_expanded_dot_receipt(expanded_dots, card["raster_sha256"])
+    if expanded_stats["duplicate"]:
+        failed_duplicate_gates = [
+            gate for gate in readiness.get("gates", [])
+            if gate.get("name") == "duplicate_stop_fusion_edge_emission"
+            and gate.get("status") == "failed"
+        ]
+        if not failed_duplicate_gates or card["verdict"] != "negative":
+            raise ValueError("expanded duplicate-stop is not reflected in readiness and run-card verdict")
     stratified_path = REPORT / "results-stratified.json"
     if stratified_path.is_file():
         stratified = json.loads(stratified_path.read_text())
