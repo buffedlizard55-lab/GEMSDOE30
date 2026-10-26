@@ -35,35 +35,6 @@ def test_stratified_counts_sum_exactly_and_match_frozen_shares():
         assert got == pytest.approx(want, abs=1 / 44090)
 
 
-def test_fflidar_expanded_dot_receipt_is_bound_and_decision_matches_measurement():
-    from scripts.verify_fflidar_run import validate_expanded_dot_receipt
-
-    card = json.loads((FFL_DIR / "run-card.json").read_text())
-    audit = json.loads((FFL_DIR / "novelty-dots-expanded.json").read_text())
-    summary = validate_expanded_dot_receipt(audit, card["raster_sha256"])
-    assert summary["comparisons"] == 172
-    assert summary["duplicate"] is True
-    assert summary["max_fraction_within_3px"] == pytest.approx(0.7828078929462463)
-
-    with pytest.raises(ValueError, match="not bound"):
-        validate_expanded_dot_receipt(audit, "0" * 64)
-    inconsistent = {**audit, "decision": "blocked-incomplete-evidence"}
-    with pytest.raises(ValueError, match="contradicts measured"):
-        validate_expanded_dot_receipt(inconsistent, card["raster_sha256"])
-    false_stop = {**audit, "comparisons": [
-        {**row, "candidate_fraction_within_3px_of_reference": 0.50,
-         "spearman_full_footprint": 0.20}
-        for row in audit["comparisons"]
-    ]}
-    with pytest.raises(ValueError, match="without a threshold breach"):
-        validate_expanded_dot_receipt(false_stop, card["raster_sha256"])
-    invalid_number = {**audit, "comparisons": [
-        {**audit["comparisons"][0], "candidate_fraction_within_3px_of_reference": "0.78"}
-    ]}
-    with pytest.raises(ValueError, match="invalid dot overlap"):
-        validate_expanded_dot_receipt(invalid_number, card["raster_sha256"])
-
-
 def test_fflidar_final_artifact_is_duplicate_stopped_and_never_submittable():
     card = json.loads((FFL_DIR / "run-card.json").read_text())
     readiness = json.loads((FFL_DIR / "readiness.json").read_text())

@@ -29,6 +29,7 @@ research = [
 test = [
   "pytest>=8.0", "shapely>=2.0", "pyproj>=3.5",
   "numpy>=1.24", "scipy>=1.10", "rasterio>=1.3",
+  "scikit-learn>=1.3",
 ]
 
 [tool.setuptools.packages.find]
