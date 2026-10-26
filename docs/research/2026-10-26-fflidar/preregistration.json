@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_spec": "fflidar1",
+  "lane": "FFL-1 MSDBxLiDAR fusion + distance-stratified far-field emission (self-assigned, frozen 2026-10-26; owner lane paragraph missing, IR-30-078)",
+  "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+  "evaluator_version": "component-holdout-v3-blockstats-20261025",
+  "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+  "buffer_px": 17,
+  "dot_budget_full": 44090,
+  "seed": 3051,
+  "bootstrap_seed": 3071,
+  "bootstrap_replicates": 2000,
+  "arms_experiment_1": ["msdb_edge", "fusion_edge"],
+  "arms_experiment_2": ["fusion_edge", "fusion_ffstrat"],
+  "candidate_arm": "fusion_ffstrat",
+  "fallback_arm": "fusion_edge",
+  "strata": [
+    {"label": "(2,5]px", "low_exclusive": 2.0, "high_inclusive": 5.0, "share": 0.14},
+    {"label": "(5,10]px", "low_exclusive": 5.0, "high_inclusive": 10.0, "share": 0.15},
+    {"label": "(10,30]px", "low_exclusive": 10.0, "high_inclusive": 30.0, "share": 0.34},
+    {"label": "(30,50]px", "low_exclusive": 30.0, "high_inclusive": 50.0, "share": 0.16},
+    {"label": ">50px", "low_exclusive": 50.0, "high_inclusive": null, "share": 0.21}
+  ],
+  "production_outside_convention": "0.0 outside footprint; finite everywhere; no NaN/Inf in the whole array",
+  "note_template": "FFL1: MSDB31+LiDAR17 fusion x Rayleigh gate, far-field stratified quotas (2px excl), 44090 off-cat dots, all-finite",
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200
+}

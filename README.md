@@ -1,6 +1,25 @@
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
-## START HERE — Unique `MSDB-1v2` GeoTIFF Generated (`+27.6%` over `core19` on 4-Fold Buffered Holdout; Conservative Slot Gate Active: **NOT APPROVED FOR SUBMISSION**)
+## LATEST 2026-10-26 — FFL-1 MSDB × LiDAR Fusion: **DO NOT SUBMIT — DUPLICATE-STOPPED**
+
+- **Generated GeoTIFF (research artifact only):** [`gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3.tif`](docs/research/2026-10-26-fflidar/gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3.tif) (`SHA-256: 7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07`; 44,090 dots)
+- **Submission name:** `gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3`
+- **Note (107/140 chars):** `FFL1: MSDB31+LiDAR17 fusion x Rayleigh gate + 300m EDGE, >2px off-cat, 44090 dots, all-finite zeros-outside`
+- **Machine verdict:** `negative`; `ok_to_submit=false`; `submission_approved=false`; `slot_selected=false`; **organizer score: none**
+- **Why not submit:** the corrected expanded novelty audit (pinned registry + every TIFF in `docs/downloads/`, candidate excluded; 168 comparisons) found **78.280789% of FFL dots within 3 px of MSDB-1v2**, above the 70% duplicate-stop threshold. The strict whole-array `[0, 1]` file validator passes, but format validity does not rescue a duplicate.
+- **Feature evidence (HOLDOUT-DTI only, evaluator `component-holdout-v3-blockstats-20261025`, 60,988 withheld positives):** Exp. 1 seed 3051 `fusion_edge` 0.182417 [0.168230, 0.196433] vs same-run `msdb_edge` 0.175639 [0.161471, 0.189566] (Δ +0.006779 [−0.000067, +0.012888]; frozen gate failed); disclosed Amendment-A1 fresh-seed confirmation 0.183949 [0.169419, 0.197874] vs 0.173427 [0.159043, 0.187952] (Δ +0.010522 [+0.004182, +0.016362]).
+- **Stratified rescue:** not produced. The frozen distance quotas are geometrically infeasible in the v3 quadrant folds (0 eligible pixels in both `(2,5]` and `(5,10]` strata in every fold), so Experiment 3 scored zero folds rather than redefining quotas after the fact.
+- **Read next:** [FFL-1 PhD review](docs/research/2026-10-26-fflidar/review.md) · [nine-site executive summary](docs/research/2026-10-26-fflidar/nine-site-executive-summary.md) · [run card](docs/research/2026-10-26-fflidar/run-card.json) · [readiness](docs/research/2026-10-26-fflidar/readiness.json) · [irregularities IR-FFL-01…07](docs/irregularities.md)
+- **Verify the negative decision (no human inspection):** `.venv/bin/python scripts/verify_fflidar_run.py` (exit 0); `.venv/bin/python scripts/verify_fflidar_run.py --require-promote` (expected exit 2).
+
+The shared `docs/current-run.json` pointer deliberately remains on MSDB-1v2;
+FFL-1 is the newest lane, not a replacement current-run artifact. Do not move
+the FFL TIFF back into `docs/downloads/` without regenerating the exact MSDB
+late-registry evidence (see IR-FFL-05).
+
+---
+
+## CURRENT-POINTER ARTIFACT — Unique `MSDB-1v2` GeoTIFF Generated (`+27.6%` over `core19` on 4-Fold Buffered Holdout; Conservative Slot Gate Active: **NOT APPROVED FOR SUBMISSION**)
 
 - **Unique Generated GeoTIFF (`44,090` off-catalogue binary dots):** [`docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif`](docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif) (`SHA-256: 22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381`)
 - **Submission Name:** `gems30-MSDB1-edge44090-20261025-e7856ec3f14a`
@@ -43,12 +62,15 @@ novelty, and paired spatial-bootstrap checks without human raster inspection.
 ```bash
 python -m venv .venv
 .venv/bin/pip install -e '.[research,test]' -c requirements-tdx1.txt
-.venv/bin/python scripts/restore_public_mirrors.py --include-extra
+.venv/bin/python scripts/restore_public_mirrors.py
+.venv/bin/python scripts/restore_public_mirrors.py --pins docs/research/mirror-pins-extra.json --output-dir data/raw
 .venv/bin/python scripts/prepare_data.py
 .venv/bin/python scripts/verify_prepared_cache.py --output docs/research/msdb-piedmont/cache-verification.json
 .venv/bin/python scripts/sync_priority_registry.py --output docs/research/msdb-piedmont/registry.json --restore-only
 # Inspect committed MSDB-1v2 artifact & recompute 2,000-draw paired spatial bootstrap (exits 0):
 .venv/bin/python scripts/verify_current_run.py
+# Inspect the newest FFL-1 negative/duplicate-stop decision (exit 0; --require-promote exits 2):
+.venv/bin/python scripts/verify_fflidar_run.py
 .venv/bin/python scripts/verify_stopped_attempt.py
 .venv/bin/python scripts/build_research_site.py --check
 .venv/bin/python -m pytest -q

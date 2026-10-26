@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "experiment_spec": "fflidar1",
+  "run_id": "gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3",
+  "submission_name": "gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3",
+  "note": "FFL1: MSDB31+LiDAR17 fusion x Rayleigh gate + 300m EDGE, >2px off-cat, 44090 dots, all-finite zeros-outside",
+  "created_utc": "2026-10-26T00:50:39+00:00",
+  "hypothesis": "1 m-LiDAR scarp morphology fused with the corrected MSDB-1v2 stationary potential-field/topographic discontinuity stack finds uncatalogued faults better than MSDB alone; allocating the dot budget across catalogue-distance strata (excluding <=2 px) spends dots where prior lanes under-sample.",
+  "mechanism": "48-feature HGB (13 stationary raw + 18 MSDB physics + 17 LiDAR scarp layers), Prentice-Pyke Bayes calibration x Rayleigh curvilinear gate; emission = fusion_edge (duplicate-stopped; see amendment-stratified.md)",
+  "non_fault_mimic": "Lake Lahontan paleo-shorelines/playa benches; fluvial terrace risers; volcanic flow fronts; pluton contacts; roads/canals/mines",
+  "lane": "FFL-1 (self-assigned, preregistration frozen 2026-10-26; IR-30-078)",
+  "lane_preregistration_sha256": "deac9f798671fd6f158d18ba0059faf5cf4081b3121422a264fe0315d7f053b5",
+  "experiments_run": 3,
+  "experiment_cap": 3,
+  "experimental_elapsed_seconds": 438.1,
+  "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+  "published_tiff": "docs/research/2026-10-26-fflidar/gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3.tif",
+  "raster_sha256": "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07",
+  "values_sha256": "eacd73e854a31ad7c64f2e3fa2171ba7442068cafb26d08efdd22b8d239f2908",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.18241743802965732,
+    "withheld_positives": 60988,
+    "ci95": [
+      0.1682304824005995,
+      0.19643266214571023
+    ],
+    "tp_weight": 10727.04586819925,
+    "fp_weight": 39345.636860789906,
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "bootstrap": {
+      "unit": "geographic block aggregated across folds",
+      "blocks": 371,
+      "replicates": 2000,
+      "seed": 3071,
+      "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+    },
+    "comparators": {
+      "msdb_edge": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.17563859064364507,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.16147080837963504,
+          0.18956563333705054
+        ],
+        "tp_weight": 10318.081861070294,
+        "fp_weight": 39460.408210647234
+      }
+    },
+    "candidate_minus": {
+      "msdb_edge": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.0067788473860122545,
+        "ci95": [
+          -6.704104265051745e-05,
+          0.012888018387547483
+        ]
+      }
+    },
+    "experiment_1_seed3051": {
+      "fusion_edge": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.18241743802965732,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.1682304824005995,
+          0.19643266214571023
+        ],
+        "tp_weight": 10727.04586819925,
+        "fp_weight": 39345.636860789906
+      },
+      "msdb_edge": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.17563859064364507,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.16147080837963504,
+          0.18956563333705054
+        ],
+        "tp_weight": 10318.081861070294,
+        "fp_weight": 39460.408210647234
+      },
+      "candidate_minus_msdb_edge": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.0067788473860122545,
+        "ci95": [
+          -6.704104265051745e-05,
+          0.012888018387547483
+        ]
+      }
+    },
+    "confirmation_seed3063": {
+      "fusion_edge": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.1839491399944582,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.16941879692179745,
+          0.19787438682807115
+        ],
+        "tp_weight": 10818.871162508625,
+        "fp_weight": 39301.47847761931
+      },
+      "msdb_edge": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.17342692823529826,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.15904280118628636,
+          0.1879520020835673
+        ],
+        "tp_weight": 10184.796900598854,
+        "fp_weight": 39496.8678427221
+      },
+      "candidate_minus_msdb_edge": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.010522211759159933,
+        "ci95": [
+          0.004182145058381206,
+          0.016361887018721873
+        ]
+      },
+      "gate_passed": true
+    }
+  },
+  "feature_canaries": {
+    "features_per_fold": 54,
+    "folds": 4,
+    "alarms": [],
+    "max_auc_either_direction": 0.6666596600375767
+  },
+  "registry": {
+    "dots_expanded": null,
+    "surface_expanded_max_spearman": null,
+    "scope": "pinned nine-site registry + every TIFF in docs/downloads (candidate SHA excluded)",
+    "duplicate_stop_fusion_edge": {
+      "reference": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+      "fraction_of_fusion_edge_dots_within_3px": 0.7828078929462463
+    }
+  },
+  "validator_output": {
+    "status": "passed",
+    "no_nan_inside_footprint": true,
+    "no_nan_anywhere": true,
+    "values_in_0_1_inside_footprint": true,
+    "values_in_0_1_whole_array": true,
+    "min_whole_array": 0.0,
+    "max_whole_array": 1.0,
+    "crs_match": true,
+    "shape_match": true,
+    "transform_match": true,
+    "single_float32_band": true,
+    "outside_footprint_value": 0.0,
+    "positive_catalogue_pixels": 0,
+    "dots_within_2px_of_catalogue": 0,
+    "emitted_dots": 44090,
+    "organizer_acceptance_confirmed": false
+  },
+  "production_stratum_counts": null,
+  "historical_best_rerun": {
+    "verified": true,
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "candidate_beats_best_with_paired_ci": true
+  },
+  "verdict": "negative",
+  "submission_approved": false,
+  "slot_selected": false,
+  "download_ok": true,
+  "ok_to_submit": false,
+  "display_status": "DO NOT SUBMIT - automated gates not all passed",
+  "organizer_score": null,
+  "candidate_arm": "fusion_edge",
+  "confirmation": {
+    "label": "HOLDOUT-DTI",
+    "seed": 3063,
+    "fusion_edge": {
+      "label": "HOLDOUT-DTI",
+      "value": 0.1839491399944582,
+      "withheld_positives": 60988,
+      "ci95": [
+        0.16941879692179745,
+        0.19787438682807115
+      ],
+      "tp_weight": 10818.871162508625,
+      "fp_weight": 39301.47847761931
+    },
+    "msdb_edge": {
+      "label": "HOLDOUT-DTI",
+      "value": 0.17342692823529826,
+      "withheld_positives": 60988,
+      "ci95": [
+        0.15904280118628636,
+        0.1879520020835673
+      ],
+      "tp_weight": 10184.796900598854,
+      "fp_weight": 39496.8678427221
+    },
+    "candidate_minus_msdb_edge": {
+      "label": "HOLDOUT-DTI difference",
+      "value": 0.010522211759159933,
+      "ci95": [
+        0.004182145058381206,
+        0.016361887018721873
+      ]
+    },
+    "gate_passed": true,
+    "amendment": "amendment-confirmation.md (written after Experiment 1, before the confirmation run)"
+  }
+}

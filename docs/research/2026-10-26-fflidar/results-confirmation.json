@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "experiment": 2,
+  "amendment": "amendment-confirmation.md",
+  "seed": 3063,
+  "summary": {
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "bootstrap": {
+      "unit": "geographic block aggregated across folds",
+      "blocks": 371,
+      "replicates": 2000,
+      "seed": 3071,
+      "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+    },
+    "arms": {
+      "msdb_edge": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.17342692823529826,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.15904280118628636,
+          0.1879520020835673
+        ],
+        "tp_weight": 10184.796900598854,
+        "fp_weight": 39496.8678427221
+      },
+      "fusion_edge": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.1839491399944582,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.16941879692179745,
+          0.19787438682807115
+        ],
+        "tp_weight": 10818.871162508625,
+        "fp_weight": 39301.47847761931
+      }
+    },
+    "candidate_minus": {
+      "msdb_edge": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.010522211759159933,
+        "ci95": [
+          0.004182145058381206,
+          0.016361887018721873
+        ]
+      }
+    }
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "dot_budget_each_arm": 20902,
+      "arms": {
+        "msdb_edge": {
+          "tp_weight": 4119.351671094662,
+          "fp_weight": 19027.761397505994,
+          "truth_pixels": 29340.0,
+          "emitted_pixels": 20902
+        },
+        "fusion_edge": {
+          "tp_weight": 4248.969282474295,
+          "fp_weight": 18970.18824572961,
+          "truth_pixels": 29340.0,
+          "emitted_pixels": 20902
+        }
+      }
+    },
+    {
+      "fold": 1,
+      "dot_budget_each_arm": 11661,
+      "arms": {
+        "msdb_edge": {
+          "tp_weight": 2947.3486016522293,
+          "fp_weight": 10112.197543989369,
+          "truth_pixels": 12566.0,
+          "emitted_pixels": 11661
+        },
+        "fusion_edge": {
+          "tp_weight": 3013.8984122159045,
+          "fp_weight": 10166.168127227362,
+          "truth_pixels": 12566.0,
+          "emitted_pixels": 11661
+        }
+      }
+    },
+    {
+      "fold": 2,
+      "dot_budget_each_arm": 4821,
+      "arms": {
+        "msdb_edge": {
+          "tp_weight": 1433.79465498548,
+          "fp_weight": 4268.644709856734,
+          "truth_pixels": 9403.0,
+          "emitted_pixels": 4821
+        },
+        "fusion_edge": {
+          "tp_weight": 1594.3819042915243,
+          "fp_weight": 4197.36240543685,
+          "truth_pixels": 9403.0,
+          "emitted_pixels": 4821
+        }
+      }
+    },
+    {
+      "fold": 3,
+      "dot_budget_each_arm": 6728,
+      "arms": {
+        "msdb_edge": {
+          "tp_weight": 1684.301972866484,
+          "fp_weight": 6088.264191370016,
+          "truth_pixels": 9679.0,
+          "emitted_pixels": 6728
+        },
+        "fusion_edge": {
+          "tp_weight": 1961.6215635269089,
+          "fp_weight": 5967.759699225498,
+          "truth_pixels": 9679.0,
+          "emitted_pixels": 6728
+        }
+      }
+    }
+  ],
+  "gate": {
+    "rule": "fresh-seed fusion_edge-msdb_edge > 0 with paired 95% CI lower bound > 0",
+    "passed": true
+  },
+  "elapsed_seconds": 170.39,
+  "label": "HOLDOUT-DTI"
+}

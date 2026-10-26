@@ -21,6 +21,12 @@ MSDB_FEATURES = (
     "msdb_align_grav_basement", "msdb_align_rtp_grav", "msdb_align_topo_radtc",
     "msdb_piedmont_ramp_index", "msdb_radtc_grad_300m", "msdb_transtensional_index",
 )
+LIDAR_FEATURES = (
+    "lidar_valid", "step_max", "ex_max", "ex_mean", "lapneg_max", "lappos_max",
+    "downface_max", "upface_max", "cross_max", "relief", "coh100",
+    "scarp_dipole", "scarp_face", "face_vs_channel", "strike_persistence_5x5",
+    "scarp_face_max3", "scarp_dipole_smooth",
+)
 
 
 def contract(card: dict) -> dict:
@@ -68,6 +74,20 @@ def contract(card: dict) -> dict:
             "transform_version": "msdb-piedmont-v2-20261025",
             "label": "MSDB-1v2",
             "image_name": "msdb1-support.png",
+        }
+    if name == "fflidar1":
+        return {
+            "id": name,
+            "candidate": "fusion_ffstrat",
+            "arms": ("msdb_edge", "fusion_edge", "fusion_ffstrat"),
+            "required_positive_deltas": ("msdb_edge", "fusion_edge"),
+            "features": CORE_FEATURES + MSDB_FEATURES + LIDAR_FEATURES,
+            "support_px": 13,
+            "guard_px": 17,
+            "transform_path": "src/gemsdoe30/msdb.py",
+            "transform_version": "msdb-piedmont-v2-20261025",
+            "label": "FFL-1",
+            "image_name": "fflidar-support.png",
         }
     raise ValueError(f"unknown research experiment contract: {name!r}")
 

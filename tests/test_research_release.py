@@ -54,12 +54,18 @@ def test_generated_pages_have_real_local_links_and_valid_html_anchors(relative):
 @pytest.mark.parametrize("relative", ["index.html", "executive-summary.html"])
 def test_download_and_copy_controls_bind_to_the_current_negative_artifact(relative):
     card = json.loads((current_research_dir() / "run-card.json").read_text())
+    ffl_dir = ROOT / "docs/research/2026-10-26-fflidar"
+    ffl_card = json.loads((ffl_dir / "run-card.json").read_text())
     html = (ROOT / relative).read_text()
     parsed = Links(html)
-    assert parsed.downloads == [card["published_tiff"]]
+    # Newest FFL-1 research artifact first; current-pointer MSDB artifact second.
+    assert parsed.downloads == [ffl_card["published_tiff"], card["published_tiff"]]
     assert "NOT APPROVED FOR SUBMISSION" in html and "Do not submit." in html
+    assert "Latest lane FFL-1" in html and "78.280789%" in html
+    assert ffl_card["submission_name"] in html and ffl_card["verdict"] == "negative"
     assert card["submission_name"] in html
     assert "No competition slot selected or used" in html
+    assert (ROOT / ffl_card["published_tiff"]).is_file()
     assert (ROOT / card["published_tiff"]).is_file()
     cleaned = html.lower().replace("not approved for submission", "")
     for forbidden in ("safe to submit", "ready to submit", "submission-ready", "approved for submission"):
