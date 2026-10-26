@@ -33,6 +33,7 @@ on:
       - "index.html"
       - "executive-summary.html"
       - "experiment-review.html"
+      - "priority-site-review.html"
       - ".github/workflows/status-feed.yml"
   schedule:
     # Weekly refresh so a stale feed is visible even when nothing is pushed.

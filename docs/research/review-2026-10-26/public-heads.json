@@ -1,0 +1,51 @@
+{
+  "retrieved_utc": "2026-10-26T00:34:06.533873+00:00",
+  "scope": "GitHub main pointers only; no current TIFF contents or scores fetched",
+  "repositories": [
+    {
+      "site": "GEMSDOE24",
+      "current_main": "758af9ffb6ac5e3f82af6bd472f82d246dce55f0",
+      "error": null
+    },
+    {
+      "site": "GEMSDOE25",
+      "current_main": "0a45b3ca6403f7e8d4deac5d8b208797d5e8f477",
+      "error": null
+    },
+    {
+      "site": "GEMSDOE27",
+      "current_main": "927322eadbde56be42ae129ccdfb9b37540d8e60",
+      "error": null
+    },
+    {
+      "site": "GEMSDOE28",
+      "current_main": "7066e7e9b546027e0cccf835af906e05384cba60",
+      "error": null
+    },
+    {
+      "site": "GEMSDOE30",
+      "current_main": "78ae70817af861c077ce1655c3f9115c5b0f537a",
+      "error": null
+    },
+    {
+      "site": "GEMSDOE31",
+      "current_main": "3c1be4993a059fa0af8b6782d86882efddd0f489",
+      "error": null
+    },
+    {
+      "site": "GEMSDOE32",
+      "current_main": "15a5fce9494da62a2d8e41943669a7e645c06f75",
+      "error": null
+    },
+    {
+      "site": "GEMSDOE33",
+      "current_main": "b542e5ce4186b54dbd07a6a6e8756be676a3f088",
+      "error": null
+    },
+    {
+      "site": "GEMSDOE36",
+      "current_main": "1f92ee9c685db3f079b5995bffc71dda53e23497",
+      "error": null
+    }
+  ]
+}
