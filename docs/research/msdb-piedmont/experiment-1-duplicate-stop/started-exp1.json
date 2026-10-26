@@ -1,0 +1,10 @@
+{
+  "experiment_count": 1,
+  "experiment_cap": 3,
+  "started_utc": "2026-10-25T23:13:13+00:00",
+  "preregistration_sha256": "be4218e09db5671f9b48b1686007932a8a2f86e5d35a9efaf6080f4e01a39596",
+  "preregistration_json_sha256": "a7ab48b1be69bedb8ea2f420a481126dd01e07ca41614ddeead2c55ddbc25220",
+  "registry_sha256": "c978bdd07c90f1cb1060e15c857d460bb9fe4050d63055072bdd467859235a89",
+  "physical_support_px": 13,
+  "holdout_guard_px": 17
+}

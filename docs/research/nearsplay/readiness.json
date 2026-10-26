@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "readiness_version": "research-readiness-v3-matched-controls-20261025",
+  "readiness_version": "research-readiness-v4-nearsplay-20261025",
   "raster_sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
   "gates": [
     {
       "name": "file_contract",
       "status": "passed",
-      "detail": "Reopened shared-writer GeoTIFF matches template; SHA-256 binds this decision to its exact bytes"
+      "detail": "Reopened shared-writer GeoTIFF matches the template; SHA-256 binds this decision to its exact bytes"
     },
     {
       "name": "sidecar_identity",
@@ -21,22 +21,22 @@
     {
       "name": "labelled_holdout_evidence",
       "status": "passed",
-      "detail": "HOLDOUT-DTI with evaluator/protocol/bootstrap metadata, screen + confirmation splits"
+      "detail": "HOLDOUT-DTI with evaluator, protocol and bootstrap metadata on two splits"
     },
     {
       "name": "paired_improvement",
       "status": "passed",
-      "detail": "Candidate beats matched control on both splits with paired CI entirely above 0 (HOLDOUT-DTI)"
+      "detail": "Candidate beats the matched control on both splits with paired CI entirely above 0 (HOLDOUT-DTI)"
     },
     {
       "name": "duplicate_detection",
       "status": "passed",
-      "detail": "Unique vs local registry: rho <= 0.90 and dot overlap <= 0.70, lane collision False"
+      "detail": "Unique against the local registry: rho <= 0.90 and dot overlap <= 0.70; lane collision False"
     },
     {
       "name": "experimental_budget",
       "status": "passed",
-      "detail": "2 of 3 experiments within the two-hour cap"
+      "detail": "2 of 3 experiments inside the two-hour cap"
     },
     {
       "name": "artifact_identity",

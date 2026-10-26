@@ -1,49 +1,37 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="GEMSDOE30 DOE GEMS fault-discovery: holdout-promoted candidate submission TIF, download and submission guide.">
-<title>Experiments &amp; hypotheses · GEMSDOE30 · GEMSDOE30</title><link rel="stylesheet" href="docs/assets/research.css"></head>
-<body><a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="nav-wrap">
-<a class="brand" href="index.html"><span class="brand-mark">G30</span> Fault discovery lab</a><nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="experiment-review.html" aria-current="page">Research</a><a href="README.md">Project brief</a></nav></div></header>
-<main id="main"><section class="section"><p class="eyebrow">Experiments run this session (cap: 3 / 2 hours)</p>
-<h2>Two holdouts, one promoted, one negative</h2>
-<div class="table-wrap"><table>
-<caption>HOLDOUT-DTI — catalogue-proxy component holdout, not competition scores</caption>
-<thead><tr><th>Experiment</th><th>Hypothesis</th><th>Pooled DTI vs control</th><th>95% CI of delta</th><th>Quadrants</th><th>Withheld positives</th><th>Verdict</th></tr></thead>
+<meta name="description" content="GEMS fault-prediction artifacts, reproducible holdout evidence, and an explicit automated submission decision.">
+<title>Scientific review · H-NEARSPLAY · GEMSDOE30</title><link rel="stylesheet" href="docs/assets/research.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html"><span class="brand-mark">G30</span> Fault discovery lab</a>
+<nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="experiment-review.html" aria-current="page">Research</a><a href="README.md">Project brief</a></nav></div></header>
+<main id="main"><section class="intro"><div><p class="eyebrow">Scientific review · H-NEARSPLAY</p>
+<h1>A placement result,<br>with its controls and limits.</h1>
+<p class="lead">One hypothesis was promoted on a spatial holdout, one was falsified, and both receipts are published. No number on this page is an organizer score.</p></div></section>
+<section class="section"><p class="eyebrow">01 / Registered design</p><h2>Hide-and-recover over whole fault components.</h2>
+<p>Whole 8-connected catalogue components are withheld as stand-in “new” faults; the remaining components are masked exactly as the organizer masks known faults. Every catalogue-derived quantity is computed only from the visible half. Emissions are binary, Poisson-disk thinned at 300 m, and scored with the exact masked distance-weighted Tversky index (alpha 0.2, beta 0.8, triangular 300 m kernel), pooling truth credit and false-positive mass before the ratio is taken.</p>
+<p><strong>Controls.</strong> The primary arm is compared against (a) a <em>proximity-matched</em> random emission whose distance-to-known profile matches the candidate's, and (b) a uniform off-catalogue emission. A positive result therefore cannot be explained by generic proximity to mapped faults, nor by the mere absence of a geographic prior.</p>
+<p><strong>Zone definition (frozen).</strong> Dots sit 300 m–1.5 km from <em>known</em> traces, scored by inverse distance to the known set, so the inner edge starts immediately outside mapped traces. The inner exclusion band is what allows a dot to fall within 300 m of a withheld component without landing on mapped pixels.</p><div class="table-wrap"><table><caption>HOLDOUT-DTI · catalogue-proxy component holdout · paired spatial-block 95% CI</caption>
+<thead><tr><th>Split</th><th>Candidate DTI</th><th>Matched control DTI</th><th>Δ HOLDOUT-DTI</th><th>95% paired CI</th><th>Quadrants</th><th>Withheld positives</th></tr></thead>
 <tbody>
-<tr><th scope="row">1 · H-VENT volcanic-vent feeder alignment</th><td>Volcanic vents mark uncatalogued feeder fissures</td><td>0.0006 vs 0.0187 (Δ −0.0181)</td><td>[−0.0192, −0.0168]</td><td>0/4</td><td>20,870 / 20,247</td><td><span class="gate failed">negative</span></td></tr>
-<tr><th scope="row">2 · H-NEARSPLAY near-splay annulus (this submission)</th><td>Off-catalogue splays 300 m–1.5 km from mapped traces</td><td>0.0850 / 0.0879 vs ~0.0198 (Δ +0.066)</td><td>[0.0570, 0.0743] / [0.0590, 0.0772]</td><td>4/4 / 4/4</td><td>20,870 / 20,247</td><td><span class="gate passed">promoted on holdout</span></td></tr>
-</tbody>
-</table></div>
-<p class="fine">Both runs: evaluator component-holdout-v3-blockstats-20261025, buffered-quadrant whole-components,
-alpha 0.2 / beta 0.8, triangular 300 m kernel, paired spatial-block 95% CI, 2000 replicates. Full reports:
-docs/research/h-nearsplay-holdout.json and docs/research/h-vent-feeder-holdout.json.</p>
-</section>
-
-<section class="section"><p class="eyebrow">3–5 candidate hypotheses not previously tried</p>
-<h2>Ranked geological hypotheses</h2>
-<div class="table-wrap"><table>
-<thead><tr><th>Rank</th><th>Hypothesis · layers · signature</th><th>Why it targets uncatalogued faults</th><th>Differs from prior work</th><th>Prior ΔDTI / cost</th><th>Official source</th><th>Status</th></tr></thead>
-<tbody>
-<tr><th scope="row">1</th><td><strong>H-NEARSPLAY</strong> — near-splay annulus, 300 m–1.5 km off-catalogue dots, inner-edge weighted · catalogue geometry for zoning/masking only · dots at one kernel radius (300 m)</td><td>Unmapped splays/stepovers of mapped systems sit just outside catalogue traces; newly mapped geometry of an existing system is scorable (DrivenData thread 11536)</td><td>No inspected artifact emits purely from this annulus; d2.8 spreads uniformly off-catalogue (median distance 1,500 m)</td><td>+0.005…+0.020 / low</td><td>Catalogue + template (on disk)</td><td>Holdout-promoted; this submission</td></tr>
-<tr><th scope="row">2</th><td><strong>H-VENT</strong> — volcanic-vent feeder alignment · GDR 1391 Quaternary volcanics (derived_gdr_volcanics_100m_u8.tif, CC BY 4.0) · vents dilated one kernel radius</td><td>0/21 inventoried vents within 300 m of a catalogue trace; feeder fissures are structurally absent from a surface-expression catalogue</td><td>No repository holdout or inspected page uses volcanic vents at all (H-32-02 was registered, never run here)</td><td>+0.001…+0.010 / low</td><td><a href="https://gdr.openei.org/submissions/1391">GDR 1391</a> (on disk)</td><td>Negative on proxy (deliverable)</td></tr>
-<tr><th scope="row">3</th><td><strong>H-34-01</strong> — substrate-concealment prior from USGS SGMC map-unit polygons × relief bands · observability weighting, not an evidence field</td><td>Faults under basin fill/lake cover are missing from every surface catalogue; prior re-weights where to spend existing evidence</td><td>Every repo hypothesis used an evidence field; none modelled the selection process that produced the labels</td><td>+0.002…+0.015 / low</td><td><a href="https://mrdata.usgs.gov/geology/state/">USGS SGMC NV/CA</a> (hash-verified, on disk)</td><td>Registered; not run</td></tr>
-<tr><th scope="row">4</th><td><strong>H-34-02</strong> — potential-field depth lineaments · tilt derivative / Euler deconvolution of GeoDAWN magnetic grids · retain sources below ~0.5–1 km depth</td><td>A buried magnetic source with no surface rupture is invisible to a surface catalogue by construction</td><td>Prior work used magnetic values or horizontal gradients; none inverts for source depth or filters lineaments by it</td><td>+0.002…+0.012 / medium</td><td><a href="https://doi.org/10.5066/P93LGLVQ">USGS GeoDAWN, DOI 10.5066/P93LGLVQ</a></td><td>Registered; not run</td></tr>
-<tr><th scope="row">5</th><td><strong>H-34-03</strong> — drainage χ/ksn disequilibrium · USGS NHD flowlines + 3DEP DEM · basin-integrated fluvial-strain transform</td><td>Fluvial networks record deformation where scarps are eroded or buried; NHD/3DEP are independent of the fault-mapping programme</td><td>No repository work computes χ or ksn; prior hydrology ideas were qualitative only</td><td>+0.002…+0.010 / high (full-ROI transfer unverified)</td><td><a href="https://tnmaccess.nationalmap.gov/api/v1/products?datasets=National%20Hydrography%20Dataset%20(NHD)%20Best%20Resolution&bbox=-119,38.5,-118.5,39">USGS TNM API</a> (coverage unverified)</td><td>Registered; blocked on data</td></tr>
-</tbody>
-</table></div>
-<p class="fine">Planning priors are experiment ranges, not forecasts or competition-score predictions. No candidate consumes a weekly slot without a holdout pass.</p>
-</section>
-
-<section class="section"><p class="eyebrow">Integrity</p>
-<h2>Labels, limits and what is not claimed</h2>
+<tr><th scope="row">Screen (seed 31)</th><td>0.085021</td><td>0.019654</td><td>+0.065367</td><td>[+0.056983, +0.074347]</td><td>4/4</td><td>20,870</td></tr>
+<tr><th scope="row">Confirmation (seed 41, fresh split + fresh draws)</th><td>0.087880</td><td>0.019942</td><td>+0.067938</td><td>[+0.058977, +0.077243]</td><td>4/4</td><td>20,247</td></tr>
+</tbody></table></div>
+<p class="fine">Evaluator <code>component-holdout-v3-blockstats-20261025</code> · protocol <code>buffered-quadrant-whole-components-v1-20261025</code> · alpha 0.2 / beta 0.8 · triangular 300 m kernel · 1024 geographic blocks · 2000 paired replicates. <strong>Catalogue-recovery proxy only — never an organizer score or a leaderboard projection.</strong></p></section>
+<section class="section"><p class="eyebrow">02 / The negative experiment</p><h2>H-VENT: a real hypothesis that the proxy could not validate.</h2>
+<p>Volcanic feeder fissures are a genuinely uncatalogued population: only 615 of 6,776 vent pixels (≈9%) lie within 300 m of a catalogue trace, and 0 of 21 inventoried vents do. On the catalogue proxy the vent-aligned arm scored <strong>0.000609</strong> against a matched control of <strong>0.018679</strong> on screen and <strong>0.001403</strong> vs <strong>0.016792</strong> on confirmation — decisively worse, 0/4 quadrants, both paired CIs entirely below zero.</p>
+<p>This is <strong>not</strong> evidence that volcanic vents do not mark faults. It is evidence that a catalogue-derived proxy <em>cannot</em> adjudicate a hypothesis about structures the catalogue does not contain (IR-30-017, IR-30-079). The line is closed on this proxy and the negative result is published as a deliverable.</p></section>
+<section class="section"><p class="eyebrow">03 / Uniqueness and its limits</p><h2>Unique against 21 local rasters — with a stated margin.</h2>
+<p>Against every locally available registry raster the maximum full-raster Spearman correlation is <code>0.0703</code> (duplicate threshold 0.90) and the maximum share of candidate dots falling within 3 px of one reference is <code>68.08%</code> (duplicate threshold 70%). No lane collision. The margin on the overlap statistic is thin, and the complete parallel registry is unavailable here (IR-30-078), so a later session with the full registry must re-run the final-dot comparison before any upload.</p>
+<p>An inverse-square inner-edge variant was also tried while building the artifact: it concentrated too hard and collided with a dense existing edge-hybrid reference. The frozen inverse-linear weighting was retained. That ablation is recorded here so the published support is reproducible rather than cherry-picked.</p></section>
+<section class="section"><p class="eyebrow">04 / Boundaries</p><h2>What this is, and what it is not.</h2>
 <ul class="spaced">
-<li><strong>HOLDOUT-DTI vs ORGANIZER-CONFIRMED.</strong> Every number above is HOLDOUT-DTI (evaluator version, withheld positives, 95% CI) or a local format check. Nothing here is ORGANIZER-CONFIRMED: no submission receipt, ID, or score exists for this file.</li>
-<li><strong>No score claims.</strong> The leaderboard values quoted elsewhere (0.3195 public snapshot; reported 0.2778 for GEMSDOE32 H33) are unattributed to exact file hashes and are treated as unverified historical claims.</li>
-<li><strong>No slot used.</strong> This repository does not authenticate to DrivenData, upload files, or consume submission slots (IR-30-007). The authorized entrant decides whether to submit.</li>
-<li><strong>Data provenance.</strong> Rasters restored from SHA-256-pinned owner mirrors; not organizer-authenticated (IR-30-001).</li>
-</ul>
-</section></main>
-<footer><div><strong>GEMSDOE30</strong><p>Evidence before claims. A valid file is not a competition approval.</p></div>
-<div><a href="docs/status.json">Evidence feed (JSON)</a><a href="docs/current-run.json">Current run pointer</a><a href="https://www.drivendata.org/competitions/306/competitions-doe-gems/leaderboard/" rel="nofollow">Official leaderboard ↗</a></div>
-<p class="fine">Repository evidence, not a live leaderboard. No competition slot selected or used by this repository. Local validation and holdout results are not organizer acceptance.</p></footer>
+<li>It is a <strong>placement</strong> result on a catalogue proxy, not a new fault-physics detector. It does not claim to see faults a magnetometer or a lidar cannot.</li>
+<li>It is <strong>not</strong> a leaderboard projection. The reported 0.2778 (GEMSDOE32 H33), 0.2600 (GEMSDOE25/30 D2.8) and 0.4413 (live leaderboard) remain unverified historical claims with no receipt binding a score to a file hash (IR-30-080).</li>
+<li>It is <strong>not</strong> geothermal-vent detection. No temperature, permeability, flow or vent observation was used.</li>
+<li>It does <strong>not</strong> use organizer-authenticated data: everything ran on SHA-256-pinned owner mirrors (IR-30-001).</li>
+</ul></section></main>
+<footer><div><strong>GEMSDOE30</strong><p>Evidence before claims. Automated machine gates require zero human raster inspection.</p></div>
+<div><a href="docs/status.json">Evidence feed (JSON)</a><a href="docs/research/nearsplay/run-card.json">Run card</a><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Official competition ↗</a></div>
+<p class="fine">Repository evidence only; not a live leaderboard projection. No competition slot selected or used by this repository. Local validation and holdout results are <strong>not</strong> organizer acceptance.</p></footer>
 <script src="docs/assets/research.js" defer></script></body></html>

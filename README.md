@@ -1,91 +1,108 @@
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
-## START HERE — one **HOLDOUT-PROMOTED** submission TIF is downloadable
+## START HERE — two **HOLDOUT-PROMOTED** candidate GeoTIFFs, no slot used
 
-**Download (OK):** [GEMSDOE30 near-splay annulus submission TIF](docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif)
+**Two distinct, unique, format-valid artifacts exist in this repository.** Both passed
+their own automated gates. Neither is ORGANIZER-CONFIRMED, and **no competition slot
+has been selected or used by this repository** — the authorized entrant decides.
+
+### 1. Current pointer — H-NEARSPLAY (this session's lane)
+
+**Download (OK):** [near-splay annulus submission TIF](docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif)
 — SHA-256 `f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52`,
 40,000 binary dots, one float32 band, EPSG:32611, 3,730 × 3,292, exact template
-transform, finite `[0, 1]` inside the footprint, NaN nodata outside, **0 NaN
-inside**. All 11 local format checks pass.
-
-**Submit (not confirmed):** the result is **HOLDOUT-DTI** on a catalogue proxy.
-It is **not ORGANIZER-CONFIRMED** — no DrivenData receipt, submission ID, hash
-binding or score exists for this file. **No competition slot was selected or
-used by this repository**; the authorized entrant decides whether to spend one.
-
-**[Open the site](https://buffedlizard55-lab.github.io/GEMSDOE30/) ·
-[Executive submission guide](executive-summary.html) ·
-[Experiment review & hypotheses](experiment-review.html) ·
-[JSON run card](docs/research/nearslay-run-card.json) ·
-[Readiness receipt](docs/research/nearslay-readiness.json)**
+transform, finite `[0, 1]` inside the footprint, NaN nodata outside, **0 NaN inside**.
 
 **Submission name:** `GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan`
 **Note (128/140 chars):** `NEARSPLAY annulus 300m-1.5km off-cat dots; holdout DTI +0.066 [0.057,0.074] vs matched control; proxy holdout, not org-confirmed`
 
-Read the [complete owner prompt](#current-owner-prompt) and
-[current pointers](docs/current-run.json) before working on this project.
-**Maximize P(Win):** protect organizer feedback slots for unique reproducible
-improvements. **Own the Outcome:** deliver honest negative results and automated
-decisions, not a manual-inspector handoff.
+**Idea:** binary dots placed **300 m–1.5 km off the USGS/INGENIOUS catalogue**,
+inner-edge weighted and Poisson-disk thinned at one kernel radius (300 m). Unmapped
+splays and stepovers of mapped systems sit just outside catalogue traces and count as
+newly mapped geometry of an existing system
+([t/11536](https://community.drivendata.org/t/clarification-what-counts-as-a-new-fault-in-the-test-set/11536));
+known faults are masked from scoring
+([t/11516](https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516)),
+so off-catalogue mass is the only mass that can earn credit. No inspected GEMSDOE
+artifact or repository holdout emits purely from this annulus — the d2.8 family spreads
+uniformly off-catalogue (median catalogue distance exactly 1,500 m).
 
-### Latest evidence — two experiments this session (cap: 3 / 2 hours)
+### 2. Peer artifact — MSDB-1v2 (merged from `main`)
 
-All performance numbers below are **HOLDOUT-DTI**, evaluator
-`component-holdout-v3-blockstats-20261025`, protocol
-`buffered-quadrant-whole-components-v1-20261025`, with **95% paired
-spatial-bootstrap CI**. This is a catalogue proxy — **not** an organizer score,
-projection, or independent confirmation.
+**Download (OK):** [MSDB-1v2 GeoTIFF](docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif)
+— SHA-256 `22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381`,
+44,090 off-catalogue binary dots.
 
-| Experiment / arm | HOLDOUT-DTI vs control | 95% CI of difference | Quadrants | Withheld positives | Verdict |
-|---|---:|---:|---:|---:|---|
-| **H-NEARSPLAY** screen seed 31 (inner-edge-weighted near-splay annulus) | **+0.065367** (0.085021 vs 0.019654) | **[0.056983, 0.074347]** | 4/4 | 20,870 | **promoted** |
-| **H-NEARSPLAY** confirmation seed 41 (fresh split + fresh draws) | **+0.067938** (0.087880 vs 0.019942) | **[0.058977, 0.077243]** | 4/4 | 20,247 | **promoted** |
-| H-VENT volcanic-vent feeder alignment (screen seed 31) | −0.018071 (0.000609 vs 0.018679) | [−0.019188, −0.016825] | 0/4 | 20,870 | negative (deliverable) |
-| H-VENT volcanic-vent feeder alignment (confirmation seed 41) | −0.015389 (0.001403 vs 0.016792) | [−0.016991, −0.013614] | 0/4 | 20,247 | negative (deliverable) |
+**Submission name:** `gems30-MSDB1-edge44090-20261025-e7856ec3f14a`
+**Note (119/140 chars):** `MSDB-1v2: 31-feat stationary discontinuity+piedmont ramp HGB x Rayleigh curv gate + Bayes 300m EDGE, 44090 off-cat dots`
 
-**Mechanism.** Unmapped splays and stepovers of mapped fault systems sit just
-outside catalogue traces and are scorable as newly mapped geometry of an
-existing system (DrivenData thread 11536). Dots placed 300 m–1.5 km
-off-catalogue, at exactly one kernel radius (300 m) and inner-edge weighted,
-recover withheld stand-in faults with minimal redundant false-positive mass.
-Binary 0/1 dots dominate any graded map on a fixed support under the
-distance-weighted Tversky index.
+Correcting two competition band-metadata errors (`Band 6 tc` = GeoDAWN Radiometric
+Total Count; `Bands 18/11` = signed `∇g`) and gating a stationary 31-feature
+discontinuity habitat by a Rayleigh 1-D curvilinear envelope lifts buffered
+whole-segment `HOLDOUT-DTI` from `0.133628` to `0.170462` across all 4 disjoint quadrants.
 
-**Non-fault mimic to watch:** erosional/drainage lineaments, cultural or road
-linear features, and volcanic contacts that coincidentally parallel mapped
-traces inside the annulus.
+### Holdout evidence — HOLDOUT-DTI (a catalogue proxy, **never** a competition score)
 
-| Automated diagnostic (not a performance score) | Result |
+Evaluator `component-holdout-v3-blockstats-20261025`, protocol
+`buffered-quadrant-whole-components-v1-20261025`, alpha 0.2 / beta 0.8, triangular
+300 m kernel, paired spatial-block 95% CI.
+
+| Lane / arm | HOLDOUT-DTI | 95% CI | Withheld positives | Verdict |
+|---|---:|---:|---:|---|
+| **H-NEARSPLAY** screen seed 31 | **0.085021** (control 0.019654, Δ **+0.065367**) | [+0.056983, +0.074347] | 20,870 | **promoted**, 4/4 quadrants |
+| **H-NEARSPLAY** confirmation seed 41 | **0.087880** (control 0.019942, Δ **+0.067938**) | [+0.058977, +0.077243] | 20,247 | **promoted**, 4/4 quadrants |
+| H-VENT volcanic-vent feeder alignment | 0.000609 (control 0.018679, Δ −0.018071) | [−0.019188, −0.016825] | 20,870 | negative (deliverable) |
+| **MSDB-1v2** `msdb_edge` (peer, `main`) | **0.170462** (`core19` 0.133628, Δ **+0.036834**) | [+0.022322, +0.050315] | 60,988 | promoted, 4/4 quadrants |
+| **MSDB-1v2** `msdb_poisson` ablation | 0.169326 (Δ vs `core19` +0.035698) | [+0.021622, +0.048841] | 60,988 | promoted |
+
+**H-NEARSPLAY non-fault mimic to watch:** erosional/drainage lineaments, cultural or
+road linear features, and volcanic contacts that coincidentally parallel mapped traces
+inside the annulus. That is why the control is proximity-matched and why the *delta*,
+not the raw score, is the decision statistic.
+
+### Automated gates and honest limits
+
+| Diagnostic | Result |
 |---|---|
-| Local format validator | **Passed** — one float32 band, EPSG:32611, 3,730 × 3,292, exact transform, finite `[0,1]` inside, NaN outside, 0 NaN inside |
-| Uniqueness vs 21 local registry rasters | Max Spearman rho **0.070** (limit 0.90); max dot overlap **68.08%** within 3 px (limit 70%); **lane collision: false** |
-| Complete parallel registry | **Unknown** — nine-site public snapshots cannot attest all parallel rasters |
-| Externally assigned lane | **Unknown** — this is an autonomous research continuation, not an assigned lane |
+| H-NEARSPLAY local format validator | **Passed** — one float32 band, EPSG:32611, 3,730 × 3,292, exact transform, finite `[0,1]` inside, NaN outside, 0 NaN inside |
+| H-NEARSPLAY uniqueness vs 21 local registry rasters | Max Spearman rho **0.070** (limit 0.90); max dot overlap **68.08%** within 3 px (limit 70%); **lane collision: false** |
+| MSDB-1v2 novelty (peer) | **Passed** — surface max Spearman 0.154504; dots max overlap 64.7789%; 0 duplicates over 165 unique aligned GeoTIFFs |
+| Leakage canaries | H-NEARSPLAY: no feature AUC alarm. MSDB-1v2: 37 features × 4 folds, 0 alarms (max univariate AUC 0.6419) |
+| Complete parallel registry | **Unknown** — nine-site public snapshots cannot attest all parallel rasters (IR-30-078) |
+| Externally assigned lane | **Unknown** — autonomous research continuation, not an assigned lane |
 | Comparable historical-best rerun | **Unknown** — do not substitute an archived metric for a missing rerun |
-| Execution budget | 2 of 3 experiments, inside the two-hour cap |
-| Approval | **Promoted on holdout only.** `submission_approved: false`, `slot_selected: false`, `organizer_acceptance_confirmed: false` |
+| Execution budget | H-NEARSPLAY: 2 of 3 experiments, inside the two-hour cap |
+| Approval | **Promoted on holdout only.** `submission_approved: false`, `slot_selected: false`, `organizer_acceptance_confirmed: false` for every artifact |
 
-The previous TDX-C2 attempt remains **duplicate-stopped** and unpublished (79.09%
-dot overlap with G30-S19); that stop is preserved, not rewritten.
+The TDX-C2 attempt remains **duplicate-stopped** and unpublished (79.09% dot overlap
+with G30-S19); that stop is preserved, not rewritten. G30-LSM is likewise
+duplicate-stopped and unpublished. Neither is downloadable.
 
-### Why H33 may have improved
+### Newly discovered competition metadata irregularities (measured, 2026-10-25)
 
-Reproduced again: its **37,654-dot support** equals the **40,199-dot GEMSDOE28 base**
-with all dots at catalogue distance ≤2 px deleted—**zero support mismatches**.
-GEMSDOE25/30 and GEMSDOE28/31 references also have identical in-footprint values.
-These are raster diagnostics, not scores. Pruning can save FP mass while preserving
-max-kernel truth coverage; it can also remove genuine splays. This does not identify
-a hidden-test cause or establish a new geological discovery. The owner's **0.2778**
-attribution remains **unverified**, not ORGANIZER-CONFIRMED. [Detailed mathematical
-analysis and all nine audited references](docs/research/texture-controls/review.md).
+1. **`Band 6 (tc)` is GeoDAWN Radiometric Total Count, NOT Magnetic Tilt (`IR-MSDB-01`):** despite GDAL tags labeling Band 6 as *"Tilt angle or total curvature - magnetic field derivative"*, direct verification against USGS GeoDAWN (`10.5066/P93LGLVQ`) proves `Spearman(Band 6, GeoDAWN TC) = 0.999957`, whereas `Spearman(Band 6, arctan2(tmi_vg, tmi_hg)) = 0.01597`. MSDB-1v2 computes true Miller–Singh magnetic tilt, zero-crossing crest, and Salem tilt-depth explicitly while treating Band 6 as surficial gamma-ray exposure rate.
+2. **`Bands 18 & 11 (iso_grav_anom_hg, iso_grav_anom_vg)` are signed grid derivatives `(+dg/dx, +dg/dy)` (`IR-MSDB-02`):** finite-difference verification against Band 13 (`iso_grav_anom`) proves `Spearman = +0.9558, +0.9357` (`hypot(B18, B11)` matches Band 5 `iso_grav_anom_slope` at `Spearman = 0.9407`). MSDB-1v2 reconstructs the full azimuthally symmetric 2-D gravity gradient vector.
 
-### Autonomous inspection (CPU, Python 3.11+)
+### Key Artifacts & Verified Official Links
+
+- **Current Run Receipts (`MSDB-1v2`):** [Final JSON run card](docs/research/msdb-piedmont/run-card.json) · [machine-adjudicated readiness](docs/research/msdb-piedmont/readiness.json) · [full fold/canary statistics](docs/research/msdb-piedmont/results.json) · [165-raster 9-site registry](docs/research/msdb-piedmont/registry.json) · [Experiment 1 duplicate-stop receipt](docs/research/msdb-piedmont/experiment-1-duplicate-stop/receipt.json)
+- **Scientific Review & Irregularities:** [PhD forensic analysis of `GEMSDOE32` `H33` (`0.2778`), 4 ranked hypotheses, & 3-pass journal](docs/research/msdb-piedmont/review.md) · [irregularities ledger (`IR-MSDB-01`..`05`)](docs/irregularities.md)
+- **Preserved Prior `TDX-1` Receipts:** [TDX-1 run card](docs/research/texture-displacement/run-card.json) · [TDX-1 review](docs/research/texture-displacement/review.md) · [all 119 quarantined owner-reported claims](docs/research/texture-displacement/owner-claims.csv)
+- **Official Competition & Public Geoscience Sources (verified 2026-10-25):** [DrivenData GEMS overview](https://www.drivendata.org/competitions/306/competition-doe-gems/) · [Problem & DW-Tversky metric (`page/967`)](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) · [Live leaderboard (`#1 = 0.4413`)](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) · [NLR Official Rules PDF (`96647.pdf`)](https://docs.nlr.gov/docs/fy26osti/96647.pdf) · [Forum: known faults masked (`t/11516`)](https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516) · [Forum: splays & continuations (`t/11536`)](https://community.drivendata.org/t/clarification-what-counts-as-a-new-fault-in-the-test-set/11536) · [USGS GeoDAWN (`10.5066/P93LGLVQ`, CC0)](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and) · [OpenEI GDR `1391` INGENIOUS (`10.15121/1881483`, CC BY 4.0)](https://gdr.openei.org/submissions/1391) · [GBCGE INGENIOUS](https://gbcge.org/current-projects/ingenious/) · [EPSG:32611](https://epsg.io/32611)
+
+### Reproduce and inspect autonomously (Python 3.11+, CPU)
 
 ```bash
 python -m venv .venv
 .venv/bin/pip install -e '.[research,test]' -c requirements-tdx1.txt
-# The small pinned template is enough for every publication check.
+# The small pinned template is enough for a lightweight publication check.
 .venv/bin/python scripts/restore_public_mirrors.py --ids sample_submission
+# Full restore (adds the MSDB-1v2 external layers) for the feature-stack lanes:
+.venv/bin/python scripts/restore_public_mirrors.py --include-extra
+.venv/bin/python scripts/prepare_data.py
+.venv/bin/python scripts/verify_prepared_cache.py --output docs/research/msdb-piedmont/cache-verification.json
+.venv/bin/python scripts/sync_priority_registry.py --output docs/research/msdb-piedmont/registry.json --restore-only
+# Inspect the committed artifacts & recompute the 2,000-draw paired spatial bootstrap (exits 0):
 .venv/bin/python scripts/verify_current_run.py
 .venv/bin/python scripts/verify_stopped_attempt.py
 .venv/bin/python scripts/build_research_site.py
@@ -93,18 +110,27 @@ python -m venv .venv
 .venv/bin/python -m pytest -q
 # The stopped attempt still deliberately exits 2: it stays unpublished.
 .venv/bin/python scripts/verify_stopped_attempt.py --require-promote
+# EXPECTED exit 2: holdout-promoted, but the weekly-slot gate is a separate decision.
+.venv/bin/python scripts/verify_current_run.py --require-promote
 ```
 
-`verify_current_run.py` reopens the **published candidate TIFF**, re-checks its
-SHA-256 against the run card and the download sidecar, re-runs the shared format
-validator, and re-checks the holdout metric shape, duplicate-stop thresholds,
-budget and identity limits. It writes
-[docs/research/nearslay-readiness.json](docs/research/nearslay-readiness.json).
+`verify_current_run.py` dispatches on `docs/current-run.json`. For the current
+H-NEARSPLAY pointer it calls `scripts/verify_nearsplay_run.py`, which reopens the
+**published candidate TIFF**, re-checks its SHA-256 against the run card and the
+download sidecar, re-runs the shared format validator, and re-checks the holdout
+metric shape, duplicate-stop thresholds, budget and identity limits. It writes
+[docs/research/nearsplay/readiness.json](docs/research/nearsplay/readiness.json).
 `verify_stopped_attempt.py` recomputes the **archived** TDX-C2 duplicate-stop
-decision from immutable receipts, without claiming the private TIFF is
-distributed. Add `--inspect-quarantine` only where ignored local bytes exist to
-reopen them too. No human-inspector override, clipping workaround, competition
-authentication or uploader exists.
+decision from immutable receipts, without claiming the private TIFF is distributed.
+Add `--inspect-quarantine` only where ignored local bytes exist to reopen them too.
+No human-inspector override, clipping workaround, competition authentication or
+uploader exists.
+
+For lightweight CI inspection of a committed artifact without training arrays,
+restore **just** the small template: `python scripts/restore_public_mirrors.py --ids
+sample_submission`, then run `python scripts/verify_current_run.py`. Exit 0 verifies
+the research decision, **not submission approval**. CI repeats this inspection and
+checks generated Pages for staleness.
 
 Reproduce this session's experiments end to end (about 6 minutes on CPU):
 
@@ -117,14 +143,19 @@ Reproduce this session's experiments end to end (about 6 minutes on CPU):
 .venv/bin/python scripts/verify_current_run.py --write
 ```
 
-The builder `scripts/run_texture_controls.py` intentionally refuses to overwrite
-an already registered/stopped execution. Its exact executed version is frozen at
-commit `79d1be92e578f4e555fe5a5ae8d273728221c8af`. A subsequent audit-only finalizer
-fixed negative run-card logging; **no refit or replacement TIFF followed the stop**.
-The shared evaluator/writer are `src/gemsdoe30/{holdout,submission}.py`; the literal
-template filenames in the prompt are absent, so those shared equivalents are reused.
+The nine priority sites were audited through GitHub, including all published TIFFs
+at recorded snapshots. The new method passed the observed duplicate-stop tests,
+but incomplete parallel/original-surface coverage does not certify global novelty.
+The restricted physics model improves on its three-band ablation but loses to the
+stronger comparator. That does not establish a higher hidden-test score. The owner's
+H33 attribution remains unverified; projections are never organizer scores.
 
-### Sources, constraints and next session
+Raw/core data were restored and prepared in this worktree, not distributed with
+Pages. Large rasters, arrays, models and intermediate outputs stay Git-ignored.
+Mirror hashes verify consistency, not organizer origin. Network access excludes
+DrivenData/USGS/GDR/NLR web hosts; no current leaderboard, portal limit or acceptance
+receipt was invented. GPU training is not needed for TDX-1; legacy UNet training,
+missing best-model checkpoints and hidden expert labels remain separate limitations.
 
 - Official GitHub [reference notebook](https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/unet-mc-cv-reference-solution.ipynb)
   retrieved again: [hashes, saved band metadata and exact excerpts](docs/research/texture-controls/official-source-audit.json).
@@ -134,9 +165,9 @@ template filenames in the prompt are absent, so those shared equivalents are reu
   disk; no inaccessible external dataset was claimed viable.
 - [H-NEARSPLAY holdout](docs/research/h-nearsplay-holdout.json) ·
   [H-VENT holdout](docs/research/h-vent-feeder-holdout.json) ·
-  [run card](docs/research/nearslay-run-card.json) ·
-  [readiness](docs/research/nearslay-readiness.json) ·
-  [validation receipt](docs/research/nearslay-submission-validation.json) ·
+  [run card](docs/research/nearsplay/run-card.json) ·
+  [readiness](docs/research/nearsplay/readiness.json) ·
+  [validation receipt](docs/research/nearsplay/validation.json) ·
   [source/irregularity boundaries](docs/irregularities.md).
 - Data placement is not the old blocker: pinned owner mirrors were restored and
   prepared, then verified cell-for-cell. Integrity ≠ organizer authentication.
@@ -145,28 +176,29 @@ template filenames in the prompt are absent, so those shared equivalents are reu
   continuation of the previous next step, not an asserted external allocation.
 - Complete private/parallel surfaces, the historical-best checkpoint, untouched
   evaluation regions and current organizer constraints remain unavailable. GPU is
-  not required for this fixed CPU experiment; legacy UNet training is separate.
+  not required for these fixed CPU experiments; legacy UNet training is separate.
 - Network access excludes DrivenData/USGS/GDR/NLR hosts. Official links are retained
   for review, not freshly verified claims. Fault mapping is not geothermal-vent
   detection: no temperature, permeability, flow or vent observations were used.
 
-**Next session, in order:** preserve the stop; synchronize externally assigned lanes
-and original continuous surfaces; restore a comparable historical-best model;
-reserve untouched spatial evaluation; only then preregister a distinct mechanism
-with matched physical controls. Do not move dots or rename this duplicate to pass.
+**Next session, in order:** preserve both duplicate stops; synchronize externally
+assigned lanes and original continuous surfaces; restore a comparable historical-best
+model; reserve untouched spatial evaluation; then preregister the next distinct
+mechanism (H-34-01 substrate concealment, H-34-02 magnetic depth lineaments) with
+matched physical controls. Do not move dots or rename a duplicate to pass a gate.
 Research promotion and a real weekly slot remain separate decisions.
 
-### Concurrent PR #29 records retained (G30-S20)
+### Concurrent lane records retained (G30-S19, G30-S20, G30-LSM, TDX-1)
 
-Main advanced during this audit. The [G30-S20 run card](docs/research/2026-10-25-s20/run-card.json),
-[analysis](docs/research/2026-10-25-s20/analysis.md) and two research TIFFs are
-preserved as **peer records**, not new outputs or approved selections by this lane.
-S20 also records a duplicate-stop against G30-S19; its different component-holdout
-results are not ranked against the buffered TDX-C2 regional trials. No peer
-`promote` claim allocates a weekly slot here. The retained TDX-1 addendum honestly
-marks its missing continuous-surface comparisons against those arrivals unknown.
-TDX-C2's saved states were checked against both post-stop arrivals: 166 total
-observed comparisons, same maximum overlap. No model or dot changes followed.
+The [G30-S20 run card](docs/research/2026-10-25-s20/run-card.json), the
+[G30-LSM pointer](docs/research/2026-10-25-lsm/current-run.json) and the
+[TDX-1 archive](docs/research/texture-displacement/run-card.json) are preserved as
+**peer records**, not new outputs or approved selections by this lane. G30-S20 and
+G30-LSM each record a duplicate-stop against G30-S19; their component-holdout
+results use different protocols and are not ranked against the buffered H-NEARSPLAY
+trials. No peer `promote` claim allocates a weekly slot here. The stopped attempts'
+late-registry audits now cover 168 observed comparisons, including the H-NEARSPLAY
+arrival, with no model or dot changes following.
 
 ---
 

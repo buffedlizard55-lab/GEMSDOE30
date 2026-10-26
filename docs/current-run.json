@@ -1,7 +1,25 @@
 {
   "schema_version": 1,
-  "run_card": "docs/research/nearslay-run-card.json",
-  "readiness": "docs/research/nearslay-readiness.json",
-  "purpose": "One holdout-promoted candidate TIFF is available for download; not organizer-confirmed, no competition slot used",
-  "latest_attempt": "docs/research/texture-controls/run-card.json"
+  "run_card": "docs/research/nearsplay/run-card.json",
+  "readiness": "docs/research/nearsplay/readiness.json",
+  "verifier": "scripts/verify_nearsplay_run.py",
+  "purpose": "Current research artifact H-NEARSPLAY near-splay annulus (off-catalogue dots, 300 m-1.5 km, inner-edge weighted): promoted on HOLDOUT-DTI with paired CI entirely above 0 on screen and confirmation; NOT ORGANIZER-CONFIRMED; no competition slot used",
+  "latest_attempt": "docs/research/texture-controls/run-card.json",
+  "additional_stopped_attempts": [
+    {
+      "lane": "G30-LSM",
+      "pointer": "docs/research/2026-10-25-lsm/current-run.json",
+      "verifier": "scripts/verify_lsm_run.py",
+      "decision": "DO NOT SUBMIT (duplicate-stop; holdout gate passed; no TIFF published)"
+    }
+  ],
+  "additional_research_artifacts": [
+    {
+      "lane": "MSDB-1v2",
+      "run_card": "docs/research/msdb-piedmont/run-card.json",
+      "readiness": "docs/research/msdb-piedmont/readiness.json",
+      "verifier": "scripts/verify_current_run.py",
+      "decision": "Registered peer artifact; holdout-promoted on its own protocol. Not re-adjudicated or slot-selected by this lane."
+    }
+  ]
 }

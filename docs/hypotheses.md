@@ -366,3 +366,15 @@ transfer. H-34-04 is the cheapest to start and the most likely to be underpowere
 
 **No candidate above is promoted, none is validated, and none may consume a weekly submission slot.**
 H-34-01 is the next action because its data are already on disk.
+
+## 2026-10-25 — lane G30-LSM (ranked before implementation; see `docs/research/2026-10-25-lsm/preregistration.md`)
+
+| ID | Hypothesis (layers → signature) | Status (labelled evidence) |
+|---|---|---|
+| H-LSM-1 | 3DEP 1 m-LiDAR scarp morphology (step, crest–toe dipole, facing step, scarp/channel ratio, strike persistence) fused with 19 GeoDAWN bands and 6 geophysical edges; no proximity input | **Holdout gate passed:** HOLDOUT-DTI 0.1572 vs core19 0.1398, Δ +0.0174 [+0.0066, +0.0279] (v3, 60,988 withheld). **Duplicate-stop at the dot stage:** 80 % of dots within 3 px of earlier rasters, because the model's dots concentrate near mapped faults. Not submittable. |
+| H-LSM-2 | Six geophysical edge transforms alone (geo25 ablation) | 0.1487 [0.1341, 0.1642]. The LiDAR share of the gain (+0.0085 [−0.0016, +0.0188]) is not significant. |
+| H-LSM-1r | Crest-line (Hessian ridge) placement of the same belief | **Negative:** +0.0016 [−0.0029, +0.0055] on v3. Improved SGMC-frame alignment (+0.0087 [+0.0054, +0.0122]), reported and not gated. |
+| H-LSM-3 | GeoDAWN radiometric K/eTh alteration halos | Not run (rank 3). |
+| H-LSM-4 | Lake Lahontan shoreline rejection using absolute elevation (3DEP 1/3″ via TNM Access) | Not run (rank 4). Needs a GitHub Actions fetch. |
+| H-LSM-5 | Side-of-fault (hanging-wall) relative elevation | Not run (rank 5). Catalogue-relative, which conflicts with the leaderboard evidence. |
+| M-LB-1 (meta) | Leaderboard calibration: a uniform lattice fixes ρ; nested pairs give marginal hit rates | ρ ≈ 0.244 % (PROJECTION). Near-catalogue dots ≈ 0 hits; D-family coverage ≈ 40.5 %. See `leaderboard-calibration.json`. |

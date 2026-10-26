@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import io
 import json
 from pathlib import Path
 import threading
@@ -78,6 +79,102 @@ def test_restore_rejects_wrong_download_before_publishing_a_cached_file(tmp_path
     with pytest.raises(ValueError, match="Git blob mismatch"):
         sync.restore_row(row, grid)
     assert not (tmp_path / row["path"]).exists()
+
+
+def test_fresh_priority_snapshot_cannot_overwrite_a_frozen_experiment_registry(tmp_path, monkeypatch):
+    from scripts import sync_priority_registry as sync
+    monkeypatch.setattr(sync, "ROOT", tmp_path)
+    frozen = tmp_path / "docs/research/texture-controls/registry.json"
+    frozen.parent.mkdir(parents=True); frozen.write_text('{"frozen": true}\n')
+    template = raster(tmp_path / "template.tif", np.zeros((4, 5)))
+    with pytest.raises(ValueError, match="frozen experiment registry"):
+        sync.snapshot(frozen, template)
+    # The fail-closed guard runs before pins/API work and leaves historic bytes intact.
+    assert frozen.read_text() == '{"frozen": true}\n'
+    with pytest.raises(ValueError, match="inside the repository"):
+        sync.require_new_snapshot_target(tmp_path.parent / "outside.json")
+
+
+def test_priority_snapshot_records_surface_paths_without_claiming_they_are_usable(tmp_path, monkeypatch):
+    from scripts import sync_priority_registry as sync
+    monkeypatch.setattr(sync, "ROOT", tmp_path)
+    source = raster(tmp_path / "source.tif", np.eye(4, 5))
+    content = source.read_bytes()
+    blob = hashlib.sha1(f"blob {len(content)}\0".encode() + content).hexdigest()
+    pins = tmp_path / "docs/research/priority-site-pins.json"
+    pins.parent.mkdir(parents=True)
+    pins.write_text(json.dumps({"rasters": [{"site": "SYNTHETIC", "repo": "test/synthetic",
+                                                "ref": "not-used"}]}))
+    ref = "b" * 40
+    tree = {"sha": "tree-1", "truncated": False, "tree": [
+        {"type": "blob", "path": "docs/downloads/candidate.tif", "sha": blob, "size": len(content)},
+        {"type": "blob", "path": "outputs/oof_surface.npy", "sha": "c" * 40, "size": 99},
+        {"type": "blob", "path": "models/predictions.npz", "sha": "d" * 40, "size": 88},
+    ]}
+
+    def fake_api(endpoint, *, raw=False):
+        if endpoint.endswith("/commits/main"):
+            return json.dumps({"sha": ref}).encode()
+        if "/git/trees/" in endpoint:
+            return json.dumps(tree).encode()
+        assert raw and "docs/downloads/candidate.tif" in endpoint
+        return content
+
+    monkeypatch.setattr(sync, "api", fake_api)
+    template = raster(tmp_path / "template.tif", np.zeros((4, 5)))
+    output = tmp_path / "docs/research/registry-snapshots/synthetic.json"
+    report = sync.snapshot(output, template)
+    assert report["schema_version"] == 4
+    discovery = report["continuous_surface_discovery"]
+    assert discovery["status"] == "path-inventory-only" and discovery["candidate_count"] == 2
+    assert {row["source_path"] for row in discovery["candidates"]} == {
+        "outputs/oof_surface.npy", "models/predictions.npz"}
+    assert all("not downloaded" in row["discovery_scope"] for row in discovery["candidates"])
+    assert output.is_file() and len(report["rasters"]) == 1
+
+
+def test_surface_metadata_inspection_never_promotes_or_compares_a_public_array(tmp_path, monkeypatch):
+    from scripts import sync_priority_registry as sync
+    monkeypatch.setattr(sync, "ROOT", tmp_path)
+    source = raster(tmp_path / "source.tif", np.eye(4, 5))
+    tiff_bytes = source.read_bytes()
+    tiff_blob = hashlib.sha1(f"blob {len(tiff_bytes)}\0".encode() + tiff_bytes).hexdigest()
+    array_stream = io.BytesIO(); np.savez(array_stream, belief=np.zeros((4, 5), dtype="float32"))
+    npz_bytes = array_stream.getvalue()
+    npz_blob = hashlib.sha1(f"blob {len(npz_bytes)}\0".encode() + npz_bytes).hexdigest()
+    pins = tmp_path / "docs/research/priority-site-pins.json"
+    pins.parent.mkdir(parents=True)
+    pins.write_text(json.dumps({"rasters": [{"site": "SYNTHETIC", "repo": "test/synthetic",
+                                                "ref": "not-used"}]}))
+    ref = "b" * 40
+    tree = {"sha": "tree-1", "truncated": False, "tree": [
+        {"type": "blob", "path": "docs/downloads/candidate.tif", "sha": tiff_blob, "size": len(tiff_bytes)},
+        {"type": "blob", "path": "evidence/prediction_surface.tif", "sha": tiff_blob, "size": len(tiff_bytes)},
+        {"type": "blob", "path": "evidence/oof_belief.npz", "sha": npz_blob, "size": len(npz_bytes)},
+    ]}
+
+    def fake_api(endpoint, *, raw=False):
+        if endpoint.endswith("/commits/main"):
+            return json.dumps({"sha": ref}).encode()
+        if "/git/trees/" in endpoint:
+            return json.dumps(tree).encode()
+        assert raw
+        return npz_bytes if endpoint.endswith("oof_belief.npz?ref=" + ref) else tiff_bytes
+
+    monkeypatch.setattr(sync, "api", fake_api)
+    template = raster(tmp_path / "template.tif", np.zeros((4, 5)))
+    report = sync.snapshot(tmp_path / "docs/research/registry-snapshots/surface.json", template,
+                           inspect_surfaces=True)
+    inspected = report["continuous_surface_discovery"]
+    assert inspected["status"] == "metadata-inspected"
+    assert len(inspected["inspections"]) == 2
+    geo = next(row for row in inspected["inspections"] if row["format"] == "GeoTIFF")
+    archive = next(row for row in inspected["inspections"] if row["format"] == "NPZ")
+    assert geo["grid_matches_template"] is True
+    assert archive["any_array_matches_template_shape"] is True
+    assert all(row["future_surface_comparison_eligibility"] == "unknown"
+               and "not ranked" in row["inspection_scope"]
+               for row in inspected["inspections"])
 
 
 @pytest.fixture

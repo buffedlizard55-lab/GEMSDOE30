@@ -200,7 +200,7 @@ def test_late_arrivals_are_checked_without_rewriting_the_original_snapshot(isola
     verifier, directory, template, _ = isolated
     original = (directory / 'registry.json').read_bytes()
     result = verifier.verify(directory, template)
-    assert result['observed_registry']['dots']['registry_entries_compared'] == 166
+    assert result['observed_registry']['dots']['registry_entries_compared'] == 168
     assert (directory / 'registry.json').read_bytes() == original
     (directory / 'registry-parallel-addendum.json').unlink()
     with pytest.raises(ValueError, match='late-registry audit'):

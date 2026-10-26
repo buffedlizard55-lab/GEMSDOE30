@@ -1,78 +1,56 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="GEMSDOE30 DOE GEMS fault-discovery: holdout-promoted candidate submission TIF, download and submission guide.">
-<title>Executive submission guide · GEMSDOE30 · GEMSDOE30</title><link rel="stylesheet" href="docs/assets/research.css"></head>
-<body><a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="nav-wrap">
-<a class="brand" href="index.html"><span class="brand-mark">G30</span> Fault discovery lab</a><nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html" aria-current="page">Submission guide</a><a href="experiment-review.html">Research</a><a href="README.md">Project brief</a></nav></div></header>
-<main id="main"><section class="intro"><div>
-<p class="eyebrow">Submission artifact · ready to download</p>
-<h1>One GEMSDOE30 TIF.<br>Clear about submission.</h1>
-<p class="lead">A holdout-promoted, format-valid single-band GeoTIFF is published below for download.
-It is <strong>OK to download</strong> as a research artifact. It is <strong>not OK to treat as cleared to submit</strong>:
-the result is HOLDOUT-DTI (a catalogue-proxy holdout), it is <strong>not ORGANIZER-CONFIRMED</strong>, and no
-organizer receipt or competition score exists for it.</p>
-<p class="meta">25 October 2026 <span>·</span> One holdout-validated candidate <span>·</span> No weekly slot used</p>
-</div></section>
-
-<section class="release" aria-labelledby="download-title">
-<div class="release-heading"><span class="pill good">FORMAT-VALID · LOCAL CONTRACT PASSED</span><span class="pill caution">PROMOTED ON HOLDOUT · PROXY ONLY</span><span class="pill caution">NOT ORGANIZER-CONFIRMED</span></div>
-<h2 id="download-title">Download the submission TIF</h2>
-<p><strong>File:</strong> <code>GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif</code> <span>(0.45 MiB)</span> <span>· <strong>40,000 binary dots</strong> at one kernel radius (300 m), all off-catalogue</span></p>
-<div class="actions"><a class="button" href="docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif" download>↓ Download submission TIF <span>click to save .tif</span></a><a class="button secondary" href="docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.json" download>Provenance sidecar (.json)</a></div>
+<meta name="description" content="GEMS fault-prediction artifacts, reproducible holdout evidence, and an explicit automated submission decision.">
+<title>Executive submission guide · GEMSDOE30</title><link rel="stylesheet" href="docs/assets/research.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html"><span class="brand-mark">G30</span> Fault discovery lab</a>
+<nav aria-label="Main navigation"><a href="index.html">Overview</a><a href="executive-summary.html" aria-current="page">Submission guide</a><a href="experiment-review.html">Research</a><a href="README.md">Project brief</a></nav></div></header>
+<main id="main"><section class="intro"><div><p class="eyebrow">Executive submission guide</p><h1>Exactly how to submit.<br>And what is still unproven.</h1>
+<p class="lead">One holdout-promoted TIF is published below. It is <strong>OK to download</strong>. It is <strong>not established as cleared to submit</strong>: the evidence is HOLDOUT-DTI on a catalogue proxy, not ORGANIZER-CONFIRMED, and no competition slot has been used by this repository.</p></div></section>
+<section class="release" aria-labelledby="release-title">
+<div class="release-heading"><span class="pill good">FORMAT-VALID · LOCAL CONTRACT PASSED</span><span class="pill caution">PROMOTED ON HOLDOUT-DTI · PROXY ONLY</span><span class="pill caution">NOT ORGANIZER-CONFIRMED</span></div>
+<h2 id="release-title">Safe to download. <span>Not cleared to submit.</span></h2>
+<p><strong>Zero human inspection required:</strong> automated machine verification reopened <code>GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif</code> and confirmed a single <code>float32</code> band, <code>EPSG:32611</code>, <code>3,730 × 3,292</code>, the exact sample-template transform, finite values in <code>[0, 1]</code> across all 5,167,373 in-footprint cells (<code>NaN</code> nodata outside), 40,000 binary dots at one kernel radius (300 m), <strong>0</strong> dots on known USGS/INGENIOUS faults, uniqueness against the local registry (max Spearman <code>0.0703 &le; 0.90</code>, max 3-px dot overlap <code>68.08% &le; 70%</code>), and a <strong>paired HOLDOUT-DTI improvement of +0.065367</strong> (95% CI <code>[+0.056983, +0.074347]</code>) confirmed on a fresh split at <strong>+0.067938</strong> (95% CI <code>[+0.058977, +0.077243]</code>).</p>
+<div class="actions"><a class="button" href="docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif" download>↓ Download the submission TIF <span>0.45 MiB</span></a><a class="button secondary" href="docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.json" download>Provenance sidecar (.json)</a><a class="button secondary" href="executive-summary.html">Open the submission guide</a></div>
 <p class="filename">GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif</p>
-<details><summary>File identity &amp; current validation</summary>
-<dl>
+<details open><summary>Automated validation scorecard &amp; file identity</summary><dl>
 <dt>SHA-256</dt><dd><code>f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52</code></dd>
-<dt>Contract</dt><dd>One float32 band · EPSG:32611 · 3,730 × 3,292 · exact template transform · finite [0, 1] inside the footprint · NaN nodata outside · 0 NaN inside the footprint</dd>
-<dt>Local validation</dt><dd>All 11 published-format checks passed (finite [0, 1] inside footprint; NaN outside; CRS/shape/transform match the sample template). Receipt: <a href="docs/research/nearslay-submission-validation.json">nearslay-submission-validation.json</a></dd>
-<dt>Holdout result (HOLDOUT-DTI · not a score)</dt><dd>Screen seed 31: Δ +0.0654, 95% CI [0.0570, 0.0743], 4/4 quadrants, 20,870 withheld positives · Confirmation seed 41: Δ +0.0679, 95% CI [0.0590, 0.0772], 4/4 quadrants, 20,247 withheld positives · Evaluator component-holdout-v3-blockstats-20261025, triangular 300 m kernel, alpha 0.2 / beta 0.8</dd>
-<dt>Uniqueness vs registry</dt><dd>Max Spearman rho 0.070 (limit 0.90); max dot overlap 68.1% within 3 px of any one local reference raster (limit 70%). No lane collision vs the 21 locally available registry rasters.</dd>
-<dt>Verdict</dt><dd><strong>Promote on holdout.</strong> Downloadable research artifact only. Not ORGANIZER-CONFIRMED — no organizer receipt, ID, hash, or score exists for this file. The authorized entrant decides whether to spend a weekly submission slot.</dd>
-</dl>
-</details>
-</section>
-
+<dt>Submission name</dt><dd><code>GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan</code></dd>
+<dt>Submission note (128/140)</dt><dd><code>NEARSPLAY annulus 300m-1.5km off-cat dots; holdout DTI +0.066 [0.057,0.074] vs matched control; proxy holdout, not org-confirmed</code></dd>
+<dt>Portal format gate</dt><dd><code>PASSED</code> · 1 band <code>float32</code> · <code>EPSG:32611</code> · <code>3,730 × 3,292</code> · finite in <code>[0, 1]</code> inside · <code>NaN</code> outside · <code>0</code> NaN inside</dd>
+<dt>Receipts</dt><dd><a href="docs/research/nearsplay/validation.json">Reopened-file validation</a> · <a href="docs/research/h-nearsplay-holdout.json">Holdout report</a> · <a href="docs/research/nearsplay/run-card.json">Run card</a> · <a href="docs/research/nearsplay/readiness.json">Readiness receipt</a></dd>
+</dl></details></section>
 <section class="section"><div class="identity">
-<label for="submission-name">Submission name (copy for “File to submit”)</label>
+<label for="submission-name">Submission name (copy into “File to submit”)</label>
 <input id="submission-name" value="GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan" readonly>
 <button class="copy-button" type="button" data-copy="submission-name">Copy name</button>
 <label for="submission-note">Submission note · 128 / 140 characters (paste into “Note (optional)”)</label>
 <textarea id="submission-note" readonly rows="3">NEARSPLAY annulus 300m-1.5km off-cat dots; holdout DTI +0.066 [0.057,0.074] vs matched control; proxy holdout, not org-confirmed</textarea>
 <button class="copy-button" type="button" data-copy="submission-note">Copy note</button>
 <p id="copy-status" role="status" aria-live="polite"></p>
-</div>
-</section><section class="section"><p class="eyebrow">Exactly how to submit</p><h2>“New submission” on the official competition</h2>
+</div></section>
+<section class="section"><p class="eyebrow">Step by step</p><h2>Using the official “New submission” form</h2>
 <ol class="steps">
-<li><strong>Download the TIF.</strong><p>Click the download link above and save <code>GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif</code>. Do not edit, clip, resize, or re-encode it: edits change the hash and void the validation receipt.</p></li>
-<li><strong>Open the official form.</strong><p>In an authorized DrivenData account on the <a href="https://www.drivendata.org/competitions/306/competitions-doe-gems/">official competition page</a>, go to “New submission” → “File to submit”.</p></li>
-<li><strong>Attach the file.</strong><p>Choose the single-band GeoTIFF (.tif). The repository does not authenticate, upload, or consume a weekly slot; that step is yours, in your account.</p></li>
-<li><strong>Paste the note.</strong><p>Paste the submission note copied above into “Note (optional)” — it helps tell submissions apart (e.g. “clustering with k=25”).</p></li>
-<li><strong>Keep the receipt.</strong><p>Record the submission ID, returned score, file SHA-256 and timestamp. Only a submission-page receipt is ORGANIZER-CONFIRMED; HOLDOUT-DTI and projections are never written as scores.</p></li>
-</ol>
-</section>
-
-<section class="section two-column">
-<div>
-<p class="eyebrow">Is it OK to download and submit?</p>
-<h3>Download: yes · Submit: not confirmed</h3>
+<li><strong>Download the TIF.</strong><p>Click the download button above and save <code>GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif</code>. Do not edit, clip, resize, or re-encode it: any edit changes the SHA-256 and voids the validation receipt.</p></li>
+<li><strong>Open the official form.</strong><p>In an authorized DrivenData account on the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">official competition page</a>, go to “New submission” → “File to submit”.</p></li>
+<li><strong>Attach the file.</strong><p>Choose the single-band GeoTIFF (.tif). This repository does not authenticate, upload, or consume a weekly slot; that step belongs to you, in your account.</p></li>
+<li><strong>Paste the note.</strong><p>Paste the copied submission note into “Note (optional)” so the submission can be told apart later (e.g. “clustering with k=25”).</p></li>
+<li><strong>Keep the receipt.</strong><p>Record the submission ID, returned score, file SHA-256 and timestamp. <strong>Only</strong> a submission-page receipt is ORGANIZER-CONFIRMED; holdout deltas and projections are never written as scores.</p></li>
+</ol></section>
+<section class="section two-column"><div><p class="eyebrow">Is it OK to download and submit?</p><h3>Download: yes · Submit: not confirmed</h3>
 <ul class="spaced">
-<li><strong>Download:</strong> yes — this page links the exact validated bytes and records the SHA-256.</li>
-<li><strong>Submit:</strong> not established. The file passed the local format contract and the holdout gate, but holdout results are a catalogue proxy (IR-30-017), not the private expert-new test labels. No DrivenData submission receipt exists, so nothing here is ORGANIZER-CONFIRMED.</li>
-<li><strong>Range error:</strong> the file is finite [0, 1] inside the footprint with NaN nodata outside, matching the published GEMS format; the historical “Predicted values must be in range [0, 1]” rejection is diagnosed (IR-30-044) and this file avoids both known causes (in-footprint NaN; whole-array out-of-range values). Local validation does not prove portal acceptance.</li>
-</ul>
-</div>
-<div class="note-card"><h3>Official review links</h3>
-<ul class="spaced">
-<li><a href="https://www.drivendata.org/competitions/306/competitions-doe-gems/page/967/">Problem &amp; submission format</a></li>
-<li><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Official rules PDF (NLR, September 2026)</a></li>
-<li><a href="https://www.drivendata.org/competitions/306/competitions-doe-gems/data/">Competition data page</a></li>
-<li><a href="https://www.drivendata.org/competitions/306/competitions-doe-gems/leaderboard/" rel="nofollow">Official leaderboard</a></li>
-<li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">DrivenData reference solution</a></li>
-<li><a href="https://gdr.openei.org/submissions/1391">GDR INGENIOUS submission 1391</a></li>
-</ul>
-<p class="fine">External hosts are outside this session's network access. Links are for manual review, not fresh verification.</p></div>
-</section></main>
-<footer><div><strong>GEMSDOE30</strong><p>Evidence before claims. A valid file is not a competition approval.</p></div>
-<div><a href="docs/status.json">Evidence feed (JSON)</a><a href="docs/current-run.json">Current run pointer</a><a href="https://www.drivendata.org/competitions/306/competitions-doe-gems/leaderboard/" rel="nofollow">Official leaderboard ↗</a></div>
-<p class="fine">Repository evidence, not a live leaderboard. No competition slot selected or used by this repository. Local validation and holdout results are not organizer acceptance.</p></footer>
+<li><strong>Download:</strong> yes — the exact validated bytes are linked and the SHA-256 is recorded.</li>
+<li><strong>Submit:</strong> not established. The file passed the local format contract and the holdout gate, but a catalogue proxy is not the private expert-new test labels (IR-30-017, IR-30-079), and no DrivenData receipt exists.</li>
+<li><strong>Range error:</strong> this file is finite <code>[0, 1]</code> inside the footprint with NaN nodata outside, matching the published GEMS format, and avoids both known causes of the historical “Predicted values must be in range [0, 1]” rejection (in-footprint NaN; whole-array out-of-range values). Local validation does not prove portal acceptance (IR-30-019).</li>
+<li><strong>Budget:</strong> at most one weekly slot on this file, and keep the receipt either way — a rejected upload is evidence too.</li>
+</ul></div>
+<div class="note-card"><h3>Official review links</h3><ul class="spaced">
+<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem &amp; submission format</a></li>
+<li><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Official rules PDF</a></li>
+<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">Competition data page</a></li>
+<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Official leaderboard</a></li>
+</ul><p class="fine">External hosts are outside this session's network access. Links are for review, not fresh verification.</p></div></section></main>
+<footer><div><strong>GEMSDOE30</strong><p>Evidence before claims. Automated machine gates require zero human raster inspection.</p></div>
+<div><a href="docs/status.json">Evidence feed (JSON)</a><a href="docs/research/nearsplay/run-card.json">Run card</a><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Official competition ↗</a></div>
+<p class="fine">Repository evidence only; not a live leaderboard projection. No competition slot selected or used by this repository. Local validation and holdout results are <strong>not</strong> organizer acceptance.</p></footer>
 <script src="docs/assets/research.js" defer></script></body></html>
