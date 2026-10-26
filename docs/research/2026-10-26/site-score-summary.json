@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "as_of_utc": "2026-10-26",
+  "scope": "Highest numeric owner-reported value in the repository's score ledger for each requested site, plus the newer lower claim supplied in the current task where applicable. These are not organizer-confirmed scores.",
+  "score_class": "OWNER-REPORTED / UNVERIFIED",
+  "organizer_receipts_audited": 0,
+  "organizer_confirmed_scores": [],
+  "no_receipt_statement": "No official DrivenData submission-page receipt tying a score to an exact file was found in this repository review. A repository or owner-site artifact is not a receipt.",
+  "sites": [
+    {
+      "site": "GEMSDOE24",
+      "owner_page_url": "https://buffedlizard55-lab.github.io/GEMSDOE24/",
+      "highest": {
+        "score": 0.2477,
+        "submission": "h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan",
+        "artifact_url": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/fc2bc6f350bf5c6ce8da5d7a2ab03578ea1259d1/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+        "artifact_sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310"
+      },
+      "newer_claim": {
+        "score": 0.0859,
+        "submission": "gems24-gvc1-negative-geothermal-lineament-submod-20261025-abe8e51c719d-nan",
+        "artifact_url": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/fc2bc6f350bf5c6ce8da5d7a2ab03578ea1259d1/docs/downloads/gems24-gvc1-negative-geothermal-lineament-submod-20261025-abe8e51c719d-nan.tif",
+        "artifact_sha256": "b537611d648d0f4fd40115f1d4b8eb97fe0febccc4686b80e7db21ee9c287a96",
+        "claim_source": "Supplied in the current task; the immutable public artifact exists, but the score is not receipt-confirmed."
+      },
+      "executive_summary": "The highest score claim in the local ledger is 0.2477 for an H19-5-derived d=1.5 dotted raster. The newer GVC1 geothermal-lineament/submodular result was supplied as 0.0859 and is explicitly described as a negative result. Both values remain owner claims without organizer receipts.",
+      "organizer_confirmed_score": null
+    },
+    {
+      "site": "GEMSDOE25",
+      "owner_page_url": "https://buffedlizard55-lab.github.io/GEMSDOE25/",
+      "highest": {
+        "score": 0.2600,
+        "submission": "dotted-h19-5-d2-8-20261002-e56ea318af89-nan",
+        "artifact_url": "https://github.com/buffedlizard55-lab/GEMSDOE25/blob/04333cc3fbf7486c56e0324fd07aee684be614dc/docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+        "artifact_sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8"
+      },
+      "newer_claim": {
+        "score": 0.0742,
+        "submission": "gems25-h66-mgd-flank-sapd3-0-k3p5-20261025-da617550a0e9-nan",
+        "artifact_url": "https://github.com/buffedlizard55-lab/GEMSDOE25/blob/0a45b3ca6403f7e8d4deac5d8b208797d5e8f477/docs/downloads/gems25-h66-mgd-flank-sapd3-0-k3p5-20261025-da617550a0e9-nan.tif",
+        "artifact_sha256": "a27a036ac86e468a47b492801fca0257417fd8ebbcdfea859a87c25193a477d8",
+        "claim_source": "Supplied in the current task; the immutable public artifact exists, but the score is not receipt-confirmed."
+      },
+      "executive_summary": "The 0.2600 d=2.8 claim has an attribution caveat: the historically pinned GEMSDOE25 bytes also appear as an alias in GEMSDOE24, while the inspected current GEMSDOE25 main snapshot no longer lists that old path; an owner-page note also labels a related copy unscored/not slot-approved. The newer H66/MGD flank SAPD3 claim is 0.0742, unverified.",
+      "organizer_confirmed_score": null
+    },
+    {
+      "site": "GEMSDOE27",
+      "owner_page_url": "https://buffedlizard55-lab.github.io/GEMSDOE27/",
+      "highest": {
+        "score": 0.2449,
+        "submission": "topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan",
+        "artifact_url": "https://github.com/buffedlizard55-lab/GEMSDOE27/blob/927322eadbde56be42ae129ccdfb9b37540d8e60/docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+        "artifact_sha256": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d"
+      },
+      "newer_claim": {
+        "score": 0.2190,
+        "submission": "gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-nan",
+        "artifact_url": "https://github.com/buffedlizard55-lab/GEMSDOE27/blob/927322eadbde56be42ae129ccdfb9b37540d8e60/docs/downloads/gems27-h29-hydrothermal-piedmont-celf-20261025-511898747886-nan.tif",
+        "artifact_sha256": "a47d3e5e61ae985e965125bd6c71f2d1ecaac76aa391621d01182a987915df48",
+        "claim_source": "Supplied in the current task; the immutable public artifact exists, but the score is not receipt-confirmed."
+      },
+      "executive_summary": "The ledger's highest claim is 0.2449 for the topographic gap-closure T-v2 d=1.5 raster. The newer H29 hydrothermal piedmont CELF claim is 0.2190; both are owner-reported. The H29 method is distinct from the older gap-closure submission, but its score is not organizer-verified.",
+      "organizer_confirmed_score": null
+    },
+    {
+      "site": "GEMSDOE28",
+      "owner_page_url": "https://buffedlizard55-lab.github.io/GEMSDOE28/",
+      "highest": {
+        "score": 0.2710,
+        "submission": "h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan",
+        "artifact_url": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/10c26af3dc4d45292189734b0b696c7afb24ffb1/docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+        "artifact_sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641"
+      },
+      "newer_claim": {
+        "score": 0.0217,
+        "submission": "gems28-s18-mxtp-20261025-3e95505c011a-allfinite",
+        "artifact_url": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/10c26af3dc4d45292189734b0b696c7afb24ffb1/docs/downloads/gems28-s18-mxtp-20261025-3e95505c011a-allfinite.tif",
+        "artifact_sha256": "ce043566a96a1bf0abae366ba706ed6be5907297248b1d14deace8596500b186",
+        "claim_source": "Supplied in the current task; the immutable public artifact exists, but the score is not receipt-confirmed."
+      },
+      "executive_summary": "The top ledger claim is 0.2710 for H36-1 rung30-blind R1. Close historical claims include 0.2708 for H27-4 solo d=2.8 and 0.2707 for H38-1 HF-Euler; the newer S18-MXTP claim is 0.0217. These are owner reports, not organizer receipts.",
+      "organizer_confirmed_score": null
+    },
+    {
+      "site": "GEMSDOE30",
+      "owner_page_url": "https://buffedlizard55-lab.github.io/GEMSDOE30/",
+      "highest": {
+        "score": 0.2600,
+        "submission": "d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca",
+        "artifact_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/c6d5710324ee31b82fcf8489b9f65d070da9eaf8/docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+        "artifact_sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd"
+      },
+      "newer_claim": {
+        "score": 0.1462,
+        "submission": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a",
+        "artifact_url": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+        "artifact_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+        "claim_source": "Supplied in the current task; the local TIFF hash is independently verified, but the score is not receipt-confirmed."
+      },
+      "executive_summary": "The highest stored owner claim is 0.2600 for the D2.8/Poisson 300 m off-catalogue raster. The current MSDB1 owner claim supplied by the task is 0.1462. Its separate catalogue-proxy HOLDOUT-DTI result is 0.170462 with evaluator component-holdout-v3-blockstats-20261025, 60,988 withheld positives, and 95% CI [0.156227, 0.184168]; it is not comparable to, or a replacement for, the owner/organizer claim.",
+      "organizer_confirmed_score": null
+    },
+    {
+      "site": "GEMSDOE31",
+      "owner_page_url": "https://buffedlizard55-lab.github.io/GEMSDOE31/docs/",
+      "highest": {
+        "score": 0.2708,
+        "submission": "h27-4-solo-d28-20261004-8acb75e1-nan",
+        "artifact_url": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/1aebc0b80570406b9eca6c56eed915b8d064e3b2/docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-nan.tif",
+        "artifact_sha256": "07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40"
+      },
+      "newer_claim": null,
+      "executive_summary": "The highest ledger claim is 0.2708 for H27-4 solo d=2.8. Its in-footprint raster is byte-identical to the GEMSDOE28 H27-4 solo d=2.8 raster in the frozen audit, so these are not independent methods or evidence. No newer site claim was supplied in this task.",
+      "organizer_confirmed_score": null
+    },
+    {
+      "site": "GEMSDOE32",
+      "owner_page_url": "https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html",
+      "highest": {
+        "score": 0.2778,
+        "submission": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
+        "artifact_url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/7a97c5a88936a3fdb99d0358c3b85d739a714631/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+        "artifact_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
+      },
+      "newer_claim": null,
+      "executive_summary": "The top ledger claim across the nine sites is 0.2778 for H33/B2. Byte-level reconstruction shows its 37,654-dot support equals the GEMSDOE28 d=2.8 support after deleting the 2,545 dots within 2 pixels of catalogue labels. That establishes a pruning/spacing lineage, not a new geological discovery, and does not authenticate that the claimed score was returned for these exact bytes.",
+      "organizer_confirmed_score": null
+    },
+    {
+      "site": "GEMSDOE33",
+      "owner_page_url": "https://buffedlizard55-lab.github.io/GEMSDOE33/",
+      "highest": {
+        "score": 0.2632,
+        "submission": "h33d-analog-tip-stepover-r30-20261004-cb490425926e",
+        "artifact_url": "https://github.com/buffedlizard55-lab/GEMSDOE33/blob/b542e5ce4186b54dbd07a6a6e8756be676a3f088/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+        "artifact_sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757"
+      },
+      "newer_claim": null,
+      "executive_summary": "The highest ledger claim is 0.2632 for H33D analog tip-stepover R30. Its raster is a close support duplicate of H33: 99.984% of H33 dots lie within 3 pixels of H33D. A distinct method or score is not established by the filename or owner-reported value.",
+      "organizer_confirmed_score": null
+    },
+    {
+      "site": "GEMSDOE36",
+      "owner_page_url": "https://buffedlizard55-lab.github.io/GEMSDOE36/docs/",
+      "highest": {
+        "score": 0.2750,
+        "submission": "anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros",
+        "artifact_url": "https://github.com/buffedlizard55-lab/GEMSDOE36/blob/d519364018a2b9ce864565beb9080e32227e7a36/docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif",
+        "artifact_sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a"
+      },
+      "newer_claim": null,
+      "executive_summary": "The highest ledger claim is 0.2750 for an Anderson-geothermal PINN raster. All H33 dots lie within 3 pixels of the GEMSDOE36 reference in the frozen novelty audit, so the support is not independent of H33. No newer site claim was supplied in this task.",
+      "organizer_confirmed_score": null
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "checked_utc": "2026-10-26",
+  "operation": "restore and verify exact optional owner-mirror pins; no experiment, scoring, or source-value inspection",
+  "official_source": {
+    "name": "USGS GeoDAWN airborne magnetic and radiometric survey",
+    "doi": "10.5066/P93LGLVQ",
+    "url": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+    "official_release_license": "CC0 / US public-domain source release",
+    "source_authentication_note": "The official USGS source is the upstream release. The restored rasters below are owner-derived quantisations mirrored on GitHub; this receipt does not authenticate their upstream derivation."
+  },
+  "mirror": {
+    "pins_file": "docs/research/mirror-pins-extra.json",
+    "repository": "buffedlizard55-lab/GEMSDOE24",
+    "pinned_ref": "07345ea0604953d7efb858d9cfbc21e20c7aca0b",
+    "organizer_authenticated": false,
+    "data_origin_verified_by_hash": false
+  },
+  "grid": {
+    "shape": [3730, 3292],
+    "crs": "EPSG:32611",
+    "pixel_size_m": 100,
+    "band_count_each": 4,
+    "dtype_each": "uint8"
+  },
+  "files": [
+    {
+      "id": "ext_geodawn_rad_u8",
+      "path": "data/external/geodawn_rad_u8.tif",
+      "sha256_expected": "c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682",
+      "sha256_observed": "c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682",
+      "bytes_expected": 26612970,
+      "bytes_observed": 26612970,
+      "band_descriptions": ["K", "Th", "U", "TC"],
+      "provenance": "Owner-derived 1st–99th-percentile uint8 quantisation of USGS GeoDAWN radiometric grids"
+    },
+    {
+      "id": "ext_geodawn_extensions_u8",
+      "path": "data/external/geodawn_extensions_u8.tif",
+      "sha256_expected": "a35a9c6d2a14786f4dab85481ee59769213072f5dab5b2535ea82ae4d9bb7d9b",
+      "sha256_observed": "a35a9c6d2a14786f4dab85481ee59769213072f5dab5b2535ea82ae4d9bb7d9b",
+      "bytes_expected": 27132925,
+      "bytes_observed": 27132925,
+      "band_descriptions": ["ThK", "UK", "UTh", "TMI_up150"],
+      "provenance": "Owner-derived ratios and upward-continued magnetic field from USGS GeoDAWN; uint8 quantisation"
+    }
+  ],
+  "local_checks": {
+    "sha256_pin_match": true,
+    "single_file_grid_match": true,
+    "band_names_read_from_geotiff_metadata": true,
+    "values_used_for_scoring_or_modeling": false,
+    "organizer_acceptance": false,
+    "competition_submission_approval": false
+  },
+  "readiness_for_ratio_hypothesis": "Conditional only: original float grids or owner quantisation parameters are needed for defensible log-ratio calibration; no ratio hypothesis was executed."
+}

@@ -1,89 +1,75 @@
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
-## START HERE — Unique `MSDB-1v2` GeoTIFF Generated (`+27.6%` over `core19` on 4-Fold Buffered Holdout; Conservative Slot Gate Active: **NOT APPROVED FOR SUBMISSION**)
+## START HERE — 2026-10-26 evidence review (research only; contest upload **NOT APPROVED**)
 
-- **Unique Generated GeoTIFF (`44,090` off-catalogue binary dots):** [`docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif`](docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif) (`SHA-256: 22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381`)
-- **Submission Name:** `gems30-MSDB1-edge44090-20261025-e7856ec3f14a`
-- **Submission Note (`119 / 140` chars):** `MSDB-1v2: 31-feat stationary discontinuity+piedmont ramp HGB x Rayleigh curv gate + Bayes 300m EDGE, 44090 off-cat dots`
-- **Zero-Human-Inspection Pages:** [Landing overview (`index.html`)](index.html) · [Executive summary & validation guide (`executive-summary.html`)](executive-summary.html) · [Full source-linked PhD review (`review.md`)](docs/research/msdb-piedmont/review.md)
+> **Do not upload the downloadable TIFF below.** It is a reproducibility/research artifact only. `submission_approved=false`; the research verdict is negative, the externally assigned method lane and complete parallel registry remain unresolved, and no contest slot has been selected or used. Local validation is not DrivenData acceptance.
 
-**Read the [complete current owner prompt](#current-owner-prompt)
-and [frozen `MSDB-1v2` preregistration](docs/research/msdb-piedmont/preregistration.md)
-at the start of every session.** Core values: **Maximize P(Win)** by preserving weekly slots (`3/week` cap)
-for fully verified candidates; **Own the Outcome** by enforcing automated format, `[0, 1]` range, leakage,
-novelty, and paired spatial-bootstrap checks without human raster inspection.
+- **Research TIFF (downloadable, NOT upload-approved):** [`docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif`](docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif), SHA-256 `22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381`.
+- **Read-first Pages:** [Overview](index.html) · [Research summary](executive-summary.html) · [Submission process and no-upload decision](submission-process.html) · [Nine-site score digest](site-summaries.html) · [Scientific/evidence review](experiment-review.html) · [Project brief](README.md).
+- **Read-first source records:** [Current run card](docs/research/msdb-piedmont/run-card.json) · [Current readiness receipt](docs/research/msdb-piedmont/readiness.json) · [Dated site-score summary](docs/research/2026-10-26/site-score-summary.json) · [Untried hypotheses](docs/research/2026-10-26/untried-hypotheses.md) · [Official-source availability](docs/research/2026-10-26/data-source-check.md) · [Post-placement dot audit](docs/research/2026-10-26/msdb1-postsnapshot-dot-audit.json).
 
-| Automated Gate / Measurement (`MSDB-1v2`) | Machine-Verified Result |
+**Before project work, read the complete embedded owner prompt and its parallel-run protocol below; do not shorten or replace it.** Core values remain **Maximize P(Win)** and **Own the Outcome**. Stay in the assigned single-method lane; the lane is currently missing and must not be invented. Do not run another experiment or select a slot until the lane and complete parallel registry are resolved. Promotion and slot selection are separate decisions.
+
+### Existing research result — HOLDOUT-DTI, not a competition score
+
+| Quantity | Existing result |
 |---|---|
-| **`msdb_edge` (`MSDB-1v2` Candidate) — `HOLDOUT-DTI`** (`component-holdout-v3-blockstats-20261025`, `60,988` withheld positives, `371` blocks) | **`0.170462`**, spatial-bootstrap **95% CI `[0.156227, 0.184168]`** (`TP_w = 10,006.7`, `FP_w = 39,558.7`) |
-| **`msdb_poisson` (Internal Ablation) — `HOLDOUT-DTI`**, same folds & dot budgets | **`0.169326`**, **95% CI `[0.154797, 0.183273]`** (`TP_w = 9,940.9`, `FP_w = 39,650.4`) |
-| **`core19` (19-Band Baseline) — `HOLDOUT-DTI`**, same folds & dot budgets | **`0.133628`**, **95% CI `[0.118285, 0.148875]`** (`TP_w = 7,813.0`, `FP_w = 40,577.6`) |
-| **Paired `msdb_edge − core19` — `HOLDOUT-DTI difference`** | **`+0.036834` (`+27.6%`)**, paired **95% CI `[+0.022322, +0.050315]`** — **wins `4 / 4` disjoint quadrants** |
-| **Paired `msdb_poisson − core19` (Pure Physics Feature Gain)** | **`+0.035698` (`+26.7%`)**, paired **95% CI `[+0.021622, +0.048841]`** (`96.9%` of total improvement) |
-| **Paired `msdb_edge − msdb_poisson` (Internal Emitter Tie-Breaker)** | **`+0.001135`**, paired **95% CI `[-0.002173, +0.004628]`** (`wins 3 / 4` quadrants; CI straddles `0`) |
-| **Single-Feature Leakage Canaries (`37 features × 4 folds = 148` checks)** | **`PASSED`** — `0` alarms (`max univariate AUC = 0.6419 <= 0.90`; `#1` feature: `msdb_topo_coherence`) |
-| **Observed 9-Site Novelty (`180` files → `165` unique aligned GeoTIFFs)** | **`PASSED`** — surface max Spearman **`0.154504 <= 0.90`**; dots max 3-px overlap **`64.7789% <= 70.00%`** (`0` duplicates) |
-| **Portal GeoTIFF & `[0, 1]` Range Contract (`src/gemsdoe30/submission.py`)** | **`PASSED`** — 1 `float32` band, `EPSG:32611`, `3730 × 3292`, `100%` finite in `[0.0, 1.0]` inside footprint, `NaN` outside, `0` on known catalogue |
-| **Automated Weekly-Slot Governance (`src/gemsdoe30/readiness.py`)** | **`negative` (`NOT APPROVED FOR SUBMISSION`)** — conservative hold active because internal `msdb_edge − msdb_poisson` 95% CI straddles `0` and archived UNet checkpoints / unobserved external sessions remain incomplete |
+| `msdb_edge` candidate | **HOLDOUT-DTI `0.170462`**, evaluator `component-holdout-v3-blockstats-20261025`, `60,988` withheld positives, 95% CI `[0.156227, 0.184168]` |
+| `core19` comparator | **HOLDOUT-DTI `0.133628`**, same evaluator/folds/withheld positives, 95% CI `[0.118285, 0.148875]` |
+| Paired candidate − `core19` | **HOLDOUT-DTI Δ `+0.036834`**, 95% CI `[+0.022322, +0.050315]`; positive in all four buffered quadrants |
+| Paired `msdb_edge − msdb_poisson` | **HOLDOUT-DTI Δ `+0.001135`**, 95% CI `[−0.002173, +0.004628]`; crosses zero and is **inconclusive**. This is **not** an equivalence result or a promotion gate; the recorded paired-improvement gate is against `core19`. |
+| Leakage canaries | 148 single-feature checks across four folds; zero alarms above the `0.90` AUC alarm threshold (maximum AUC `0.6419`) |
+| Post-placement public dot screen | 204 non-self TIFF comparisons; maximum `64.78%` within 3 px, below the `70%` stop threshold. The receipt is `blocked-incomplete-evidence` because the registry is incomplete; this is **not** a global novelty certificate or a pre-placement check. |
+| Local TIFF checks | Reopened-file validator checks passed for the expected single-band `float32`, EPSG:32611 grid, in-footprint `[0,1]` values, outside-footprint nulls, and catalogue exclusion. **Local pass does not mean portal acceptance.** |
+| Current readiness | Negative/not approved; nine gates recorded passed and three unknown. Lane assignment and complete parallel registry are unresolved. No experiment was run in this review. |
 
-### Newly Discovered Competition Metadata Irregularities (`MEASURED`, 2026-10-25)
+These holdout values are catalogue-recovery proxy measurements using whole-segment buffered folds, visible-pixel masking, pooled DTI and a 300 m triangular kernel. They are not leaderboard values, organizer scores, or projections.
 
-1. **`Band 6 (tc)` is GeoDAWN Radiometric Total Count, NOT Magnetic Tilt (`IR-MSDB-01`):** Despite GDAL tags labeling Band 6 as `"Tilt angle or total curvature - magnetic field derivative"`, direct verification against USGS GeoDAWN (`10.5066/P93LGLVQ`) proves `Spearman(Band 6, GeoDAWN TC) = 0.999957`, whereas `Spearman(Band 6, arctan2(tmi_vg, tmi_hg)) = 0.01597`. `MSDB-1v2` computes true Miller–Singh magnetic tilt, zero-crossing crest, and Salem tilt-depth explicitly while treating `Band 6` as surficial gamma-ray exposure rate.
-2. **`Bands 18 & 11 (iso_grav_anom_hg, iso_grav_anom_vg)` are Signed Grid Derivatives `(+dg/dx, +dg/dy)` (`IR-MSDB-02`):** Finite-difference verification against Band 13 (`iso_grav_anom`) proves `Spearman = +0.9558, +0.9357` (`hypot(B18, B11)` matches Band 5 `iso_grav_anom_slope` at `Spearman = 0.9407`). `MSDB-1v2` reconstructs the full azimuthally symmetric 2-D gravity gradient vector.
+### Nine requested sites — highest score claim in the repository ledger
 
-### Key Artifacts & Verified Official Links
+Every value in this table is **OWNER-REPORTED / UNVERIFIED**, not `ORGANIZER-CONFIRMED`; this review found no official submission-page receipt tying a score to exact TIFF bytes. Open the [site digest](site-summaries.html) for submission names, pinned artifact URLs/hashes, executive summaries, attribution caveats, and newer lower claims supplied for five sites.
 
-- **Current Run Receipts (`MSDB-1v2`):** [Final JSON run card](docs/research/msdb-piedmont/run-card.json) · [machine-adjudicated readiness](docs/research/msdb-piedmont/readiness.json) · [full fold/canary statistics](docs/research/msdb-piedmont/results.json) · [165-raster 9-site registry](docs/research/msdb-piedmont/registry.json) · [Experiment 1 duplicate-stop receipt](docs/research/msdb-piedmont/experiment-1-duplicate-stop/receipt.json)
-- **Scientific Review & Irregularities:** [PhD forensic analysis of `GEMSDOE32` `H33` (`0.2778`), 4 ranked hypotheses, & 3-pass journal](docs/research/msdb-piedmont/review.md) · [irregularities ledger (`IR-MSDB-01`..`05`)](docs/irregularities.md)
-- **Preserved Prior `TDX-1` Receipts:** [TDX-1 run card](docs/research/texture-displacement/run-card.json) · [TDX-1 review](docs/research/texture-displacement/review.md) · [all 119 quarantined owner-reported claims](docs/research/texture-displacement/owner-claims.csv)
-- **Official Competition & Public Geoscience Sources (verified 2026-10-25):** [DrivenData GEMS overview](https://www.drivendata.org/competitions/306/competition-doe-gems/) · [Problem & DW-Tversky metric (`page/967`)](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) · [Live leaderboard (`#1 = 0.4413`)](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) · [NLR Official Rules PDF (`96647.pdf`)](https://docs.nlr.gov/docs/fy26osti/96647.pdf) · [Forum: known faults masked (`t/11516`)](https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516) · [Forum: splays & continuations (`t/11536`)](https://community.drivendata.org/t/clarification-what-counts-as-a-new-fault-in-the-test-set/11536) · [USGS GeoDAWN (`10.5066/P93LGLVQ`, CC0)](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and) · [OpenEI GDR `1391` INGENIOUS (`10.15121/1881483`, CC BY 4.0)](https://gdr.openei.org/submissions/1391) · [GBCGE INGENIOUS](https://gbcge.org/current-projects/ingenious/) · [EPSG:32611](https://epsg.io/32611)
+| Site | Highest recorded claim | Site | Highest recorded claim | Site | Highest recorded claim |
+|---|---:|---|---:|---|---:|
+| GEMSDOE24 | 0.2477 | GEMSDOE25 | 0.2600 | GEMSDOE27 | 0.2449 |
+| GEMSDOE28 | 0.2710 | GEMSDOE30 | 0.2600 | GEMSDOE31 | 0.2708 |
+| GEMSDOE32 | 0.2778 | GEMSDOE33 | 0.2632 | GEMSDOE36 | 0.2750 |
 
-### Reproduce and inspect autonomously (Python 3.11+, CPU)
+**H33 / GEMSDOE32:** the `0.2778` figure is owner-reported/unverified. Its 37,654-dot support reconstructs exactly as the GEMSDOE28 d=2.8 support (40,199 dots) minus 2,545 dots within 2 pixels of catalogue labels. That is evidence of a pruning/spacing lineage, not a distinct geological discovery or verified score-to-file association. A genuinely distinct method could beat the claim in principle; the repository has no organizer-confirmed result showing that it has.
+
+### Untried hypotheses — planning only; no validation claimed
+
+The code/artifact overlap screen excludes relabelling `RadTC-Fan` (already in MSDB-1v2), `MT-HF-Saddle` (overlaps prior heat-flow/conductivity work), and `WL-Strain` (overlaps GEMSDOE27 strain/conductivity). The ranked, falsifiable shortlist is:
+
+1. **SGMC cover-observability × independent structural evidence.** Public USGS state-map source exists, but original polygon packages are absent locally; restore/checksum them first.
+2. **Lithology-conditioned GeoDAWN K/Th log-ratio residual × fixed along-strike persistence.** USGS GeoDAWN is public; the locally restored rasters are quantized owner derivatives, not raw official grids, so raw measurements or quantization metadata are needed.
+3. **Drainage χ disequilibrium and channel steepness (`ksn`) aligned to independent structure.** Public USGS NHD/3DEP sources exist; complete study-area coverage and data access are not verified.
+
+These are unrun hypotheses, not score projections or authorization to experiment. Full non-fault mimics, prior-artifact overlap, official-source notes, controls, and holdout plans are in [the shortlist](docs/research/2026-10-26/untried-hypotheses.md).
+
+### Read-first execution and submission requirements
+
+- Reuse the template cached features and shared evaluator/writer. Hold out whole fault segments with a buffer; derive catalogue-based features from visible faults only; mask visible pixels exactly; score pooled DTI with alpha `0.2`, beta `0.8`, and a 300 m triangular kernel. Fix shared-tool defects in the shared tool, not a private fork.
+- Run single-feature leakage canaries; AUC `>0.90` is a leakage alarm until explained. Check novelty both before and after placement. Stop and log duplicates if surface rank-correlation is `>0.90` or `>70%` of dots are within 3 px of a registry raster.
+- Label performance only as HOLDOUT-DTI with evaluator, withheld-positive count, and 95% CI, or ORGANIZER-CONFIRMED only from an official submission-page receipt. Never present projections or owner claims as scores.
+- Current budget: at most three experiments and two hours; no experiment is authorized while the lane/registry gates remain unresolved. Do not select or use a contest slot. No manual raster-inspector dependency.
+- **Downloadable research TIFF ≠ approved upload.** The official DrivenData [problem page](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) and [NLR Official Rules](https://docs.nlr.gov/docs/fy26osti/96647.pdf) control live eligibility, deadlines, allowed data and portal instructions. Confirm those live terms before any future authorized upload; this review did not verify a live leaderboard or private submission page.
+
+### Reproduce local checks (not organizer acceptance)
 
 ```bash
 python -m venv .venv
 .venv/bin/pip install -e '.[research,test]' -c requirements-tdx1.txt
-.venv/bin/python scripts/restore_public_mirrors.py --include-extra
-.venv/bin/python scripts/prepare_data.py
-.venv/bin/python scripts/verify_prepared_cache.py --output docs/research/msdb-piedmont/cache-verification.json
-.venv/bin/python scripts/sync_priority_registry.py --output docs/research/msdb-piedmont/registry.json --restore-only
-# Inspect committed MSDB-1v2 artifact & recompute 2,000-draw paired spatial bootstrap (exits 0):
+.venv/bin/python scripts/restore_public_mirrors.py --ids sample_submission
 .venv/bin/python scripts/verify_current_run.py
-.venv/bin/python scripts/verify_stopped_attempt.py
+.venv/bin/python scripts/build_research_site.py
 .venv/bin/python scripts/build_research_site.py --check
 .venv/bin/python -m pytest -q
-# EXPECTED exit 2: valid research download, conservative weekly-slot gate active:
-.venv/bin/python scripts/verify_current_run.py --require-promote
 ```
 
-For lightweight CI inspection of the committed artifact without training arrays, restore **just** the small template:
-`python scripts/restore_public_mirrors.py --ids sample_submission`, then run
-`python scripts/verify_current_run.py`. Exit 0 verifies the research decision,
-**not submission approval**. CI repeats this inspection and checks generated Pages
-for staleness. There is no human-inspector override or competition uploader.
-
-The nine priority sites were audited through GitHub, including all published TIFFs
-at recorded snapshots. The new method passed the observed duplicate-stop tests,
-but incomplete parallel/original-surface coverage does not certify global novelty.
-The restricted physics model improves on its three-band ablation but loses to the
-stronger comparator. That does not establish a higher hidden-test score. The owner's
-H33 attribution remains unverified; projections are never organizer scores.
-
-Raw/core data were restored and prepared in this worktree, not distributed with
-Pages. Large rasters, arrays, models and intermediate outputs stay Git-ignored.
-Mirror hashes verify consistency, not organizer origin. Network access excludes
-DrivenData/USGS/GDR/NLR web hosts; no current leaderboard, portal limit or acceptance
-receipt was invented. GPU training is not needed for TDX-1; legacy UNet training,
-missing best-model checkpoints and hidden expert labels remain separate limitations.
-
-**Next session:** preserve the negative result; obtain programmatically shared lane/
-registry evidence; preregister matched zero-lag/phase-scrambled controls; only then
-consider adding this mechanism to the full feature stack. Reusing inspected folds
-with a new seed is not independent confirmation. See the review for prioritized
-next work and the three-pass verification record.
+The build regenerates the Pages entry points; the checks validate repository evidence and deterministic output only. They do not upload a file, spend a slot, confirm a score, or guarantee portal acceptance. Large rasters, arrays, models and intermediate data remain ignored/not distributed. Hash-checked owner mirrors establish mirror consistency, not organizer origin.
 
 ---
-
 > **Historical archive below.** Older status, score projections, zero-outside
 > “ready” copy and data-placement blockers are retained as history, not current
 > operating instructions. The current pointer, automated gates and TDX-1 report

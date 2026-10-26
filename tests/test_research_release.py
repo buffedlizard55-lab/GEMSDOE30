@@ -36,7 +36,7 @@ class Links(HTMLParser):
             self.downloads.append(attrs.get("href"))
 
 
-@pytest.mark.parametrize("relative", ["index.html", "executive-summary.html", "experiment-review.html", "priority-registry-review.html", "docs/index.html"])
+@pytest.mark.parametrize("relative", ["index.html", "executive-summary.html", "submission-process.html", "site-summaries.html", "experiment-review.html", "priority-registry-review.html", "docs/index.html"])
 def test_generated_pages_have_real_local_links_and_valid_html_anchors(relative):
     path = ROOT / relative
     page = Links(path.read_text())
@@ -68,6 +68,42 @@ def test_download_and_copy_controls_bind_to_the_current_negative_artifact(relati
         assert card["note"] in html
         assert {"submission-name", "submission-note", "copy-status"} <= parsed.ids
         assert len(card["note"]) <= 140
+
+
+def test_contest_process_page_separates_downloadability_from_upload_approval():
+    html = (ROOT / "submission-process.html").read_text()
+    assert "NOT APPROVED FOR CONTEST UPLOAD" in html
+    assert "Downloadable research TIFF ≠ approved contest upload" in html
+    assert "Do not upload this file" in html
+    assert "no contest slot has been selected or spent" in html.lower()
+    assert "drivendata.org/competitions/306/competition-doe-gems/page/967/" in html
+    assert "docs.nlr.gov/docs/fy26osti/96647.pdf" in html
+    assert "ORGANIZER-CONFIRMED" in html
+
+
+def test_nine_site_digest_labels_claims_and_does_not_invent_receipts():
+    summary = json.loads((ROOT / "docs/research/2026-10-26/site-score-summary.json").read_text())
+    html = (ROOT / "site-summaries.html").read_text()
+    expected = {
+        "GEMSDOE24": "0.2477", "GEMSDOE25": "0.2600", "GEMSDOE27": "0.2449",
+        "GEMSDOE28": "0.2710", "GEMSDOE30": "0.2600", "GEMSDOE31": "0.2708",
+        "GEMSDOE32": "0.2778", "GEMSDOE33": "0.2632", "GEMSDOE36": "0.2750",
+    }
+    assert {row["site"]: f"{row['highest']['score']:.4f}" for row in summary["sites"]} == expected
+    assert all(row["organizer_confirmed_score"] is None for row in summary["sites"])
+    assert summary["organizer_confirmed_scores"] == []
+    assert html.count("OWNER-REPORTED / UNVERIFIED") >= len(expected)
+    assert "None found." in html
+    for site, score in expected.items():
+        assert site in html and score in html
+
+
+def test_matched_emitter_difference_is_disclosed_but_not_a_promotion_gate():
+    for relative in ("index.html", "executive-summary.html", "experiment-review.html"):
+        html = (ROOT / relative).read_text()
+        assert "msdb_edge − msdb_poisson" in html
+        assert "inconclusive" in html.lower()
+        assert "not a promotion gate" in html.lower()
 
 
 def test_complete_current_prompt_and_every_reported_claim_remain_quarantined():

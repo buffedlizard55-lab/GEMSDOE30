@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "run_kind": "repository-review; no new experiment",
+  "created_utc": "2026-10-26",
+  "hypothesis": "No new hypothesis was executed in this review. The existing MSDB-1v2 candidate tests whether multi-scale geophysical discontinuities and shallow-cover piedmont ramps improve whole-segment spatial holdout recovery over core19; its matched msdb_edge versus msdb_poisson result is inconclusive.",
+  "mechanism": "Existing MSDB-1v2 mechanism: bounded-support steerable Hessian tubularity/saddle, structure-tensor coherence, true magnetic tilt, signed 2-D gravity-gradient concordance, basement-cover-ramp features, fold-local Rayleigh curvilinear gating, and Bayes-calibrated 300 m submodular coverage.",
+  "non_fault_mimic": "Volcanic lava-flow fronts, intrusive pluton contacts, paleoshoreline/playa benches, and lithologically contrasting adjacent bajada catchments.",
+  "holdout": {
+    "status": "reused existing canonical result; no new validation",
+    "label": "HOLDOUT-DTI",
+    "value": 0.1704616131030584,
+    "evaluator": "component-holdout-v3-blockstats-20261025",
+    "withheld_positive_count": 60988,
+    "ci95": [
+      0.15622652622271732,
+      0.18416757014609178
+    ],
+    "preregistered_core19_delta": {
+      "label": "HOLDOUT-DTI difference",
+      "value": 0.036833824363972034,
+      "ci95": [
+        0.022321931701094682,
+        0.05031469880668008
+      ]
+    },
+    "matched_msdb_poisson_delta": {
+      "label": "HOLDOUT-DTI difference",
+      "value": 0.0011353870174352354,
+      "ci95": [
+        -0.0021729500779855263,
+        0.004628178060411529
+      ],
+      "interpretation": "inconclusive; interval crosses zero; not evidence of equivalence"
+    },
+    "new_shortlist_candidates": "not run; no HOLDOUT-DTI result or CI exists for them"
+  },
+  "novelty": {
+    "preplacement_surface_check": {
+      "status": "existing, limited observed-registry result only",
+      "references_compared": 167,
+      "max_spearman": 0.1545037513302229,
+      "complete_parallel_registry": false,
+      "current_surface_available_for_recheck": false
+    },
+    "postplacement_public_dot_check": {
+      "status": "blocked-incomplete-evidence",
+      "references_compared": 204,
+      "max_full_footprint_spearman": 0.06337779887839463,
+      "max_candidate_dot_fraction_within_3px": 0.6477886141982309,
+      "correlation_threshold_exceeded": false,
+      "dot_overlap_threshold_exceeded": false,
+      "decision": "blocked-incomplete-evidence",
+      "complete_parallel_registry": false,
+      "preplacement": false
+    },
+    "note": "Observed public TIFF thresholds did not trigger in the post-placement check; this is not a pre-placement or global uniqueness certificate. No manual raster inspection was used."
+  },
+  "hash": {
+    "candidate_tiff_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+    "public_snapshot_sha256": "a40ef110173b05746473e399ed305b5767d2a5291bbbd0504cc9700fa8cf1e83",
+    "dot_registry_sha256": "1c62e485c9eaf9047938905ffda557d3d95fde2bef3c0b584ab1a42507dd0bf6",
+    "postplacement_dot_audit_sha256": "cf864c1e300beefac6dabb6ee331b8aae8376aae3831750dc9be99ae4442e97b"
+  },
+  "validator": {
+    "local_validation_status": "passed in existing receipt",
+    "local_validation_receipt": "docs/research/msdb-piedmont/validation.json",
+    "local_format_or_range_check_is_organizer_acceptance": false,
+    "organizer_acceptance_confirmed": false,
+    "submission_approved": false,
+    "slot_selected": false
+  },
+  "name": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a",
+  "note": "MSDB-1v2: 31-feat stationary discontinuity+piedmont ramp HGB x Rayleigh curv gate + Bayes 300m EDGE, 44090 off-cat dots",
+  "experiment_budget": {
+    "previous_experiments_run": 2,
+    "cap": 3,
+    "previous_experimental_elapsed_seconds": 571.07,
+    "this_review_experiments_run": 0
+  },
+  "verdict": "negative; no new candidate validated; no contest upload or slot selection",
+  "quality_checks": {
+    "pages_build": {
+      "command": ".venv/bin/python scripts/build_research_site.py",
+      "status": "passed"
+    },
+    "pages_determinism": {
+      "command": ".venv/bin/python scripts/build_research_site.py --check",
+      "status": "passed"
+    },
+    "test_suite": {
+      "command": ".venv/bin/python -m pytest -q",
+      "status": "passed",
+      "passed": 250,
+      "skipped": 5,
+      "warnings": 2
+    },
+    "current_run_validator": {
+      "command": ".venv/bin/python scripts/verify_current_run.py",
+      "status": "passed",
+      "research_verdict": "negative",
+      "gates_passed": 9,
+      "gates_unknown": 3,
+      "submission_approved": false,
+      "slot_selected": false
+    },
+    "stopped_attempt_validator": {
+      "command": ".venv/bin/python scripts/verify_stopped_attempt.py",
+      "status": "passed",
+      "verdict": "negative; duplicate attempt remains non-submittable"
+    },
+    "git_diff_check": {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  }
+}
