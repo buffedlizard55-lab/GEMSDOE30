@@ -4,7 +4,7 @@
   "candidate": "/home/user/GEMSDOE30/runs/msdb-piedmont/msdb1-surface.tif",
   "candidate_sha256": "1f98db36ed24950ebd1c4f1a9acec1fad26a2ab891212eac23611838eb2fab1f",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "registry_sha256": "df8d266bd605b70eb278cfb219f877da6f01b4904d82b0bd763dda2733ca1a18",
+  "registry_sha256": "f125ca2c9ffee3c241c8b4d5bc4d0663f49c8081665f8434d85f5b78b1b889f6",
   "registry_complete": false,
   "comparisons": [
     {
@@ -38,6 +38,26 @@
       "correlation_duplicate": false,
       "dot_duplicate": false,
       "undefined": false
+    },
+    {
+      "reference_path": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "reference_sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+      "site": "GEMSDOE30-nearslay-lane",
+      "stage": "surface",
+      "spearman_full_footprint": null,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "error": "Saved continuous pre-placement surface is not tracked in git; post-run byte re-audit applies to final dots only."
+    },
+    {
+      "reference_path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "reference_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "site": "GEMSDOE30-parallel-merged",
+      "stage": "surface",
+      "spearman_full_footprint": null,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "error": "Saved continuous pre-placement surface is not tracked in git; post-run byte re-audit applies to final dots only."
     }
   ],
   "errors": [],

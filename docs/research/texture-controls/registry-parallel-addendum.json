@@ -69,6 +69,21 @@
         3292
       ],
       "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/arena/54f26a63-gemsdoe30/docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif"
+    },
+    {
+      "site": "GEMSDOE30-parallel-merged",
+      "repo": "buffedlizard55-lab/GEMSDOE30",
+      "ref": "99f7788",
+      "source_path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "expected_bytes": 472074,
+      "sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "aligned": true,
+      "shape": [
+        3730,
+        3292
+      ],
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/arena/a2b527ff-gemsdoe30/docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif"
     }
   ]
 }

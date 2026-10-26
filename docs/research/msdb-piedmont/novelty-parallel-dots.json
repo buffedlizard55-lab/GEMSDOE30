@@ -4,7 +4,7 @@
   "candidate": "/home/user/GEMSDOE30/docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
   "candidate_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "registry_sha256": "df8d266bd605b70eb278cfb219f877da6f01b4904d82b0bd763dda2733ca1a18",
+  "registry_sha256": "f125ca2c9ffee3c241c8b4d5bc4d0663f49c8081665f8434d85f5b78b1b889f6",
   "registry_complete": false,
   "comparisons": [
     {
@@ -38,6 +38,24 @@
       "correlation_duplicate": false,
       "dot_duplicate": false,
       "undefined": false
+    },
+    {
+      "reference_path": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "reference_sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+      "site": "GEMSDOE30-nearslay-lane",
+      "stage": "dots",
+      "spearman_full_footprint": 0.0125968834388099,
+      "candidate_fraction_within_3px_of_reference": 0.4757995010206396,
+      "identical_inside_footprint": false
+    },
+    {
+      "reference_path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "reference_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "site": "GEMSDOE30-parallel-merged",
+      "stage": "dots",
+      "spearman_full_footprint": 0.020378167361996633,
+      "candidate_fraction_within_3px_of_reference": 0.4165343615332275,
+      "identical_inside_footprint": false
     }
   ],
   "errors": [],

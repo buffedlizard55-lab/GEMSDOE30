@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "signature": {
+    "transform_version": "phase-tilt-dip-asymmetry-v1-support17px-20261025",
+    "transform_code_sha256": "7356c400f0f461cbad6e4974c5e9125bf95fc0c8e377a7378778b14835228a7a",
+    "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+    "valid_mask_sha256": "aadc4079300653c5293dbe74c7f29b1fe04a1d0c58620d4e3d82ed3765348364"
+  },
+  "source_bands_1based": [
+    2,
+    3,
+    9,
+    13,
+    5,
+    11,
+    15,
+    17
+  ],
+  "sha256": {
+    "pta_mag_tilt": "87aa58b5cecc1edbbacd8f4537480a08078ffec0aeeb16ecc8e57508b7861efc",
+    "pta_mag_hd_tdr": "fd14628f35f37732a189538595b04e978f46929fa5c862534abe95af6e710d11",
+    "pta_mag_as3d_log": "f20a22f187485510cb4d97f91498f2b7be2c40078bebef1104c60bb41846f41b",
+    "pta_grav_tilt": "024f8ee8b4410f5021b8d388ffc2476527c4aa22d47cfa7ae41fea6257ab442f",
+    "pta_grav_hd_tdr": "95e42b573930680150991400008af05defd233b35289c16ae25b946946c2ea0c",
+    "pta_mg_phase_concord": "022fc172c25186a237db108b5cf6e23a4e07c1725e0437b4fdfb3e1e778e372e",
+    "pta_strike_persist": "195f2015a5191abfe516af0d42c3f2bc37de14b5fe30e108460febb4390c7017",
+    "pta_dip_grav_mig": "71c0f2b21bbe2b45183d36766cd42a235a05ff222215609fbbb482c51e85ba17",
+    "pta_dip_cover_step": "5fd8dcd960d992c1b31e2ab03b3359318b87936d0f33dc283b45c84d39100cad",
+    "pta_dip_cond_step": "96e984410850ac271d3058a7c879516fa2fe8ce83530281675a1066099d3430f",
+    "ctrl_naive_mag_tilt": "c26cc75124f803120dd7e7007cb4b08c37bc36958d50888f6219cf946a3377c6",
+    "ctrl_naive_mag_hd_tdr": "0cdb4d36e2683056a0129c58b1077308691f04574e5d9b55086936489c76dc50",
+    "ctrl_naive_mag_as3d_log": "d729294287dc57f30dc3d59e26e5c6613fcc3cfa791189d4420a83e4a8d9bd63",
+    "ctrl_naive_mg_concord": "4130f7272cfb16c96228d772b42f116294254763a3f7017454a19cc6c61d9e2a",
+    "ctrl_normal_blur": "edfce628fc69c498c793ac7b9c962b8109890a22de3ee63d35dbb60c3aeba185",
+    "ctrl_sym_grav_mig": "30f4da12d3f27a45e863cdbf62fa0e2b91ccf7f32182f8bd611458847c8a3482",
+    "ctrl_sym_cover_step": "e923e95ba257c783a902edaf880ef2bc17fbcf8360522922c956c8c18c608ad4",
+    "ctrl_sym_cond_step": "373d4791d108d9deb0ccee14303507fd25fc128c0ee95289e8d6f0e843e55736"
+  },
+  "support_px": 17,
+  "tight_analytic_support_px": 12,
+  "supported_pixels": 5069840,
+  "uses_catalogue_geometry": false,
+  "uses_registry_values": false,
+  "uses_template_values_as_features": false
+}

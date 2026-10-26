@@ -1,0 +1,14 @@
+{
+  "started_utc": "2026-10-26T00:02:40+00:00",
+  "preregistration_sha256": "10a6d800c4372bffd3741859e3bbb2ec3caa33b1e49333476fd3b3cdad70e824",
+  "experiment_spec": "pta1",
+  "experiment_count": 1,
+  "fixed_arms": [
+    "core19",
+    "sub8_raw",
+    "pta_naive_sym",
+    "pta1_cand"
+  ],
+  "script_sha256": "98a382dab830a697b2f4fa3f7e52451cd880f79f666dd22b76a3dcf6e065c78e",
+  "max_experimental_seconds": 5400
+}

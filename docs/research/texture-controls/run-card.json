@@ -173,13 +173,13 @@
     "timing": "Post-stop late-reference audit of saved states; no refit, replacement, new placement or original-registry rewrite",
     "combined_observed_registry": {
       "surface": {
-        "registry_entries_compared": 168,
+        "registry_entries_compared": 169,
         "max_spearman": 0.15657261436067785,
         "max_fraction_within_3px": null,
         "status": "unknown"
       },
       "dots": {
-        "registry_entries_compared": 168,
+        "registry_entries_compared": 169,
         "max_spearman": 0.06383254570926011,
         "max_fraction_within_3px": 0.790904967112724,
         "status": "failed"

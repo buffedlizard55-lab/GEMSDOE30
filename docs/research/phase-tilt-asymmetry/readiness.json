@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "readiness_version": "research-readiness-v3-matched-controls-20261025",
+  "raster_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+  "gates": [
+    {
+      "name": "file_contract",
+      "status": "passed",
+      "detail": "Reopened shared-writer GeoTIFF matches template; SHA-256 binds this decision to its exact bytes"
+    },
+    {
+      "name": "labelled_holdout_evidence",
+      "status": "passed",
+      "detail": "HOLDOUT-DTI requires evaluator/protocol, withheld positives and spatial-bootstrap 95% CI"
+    },
+    {
+      "name": "paired_improvement",
+      "status": "failed",
+      "detail": "Fixed PTA-1 candidate must improve all 3 comparators (core19, pta_naive_sym, sub8_raw) with positive paired CI lower bounds"
+    },
+    {
+      "name": "single_feature_leakage_canaries",
+      "status": "failed",
+      "detail": "All 37 raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC"
+    },
+    {
+      "name": "count_matched_construction",
+      "status": "passed",
+      "detail": "All fixed arms must realize the same predeclared active-domain budget in every fold"
+    },
+    {
+      "name": "surface_observed_registry",
+      "status": "passed",
+      "detail": "196 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+    },
+    {
+      "name": "dots_observed_registry",
+      "status": "passed",
+      "detail": "196 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+    },
+    {
+      "name": "complete_parallel_registry",
+      "status": "unknown",
+      "detail": "Nine-site public snapshots cannot attest all parallel rasters or missing original surfaces"
+    },
+    {
+      "name": "assigned_lane",
+      "status": "unknown",
+      "detail": "Autonomous research continuation is not an externally supplied lane assignment"
+    },
+    {
+      "name": "comparable_historical_best",
+      "status": "unknown",
+      "detail": "Do not substitute an archived metric or a new comparator for a missing historical-best rerun"
+    },
+    {
+      "name": "experimental_budget",
+      "status": "passed",
+      "detail": "At most three experiments / two experimental hours"
+    },
+    {
+      "name": "artifact_identity",
+      "status": "passed",
+      "detail": "Named artifact and note of at most 140 characters"
+    }
+  ],
+  "observed_registry": {
+    "surface": {
+      "registry_entries_compared": 196,
+      "max_spearman": 0.10547821858490214,
+      "max_fraction_within_3px": null,
+      "status": "passed"
+    },
+    "dots": {
+      "registry_entries_compared": 196,
+      "max_spearman": 0.03190577117988539,
+      "max_fraction_within_3px": 0.5459741437967793,
+      "status": "passed"
+    }
+  },
+  "download_ok": true,
+  "research_verdict": "negative",
+  "eligible_for_separate_slot_selector": false,
+  "submission_approved": false,
+  "slot_selected": false,
+  "display_status": "NOT APPROVED FOR SUBMISSION",
+  "organizer_score": null,
+  "organizer_acceptance_confirmed": false
+}
