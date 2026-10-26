@@ -1,0 +1,16 @@
+{
+  "rasters": [
+    {
+      "site": "GEMSDOE30",
+      "path": "docs/downloads/GEMSDOE30-blind-thermal-corridor-h1-annulus-20261026T202136Z.tif",
+      "source_path": "docs/downloads/GEMSDOE30-blind-thermal-corridor-h1-annulus-20261026T202136Z.tif",
+      "sha256": "20fc7b107e9e1a3a19e5e082d41720f0ce2204ad0ae8ca632b9884d16534af26",
+      "repo": "buffedlizard55-lab/GEMSDOE30",
+      "ref": "362cc7ba8151fc4759578fb921548177218667b5",
+      "scope": "Concurrent PR 50 merged at main 22168d2 after original freeze; preserved without retuning"
+    }
+  ],
+  "registry_complete": false,
+  "original_registry_sha256": "447f6062686215a20703cec5ace121a279e44619dd6f079438e1e34a7c8c386a",
+  "scope": "Technical integration byte audit only; not another scientific experiment or frozen chronological pre-placement coverage"
+}

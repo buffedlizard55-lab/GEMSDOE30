@@ -52,10 +52,10 @@ def require_new_snapshot_target(output: Path) -> Path:
     root = ROOT.resolve()
     if not target.is_relative_to(root):
         raise ValueError("snapshot output must remain inside the repository")
-    if target in frozen_registry_paths():
+    if target in frozen_registry_paths() or target.exists():
         names = ", ".join(str(path.relative_to(root)) for path in sorted(frozen_registry_paths()))
         raise ValueError(
-            "a fresh snapshot may not overwrite a frozen experiment registry "
+            "a fresh snapshot may not overwrite a frozen experiment registry or any existing snapshot "
             f"({names}); use --restore-only to verify it or choose a new --output"
         )
     return target

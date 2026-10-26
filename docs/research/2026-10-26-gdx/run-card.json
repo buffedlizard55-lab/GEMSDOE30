@@ -99,7 +99,14 @@
       "successful_comparisons_per_stage": 1,
       "chronology": "Post-run audit of the exact saved states; no refit; not part of frozen pre-placement coverage"
     },
-    "global_uniqueness": "unknown"
+    "global_uniqueness": "unknown",
+    "additional_postmerge_evidence": {
+      "registry": "docs/research/2026-10-26-gdx/registry-postmerge-addendum.json",
+      "surface": "docs/research/2026-10-26-gdx/novelty-postmerge-surface.json",
+      "dots": "docs/research/2026-10-26-gdx/novelty-postmerge-dots.json",
+      "successful_comparisons_per_stage": 1,
+      "chronology": "Exact saved-state audit during main integration, after the scientific run; no new experiment, refit or placement"
+    }
   },
   "raster_sha256": "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
   "surface_sha256": "80c1c5096958fbacd5addfb5afd3563417d544663e5d7c71a052fcc67e2980be",

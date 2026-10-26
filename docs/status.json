@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-26T20:57:07Z",
+  "generated_utc": "2026-10-26T21:05:25Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -77,6 +77,26 @@
     ]
   },
   "downloads": [
+    {
+      "manifest": "GEMSDOE30-blind-thermal-corridor-h1-annulus-20261026T202136Z.json",
+      "file": "docs/downloads/GEMSDOE30-blind-thermal-corridor-h1-annulus-20261026T202136Z.tif",
+      "present": true,
+      "sha256": "20fc7b107e9e1a3a19e5e082d41720f0ce2204ad0ae8ca632b9884d16534af26",
+      "sha256_matches_manifest": true,
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "legacy_manifest_claim_range_error_immunity": null,
+      "organizer_acceptance_confirmed": false,
+      "site_linked": null,
+      "submission_recommendation": false,
+      "run_name": "GEMSDOE30-blind-thermal-corridor-h1-annulus",
+      "note": "Blind thermal corridor off-cat: paleo-springs x 2m probes, SGMC 3-30px annulus, volcanics-excluded, 3px Poisson disk, 18766 dots",
+      "performance_status": "unscored; format validation is not a score"
+    },
     {
       "manifest": "GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.json",
       "file": "docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif",
@@ -757,7 +777,7 @@
       "verification_scope": "Current TIFF reopened; CIs recomputed; historical continuous-surface receipts verified, not reopened in CI",
       "saved_surface_reopened": true,
       "catalogue_bytes_reopened": true,
-      "local_additional_comparisons_per_stage": 1
+      "local_additional_comparisons_per_stage": 2
     },
     "history_preserved": true,
     "card": {
@@ -861,7 +881,14 @@
           "successful_comparisons_per_stage": 1,
           "chronology": "Post-run audit of the exact saved states; no refit; not part of frozen pre-placement coverage"
         },
-        "global_uniqueness": "unknown"
+        "global_uniqueness": "unknown",
+        "additional_postmerge_evidence": {
+          "registry": "docs/research/2026-10-26-gdx/registry-postmerge-addendum.json",
+          "surface": "docs/research/2026-10-26-gdx/novelty-postmerge-surface.json",
+          "dots": "docs/research/2026-10-26-gdx/novelty-postmerge-dots.json",
+          "successful_comparisons_per_stage": 1,
+          "chronology": "Exact saved-state audit during main integration, after the scientific run; no new experiment, refit or placement"
+        }
       },
       "raster_sha256": "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
       "surface_sha256": "80c1c5096958fbacd5addfb5afd3563417d544663e5d7c71a052fcc67e2980be",
@@ -1177,7 +1204,7 @@
       {
         "name": "current_published_inventory_coverage",
         "status": "unknown",
-        "detail": "3 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
+        "detail": "4 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
       }
     ],
     "observed_registry": {
@@ -1205,6 +1232,7 @@
     "archived_research_verdict": "negative",
     "unassessed_current_reference_sha256": [
       "0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564",
+      "20fc7b107e9e1a3a19e5e082d41720f0ce2204ad0ae8ca632b9884d16534af26",
       "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
       "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07"
     ],
@@ -1476,7 +1504,7 @@
         {
           "name": "current_published_inventory_coverage",
           "status": "unknown",
-          "detail": "3 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
+          "detail": "4 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
         }
       ],
       "observed_registry": {
@@ -1510,6 +1538,7 @@
       "archived_research_verdict": "negative",
       "unassessed_current_reference_sha256": [
         "0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564",
+        "20fc7b107e9e1a3a19e5e082d41720f0ce2204ad0ae8ca632b9884d16534af26",
         "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
         "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07"
       ],
@@ -1621,7 +1650,7 @@
         {
           "name": "current_published_inventory_coverage",
           "status": "unknown",
-          "detail": "3 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
+          "detail": "4 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
         }
       ]
     }
@@ -2638,7 +2667,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "334 tests collected in 0.78s",
+      "pytest_collect": "336 tests collected in 0.81s",
       "exit_code": 0
     },
     "score_gain_claimed": false

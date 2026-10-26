@@ -20,7 +20,7 @@ historical lane records, not fresh global uniqueness or upload approval.
 - **Observed novelty, NOT global clearance:** 327 valid frozen references per stage,
   maximum surface ρ .164702, final-dot ρ .091798, 3 px overlap 54.2459%; one malformed
   GEMSDOE31 reference remains UNKNOWN. One additional local FFL comparison per stage:
-  surface ρ .077351, dot overlap 44.5339%. No observed duplicate, but private/parallel
+  surface ρ .077351, dot overlap 44.5339%. Concurrent main H1 was checked separately during integration: surface ρ .011136, dot overlap 8.6596%. No observed duplicate, but private/parallel
   inventory and original surfaces are incomplete. Original attempt stopped; documented
   A1 allowed only exact-surface exploratory recovery, no retuning. Approval stays blocked.
 - **Machine verdict:** `negative`, `download_ok=true`, `ok_to_submit=false`,
@@ -65,6 +65,15 @@ The entire [owner prompt](#current-owner-prompt) remains below, unchanged; rerea
 - **Uniqueness (lane rule ≤0.90 rho / ≤70% dots within 3 px):** vs all 23 submission rasters in `docs/downloads/` max Spearman `0.018`, max 3 px overlap `60.6%` (next 39.2% vs G30-TAD; 17.2% vs the GEMSDOE25 0.2600 file; 17.2% vs d28; 19.8% vs PTA-1) — [audit](docs/research/geothermal-corridor/novelty-downloads-audit.json). Pinned-registry decision is honestly `blocked-incomplete-evidence` (registry incomplete; 3 scored files absent) — [receipt](docs/research/geothermal-corridor/novelty-dots.json). Best-submission files for GEMSDOE27/28/31/32/33/36 are not present locally, so no direct file comparison against those six is claimed.
 - **Why not submit:** HOLDOUT-DTI and leakage canaries require organizer `labels.tif`/`training_features.tif` behind the DrivenData login; they are absent in this checkout, so no holdout number exists for this lane. Per protocol, no holdout pass means no slot.
 - **Lane (distinct from every shipped lane):** distance-decay proximity pool of Quaternary volcanics + paleogeothermal springs + 2 m temperature probes (DOE GDR 1391 / USGS SGMC), gently boosted near SGMC structure, gated >2 px off mapped structure, 3 px Poisson-disk emission. Builder: `scripts/build_geothermal_corridor_submission.py`; [run card](docs/research/geothermal-corridor/run-card.json); science basis: [verified vents knowledge base](docs/research/geothermal-vents-knowledge.md).
+
+---
+
+## Archived parallel session 2026-10-26 — H1 blind-thermal-corridor: DUPLICATE-STOP · NEGATIVE · NOT OFFERED
+
+- **Built & validated:** `GEMSDOE30-blind-thermal-corridor-h1-annulus-20261026T202136Z.tif` (18,766 dots; 12/12 format checks passed; NaN outside; EPSG:32611; 3,730×3,292; 100 m; SHA-256 `20fc7b10…16534af26`; note 128/140 chars). Builder: `scripts/build_blind_thermal_corridor_submission.py`; ranked hypothesis H1 in `docs/research/blind-thermal-corridor/hypotheses.md`.
+- **Result:** **Protocol Rule 1 duplicate-stop** — 74.98% of H1 dots fall within 3 px of the edge-hybrid-80k registry raster (>70% limit), so the lane drifted into the EDGE-emitter belief-field zone. Logged as a **negative deliverable** at `docs/research/blind-thermal-corridor/run-card.json`; the raster was **not perturbed or re-encoded** and is **not offered as a unique submission**.
+- **Featured unique downloadable artifact remains** `GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif` (download_ok=true, format-validated, lane-clear at 60.6% ≤ 70% overlap, but **ok_to_submit=false** — holdout-gated; no organizer labels present).
+- **Executive summary rewritten:** `executive-summary.html` now carries the nine-site (GEMSDOE 24/25/27/28/30/31/32/33/36) file-to-download / owner-reported-score / uniqueness table, the submission how-to, and the GEMSDOE32 0.2778 mechanics. None of the nine scores is organizer-confirmed; none is OK to submit without a holdout pass.
 
 ---
 

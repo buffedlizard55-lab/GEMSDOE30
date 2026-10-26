@@ -63,7 +63,7 @@ or freshly authenticate unreachable official websites.
   surfaced instead of stale green. Both CI workflows restore pinned template +
   catalogue and verify GDX. Status format scan now covers research-directory
   TIFFs too; sidecar provenance is never overwritten.
-- Final local full suite: **329 passed, 5 skipped, 2 warnings, 7 subtests passed in 49.76s**. Five skips are optional PyTorch tests,
+- Pre-integration local full suite: **329 passed, 5 skipped, 2 warnings, 7 subtests passed in 49.76s**. Five skips are optional PyTorch tests,
   not failed geothermal checks. The two warnings are existing rasterio/Affine
   pending deprecations. Exact commands/return codes: `verification.json`.
 - Real Chromium 153 / Playwright 1.64.1: 1440×1100 desktop and 390×844 mobile;
@@ -85,3 +85,18 @@ path are achieved. No score/receipt/access/portal acceptance is fabricated.
 PR/check/merge outcome is reported by the actual GitHub PR receipt and final
 session response, not preclaimed in this pre-merge review. No competition upload
 or slot selection is part of merging repository improvements.
+
+### Pass 3 continuation — parallel main integration
+
+Main advanced during the session with PR 50's duplicate-stopped H1 lane. Preserved
+its builder, raster, hypothesis/stop receipts and README record without rerunning
+it. Resolved the overlapping executive summary by retaining the entire earlier
+guide in an explicitly archived page and keeping the newer measured GDX summary
+current. Added a separate H1 byte-audit addendum on the exact saved GDX surface /
+dots (surface rho .01113552, overlap 8.65956%), not another experiment. Original
+preregistration, frozen novelty receipts, FFL addendum and negative scientific
+results remain unchanged. Current coverage helper correctly blocks old lanes
+when this new published raster arrives. Post-integration checks are recorded in
+verification.json and the GitHub PR CI, not presumed from earlier tests.
+
+**Post-integration final local suite:** 331 passed, 5 skipped, 2 warnings, 7 subtests passed in 47.96s. All listed verifier/freshness/lineage/compile checks passed again; `--require-promote` returned expected exit 2. Shared snapshot writer now rejects all existing output paths before network access.

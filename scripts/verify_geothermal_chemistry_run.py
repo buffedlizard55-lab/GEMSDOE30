@@ -223,23 +223,35 @@ def verify(directory=REPORT, template=None):
             and all(c.get(k) is False for k in ("ok_to_submit", "slot_selected", "submission_approved"))
             and c.get("organizer_score") is None and c.get("leaderboard_estimate") is None,
             "negative decision/score class changed")
-    # A post-run byte audit adds the local FFL file without changing archived evidence.
-    extra = load(directory / "registry-local-addendum.json")
-    require(extra.get("original_registry_sha256") == c["registry_sha256"], "local registry addendum unbound")
-    for row in extra["rasters"]:
-        require(sha(ROOT / row["path"]) == row["sha256"], "local reference bytes changed")
-    for stage, digest in (("surface", c["surface_sha256"]), ("dots", c["raster_sha256"])):
-        extra_audit = load(directory / f"novelty-local-{stage}.json")
-        require(extra_audit.get("registry_sha256") == sha(directory / "registry-local-addendum.json")
-                and extra_audit.get("template_sha256") == sha(template), "local novelty registry/template binding mismatch")
-        validate_audit(extra_audit, extra, digest, stage, allow_invalid=False)
-    known = {row["sha256"] for row in registry["rasters"] + extra["rasters"]} | {c["raster_sha256"]}
+    # Post-run exact-state audits preserve both early FFL evidence and concurrent
+    # main's H1 artifact, without changing any frozen receipt or scientific fit.
+    known = {row["sha256"] for row in registry["rasters"]} | {c["raster_sha256"]}
+    additional_count = 0
+    for stem in ("local", "postmerge"):
+        extra_path = directory / f"registry-{stem}-addendum.json"
+        extra = load(extra_path)
+        require(extra.get("original_registry_sha256") == c["registry_sha256"], "local registry addendum unbound")
+        metadata = c["registry"][f"additional_{stem}_evidence"]
+        require(metadata.get("successful_comparisons_per_stage") == len(extra["rasters"])
+                and metadata.get("registry") == str(extra_path.relative_to(ROOT)), "run-card additional coverage mismatch")
+        for row in extra["rasters"]:
+            require(sha(ROOT / row["path"]) == row["sha256"], "local reference bytes changed")
+        for stage, digest in (("surface", c["surface_sha256"]), ("dots", c["raster_sha256"])):
+            audit_path = directory / f"novelty-{stem}-{stage}.json"
+            extra_audit = load(audit_path)
+            require(extra_audit.get("registry_sha256") == sha(extra_path)
+                    and extra_audit.get("template_sha256") == sha(template)
+                    and metadata.get(stage) == str(audit_path.relative_to(ROOT)), "local novelty registry/template binding mismatch")
+            validate_audit(extra_audit, extra, digest, stage, allow_invalid=False)
+        known.update(row["sha256"] for row in extra["rasters"])
+        additional_count += len(extra["rasters"])
+    require(c["registry"].get("global_uniqueness") == "unknown", "global uniqueness cannot be upgraded")
     current = {sha(p) for p in (ROOT / "docs").rglob("*") if p.is_file() and p.suffix.lower() in (".tif", ".tiff")}
     ready = with_current_inventory(ready, recorded_hashes=known, current_hashes=current)
     ready["verification_scope"] = "Current TIFF reopened; CIs recomputed; historical continuous-surface receipts verified, not reopened in CI"
     ready["saved_surface_reopened"] = saved_surface.is_file()
     ready["catalogue_bytes_reopened"] = True
-    ready["local_additional_comparisons_per_stage"] = len(extra["rasters"])
+    ready["local_additional_comparisons_per_stage"] = additional_count
     return ready
 
 

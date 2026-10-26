@@ -96,8 +96,11 @@ label-based full fit, not an OOF/organizer performance measurement.
 | Final 44,090 dots | 327 | 0.0917976630 | 54.24586074% |
 | Additional local FFL surface | 1 | 0.0773506624 | Not applicable |
 | Additional local FFL dots | 1 | 0.0202637870 | 44.53390792% |
+| Concurrent main H1 surface | 1 | 0.0111355200 | Not applicable |
+| Concurrent main H1 dots | 1 | 0.0059071293 | 8.65955999% |
 
-No observed duplicate crosses rho >.90 or overlap >70%. **This is not a global
+Overall, 329 successful comparisons plus the one malformed reference are recorded
+across the frozen registry and two distinct addenda. No observed duplicate crosses rho >.90 or overlap >70%. **This is not a global
 uniqueness pass.** The frozen 328-reference registry contains one pinned malformed
 GEMSDOE31 source: SHA
 `774c7c5aa3784d7c52dc67870e1cc8b0e0a34d1697092ad9f3b08c33dcaf2546`,
@@ -204,3 +207,22 @@ GDX, FFL or H-NEARSPLAY by geometry perturbation or relabeling old predictions.
 
 The three cumulative review passes, actual commands and final delivery status are
 recorded in [three-pass-review.md](three-pass-review.md).
+
+## Concurrent-main integration (not a fourth experiment)
+
+PR 50 merged at main `22168d298277a05748d26062efea2045eddb1f1c`
+while this run was active. Its H1 blind-thermal raster (SHA
+`20fc7b107e9e1a3a19e5e082d41720f0ce2204ad0ae8ca632b9884d16534af26`)
+and negative record are preserved unchanged. Its own 74.98% duplicate stop remains
+final; no H1 holdout or reassessment of that method is manufactured. Statements
+about missing data in that archived session are not current global data status.
+The previous executive summary is preserved as
+[parallel-corridor-history.html](../../../parallel-corridor-history.html), with
+an archive warning; the latest summary uses GDX's measured evidence.
+
+The same saved GDX surface and final dots were compared to H1 after integration:
+surface rho .01113552; final rho .00590713, overlap 8.65956%. No fitting, new dots,
+seed change, tuning or additional holdout occurred. The original registry and
+FFL addendum stay byte-unchanged. The new independently hash-bound postmerge
+addendum is named explicitly, never called frozen pre-placement coverage. All
+original GDX science/CI/budget/negative decisions remain unchanged.

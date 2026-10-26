@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "stage": "dots",
+  "candidate": "/home/user/GEMSDOE30/docs/research/2026-10-26-gdx/gems30-GDX1-44090-20261026-2992ee3619f5.tif",
+  "candidate_sha256": "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "registry_sha256": "c6b2558327b7948a47b941ac43e3ac7ca4ff48b417912149cc0680c61ea31737",
+  "registry_complete": false,
+  "comparisons": [
+    {
+      "reference": "docs/downloads/GEMSDOE30-blind-thermal-corridor-h1-annulus-20261026T202136Z.tif",
+      "site": "GEMSDOE30",
+      "reference_sha256": "20fc7b107e9e1a3a19e5e082d41720f0ce2204ad0ae8ca632b9884d16534af26",
+      "reference_values_sha256": "2f2e209e064793c82326440f1cdf277719bed40d9345a34e4590461adcd3e1e6",
+      "stage": "dots",
+      "spearman_full_footprint": 0.005907129318446839,
+      "candidate_dots": 44090,
+      "candidate_positive_support": 44090,
+      "reference_dots": 18766,
+      "candidate_fraction_within_3px_of_reference": 0.08659559990927648,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    }
+  ],
+  "errors": [],
+  "decision": "blocked-incomplete-evidence",
+  "submission_approved": false
+}

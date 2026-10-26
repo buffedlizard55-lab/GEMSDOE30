@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "stage": "surface",
+  "candidate": "/home/user/GEMSDOE30/outputs/geothermal-chemistry/gdx1-surface.tif",
+  "candidate_sha256": "80c1c5096958fbacd5addfb5afd3563417d544663e5d7c71a052fcc67e2980be",
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "registry_sha256": "c6b2558327b7948a47b941ac43e3ac7ca4ff48b417912149cc0680c61ea31737",
+  "registry_complete": false,
+  "comparisons": [
+    {
+      "reference": "docs/downloads/GEMSDOE30-blind-thermal-corridor-h1-annulus-20261026T202136Z.tif",
+      "site": "GEMSDOE30",
+      "reference_sha256": "20fc7b107e9e1a3a19e5e082d41720f0ce2204ad0ae8ca632b9884d16534af26",
+      "reference_values_sha256": "2f2e209e064793c82326440f1cdf277719bed40d9345a34e4590461adcd3e1e6",
+      "stage": "surface",
+      "spearman_full_footprint": 0.011135519979764764,
+      "candidate_dots": null,
+      "candidate_positive_support": 5167373,
+      "reference_dots": 18766,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    }
+  ],
+  "errors": [],
+  "decision": "blocked-incomplete-evidence",
+  "submission_approved": false
+}

@@ -36,7 +36,7 @@ def test_real_gdx_bytes_ci_receipts_and_negative_cli_are_immutable():
     assert ready["research_verdict"] == "negative" and ready["download_ok"]
     assert not ready["eligible_for_separate_slot_selector"]
     assert ready["catalogue_bytes_reopened"] is True
-    assert ready["local_additional_comparisons_per_stage"] == 1
+    assert ready["local_additional_comparisons_per_stage"] == 2
     assert ready["observed_registry"]["surface"]["status"] == "unknown"
     assert ready["observed_registry"]["dots"]["registry_entries_compared"] == 327
     assert {p.name: p.read_bytes() for p in REPORT.glob("*.json")} == before
@@ -58,10 +58,11 @@ def isolated(tmp_path, monkeypatch):
         dest = tmp_path / name
         dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy(ROOT / name, dest)
-    for row in load(REPORT / "registry-local-addendum.json")["rasters"]:
-        dest = tmp_path / row["path"]
-        dest.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy(ROOT / row["path"], dest)
+    for stem in ("local", "postmerge"):
+        for row in load(REPORT / f"registry-{stem}-addendum.json")["rasters"]:
+            dest = tmp_path / row["path"]
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy(ROOT / row["path"], dest)
     monkeypatch.setattr(v, "ROOT", tmp_path)
     return v, directory, tmp_path
 
@@ -132,7 +133,7 @@ class Links(HTMLParser):
 
 
 @pytest.mark.parametrize("name", ["index.html", "executive-summary.html", "geothermal-chemistry-review.html",
-                                  "priority-executive-summary.html", "research-history.html"]
+                                  "priority-executive-summary.html", "research-history.html", "parallel-corridor-history.html"]
                          + [f"priority-GEMSDOE{s}.html" for s in (24, 25, 27, 28, 30, 31, 32, 33, 36)])
 def test_all_current_pages_have_real_links_unique_ids_and_clear_scope(name):
     path = ROOT / name
