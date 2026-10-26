@@ -434,7 +434,7 @@ def build(template: Path) -> dict[Path, str | bytes]:
         ROOT / "docs/geothermal-tilt-alteration-review.html": redirect_html("../geothermal-tilt-alteration-review.html", "G30-TAD & PhD H33 analysis · GEMSDOE30"),
     }
     # Historical dashboards remain auditable, but never lead the current UI.
-    archive_notice = '<section class="stop-notice"><h2>Historical archive — not the current recommendation</h2><p>Contains superseded claims and assumptions, not fresh leaderboard / global uniqueness clearance. <a href="executive-summary.html">Read the current CSR-1 decision</a>; no archived file is slot-approved.</p></section>'
+    archive_notice = '<section class="stop-notice"><h2>Historical archive — not the current recommendation</h2><p>Contains superseded claims and assumptions, not fresh leaderboard / global uniqueness clearance. <a href="executive-summary.html">Read the current decision</a>; no archived file is slot-approved.</p></section>'
     result[ROOT / "research-history.html"] = result[ROOT / "executive-summary.html"].replace('<main id="main">', '<main id="main">' + archive_notice, 1)
     for historical in ("experiment-review.html", "geothermal-tilt-alteration-review.html"):
         result[ROOT / historical] = result[ROOT / historical].replace('<main id="main">', '<main id="main">' + archive_notice, 1)
@@ -442,16 +442,26 @@ def build(template: Path) -> dict[Path, str | bytes]:
     from scripts.render_gdx_review import pages as gdx_pages
     gdx_rendered = gdx_pages(verify_gdx(template=template))
     result[ROOT / "geothermal-chemistry-review.html"] = gdx_rendered["geothermal-chemistry-review.html"]
-    from scripts.verify_csr_run import verify as verify_csr
-    from scripts.render_csr_review import pages as csr_pages
+    from scripts.verify_quadrature_phase_run import verify as verify_qpc
+    from scripts.render_quadrature_review import pages as qpc_pages
+    qpc_rendered = qpc_pages(verify_qpc(template=template))
+    result[ROOT / "geothermal-quadrature-review.html"] = qpc_rendered["geothermal-quadrature-review.html"]
+
     review = selection.get("latest_review", {})
-    if review.get("run_card") != "docs/research/2026-10-26-csr/run-card.json" or review.get("verifier") != "scripts/verify_csr_run.py":
-        raise ValueError("latest-review pointer does not select the verified CSR-1 report")
-    csr_card = json.loads((ROOT / review["run_card"]).read_text())
-    result[ROOT / "docs/assets/csr1-support.png"] = png_preview(template, local_path(csr_card["published_tiff"]))
-    result[ROOT / "docs/csr-discontinuity-review.html"] = redirect_html("../csr-discontinuity-review.html", "CSR-1 PhD scientific review · GEMSDOE30")
-    result[ROOT / "docs/priority-executive-summary.html"] = redirect_html("../priority-executive-summary.html", "Nine-site executive summary · GEMSDOE30")
-    result.update({ROOT / name: content for name, content in csr_pages(verify_csr(template=template)).items()})
+    if review.get("run_card") == "docs/research/2026-10-26-csr/run-card.json" and review.get("verifier") == "scripts/verify_csr_run.py":
+        from scripts.verify_csr_run import verify as verify_csr
+        from scripts.render_csr_review import pages as csr_pages
+        csr_card = json.loads((ROOT / review["run_card"]).read_text())
+        result[ROOT / "docs/assets/csr1-support.png"] = png_preview(template, local_path(csr_card["published_tiff"]))
+        result[ROOT / "docs/csr-discontinuity-review.html"] = redirect_html("../csr-discontinuity-review.html", "CSR-1 PhD scientific review · GEMSDOE30")
+        result[ROOT / "docs/priority-executive-summary.html"] = redirect_html("../priority-executive-summary.html", "Nine-site executive summary · GEMSDOE30")
+        result.update({ROOT / name: content for name, content in csr_pages(verify_csr(template=template)).items()})
+    elif review.get("run_card") == "docs/research/2026-10-26-qpc/run-card.json" and review.get("verifier") == "scripts/verify_quadrature_phase_run.py":
+        result.update({ROOT / name: content for name, content in qpc_rendered.items()})
+    elif review.get("run_card") == "docs/research/2026-10-26-gdx/run-card.json" and review.get("verifier") == "scripts/verify_geothermal_chemistry_run.py":
+        result.update({ROOT / name: content for name, content in gdx_rendered.items()})
+    else:
+        raise ValueError("latest-review pointer does not select a supported independently verified report")
     return result
 
 
@@ -469,7 +479,7 @@ def main() -> None:
         else:
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(data)
-    print("Site receipts, download link, and deterministic generated pages verified" if args.check else "Built receipt-driven GDX-1 Pages and preserved historical dashboards")
+    print("Site receipts, download link, and deterministic generated pages verified" if args.check else "Built receipt-driven research Pages and preserved historical dashboards")
 
 
 if __name__ == "__main__":

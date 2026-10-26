@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "observed_utc": "2026-10-26T22:19:51+00:00",
+  "scope": "Post-stop read-only GitHub PR inventory; not a new fit, paired analysis, novelty comparison, or slot selection.",
+  "pull_request": 41,
+  "pull_request_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/pull/41",
+  "head_commit": "2c5ea4838f046bb5b9d9263b5f995ce15d626a23",
+  "source_card_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/2c5ea4838f046bb5b9d9263b5f995ce15d626a23/docs/research/ms-cape/run-card.json",
+  "source_results_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/2c5ea4838f046bb5b9d9263b5f995ce15d626a23/docs/research/ms-cape/results.json",
+  "source_card_sha256": "9c69e9a9073d23f365632f57bed82810f8c05567b3f128fa449d359b86920ed2",
+  "source_results_sha256": "6aa89c44688f01251b70542309ec0f3585c0b85a5930c0757bc912f1cc90cd50",
+  "reported_not_independently_reproduced": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.18668699809528588,
+    "ci95": [
+      0.1733255507195668,
+      0.20031681744489188
+    ],
+    "withheld_positives": 60988,
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025"
+  },
+  "reported_dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+  "qpc_guard_px": [
+    17
+  ],
+  "pr41_guard_px": [
+    20
+  ],
+  "same_hidden_component_ids_by_fold": true,
+  "same_score_pixel_counts_and_dot_budgets_by_fold": true,
+  "same_block_indices_truth_and_scored_counts": true,
+  "same_visible_labels_and_train_masks": false,
+  "novelty_comparison_to_qpc": "not performed; PR branch TIFFs were outside the frozen main-based registry and QPC was already duplicate-stopped",
+  "submission_approval": false,
+  "limitations": "The PR reports a higher conditional proxy with a 20-pixel guard, different visible/training sets and a separate system. Aggregate block/count parity does not prove pixel-identical masks or a paired win; no comparative bootstrap or independent verification was performed. Its historical promote label and registry-complete claim are not adopted."
+}

@@ -345,20 +345,27 @@ def main() -> int:
     # its receipts without pretending unavailable private bytes were reopened.
     additional_attempts = []
     for extra in selection.get("additional_stopped_attempts", []):
-        row = {"lane": extra.get("lane"), "pointer": extra.get("pointer"), "verifier": extra.get("verifier")}
+        row = {"lane": extra.get("lane"), "pointer": extra.get("pointer") or extra.get("run_card"), "verifier": extra.get("verifier")}
         try:
             if str(ROOT) not in sys.path:
                 sys.path.insert(0, str(ROOT))
-            from scripts.verify_lsm_run import verify as verify_lsm
-            ready = verify_lsm(ROOT / extra["pointer"], data_dir / "sample_submission.tif")
-            row.update({"verified_now": True, "error": None, "decision": ready["decision"],
-                        "ok_to_submit": ready["ok_to_submit"], "research_verdict": ready["research_verdict"],
-                        "gates": ready["gates"]})
+            if extra.get("verifier") == "scripts/verify_quadrature_phase_run.py":
+                from scripts.verify_quadrature_phase_run import verify as verify_qpc
+                ready = verify_qpc(template=data_dir / "sample_submission.tif")
+                row.update({"verified_now": True, "error": None, "decision": ready.get("reason", "duplicate-stop"),
+                            "ok_to_submit": False, "research_verdict": ready["research_verdict"],
+                            "gates": ready.get("gates", [])})
+            else:
+                from scripts.verify_lsm_run import verify as verify_lsm
+                ready = verify_lsm(ROOT / extra["pointer"], data_dir / "sample_submission.tif")
+                row.update({"verified_now": True, "error": None, "decision": ready["decision"],
+                            "ok_to_submit": ready["ok_to_submit"], "research_verdict": ready["research_verdict"],
+                            "gates": ready["gates"]})
         except Exception as exc:  # record missing access, never a stale green receipt
             row.update({"verified_now": False, "error": str(exc), "ok_to_submit": False})
         additional_attempts.append(row)
         gates[f"stopped_attempt_{str(extra.get('lane')).lower()}"] = {
-            "evidence": extra.get("pointer"), "promoted": False,
+            "evidence": extra.get("pointer") or extra.get("run_card"), "promoted": False,
             "decision": row.get("decision", "blocked: inspection unavailable")}
     additional_verified_lanes = []
     for extra in selection.get("additional_verified_lanes", []):
@@ -412,29 +419,23 @@ def main() -> int:
         latest_review = {**ref, "card": load_json(ROOT / ref["run_card"]), "verified_now": False,
                          "error": None, "decision": None, "ok_to_submit": False}
         try:
-            if ref.get("verifier") == "scripts/verify_csr_run.py":
+            verifier = ref.get("verifier")
+            if verifier == "scripts/verify_csr_run.py":
                 from scripts.verify_csr_run import verify as verify_latest
-            else:
+            elif verifier == "scripts/verify_geothermal_chemistry_run.py":
                 from scripts.verify_geothermal_chemistry_run import verify as verify_latest
+            elif verifier == "scripts/verify_quadrature_phase_run.py":
+                from scripts.verify_quadrature_phase_run import verify as verify_latest
+            else:
+                raise ValueError(f"unsupported latest-review verifier: {verifier}")
             decision = verify_latest(template=data_dir / "sample_submission.tif")
             latest_review.update(verified_now=True, decision=decision, ok_to_submit=bool(decision.get("ok_to_submit", False)))
         except Exception as exc:
             latest_review["error"] = str(exc)
-        gates["latest_csr_scientific_review"] = {
+        gates["latest_scientific_review"] = {
             "evidence": ref["run_card"], "promoted": False,
-            "decision": decision["display_status"] if latest_review["verified_now"] else "blocked: newest review inspection unavailable"}
-    try:
-        from scripts.verify_geothermal_chemistry_run import verify as verify_gdx
-        gdx_decision = verify_gdx(template=data_dir / "sample_submission.tif")
-        gates["archived_gdx_scientific_review"] = {
-            "evidence": "docs/research/2026-10-26-gdx/run-card.json", "promoted": False,
-            "decision": gdx_decision["display_status"],
-        }
-    except Exception as exc:
-        gates["archived_gdx_scientific_review"] = {
-            "evidence": "docs/research/2026-10-26-gdx/run-card.json", "promoted": False,
-            "decision": f"blocked: {exc}",
-        }
+            "decision": (decision.get("display_status") or "NOT APPROVED FOR SUBMISSION")
+                        if latest_review["verified_now"] else "blocked: newest review inspection unavailable"}
     promoted = [name for name, gate in gates.items() if gate.get("promoted")]
     peer_reports = []
     for name, filename in (("G30-S19 habitat + EDGE", "lane-g30s19-run-card.json"),

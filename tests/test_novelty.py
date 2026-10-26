@@ -50,6 +50,19 @@ def test_rescaling_has_identical_rank():
     assert row['correlation_duplicate']
 
 
+@pytest.mark.parametrize('positive_fraction', [.001, .1, .5, .999])
+def test_binary_rank_fast_path_matches_full_average_tie_spearman(positive_fraction):
+    from scipy.stats import spearmanr
+    from gemsdoe30.novelty import rank_cache
+    rng = np.random.default_rng(232)
+    a = rng.integers(0, 8, size=(80, 100)).astype(float)  # candidate ties too
+    b = (rng.random(a.shape) < positive_fraction).astype(float)
+    mask = rng.random(a.shape) > .1
+    row = compare(a, b, mask, stage='surface', cached_ranks=rank_cache(a, mask))
+    assert row['spearman_full_footprint'] == pytest.approx(
+        spearmanr(a[mask], b[mask]).statistic, abs=1e-12)
+
+
 def test_cli_checks_grid_and_pins(tmp_path):
     import json
     import rasterio

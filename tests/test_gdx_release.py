@@ -133,7 +133,7 @@ class Links(HTMLParser):
 
 
 @pytest.mark.parametrize("name", ["index.html", "executive-summary.html", "geothermal-chemistry-review.html",
-                                  "priority-executive-summary.html", "research-history.html", "parallel-corridor-history.html"]
+                                  "geothermal-quadrature-review.html", "priority-executive-summary.html", "research-history.html", "parallel-corridor-history.html"]
                          + [f"priority-GEMSDOE{s}.html" for s in (24, 25, 27, 28, 30, 31, 32, 33, 36)])
 def test_all_current_pages_have_real_links_unique_ids_and_clear_scope(name):
     path = ROOT / name
@@ -147,11 +147,14 @@ def test_all_current_pages_have_real_links_unique_ids_and_clear_scope(name):
         assert target.is_relative_to(ROOT) and target.is_file(), url
         if parts.fragment and target.suffix == ".html":
             assert unquote(parts.fragment) in Links(target.read_text()).ids, url
-    if name == "geothermal-chemistry-review.html":
-        assert parsed.downloads == [load(REPORT / "run-card.json")["published_tiff"]]
+    if name in {"geothermal-chemistry-review.html", "geothermal-quadrature-review.html"}:
+        previous = load(REPORT / "run-card.json")["published_tiff"]
+        assert parsed.downloads == [previous]
         assert text.count("NOT APPROVED FOR SUBMISSION") == 1
         assert "HOLDOUT-DTI" in text and "60,988" in text
     elif name in {"index.html", "executive-summary.html"}:
+        csr = load(ROOT / "docs/research/2026-10-26-csr/run-card.json")["published_tiff"]
+        assert parsed.downloads == [csr]
         assert text.count("NOT APPROVED FOR SUBMISSION") == 1
         assert "HOLDOUT-DTI" in text and "60,988" in text
     elif name.startswith("priority-"):

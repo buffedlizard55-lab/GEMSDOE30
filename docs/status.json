@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-26T23:15:25Z",
+  "generated_utc": "2026-10-26T23:24:18Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -625,6 +625,12 @@
         "pointer": "docs/research/2026-10-25-lsm/current-run.json",
         "verifier": "scripts/verify_lsm_run.py",
         "decision": "DO NOT SUBMIT (duplicate-stop; holdout gate passed; no TIFF published)"
+      },
+      {
+        "lane": "QPC-1",
+        "run_card": "docs/research/2026-10-26-qpc/run-card.json",
+        "verifier": "scripts/verify_quadrature_phase_run.py",
+        "decision": "DO NOT SUBMIT (duplicate-stop at 78.915854% dot overlap; paired-CI gates failed; no QPC TIFF published)"
       }
     ],
     "additional_verified_lanes": [
@@ -677,6 +683,12 @@
         "decision": "ARCHIVED record, not current approval: DUPLICATE ON EXPANDED REGISTRY (71.26% > 70% within 3 px on four GEMSDOE25 rasters, fulfilling IR-30-078 post-run check); DO NOT SUBMIT; retained for provenance only"
       }
     ],
+    "previous_review": {
+      "lane": "QPC-1",
+      "run_card": "docs/research/2026-10-26-qpc/run-card.json",
+      "verifier": "scripts/verify_quadrature_phase_run.py",
+      "decision": "NEGATIVE / DO NOT SUBMIT: duplicate-stop at 78.915854% dot overlap; paired-CI gates failed; no QPC TIFF published or slot selected"
+    },
     "latest_review": {
       "lane": "CSR-1",
       "run_card": "docs/research/2026-10-26-csr/run-card.json",
@@ -1837,6 +1849,17 @@
           "detail": "No TIFF published: the protocol stops at a dot-stage duplicate before writing"
         }
       ]
+    },
+    {
+      "lane": "QPC-1",
+      "pointer": "docs/research/2026-10-26-qpc/run-card.json",
+      "verifier": "scripts/verify_quadrature_phase_run.py",
+      "verified_now": true,
+      "error": null,
+      "decision": "duplicate-stop at dots; no perturbation or publication",
+      "ok_to_submit": false,
+      "research_verdict": "negative",
+      "gates": []
     }
   ],
   "additional_verified_lanes": [
@@ -2665,6 +2688,11 @@
       "promoted": false,
       "decision": "DO NOT SUBMIT"
     },
+    "stopped_attempt_qpc-1": {
+      "evidence": "docs/research/2026-10-26-qpc/run-card.json",
+      "promoted": false,
+      "decision": "duplicate-stop at dots; no perturbation or publication"
+    },
     "verified_lane_g30_tad": {
       "evidence": "docs/research/tilt-alteration-discontinuity/current-run.json",
       "promoted": false,
@@ -2675,15 +2703,10 @@
       "promoted": false,
       "decision": "duplicate-stop; no public TIFF"
     },
-    "latest_csr_scientific_review": {
+    "latest_scientific_review": {
       "evidence": "docs/research/2026-10-26-csr/run-card.json",
       "promoted": false,
       "decision": "NOT APPROVED FOR SUBMISSION"
-    },
-    "archived_gdx_scientific_review": {
-      "evidence": "docs/research/2026-10-26-gdx/run-card.json",
-      "promoted": false,
-      "decision": "DOWNLOAD IS RESEARCH ONLY; CURRENT NOVELTY COVERAGE UNKNOWN; DO NOT SUBMIT"
     }
   },
   "any_candidate_promoted": false,
@@ -2914,7 +2937,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "367 tests collected in 0.85s",
+      "pytest_collect": "396 tests collected in 1.09s",
       "exit_code": 0
     },
     "score_gain_claimed": false

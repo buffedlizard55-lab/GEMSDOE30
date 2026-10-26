@@ -58,11 +58,30 @@ def archive_note():
     return '''<section class="section"><h2>Earlier artifacts are not fallback submissions.</h2><p>The archived G30-TAD 51.44% overlap finding covered a frozen 193-reference snapshot, not today’s full parallel inventory. PTA-1, geothermal-corridor, FFL-1 and H-NEARSPLAY also have unresolved or negative gates. Current additive coverage is checked separately from historical evidence; no historical pass is silently inherited.</p><p>The parallel H1 blind-thermal corridor is also negative: its own recorded 74.98% overlap triggered a duplicate stop; no H1 holdout is recorded. Its later arrival is preserved, not rerun or offered here as a submission.</p><p><a href="parallel-corridor-history.html">Archived parallel PR 50 guide</a> · <a href="docs/research/blind-thermal-corridor/run-card.json">H1 negative run card</a> · <a href="research-history.html">Archived executive summary and research downloads</a> · <a href="geothermal-tilt-alteration-review.html">G30-TAD review</a> · <a href="experiment-review.html">Stopped-attempt evidence</a> · <a href="receipt-integrity-review.html">FFL receipt audit</a></p></section>'''
 
 
+def priority_relationship(row, pairs):
+    site = row["site"]
+    aliases = row["exact_value_alias_sites"]
+    outgoing = [p for p in pairs if p["candidate_site"] == site and p["dot_duplicate"]]
+    incoming = [p for p in pairs if p["reference_site"] == site and p["dot_duplicate"]]
+    if aliases:
+        return f"Same footprint values as {', '.join(aliases)}"
+    if outgoing:
+        p = max(outgoing, key=lambda x: x["candidate_fraction_within_3px_of_reference"])
+        return f"Related: {100*p['candidate_fraction_within_3px_of_reference']:.1f}% of its dots near {p['reference_site']}"
+    if incoming:
+        p = max(incoming, key=lambda x: x["candidate_fraction_within_3px_of_reference"])
+        return f"Related: {100*p['candidate_fraction_within_3px_of_reference']:.1f}% of {p['candidate_site']} dots near it"
+    return "No pairwise dot duplicate found; full uniqueness unknown"
+
+
 def priority_table(fleet):
     rows = []
+    pairs = fleet["pairwise_diagnostics"]
     for r in fleet["rows"]:
-        rows.append(f'''<tr><th scope="row"><a href="priority-{r['site']}.html">{r['site']}</a></th><td>{r['quoted_owner_claim']}<br><small>owner-reported, unverified</small></td><td><a href="{e(r['source_url'])}?raw=true"><code>{e(r['historical_file'])}</code></a></td><td>{r['dots']:,}</td><td>No new submission; no forecast</td></tr>''')
-    return f'''<div class="table-wrap"><table><caption>Nine priority repositories · historical files named in the prompt · not a live ranking</caption><thead><tr><th>Repository review</th><th>Historical claim (NOT verified score)</th><th>Exact historical filename / source bytes</th><th>Dot count</th><th>Submit?</th></tr></thead><tbody>{''.join(rows)}</tbody></table></div>'''
+        site = r["site"]
+        uniqueness = priority_relationship(r, pairs)
+        rows.append(f'''<tr><th scope="row"><a href="priority-{e(site)}.html">{e(site)}</a></th><td>{r['quoted_owner_claim']}<br><small>owner-reported, unverified</small></td><td><a href="{e(r['source_url'])}?raw=true"><code>{e(r['historical_file'])}</code></a></td><td>{r['dots']:,}</td><td>{e(uniqueness)}</td><td>Unknown; no defensible estimate</td><td>No</td></tr>''')
+    return f'''<div class="table-wrap"><table><caption>Nine selected historical files · not a live ranking; “near” means within 3 pixels in the stated direction</caption><thead><tr><th>Repository review</th><th>Historical claim (NOT verified score)</th><th>Exact historical filename / source bytes</th><th>Dot count</th><th>Uniqueness vs listed files</th><th>Estimated score</th><th>Submit?</th></tr></thead><tbody>{''.join(rows)}</tbody></table></div><p class="fine">All nine selected files have at least one pairwise directional overlap above the 70% duplicate-stop threshold. This table compares selected historical dots, not every surface or all private work; different filenames or bytes do not establish novelty.</p>'''
 
 
 def lineage():

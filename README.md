@@ -8,11 +8,11 @@
 - **Automated zero-human format & `[0, 1]` range guarantees (`12/12` checks):** 1 `float32` band, `EPSG:32611`, `3730 × 3292`, exact `sample_submission.tif` affine transform, **all `12,279,160 / 12,279,160` cells finite in `[0.0, 1.0]`** (`5,167,373` footprint cells, `0.0` outside, `0` NaN anywhere — prevents `"Predicted values must be in range [0, 1]"`), `0` dots on or within `<= 2 px` of the `60,988` catalogue positives, `min NN = 2.8284 px` (`dr^2 + dc^2 > 6`).
 - **HOLDOUT-DTI (`component-holdout-v3-blockstats-20261025`, `60,988` withheld positives, `17 px` whole-component buffer, `371` spatial blocks, `2,000` bootstrap replicates, `seed = 3137`):**
   - `CSR-1` (`csr_dispersed`): **`0.158162` `[0.144986, 0.171474]`** (folds: `0.13261, 0.19518, 0.14528,` **Fold 3 SE Walker Lane `0.19686`**)
-  - `csr_dense_edge` (same OOF surface, standard dense EDGE): `0.158453` `[0.144526, 0.172309]` (proves `2.83 px` 1D-Hessian dispersion costs `-0.00029` DTI while cutting `MSDB1-edge` overlap from `FFL-1`'s `78.28%` to `59.86%`)
+  - `csr_dense_edge` (same OOF surface, standard dense EDGE): `0.158453` `[0.144526, 0.172309]` (proves `2.83 px` 1D-Hessian dispersion costs `-0.00029` DTI while cutting `MSDB1-edge` overlap from `FFL-1`'s `78.28%` / `QPC-1`'s `78.92%` to `59.86%`)
   - `core19_edge`: `0.144915` `[0.129948, 0.159445]` -> `CSR-1 − core19_edge =` **`+0.013247` `[-0.001978, +0.030068]`**
-  - `msdb_edge`: `0.169986` `[0.156534, 0.183948]` -> `CSR-1 − msdb_edge =` **`-0.011825` `[-0.023453, +0.000297]`** (beat `msdb_edge` by **`+0.02300` in Fold 3**, trailed in Folds 0–2 due to `det_elev` ablation + uniform `0.35` playa weight).
-- **Two-stage novelty (`PASSED` across `357` aligned rasters + `5` surfaces + `1` malformed `GEMSDOE31` audit) & leakage canaries (`324 / 324` passed):** pre-placement surface max Spearman **`0.1378 <= 0.90`**; final dots max Spearman **`0.0856 <= 0.90`** and max 3-px overlap **`67.70% <= 70.0%`** (`59.86%` max vs published `docs/downloads/`; `36.06%–40.59%` vs the 9 historical site leaders; `1.45%` finite-subset vs malformed `GEMSDOE31` `774c7c5aa...`); `0` canary alarms (`max_symmetric_auc = 0.6629 <= 0.90`).
-- **Machine verdict:** `verdict = "negative"`, `download_ok = true`, `ok_to_submit = false`, `submission_approved = false`, `slot_selected = false`; `ORGANIZER-CONFIRMED` score: **none**; experiments `2/3` (`1,495.2 s`).
+  - `msdb_edge`: `0.169986` `[0.156534, 0.183948]` -> `CSR-1 − msdb_edge =` **`-0.011825` `[-0.023453, +0.000297]`** (beat `msdb_edge` by **`+0.02300` in Fold 3**, trailed in Folds 0–2).
+- **Two-stage novelty (`PASSED` across `357` aligned rasters + `5` surfaces + `1` malformed `GEMSDOE31` audit) & leakage canaries (`324 / 324` passed):** pre-placement surface max Spearman **`0.1378 <= 0.90`**; final dots max Spearman **`0.0856 <= 0.90`** and max 3-px overlap **`67.70% <= 70.0%`** (`59.86%` max vs published `docs/downloads/`; `36.06%–40.59%` vs the 9 historical site leaders; `1.45%` finite-subset vs malformed `GEMSDOE31` `774c7c5aa...`); `0` canary alarms (`max_symmetric_auc = 0.6629 <= 0.90`). Unscanned open-PR heads and private work remain unknown.
+- **Machine verdict:** `verdict = "negative"`, `download_ok = true`, `ok_to_submit = false`, `submission_approved = false`, `slot_selected = false`; `ORGANIZER-CONFIRMED` score: **none**; experiments `2/3` (`1,493.6 s`).
 - **Unique Submission Name:** `gems30-CSR1-44090-20261026-502fb5948335`
 - **Submission Note (`104 / 140` chars):** `CSR1: 3D Laplace/Poisson+1.8km Radon+NoisyOR+2.83px 1D-ridge EDGE, >2px off-cat, 44090d, all-finite [0,1]`
 
@@ -28,14 +28,28 @@
 
 ---
 
-## Archived 2026-10-26 — GDX-1: **RESEARCH DOWNLOAD OK · DO NOT SUBMIT**
+## Archived 2026-10-26 — QPC-1: **DUPLICATE-STOP · DO NOT SUBMIT**
+
+**No QPC TIFF is offered.** The magnetic–gravity phase-proxy hypothesis failed
+its matched scientific gate and **78.915854%** of its final dots were within 3 px
+of an existing GEMSDOE30 file, exceeding the 70% duplicate-stop rule. The run stopped;
+it was not perturbed, renamed as a new hypothesis, validated after the stop, or
+published. No competition slot was selected or uploaded.
+
+[QPC-1 science](geothermal-quadrature-review.html) ·
+[Canonical JSON run card](docs/research/2026-10-26-qpc/run-card.json) ·
+[Full results and next steps](docs/research/2026-10-26-qpc/review.md) ·
+[Preregistration](docs/research/2026-10-26-qpc/preregistration.md).
+
+---
+
+## Previous decision — 2026-10-26 GDX-1: **RESEARCH DOWNLOAD OK · DO NOT SUBMIT**
 
 **Maximize P(Win):** reject a mechanism that did not beat its controls. **Own the Outcome:**
-ship the audited negative result, repair shared coverage checks, and do not spend a slot.
-This is the current decision; all older “LATEST” / “START HERE” sections below are
-historical lane records, not fresh global uniqueness or upload approval.
+retain the audited negative result and do not spend a slot. This older decision is
+superseded by QPC-1 above and does not establish current global uniqueness.
 
-- **New single-band TIFF (research only):** [`gems30-GDX1-44090-20261026-2992ee3619f5.tif`](docs/research/2026-10-26-gdx/gems30-GDX1-44090-20261026-2992ee3619f5.tif) · 44,090 dots · 474 KiB · SHA-256 `3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac`.
+- **Earlier single-band TIFF (research only):** [`gems30-GDX1-44090-20261026-2992ee3619f5.tif`](docs/research/2026-10-26-gdx/gems30-GDX1-44090-20261026-2992ee3619f5.tif) · 44,090 dots · 474 KiB · SHA-256 `3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac`.
 - **Automated format:** 1 float32 band, EPSG:32611, 3730 × 3292, exact template transform,
   finite `[0,1]` inside all 5,167,373 footprint cells, NaN outside, zero dots on / within
   2 px of the catalogue, ≥3 px dot spacing. No human-inspector gate. Not portal acceptance.
@@ -60,7 +74,7 @@ historical lane records, not fresh global uniqueness or upload approval.
 [Clean overview](index.html) · [Executive submission decision](executive-summary.html) ·
 [GDX-1 science / four ranked hypotheses](geothermal-chemistry-review.html) ·
 [Nine-site executive reviews](priority-executive-summary.html) ·
-[Canonical JSON run card](docs/research/2026-10-26-gdx/run-card.json) ·
+[GDX-1 JSON run card](docs/research/2026-10-26-gdx/run-card.json) ·
 [Full review / reproduction / next steps](docs/research/2026-10-26-gdx/review.md) ·
 [Three-pass review](docs/research/2026-10-26-gdx/three-pass-review.md).
 
@@ -76,16 +90,16 @@ then `python scripts/verify_geothermal_chemistry_run.py` (exit 0 validates a neg
 surface receipts are verified, and local surface bytes are reopened if retained. No refit
 or uploader. Do not remove `started.json` / `resumed.json` to run a fourth experiment.
 
-**Next session:** resolve the malformed reference, obtain the actual lane + complete
-parallel registry, restore the strongest comparable control, then preregister the next
-population-contrast test under a fresh budget. No rescue of negative/stopped predictions.
+**Next session:** resolve the malformed reference, obtain the actual assigned lane and
+complete parallel registry, and independently preregister a genuinely distinct test
+under a fresh budget. No rescue of negative/stopped predictions.
 The entire [owner prompt](#current-owner-prompt) remains below, unchanged; reread it each session.
 
 ---
 
 ## Archived 2026-10-26 — Geothermal-Corridor GeoTIFF: **DOWNLOAD OK · NOT OK TO SUBMIT (holdout-gated)**
 
-- **One-click download (research artifact):** [`GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif`](docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif) (375,154 bytes; SHA-256 `0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564`; 40,000 dots) — also featured at the top of the [site](index.html) and the [Executive Submission Guide](executive-summary.html).
+- **One-click download (research artifact):** [`GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif`](docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif) (375,154 bytes; SHA-256 `0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564`; 40,000 dots) — archived; it is not the current front-page recommendation.
 - **Unique submission name:** `GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z`
 - **Note (110/140 chars):** `Geothermal corridor off-cat: Q-volcanics x paleo-springs x 2m probes, SGMC-gated, 3px Poisson disk, 40000 dots`
 - **Machine verdict, obvious by design:** `download_ok=true` but **`ok_to_submit=false`**, `submission_approved=false`, `slot_selected=false`, `verdict=negative`; **organizer score: none**. Do not upload it to spend a weekly slot.
