@@ -1,11 +1,49 @@
 {
   "passes_completed": 3,
+  "verification_refreshed_utc": "2026-10-26T15:41:03Z",
+  "verification_scope": "Independent repository review and recorded-artifact verification only; no scientific experiment or submission slot used.",
   "pytest": {
-    "passed": 250,
-    "skipped": 6,
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 261,
+    "skipped": 5,
     "warnings": 2,
     "subtests_passed": 7,
-    "skips": "Five optional torch tests; one non-current preregistration schema test"
+    "skips": "Five optional torch-dependent tests; all three release tests requiring the sample_submission template ran after restoring the pinned mirror."
+  },
+  "template_restore": {
+    "command": ".venv/bin/python scripts/restore_public_mirrors.py --ids sample_submission",
+    "result": "success",
+    "sha256_pinned": true,
+    "organizer_authenticated": false,
+    "note": "Restored the pinned owner-provided mirror to ignored data/raw/sample_submission.tif; no DrivenData portal access."
+  },
+  "artifact_verification": {
+    "ffl1": {
+      "command": ".venv/bin/python scripts/verify_fflidar_run.py",
+      "exit_code": 0,
+      "recorded_raster_sha256": "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07",
+      "verdict": "negative",
+      "submission_approved": false,
+      "slot_selected": false
+    },
+    "pta1_current_pointer": {
+      "command": ".venv/bin/python scripts/verify_current_run.py",
+      "exit_code": 0,
+      "recorded_raster_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "verdict": "negative",
+      "submission_approved": false,
+      "slot_selected": false
+    },
+    "ffl1_require_promote": {
+      "command": ".venv/bin/python scripts/verify_fflidar_run.py --require-promote",
+      "expected_exit_code": 2,
+      "observed_exit_code": 2,
+      "meaning": "Recorded evidence is internally consistent, but promotion is not permitted."
+    }
+  },
+  "site_generation_check": {
+    "command": ".venv/bin/python scripts/build_research_site.py --check",
+    "result": "passed"
   },
   "git_diff_check": "passed",
   "primary_tiffs_reopened": 2,
@@ -15,5 +53,6 @@
   "novelty_rerun": false,
   "official_non_github_sources_fetched": false,
   "new_experiments": 0,
-  "new_tiff_generated": false
+  "new_tiff_generated": false,
+  "submission_recommendation": "Do not submit. FFL-1 is duplicate-stopped; PTA-1 is negative on required paired gates."
 }
