@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "experiment_spec": "qpc1",
+  "hypothesis": "Co-located magnetic and gravity quadrature-phase proxies identify concealed fault boundaries.",
+  "mechanism": "Two-scale high-pass/gradient normalized vector concordance, with within-field persistence.",
+  "non_fault_mimic": "Volcanic-flow or intrusive contacts, dike swarms, and survey leveling artifacts.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": 0.13866497186828491,
+    "withheld_positives": 60988,
+    "ci95": [
+      0.12368500865140516,
+      0.15499952977983888
+    ],
+    "tp_weight": 8111.997449277898,
+    "fp_weight": 40439.485584975904,
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "comparators": {
+      "core19": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.13362778873908637,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.11828522390010657,
+          0.1488749805646302
+        ],
+        "tp_weight": 7813.020600502169,
+        "fp_weight": 40577.637846987476
+      },
+      "persistence21": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.13885882625019214,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.12322520986835993,
+          0.15497552287954106
+        ],
+        "tp_weight": 8123.869400985568,
+        "fp_weight": 40446.74584618314
+      },
+      "ffl_confirm": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.1839491399944582,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.16941879692179745,
+          0.19787438682807115
+        ],
+        "tp_weight": 10818.871162508625,
+        "fp_weight": 39301.47847761931
+      },
+      "msdb_edge": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.1704616131030584,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.15622652622271732,
+          0.18416757014609178
+        ],
+        "tp_weight": 10006.69118890733,
+        "fp_weight": 39558.74674711629
+      }
+    },
+    "candidate_minus": {
+      "core19": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.005037183129198541,
+        "ci95": [
+          -0.0011837013615638506,
+          0.011186810392628517
+        ]
+      },
+      "persistence21": {
+        "label": "HOLDOUT-DTI difference",
+        "value": -0.00019385438190722137,
+        "ci95": [
+          -0.0061928093280117094,
+          0.006016672206040689
+        ]
+      },
+      "ffl_confirm": {
+        "label": "HOLDOUT-DTI difference",
+        "value": -0.04528416812617328,
+        "ci95": [
+          -0.05937678067103743,
+          -0.031152779444102902
+        ]
+      },
+      "msdb_edge": {
+        "label": "HOLDOUT-DTI difference",
+        "value": -0.03179664123477349,
+        "ci95": [
+          -0.04595774337033678,
+          -0.017890215715884537
+        ]
+      }
+    },
+    "bootstrap": {
+      "unit": "geographic block aggregated across folds",
+      "blocks": 371,
+      "replicates": 2000,
+      "seed": 3071,
+      "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+    },
+    "scope": "mapped-fault holdout proxy; not an organizer score or leaderboard projection"
+  },
+  "registry": {
+    "complete": false,
+    "surface_receipt": "docs/research/2026-10-26-qpc/novelty-surface.json",
+    "surface": {
+      "decision": "blocked-incomplete-evidence",
+      "registry_entries_compared": 353,
+      "max_spearman": 0.15910948199244948,
+      "max_fraction_within_3px": null,
+      "errors": [
+        "data/raw/registry-expanded/GEMSDOE31-ed22e5c02a6d659b69ebf2d7084cd01061963e02.tif: non-finite values inside footprint"
+      ]
+    },
+    "dots_receipt": "docs/research/2026-10-26-qpc/novelty-dots.json",
+    "dots": {
+      "decision": "duplicate-stop",
+      "registry_entries_compared": 353,
+      "max_spearman": 0.09793280932374733,
+      "max_fraction_within_3px": 0.7891585393513268,
+      "errors": [
+        "data/raw/registry-expanded/GEMSDOE31-ed22e5c02a6d659b69ebf2d7084cd01061963e02.tif: non-finite values inside footprint"
+      ]
+    }
+  },
+  "raster_sha256": "8baa49d49c1f665f6633ba5296508242de3c5e4cd2c606d1e16a1aac51175faf",
+  "validator_output": null,
+  "submission_name": "gems30-QPC1-44090-20261026-b6ae3a8c9bab",
+  "note": "QPC1 magnetic-gravity quadrature phase, 44090 dots; research only, not approved for competition submission.",
+  "published_tiff": null,
+  "download_ok": false,
+  "ok_to_submit": false,
+  "submission_approved": false,
+  "slot_selected": false,
+  "verdict": "negative",
+  "reason": "duplicate-stop at dots; no perturbation or publication",
+  "experiments_run": 2,
+  "experiment_cap": 3,
+  "experimental_elapsed_seconds": 550.904,
+  "organizer_score": null,
+  "leaderboard_estimate": null,
+  "created_utc": "2026-10-26T22:12:46.812311+00:00"
+}

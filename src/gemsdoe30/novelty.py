@@ -41,11 +41,25 @@ def compare(candidate, reference, footprint, *, stage='dots', cached_ranks=None)
     rho = None
     if not constant:
         ar, an = rank_cache(a, mask) if cached_ranks is None else cached_ranks
-        br = rankdata(bv).astype(np.float64)
-        br -= br.mean()
-        bn = float(np.sqrt(np.dot(br, br)))
-        if an > 0 and bn > 0:
-            rho = float(np.clip(np.dot(ar, br) / (an * bn), -1.0, 1.0))
+        # Most registered outputs are binary dots. Their average-tie ranks
+        # have a closed form, avoiding hundreds of expensive full-grid sorts.
+        # This is algebraically the same full-footprint Spearman statistic;
+        # arbitrary-valued rasters still use the general rankdata path.
+        binary = np.all((bv == 0) | (bv == 1))
+        if binary:
+            positives = bv == 1
+            n1 = int(np.count_nonzero(positives))
+            n0 = len(bv) - n1
+            if an > 0 and n0 and n1:
+                numer = float(np.sum(ar, where=positives, dtype=np.float64)) * np.sqrt(float(len(bv)))
+                denom = an * np.sqrt(float(n0) * float(n1))
+                rho = float(np.clip(numer / denom, -1.0, 1.0))
+        else:
+            br = rankdata(bv).astype(np.float64)
+            br -= br.mean()
+            bn = float(np.sqrt(np.dot(br, br)))
+            if an > 0 and bn > 0:
+                rho = float(np.clip(np.dot(ar, br) / (an * bn), -1.0, 1.0))
     overlap = None
     candidate_count, reference_count = int(np.count_nonzero(av > 0)), int(np.count_nonzero(bv > 0))
     # Positive support of a dense continuous surface is NOT a set of placed dots.

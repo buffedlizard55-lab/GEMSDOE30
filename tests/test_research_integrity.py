@@ -113,6 +113,8 @@ def test_priority_snapshot_records_surface_paths_without_claiming_they_are_usabl
     ]}
 
     def fake_api(endpoint, *, raw=False):
+        if "/pulls?" in endpoint:
+            return b"[]"
         if endpoint.endswith("/commits/main"):
             return json.dumps({"sha": ref}).encode()
         if "/git/trees/" in endpoint:
@@ -131,6 +133,50 @@ def test_priority_snapshot_records_surface_paths_without_claiming_they_are_usabl
         "outputs/oof_surface.npy", "models/predictions.npz"}
     assert all("not downloaded" in row["discovery_scope"] for row in discovery["candidates"])
     assert output.is_file() and len(report["rasters"]) == 1
+
+
+def test_priority_snapshot_includes_research_and_quarantine_tiffs(tmp_path, monkeypatch):
+    from scripts import sync_priority_registry as sync
+    monkeypatch.setattr(sync, "ROOT", tmp_path)
+    source = raster(tmp_path / "source.tif", np.eye(4, 5))
+    content = source.read_bytes()
+    blob = hashlib.sha1(f"blob {len(content)}\0".encode() + content).hexdigest()
+    pins = tmp_path / "docs/research/priority-site-pins.json"
+    pins.parent.mkdir(parents=True)
+    pins.write_text(json.dumps({"rasters": [{"site": "SYNTHETIC", "repo": "test/synthetic"}]}))
+    ref = "c" * 40
+    paths = ["docs/downloads/release.tif", "docs/research/lane/research.tif",
+             "docs/research/quarantine/negative.TIFF"]
+    tree = {"sha": "tree", "truncated": False, "tree": [
+        {"type": "blob", "path": path, "sha": blob, "size": len(content)}
+        for path in paths + ["data/raw/labels.tif"]
+    ]}
+
+    def fake_api(endpoint, *, raw=False):
+        if "/pulls?" in endpoint:
+            return json.dumps([{"number": 41, "html_url": "https://github.com/test/synthetic/pull/41",
+                                "updated_at": "2026-10-26T00:00:00Z",
+                                "head": {"sha": "a" * 40, "ref": "parallel", "repo": {"full_name": "test/synthetic"}}}]).encode()
+        if endpoint.endswith("/commits/main"):
+            return json.dumps({"sha": ref}).encode()
+        if "/git/trees/" in endpoint:
+            return json.dumps(tree).encode()
+        assert raw and "data/raw/labels.tif" not in endpoint
+        return content
+
+    monkeypatch.setattr(sync, "api", fake_api)
+    template = raster(tmp_path / "template.tif", np.zeros((4, 5)))
+    result = sync.snapshot(tmp_path / "docs/research/new.json", template)
+    assert result["source_files"] == 3
+    assert len(result["rasters"]) == 1  # same bytes retain every source alias
+    assert len(result["rasters"][0]["aliases"]) == 3
+    assert any("quarantine/negative.TIFF" in a for a in result["rasters"][0]["aliases"])
+    assert result["complete"] is False
+    assert any("outside" in reason for reason in result["missing_evidence"])
+    heads = result["open_pull_request_heads"]
+    assert heads["count"] == 1 and heads["heads"][0]["number"] == 41
+    assert heads["heads"][0]["head_sha"] == "a" * 40
+    assert "not scanned or compared" in heads["heads"][0]["comparison_status"]
 
 
 def test_surface_metadata_inspection_never_promotes_or_compares_a_public_array(tmp_path, monkeypatch):
@@ -154,6 +200,8 @@ def test_surface_metadata_inspection_never_promotes_or_compares_a_public_array(t
     ]}
 
     def fake_api(endpoint, *, raw=False):
+        if "/pulls?" in endpoint:
+            return b"[]"
         if endpoint.endswith("/commits/main"):
             return json.dumps({"sha": ref}).encode()
         if "/git/trees/" in endpoint:

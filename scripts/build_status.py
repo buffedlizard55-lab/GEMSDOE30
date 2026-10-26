@@ -412,14 +412,21 @@ def main() -> int:
         latest_review = {**ref, "card": load_json(ROOT / ref["run_card"]), "verified_now": False,
                          "error": None, "decision": None, "ok_to_submit": False}
         try:
-            from scripts.verify_geothermal_chemistry_run import verify as verify_gdx
-            decision = verify_gdx(template=data_dir / "sample_submission.tif")
+            verifier = ref.get("verifier")
+            if verifier == "scripts/verify_geothermal_chemistry_run.py":
+                from scripts.verify_geothermal_chemistry_run import verify as verify_latest
+            elif verifier == "scripts/verify_quadrature_phase_run.py":
+                from scripts.verify_quadrature_phase_run import verify as verify_latest
+            else:
+                raise ValueError(f"unsupported latest-review verifier: {verifier}")
+            decision = verify_latest(template=data_dir / "sample_submission.tif")
             latest_review.update(verified_now=True, decision=decision, ok_to_submit=False)
         except Exception as exc:
             latest_review["error"] = str(exc)
-        gates["latest_gdx_scientific_review"] = {
+        gates["latest_scientific_review"] = {
             "evidence": ref["run_card"], "promoted": False,
-            "decision": decision["display_status"] if latest_review["verified_now"] else "blocked: newest review inspection unavailable"}
+            "decision": (decision.get("display_status") or "NOT APPROVED FOR SUBMISSION")
+                        if latest_review["verified_now"] else "blocked: newest review inspection unavailable"}
     promoted = [name for name, gate in gates.items() if gate.get("promoted")]
     peer_reports = []
     for name, filename in (("G30-S19 habitat + EDGE", "lane-g30s19-run-card.json"),

@@ -1,0 +1,17 @@
+{
+  "started_utc": "2026-10-26T22:03:35.913353+00:00",
+  "preregistration_sha256": "f332229c96264a998278e86eabe145346374760a062b6c54a6ee486439c46be3",
+  "registry_sha256": "251430967cd4e85cd81775be747146caa9f131e2d8bd9fe4bebd74839546a72f",
+  "runner_sha256": "33af6c224f3c60671eec1b352e353d00974c13417840f0a8c5078cddae1c2be7",
+  "transform_sha256": "b40274c98edf77fbde727f885e795c50a223d2b84f681b6884f510020beed50e",
+  "packages": {
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "rasterio": "1.4.4",
+    "scikit-learn": "1.9.1",
+    "threadpoolctl": "3.7.0"
+  },
+  "max_seconds": 6000,
+  "experiment_cap": 3,
+  "externally_assigned_lane_verified": false
+}
