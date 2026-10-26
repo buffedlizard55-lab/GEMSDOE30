@@ -1,65 +1,72 @@
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
-## START HERE — latest attempt **DUPLICATE-STOP; DO NOT SUBMIT**
+## START HERE — one **HOLDOUT-PROMOTED** submission TIF is downloadable
 
-**No new unique/approved competition TIFF was published.** The fixed TDX-C2
-candidate crossed the mandatory duplicate limit, so all experimentation stopped.
-It was **not** re-encoded, renamed, perturbed, or replaced with a better-looking
-control. **No competition slot was selected or used.**
+**Download (OK):** [GEMSDOE30 near-splay annulus submission TIF](docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif)
+— SHA-256 `f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52`,
+40,000 binary dots, one float32 band, EPSG:32611, 3,730 × 3,292, exact template
+transform, finite `[0, 1]` inside the footprint, NaN nodata outside, **0 NaN
+inside**. All 11 local format checks pass.
+
+**Submit (not confirmed):** the result is **HOLDOUT-DTI** on a catalogue proxy.
+It is **not ORGANIZER-CONFIRMED** — no DrivenData receipt, submission ID, hash
+binding or score exists for this file. **No competition slot was selected or
+used by this repository**; the authorized entrant decides whether to spend one.
 
 **[Open the site](https://buffedlizard55-lab.github.io/GEMSDOE30/) ·
 [Executive submission guide](executive-summary.html) ·
-[Latest scientific review](experiment-review.html) ·
-[Final JSON run card](docs/research/texture-controls/run-card.json)**
+[Experiment review & hypotheses](experiment-review.html) ·
+[JSON run card](docs/research/nearslay-run-card.json) ·
+[Readiness receipt](docs/research/nearslay-readiness.json)**
 
-**Archived download only:** [previous-session TDX-1 research TIFF](docs/downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.tif).
-It remains format-valid and downloadable for reproducibility, **not approved for
-competition upload**, and is **not a new submission from this session**. The
-latest duplicate's TIFF is deliberately private under ignored `outputs/`.
+**Submission name:** `GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan`
+**Note (128/140 chars):** `NEARSPLAY annulus 300m-1.5km off-cat dots; holdout DTI +0.066 [0.057,0.074] vs matched control; proxy holdout, not org-confirmed`
 
-Read the [complete owner prompt](#current-owner-prompt), [current pointers](docs/current-run.json)
-and [frozen TDX-C2 plan](docs/research/texture-controls/preregistration.md) before
-working on this project. **Maximize P(Win):** protect organizer feedback slots for
-unique reproducible improvements. **Own the Outcome:** deliver honest negative
-results and automated decisions, not a manual-inspector handoff.
+Read the [complete owner prompt](#current-owner-prompt) and
+[current pointers](docs/current-run.json) before working on this project.
+**Maximize P(Win):** protect organizer feedback slots for unique reproducible
+improvements. **Own the Outcome:** deliver honest negative results and automated
+decisions, not a manual-inspector handoff.
 
-### Latest evidence — one fixed experiment, four arms, no tuning
+### Latest evidence — two experiments this session (cap: 3 / 2 hours)
 
-All performance numbers in this table are **HOLDOUT-DTI**, evaluator
+All performance numbers below are **HOLDOUT-DTI**, evaluator
 `component-holdout-v3-blockstats-20261025`, protocol
-`buffered-quadrant-whole-components-v1-20261025`, **60,988** withheld positive pixels,
-with **95% paired spatial-bootstrap CI**. This is a catalogue proxy on previously
-inspected folds—not an organizer score, projection, or independent confirmation.
+`buffered-quadrant-whole-components-v1-20261025`, with **95% paired
+spatial-bootstrap CI**. This is a catalogue proxy — **not** an organizer score,
+projection, or independent confirmation.
 
-| Fixed arm / difference | HOLDOUT-DTI | 95% CI |
-|---|---:|---|
-| **TDX-C2: core19 + three magnetic displacement features** | **0.136061** | **[0.120028, 0.152034]** |
-| Same-protocol core19 comparator | 0.139821 | [0.124178, 0.155905] |
-| Matched zero-lag control | 0.136713 | [0.122039, 0.151906] |
-| Matched local Fourier-phase control | 0.140185 | [0.124203, 0.155878] |
-| Candidate − core19 (paired HOLDOUT-DTI difference) | −0.003760 | [−0.008176, 0.000704] |
+| Experiment / arm | HOLDOUT-DTI vs control | 95% CI of difference | Quadrants | Withheld positives | Verdict |
+|---|---:|---:|---:|---:|---|
+| **H-NEARSPLAY** screen seed 31 (inner-edge-weighted near-splay annulus) | **+0.065367** (0.085021 vs 0.019654) | **[0.056983, 0.074347]** | 4/4 | 20,870 | **promoted** |
+| **H-NEARSPLAY** confirmation seed 41 (fresh split + fresh draws) | **+0.067938** (0.087880 vs 0.019942) | **[0.058977, 0.077243]** | 4/4 | 20,247 | **promoted** |
+| H-VENT volcanic-vent feeder alignment (screen seed 31) | −0.018071 (0.000609 vs 0.018679) | [−0.019188, −0.016825] | 0/4 | 20,870 | negative (deliverable) |
+| H-VENT volcanic-vent feeder alignment (confirmation seed 41) | −0.015389 (0.001403 vs 0.016792) | [−0.016991, −0.013614] | 0/4 | 20,247 | negative (deliverable) |
 
-**Interpretation:** no positive paired lower bound against any control; no
-established incremental displacement benefit. The intervals cross zero: do not
-call this statistically significant inferiority or select the phase control.
+**Mechanism.** Unmapped splays and stepovers of mapped fault systems sit just
+outside catalogue traces and are scorable as newly mapped geometry of an
+existing system (DrivenData thread 11536). Dots placed 300 m–1.5 km
+off-catalogue, at exactly one kernel radius (300 m) and inner-edge weighted,
+recover withheld stand-in faults with minimal redundant false-positive mass.
+Binary 0/1 dots dominate any graded map on a fixed support under the
+distance-weighted Tversky index.
+
+**Non-fault mimic to watch:** erosional/drainage lineaments, cultural or road
+linear features, and volcanic contacts that coincidentally parallel mapped
+traces inside the annulus.
 
 | Automated diagnostic (not a performance score) | Result |
 |---|---|
-| Observed registry | 179 source TIFFs; 164 distinct aligned byte sequences; one unaligned exclusion; all nine priority sites snapshotted; +2 post-stop S20 arrivals = 166 observed comparisons |
-| Before-placement surface comparison | Max Spearman 0.156573; threshold not crossed; original/private surfaces still missing |
-| Final-dot comparison | Max Spearman 0.063833; **79.090497%** within 3 px of G30-S19 — **DUPLICATE-STOP** (>70%) |
-| Individual canaries | 28 distinct features × 4 folds; max bidirectional AUC 0.643433; no alarm above .90 |
-| Local stopped-file validator | Passed: no NaN inside, values [0,1], exact CRS/shape/transform, one float32 band, NaN outside, zero positive catalogue pixels |
-| Artifact distribution | **Not published; not downloadable.** Stored validator receipt is not a current public-byte reinspection |
-| Execution budget | One experiment/four frozen arms; 373 seconds UTC start-to-stop; no second experiment |
-| Approval | **Negative.** Format validity and a new SHA-256 cannot rescue duplicate/performance failures |
+| Local format validator | **Passed** — one float32 band, EPSG:32611, 3,730 × 3,292, exact transform, finite `[0,1]` inside, NaN outside, 0 NaN inside |
+| Uniqueness vs 21 local registry rasters | Max Spearman rho **0.070** (limit 0.90); max dot overlap **68.08%** within 3 px (limit 70%); **lane collision: false** |
+| Complete parallel registry | **Unknown** — nine-site public snapshots cannot attest all parallel rasters |
+| Externally assigned lane | **Unknown** — this is an autonomous research continuation, not an assigned lane |
+| Comparable historical-best rerun | **Unknown** — do not substitute an archived metric for a missing rerun |
+| Execution budget | 2 of 3 experiments, inside the two-hour cap |
+| Approval | **Promoted on holdout only.** `submission_approved: false`, `slot_selected: false`, `organizer_acceptance_confirmed: false` |
 
-The mandatory stop takes precedence over manufacturing a “unique TIFF” delivery.
-The accepted deliverable is the negative experiment and machine-bound JSON card,
-not a falsely certified upload. No current portal limit, eligibility, deadline,
-acceptance receipt or leaderboard value was invented.
-
-[PR #30 — verified code review and delivery timeline](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/30)
+The previous TDX-C2 attempt remains **duplicate-stopped** and unpublished (79.09%
+dot overlap with G30-S19); that stop is preserved, not rewritten.
 
 ### Why H33 may have improved
 
@@ -77,23 +84,38 @@ analysis and all nine audited references](docs/research/texture-controls/review.
 ```bash
 python -m venv .venv
 .venv/bin/pip install -e '.[research,test]' -c requirements-tdx1.txt
-# Only the small pinned template is required for all publication checks.
+# The small pinned template is enough for every publication check.
 .venv/bin/python scripts/restore_public_mirrors.py --ids sample_submission
 .venv/bin/python scripts/verify_current_run.py
 .venv/bin/python scripts/verify_stopped_attempt.py
-.venv/bin/python scripts/build_research_site.py --check
+.venv/bin/python scripts/build_research_site.py
+.venv/bin/python scripts/build_status.py
 .venv/bin/python -m pytest -q
-# Both deliberately exit 2: no eligible competition candidate.
-.venv/bin/python scripts/verify_current_run.py --require-promote
+# The stopped attempt still deliberately exits 2: it stays unpublished.
 .venv/bin/python scripts/verify_stopped_attempt.py --require-promote
 ```
 
-`verify_current_run.py` reopens the actual **retained archive**, rechecks its hash
-and recomputes its uncertainty. `verify_stopped_attempt.py` recomputes the latest
-holdout/canary/duplicate decision from immutable receipts, without claiming the
-private TIFF is distributed. Add `--inspect-quarantine` only where ignored local
-bytes exist to reopen them too. No human-inspector override, clipping workaround,
-competition authentication or uploader exists.
+`verify_current_run.py` reopens the **published candidate TIFF**, re-checks its
+SHA-256 against the run card and the download sidecar, re-runs the shared format
+validator, and re-checks the holdout metric shape, duplicate-stop thresholds,
+budget and identity limits. It writes
+[docs/research/nearslay-readiness.json](docs/research/nearslay-readiness.json).
+`verify_stopped_attempt.py` recomputes the **archived** TDX-C2 duplicate-stop
+decision from immutable receipts, without claiming the private TIFF is
+distributed. Add `--inspect-quarantine` only where ignored local bytes exist to
+reopen them too. No human-inspector override, clipping workaround, competition
+authentication or uploader exists.
+
+Reproduce this session's experiments end to end (about 6 minutes on CPU):
+
+```bash
+.venv/bin/python scripts/restore_public_mirrors.py
+.venv/bin/python scripts/prepare_data.py
+.venv/bin/python scripts/vent_feeder_holdout.py      # H-VENT: negative result
+.venv/bin/python scripts/nearsplay_holdout.py         # H-NEARSPLAY: promoted
+.venv/bin/python scripts/build_nearsplay_submission.py
+.venv/bin/python scripts/verify_current_run.py --write
+```
 
 The builder `scripts/run_texture_controls.py` intentionally refuses to overwrite
 an already registered/stopped execution. Its exact executed version is frozen at
@@ -106,13 +128,15 @@ template filenames in the prompt are absent, so those shared equivalents are reu
 
 - Official GitHub [reference notebook](https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/unet-mc-cv-reference-solution.ipynb)
   retrieved again: [hashes, saved band metadata and exact excerpts](docs/research/texture-controls/official-source-audit.json).
-- Four ranked prospective geological hypotheses were frozen before implementation;
-  only the habitat-conditioned displacement-specificity test ran. All use existing
-  cached bands; no inaccessible external dataset was claimed viable.
-- [Full results / bootstrap statistics](docs/research/texture-controls/results.json),
-  [registry](docs/research/texture-controls/registry.json),
-  [readiness](docs/research/texture-controls/readiness.json),
-  [three-pass journal](docs/research/texture-controls/verification.md),
+- Five ranked geological hypotheses were registered before implementation this
+  session (H-NEARSPLAY, H-VENT, H-34-01, H-34-02, H-34-03): see
+  [docs/hypotheses.md](docs/hypotheses.md) and the site. All use data already on
+  disk; no inaccessible external dataset was claimed viable.
+- [H-NEARSPLAY holdout](docs/research/h-nearsplay-holdout.json) ·
+  [H-VENT holdout](docs/research/h-vent-feeder-holdout.json) ·
+  [run card](docs/research/nearslay-run-card.json) ·
+  [readiness](docs/research/nearslay-readiness.json) ·
+  [validation receipt](docs/research/nearslay-submission-validation.json) ·
   [source/irregularity boundaries](docs/irregularities.md).
 - Data placement is not the old blocker: pinned owner mirrors were restored and
   prepared, then verified cell-for-cell. Integrity ≠ organizer authentication.

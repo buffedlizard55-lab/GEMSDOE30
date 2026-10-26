@@ -1,6 +1,6 @@
 # Irregularity and limitation register
 
-Last reviewed: **2026-10-03**. “Fixed” means the repository now mitigates the tooling defect; it does not authenticate competition data or establish score gains.
+Last reviewed: **2026-10-25**. “Fixed” means the repository now mitigates the tooling defect; it does not authenticate competition data or establish score gains.
 
 | ID | Severity | Status | Observation / evidence | Action or consequence |
 | --- | --- | --- | --- | --- |
@@ -193,6 +193,9 @@ has a competition score.
 | IR-30-075 | Low | Open | First holdout run was killed for memory (exit 137) because canary features were copied eagerly as float64. | Canaries now sample pixels lazily. The killed run's output was not used. Recorded for audit. |
 | IR-30-076 | Low | Open | The bash sandbox cannot reach drivendata.org, but the page-retrieval tool can. Verification of live pages therefore came through the retrieval tool, not a sandbox fetch. | Recorded in `live-verification.md` with retrieval dates. |
 | IR-30-077 | Medium | Open | Eligibility: the rules require U.S. citizenship or permanent residence for individual entrants and a penalty-of-perjury certification. This repository has no record of who the user is. | Not assessed. The user must confirm eligibility before any entry or payment. |
+| IR-30-078 | Medium | **Open — registry completeness** | The H-NEARSPLAY candidate was checked for uniqueness against the 21 locally available registry rasters (`docs/downloads/` and `data/raw/scored/`). The complete parallel registry and the original continuous surfaces of other lanes are not available here, so a lane collision with an unseen parallel artifact cannot be excluded. | Recorded maximum: Spearman rho 0.070 (limit 0.90) and 68.08 % of dots within 3 px of one reference (limit 70 %). The 68.08 % figure sits close to the 70 % stop threshold; a later session with the complete registry must re-run the final-dot comparison before any upload. |
+| IR-30-079 | Medium | **Open — proxy holdout is not the scored truth** | The H-NEARSPLAY promotion rests on a catalogue-component proxy (HOLDOUT-DTI). Per IR-30-017 the official metric scores faults *absent* from the catalogue, so a catalogue proxy can reward exactly the pixels the competition ignores. H-VENT in the same session is the counter-example: it targets genuinely uncatalogued structures and scores far *below* the random control on the proxy. | The proxy is reported as HOLDOUT-DTI with evaluator, protocol, withheld positives and 95 % CI, never as a competition score. Promotion is recorded as "promoted on holdout"; `submission_approved`, `slot_selected` and `organizer_acceptance_confirmed` remain false. Only an organizer receipt can change that. |
+| IR-30-080 | Low | **Open — score attribution** | The owner's reported 0.2778 (GEMSDOE32 H33-B2), 0.2600 (GEMSDOE25/30 D2.8) and 0.4413 (live leaderboard) are still unbound to exact file hashes by any submission-page receipt. | Retained as unverified historical claims in `docs/score-ledger.csv`. No comparison number in this session's run card is derived from them, and no projection of the near-splay result onto a leaderboard value is stated. |
 
 
 
