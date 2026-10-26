@@ -4,7 +4,7 @@
   "candidate": "/home/user/GEMSDOE30/docs/downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.tif",
   "candidate_sha256": "9556e3ddd8ea7658ca510ab02d5b5304ac4c3332c54e7f86df5a24769bd03cdb",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "registry_sha256": "dfd40346f166beea8c92315b1ec6a3e336c92eb5e8adfc2be0242fd021aa93b2",
+  "registry_sha256": "f5bf8be1281691d0f01368daa99fd71c62d584accb49f7d391c27140e78f1d43",
   "registry_complete": false,
   "comparisons": [
     {
@@ -120,20 +120,22 @@
       "undefined": false
     },
     {
-      "reference": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
-      "site": "GEMSDOE30-PTA1",
-      "reference_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
-      "reference_values_sha256": "e17e9783cc288242399b74d71c724ebe7baa76ee11fecf537d774ca96b92780e",
+      "reference_path": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "reference_sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+      "site": "GEMSDOE30-nearslay-lane",
       "stage": "dots",
-      "spearman_full_footprint": 0.017084013661885982,
-      "candidate_dots": 44090,
-      "candidate_positive_support": 44090,
-      "reference_dots": 44090,
+      "spearman_full_footprint": 0.005202553008862754,
+      "candidate_fraction_within_3px_of_reference": 0.2625538670900431,
+      "identical_inside_footprint": false
+    },
+    {
+      "reference_path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "reference_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "site": "GEMSDOE30-parallel-merged",
+      "stage": "dots",
+      "spearman_full_footprint": 0.01708401366188502,
       "candidate_fraction_within_3px_of_reference": 0.3301428895441143,
-      "identical_inside_footprint": false,
-      "correlation_duplicate": false,
-      "dot_duplicate": false,
-      "undefined": false
+      "identical_inside_footprint": false
     }
   ],
   "errors": [],

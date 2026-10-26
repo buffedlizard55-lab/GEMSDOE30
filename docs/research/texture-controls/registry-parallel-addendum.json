@@ -56,12 +56,26 @@
       "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/arena/89455fb7-gemsdoe30/docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif"
     },
     {
-      "site": "GEMSDOE30-PTA1",
+      "site": "GEMSDOE30-nearslay-lane",
       "repo": "buffedlizard55-lab/GEMSDOE30",
-      "ref": "arena/a2b527ff-gemsdoe30",
+      "ref": "arena/54f26a63-gemsdoe30",
+      "source_path": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "path": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "expected_bytes": 476662,
+      "sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+      "aligned": true,
+      "shape": [
+        3730,
+        3292
+      ],
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/arena/54f26a63-gemsdoe30/docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif"
+    },
+    {
+      "site": "GEMSDOE30-parallel-merged",
+      "repo": "buffedlizard55-lab/GEMSDOE30",
+      "ref": "99f7788",
       "source_path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
       "path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
-      "git_blob_sha1": "4db525db17a8c3da3ae87a8aaf09f60beeb9d8fe",
       "expected_bytes": 472074,
       "sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
       "aligned": true,
@@ -69,7 +83,7 @@
         3730,
         3292
       ],
-      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/main/docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif"
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/arena/a2b527ff-gemsdoe30/docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif"
     }
   ]
 }

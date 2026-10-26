@@ -1,27 +1,31 @@
 {
   "schema_version": 1,
   "stage": "dots",
+  "candidate": "/home/user/GEMSDOE30/outputs/phase-tilt-asymmetry/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
   "candidate_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "registry_sha256": "a5cba7388f0fd42bd7ed6704f0155b54d7a207615f35246f90e9eefe7ed95921",
+  "registry_sha256": "406bf85c665d26d1f4a7d1d3bb962387fc6a189043f48f39c6f35c00714cc83c",
   "registry_complete": false,
   "comparisons": [
     {
-      "reference": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
-      "site": "GEMSDOE30-MSDB1v2",
+      "reference_path": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
       "reference_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
-      "reference_values_sha256": "7a89266115d3d8badd92301198711c8d617ce2b739f4755e36d6c04d5dfa1ee7",
+      "site": "GEMSDOE30-parallel-merged",
       "stage": "dots",
-      "spearman_full_footprint": 0.02037816736199749,
-      "candidate_dots": 44090,
-      "candidate_positive_support": 44090,
-      "reference_dots": 44090,
+      "spearman_full_footprint": 0.02037816736199663,
       "candidate_fraction_within_3px_of_reference": 0.5075980948060784,
-      "identical_inside_footprint": false,
-      "correlation_duplicate": false,
-      "dot_duplicate": false,
-      "undefined": false
+      "identical_inside_footprint": false
+    },
+    {
+      "reference_path": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "reference_sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+      "site": "GEMSDOE30-nearslay-lane",
+      "stage": "dots",
+      "spearman_full_footprint": 0.013941307153345687,
+      "candidate_fraction_within_3px_of_reference": 0.4339532773871626,
+      "identical_inside_footprint": false
     }
   ],
-  "errors": []
+  "errors": [],
+  "decision": "passed"
 }

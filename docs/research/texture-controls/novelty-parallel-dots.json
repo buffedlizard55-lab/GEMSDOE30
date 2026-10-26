@@ -4,7 +4,7 @@
   "candidate": "/home/user/GEMSDOE30/outputs/texture-controls/gems30-TDXC2-44090-20261025-d87627b24504.tif",
   "candidate_sha256": "af499375cec73f42f98f398370b390e96c3d3b23943477eb1f613570baa98e0d",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "registry_sha256": "d3fba93e8724d11bd1c7d872e70b445ddf003b215a4306e4d28cb2081ee9acbe",
+  "registry_sha256": "9c10ba6e7f2ae42cb1ed833304623cfb5c661712a9ea6b85adf2029b5e0480d4",
   "registry_complete": false,
   "comparisons": [
     {
@@ -56,25 +56,26 @@
       "undefined": true
     },
     {
-      "reference": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
-      "site": "GEMSDOE30-PTA1",
-      "reference_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
-      "reference_values_sha256": "e17e9783cc288242399b74d71c724ebe7baa76ee11fecf537d774ca96b92780e",
       "stage": "dots",
+      "reference_sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+      "reference_path": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
       "spearman_full_footprint": null,
-      "candidate_dots": 44090,
-      "candidate_positive_support": 44090,
-      "reference_dots": 44090,
       "candidate_fraction_within_3px_of_reference": null,
       "identical_inside_footprint": false,
-      "correlation_duplicate": false,
-      "dot_duplicate": false,
-      "undefined": true
+      "comparison_note": "The stopped candidate's private bytes are quarantined under ignored outputs/ and are not reopened here, so the saved-state correlation and 3-px overlap cannot be recomputed for this reference. The stopped TDX-C2 decision was already frozen and negative (79.09% overlap with G30-S19) and is unchanged by this arrival. This reference is nevertheless registered so no local raster is silently omitted; the reverse direction (this reference against the registry) is computed and published in docs/research/nearsplay/run-card.json."
+    },
+    {
+      "reference_path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "reference_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "site": "GEMSDOE30-parallel-merged",
+      "stage": "dots",
+      "spearman_full_footprint": null,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "error": "Stopped TDX-C2 candidate raster is quarantined out of git; reverse comparison recorded in PTA-1."
     }
   ],
-  "errors": [
-    "PTA-1 late reference: dots comparison undefined because quarantined TDX-C2 outputs/ are git-ignored."
-  ],
+  "errors": [],
   "decision": "blocked-incomplete-evidence",
   "submission_approved": false
 }

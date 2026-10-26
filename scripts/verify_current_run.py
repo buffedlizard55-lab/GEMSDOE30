@@ -69,6 +69,11 @@ def verify(pointer: Path, template: Path, *, write=False):
             sys.path.insert(0, str(ROOT))
         from scripts.verify_lsm_run import verify as verify_lsm
         return verify_lsm(pointer, template, write=write)
+    if selection.get("verifier") == "scripts/verify_nearsplay_run.py":
+        if str(ROOT) not in sys.path:
+            sys.path.insert(0, str(ROOT))
+        from scripts.verify_nearsplay_run import verify as verify_nearsplay
+        return verify_nearsplay(pointer, template, write=write)
     card_path = local_path(selection["run_card"])
     directory = card_path.parent
     card = load(card_path)

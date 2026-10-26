@@ -4,7 +4,7 @@
   "candidate": "outputs/texture-displacement/tdx1-surface.tif",
   "candidate_sha256": "b5545eae3898e96cdf00a5898b63d52a616024e795f9e7a98fd822573fffa275",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "registry_sha256": "dfd40346f166beea8c92315b1ec6a3e336c92eb5e8adfc2be0242fd021aa93b2",
+  "registry_sha256": "f5bf8be1281691d0f01368daa99fd71c62d584accb49f7d391c27140e78f1d43",
   "registry_complete": false,
   "comparisons": [
     {
@@ -120,25 +120,28 @@
       "undefined": true
     },
     {
-      "reference": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
-      "site": "GEMSDOE30-PTA1",
-      "reference_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
-      "reference_values_sha256": "e17e9783cc288242399b74d71c724ebe7baa76ee11fecf537d774ca96b92780e",
+      "reference_path": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "reference_sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+      "site": "GEMSDOE30-nearslay-lane",
       "stage": "surface",
       "spearman_full_footprint": null,
-      "candidate_dots": null,
-      "candidate_positive_support": 5167373,
-      "reference_dots": 44090,
       "candidate_fraction_within_3px_of_reference": null,
       "identical_inside_footprint": false,
-      "correlation_duplicate": false,
-      "dot_duplicate": false,
-      "undefined": true
+      "error": "Saved continuous pre-placement surface is not tracked in git; post-run byte re-audit applies to final dots only."
+    },
+    {
+      "reference_path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "reference_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "site": "GEMSDOE30-parallel-merged",
+      "stage": "surface",
+      "spearman_full_footprint": null,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "error": "Saved continuous pre-placement surface is not tracked in git; post-run byte re-audit applies to final dots only."
     }
   ],
   "errors": [
-    "G30-S20 late references (PR #29): surface-stage Spearman undefined; tdx1-surface.tif bytes unavailable (git-ignored outputs/) in the post-merge worktree. Recorded undefined; gate must fail closed.",
-    "PTA-1 late reference: candidate continuous surface is git-ignored under outputs/; surface gate stays fail-closed (unknown)."
+    "G30-S20 late references (PR #29): surface-stage Spearman undefined; tdx1-surface.tif bytes unavailable (git-ignored outputs/) in the post-merge worktree. Recorded undefined; gate must fail closed."
   ],
   "decision": "blocked-incomplete-evidence",
   "submission_approved": false

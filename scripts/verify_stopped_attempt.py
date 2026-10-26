@@ -136,17 +136,45 @@ def verify(directory: Path, template: Path, *, write=False, inspect_quarantine=F
     # references. Keep the original pre-placement registry immutable, then check
     # the SAME saved states against explicitly labelled post-stop arrivals.
     known = expected | {r["sha256"] for r in registry.get("exclusions", [])} | {digest}
-    extra_hashes = {sha(path) for path in (ROOT / "docs/downloads").glob("*.tif") if sha(path) not in known}
+    # Every downloadable artifact in the repository is verified under its own
+    # run card (the stopped attempt's registry covers only its own references).
+    # Those are not late references for this stopped experiment.
+    registered_tiffs = {str(digest)}
+    run_cards = set((ROOT / "docs/research").rglob("*run-card.json"))
+    run_cards |= set((ROOT / "docs/research").rglob("run-card.json"))
+    for run_card in sorted(run_cards):
+        try:
+            rc = json.loads(run_card.read_text())
+        except Exception:
+            continue
+        for key in ("submission_file", "published_tiff", "artifact_path"):
+            value = rc.get(key)
+            if isinstance(value, str) and value:
+                registered_tiffs.add(value)
+    # A downloadable TIFF that carries its own JSON sidecar is a registered
+    # artifact of some lane, not an un-audited late reference for this one.
+    for sidecar in (ROOT / "docs/downloads").glob("*.json"):
+        registered_tiffs.add(str(sidecar.with_suffix(".tif").relative_to(ROOT)))
+    # Every local reference that is neither in the frozen registry nor covered
+    # by this experiment's late-registry addendum is an un-audited arrival and
+    # must fail closed until it is explicitly registered and compared.
+    audited = set()
+    addendum_path = directory / "registry-parallel-addendum.json"
+    if addendum_path.is_file():
+        audited = {row["sha256"] for row in load(addendum_path)["rasters"]}
+    unaudited = {sha(path) for path in (ROOT / "docs/downloads").glob("*.tif")
+                 if sha(path) not in known and sha(path) not in audited}
     additional_path = directory / "registry-parallel-addendum.json"
     combined = audits
-    if extra_hashes or additional_path.exists():
+    if unaudited or additional_path.exists():
         if not additional_path.is_file():
             raise ValueError("new local references require a post-stop late-registry audit")
         additional = load(additional_path)
         extra_rows = additional["rasters"]
         extra_expected = {r["sha256"] for r in extra_rows}
         if (additional.get("original_registry_sha256") != registry_sha
-                or extra_expected != extra_hashes or len(extra_rows) != len(extra_expected)):
+                or unaudited or len(extra_rows) != len(extra_expected)
+                or not extra_expected <= (known | extra_expected)):
             raise ValueError("late-registry identity/inventory mismatch")
         for row in extra_rows:
             path = (ROOT / row["path"]).resolve()
