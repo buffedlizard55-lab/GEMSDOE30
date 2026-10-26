@@ -29,6 +29,11 @@
       "detail": "54 features x 4 folds; max either-direction AUC 0.6667 <= 0.90"
     },
     {
+      "name": "preplacement_surface_novelty_expanded_registry",
+      "status": "failed",
+      "detail": "Expanded surface receipt is mis-bound to the final binary TIFF SHA, not a separate pre-placement continuous surface; surface novelty across expanded registry is unverified."
+    },
+    {
       "name": "dots_expanded_registry",
       "status": "failed",
       "detail": "no passing production (holdout gate failed)"
@@ -51,5 +56,13 @@
   "slot_selected": false,
   "display_status": "DO NOT SUBMIT - automated gates not all passed",
   "organizer_score": null,
-  "organizer_acceptance_confirmed": false
+  "organizer_acceptance_confirmed": false,
+  "surface_audit": {
+    "preplacement_surface_valid": false,
+    "expanded_receipt": "novelty-surface-expanded.json",
+    "expanded_receipt_candidate_sha256": "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07",
+    "final_tiff_sha256": "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07",
+    "status": "invalid_as_preplacement_evidence",
+    "reason": "The receipt candidate path and SHA identify the final binary submission TIFF, not the distinct continuous score raster required for a pre-placement comparison."
+  }
 }

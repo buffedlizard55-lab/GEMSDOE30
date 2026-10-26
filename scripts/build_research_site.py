@@ -344,9 +344,10 @@ def ffl_section() -> str:
     if dots["candidate_sha256"] != card["raster_sha256"] or dots["decision"] != "duplicate-stop":
         raise ValueError("FFL-1 expanded dot audit does not bind the duplicate-stopped TIFF")
     max_overlap = max(r["candidate_fraction_within_3px_of_reference"] for r in dots["comparisons"])
-    max_surface = max(r["spearman_full_footprint"] for r in surface["comparisons"])
     if max_overlap <= 0.70 or surface["candidate_sha256"] != card["raster_sha256"]:
-        raise ValueError("FFL-1 expanded novelty receipts contradict the duplicate-stop")
+        raise ValueError("FFL-1 expanded novelty receipts contradict the duplicate-stop / surface audit irregularity")
+    if readiness.get("surface_audit", {}).get("preplacement_surface_valid") is not False:
+        raise ValueError("FFL-1 mis-bound expanded surface receipt must be marked invalid as pre-placement evidence")
     if not stratified.get("infeasible_as_frozen") or stratified.get("production") is not None:
         raise ValueError("FFL-1 stratified receipt no longer records the frozen infeasibility")
     file = local_path(card["published_tiff"])
@@ -357,7 +358,7 @@ def ffl_section() -> str:
     return f'''<section class="release" style="margin-bottom:26px" aria-labelledby="ffl-title">
 <div class="release-heading"><span class="pill failed">Latest lane FFL-1 · Negative</span><span class="pill caution">Duplicate-stop · Do not submit</span></div>
 <h2 id="ffl-title">FFL-1 produced a byte-distinct TIFF. <span>Do not submit it.</span></h2>
-<p><strong>Automated decision first:</strong> the expanded registry audit—pinned nine-site registry plus every TIFF in <code>docs/downloads/</code> at audit time, candidate SHA excluded ({len(dots["comparisons"])} comparisons)—found <strong>{100 * max_overlap:.6f}%</strong> of FFL-1 dots within 3 px of MSDB-1v2, above the 70% limit. The continuous surface was not the duplicate (max Spearman <code>{max_surface:.6f}</code>); the dot placement was. The frozen distance-stratified rescue scored zero folds because the <code>(2,5]</code> and <code>(5,10]</code> strata have zero eligible pixels in every v3 quadrant fold, so no replacement was produced and no weekly slot was selected.</p>
+<p><strong>Automated decision first:</strong> the expanded observed-registry dot audit—pinned nine-site registry plus every TIFF in <code>docs/downloads/</code> at audit time, candidate SHA excluded ({len(dots["comparisons"])} comparisons)—found <strong>{100 * max_overlap:.6f}%</strong> of FFL-1 dots within 3 px of MSDB-1v2, above the 70% duplicate-stop limit. A separate required check is not established: the receipt labeled expanded <code>stage=surface</code> is bound to the final binary TIFF SHA, not a distinct pre-placement continuous score surface. Therefore pre-placement surface novelty against the expanded registry is <strong>unverified</strong>; the duplicate stop is supported by the independently hash-bound dot audit regardless. The frozen distance-stratified rescue scored zero folds because the <code>(2,5]</code> and <code>(5,10]</code> strata have zero eligible pixels in every v3 quadrant fold, so no replacement was produced and no weekly slot was selected.</p>
 <p>HOLDOUT-DTI (catalogue proxy, never an organizer score): Exp. 1 seed 3051 <code>fusion_edge</code> <code>{h["value"]:.6f}</code> vs same-run <code>msdb_edge</code> <code>{h["comparators"]["msdb_edge"]["value"]:.6f}</code> (Δ <code>{delta["value"]:+.6f}</code>, 95% CI <code>[{delta["ci95"][0]:+.6f}, {delta["ci95"][1]:+.6f}]</code>); disclosed fresh-seed confirmation Δ <code>{conf["value"]:+.6f}</code> (95% CI <code>[{conf["ci95"][0]:+.6f}, {conf["ci95"][1]:+.6f}]</code>). The strict validator reopens the file as one float32 band on the exact template grid, with every cell finite in <code>[0, 1]</code>, 44,090 dots, and zero dots on or within 2 px of the catalogue; that file check does not override the duplicate-stop.</p>
 <div class="actions"><a class="button secondary" href="{e(card['published_tiff'])}" download>↓ Download FFL-1 research artifact — do not upload <span>{size:.2f} MiB</span></a><a class="button secondary" href="{FFL_DIR}/review.md">Read FFL-1 review</a><a class="button secondary" href="{FFL_DIR}/nine-site-executive-summary.md">Nine-site executive summary</a></div>
 <p class="filename">{e(file.name)}</p>
