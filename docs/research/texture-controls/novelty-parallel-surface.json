@@ -4,7 +4,7 @@
   "candidate": "/home/user/GEMSDOE30/outputs/texture-controls/tdxc2-surface.tif",
   "candidate_sha256": "1f1f372c75642b025750ac5e69221b800cca30c5f553479538f19e6fe9885788",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "registry_sha256": "9c10ba6e7f2ae42cb1ed833304623cfb5c661712a9ea6b85adf2029b5e0480d4",
+  "registry_sha256": "e3995fcef09da9481e2429d6341cd3a24570b83084183a7abedcf500144bcfb4",
   "registry_complete": false,
   "comparisons": [
     {
@@ -73,6 +73,38 @@
       "candidate_fraction_within_3px_of_reference": null,
       "identical_inside_footprint": false,
       "error": "Stopped TDX-C2 candidate raster is quarantined out of git; reverse comparison recorded in PTA-1."
+    },
+    {
+      "reference": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif",
+      "site": "GEMSDOE30-parallel-merged",
+      "reference_sha256": "3077db43ee72ee526d8b943d1db40f19ce49be9d8ccd3109068ca442964f26cc",
+      "reference_values_sha256": "ea3669f488eabd35ff8a9c8a8df738155a9967f131cb6fad003dd9535ea65dcd",
+      "stage": "surface",
+      "spearman_full_footprint": 0.15583525219422545,
+      "candidate_dots": null,
+      "candidate_positive_support": 5167373,
+      "reference_dots": 38000,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif",
+      "site": "GEMSDOE30-parallel-merged",
+      "reference_sha256": "54139f2cf86f75ba96bddba0f49409e934c77d716eb39150dbd04daf23b6b7e4",
+      "reference_values_sha256": "ea3669f488eabd35ff8a9c8a8df738155a9967f131cb6fad003dd9535ea65dcd",
+      "stage": "surface",
+      "spearman_full_footprint": 0.15583525219422545,
+      "candidate_dots": null,
+      "candidate_positive_support": 5167373,
+      "reference_dots": 38000,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
     }
   ],
   "errors": [],

@@ -150,6 +150,20 @@
         3292
       ],
       "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/arena/a2b527ff-gemsdoe30/docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif"
+    },
+    {
+      "path": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif",
+      "sha256": "3077db43ee72ee526d8b943d1db40f19ce49be9d8ccd3109068ca442964f26cc",
+      "values_sha256": "ea3669f488eabd35ff8a9c8a8df738155a9967f131cb6fad003dd9535ea65dcd",
+      "site": "GEMSDOE30-parallel-merged",
+      "dots": 38000
+    },
+    {
+      "path": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif",
+      "sha256": "54139f2cf86f75ba96bddba0f49409e934c77d716eb39150dbd04daf23b6b7e4",
+      "values_sha256": "ea3669f488eabd35ff8a9c8a8df738155a9967f131cb6fad003dd9535ea65dcd",
+      "site": "GEMSDOE30-parallel-merged",
+      "dots": 38000
     }
   ],
   "exclusions": [],

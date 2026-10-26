@@ -4,7 +4,7 @@
   "candidate": "/home/user/GEMSDOE30/docs/downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.tif",
   "candidate_sha256": "9556e3ddd8ea7658ca510ab02d5b5304ac4c3332c54e7f86df5a24769bd03cdb",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "registry_sha256": "f5bf8be1281691d0f01368daa99fd71c62d584accb49f7d391c27140e78f1d43",
+  "registry_sha256": "e8cb3405e8b6cf34380905d0fac49e8557766c6f496dd789cfbde39a9e9b3bde",
   "registry_complete": false,
   "comparisons": [
     {
@@ -135,6 +135,24 @@
       "stage": "dots",
       "spearman_full_footprint": 0.01708401366188502,
       "candidate_fraction_within_3px_of_reference": 0.3301428895441143,
+      "identical_inside_footprint": false
+    },
+    {
+      "reference_path": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif",
+      "reference_sha256": "3077db43ee72ee526d8b943d1db40f19ce49be9d8ccd3109068ca442964f26cc",
+      "site": "GEMSDOE30-parallel-merged",
+      "stage": "dots",
+      "spearman_full_footprint": -0.00017806180731158152,
+      "candidate_fraction_within_3px_of_reference": 0.156271263325017,
+      "identical_inside_footprint": false
+    },
+    {
+      "reference_path": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif",
+      "reference_sha256": "54139f2cf86f75ba96bddba0f49409e934c77d716eb39150dbd04daf23b6b7e4",
+      "site": "GEMSDOE30-parallel-merged",
+      "stage": "dots",
+      "spearman_full_footprint": -0.00017806180731158152,
+      "candidate_fraction_within_3px_of_reference": 0.156271263325017,
       "identical_inside_footprint": false
     }
   ],

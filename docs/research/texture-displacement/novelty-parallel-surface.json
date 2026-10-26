@@ -4,7 +4,7 @@
   "candidate": "outputs/texture-displacement/tdx1-surface.tif",
   "candidate_sha256": "b5545eae3898e96cdf00a5898b63d52a616024e795f9e7a98fd822573fffa275",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "registry_sha256": "f5bf8be1281691d0f01368daa99fd71c62d584accb49f7d391c27140e78f1d43",
+  "registry_sha256": "e8cb3405e8b6cf34380905d0fac49e8557766c6f496dd789cfbde39a9e9b3bde",
   "registry_complete": false,
   "comparisons": [
     {
@@ -132,6 +132,26 @@
     {
       "reference_path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
       "reference_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "site": "GEMSDOE30-parallel-merged",
+      "stage": "surface",
+      "spearman_full_footprint": null,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "error": "Saved continuous pre-placement surface is not tracked in git; post-run byte re-audit applies to final dots only."
+    },
+    {
+      "reference_path": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif",
+      "reference_sha256": "3077db43ee72ee526d8b943d1db40f19ce49be9d8ccd3109068ca442964f26cc",
+      "site": "GEMSDOE30-parallel-merged",
+      "stage": "surface",
+      "spearman_full_footprint": null,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "error": "Saved continuous pre-placement surface is not tracked in git; post-run byte re-audit applies to final dots only."
+    },
+    {
+      "reference_path": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif",
+      "reference_sha256": "54139f2cf86f75ba96bddba0f49409e934c77d716eb39150dbd04daf23b6b7e4",
       "site": "GEMSDOE30-parallel-merged",
       "stage": "surface",
       "spearman_full_footprint": null,

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "registered_utc": "2026-10-26T00:09:36+00:00",
+  "lane": "G30-TAD",
+  "registered_plan": "docs/research/tilt-alteration-discontinuity/preregistration.md",
+  "registered_plan_sha256": "9c7e91953be22f435d0113f8a9ce95d19cfc9aa86f7c3120d33052e91ef0c3d2",
+  "registry": "docs/research/tilt-alteration-discontinuity/registry.json",
+  "registry_sha256": "bec529994d009be6cedd23c35d0e788f876ae62bb4d2f86f3491c90915bdc527",
+  "registry_aligned_rasters": 190,
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200,
+  "support_px": 17
+}

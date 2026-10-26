@@ -23,6 +23,7 @@ jobs:
           python scripts/ci_check.py python scripts/verify_current_run.py
           python scripts/ci_check.py python scripts/verify_stopped_attempt.py
           python scripts/ci_check.py python scripts/verify_lsm_run.py
+          python scripts/ci_check.py python scripts/verify_tad_run.py
           python scripts/ci_check.py python scripts/build_research_site.py --check
       - name: Run tests with API-readable failure diagnostics
         run: python scripts/ci_check.py python -m pytest -q
