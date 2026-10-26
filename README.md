@@ -1,5 +1,11 @@
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
+## Priority-site comparison: what to trust first
+
+The requested per-site executive comparison for GEMSDOE24, 25, 27, 28, 30, 31, 32, 33, and 36 is now available at **[Priority-site review](priority-site-review.html)**. The owner-supplied list names GEMSDOE32 H33 as the highest historical entry (reported 0.2778), but the repository reconstructs it as a catalogue-proximity-pruned variant of the GEMSDOE28 d2.8 raster; the historical raster fails the requested novelty gate and must not be copied or relabelled. The current H-NEARSPLAY TIF is downloadable as a research artifact, but incomplete registry coverage means it is **not cleared for a competition slot**. Owner-supplied site values are not submission receipts, HOLDOUT-DTI results, or organizer-confirmed scores.
+
+**Session rule:** use the current pointer and run-card below; preserve duplicate stops; never turn an owner-reported leaderboard value into a score receipt. For the entire owner prompt, session protocol, and historical audit trail, see [Current owner prompt](#current-owner-prompt-complete-task-text-formatting-normalized) and [the priority-site review](priority-site-review.html).
+
 ## START HERE — 26 October review: downloads valid; NOT cleared to submit
 
 Read the [dated nine-site executive review](docs/research/review-2026-10-26/review.md) and [machine inspection](docs/research/review-2026-10-26/readiness.json) first. The current owner prompt below remains the starting brief. This session follows the same requirements; no lane paragraph was supplied, so no new scientific experiment or TIFF was generated. No weekly slot was used. Missing full registry and comparable-best evidence stay blockers.
@@ -997,7 +1003,7 @@ measurements taken this session rather than on judgement.
 
 **Requirements and owner-reported claims, not verified results.** Read this at the start of every session.
 Whitespace and link formatting are normalized; repeated requests and the supplied submission list are retained.
-The [current pointer](docs/current-run.json), [dated review](docs/research/review-2026-10-26/review.md), and automated gates, not the quoted claims, determine readiness.
+The [current run card](docs/research/texture-displacement/run-card.json) and automated gates, not the quoted claims, determine readiness.
 
 <details>
 <summary>Expand the complete owner task text (2026-10-25)</summary>

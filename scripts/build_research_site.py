@@ -67,7 +67,7 @@ def page(title: str, content: str, *, active: str = "home", research_dir: str = 
 <title>{e(title)} · GEMSDOE30</title><link rel="stylesheet" href="{STYLE}"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html"><span class="brand-mark">G30</span> Fault discovery lab</a>
-<nav aria-label="Main navigation"><a href="index.html"{' aria-current="page"' if active == "home" else ''}>Overview</a><a href="executive-summary.html"{' aria-current="page"' if active == "guide" else ''}>Submission guide</a><a href="experiment-review.html"{' aria-current="page"' if active == "research" else ''}>Research</a><a href="README.md">Project brief</a></nav></div></header>
+<nav aria-label="Main navigation"><a href="index.html"{' aria-current="page"' if active == "home" else ''}>Overview</a><a href="executive-summary.html"{' aria-current="page"' if active == "guide" else ''}>Submission guide</a><a href="experiment-review.html"{' aria-current="page"' if active == "research" else ''}>Research</a><a href="priority-site-review.html">Priority sites</a><a href="README.md">Project brief</a></nav></div></header>
 <main id="main">{LATEST_REVIEW if active in ("home", "guide") else ""}{content}</main>
 <footer><div><strong>GEMSDOE30</strong><p>Evidence before claims. Automated machine gates require zero human raster inspection.</p></div>
 <div><a href="docs/status.json">Evidence feed (JSON)</a><a href="{e(research_dir)}/run-card.json">Run card</a><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Official competition ↗</a></div>
