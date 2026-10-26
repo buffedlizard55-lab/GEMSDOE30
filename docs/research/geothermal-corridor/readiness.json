@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "lane": "geothermal-corridor",
+  "run_id": "GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z",
+  "download_ok": true,
+  "ok_to_submit": false,
+  "submission_approved": false,
+  "slot_selected": false,
+  "verdict": "negative",
+  "gates": [
+    {"gate": "GeoTIFF format: single float32 band, EPSG:32611, shape/transform match, finite [0,1] inside footprint, NaN outside", "state": "passed", "evidence": "docs/research/geothermal-corridor/validation.json (12/12 checks)"},
+    {"gate": "Portal range error: no NaN/Inf or out-of-[0,1] value inside footprint", "state": "passed", "evidence": "5,167,373 finite footprint cells, min 0.0 max 1.0 (validation.json)"},
+    {"gate": "Uniqueness vs locally present submissions: Spearman <=0.90 and 3px dot overlap <=70%", "state": "passed", "evidence": "max rho 0.018, max overlap 60.6% across all 23 docs/downloads rasters (novelty-downloads-audit.json)"},
+    {"gate": "Completeness of pinned novelty registry", "state": "unknown", "evidence": "pinned registry complete=false; 3 scored files absent (novelty-dots.json decision=blocked-incomplete-evidence); GEMSDOE27/28/31/32/33/36 best-submission files not present locally"},
+    {"gate": "HOLDOUT-DTI beats current holdout best with CI", "state": "unknown", "evidence": "not computable: organizer labels.tif/training_features.tif absent (DrivenData login)"},
+    {"gate": "Single-feature leakage canaries AUC <=0.90", "state": "unknown", "evidence": "not computable without labels"},
+    {"gate": "Dots on/within 2px of organizer catalogue", "state": "unknown", "evidence": "0 on/within 2px of SGMC proxy by construction; organizer catalogue not available to count against"},
+    {"gate": "Unique submission name and <=140-char note", "state": "passed", "evidence": "GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z; note 110/140 chars"}
+  ],
+  "decision": "DOWNLOAD OK; NOT OK TO SUBMIT. Unknown is never approved: with holdout/canary/catalogue gates unknown, no weekly slot is selected or used."
+}
