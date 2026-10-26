@@ -29,6 +29,44 @@ def sha(path: Path) -> str:
         return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
+def verify_expanded_dot_audit(audit: dict, expected_sha256: str) -> float:
+    """Require the expanded dot receipt to be bound to the TIFF and prove a stop.
+
+    A passing/blocked partial audit is not enough for this artifact: its final
+    negative decision depends on the recorded >70% overlap against an observed
+    prior raster. This validates that evidence without claiming registry
+    completeness.
+    """
+    if audit.get("stage") != "dots":
+        raise ValueError("expanded novelty receipt is not a dot-stage audit")
+    if audit.get("candidate_sha256") != expected_sha256:
+        raise ValueError("expanded dot novelty receipt is not bound to the published TIFF")
+    if audit.get("errors"):
+        raise ValueError("expanded dot novelty audit contains comparison errors")
+    rows = audit.get("comparisons")
+    if not isinstance(rows, list) or not rows:
+        raise ValueError("expanded dot novelty audit has no comparisons")
+    overlaps = []
+    max_rho = 0.0
+    for row in rows:
+        try:
+            rho = float(row["spearman_full_footprint"])
+            overlap = float(row["candidate_fraction_within_3px_of_reference"])
+        except (KeyError, TypeError, ValueError) as exc:
+            raise ValueError("expanded dot novelty row is incomplete") from exc
+        if not np.isfinite(rho) or not np.isfinite(overlap) or not 0.0 <= overlap <= 1.0:
+            raise ValueError("expanded dot novelty row has invalid statistics")
+        max_rho = max(max_rho, rho)
+        overlaps.append(overlap)
+    max_overlap = max(overlaps)
+    duplicate = max_rho > 0.90 or max_overlap > 0.70
+    if not duplicate or audit.get("decision") != "duplicate-stop":
+        raise ValueError("expanded dot novelty receipt does not support the duplicate-stop")
+    if audit.get("submission_approved") is not False:
+        raise ValueError("expanded dot novelty receipt must not approve submission")
+    return max_overlap
+
+
 def verify() -> dict:
     card = json.loads((REPORT / "run-card.json").read_text())
     readiness = json.loads((REPORT / "readiness.json").read_text())
@@ -48,13 +86,30 @@ def verify() -> dict:
         if audit["decision"] == "duplicate-stop" or audit.get("errors"):
             raise ValueError(f"{stage} novelty audit is a duplicate-stop / has errors")
         rows = audit["comparisons"]
-        if max(r["spearman_full_footprint"] for r in rows) > 0.90:
-            raise ValueError(f"{stage} surface correlation exceeds 0.90")
-        if stage == "dots" and not (REPORT / "results-stratified.json").is_file():
-            if audit["candidate_sha256"] != card["raster_sha256"]:
-                raise ValueError("dot novelty receipt is not bound to the published TIFF")
-            if max(r["candidate_fraction_within_3px_of_reference"] for r in rows) > 0.70:
-                raise ValueError("dot overlap exceeds 70%")
+        if not rows or max(r["spearman_full_footprint"] for r in rows) > 0.90:
+            raise ValueError(f"{stage} novelty audit is empty or exceeds correlation threshold")
+    expanded_dots = json.loads((REPORT / "novelty-dots-expanded.json").read_text())
+    max_expanded_overlap = verify_expanded_dot_audit(expanded_dots, card["raster_sha256"])
+    if card["verdict"] != "negative" or card["submission_approved"] is not False:
+        raise ValueError("duplicate-stopped expanded dots must remain a negative, unapproved artifact")
+    # The purported expanded 'surface' receipt is actually bound to the final
+    # binary submission TIFF, not the pre-placement continuous score raster.
+    # Do not present it as evidence of pre-placement surface novelty.
+    expanded_surface = json.loads((REPORT / "novelty-surface-expanded.json").read_text())
+    if expanded_surface.get("stage") != "surface":
+        raise ValueError("expanded surface receipt has an invalid stage")
+    preplacement_surface_valid = (
+        expanded_surface.get("candidate_sha256") != card["raster_sha256"]
+        and not expanded_surface.get("errors")
+        and bool(expanded_surface.get("comparisons"))
+        and max(r["spearman_full_footprint"] for r in expanded_surface["comparisons"]) <= 0.90
+    )
+    if readiness.get("surface_audit", {}).get("preplacement_surface_valid") != preplacement_surface_valid:
+        raise ValueError("readiness does not reflect the expanded pre-placement surface audit status")
+    if readiness.get("surface_audit", {}).get("preplacement_surface_valid") is not False:
+        raise ValueError("mis-bound expanded surface receipt must not count as pre-placement evidence")
+    if max_expanded_overlap <= 0.70:
+        raise ValueError("expanded dot audit no longer supports duplicate-stop")
     if results["canary_alarms"]:
         raise ValueError("leakage canary alarms recorded")
     stratified_path = REPORT / "results-stratified.json"
