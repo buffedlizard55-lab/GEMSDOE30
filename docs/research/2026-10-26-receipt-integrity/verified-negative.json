@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "lane": "FFL-1",
+  "raster_sha256": "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07",
+  "gates": [
+    {
+      "name": "file_contract_strict_all_finite",
+      "status": "passed",
+      "detail": "single float32 band, EPSG:32611, template shape/transform; whole array finite in [0,1]; 0.0 outside"
+    },
+    {
+      "name": "experiment1_point_improvement",
+      "status": "passed",
+      "detail": "seed3051 fusion_edge-msdb_edge = +0.006779 (point); frozen CI gate failed by 0.000067"
+    },
+    {
+      "name": "confirmation_fresh_seed_paired_ci",
+      "status": "passed",
+      "detail": "seed3063 delta=0.010522"
+    },
+    {
+      "name": "experiment3_stratified_paired_ci",
+      "status": "failed",
+      "detail": "infeasible as frozen on v3 folds (see results-stratified.json)"
+    },
+    {
+      "name": "single_feature_leakage_canaries",
+      "status": "passed",
+      "detail": "54 features x 4 folds; max either-direction AUC 0.6667 <= 0.90"
+    },
+    {
+      "name": "dots_expanded_registry",
+      "status": "failed",
+      "detail": "no passing production (holdout gate failed)"
+    },
+    {
+      "name": "duplicate_stop_fusion_edge_emission",
+      "status": "failed",
+      "detail": "78.28% of fusion_edge dots within 3px of MSDB-1v2 raster (>70%); that emission is permanently negative"
+    },
+    {
+      "name": "catalogue_exclusion",
+      "status": "passed",
+      "detail": "0 dots on catalogue pixels; 0 dots within 2 px of catalogue"
+    }
+  ],
+  "research_verdict": "negative",
+  "ok_to_submit": false,
+  "download_ok": true,
+  "submission_approved": false,
+  "slot_selected": false,
+  "display_status": "DO NOT SUBMIT - automated gates not all passed",
+  "organizer_score": null,
+  "organizer_acceptance_confirmed": false
+}

@@ -1,0 +1,69 @@
+{
+  "path": "docs/research/2026-10-26-fflidar/gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3.tif",
+  "passed": true,
+  "checks": [
+    {
+      "name": "template_single_band",
+      "passed": true,
+      "detail": "count=1"
+    },
+    {
+      "name": "single_band",
+      "passed": true,
+      "detail": "count=1"
+    },
+    {
+      "name": "float32",
+      "passed": true,
+      "detail": "dtypes=('float32',)"
+    },
+    {
+      "name": "epsg",
+      "passed": true,
+      "detail": "crs=EPSG:32611"
+    },
+    {
+      "name": "template_epsg",
+      "passed": true,
+      "detail": "crs=EPSG:32611"
+    },
+    {
+      "name": "shape_matches_template",
+      "passed": true,
+      "detail": "output=(3730, 3292) template=(3730, 3292)"
+    },
+    {
+      "name": "transform_matches_template",
+      "passed": true,
+      "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+    },
+    {
+      "name": "100m_north_up_grid",
+      "passed": true,
+      "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+    },
+    {
+      "name": "finite_and_in_range_inside_footprint",
+      "passed": true,
+      "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+    },
+    {
+      "name": "finite_in_range_outside_footprint_diagnostic",
+      "passed": true,
+      "detail": "outside_pixels=7111787; finite in-range values required for the nonstandard whole-array diagnostic (finite=7111787)"
+    },
+    {
+      "name": "whole_raster_finite_range_diagnostic",
+      "passed": true,
+      "detail": "all_pixels=12279160 finite and in [0, 1]"
+    },
+    {
+      "name": "template_readable",
+      "passed": true,
+      "detail": "shape=(3730, 3292)"
+    }
+  ],
+  "raster_sha256": "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07",
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "scope": "Current byte validation only; no holdout or novelty re-execution; template is a pinned owner mirror."
+}

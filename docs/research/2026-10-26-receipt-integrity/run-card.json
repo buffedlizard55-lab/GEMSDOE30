@@ -1,0 +1,33 @@
+{
+  "hypothesis": "A negative duplicate-stop decision must verify the decisive expanded registry receipt, not bypass it.",
+  "mechanism": "Bind the archived expanded audit to the exact raster digest; validate finite measurements and shared novelty decision; re-open bytes with shared submission validator.",
+  "non_fault_mimic": "Not a new geological experiment; archived FFL features can respond to paleo-shorelines, volcanic flow fronts and lithologic contacts.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": null,
+    "ci95": null,
+    "withheld_positives": null,
+    "evaluator_version": null,
+    "reason": "No holdout executed; no identifiable allocated method lane in supplied prompt."
+  },
+  "registry": {
+    "surface_correlation": null,
+    "dot_overlap": null,
+    "complete": false,
+    "reason": "No new surface or dots; archived duplicate evidence checked, not recomputed. See archived FFL run card."
+  },
+  "raster_sha256": null,
+  "validator_output": {
+    "new_raster": "not generated",
+    "existing_artifact": "validation.json",
+    "passed": true,
+    "scope": "Current archived FFL bytes only; no new-raster validation claim."
+  },
+  "submission_name": null,
+  "note": "Receipt-integrity audit only. No new TIFF; archived FFL remains duplicate-stopped. DO NOT SUBMIT.",
+  "experiments_run": 0,
+  "new_tiff_generated": false,
+  "submission_approved": false,
+  "slot_selected": false,
+  "verdict": "negative"
+}
