@@ -2,7 +2,7 @@
   "schema_version": 1,
   "run_card": "docs/research/phase-tilt-asymmetry/run-card.json",
   "readiness": "docs/research/phase-tilt-asymmetry/readiness.json",
-  "purpose": "Archived PTA-1 downloadable research artifact, not a current-slot recommendation. Historical 198-reference evidence is frozen; new public references receive blocking UNKNOWN coverage without rewriting it. See latest_review for GDX-1, the newest negative experiment. No organizer-confirmed score or slot selected.",
+  "purpose": "Archived PTA-1 downloadable research artifact, not a current-slot recommendation. Historical 198-reference evidence is frozen; new public references receive blocking UNKNOWN coverage without rewriting it. See latest_review for CSR-1, the newest verified negative experiment (OK to download: YES; OK to submit: NO). No organizer-confirmed score or slot selected.",
   "latest_attempt": "docs/research/texture-controls/run-card.json",
   "additional_stopped_attempts": [
     {
@@ -21,6 +21,13 @@
     }
   ],
   "additional_research_artifacts": [
+    {
+      "lane": "GDX-1",
+      "run_card": "docs/research/2026-10-26-gdx/run-card.json",
+      "readiness": "docs/research/2026-10-26-gdx/readiness.json",
+      "verifier": "scripts/verify_geothermal_chemistry_run.py",
+      "decision": "ARCHIVED record, not current approval: NEGATIVE / DO NOT SUBMIT (HOLDOUT-DTI 0.11965 vs same-protocol core19 0.13691; both paired-CI improvement gates failed; global uniqueness UNKNOWN; no slot selected)"
+    },
     {
       "lane": "G30-TAD",
       "pointer": "docs/research/tilt-alteration-discontinuity/current-run.json",
@@ -56,10 +63,13 @@
     }
   ],
   "latest_review": {
-    "lane": "GDX-1",
-    "run_card": "docs/research/2026-10-26-gdx/run-card.json",
-    "verifier": "scripts/verify_geothermal_chemistry_run.py",
-    "decision": "NEGATIVE / DO NOT SUBMIT: HOLDOUT-DTI 0.11965 vs same-protocol core19 0.13691; both paired-CI improvement gates failed; global uniqueness UNKNOWN; no slot selected",
+    "lane": "CSR-1",
+    "run_card": "docs/research/2026-10-26-csr/run-card.json",
+    "readiness": "docs/research/2026-10-26-csr/readiness.json",
+    "verifier": "scripts/verify_csr_run.py",
+    "report": "docs/research/2026-10-26-csr/review.md",
+    "site_page": "csr-discontinuity-review.html",
+    "decision": "NEGATIVE / DOWNLOAD OK, DO NOT SUBMIT: HOLDOUT-DTI 0.158162 vs core19_edge 0.144915 (+0.013247) and msdb_edge 0.169986 (-0.011825 pooled; Fold 3 SE Walker Lane +0.02300); 324/324 canaries <= 0.6629; 357-raster two-stage novelty PASSED (max 67.70% <= 70%, 59.86% vs published downloads); 12/12 format checks all-finite [0,1]; no slot selected",
     "history_preserved": true
   }
 }

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "lane": "CSR-1",
+  "experiment_spec": "csr1",
+  "frozen_utc": "2026-10-26T22:18:00Z",
+  "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+  "registry_path": "docs/research/2026-10-26-csr/registry.json",
+  "registry_sha256": "cf8ccc608e01ed233b350b0b48fc6904c3ec1fd8f7517863dbf2ecc0a9f9d62b",
+  "registry_aligned_rasters": 357,
+  "registry_exclusions": 2,
+  "guard_px": 17,
+  "support_px": 16,
+  "analytic_max_euclidean_support_px": 13.73,
+  "dot_budget": 44090,
+  "off_catalogue_min_distance_px": 2.0,
+  "min_interdot_sq_dist_exclusive": 6,
+  "min_realized_interdot_spacing_px": 2.8284271247461903,
+  "ridge_concentration_gamma": 1.25,
+  "noisy_or_subsurface_weight": 0.35,
+  "gate_floor": 0.08,
+  "primary_seed": 3101,
+  "confirmation_seed": 3119,
+  "bootstrap_seed": 3137,
+  "bootstrap_replicates": 2000,
+  "max_experiments": 3,
+  "max_wall_seconds": 7200,
+  "arms": [
+    "core19_edge",
+    "msdb_edge",
+    "csr_dense_edge",
+    "csr_dispersed"
+  ],
+  "candidate_arm": "csr_dispersed",
+  "required_positive_deltas": [
+    "core19_edge",
+    "msdb_edge"
+  ],
+  "canary_max_symmetric_auc": 0.90,
+  "novelty_max_spearman": 0.90,
+  "novelty_max_dot_overlap_3px": 0.70
+}

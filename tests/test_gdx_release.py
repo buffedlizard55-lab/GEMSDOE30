@@ -147,8 +147,11 @@ def test_all_current_pages_have_real_links_unique_ids_and_clear_scope(name):
         assert target.is_relative_to(ROOT) and target.is_file(), url
         if parts.fragment and target.suffix == ".html":
             assert unquote(parts.fragment) in Links(target.read_text()).ids, url
-    if name in {"index.html", "executive-summary.html", "geothermal-chemistry-review.html"}:
+    if name == "geothermal-chemistry-review.html":
         assert parsed.downloads == [load(REPORT / "run-card.json")["published_tiff"]]
+        assert text.count("NOT APPROVED FOR SUBMISSION") == 1
+        assert "HOLDOUT-DTI" in text and "60,988" in text
+    elif name in {"index.html", "executive-summary.html"}:
         assert text.count("NOT APPROVED FOR SUBMISSION") == 1
         assert "HOLDOUT-DTI" in text and "60,988" in text
     elif name.startswith("priority-"):

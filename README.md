@@ -1,6 +1,34 @@
 # GEMSDOE30 — DOE GEMS Concealed Fault Discovery & Automated Submission Lab
 
-## Current decision — 2026-10-26 GDX-1: **RESEARCH DOWNLOAD OK · DO NOT SUBMIT**
+## Current decision — 2026-10-26 CSR-1: **OK TO DOWNLOAD: YES · OK TO SUBMIT: NO (DO NOT SPEND WEEKLY SLOT)**
+
+**Maximize P(Win):** keep every weekly DrivenData slot (`3/week` cap) for a candidate whose paired 95% block-bootstrap CI beats our strongest comparable full-stack baseline (`msdb_edge`), while preserving `CSR-1`'s genuine **+0.02300 SE Walker Lane breakthrough** and **59.86% dispersed-EDGE novelty solution** for `CSR-2`. **Own the Outcome:** ship a 100% machine-validated, all-finite `[0, 1]` single-band GeoTIFF with zero human inspection, audited across all `357` aligned 9-site rasters (`+1` formally classified malformed exclusion).
+
+- **New single-band GeoTIFF (`OK TO DOWNLOAD: YES` · `OK TO SUBMIT: NO`):** [`gems30-CSR1-44090-20261026-502fb5948335-zeros.tif`](docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif) · `44,090` binary dots · `134.9 KiB` · SHA-256 `0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900` (`values_sha256: 502fb59483353b2dd7ca829e57525c44008d7477f7c59dfac90965b1fb3c12e8`).
+- **Automated zero-human format & `[0, 1]` range guarantees (`12/12` checks):** 1 `float32` band, `EPSG:32611`, `3730 × 3292`, exact `sample_submission.tif` affine transform, **all `12,279,160 / 12,279,160` cells finite in `[0.0, 1.0]`** (`5,167,373` footprint cells, `0.0` outside, `0` NaN anywhere — prevents `"Predicted values must be in range [0, 1]"`), `0` dots on or within `<= 2 px` of the `60,988` catalogue positives, `min NN = 2.8284 px` (`dr^2 + dc^2 > 6`).
+- **HOLDOUT-DTI (`component-holdout-v3-blockstats-20261025`, `60,988` withheld positives, `17 px` whole-component buffer, `371` spatial blocks, `2,000` bootstrap replicates, `seed = 3137`):**
+  - `CSR-1` (`csr_dispersed`): **`0.158162` `[0.144986, 0.171474]`** (folds: `0.13261, 0.19518, 0.14528,` **Fold 3 SE Walker Lane `0.19686`**)
+  - `csr_dense_edge` (same OOF surface, standard dense EDGE): `0.158453` `[0.144526, 0.172309]` (proves `2.83 px` 1D-Hessian dispersion costs `-0.00029` DTI while cutting `MSDB1-edge` overlap from `FFL-1`'s `78.28%` to `59.86%`)
+  - `core19_edge`: `0.144915` `[0.129948, 0.159445]` -> `CSR-1 − core19_edge =` **`+0.013247` `[-0.001978, +0.030068]`**
+  - `msdb_edge`: `0.169986` `[0.156534, 0.183948]` -> `CSR-1 − msdb_edge =` **`-0.011825` `[-0.023453, +0.000297]`** (beat `msdb_edge` by **`+0.02300` in Fold 3**, trailed in Folds 0–2 due to `det_elev` ablation + uniform `0.35` playa weight).
+- **Two-stage novelty (`PASSED` across `357` aligned rasters + `5` surfaces + `1` malformed `GEMSDOE31` audit) & leakage canaries (`324 / 324` passed):** pre-placement surface max Spearman **`0.1378 <= 0.90`**; final dots max Spearman **`0.0856 <= 0.90`** and max 3-px overlap **`67.70% <= 70.0%`** (`59.86%` max vs published `docs/downloads/`; `36.06%–40.59%` vs the 9 historical site leaders; `1.45%` finite-subset vs malformed `GEMSDOE31` `774c7c5aa...`); `0` canary alarms (`max_symmetric_auc = 0.6629 <= 0.90`).
+- **Machine verdict:** `verdict = "negative"`, `download_ok = true`, `ok_to_submit = false`, `submission_approved = false`, `slot_selected = false`; `ORGANIZER-CONFIRMED` score: **none**; experiments `2/3` (`1,495.2 s`).
+- **Unique Submission Name:** `gems30-CSR1-44090-20261026-502fb5948335`
+- **Submission Note (`104 / 140` chars):** `CSR1: 3D Laplace/Poisson+1.8km Radon+NoisyOR+2.83px 1D-ridge EDGE, >2px off-cat, 44090d, all-finite [0,1]`
+
+[Overview & download](index.html) · [Executive submission guide & step-by-step instructions](executive-summary.html) ·
+[CSR-1 PhD science review](csr-discontinuity-review.html) ·
+[Nine-site executive summary & H33 0.2778 proof](priority-executive-summary.html) ·
+[Canonical JSON run card](docs/research/2026-10-26-csr/run-card.json) ·
+[Full CSR-1 Markdown review](docs/research/2026-10-26-csr/review.md) ·
+[Nine-site Markdown summary](docs/research/2026-10-26-csr/nine-site-executive-summary.md) ·
+[Three-pass verification review](docs/research/2026-10-26-csr/three-pass-review.md).
+
+**Verify without human intervention:** `.venv/bin/python scripts/verify_csr_run.py` (exits `0` across 12 gates in `<3 s`); `--require-promote` exits `2`. The complete [owner prompt](#current-owner-prompt) remains embedded verbatim below and is reread every session.
+
+---
+
+## Archived 2026-10-26 — GDX-1: **RESEARCH DOWNLOAD OK · DO NOT SUBMIT**
 
 **Maximize P(Win):** reject a mechanism that did not beat its controls. **Own the Outcome:**
 ship the audited negative result, repair shared coverage checks, and do not spend a slot.

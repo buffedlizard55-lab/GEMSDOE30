@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "lane": "CSR-1",
+  "experiment_spec": "csr1",
+  "started_utc": "2026-10-26T22:28:26+00:00",
+  "experiment_cap": 3,
+  "preregistration_md_sha256": "28383a271211f7ae1090f2cd89926f37ca756d3fcac8a6d442ad7b6b7b3009c9",
+  "preregistration_json_sha256": "329f4e13d3c94a0ee627f04a7ae40344fbca22a1586fe2b8dd163908889f13fc",
+  "registry_sha256": "cf8ccc608e01ed233b350b0b48fc6904c3ec1fd8f7517863dbf2ecc0a9f9d62b"
+}
