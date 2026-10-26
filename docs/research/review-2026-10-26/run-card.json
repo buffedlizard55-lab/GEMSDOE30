@@ -1,0 +1,34 @@
+{
+  "hypothesis": "Audit whether current local evidence supports a unique, higher-performing competition submission",
+  "mechanism": "Reopen primary TIFFs using shared validator; bind exact bytes to run cards; preserve unknown scientific gates",
+  "non_fault_mimic": "Lithologic contacts, volcanic flow fronts and erosional lineaments can mimic proposed fault signatures",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": null,
+    "ci95": null,
+    "withheld_positives": null,
+    "evaluator_version": null,
+    "reason": "No experiment executed: no identifiable assigned method lane; no comparable-best rerun"
+  },
+  "registry": {
+    "surface_correlation": null,
+    "dot_overlap": null,
+    "complete": false,
+    "reason": "No new raster; no novelty rerun; archived public subset cannot certify full parallel registry"
+  },
+  "raster_sha256": null,
+  "validator_output": {
+    "new_raster": "not generated",
+    "existing_primary_tiffs": "Both reopened, format-valid and hash-matched; see readiness.json",
+    "no_nan_inside_footprint": null,
+    "values_in_0_1": null,
+    "crs_shape_transform_match": null
+  },
+  "submission_name": null,
+  "note": "Audit only. No new TIFF; lane, full registry and same-protocol best-model validation unresolved. Do not submit.",
+  "experiments_run": 0,
+  "new_tiff_generated": false,
+  "submission_approved": false,
+  "slot_selected": false,
+  "verdict": "negative"
+}

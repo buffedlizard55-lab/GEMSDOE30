@@ -6,10 +6,16 @@ The requested per-site executive comparison for GEMSDOE24, 25, 27, 28, 30, 31, 3
 
 **Session rule:** use the current pointer and run-card below; preserve duplicate stops; never turn an owner-reported leaderboard value into a score receipt. For the entire owner prompt, session protocol, and historical audit trail, see [Current owner prompt](#current-owner-prompt-complete-task-text-formatting-normalized) and [the priority-site review](priority-site-review.html).
 
-## START HERE — two **HOLDOUT-PROMOTED** candidate GeoTIFFs, no slot used
+## START HERE — 26 October review: downloads valid; NOT cleared to submit
 
-**Two distinct, unique, format-valid artifacts exist in this repository.** Both passed
-their own automated gates. Neither is ORGANIZER-CONFIRMED, and **no competition slot
+Read the [dated nine-site executive review](docs/research/review-2026-10-26/review.md) and [machine inspection](docs/research/review-2026-10-26/readiness.json) first. The current owner prompt below remains the starting brief. This session follows the same requirements; no lane paragraph was supplied, so no new scientific experiment or TIFF was generated. No weekly slot was used. Missing full registry and comparable-best evidence stay blockers.
+
+The prior-session narrative below is historical; the dated review supersedes conflicting readiness claims.
+
+## Existing candidate GeoTIFFs — local format validity only
+
+**Two distinct, unique, format-valid artifacts exist in this repository.** Both pass local format checks. H-NEARSPLAY has a recorded proxy promotion;
+MSDB-1v2 has a recorded **negative** overall readiness verdict because required evidence is unknown. Neither is ORGANIZER-CONFIRMED, and **no competition slot
 has been selected or used by this repository** — the authorized entrant decides.
 
 ### 1. Current pointer — H-NEARSPLAY (this session's lane)
@@ -33,7 +39,7 @@ so off-catalogue mass is the only mass that can earn credit. No inspected GEMSDO
 artifact or repository holdout emits purely from this annulus — the d2.8 family spreads
 uniformly off-catalogue (median catalogue distance exactly 1,500 m).
 
-### 2. Peer artifact — MSDB-1v2 (merged from `main`)
+### 2. Peer artifact — MSDB-1v2 (format-valid, overall readiness negative)
 
 **Download (OK):** [MSDB-1v2 GeoTIFF](docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif)
 — SHA-256 `22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381`,
