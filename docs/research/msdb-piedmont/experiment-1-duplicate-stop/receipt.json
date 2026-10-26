@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "experiment_ordinal": 1,
+  "lane": "MSDB-1-exp1-unconstrained-raw19-plus-msdb18",
+  "elapsed_seconds": 194.62,
+  "holdout_folds_executed": 0,
+  "holdout_labels_evaluated": false,
+  "surface_novelty": {
+    "decision": "blocked-incomplete-evidence",
+    "duplicate_detected": false,
+    "max_spearman": 0.15478642581437857
+  },
+  "dots_novelty": {
+    "decision": "duplicate-stop",
+    "duplicate_detected": true,
+    "max_spearman": 0.05936912858525804,
+    "max_fraction_within_3px": 0.7144477205715582,
+    "triggering_reference": "docs/downloads/gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan.tif",
+    "triggering_reference_dots": 60000
+  },
+  "root_cause": "Feeding raw regional coordinate-proxy/DC-level bands (mag_anom, rtp, deq_n100a15, iso_grav_anom, tmi, ieq_n100a15) directly into HGB + un-gated 2-D disk EDGE allocated diffuse basin-interior dots into G30-S19's 60,000-dot regional habitat corridors (71.44% > 70% threshold by 1.44 percentage points).",
+  "action_taken": "Stopped immediately per Parallel-Run Protocol Rule 1 prior to any holdout fold evaluation; archived full Experiment 1 receipts here; preregistered Experiment 2 (MSDB-1-v2) inside pure stationary derivative/cover-ramp + Rayleigh curvilinear-discontinuity-gated MSDB lane."
+}

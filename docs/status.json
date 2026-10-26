@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-26T00:24:29Z",
+  "generated_utc": "2026-10-26T00:33:24Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -156,6 +156,26 @@
       "run_name": "gems25-dotted-h19-5-d2-8-zeros_20261003T172939460962Z",
       "note": "Archived zero-outside diagnostic; not published-format compliant or upload-recommended",
       "performance_status": "unscored; local format validation is not a score"
+    },
+    {
+      "manifest": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a.json",
+      "file": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+      "present": true,
+      "sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+      "sha256_matches_manifest": true,
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "legacy_manifest_claim_range_error_immunity": null,
+      "organizer_acceptance_confirmed": false,
+      "site_linked": null,
+      "submission_recommendation": false,
+      "run_name": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a",
+      "note": "MSDB-1v2: 31-feat stationary discontinuity+piedmont ramp HGB x Rayleigh curv gate + Bayes 300m EDGE, 44090 off-cat dots",
+      "performance_status": "unscored; format validation is not a score"
     },
     {
       "manifest": "gems30-PTA1-44090-20261025-9a3f7f9535a4.json",
@@ -461,7 +481,7 @@
   "submission_format": {
     "published_outside_convention": "null/NaN outside the data bounds; finite probabilities in [0, 1] inside",
     "official_problem_description": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-    "builder_default": "Current shared writer (PTA-1 & archived TDX-1): NaN nodata outside, finite [0,1] inside; no range-error-immunity claim",
+    "builder_default": "Current shared writer / retained TDX1 archive: NaN nodata outside, finite [0,1] inside; no range-error-immunity claim",
     "zero_outside": "Historical all-finite convention. The official reference notebook writes without an explicit nodata argument; owner-reported scores are not organizer confirmation. A whole-array range check does not prove portal acceptance or scientific readiness.",
     "historical_range_error_file_identified": false,
     "historical_range_error_cause_diagnosed": false,
@@ -481,10 +501,20 @@
     "schema_version": 3,
     "run_card": "docs/research/phase-tilt-asymmetry/run-card.json",
     "readiness": "docs/research/phase-tilt-asymmetry/readiness.json",
+    "purpose": "Current unique research artifact PTA-1 (unit-consistent 1000x tmi_vg 3D phase-tilt & signed Grauch-Hudson dip-asymmetry; +0.00887 over sub8_raw with 95% CI [+0.00156, +0.01598]; 195-raster novelty passed at 54.60% max 3px overlap; not approved for competition slot)",
+    "peer_full_stack_artifact": "docs/research/msdb-piedmont/run-card.json",
+    "peer_full_stack_readiness": "docs/research/msdb-piedmont/readiness.json",
     "previous_run_card": "docs/research/texture-displacement/run-card.json",
     "previous_readiness": "docs/research/texture-displacement/readiness.json",
-    "archived_stopped_attempt": "docs/research/texture-controls/run-card.json",
-    "archived_stopped_readiness": "docs/research/texture-controls/readiness.json"
+    "latest_attempt": "docs/research/texture-controls/run-card.json",
+    "additional_stopped_attempts": [
+      {
+        "lane": "G30-LSM",
+        "pointer": "docs/research/2026-10-25-lsm/current-run.json",
+        "verifier": "scripts/verify_lsm_run.py",
+        "decision": "DO NOT SUBMIT (duplicate-stop; holdout gate passed; no TIFF published)"
+      }
+    ]
   },
   "current_readiness": {
     "schema_version": 3,
@@ -651,7 +681,27 @@
     ],
     "preregistration_sha256": "10a6d800c4372bffd3741859e3bbb2ec3caa33b1e49333476fd3b3cdad70e824",
     "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
-    "created_utc": "2026-10-26T00:07:45+00:00"
+    "created_utc": "2026-10-26T00:07:45+00:00",
+    "additional_novelty_evidence": {
+      "registry": "docs/research/phase-tilt-asymmetry/registry-parallel-addendum.json",
+      "surface_receipt": "docs/research/phase-tilt-asymmetry/novelty-parallel-surface.json",
+      "dots_receipt": "docs/research/phase-tilt-asymmetry/novelty-parallel-dots.json",
+      "timing": "Late-arriving references; checked both saved states without refitting or replacing dots",
+      "combined_observed_registry": {
+        "surface": {
+          "registry_entries_compared": 195,
+          "max_spearman": 0.10547821858490214,
+          "max_fraction_within_3px": null,
+          "status": "passed"
+        },
+        "dots": {
+          "registry_entries_compared": 195,
+          "max_spearman": 0.03190577117988539,
+          "max_fraction_within_3px": 0.5459741437967793,
+          "status": "passed"
+        }
+      }
+    }
   },
   "current_artifact_inspection": {
     "verified_now": true,
@@ -679,7 +729,7 @@
       },
       {
         "name": "single_feature_leakage_canaries",
-        "status": "passed",
+        "status": "failed",
         "detail": "All 37 raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC"
       },
       {
@@ -690,12 +740,12 @@
       {
         "name": "surface_observed_registry",
         "status": "passed",
-        "detail": "194 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+        "detail": "195 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
       },
       {
         "name": "dots_observed_registry",
         "status": "passed",
-        "detail": "194 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+        "detail": "195 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
       },
       {
         "name": "complete_parallel_registry",
@@ -725,13 +775,13 @@
     ],
     "observed_registry": {
       "surface": {
-        "registry_entries_compared": 194,
+        "registry_entries_compared": 195,
         "max_spearman": 0.10547821858490214,
         "max_fraction_within_3px": null,
         "status": "passed"
       },
       "dots": {
-        "registry_entries_compared": 194,
+        "registry_entries_compared": 195,
         "max_spearman": 0.03190577117988539,
         "max_fraction_within_3px": 0.5459741437967793,
         "status": "passed"
@@ -746,7 +796,7 @@
     "organizer_score": null,
     "organizer_acceptance_confirmed": false
   },
-  "archived_stopped_attempt": {
+  "latest_scientific_attempt": {
     "run_card": "docs/research/texture-controls/run-card.json",
     "card": {
       "schema_version": 3,
@@ -923,13 +973,13 @@
         "timing": "Post-stop late-reference audit of saved states; no refit, replacement, new placement or original-registry rewrite",
         "combined_observed_registry": {
           "surface": {
-            "registry_entries_compared": 167,
+            "registry_entries_compared": 168,
             "max_spearman": 0.15657261436067785,
             "max_fraction_within_3px": null,
             "status": "unknown"
           },
           "dots": {
-            "registry_entries_compared": 167,
+            "registry_entries_compared": 168,
             "max_spearman": 0.06383254570926011,
             "max_fraction_within_3px": 0.790904967112724,
             "status": "failed"
@@ -975,12 +1025,12 @@
         {
           "name": "surface_observed_registry",
           "status": "unknown",
-          "detail": "167 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+          "detail": "168 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
         },
         {
           "name": "dots_observed_registry",
           "status": "failed",
-          "detail": "167 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+          "detail": "168 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
         },
         {
           "name": "complete_parallel_registry",
@@ -1010,13 +1060,13 @@
       ],
       "observed_registry": {
         "surface": {
-          "registry_entries_compared": 167,
+          "registry_entries_compared": 168,
           "max_spearman": 0.15657261436067785,
           "max_fraction_within_3px": null,
           "status": "unknown"
         },
         "dots": {
-          "registry_entries_compared": 167,
+          "registry_entries_compared": 168,
           "max_spearman": 0.06383254570926011,
           "max_fraction_within_3px": 0.790904967112724,
           "status": "failed"
@@ -1039,6 +1089,55 @@
     },
     "public_download": false
   },
+  "additional_stopped_attempts": [
+    {
+      "lane": "G30-LSM",
+      "pointer": "docs/research/2026-10-25-lsm/current-run.json",
+      "verifier": "scripts/verify_lsm_run.py",
+      "verified_now": true,
+      "error": null,
+      "decision": "DO NOT SUBMIT",
+      "ok_to_submit": false,
+      "research_verdict": "duplicate-stop",
+      "gates": [
+        {
+          "name": "preregistration_binding",
+          "status": "passed",
+          "detail": "Frozen preregistration and E3 amendment hashes match every start receipt and result"
+        },
+        {
+          "name": "beats_current_holdout_best",
+          "status": "passed",
+          "detail": "HOLDOUT-DTI (component-holdout-v3-blockstats-20261025, 60,988 withheld positives): lsm42 - core19 = +0.01735 [+0.00662, +0.02786]; production-emission delta +0.01917"
+        },
+        {
+          "name": "single_feature_leakage_canaries",
+          "status": "passed",
+          "detail": "168 checks (42 inputs x 4 folds); max AUC 0.6647 <= 0.90"
+        },
+        {
+          "name": "experiment_budget",
+          "status": "passed",
+          "detail": "3 experiments, 457 s of experiment compute (cap 3 / 7,200 s)"
+        },
+        {
+          "name": "novelty_surface",
+          "status": "passed",
+          "detail": "max surface rank correlation 0.218 vs 131 references (limit 0.90)"
+        },
+        {
+          "name": "novelty_dots",
+          "status": "failed",
+          "detail": "DUPLICATE: 5 distinct sparse registry rasters (9 files) hold >70% of the dots within 3 px (max 0.802); protocol stop"
+        },
+        {
+          "name": "file_contract",
+          "status": "failed",
+          "detail": "No TIFF published: the protocol stops at a dot-stage duplicate before writing"
+        }
+      ]
+    }
+  ],
   "legacy_readiness_2026_10_25": {
     "schema_version": 1,
     "run_id": "gems30-readiness-audit-20261025",
@@ -1490,7 +1589,12 @@
       "promoted": false,
       "decision": "NOT APPROVED FOR SUBMISSION"
     },
-    "archived_stopped_attempt_tdxc2": {
+    "stopped_attempt_g30-lsm": {
+      "evidence": "docs/research/2026-10-25-lsm/current-run.json",
+      "promoted": false,
+      "decision": "DO NOT SUBMIT"
+    },
+    "latest_scientific_attempt": {
       "evidence": "docs/research/texture-controls/run-card.json",
       "promoted": false,
       "decision": "duplicate-stop; no public TIFF"
@@ -1724,7 +1828,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "233 tests collected in 0.61s",
+      "pytest_collect": "257 tests collected in 0.79s",
       "exit_code": 0
     },
     "score_gain_claimed": false

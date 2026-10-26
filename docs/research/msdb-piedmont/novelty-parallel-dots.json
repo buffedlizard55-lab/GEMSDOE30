@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "stage": "dots",
+  "candidate": "/home/user/GEMSDOE30/docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+  "candidate_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "registry_sha256": "5de8e2b9241dba3bce0b8834b7513c27ca84008c890933231e72f497d722b790",
+  "registry_complete": false,
+  "comparisons": [
+    {
+      "reference": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
+      "site": "GEMSDOE30-parallel-merged",
+      "reference_sha256": "1b07820d0066e56442ade4f4a3880af92f50b4ca9cac528ccf59696ec5299cd6",
+      "reference_values_sha256": "9f937933d36b3d2f73cb2780be05de8fb1b6e0634888094ec1bbdc79d7174ae3",
+      "stage": "dots",
+      "spearman_full_footprint": 0.04894509346081217,
+      "candidate_dots": 44090,
+      "candidate_positive_support": 44090,
+      "reference_dots": 60000,
+      "candidate_fraction_within_3px_of_reference": 0.6366296212293037,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif",
+      "site": "GEMSDOE30-parallel-merged",
+      "reference_sha256": "12bd6196cdebfbaa39960d0d6f600fde498f1fb7675321222ba49489dec69b22",
+      "reference_values_sha256": "9f937933d36b3d2f73cb2780be05de8fb1b6e0634888094ec1bbdc79d7174ae3",
+      "stage": "dots",
+      "spearman_full_footprint": 0.04894509346081217,
+      "candidate_dots": 44090,
+      "candidate_positive_support": 44090,
+      "reference_dots": 60000,
+      "candidate_fraction_within_3px_of_reference": 0.6366296212293037,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "site": "GEMSDOE30-PTA1",
+      "reference_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "reference_values_sha256": "e17e9783cc288242399b74d71c724ebe7baa76ee11fecf537d774ca96b92780e",
+      "stage": "dots",
+      "spearman_full_footprint": 0.02037816736199749,
+      "candidate_dots": 44090,
+      "candidate_positive_support": 44090,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": 0.4165343615332275,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    }
+  ],
+  "errors": [],
+  "decision": "blocked-incomplete-evidence",
+  "submission_approved": false
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "stage": "surface",
+  "candidate_sha256": "d1470fc4bc01b95c8d0b30b25f218a05378ee7c43c442a117134ca1b65a83bb0",
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "registry_sha256": "a5cba7388f0fd42bd7ed6704f0155b54d7a207615f35246f90e9eefe7ed95921",
+  "registry_complete": false,
+  "comparisons": [
+    {
+      "reference": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+      "site": "GEMSDOE30-MSDB1v2",
+      "reference_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+      "reference_values_sha256": "7a89266115d3d8badd92301198711c8d617ce2b739f4755e36d6c04d5dfa1ee7",
+      "stage": "surface",
+      "spearman_full_footprint": 0.07607721278270727,
+      "candidate_dots": null,
+      "candidate_positive_support": 5167373,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    }
+  ],
+  "errors": []
+}

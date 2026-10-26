@@ -4,7 +4,7 @@
   "candidate": "/home/user/GEMSDOE30/outputs/texture-controls/gems30-TDXC2-44090-20261025-d87627b24504.tif",
   "candidate_sha256": "af499375cec73f42f98f398370b390e96c3d3b23943477eb1f613570baa98e0d",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "registry_sha256": "1703d0c77533bcbb7412142c74af655ca3d4b584967d74819dd77ec9d9ecc511",
+  "registry_sha256": "d3fba93e8724d11bd1c7d872e70b445ddf003b215a4306e4d28cb2081ee9acbe",
   "registry_complete": false,
   "comparisons": [
     {
@@ -40,6 +40,22 @@
       "undefined": false
     },
     {
+      "reference": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+      "site": "GEMSDOE30-parallel-merged",
+      "reference_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+      "reference_values_sha256": "7a89266115d3d8badd92301198711c8d617ce2b739f4755e36d6c04d5dfa1ee7",
+      "stage": "dots",
+      "spearman_full_footprint": null,
+      "candidate_dots": 60000,
+      "candidate_positive_support": 60000,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": true
+    },
+    {
       "reference": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
       "site": "GEMSDOE30-PTA1",
       "reference_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
@@ -57,8 +73,8 @@
     }
   ],
   "errors": [
-    "PTA-1 late reference: dots-stage comparison undefined because quarantined TDX-C2 outputs/ are git-ignored; original duplicate-stop vs G30-S19 remains failed."
+    "PTA-1 late reference: dots comparison undefined because quarantined TDX-C2 outputs/ are git-ignored."
   ],
-  "decision": "duplicate-stop",
+  "decision": "blocked-incomplete-evidence",
   "submission_approved": false
 }

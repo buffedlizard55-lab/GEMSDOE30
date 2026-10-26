@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "generated_utc": "2026-10-25T23:46:47.697124+00:00",
+  "complete": false,
+  "coverage": "Two newly merged G30-S20 parallel-lane TIFFs (PR #29); additive to the frozen 165 references, measured exactly on both saved MSDB-1v2 states.",
+  "missing_evidence": [
+    "Other private parallel sessions and unexported continuous surfaces"
+  ],
+  "original_registry_sha256": "c978bdd07c90f1cb1060e15c857d460bb9fe4050d63055072bdd467859235a89",
+  "received_commit": "5227dd7",
+  "timing": "Late-arriving references received on concurrent main merge; audited both saved MSDB-1v2 output states exactly without refitting or replacing dots.",
+  "rasters": [
+    {
+      "site": "GEMSDOE30-parallel-merged",
+      "repo": "buffedlizard55-lab/GEMSDOE30",
+      "ref": "3f4c42f57104952e17d44798774d1f6b5d08d823",
+      "source_path": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
+      "path": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
+      "git_blob_sha1": "7c8a85452ec98317b60712872871d3a8bb35d36e",
+      "expected_bytes": 451460,
+      "sha256": "1b07820d0066e56442ade4f4a3880af92f50b4ca9cac528ccf59696ec5299cd6",
+      "aligned": true,
+      "shape": [
+        3730,
+        3292
+      ],
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/3f4c42f57104952e17d44798774d1f6b5d08d823/docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif"
+    },
+    {
+      "site": "GEMSDOE30-parallel-merged",
+      "repo": "buffedlizard55-lab/GEMSDOE30",
+      "ref": "3f4c42f57104952e17d44798774d1f6b5d08d823",
+      "source_path": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif",
+      "path": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif",
+      "git_blob_sha1": "ce374c22b67046f83e9f8acdb89d752f1d3faa39",
+      "expected_bytes": 525874,
+      "sha256": "12bd6196cdebfbaa39960d0d6f600fde498f1fb7675321222ba49489dec69b22",
+      "aligned": true,
+      "shape": [
+        3730,
+        3292
+      ],
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/3f4c42f57104952e17d44798774d1f6b5d08d823/docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif"
+    },
+    {
+      "site": "GEMSDOE30-PTA1",
+      "repo": "buffedlizard55-lab/GEMSDOE30",
+      "ref": "arena/a2b527ff-gemsdoe30",
+      "source_path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "git_blob_sha1": "4db525db17a8c3da3ae87a8aaf09f60beeb9d8fe",
+      "expected_bytes": 472074,
+      "sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "aligned": true,
+      "shape": [
+        3730,
+        3292
+      ],
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/main/docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif"
+    }
+  ],
+  "exclusions": [],
+  "organizer_authenticated": false
+}

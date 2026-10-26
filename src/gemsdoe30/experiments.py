@@ -1,15 +1,9 @@
 """Explicit supported experiment contracts; unknown experiment IDs fail closed.
 
 Contracts are code-reviewed, not arbitrary mutable JSON that can redefine a failed
-promotion gate. Old TDX-1 receipts keep their original schema and expectations.
+promotion gate. Old TDX-1, TDX-C2, and MSDB-1v2 receipts keep their original schema and expectations.
 """
 from __future__ import annotations
-
-from gemsdoe30.phase_tilt import (
-    ALL_DERIVED_NAMES as PTA1_DERIVED_NAMES,
-    SUPPORT_PX as PTA1_SUPPORT_PX,
-    TRANSFORM_VERSION as PTA1_TRANSFORM_VERSION,
-)
 
 CORE_FEATURES = (
     "mag_anom", "rtp", "tmi_hg", "geod_2ndinv", "iso_grav_anom_slope", "tc",
@@ -19,41 +13,105 @@ CORE_FEATURES = (
 )
 TDX_FEATURES = ("mag_texture", "rtp_texture", "texture_consensus")
 CONTROL_FEATURES = ("zero_mag", "zero_rtp", "zero_consensus", "phase_mag", "phase_rtp", "phase_consensus")
+MSDB_FEATURES = (
+    "msdb_mag_tilt_rad", "msdb_mag_tilt_zero_crest", "msdb_mag_contact_invdepth",
+    "msdb_topo_tubularity_100m", "msdb_topo_tubularity_300m", "msdb_topo_saddle_300m",
+    "msdb_rtp_tubularity_300m", "msdb_grav_tubularity_300m", "msdb_base_tubularity_300m",
+    "msdb_cond_saddle_300m", "msdb_topo_coherence", "msdb_grav_coherence",
+    "msdb_align_grav_basement", "msdb_align_rtp_grav", "msdb_align_topo_radtc",
+    "msdb_piedmont_ramp_index", "msdb_radtc_grad_300m", "msdb_transtensional_index",
+)
+PTA_CANDIDATE_FEATURES = (
+    "pta_mag_tilt",
+    "pta_mag_hd_tdr",
+    "pta_mag_as3d_log",
+    "pta_grav_tilt",
+    "pta_grav_hd_tdr",
+    "pta_mg_strike_concord",
+    "pta_strike_persist",
+    "pta_dip_grav_mig",
+    "pta_dip_cover_step",
+    "pta_dip_cond_step",
+)
+PTA_CONTROL_FEATURES = (
+    "ctrl_naive_mag_tilt",
+    "ctrl_naive_mag_hd_tdr",
+    "ctrl_naive_mag_as3d_log",
+    "ctrl_naive_mg_concord",
+    "ctrl_normal_blur",
+    "ctrl_sym_grav_mig",
+    "ctrl_sym_cover_step",
+    "ctrl_sym_cond_step",
+)
 
 
 def contract(card: dict) -> dict:
     name = card.get("experiment_spec", "tdx1")
     if name == "tdx1":
-        return {"id": name, "candidate": "tdx6", "arms": ("physics3", "core19", "tdx6"),
-                "features": CORE_FEATURES + TDX_FEATURES, "support_px": 17,
-                "transform_path": "src/gemsdoe30/texture.py",
-                "transform_version": "tdx1-profiles-v2-euclidean-support-20261025",
-                "label": "TDX-1", "image_name": "tdx1-support.png"}
+        return {
+            "id": name,
+            "candidate": "tdx6",
+            "arms": ("physics3", "core19", "tdx6"),
+            "required_positive_deltas": ("physics3", "core19"),
+            "features": CORE_FEATURES + TDX_FEATURES,
+            "support_px": 17,
+            "guard_px": 17,
+            "transform_path": "src/gemsdoe30/texture.py",
+            "transform_version": "tdx1-profiles-v2-euclidean-support-20261025",
+            "label": "TDX-1",
+            "image_name": "tdx1-support.png",
+        }
     if name == "tdxc2":
-        return {"id": name, "candidate": "tdx22", "arms": ("core19", "tdx22", "zero22", "phase22"),
-                "features": CORE_FEATURES + TDX_FEATURES + CONTROL_FEATURES, "support_px": 17,
-                "transform_path": "src/gemsdoe30/texture_controls.py",
-                "parent_transform_path": "src/gemsdoe30/texture.py",
-                "parent_transform_version": "tdx1-profiles-v2-euclidean-support-20261025",
-                "transform_version": "tdxc2-local-profile-controls-v1-20261025",
-                "label": "TDX-C2", "image_name": "tdxc2-support.png"}
+        return {
+            "id": name,
+            "candidate": "tdx22",
+            "arms": ("core19", "tdx22", "zero22", "phase22"),
+            "required_positive_deltas": ("core19", "zero22", "phase22"),
+            "features": CORE_FEATURES + TDX_FEATURES + CONTROL_FEATURES,
+            "support_px": 17,
+            "guard_px": 17,
+            "transform_path": "src/gemsdoe30/texture_controls.py",
+            "parent_transform_path": "src/gemsdoe30/texture.py",
+            "parent_transform_version": "tdx1-profiles-v2-euclidean-support-20261025",
+            "transform_version": "tdxc2-local-profile-controls-v1-20261025",
+            "label": "TDX-C2",
+            "image_name": "tdxc2-support.png",
+        }
+    if name == "msdb1v2":
+        return {
+            "id": name,
+            "candidate": "msdb_edge",
+            "arms": ("core19", "msdb_poisson", "msdb_edge"),
+            "required_positive_deltas": ("core19",),
+            "features": CORE_FEATURES + MSDB_FEATURES,
+            "support_px": 13,
+            "guard_px": 17,
+            "transform_path": "src/gemsdoe30/msdb.py",
+            "transform_version": "msdb-piedmont-v2-20261025",
+            "label": "MSDB-1v2",
+            "image_name": "msdb1-support.png",
+        }
     if name == "pta1":
-        return {"id": name, "candidate": "pta1_cand",
-                "arms": ("core19", "sub8_raw", "pta_naive_sym", "pta1_cand"),
-                "features": CORE_FEATURES + PTA1_DERIVED_NAMES, "support_px": PTA1_SUPPORT_PX,
-                "transform_path": "src/gemsdoe30/phase_tilt.py",
-                "transform_version": PTA1_TRANSFORM_VERSION,
-                "label": "PTA-1", "image_name": "pta1-support.png"}
+        return {
+            "id": name,
+            "candidate": "pta1_cand",
+            "arms": ("core19", "sub8_raw", "pta_naive_sym", "pta1_cand"),
+            "required_positive_deltas": ("core19", "sub8_raw", "pta_naive_sym"),
+            "features": CORE_FEATURES + PTA_CANDIDATE_FEATURES + PTA_CONTROL_FEATURES,
+            "support_px": 17,
+            "guard_px": 17,
+            "tight_analytic_support_px": 12,
+            "transform_path": "src/gemsdoe30/phase_tilt.py",
+            "transform_version": "phase-tilt-dip-asymmetry-v1-support17px-20261025",
+            "label": "PTA-1",
+            "image_name": "pta1-support.png",
+        }
     raise ValueError(f"unknown research experiment contract: {name!r}")
 
 
 class LayerStack:
-    """A zero-copy channel view over cached arrays for the existing sampler/predictor.
+    """A zero-copy channel view over cached arrays for the existing sampler/predictor."""
 
-    Only requested pixel batches are stacked. This avoids materializing another
-    gigabyte-sized 22/28-channel raster while retaining NumPy indexing semantics
-    used by the shared feature sampler and blockwise predictor.
-    """
     def __init__(self, layers):
         self.layers = tuple(layers)
         if not self.layers or len(self.layers[0].shape) != 2:

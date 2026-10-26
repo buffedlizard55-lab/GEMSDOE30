@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "readiness_version": "lsm-readiness-v1-20261025",
+  "run_id": "gems30-LSM42-38000-20261025-eb81d4c94efc",
+  "ok_to_submit": false,
+  "decision": "DO NOT SUBMIT",
+  "research_verdict": "duplicate-stop",
+  "download_ok": false,
+  "eligible_for_separate_slot_selector": false,
+  "display_status": "DO NOT SUBMIT - duplicate-stop at the dot stage; no TIFF published this session",
+  "primary_file": null,
+  "alternate_file": null,
+  "stop_reason": "Dot-stage duplicate under the owner protocol: >70 % of the 38,000 final dots fall within 3 px of 5 sparse registry rasters (chance level 14-18 %). The habitat model learned that catalogue-like pixels sit next to mapped faults, so its dots concentrate where proximity-based lanes already placed theirs.",
+  "gates": [
+    {
+      "name": "preregistration_binding",
+      "status": "passed",
+      "detail": "Frozen preregistration and E3 amendment hashes match every start receipt and result"
+    },
+    {
+      "name": "beats_current_holdout_best",
+      "status": "passed",
+      "detail": "HOLDOUT-DTI (component-holdout-v3-blockstats-20261025, 60,988 withheld positives): lsm42 - core19 = +0.01735 [+0.00662, +0.02786]; production-emission delta +0.01917"
+    },
+    {
+      "name": "single_feature_leakage_canaries",
+      "status": "passed",
+      "detail": "168 checks (42 inputs x 4 folds); max AUC 0.6647 <= 0.90"
+    },
+    {
+      "name": "experiment_budget",
+      "status": "passed",
+      "detail": "3 experiments, 457 s of experiment compute (cap 3 / 7,200 s)"
+    },
+    {
+      "name": "novelty_surface",
+      "status": "passed",
+      "detail": "max surface rank correlation 0.218 vs 131 references (limit 0.90)"
+    },
+    {
+      "name": "novelty_dots",
+      "status": "failed",
+      "detail": "DUPLICATE: 5 distinct sparse registry rasters (9 files) hold >70% of the dots within 3 px (max 0.802); protocol stop"
+    },
+    {
+      "name": "file_contract",
+      "status": "failed",
+      "detail": "No TIFF published: the protocol stops at a dot-stage duplicate before writing"
+    }
+  ],
+  "slot_selection": "NOT performed here",
+  "organizer_score": null
+}

@@ -1,0 +1,45 @@
+{
+  "signature": {
+    "transform_version": "msdb-piedmont-v2-20261025",
+    "transform_code_sha256": "dac0f9aec2aa177cfe5361819d3b2a73081b30fcf554e5c4cb80814c35c1c091",
+    "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed"
+  },
+  "support_px": 13,
+  "max_axial_halfwidth_px": 9,
+  "euclidean_support_px_exact": 12.727922061357855,
+  "derived_feature_names": [
+    "msdb_mag_tilt_rad",
+    "msdb_mag_tilt_zero_crest",
+    "msdb_mag_contact_invdepth",
+    "msdb_topo_tubularity_100m",
+    "msdb_topo_tubularity_300m",
+    "msdb_topo_saddle_300m",
+    "msdb_rtp_tubularity_300m",
+    "msdb_grav_tubularity_300m",
+    "msdb_base_tubularity_300m",
+    "msdb_cond_saddle_300m",
+    "msdb_topo_coherence",
+    "msdb_grav_coherence",
+    "msdb_align_grav_basement",
+    "msdb_align_rtp_grav",
+    "msdb_align_topo_radtc",
+    "msdb_piedmont_ramp_index",
+    "msdb_radtc_grad_300m",
+    "msdb_transtensional_index"
+  ],
+  "msdb_retained_raw_indices": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10,
+    11,
+    14,
+    16,
+    17,
+    18
+  ]
+}

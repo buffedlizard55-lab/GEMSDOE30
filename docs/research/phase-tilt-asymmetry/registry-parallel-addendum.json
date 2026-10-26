@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "complete": false,
+  "purpose": "Read-only post-run late-reference audit against concurrent PR #33 MSDB-1v2 arrival on main; original 194-raster registry.json untouched.",
+  "rasters": [
+    {
+      "site": "GEMSDOE30-MSDB1v2",
+      "repo": "buffedlizard55-lab/GEMSDOE30",
+      "ref": "arena/a2b527ff-gemsdoe30",
+      "source_path": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+      "path": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+      "git_blob_sha1": "b15147a1abbe4f9eafe09c700b7b66b6c1d61c30",
+      "expected_bytes": 493566,
+      "sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+      "aligned": true,
+      "shape": [
+        3730,
+        3292
+      ],
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/main/docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif"
+    }
+  ],
+  "original_registry_sha256": "57822dd286f92abde20580365b6c498d97af09f03f1cfbd643c68aec80164f8c"
+}

@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "stage": "dots",
-  "candidate": "docs/downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.tif",
+  "candidate": "/home/user/GEMSDOE30/docs/downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.tif",
   "candidate_sha256": "9556e3ddd8ea7658ca510ab02d5b5304ac4c3332c54e7f86df5a24769bd03cdb",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "registry_sha256": "4447e4d56e950009fe2c31930adfc1bbbdc4a3f0a88625f643866fe059774a61",
+  "registry_sha256": "dfd40346f166beea8c92315b1ec6a3e336c92eb5e8adfc2be0242fd021aa93b2",
   "registry_complete": false,
   "comparisons": [
     {
@@ -98,6 +98,22 @@
       "candidate_positive_support": 44090,
       "reference_dots": 60000,
       "candidate_fraction_within_3px_of_reference": 0.31462916761170334,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": false
+    },
+    {
+      "reference": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+      "site": "GEMSDOE30-parallel-merged",
+      "reference_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+      "reference_values_sha256": "7a89266115d3d8badd92301198711c8d617ce2b739f4755e36d6c04d5dfa1ee7",
+      "stage": "dots",
+      "spearman_full_footprint": 0.008940133681054752,
+      "candidate_dots": 44090,
+      "candidate_positive_support": 44090,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": 0.30793830800635064,
       "identical_inside_footprint": false,
       "correlation_duplicate": false,
       "dot_duplicate": false,
