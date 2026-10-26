@@ -36,7 +36,7 @@ class Links(HTMLParser):
             self.downloads.append(attrs.get("href"))
 
 
-@pytest.mark.parametrize("relative", ["index.html", "executive-summary.html", "experiment-review.html", "priority-registry-review.html", "docs/index.html"])
+@pytest.mark.parametrize("relative", ["index.html", "executive-summary.html", "experiment-review.html", "priority-site-executive-summary.html", "priority-registry-review.html", "docs/index.html"])
 def test_generated_pages_have_real_local_links_and_valid_html_anchors(relative):
     path = ROOT / relative
     page = Links(path.read_text())
@@ -57,7 +57,7 @@ def test_download_and_copy_controls_bind_to_the_current_negative_artifact(relati
     html = (ROOT / relative).read_text()
     parsed = Links(html)
     assert parsed.downloads == [card["published_tiff"]]
-    assert "NOT APPROVED FOR SUBMISSION" in html and "Do not submit." in html
+    assert "NOT APPROVED FOR SUBMISSION" in html and "Do not submit this file." in html
     assert card["submission_name"] in html
     assert "No competition slot selected or used" in html
     assert (ROOT / card["published_tiff"]).is_file()
@@ -68,6 +68,17 @@ def test_download_and_copy_controls_bind_to_the_current_negative_artifact(relati
         assert card["note"] in html
         assert {"submission-name", "submission-note", "copy-status"} <= parsed.ids
         assert len(card["note"]) <= 140
+
+
+def test_priority_site_executive_page_is_explicitly_non_promotional():
+    html = (ROOT / "priority-site-executive-summary.html").read_text()
+    assert "submit none of the historical priority-site TIFFs" in html
+    assert "OWNER-REPORTED / UNVERIFIED" in html
+    assert "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros" in html
+    for site in ("GEMSDOE24", "GEMSDOE25", "GEMSDOE27", "GEMSDOE28", "GEMSDOE30",
+                 "GEMSDOE31", "GEMSDOE32", "GEMSDOE33", "GEMSDOE36"):
+        assert site in html
+    assert "docs/research/priority-site-executive.json" in html
 
 
 def test_complete_current_prompt_and_every_reported_claim_remain_quarantined():

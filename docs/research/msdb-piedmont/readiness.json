@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "readiness_version": "research-readiness-v3-matched-controls-20261025",
+  "readiness_version": "research-readiness-v4-prereg-alignment-20261026",
   "raster_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
   "gates": [
     {
@@ -15,8 +15,8 @@
     },
     {
       "name": "paired_improvement",
-      "status": "passed",
-      "detail": "Fixed candidate must improve preregistered core19 comparator with positive paired CI lower bound"
+      "status": "failed",
+      "detail": "Fixed msdb_edge artifact must improve preregistered core19 and count-matched msdb_poisson controls with positive paired CI lower bounds"
     },
     {
       "name": "single_feature_leakage_canaries",

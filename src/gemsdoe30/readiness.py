@@ -7,6 +7,7 @@ from typing import Any
 from .experiments import contract
 
 READINESS_VERSION = "research-readiness-v2-parallel-evidence-20261025"
+MSDB_READINESS_VERSION = "research-readiness-v4-prereg-alignment-20261026"
 
 EXPECTED_FEATURES = frozenset(contract({})["features"])
 
@@ -68,8 +69,13 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
         delta_detail = "Fixed candidate must improve both same-protocol controls with positive paired CI lower bound"
     elif spec["id"] == "tdxc2":
         delta_detail = "Fixed full-stack candidate must improve core19, zero-lag and phase-null controls with positive paired CI lower bounds"
+    elif spec["id"] == "msdb1v2":
+        delta_detail = (
+            "Fixed msdb_edge artifact must improve preregistered core19 and "
+            "count-matched msdb_poisson controls with positive paired CI lower bounds"
+        )
     else:
-        delta_detail = "Fixed candidate must improve preregistered core19 comparator with positive paired CI lower bound"
+        delta_detail = "Fixed candidate must improve every preregistered required comparator with positive paired CI lower bounds"
     gate("paired_improvement", "passed" if wins else "failed", delta_detail)
     features = results.get("feature_canaries", [])
     complete_canaries = (len(features) == 4 and {f.get("fold") for f in features} == set(range(4))
@@ -141,7 +147,12 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
              and isinstance(card.get("note"), str) and len(card["note"]) <= 140)
     gate("artifact_identity", "passed" if named else "failed", "Named artifact and note of at most 140 characters")
     promoted = all(row["status"] == "passed" for row in gates)
-    return {"schema_version": 1, "readiness_version": READINESS_VERSION if spec["id"] == "tdx1" else "research-readiness-v3-matched-controls-20261025",
+    readiness_version = (
+        READINESS_VERSION if spec["id"] == "tdx1"
+        else MSDB_READINESS_VERSION if spec["id"] == "msdb1v2"
+        else "research-readiness-v3-matched-controls-20261025"
+    )
+    return {"schema_version": 1, "readiness_version": readiness_version,
             "raster_sha256": card.get("raster_sha256"), "gates": gates,
             "observed_registry": observed,
             "download_ok": bool(artifact_public and format_passed and hash_matches and named and not duplicate_detected),

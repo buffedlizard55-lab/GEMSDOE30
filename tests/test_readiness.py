@@ -126,6 +126,37 @@ def test_new_contract_requires_every_matched_control_and_all_28_canaries():
     assert gate(decide(card, results, audit), 'single_feature_leakage_canaries') == 'failed'
 
 
+def test_msdb_primary_artifact_must_beat_its_preregistered_poisson_emitter_control():
+    """A point-estimate EDGE advantage is not enough for the frozen MSDB plan."""
+    from gemsdoe30.experiments import contract
+
+    card, results, audit = evidence()
+    card['experiment_spec'] = 'msdb1v2'
+    spec = contract(card)
+    arm = next(iter(results['summary']['arms'].values()))
+    results['summary']['arms'] = {name: deepcopy(arm) for name in spec['arms']}
+    results['summary']['candidate_minus'] = {
+        name: {'value': .05, 'ci95': [.01, .09]}
+        for name in spec['required_positive_deltas']
+    }
+    for fold in results['feature_canaries']:
+        fold['features'] = [
+            {'feature': name, 'raw_auc': .6, 'univariate_training_only_hgb_auc': .65,
+             'alarm_above_0_90': False}
+            for name in spec['features']
+        ]
+    for fold in results['folds']:
+        fold['arms'] = {name: {'emitted_pixels': 10} for name in spec['arms']}
+
+    promoted = decide(card, results, audit)
+    assert promoted['research_verdict'] == 'promote'
+    assert promoted['readiness_version'] == 'research-readiness-v4-prereg-alignment-20261026'
+    results['summary']['candidate_minus']['msdb_poisson']['ci95'] = [-.001, .09]
+    result = decide(card, results, audit)
+    assert gate(result, 'paired_improvement') == 'failed'
+    assert result['research_verdict'] == 'negative'
+
+
 def test_private_artifact_receipts_cannot_imply_a_current_public_file_inspection():
     card, results, audit = evidence()
     result = assess(card, results, format_passed=True, hash_matches=True,

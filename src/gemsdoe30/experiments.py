@@ -2,6 +2,12 @@
 
 Contracts are code-reviewed, not arbitrary mutable JSON that can redefine a failed
 promotion gate. Old TDX-1 and TDX-C2 receipts keep their original schema and expectations.
+
+A contract must mirror its frozen preregistration. In particular, the MSDB-1v2
+primary ``msdb_edge`` artifact is not promoted merely because it beats ``core19``:
+its plan also required a positive paired interval against the count-matched
+``msdb_poisson`` emitter control. Keeping that control in the code contract
+prevents a point-estimate tie from being displayed as a passed promotion gate.
 """
 from __future__ import annotations
 
@@ -60,7 +66,10 @@ def contract(card: dict) -> dict:
             "id": name,
             "candidate": "msdb_edge",
             "arms": ("core19", "msdb_poisson", "msdb_edge"),
-            "required_positive_deltas": ("core19",),
+            # Frozen MSDB-1v2 preregistration requires a positive paired lower
+            # confidence bound over BOTH the raw-band baseline and the
+            # count-matched Poisson emitter control. See its `gates` block.
+            "required_positive_deltas": ("core19", "msdb_poisson"),
             "features": CORE_FEATURES + MSDB_FEATURES,
             "support_px": 13,
             "guard_px": 17,

@@ -1,10 +1,16 @@
 # Scientific Review & Experimental Record — Lane `MSDB-1v2` (`2026-10-25`)
 
-- **Generated Unique Submission Artifact:** [`docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif`](../../downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif)
+- **Observed-Registry-Distinct Research Artifact (not an approved submission):** [`docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif`](../../downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif). Download for audit/reproducibility only; **do not upload**.
 - **SHA-256:** `22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381`
 - **Submission Name:** `gems30-MSDB1-edge44090-20261025-e7856ec3f14a`
 - **Submission Note (`119 / 140` chars):** `MSDB-1v2: 31-feat stationary discontinuity+piedmont ramp HGB x Rayleigh curv gate + Bayes 300m EDGE, 44090 off-cat dots`
-- **Machine-Adjudicated Receipts:** [`run-card.json`](run-card.json) · [`readiness.json`](readiness.json) · [`results.json`](results.json) · [`validation.json`](validation.json) · [`preregistration.md`](preregistration.md)
+- **Machine-Adjudicated Receipts:** [`run-card.json`](run-card.json) · [`readiness.json`](readiness.json) · [`results.json`](results.json) · [`validation.json`](validation.json) · [`browser-check.json`](browser-check.json) · [`preregistration.md`](preregistration.md)
+
+> **2026-10-26 readiness correction (`IR-MSDB-06`):** the shared gate contract now
+> enforces the frozen `msdb_edge > msdb_poisson` positive-CI requirement in addition
+> to `core19`. Its CI is `[-0.002173, +0.004628]`, so `paired_improvement` is
+> **failed**. No raster, model, holdout number, or experiment was changed; the file
+> remains download-only and **NOT APPROVED FOR SUBMISSION**.
 
 ---
 

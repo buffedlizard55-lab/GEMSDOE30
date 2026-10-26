@@ -177,5 +177,13 @@
         "status": "passed"
       }
     }
+  },
+  "readiness_version": "research-readiness-v4-prereg-alignment-20261026",
+  "readiness_correction_2026_10_26": {
+    "kind": "shared-contract correction; no refit, raster change, or new experiment",
+    "issue": "The shared MSDB contract omitted the preregistered msdb_edge versus msdb_poisson positive-CI requirement.",
+    "evidence": "docs/research/msdb-piedmont/preregistration.json gates.promotion_requires[1]; paired result is +0.001135 with 95% CI [-0.002173, +0.004628].",
+    "effect": "paired_improvement is failed; verdict, submission_approved=false, slot_selected=false, raster SHA-256, and all scientific results are unchanged.",
+    "source_change": "src/gemsdoe30/experiments.py; src/gemsdoe30/readiness.py"
   }
 }

@@ -1,11 +1,11 @@
 # GEMSDOE30 — DOE GEMS fault-discovery research
 
-## START HERE — Unique `MSDB-1v2` GeoTIFF Generated (`+27.6%` over `core19` on 4-Fold Buffered Holdout; Conservative Slot Gate Active: **NOT APPROVED FOR SUBMISSION**)
+## START HERE — Observed-Registry-Distinct `MSDB-1v2` Research GeoTIFF (`+27.6%` over `core19` on 4-Fold Buffered Holdout; **NOT APPROVED FOR COMPETITION SUBMISSION**)
 
-- **Unique Generated GeoTIFF (`44,090` off-catalogue binary dots):** [`docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif`](docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif) (`SHA-256: 22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381`)
+- **Research GeoTIFF only (`44,090` off-catalogue binary dots):** [`docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif`](docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif) (`SHA-256: 22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381`). **OK to download for audit/reproducibility; NOT OK to upload.** It is distinct only against the observed registry, not globally certified unique.
 - **Submission Name:** `gems30-MSDB1-edge44090-20261025-e7856ec3f14a`
 - **Submission Note (`119 / 140` chars):** `MSDB-1v2: 31-feat stationary discontinuity+piedmont ramp HGB x Rayleigh curv gate + Bayes 300m EDGE, 44090 off-cat dots`
-- **Zero-Human-Inspection Pages:** [Landing overview (`index.html`)](index.html) · [Executive summary & validation guide (`executive-summary.html`)](executive-summary.html) · [Full source-linked PhD review (`review.md`)](docs/research/msdb-piedmont/review.md)
+- **Zero-Human-Inspection Pages:** [Landing overview (`index.html`)](index.html) · [Executive summary & validation guide (`executive-summary.html`)](executive-summary.html) · [Nine-site executive selection audit](priority-site-executive-summary.html) · [Full source-linked PhD review (`review.md`)](docs/research/msdb-piedmont/review.md)
 
 **Read the [complete current owner prompt](#current-owner-prompt)
 and [frozen `MSDB-1v2` preregistration](docs/research/msdb-piedmont/preregistration.md)
@@ -34,7 +34,7 @@ novelty, and paired spatial-bootstrap checks without human raster inspection.
 ### Key Artifacts & Verified Official Links
 
 - **Current Run Receipts (`MSDB-1v2`):** [Final JSON run card](docs/research/msdb-piedmont/run-card.json) · [machine-adjudicated readiness](docs/research/msdb-piedmont/readiness.json) · [full fold/canary statistics](docs/research/msdb-piedmont/results.json) · [165-raster 9-site registry](docs/research/msdb-piedmont/registry.json) · [Experiment 1 duplicate-stop receipt](docs/research/msdb-piedmont/experiment-1-duplicate-stop/receipt.json)
-- **Scientific Review & Irregularities:** [PhD forensic analysis of `GEMSDOE32` `H33` (`0.2778`), 4 ranked hypotheses, & 3-pass journal](docs/research/msdb-piedmont/review.md) · [irregularities ledger (`IR-MSDB-01`..`05`)](docs/irregularities.md)
+- **Scientific Review & Irregularities:** [PhD forensic analysis of `GEMSDOE32` `H33` (`0.2778`), 4 ranked hypotheses, & 3-pass journal](docs/research/msdb-piedmont/review.md) · [nine-site executive selection audit (clear no-upload decision)](priority-site-executive-summary.html) · [irregularities ledger (`IR-MSDB-01`..`06`)](docs/irregularities.md)
 - **Preserved Prior `TDX-1` Receipts:** [TDX-1 run card](docs/research/texture-displacement/run-card.json) · [TDX-1 review](docs/research/texture-displacement/review.md) · [all 119 quarantined owner-reported claims](docs/research/texture-displacement/owner-claims.csv)
 - **Official Competition & Public Geoscience Sources (verified 2026-10-25):** [DrivenData GEMS overview](https://www.drivendata.org/competitions/306/competition-doe-gems/) · [Problem & DW-Tversky metric (`page/967`)](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) · [Live leaderboard (`#1 = 0.4413`)](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) · [NLR Official Rules PDF (`96647.pdf`)](https://docs.nlr.gov/docs/fy26osti/96647.pdf) · [Forum: known faults masked (`t/11516`)](https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516) · [Forum: splays & continuations (`t/11536`)](https://community.drivendata.org/t/clarification-what-counts-as-a-new-fault-in-the-test-set/11536) · [USGS GeoDAWN (`10.5066/P93LGLVQ`, CC0)](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and) · [OpenEI GDR `1391` INGENIOUS (`10.15121/1881483`, CC BY 4.0)](https://gdr.openei.org/submissions/1391) · [GBCGE INGENIOUS](https://gbcge.org/current-projects/ingenious/) · [EPSG:32611](https://epsg.io/32611)
 
@@ -104,6 +104,12 @@ selected here; TDX-1 remains negative. The current pointer above selects only TD
 
 <details>
 <summary>Preserved concurrent-session README notes (main at 7f3f4c7)</summary>
+
+> **ARCHIVED, SUPERSEDED STATUS — DO NOT UPLOAD A FILE BASED ON ANY “OK TO SUBMIT”,
+> “ready”, or similar wording inside this historical record.** The only current
+> decision is the top-of-README MSDB receipt: research download is available,
+> competition upload is **NOT APPROVED**. This block is retained solely for audit
+> lineage and does not override `docs/current-run.json` or its readiness receipt.
 
 # GEMSDOE30 — DOE GEMS fault-discovery research
 

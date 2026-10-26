@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-25T23:58:47Z",
+  "generated_utc": "2026-10-26T00:26:18Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -663,6 +663,14 @@
           "status": "passed"
         }
       }
+    },
+    "readiness_version": "research-readiness-v4-prereg-alignment-20261026",
+    "readiness_correction_2026_10_26": {
+      "kind": "shared-contract correction; no refit, raster change, or new experiment",
+      "issue": "The shared MSDB contract omitted the preregistered msdb_edge versus msdb_poisson positive-CI requirement.",
+      "evidence": "docs/research/msdb-piedmont/preregistration.json gates.promotion_requires[1]; paired result is +0.001135 with 95% CI [-0.002173, +0.004628].",
+      "effect": "paired_improvement is failed; verdict, submission_approved=false, slot_selected=false, raster SHA-256, and all scientific results are unchanged.",
+      "source_change": "src/gemsdoe30/experiments.py; src/gemsdoe30/readiness.py"
     }
   },
   "current_artifact_inspection": {
@@ -671,7 +679,7 @@
   },
   "current_release_decision": {
     "schema_version": 1,
-    "readiness_version": "research-readiness-v3-matched-controls-20261025",
+    "readiness_version": "research-readiness-v4-prereg-alignment-20261026",
     "raster_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
     "gates": [
       {
@@ -686,8 +694,8 @@
       },
       {
         "name": "paired_improvement",
-        "status": "passed",
-        "detail": "Fixed candidate must improve preregistered core19 comparator with positive paired CI lower bound"
+        "status": "failed",
+        "detail": "Fixed msdb_edge artifact must improve preregistered core19 and count-matched msdb_poisson controls with positive paired CI lower bounds"
       },
       {
         "name": "single_feature_leakage_canaries",
@@ -1790,7 +1798,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "250 tests collected in 1.17s",
+      "pytest_collect": "257 tests collected in 0.89s",
       "exit_code": 0
     },
     "score_gain_claimed": false
