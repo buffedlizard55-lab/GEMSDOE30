@@ -104,10 +104,12 @@ def test_duplicate_stop_requires_numeric_evidence_not_an_unverified_flag(isolate
     verifier, directory, template, _ = isolated
     for name in ('novelty-dots.json', 'novelty-parallel-dots.json'):
         p = directory / name; r = load(p)
+        r['errors'] = []
         for row in r['comparisons']:
             row['candidate_fraction_within_3px_of_reference'] = .2
             row['spearman_full_footprint'] = .1
             row['identical_inside_footprint'] = False
+            row.pop('undefined', None)
         dump(p, r)
     p = directory / 'run-card.json'; c = load(p)
     c['registry']['dots']['max_fraction_within_3px'] = .2
@@ -201,7 +203,7 @@ def test_late_arrivals_are_checked_without_rewriting_the_original_snapshot(isola
     original = (directory / 'registry.json').read_bytes()
     result = verifier.verify(directory, template)
     expected_total = len(load(directory / 'registry.json')['rasters']) + len(load(directory / 'registry-parallel-addendum.json')['rasters'])
-    assert result['observed_registry']['dots']['registry_entries_compared'] == expected_total == 169
+    assert result['observed_registry']['dots']['registry_entries_compared'] == expected_total == 171
     assert (directory / 'registry.json').read_bytes() == original
     (directory / 'registry-parallel-addendum.json').unlink()
     with pytest.raises(ValueError, match='late-registry audit'):

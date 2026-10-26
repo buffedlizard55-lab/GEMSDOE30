@@ -15,6 +15,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 TDX_RESEARCH = ROOT / "docs/research/texture-displacement"
 MSDB_RESEARCH = ROOT / "docs/research/msdb-piedmont"
+PTA_RESEARCH = ROOT / "docs/research/phase-tilt-asymmetry"
 
 
 def current_research_dir() -> Path:
@@ -42,6 +43,8 @@ class Links(HTMLParser):
     "executive-summary.html",
     "experiment-review.html",
     "priority-registry-review.html",
+    "priority-site-review.html",
+    "review-2026-10-26.html",
     "docs/index.html",
     "docs/executive-summary.html",
 ])
@@ -171,6 +174,7 @@ def test_full_verifier_rejects_changed_template_bytes(isolated_evidence):
 @pytest.mark.parametrize("research_dir,expected_verdict", [
     (TDX_RESEARCH, "negative"),
     (MSDB_RESEARCH, "negative"),
+    (PTA_RESEARCH, "negative"),
     (current_research_dir(), "promote"),
 ])
 def test_published_file_is_new_binary_support_and_matches_its_exact_hash(research_dir, expected_verdict):
@@ -245,7 +249,7 @@ def test_new_local_rasters_cannot_be_silently_omitted_from_late_registry(isolate
         len(json.loads((directory / 'registry.json').read_text())['rasters'])
         + len(json.loads((directory / 'registry-parallel-addendum.json').read_text())['rasters'])
     )
-    assert decision['observed_registry']['dots']['registry_entries_compared'] == expected_total == 113
+    assert decision['observed_registry']['dots']['registry_entries_compared'] == expected_total == 115
     (directory / 'registry-parallel-addendum.json').unlink()
     with pytest.raises(ValueError, match='explicit late-registry audit'):
         verifier.verify(pointer, template)

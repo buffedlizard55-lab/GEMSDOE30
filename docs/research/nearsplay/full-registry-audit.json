@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "candidate_file": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+  "candidate_sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "registry_entries_compared": 196,
+  "max_fraction_within_3px": 0.7126,
+  "duplicate_threshold_fraction_within_3px": 0.7,
+  "exceeds_duplicate_threshold": true,
+  "collisions_above_0_70": [
+    {
+      "reference_path": "data/raw/registry-expanded/GEMSDOE25-9447f85d82d1fa19ec3d0ecff70f2b8cc9b72d22.tif",
+      "reference_sha256": "d81c69cace45144ea29d6d1f208efec3f38ff45265171f5f6c9bbbfdd43eabcf",
+      "site": "GEMSDOE25",
+      "candidate_fraction_within_3px_of_reference": 0.7126
+    },
+    {
+      "reference_path": "data/raw/registry-expanded/GEMSDOE25-c22bee977faea490627f57aa6da70e3b71585052.tif",
+      "reference_sha256": "03b9d4c09aa630b69b49bd33df57f0660875a1b26b3d00cc1e38570404d6dae2",
+      "site": "GEMSDOE25",
+      "candidate_fraction_within_3px_of_reference": 0.7126
+    },
+    {
+      "reference_path": "data/raw/registry-expanded/GEMSDOE25-a1776a00411fb83ff772a1aba3c3ed52d6a8d69b.tif",
+      "reference_sha256": "41461ce0d0a6cb2d765e53fa490114d3f6e6344ca6f459b811f55bddbf7d2858",
+      "site": "GEMSDOE25",
+      "candidate_fraction_within_3px_of_reference": 0.70015
+    },
+    {
+      "reference_path": "data/raw/registry-expanded/GEMSDOE25-bf8a7656b17540395f075d9435579b8ac078d3b6.tif",
+      "reference_sha256": "db409d0dc8f636963548c8e575ec6acfde03ad8eec06f6a22fe0a869ebdbe092",
+      "site": "GEMSDOE25",
+      "candidate_fraction_within_3px_of_reference": 0.70015
+    }
+  ],
+  "decision": "duplicate_on_expanded_registry",
+  "note": "Fulfils IR-30-078 post-run full-registry check: H-NEARSPLAY passed its 21-raster local check (68.08%) when the expanded cross-site registry was unavailable, but exceeds 70% (71.26% / 70.015%) against four GEMSDOE25 rasters in the 196-raster expanded registry. Retained in docs/downloads for provenance; NOT slot-approved."
+}

@@ -24,15 +24,15 @@
 | **Causal Ladder (`HOLDOUT-DTI`)** | `physics_tilt8`: **`0.078163`** → `core19`: **`0.135709`** → `g30s19_hist_best`: **`0.137811`** → `ms_cape_e1` (Stage-1 51-ch): **`0.174359`** → `ms_cape_e2` (+ Stage-2 OOF 8-az trace): **`0.176312`** → **`ms_cape_e3` (+ 300 m submodular cover): `0.186687`** |
 | **Paired `HOLDOUT-DTI` Gains (`ms_cape_e3` minus comparator)** | **`+0.050978`** (`+37.6%`, CI `[+0.039045, +0.063146]`) vs `core19` · **`+0.048876`** (`+35.5%`, CI `[+0.037766, +0.059521]`) vs `g30s19_hist_best` · **`+0.108524`** vs `physics_tilt8` · **`+0.010375`** (CI `[+0.006586, +0.014086]`) vs `ms_cape_e2` |
 | **Single-Feature Leakage Canaries (`204 / 204`)** | All `51` Stage-1 raw/derived inputs tested alone across `4` folds (`0` alarms; `max AUC = 0.640358 << 0.90`) |
-| **Complete 119-Raster Novelty Audit** (`116` frozen multi-site + `3` concurrent `MSDB-1v2` / `G30-S20`) | Pre-placement surface `max |Spearman| = 0.171396 <= 0.90`; post-placement dots `max |Spearman| = 0.066621 <= 0.90`, `max 3-px overlap = 68.5824% <= 70%` (**`41.47%` vs `GEMSDOE32` `H33` → `58.53%` / `25,805` brand-new fault dots**; `63.16%` vs `MSDB-1v2`; `63.39%` vs `G30-S20`) |
+| **Complete 121-Raster Novelty Audit** (`116` frozen multi-site + `5` concurrent `MSDB-1v2` / `PTA-1` / `G30-S20` / `H-NEARSPLAY`) | Pre-placement surface `max |Spearman| = 0.171396 <= 0.90`; post-placement dots `max |Spearman| = 0.066621 <= 0.90`, `max 3-px overlap = 68.5824% <= 70%` (**`41.47%` vs `GEMSDOE32` `H33` → `58.53%` / `25,805` brand-new fault dots**; `63.16%` vs `MSDB-1v2`; `63.39%` vs `G30-S20`) |
 | **Piedmont Deconfounding & Off-Catalogue SGMC Check** | Emitted top-quartile slope share **`26.06%`** vs **`24.03%`** in Quaternary fault catalogue (eliminating the `~69.5%` mountain-slope trap); independent off-catalogue USGS SGMC (`>300 m`) **`DIAGNOSTIC-PROXY-DTI = 0.094114`** (`5,521.1` weighted TP px; never used in training) |
 | **GeoTIFF & `[0, 1]` Range Contract** | `1` float32 band · `EPSG:32611` · `3,730 × 3,292` · exact `100 m` template transform · `44,090` unit `{0,1}` dots (`0` on `labels > 0.5`) · `0` in-footprint `NaN`/`Inf` · `-nan.tif` & `-zeros.tif` verified bit-identical inside footprint |
 | **Official Leaderboard Context (read 2026-10-25 UTC)** | `#1 xiaofanhu = 0.4413`, `#2 cfld__ = 0.3916`, `#3 Batik Shirt Brothers = 0.3904`, `#4 BrandenKMurray = 0.3724`, `#5 No Fault of Our Own = 0.3539` (`0.3195` was the Oct 3 snapshot; `0.2778` on `GEMSDOE32` is owner-reported unverified; `ORGANIZER-CONFIRMED = 0`) |
 
 ### Key Evidence, Preserved Concurrent Lanes & Official Sources
 
-- **Promoted Primary Release (`MS-CAPE`):** [Final JSON Run Card](docs/research/ms-cape/run-card.json) · [12/12 Machine-Adjudicated Readiness Gates](docs/research/ms-cape/readiness.json) · [PhD Scientific Review & 5 Ranked Hypotheses](docs/research/ms-cape/review.md) · [Frozen Preregistration](docs/research/ms-cape/preregistration.md) · [Full Fold Statistics & 204 Leakage Canaries](docs/research/ms-cape/results.json) · [116+3 Multi-Site Novelty Receipts](docs/research/ms-cape/registry.json)
-- **Preserved Peer & Historical Lanes:** [`MSDB-1v2` (`0.170462` HOLDOUT-DTI)](docs/research/msdb-piedmont/run-card.json) · [`TDX-C2` (duplicate-stop)](docs/research/texture-controls/run-card.json) · [`G30-LSM` (duplicate-stop)](docs/research/2026-10-25-lsm/run-card.json) · [`G30-S20` (duplicate-stop)](docs/research/2026-10-25-s20/run-card.json) · [`TDX-1` (negative)](docs/research/texture-displacement/run-card.json) · [119 Quarantined Owner-Reported Claims](docs/research/texture-displacement/owner-claims.csv)
+- **Promoted Primary Release (`MS-CAPE`):** [Final JSON Run Card](docs/research/ms-cape/run-card.json) · [12/12 Machine-Adjudicated Readiness Gates](docs/research/ms-cape/readiness.json) · [PhD Scientific Review & 5 Ranked Hypotheses](docs/research/ms-cape/review.md) · [Frozen Preregistration](docs/research/ms-cape/preregistration.md) · [Full Fold Statistics & 204 Leakage Canaries](docs/research/ms-cape/results.json) · [116+5 Multi-Site Novelty Receipts](docs/research/ms-cape/registry.json)
+- **Preserved Peer & Historical Lanes:** [`MSDB-1v2` (`0.170462` HOLDOUT-DTI)](docs/research/msdb-piedmont/run-card.json) · [`PTA-1` (`0.096683` subsurface specialist)](docs/research/phase-tilt-asymmetry/run-card.json) · [`H-NEARSPLAY` (`71.26%` duplicate-stop)](docs/research/nearsplay/full-registry-audit.json) · [26 Oct Readiness Audit](review-2026-10-26.html) · [`TDX-C2` (duplicate-stop)](docs/research/texture-controls/run-card.json) · [`G30-LSM` (duplicate-stop)](docs/research/2026-10-25-lsm/run-card.json) · [`G30-S20` (duplicate-stop)](docs/research/2026-10-25-s20/run-card.json) · [`TDX-1` (negative)](docs/research/texture-displacement/run-card.json) · [119 Quarantined Owner-Reported Claims](docs/research/texture-displacement/owner-claims.csv)
 - **Official Competition & Public Geoscience Sources (verified 2026-10-25):** [DrivenData GEMS overview](https://www.drivendata.org/competitions/306/competition-doe-gems/) · [Problem & DW-Tversky metric (`page/967`)](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) · [About & Phase 1/2 Prizes (`page/968`)](https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/) · [Live leaderboard (`#1 = 0.4413`)](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) · [NLR Official Rules PDF (`96647.pdf`)](https://docs.nlr.gov/docs/fy26osti/96647.pdf) · [USGS GeoDAWN (`10.5066/P93LGLVQ`, CC0)](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and) · [OpenEI GDR `1391` INGENIOUS (`10.15121/1881483`, CC BY 4.0)](https://gdr.openei.org/submissions/1391) · [GBCGE INGENIOUS](https://gbcge.org/current-projects/ingenious/) · [EPSG:32611](https://epsg.io/32611) · [Verified Geothermal Knowledge Base](docs/research/geothermal-vents-knowledge.md) · [Irregularities Log](docs/irregularities.md) · [Auto-Generated Status Feed](docs/status.json)
 
 ### Summary of Forensic Answer (`GEMSDOE32` `0.2778`) & Why `MS-CAPE` Advances Beyond It
@@ -42,10 +42,13 @@
 
 ### Reproduce & Verify Autonomously (Python 3.11+, CPU, Zero Human Input)
 
+
 ```bash
 python -m venv .venv
 .venv/bin/pip install -e '.[research,test]' -c requirements-tdx1.txt
-.venv/bin/python scripts/restore_public_mirrors.py --include-extra
+
+# Autonomous raw competition data check / SHA-256-pinned mirror restore + cache build:
+bash scripts/download_competition_data.sh
 .venv/bin/python scripts/prepare_data.py
 .venv/bin/python scripts/verify_prepared_cache.py
 # Full end-to-end MS-CAPE 3-experiment training + holdout + novelty + dual GeoTIFF build (~26 min on 2 CPU cores):
@@ -65,6 +68,7 @@ To verify the committed submission GeoTIFFs, SHA-256 hashes, spatial-bootstrap C
 ---
 
 > **Historical archive below.** Earlier negative-run (`TDX-1`), concurrent-lane, and initial session records are preserved verbatim as an immutable audit trail. The current pointer (`docs/current-run.json`), `MS-CAPE` promoted release, and automated gates above govern the current repository state.
+
 
 
 

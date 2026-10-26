@@ -4,7 +4,7 @@
   "candidate": "/home/user/GEMSDOE30/outputs/texture-controls/tdxc2-surface.tif",
   "candidate_sha256": "1f1f372c75642b025750ac5e69221b800cca30c5f553479538f19e6fe9885788",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "registry_sha256": "65bf07fb8e934adccec274825ffa57e30d9130bbfabb358207df39c16f382a88",
+  "registry_sha256": "d70eaeacba7fb77ab97979bd716c00e5f9cdd858a7c3e42972f615d539d4932a",
   "registry_complete": false,
   "comparisons": [
     {
@@ -56,6 +56,25 @@
       "undefined": true
     },
     {
+      "stage": "surface",
+      "reference_sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+      "reference_path": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "spearman_full_footprint": null,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "comparison_note": "The stopped candidate's private bytes are quarantined under ignored outputs/ and are not reopened here, so the saved-state correlation and 3-px overlap cannot be recomputed for this reference. The stopped TDX-C2 decision was already frozen and negative (79.09% overlap with G30-S19) and is unchanged by this arrival. This reference is nevertheless registered so no local raster is silently omitted; the reverse direction (this reference against the registry) is computed and published in docs/research/nearsplay/run-card.json."
+    },
+    {
+      "reference_path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "reference_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "site": "GEMSDOE30-parallel-merged",
+      "stage": "surface",
+      "spearman_full_footprint": null,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "error": "Stopped TDX-C2 candidate raster is quarantined out of git; reverse comparison recorded in PTA-1."
+    },
+    {
       "site": "GEMSDOE30-MS-CAPE",
       "reference": "docs/downloads/gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-nan.tif",
       "reference_sha256": "002c5158103419d3c99ac48a09998113efc2e473520e78a349af36996ceb56a2",
@@ -63,8 +82,7 @@
       "identical_inside_footprint": false,
       "spearman_full_footprint": null,
       "candidate_fraction_within_3px_of_reference": null,
-      "undefined": true,
-      "note": "Withheld TDX-C2 private outputs/ rasters are not retained in Git; late sibling artifact recorded as undefined per stopped-attempt protocol."
+      "undefined": true
     },
     {
       "site": "GEMSDOE30-MS-CAPE",
@@ -74,8 +92,7 @@
       "identical_inside_footprint": false,
       "spearman_full_footprint": null,
       "candidate_fraction_within_3px_of_reference": null,
-      "undefined": true,
-      "note": "Withheld TDX-C2 private outputs/ rasters are not retained in Git; late sibling artifact recorded as undefined per stopped-attempt protocol."
+      "undefined": true
     }
   ],
   "errors": [],

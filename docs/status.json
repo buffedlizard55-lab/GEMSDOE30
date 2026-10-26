@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-26T00:48:45Z",
+  "generated_utc": "2026-10-26T01:09:47Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -77,6 +77,26 @@
     ]
   },
   "downloads": [
+    {
+      "manifest": "GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.json",
+      "file": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "present": true,
+      "sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+      "sha256_matches_manifest": true,
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "legacy_manifest_claim_range_error_immunity": null,
+      "organizer_acceptance_confirmed": false,
+      "site_linked": null,
+      "submission_recommendation": false,
+      "run_name": "GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan",
+      "note": "NEARSPLAY annulus 300m-1.5km off-cat dots; holdout DTI +0.066 [0.057,0.074] vs matched control; proxy holdout, not org-confirmed",
+      "performance_status": "unscored; format validation is not a score"
+    },
     {
       "manifest": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.json",
       "file": "docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.tif",
@@ -215,6 +235,26 @@
       "submission_recommendation": false,
       "run_name": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a",
       "note": "MSDB-1v2: 31-feat stationary discontinuity+piedmont ramp HGB x Rayleigh curv gate + Bayes 300m EDGE, 44090 off-cat dots",
+      "performance_status": "unscored; format validation is not a score"
+    },
+    {
+      "manifest": "gems30-PTA1-44090-20261025-9a3f7f9535a4.json",
+      "file": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "present": true,
+      "sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "sha256_matches_manifest": true,
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "legacy_manifest_claim_range_error_immunity": null,
+      "organizer_acceptance_confirmed": false,
+      "site_linked": null,
+      "submission_recommendation": false,
+      "run_name": "gems30-PTA1-44090-20261025-9a3f7f9535a4",
+      "note": "PTA1 subsurface 3D tilt-phase + dip-asymmetry 18-feat HGB; 44090d; research artifact, NOT slot-approved.",
       "performance_status": "unscored; format validation is not a score"
     },
     {
@@ -521,7 +561,7 @@
     "schema_version": 1,
     "run_card": "docs/research/ms-cape/run-card.json",
     "readiness": "docs/research/ms-cape/readiness.json",
-    "purpose": "Promoted primary research artifact MS-CAPE (2-stage multi-physics structural-habitat + 8-azimuth lineament + GDR/GeoDAWN upflow + 300 m submodular DTI facility-location cover; pooled HOLDOUT-DTI 0.186687 vs core19 0.135709 [+0.050978 / +37.6%] and G30-S19 0.137811 [+0.048876 / +35.5%]; passed 119-entry surface + dots novelty gate; research_verdict=promote, download_ok=true, submission_approved=false, slot_selected=false)",
+    "purpose": "Promoted primary research artifact MS-CAPE (2-stage multi-physics structural-habitat + 8-azimuth lineament + GDR/GeoDAWN upflow + 300 m submodular DTI facility-location cover; pooled HOLDOUT-DTI 0.186687 vs core19 0.135709 [+0.050978 / +37.6%] and G30-S19 0.137811 [+0.048876 / +35.5%]; passed 121-entry surface + dots novelty gate; research_verdict=promote, download_ok=true, submission_approved=false, slot_selected=false)",
     "latest_attempt": "docs/research/texture-controls/run-card.json",
     "additional_stopped_attempts": [
       {
@@ -536,6 +576,11 @@
         "lane": "MSDB-1v2",
         "run_card": "docs/research/msdb-piedmont/run-card.json",
         "readiness": "docs/research/msdb-piedmont/readiness.json"
+      },
+      {
+        "lane": "PTA-1",
+        "run_card": "docs/research/phase-tilt-asymmetry/run-card.json",
+        "readiness": "docs/research/phase-tilt-asymmetry/readiness.json"
       },
       {
         "lane": "TDX-1",
@@ -898,13 +943,13 @@
       "timing": "Late-arriving references; checked both saved states without refitting or replacing dots",
       "combined_observed_registry": {
         "surface": {
-          "registry_entries_compared": 119,
+          "registry_entries_compared": 121,
           "max_spearman": 0.17139595142886038,
           "max_fraction_within_3px": null,
           "status": "passed"
         },
         "dots": {
-          "registry_entries_compared": 119,
+          "registry_entries_compared": 121,
           "max_spearman": 0.06662148795105378,
           "max_fraction_within_3px": 0.6858244499886595,
           "status": "passed"
@@ -949,12 +994,12 @@
       {
         "name": "surface_observed_registry",
         "status": "passed",
-        "detail": "119 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+        "detail": "121 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
       },
       {
         "name": "dots_observed_registry",
         "status": "passed",
-        "detail": "119 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+        "detail": "121 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
       },
       {
         "name": "complete_parallel_registry",
@@ -984,13 +1029,13 @@
     ],
     "observed_registry": {
       "surface": {
-        "registry_entries_compared": 119,
+        "registry_entries_compared": 121,
         "max_spearman": 0.17139595142886038,
         "max_fraction_within_3px": null,
         "status": "passed"
       },
       "dots": {
-        "registry_entries_compared": 119,
+        "registry_entries_compared": 121,
         "max_spearman": 0.06662148795105378,
         "max_fraction_within_3px": 0.6858244499886595,
         "status": "passed"
@@ -1182,13 +1227,13 @@
         "timing": "Post-stop late-reference audit of saved states; no refit, replacement, new placement or original-registry rewrite",
         "combined_observed_registry": {
           "surface": {
-            "registry_entries_compared": 169,
+            "registry_entries_compared": 171,
             "max_spearman": 0.15657261436067785,
             "max_fraction_within_3px": null,
             "status": "unknown"
           },
           "dots": {
-            "registry_entries_compared": 169,
+            "registry_entries_compared": 171,
             "max_spearman": 0.06383254570926011,
             "max_fraction_within_3px": 0.790904967112724,
             "status": "failed"
@@ -1234,12 +1279,12 @@
         {
           "name": "surface_observed_registry",
           "status": "unknown",
-          "detail": "169 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+          "detail": "171 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
         },
         {
           "name": "dots_observed_registry",
           "status": "failed",
-          "detail": "169 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+          "detail": "171 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
         },
         {
           "name": "complete_parallel_registry",
@@ -1269,13 +1314,13 @@
       ],
       "observed_registry": {
         "surface": {
-          "registry_entries_compared": 169,
+          "registry_entries_compared": 171,
           "max_spearman": 0.15657261436067785,
           "max_fraction_within_3px": null,
           "status": "unknown"
         },
         "dots": {
-          "registry_entries_compared": 169,
+          "registry_entries_compared": 171,
           "max_spearman": 0.06383254570926011,
           "max_fraction_within_3px": 0.790904967112724,
           "status": "failed"
@@ -2083,7 +2128,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "258 tests collected in 0.73s",
+      "pytest_collect": "271 tests collected in 0.97s",
       "exit_code": 0
     },
     "score_gain_claimed": false

@@ -68,10 +68,12 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
         delta_detail = "Fixed candidate must improve both same-protocol controls with positive paired CI lower bound"
     elif spec["id"] == "tdxc2":
         delta_detail = "Fixed full-stack candidate must improve core19, zero-lag and phase-null controls with positive paired CI lower bounds"
+    elif spec["id"] == "msdb1v2":
+        delta_detail = "Fixed candidate must improve preregistered core19 comparator with positive paired CI lower bound"
     elif spec["id"] == "ms_cape":
         delta_detail = "Fixed candidate must improve all same-protocol comparators with positive paired CI lower bound"
     else:
-        delta_detail = "Fixed candidate must improve preregistered core19 comparator with positive paired CI lower bound"
+        delta_detail = f"Fixed {spec['label']} candidate must improve all {len(comparators)} comparators ({', '.join(sorted(comparators))}) with positive paired CI lower bounds"
     gate("paired_improvement", "passed" if wins else "failed", delta_detail)
     features = results.get("feature_canaries", [])
     complete_canaries = (len(features) == 4 and {f.get("fold") for f in features} == set(range(4))
@@ -83,7 +85,6 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
         for row in fold.get("features", []):
             raw, uni = row.get("raw_auc"), row.get("univariate_training_only_hgb_auc")
             valid_auc = number(raw) and 0 <= raw <= 1 and number(uni) and 0 <= uni <= 1
-            # Recompute, do not trust a mutable "alarm=false" boolean.
             if not valid_auc or max(raw, 1 - raw, uni, 1 - uni) > .90 or row.get("alarm_above_0_90") is not False:
                 alarm = True
     gate("single_feature_leakage_canaries", "passed" if complete_canaries and not alarm else "failed",

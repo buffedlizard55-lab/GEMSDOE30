@@ -1,0 +1,130 @@
+{
+  "schema_version": 3,
+  "generated_utc": "2026-10-25T23:58:37Z",
+  "run_id": "GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan",
+  "submission_file": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+  "submission_sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+  "sidecar": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.json",
+  "validation_receipt": "docs/research/nearsplay/validation.json",
+  "holdout_report": "docs/research/h-nearsplay-holdout.json",
+  "hypothesis": "H-NEARSPLAY: off-catalogue dotted emission concentrated in the near-splay annulus (300 m - 1.5 km from mapped USGS/INGENIOUS traces), inner-edge weighted and Poisson-disk thinned at 300 m.",
+  "mechanism": "Unmapped splays and stepovers of mapped fault systems sit just outside catalogue traces and are scorable as newly mapped geometry of an existing system (DrivenData thread 11536). Dots placed 300 m - 1.5 km off-catalogue at one kernel radius (300 m) recover hidden stand-in faults with minimal redundant false-positive mass; binary 0/1 dots dominate graded maps on a fixed support under the distance-weighted Tversky index.",
+  "non_fault_mimic": "Erosional/drainage lineaments, cultural or road linear features, and volcanic contacts that coincidentally parallel mapped traces inside the annulus.",
+  "lane": "Near-slay annulus placement (off-catalogue, 300 m - 1.5 km). Distinct from the H33/G30-S19 catalogue-flank habitat lane and from uniform off-catalogue Poisson (d2.8 family). Not an externally assigned lane.",
+  "layers": [
+    "data/raw/labels.tif (catalogue geometry only, for zoning and masking)",
+    "data/raw/sample_submission.tif (template footprint/transform)"
+  ],
+  "difference_from_prior_work": "No inspected GEMSDOE artifact or repository holdout emits purely from the 300 m - 1.5 km off-catalogue annulus with an inner-edge bias: the d2.8 family spreads uniformly off-catalogue (median catalogue distance 1,500 m); other submissions use habitat/ridge/scarp density or catalogue-proximal mass.",
+  "experiments_run": 2,
+  "fixed_arms": [
+    "nearslay_inner_weighted",
+    "random_near_matched",
+    "uniform_off_catalogue"
+  ],
+  "experiment_cap": 3,
+  "time_cap_hours": 2,
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "kernel": "triangular 300 m, alpha=0.2, beta=0.8",
+    "scope": "buffered whole-segment catalogue-recovery proxy; NOT organizer performance, NOT a competition score",
+    "bootstrap": {
+      "unit": "geographic block aggregated across folds",
+      "blocks": 1024,
+      "replicates": 2000,
+      "seed": 3071,
+      "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+    },
+    "screen_seed_31": {
+      "candidate_dti": 0.08502081258697522,
+      "control_dti": 0.019653522940025436,
+      "delta": 0.06536728964694978,
+      "ci95": [
+        0.056983238130653695,
+        0.07434696611947941
+      ],
+      "withheld_positives": 20870,
+      "quadrants": "4/4",
+      "pass": true
+    },
+    "confirmation_seed_41": {
+      "candidate_dti": 0.0878801185469148,
+      "control_dti": 0.019941819710194774,
+      "delta": 0.06793829883672002,
+      "ci95": [
+        0.05897694667908524,
+        0.07724278724681792
+      ],
+      "withheld_positives": 20247,
+      "quadrants": "4/4",
+      "pass": true
+    },
+    "verdict": "promoted on catalogue-proxy holdout; NOT ORGANIZER-CONFIRMED"
+  },
+  "leakage_canary": "Single volcanic-vent proximity feature tested alone in experiment 1 (docs/research/h-vent-feeder-holdout.json): AUC far below 0.90, no leakage alarm; the vent hypothesis itself was negative on the proxy (uncatalogued targets cannot be validated against catalogue truth, IR-30-017).",
+  "novelty_vs_registry": {
+    "checked_against": "21 locally available registry rasters (docs/downloads and data/raw/scored); complete parallel registry unavailable",
+    "max_spearman_rho_vs_any_reference": 0.07027108336531361,
+    "max_fraction_of_dots_within_3px_vs_any_reference": 0.6808,
+    "lane_collision": false,
+    "thresholds": "rho > 0.90 or dot overlap > 0.70 => duplicate-stop"
+  },
+  "validator_output": {
+    "passed": true,
+    "checks": [
+      {
+        "name": "template_single_band",
+        "passed": true
+      },
+      {
+        "name": "single_band",
+        "passed": true
+      },
+      {
+        "name": "float32",
+        "passed": true
+      },
+      {
+        "name": "epsg",
+        "passed": true,
+        "detail": "EPSG:32611"
+      },
+      {
+        "name": "shape_matches_template",
+        "passed": true,
+        "detail": "3730 x 3292"
+      },
+      {
+        "name": "transform_matches_template",
+        "passed": true
+      },
+      {
+        "name": "100m_north_up_grid",
+        "passed": true
+      },
+      {
+        "name": "finite_and_in_range_inside_footprint",
+        "passed": true,
+        "detail": "5,167,373 valid pixels, min 0.0, max 1.0"
+      },
+      {
+        "name": "null_outside_template_footprint",
+        "passed": true,
+        "detail": "7,111,787 outside pixels NaN/nodata"
+      },
+      {
+        "name": "template_readable",
+        "passed": true
+      }
+    ],
+    "scope": "local format contract only; not organizer acceptance, not a range-error diagnosis"
+  },
+  "submission_name": "GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan",
+  "submission_note": "NEARSPLAY annulus 300m-1.5km off-cat dots; holdout DTI +0.066 [0.057,0.074] vs matched control; proxy holdout, not org-confirmed",
+  "submission_note_length": 128,
+  "note_max_chars": 140,
+  "verdict": "promote on holdout — downloadable research artifact; NOT approved/organizer-confirmed for competition upload; no weekly slot used by this repository; the authorized entrant decides whether to spend a slot",
+  "readiness_receipt": "docs/research/nearsplay/readiness.json"
+}

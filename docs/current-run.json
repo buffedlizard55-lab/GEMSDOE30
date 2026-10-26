@@ -2,7 +2,7 @@
   "schema_version": 1,
   "run_card": "docs/research/ms-cape/run-card.json",
   "readiness": "docs/research/ms-cape/readiness.json",
-  "purpose": "Promoted primary research artifact MS-CAPE (2-stage multi-physics structural-habitat + 8-azimuth lineament + GDR/GeoDAWN upflow + 300 m submodular DTI facility-location cover; pooled HOLDOUT-DTI 0.186687 vs core19 0.135709 [+0.050978 / +37.6%] and G30-S19 0.137811 [+0.048876 / +35.5%]; passed 119-entry surface + dots novelty gate; research_verdict=promote, download_ok=true, submission_approved=false, slot_selected=false)",
+  "purpose": "Promoted primary research artifact MS-CAPE (2-stage multi-physics structural-habitat + 8-azimuth lineament + GDR/GeoDAWN upflow + 300 m submodular DTI facility-location cover; pooled HOLDOUT-DTI 0.186687 vs core19 0.135709 [+0.050978 / +37.6%] and G30-S19 0.137811 [+0.048876 / +35.5%]; passed 121-entry surface + dots novelty gate; research_verdict=promote, download_ok=true, submission_approved=false, slot_selected=false)",
   "latest_attempt": "docs/research/texture-controls/run-card.json",
   "additional_stopped_attempts": [
     {
@@ -17,6 +17,11 @@
       "lane": "MSDB-1v2",
       "run_card": "docs/research/msdb-piedmont/run-card.json",
       "readiness": "docs/research/msdb-piedmont/readiness.json"
+    },
+    {
+      "lane": "PTA-1",
+      "run_card": "docs/research/phase-tilt-asymmetry/run-card.json",
+      "readiness": "docs/research/phase-tilt-asymmetry/readiness.json"
     },
     {
       "lane": "TDX-1",

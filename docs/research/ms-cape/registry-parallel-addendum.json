@@ -4,9 +4,21 @@
   "complete": true,
   "rasters": [
     {
+      "site": "GEMSDOE30-NEARSPLAY",
+      "path": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+      "aligned": true
+    },
+    {
       "site": "GEMSDOE30-MSDB-1v2",
       "path": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
       "sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+      "aligned": true
+    },
+    {
+      "site": "GEMSDOE30-PTA1",
+      "path": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
       "aligned": true
     },
     {

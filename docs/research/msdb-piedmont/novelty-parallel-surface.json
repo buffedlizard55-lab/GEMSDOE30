@@ -6,7 +6,7 @@
   "template": "data/raw/sample_submission.tif",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
   "registry": "docs/research/msdb-piedmont/registry-parallel-addendum.json",
-  "registry_sha256": "3fde3f7d637324afd2b39e3250dbb500efa397114adb2a7143b914179064329b",
+  "registry_sha256": "e25139332ca3dd696ed4f25a7d4f1f1ee907a30185c04ec8948a6635e8a126fe",
   "registry_complete": false,
   "thresholds": {
     "spearman_max": 0.9,
@@ -15,6 +15,16 @@
   "decision": "unknown_incomplete_surface",
   "comparisons": [
     {
+      "site": "GEMSDOE30-NEARSPLAY",
+      "reference": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "reference_sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+      "stage": "surface",
+      "identical_inside_footprint": false,
+      "spearman_full_footprint": null,
+      "candidate_fraction_within_3px_of_reference": null,
+      "undefined": true
+    },
+    {
       "site": "GEMSDOE30-MS-CAPE",
       "reference": "docs/downloads/gems30-MS-CAPE-submod300-44090-20261025-cff19a5ac497-nan.tif",
       "reference_sha256": "002c5158103419d3c99ac48a09998113efc2e473520e78a349af36996ceb56a2",
@@ -22,8 +32,7 @@
       "identical_inside_footprint": false,
       "spearman_full_footprint": null,
       "candidate_fraction_within_3px_of_reference": null,
-      "undefined": true,
-      "note": "Historical MSDB-1v2 continuous surface was held only in gitignored outputs/ during execution; final published dots audited directly."
+      "undefined": true
     },
     {
       "site": "GEMSDOE30-MS-CAPE",
@@ -33,30 +42,37 @@
       "identical_inside_footprint": false,
       "spearman_full_footprint": null,
       "candidate_fraction_within_3px_of_reference": null,
-      "undefined": true,
-      "note": "Historical MSDB-1v2 continuous surface was held only in gitignored outputs/ during execution; final published dots audited directly."
+      "undefined": true
     },
     {
-      "site": "GEMSDOE30-parallel-merged",
+      "site": "GEMSDOE30-PTA1",
+      "reference": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "reference_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "stage": "surface",
+      "identical_inside_footprint": false,
+      "spearman_full_footprint": null,
+      "candidate_fraction_within_3px_of_reference": null,
+      "undefined": true
+    },
+    {
+      "site": "GEMSDOE30-G30-S20",
       "reference": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif",
       "reference_sha256": "12bd6196cdebfbaa39960d0d6f600fde498f1fb7675321222ba49489dec69b22",
       "stage": "surface",
       "identical_inside_footprint": false,
       "spearman_full_footprint": null,
       "candidate_fraction_within_3px_of_reference": null,
-      "undefined": true,
-      "note": "Historical MSDB-1v2 continuous surface was held only in gitignored outputs/ during execution; final published dots audited directly."
+      "undefined": true
     },
     {
-      "site": "GEMSDOE30-parallel-merged",
+      "site": "GEMSDOE30-G30-S20",
       "reference": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
       "reference_sha256": "1b07820d0066e56442ade4f4a3880af92f50b4ca9cac528ccf59696ec5299cd6",
       "stage": "surface",
       "identical_inside_footprint": false,
       "spearman_full_footprint": null,
       "candidate_fraction_within_3px_of_reference": null,
-      "undefined": true,
-      "note": "Historical MSDB-1v2 continuous surface was held only in gitignored outputs/ during execution; final published dots audited directly."
+      "undefined": true
     }
   ],
   "errors": []
