@@ -145,6 +145,82 @@ def geometric_mean(left: Any, right: Any, *, floor: float = 1e-6) -> Any:
     return np.clip(combined, 0.0, None).astype(np.float32)
 
 
+def line_coherent_belief(
+    belief: Any,
+    *,
+    orientations: int = 16,
+    half_length: int = 4,
+    footprint: Any | None = None,
+    clip01: bool = True,
+    return_line_max: bool = False,
+) -> Any:
+    """Reweight a pointwise belief by oriented along-strike persistence.
+
+    For each of ``orientations`` directions ``theta = pi * k / orientations``
+    the line mean at a cell is the mean of the belief over the
+    ``2 * half_length + 1`` taps ``cell + round(t * (sin, cos)(theta))`` for
+    ``t = -half_length..half_length`` (rasterised taps; a tap that rounds to
+    the same offset as another is counted once per ``t``).  Cells outside
+    the raster contribute 0 (zero padding), so line means are diluted near
+    the border.  With ``Lmax`` the maximum line mean over orientations, the
+    returned surface is ``sqrt(belief * Lmax)``: a cell on a coherent line
+    of high belief keeps roughly its value (``Lmax ~= belief``), while an
+    isolated speckle is divided by ``sqrt(2 * half_length + 1)`` in
+    relative terms because only its centre tap is high.  Faults are linear
+    structures; a pointwise model cannot express this requirement, and the
+    geometric-mean form cannot create belief where the pointwise value is
+    zero, so localisation is preserved.
+
+    ``clip01`` clamps the result into ``[0, 1]`` (appropriate for
+    probability beliefs, where the clamp is otherwise a no-op); pass
+    ``False`` for unscaled belief surfaces.  ``footprint`` zeroes the
+    result outside the supplied mask (belief outside the footprint still
+    contributes to line means at its edge unless the caller zeroes it
+    first, as the lane scripts do).
+    """
+
+    import numpy as np
+
+    values = np.asarray(belief, dtype=np.float32)
+    if values.ndim != 2:
+        raise ValueError("belief must be two-dimensional")
+    if not np.all(np.isfinite(values)):
+        raise ValueError("belief must be finite")
+    if np.any(values < 0.0):
+        raise ValueError("belief must be non-negative")
+    if int(orientations) < 1:
+        raise ValueError("orientations must be a positive integer")
+    if int(half_length) < 1:
+        raise ValueError("half_length must be a positive integer")
+
+    pad = int(half_length)
+    height, width = values.shape
+    padded = np.pad(values, ((pad, pad), (pad, pad)), mode="constant")
+    line_max = np.zeros(values.shape, dtype=np.float32)
+    taps = np.arange(-pad, pad + 1)
+    for k in range(int(orientations)):
+        theta = math.pi * k / int(orientations)
+        dy = np.round(taps * math.sin(theta)).astype(int)
+        dx = np.round(taps * math.cos(theta)).astype(int)
+        line_sum = np.zeros(values.shape, dtype=np.float32)
+        for oy, ox in zip(dy, dx):
+            line_sum += padded[pad + oy: pad + oy + height,
+                                 pad + ox: pad + ox + width]
+        np.maximum(line_max, line_sum / float(taps.size), out=line_max)
+    combined = np.sqrt(values * line_max).astype(np.float32)
+    if footprint is not None:
+        footprint_array = np.asarray(footprint, dtype=bool)
+        if footprint_array.shape != values.shape:
+            raise ValueError("footprint shape differs from belief")
+        combined = np.where(footprint_array, combined, 0.0).astype(np.float32)
+        line_max = np.where(footprint_array, line_max, 0.0).astype(np.float32)
+    if clip01:
+        combined = np.clip(combined, 0.0, 1.0).astype(np.float32)
+    if return_line_max:
+        return combined, line_max
+    return combined
+
+
 def scale_to_mass(field: Any, mass: float, *, support: Any | None = None) -> Any:
     """Rescale a belief surface so its sum equals ``mass`` inside ``support``."""
 

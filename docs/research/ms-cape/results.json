@@ -18815,5 +18815,6 @@
         "scored_pixels": 509
       }
     ]
-  }
+  },
+  "experiment_spec": "ms_cape"
 }

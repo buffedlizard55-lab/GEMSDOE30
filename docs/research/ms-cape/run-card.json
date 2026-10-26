@@ -343,5 +343,26 @@
   "weekly_slots_used": 0,
   "organizer_confirmed_scores": [],
   "created_utc": "2026-10-26T00:02:04+00:00",
-  "blockers": []
+  "blockers": [],
+  "experiment_spec": "ms_cape",
+  "additional_novelty_evidence": {
+    "registry": "docs/research/ms-cape/registry-parallel-addendum.json",
+    "surface_receipt": "docs/research/ms-cape/novelty-parallel-surface.json",
+    "dots_receipt": "docs/research/ms-cape/novelty-parallel-dots.json",
+    "timing": "Late-arriving references; checked both saved states without refitting or replacing dots",
+    "combined_observed_registry": {
+      "surface": {
+        "registry_entries_compared": 119,
+        "max_spearman": 0.17139595142886038,
+        "max_fraction_within_3px": null,
+        "status": "passed"
+      },
+      "dots": {
+        "registry_entries_compared": 119,
+        "max_spearman": 0.06662148795105378,
+        "max_fraction_within_3px": 0.6858244499886595,
+        "status": "passed"
+      }
+    }
+  }
 }

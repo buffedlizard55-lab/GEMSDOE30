@@ -1,5 +1,14 @@
 # Source register and verification notes
 
+> **Current evidence boundary (2026-10-25, TDX-C2):** the pinned official GitHub
+> reference notebook/README were re-retrieved and hashed; saved band metadata and
+> configuration excerpts are in [the source audit](research/texture-controls/official-source-audit.json).
+> Nine owner-site README/TIFF inventories were separately frozen. Statements below
+> about previous website reads keep their original historical scope; they are not
+> fresh DrivenData/USGS/GDR/NLR verification in this network-restricted session.
+> No current organizer submission receipt was available. See the [latest review](research/texture-controls/review.md).
+
+
 **Reviewed:** 2026-10-03 (UTC date; pages read in this session). “Verified” below means that the named page's text was retrieved and checked for the stated claim. It does not mean that a private dataset, linked archive, hidden label, score receipt, or external raster binary was downloaded or authenticated.
 
 ## Primary competition sources

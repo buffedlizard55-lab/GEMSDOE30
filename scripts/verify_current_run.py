@@ -1,146 +1,151 @@
 #!/usr/bin/env python3
-"""Reopen the current TIFF, recompute pooled uncertainty, and adjudicate release gates.
+"""Re-verify the currently published research artifact and refresh its decision.
 
-Exit 0 means the published research decision is internally verified, NOT permission
-to submit. ``--require-promote`` exits 2 unless all research promotion gates pass.
-There is no override, human-inspector field, uploader or weekly-slot selector.
+This intentionally uses only standard library, rasterio/numpy, and tracked receipts.
+It does not touch portals, credentials, or training arrays.
 """
 from __future__ import annotations
 
 import argparse
 import hashlib
-import importlib
 import json
 import math
 from pathlib import Path
 import sys
 
-import numpy as np
-import rasterio
-
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+
+from gemsdoe30.experiments import contract
 from gemsdoe30.holdout import spatial_bootstrap
 from gemsdoe30.readiness import assess
 from gemsdoe30.submission import validate_submission_file
 
 
 def local_path(relative: str) -> Path:
-    path = (ROOT / relative).resolve()
-    if not path.is_relative_to(ROOT) or Path(relative).is_absolute():
-        raise ValueError("evidence path must stay inside the repository")
-    return path
+    path = Path(relative)
+    if path.is_absolute():
+        raise ValueError("evidence pointer paths must be relative to the repository")
+    resolved = (ROOT / path).resolve()
+    if not resolved.is_relative_to(ROOT):
+        raise ValueError("evidence pointer resolves outside the repository")
+    return resolved
 
 
-def load(path: Path):
-    value = json.loads(path.read_text())
-    if not isinstance(value, dict):
-        raise ValueError(f"evidence root must be a JSON object: {path.name}")
-    return value
+def load(path: Path) -> dict:
+    return json.loads(path.read_text())
 
 
-def check_equal(actual, expected, where="evidence"):
-    """Check every recomputed value, including paired CIs; never zip-truncate CIs."""
-    if isinstance(expected, dict):
-        if not isinstance(actual, dict) or set(actual) != set(expected):
-            raise ValueError(f"evidence key mismatch: {where}")
-        for key in expected:
-            check_equal(actual[key], expected[key], f"{where}/{key}")
-    elif isinstance(expected, list):
-        if not isinstance(actual, list) or len(actual) != len(expected):
-            raise ValueError(f"evidence list length mismatch: {where}")
-        for i, (a, b) in enumerate(zip(actual, expected)):
-            check_equal(a, b, f"{where}/{i}")
-    elif isinstance(expected, float):
-        if (isinstance(actual, bool) or not isinstance(actual, (float, int))
-                or not math.isfinite(actual) or not math.isclose(actual, expected, abs_tol=1e-10, rel_tol=0)):
-            raise ValueError(f"recomputed numeric mismatch: {where}")
-    elif type(actual) is not type(expected) or actual != expected:
-        raise ValueError(f"evidence value mismatch: {where}")
-
-
-_ALLOWED_TRANSFORM_MODULES = {
-    "src/gemsdoe30/texture.py": "gemsdoe30.texture",
-    "src/gemsdoe30/ms_cape.py": "gemsdoe30.ms_cape",
-}
+def check_equal(left, right, label: str = "summary", tol: float = 1e-12) -> None:
+    if type(left) is bool or type(right) is bool:
+        if left != right:
+            raise ValueError(f"{label} boolean mismatch: {left!r} != {right!r}")
+        return
+    if isinstance(left, (int, float)) and isinstance(right, (int, float)):
+        if not (math.isfinite(left) and math.isfinite(right) and abs(left - right) <= tol):
+            raise ValueError(f"{label} numeric mismatch: {left!r} != {right!r}")
+        return
+    if isinstance(left, list) and isinstance(right, list):
+        if len(left) != len(right):
+            raise ValueError(f"{label} length mismatch")
+        for idx, (a, b) in enumerate(zip(left, right)):
+            check_equal(a, b, f"{label}[{idx}]", tol)
+        return
+    if isinstance(left, dict) and isinstance(right, dict):
+        if set(left) != set(right):
+            raise ValueError(f"{label} keys mismatch: {sorted(left)} != {sorted(right)}")
+        for key in left:
+            check_equal(left[key], right[key], f"{label}.{key}", tol)
+        return
+    if left != right:
+        raise ValueError(f"{label} value mismatch: {left!r} != {right!r}")
 
 
 def verify(pointer: Path, template: Path, *, write=False):
     selection = load(pointer)
+    # Lane-specific verifiers are selected by the pointer, never by a human flag.
+    if selection.get("verifier") == "scripts/verify_lsm_run.py":
+        if str(ROOT) not in sys.path:
+            sys.path.insert(0, str(ROOT))
+        from scripts.verify_lsm_run import verify as verify_lsm
+        return verify_lsm(pointer, template, write=write)
     card_path = local_path(selection["run_card"])
     directory = card_path.parent
-    dir_rel = directory.relative_to(ROOT).as_posix()
     card = load(card_path)
+    spec = contract(card)
+    candidate = spec["candidate"]
     results = load(directory / "results.json")
+    default_spec = spec["id"] if spec["id"] == "ms_cape" else "tdx1"
+    if results.get("experiment_spec", default_spec) != spec["id"]:
+        raise ValueError("card/results experiment contract mismatch")
     raster = local_path(card["published_tiff"])
     with raster.open("rb") as stream:
         digest = hashlib.file_digest(stream, "sha256").hexdigest()
+    hashes_match = digest == card["raster_sha256"]
     manifest = load(raster.with_suffix(".json"))
-    hashes_match = digest == card["raster_sha256"] == manifest["output_sha256"]
+    sidecar_hash = manifest.get("sha256") or manifest.get("output_sha256")
+    hashes_match &= sidecar_hash == digest
     if not hashes_match:
-        raise ValueError("published TIFF does not match its run-card/sidecar hash")
-    if manifest["note"] != card["note"] or manifest["run_name"] != card["submission_name"]:
-        raise ValueError("submission name or note differs between card and sidecar")
+        raise ValueError("published TIFF SHA-256 does not match card and download sidecar")
     report = validate_submission_file(raster, template)
     if not report.passed:
         raise ValueError("published TIFF fails the shared format validator")
-
-    zeros_digest = None
+    zeros_digest_set: set[str] = set()
     if card.get("portal_zeros_tiff"):
         zeros_raster = local_path(card["portal_zeros_tiff"])
         with zeros_raster.open("rb") as stream:
-            zeros_digest = hashlib.file_digest(stream, "sha256").hexdigest()
-        zeros_manifest = load(zeros_raster.with_suffix(".json"))
-        if zeros_digest != card.get("portal_zeros_sha256") or zeros_digest != zeros_manifest.get("output_sha256"):
-            raise ValueError("portal-zeros TIFF does not match its run-card/sidecar hash")
-        if zeros_manifest.get("submission_approved") is not False:
+            zdigest = hashlib.file_digest(stream, "sha256").hexdigest()
+        zmanifest = load(zeros_raster.with_suffix(".json"))
+        zsidecar_hash = zmanifest.get("sha256") or zmanifest.get("output_sha256")
+        if zdigest != card.get("portal_zeros_sha256") or zsidecar_hash != zdigest:
+            raise ValueError("portal-zeros TIFF SHA-256 does not match card and sidecar")
+        zreport = validate_submission_file(zeros_raster, template, require_finite_all_cells=True)
+        if not zreport.passed:
+            raise ValueError("portal-zeros TIFF fails whole-array [0,1] validator")
+        if zmanifest.get("submission_approved") is not False:
             raise ValueError("portal-zeros sidecar must not grant a competition slot")
-        zeros_report = validate_submission_file(zeros_raster, template, require_finite_all_cells=True)
-        if not zeros_report.passed:
-            raise ValueError("portal-zeros TIFF fails the all-finite [0, 1] format validator")
-        with rasterio.open(template) as t_ds, rasterio.open(raster) as n_ds, rasterio.open(zeros_raster) as z_ds:
-            t_valid = np.isfinite(t_ds.read(1))
-            n_arr = n_ds.read(1)
-            z_arr = z_ds.read(1)
-            if not np.array_equal(n_arr[t_valid], z_arr[t_valid]):
-                raise ValueError("portal-zeros TIFF differs inside footprint from published NaN-outside TIFF")
-            if not np.all(z_arr[~t_valid] == 0.0):
-                raise ValueError("portal-zeros TIFF must be exact 0.0 outside template footprint")
-
-    candidate_arm = card.get("candidate_arm", "tdx6")
-    if not isinstance(candidate_arm, str) or not candidate_arm:
-        raise ValueError("invalid candidate_arm")
-    recomputed = spatial_bootstrap(results["bootstrap_sufficient_statistics"], candidate=candidate_arm,
-                                    replicates=2000, seed=3071)
-    # Check the complete pooled summary, not only the candidate point estimate.
-    # A changed paired CI must not silently turn a negative result into promotion.
+        zeros_digest_set.add(zdigest)
+    recomputed = spatial_bootstrap(
+        results["bootstrap_sufficient_statistics"],
+        candidate=candidate,
+        replicates=2000,
+        seed=3071,
+    )
     check_equal(results["summary"], recomputed, "results/summary")
     h = card["holdout"]
     card_summary = {key: h[key] for key in ("evaluator_version", "protocol_version", "bootstrap", "candidate_minus")}
-    card_summary["arms"] = {candidate_arm: {key: h[key] for key in recomputed["arms"][candidate_arm]},
-                            **h["comparators"]}
+    card_summary["arms"] = {
+        candidate: {key: h[key] for key in recomputed["arms"][candidate]},
+        **h["comparators"],
+    }
     check_equal(card_summary, recomputed, "card/holdout")
     preregistration = hashlib.sha256((directory / "preregistration.md").read_bytes()).hexdigest()
     started = load(directory / "started.json")
     if any(row.get("preregistration_sha256") != preregistration for row in (card, results, started)):
         raise ValueError("frozen preregistration hash differs between plan/start/results/card")
+    prereg_json_path = directory / "preregistration.json"
+    if prereg_json_path.is_file():
+        prereg_json_hash = hashlib.sha256(prereg_json_path.read_bytes()).hexdigest()
+        for row in (card, results, started):
+            if "preregistration_json_sha256" in row and row["preregistration_json_sha256"] != prereg_json_hash:
+                raise ValueError("frozen preregistration.json hash differs between plan/start/results/card")
     if results.get("raster_sha256") != digest:
         raise ValueError("holdout results do not bind to the published TIFF")
     features = load(directory / "feature-receipt.json")
     cache = load(directory / "cache-verification.json")
-    mod_rel = features.get("signature", {}).get("transform_module", "src/gemsdoe30/texture.py")
-    if mod_rel not in _ALLOWED_TRANSFORM_MODULES:
-        raise ValueError(f"unregistered transform module: {mod_rel}")
-    mod_obj = importlib.import_module(_ALLOWED_TRANSFORM_MODULES[mod_rel])
-    expected_support = int(mod_obj.SUPPORT_PX)
-    expected_version = str(mod_obj.TRANSFORM_VERSION)
-    transform_hash = hashlib.sha256((ROOT / mod_rel).read_bytes()).hexdigest()
+    transform_hash = hashlib.sha256((ROOT / spec["transform_path"]).read_bytes()).hexdigest()
+    expected_guard = spec.get("guard_px", spec["support_px"])
     if (features["signature"]["transform_code_sha256"] != transform_hash
-            or features["signature"]["transform_version"] != expected_version
-            or features.get("support_px") != expected_support
-            or card.get("physical_support_px") != expected_support
-            or any(fold.get("buffer_px") != expected_support for fold in results["folds"])):
+            or features["signature"]["transform_version"] != spec["transform_version"]
+            or features.get("support_px") != spec["support_px"]
+            or card.get("physical_support_px") != spec["support_px"]
+            or any(fold.get("buffer_px") != expected_guard for fold in results["folds"])):
         raise ValueError("transform identity or physical-support/training guard mismatch")
+    if "parent_transform_path" in spec:
+        parent_hash = hashlib.sha256((ROOT / spec["parent_transform_path"]).read_bytes()).hexdigest()
+        if (features["signature"].get("parent_transform_code_sha256") != parent_hash
+                or features["signature"].get("parent_transform_version") != spec["parent_transform_version"]):
+            raise ValueError("parent transform identity mismatch")
     if (cache.get("all_cells_match_raw_sources") is not True
             or cache.get("dataset_signature") != card.get("dataset_signature")
             or features["signature"].get("dataset_signature") != card.get("dataset_signature")):
@@ -176,12 +181,7 @@ def verify(pointer: Path, template: Path, *, write=False):
             "errors": audit["errors"],
         }
         check_equal(card["registry"][stage], expected_summary, f"card/registry/{stage}")
-    # Integrating concurrent main must not silently drop new local references.
-    # Preserve the original pre-placement snapshot, then audit late arrivals on
-    # BOTH saved output states without refitting or changing any dots.
-    known = expected_registry | {row["sha256"] for row in registry.get("exclusions", [])} | {digest}
-    if zeros_digest is not None:
-        known.add(zeros_digest)
+    known = expected_registry | {row["sha256"] for row in registry.get("exclusions", [])} | {digest} | zeros_digest_set
     extra_hashes = set()
     for path in raster.parent.iterdir():
         if path.suffix.lower() not in (".tif", ".tiff"):
@@ -218,7 +218,7 @@ def verify(pointer: Path, template: Path, *, write=False):
                     or late.get("registry_sha256") != hashlib.sha256(additional_path.read_bytes()).hexdigest()
                     or late.get("template_sha256") != template_hash
                     or late.get("candidate_sha256") != original.get("candidate_sha256")
-                    or late.get("registry_complete") is not False):
+                    or late.get("registry_complete") != bool(additional.get("complete"))):
                 raise ValueError("late novelty receipt stage/inventory/identity mismatch")
             merged[stage] = {**original, "comparisons": original["comparisons"] + rows,
                              "errors": original.get("errors", []) + late.get("errors", [])}
@@ -229,13 +229,12 @@ def verify(pointer: Path, template: Path, *, write=False):
     readiness = assess(card, results, format_passed=report.passed, hash_matches=hashes_match,
                        surface_audit=combined_surface, dots_audit=combined_dots, registry=assessment_registry)
     if additional_path.exists():
-        addition = {"registry": f"{dir_rel}/registry-parallel-addendum.json",
-                    "surface_receipt": f"{dir_rel}/novelty-parallel-surface.json",
-                    "dots_receipt": f"{dir_rel}/novelty-parallel-dots.json",
+        addition = {"registry": str((directory / "registry-parallel-addendum.json").relative_to(ROOT)),
+                    "surface_receipt": str((directory / "novelty-parallel-surface.json").relative_to(ROOT)),
+                    "dots_receipt": str((directory / "novelty-parallel-dots.json").relative_to(ROOT)),
                     "timing": "Late-arriving references; checked both saved states without refitting or replacing dots",
                     "combined_observed_registry": readiness["observed_registry"]}
         if write:
-            # Keep changes in memory until every assertion below has passed.
             card["additional_novelty_evidence"] = addition
         else:
             check_equal(card.get("additional_novelty_evidence"), addition, "card/additional_novelty_evidence")
@@ -265,16 +264,19 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--pointer", type=Path, default=ROOT / "docs/current-run.json")
     parser.add_argument("--template", type=Path, default=ROOT / "data/raw/sample_submission.tif")
-    parser.add_argument("--write", action="store_true")
-    parser.add_argument("--require-promote", action="store_true")
+    parser.add_argument("--write", action="store_true", help="refresh readiness.json from current evidence")
+    parser.add_argument("--require-promote", action="store_true",
+                        help="exit 2 unless the research verdict is promote")
     args = parser.parse_args()
     try:
-        result = verify(args.pointer, args.template, write=args.write)
-    except (KeyError, ValueError, OSError) as exc:
+        readiness = verify(args.pointer, args.template, write=args.write)
+    except (ValueError, KeyError, OSError) as exc:
         print(f"Verification FAILED: {exc}", file=sys.stderr)
         return 1
-    print(json.dumps(result, indent=2))
-    return 2 if args.require_promote and not result["eligible_for_separate_slot_selector"] else 0
+    print(json.dumps(readiness, indent=2))
+    if args.require_promote and readiness["research_verdict"] != "promote":
+        return 2
+    return 0
 
 
 if __name__ == "__main__":

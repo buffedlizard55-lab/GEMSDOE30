@@ -1,0 +1,1190 @@
+{
+  "scope": "Fresh frozen nine-site source review; owner-published numbers are NOT organizer receipts",
+  "sites": [
+    {
+      "site": "GEMSDOE24",
+      "repo": "buffedlizard55-lab/GEMSDOE24",
+      "ref": "996fc0b3c827ababb180fda40769e1edc0d8716c",
+      "tree_sha": "996fc0b3c827ababb180fda40769e1edc0d8716c",
+      "published_tiffs": 17,
+      "other_array_paths_not_assumed_grid_aligned": [],
+      "readme_sha256": "56229b06eefdecd252e34a4c16cd685d1d9a80c7cc7984294741348effb56331",
+      "readme_url": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/996fc0b3c827ababb180fda40769e1edc0d8716c/README.md",
+      "owner_published_claim_extracts_not_organizer_receipts": [
+        {
+          "line": 30,
+          "text": "and 0.2778 appear in site snapshots but are not organizer-confirmed)."
+        },
+        {
+          "line": 861,
+          "text": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros: 0.2778"
+        },
+        {
+          "line": 863,
+          "text": "Why and how did this get the highest score and are we able to generate a submission that scores higher than 0.2778?"
+        },
+        {
+          "line": 875,
+          "text": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros: 0.2778"
+        },
+        {
+          "line": 877,
+          "text": "Why and how did this get the highest score and are we able to generate a submission that scores higher than 0.2778?"
+        },
+        {
+          "line": 1053,
+          "text": "dotted-h19-5-d2-8-20261002-e56ea318af89-nan: 0.2600"
+        },
+        {
+          "line": 1071,
+          "text": "d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca: 0.2600"
+        },
+        {
+          "line": 1077,
+          "text": "h27-4-solo-d28-20261004-8acb75e1-nan:0.2708"
+        },
+        {
+          "line": 1101,
+          "text": "anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros: 0.2750"
+        },
+        {
+          "line": 1143,
+          "text": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros: 0.2778"
+        },
+        {
+          "line": 1149,
+          "text": "h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan: 0.2708"
+        },
+        {
+          "line": 1153,
+          "text": "h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan: 0.2710"
+        },
+        {
+          "line": 1161,
+          "text": "efd28-repro-20261003-1cc7dc534d51-nan: 0.2600"
+        }
+      ]
+    },
+    {
+      "site": "GEMSDOE25",
+      "repo": "buffedlizard55-lab/GEMSDOE25",
+      "ref": "8c32763ca00a04ba82a27aac047952a0e3f9ef60",
+      "tree_sha": "8c32763ca00a04ba82a27aac047952a0e3f9ef60",
+      "published_tiffs": 24,
+      "other_array_paths_not_assumed_grid_aligned": [],
+      "readme_sha256": "954f3cd6645e2a6747a854426319b301fe34e0f8658a0e285fcde44b39c038ba",
+      "readme_url": "https://github.com/buffedlizard55-lab/GEMSDOE25/blob/8c32763ca00a04ba82a27aac047952a0e3f9ef60/README.md",
+      "owner_published_claim_extracts_not_organizer_receipts": [
+        {
+          "line": 7,
+          "text": "**Latest session (2026-10-25, GMCE/MSCR lane):** [why H33-2-B2 scored 0.2778 (chain re-verified pixel-exactly incl. non-nested thinning), two fresh-draw detector experiments (GMCE-1 gravity-magnetic coherent edge, MSCR-1 multi-scale crest persistence; both negative) and the unique MSCR file (DO NOT SUBMIT)](knowledge/23_gmce_mscr_outcomes_2026-10-25.md) \u00b7 run card `registry/run_card_session_2026-10-25_gmce_mscr.json` \u00b7 pre-registrations `knowledge/21_preregistered_gmce_2026-10-25.md`, `knowledge/22_preregistered_mscr_exp2_2026-10-25.md`."
+        },
+        {
+          "line": 9,
+          "text": "**Latest session (2026-10-25, session 7, H37 lane):** [why H33-2-B2 scored 0.2778 (chain re-verified pixel-exact), two new pre-registered experiments (H37-1 DOC, H37-2 SPR \u2014 both negative), the density-aware lane audit and the unique H37 file (DO NOT SUBMIT)](knowledge/24_h37_outcomes_and_0.2778_answer_2026-10-25.md) \u00b7 run card `registry/run_card_h37_2026-10-25.json` \u00b7 pre-registrations `knowledge/22_preregistered_h37\u2026`, `knowledge/23`."
+        },
+        {
+          "line": 11,
+          "text": "**Latest session (2026-10-25, XG1 lane):** [why H33-2-B2 scored 0.2778 at PhD level, five ranked untried hypotheses, and the pre-registered XG1 cross-gradient test \u2014 HOLDOUT-DTI NEGATIVE (\u22120.0008 vs the same-run H35 base), unique file built, DO NOT SUBMIT](knowledge/22_xg1_outcome_2026-10-25.md) \u00b7 pre-registration [`knowledge/21`](knowledge/21_preregistered_xg1_cross_gradient_2026-10-25.md) \u00b7 run card `registry/run_card_xg1_2026-10-25.json`."
+        },
+        {
+          "line": 15,
+          "text": "**Parallel session (2026-10-25, H36/H37):** [why H33-2-B2 scored 0.2778 and the two negative holdout tests (H36 coincident tilt-zero contacts, H37 seismicity alignment) plus the unique H36-TZC testing file](knowledge/23_h36_h37_outcomes_2026-10-25.md) \u00b7 run cards `registry/run_card_h36_h37_2026-10-25.json` \u00b7 pre-registrations `knowledge/21_preregistered_h36_tiltzero_coincidence_2026-10-25.md`, `knowledge/22_preregistered_h37_seisalign_2026-10-25.md`."
+        },
+        {
+          "line": 17,
+          "text": "**Session 6:** [why H33-2-B2 scored 0.2778, the KDC/flank holdout tests (both negative) and the unique KDC file](knowledge/19_kdc_results_2026-10-25.md) \u00b7 run card `registry/run_card_kdc_2026-10-25.json` \u00b7 owner brief copies (neither guaranteed verbatim, IR-25-BRIEF-RECONSTRUCTED): [`knowledge/owner_brief_2026-10-25_verbatim.txt`](knowledge/owner_brief_2026-10-25_verbatim.txt) (parallel session, abridged) and [`knowledge/owner_brief_2026-10-25_s6_RECONSTRUCTED.txt`](knowledge/owner_brief_2026-10-25_s6_RECONSTRUCTED.txt) (full reconstruction) \u00b7 older verbatim brief `knowledge/owner_brief_verbatim.txt` \u00b7 `AGENTS.md`."
+        },
+        {
+          "line": 33,
+          "text": "* KDC \u2014 H33-2-B2 (all 37,654 dots) + 17,720 new model dots; unique content, strict lane stop; testing only, do not submit: [`gems25-kdc-b2-plus-hgb-complement-55374-20261025T211001Z-f74e9238cc1c-zeros.tif`](docs/downloads/gems25-kdc-b2-plus-hgb-complement-55374-20261025T211001Z-f74e9238cc1c-zeros.tif) (UNIQUE BY CONTENT \u00b7 FORMAT-VALID \u00b7 STRICT LANE FAIL (r13 lattice 99.9%; clean vs the other 31 registry rasters, worst 0.680) \u00b7 pre-registered holdout gate FAILED \u00b7 verdict negative \u00b7 DO NOT SUBMIT; 55,374 px)."
+        },
+        {
+          "line": 37,
+          "text": "* GEM-FUSE1 \u2014 unique content, strict lane stop; testing only, do not submit: [`gems25-gem-fuse1-blind-magnetics-prune2-20261025-c2097a554ef2-nan.tif`](docs/downloads/gems25-gem-fuse1-blind-magnetics-prune2-20261025-c2097a554ef2-nan.tif) (UNIQUE FILE BY CONTENT, BUT STRICT LANE FAIL / DUPLICATE STOP: 100% of candidate dots fall within 3 px of the r13 lattice (70% limit). Testing download only; DO NOT SUBMIT. | 2026-10-25 audit: keeps only 465 of B2's 37,654 dots (1.2 %); its holdout gate used control_B_crest (DTI 0.019\u20130.021), not the best same-run control (IR-25-GEM-FUSE1-WEAK-CONTROL).; 46,181 px)."
+        },
+        {
+          "line": 38,
+          "text": "* Format fallback: same GEM-FUSE1 dots, zeros outside footprint: [`gems25-gem-fuse1-blind-magnetics-prune2-20261025-c2097a554ef2-zeros.tif`](docs/downloads/gems25-gem-fuse1-blind-magnetics-prune2-20261025-c2097a554ef2-zeros.tif) (Format fallback only. Same candidate dots; inherits strict lane fail. Testing only; DO NOT SUBMIT.; 46,181 px)."
+        },
+        {
+          "line": 55,
+          "text": "> **OK to download (local testing): YES \u00b7 OK to spend a weekly slot: NO \u2014 DO NOT SUBMIT** (verdict **negative**). Projection: no live projection computed \u2014 holdout gates FAILED (not a score). Lane: Surface (pre-placement) and final-dot Spearman <= 0.90 vs every compared raster. Dot overlap <= 0.70 vs all sparse focus-site winners (worst 0.38) but > 0.70 vs dense rasters (r13 lattice 1.00, pindrop/h23/r7 103k-336k dots, reverse overlap 0.19-0.44, surface rho <= 0.18) and vs this repo's own H31/H35 HGB lineage (0.76-0.92). Under the repo's merged literal strict lane rule (no density exception) this is a DUPLICATE LANE / STOP.. Run card: `registry/run_card_session_2026-10-25_gmce_mscr.json`. H33-2-B2 (GEMSDOE32, owner-reported 0.2778) remains the strongest known file. Why this negative file is featured: IR-25-XG1-FEATURED-NEGATIVE."
+        },
+        {
+          "line": 59,
+          "text": "* **Why `GEMSDOE32` `h33-h33-2-b2` (reported `0.2778`, unverified claim) scored highest (`evidence/focus_sites_forensics.json`):** Pixel-exact forensics proves `GEMSDOE28`/`31` `r1` (`0.2708`, `40,199` px) is `D2.8 & (d(cat) > 1.0 px)` (`-3,891` dots at 100 m; implied credit `0.00096`/px \u226a \u03c4 = `0.0549`) and **`GEMSDOE32` `H33-2-B2` (`0.2778`, `37,654` px) is `D2.8 & (d(cat) > 2.0 px)`** (`-2,545` additional dots in 100\u2013200 m; implied credit `0.00503`/px \u226a \u03c4 = `0.0573`), while `GEMSDOE36` (`0.2750`, `38,854` px) is `B2` + `1,200` extra dots."
+        },
+        {
+          "line": 61,
+          "text": "* **Unique H31-1 GeoTIFF (`docs/downloads/gems25-h31-1-flank-subscarp-sapd24-20261025-40bfe1d5b1c5-nan.tif`):** `49,041` dots, SHA-256 `41461ce0d0a6cb2d765e53fa490114d3f6e6344ca6f459b811f55bddbf7d2858`, 16/16 format checks PASS, max surface Spearman `0.1826 <= 0.90`, comparable dotted/focus 3-px overlap `0.6544 <= 0.70` (`0.3183` vs GEMSDOE32 `0.2778`; literal 5-px lattice overlap `1.000` -> testing only, DO NOT SUBMIT). Full Run Card: `evidence/h31_run_card_2026-10-25.json`."
+        },
+        {
+          "line": 62,
+          "text": "* **H31-1 Anisotropic Along-Strike Continuation + 100 m 3DEP LiDAR Strike Coherence + B=2 Shadow Guard (`knowledge/13_preregistered_h31_anisotropic_scarp_coherence_2026-10-25.md`, `knowledge/14_h31_anisotropic_scarp_outcomes_2026-10-25.md`, `evidence/h31_experiments/run_card.json`):** Single-feature leakage canary PASSED (`max AUC = 0.8419 <= 0.90`). On untouched draws `10,11` (`8` cells, `22,317` withheld positives), `H31_E3_B2` achieved pooled `HOLDOUT-DTI = 0.156013`, cell mean `0.156523` (`95% CI [0.141886, 0.171160]`), beating `BASE` by `+0.008838` (`4/4` folds) and `T_BASE` by `+0.005717` (`4/4` folds). Built unique GeoTIFF [`docs/downloads/gems25-h31-aniso-scarp-b2-d2-8-20261025-c213681203f6-nan.tif`](docs/downloads/gems25-h31-aniso-scarp-b2-d2-8-20261025-c213681203f6-nan.tif) (`43,771` dots, `content_id = c213681203f6`, SHA-256 `22a9d729bec45b72a7309380a0da7d147d79fadcdf1472259ca5eecea524893d`, 15/15 hard format checks PASS, max rank-corr `0.1697 <= 0.90`, max symmetric 3-px overlap `0.5837 <= 0.70`, max sparse-detector 3-px overlap `0.6707 <= 0.70`, `31.75%` vs `GEMSDOE32` `0.2778`; literal 5-px lattice overlap `1.000` under `IR-25-LANE-DENSITY`)."
+        },
+        {
+          "line": 66,
+          "text": "* **Unverified leaderboard claims** (reported 2026-10-02; no organizer page or receipt was accessed): #1 DARD 0.3195; reported rank #5 0.2941. The group-best claim is **0.2778**; the previously reported rank #16/account association is not authenticated. These are not independently verified scores; apparent gaps to ranks #5/#1 are arithmetic on supplied claims only."
+        },
+        {
+          "line": 130,
+          "text": "| GEMSDOE32 | `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros` | 0.2778 | exact D2.8 & (d(cat) > 2.0 px), 37,654 px (-6,436 collar px at d<=2.0); sha256 c55bafc47005... |"
+        },
+        {
+          "line": 131,
+          "text": "| GEMSDOE50 | `h50-b2-d28-37654-20261005T195308Z-c55bafc4-zeros` | 0.2778 | re-host of GEMSDOE32 B=2 (sha256 prefix c55bafc4) |"
+        },
+        {
+          "line": 132,
+          "text": "| GEMSDOE58 | `h58-1-b2-200m-moat-d28-37654-20261010T012000Z-c55bafc4-zeros` | 0.2778 | re-host of GEMSDOE32 B=2 |"
+        },
+        {
+          "line": 149,
+          "text": "| 5 | H26-4 | dilation-tendency-weighted orientation prior (USGS 10.5066/P9YL58W6) | page-listed shapefile; direct access failed, bytes/licence not verified |"
+        },
+        {
+          "line": 189,
+          "text": "* **IR-25-HOLDOUT-DOES-NOT-TEST-PRUNING** (high, disclosed) \u2014 The hide-and-recover holdout uses catalogue components as truth. It cannot evaluate catalogue-proximity pruning (the GEMSDOE32 mechanism) or any hypothesis whose premise is the hidden set's distance from the catalogue."
+        },
+        {
+          "line": 193,
+          "text": "* **IR-25-GEMSDOE32-B2-PARADOX** (high, verified) \u2014 Pixel-exact forensics across the 9 focus sites proves GEMSDOE28 r1 (0.2708, 40,199 px) is D2.8 & (d(cat)>1 px), GEMSDOE32 H33-2-B2 (0.2778, 37,654 px) is D2.8 & (d(cat)>2 px), and GEMSDOE36 (0.2750, 38,854 px) is B2 + 1,200 extra dots. Evaluating the pre-built\u2026"
+        },
+        {
+          "line": 197,
+          "text": "* **IR-25-GEM-FUSE1-WEAK-CONTROL** (high, open) \u2014 GEM-FUSE1 (PR #13, content id c2097a554ef2) is described as 'blind magnetics + B2 prune, holdout-validated (screen +0.0182 4/4, confirm +0.0218 4/4)'. Its gate compared it with control_B_crest (HOLDOUT-DTI 0.019\u20130.021), not with the best same-run control of th\u2026"
+        },
+        {
+          "line": 198,
+          "text": "* **IR-25-DUPLICATE-MASKS-ACROSS-SITES** (high, flagged) \u2014 Byte-and-mask forensic audit across the focus projects shows that several sibling repositories shipped pixel-identical or byte-identical masks under different filenames: GEMSDOE30 d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca (owner-reported 0.2600) h\u2026"
+        },
+        {
+          "line": 200,
+          "text": "* **IR-25-LANE-CHECKS-MISSED-TOP** (high, fixed) \u2014 The shared lane checkers (scripts/check_lane_duplicates.py, scripts/check_lane_surface.py) never compared candidates against data/registry_top, i.e. against the hash-pinned top-scorer mirrors including the GEMSDOE32 B2 0.2778 raster. Earlier 'worst vs scored' \u2026"
+        },
+        {
+          "line": 321,
+          "text": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros: 0.2778"
+        },
+        {
+          "line": 323,
+          "text": "Why and how did this get the highest score and are we able to generate a submission that scores higher than 0.2778?"
+        },
+        {
+          "line": 415,
+          "text": "dotted-h19-5-d2-8-20261002-e56ea318af89-nan: 0.2600"
+        },
+        {
+          "line": 424,
+          "text": "d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca: 0.2600"
+        },
+        {
+          "line": 427,
+          "text": "h27-4-solo-d28-20261004-8acb75e1-nan:0.2708"
+        },
+        {
+          "line": 439,
+          "text": "anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros: 0.2750"
+        },
+        {
+          "line": 460,
+          "text": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros: 0.2778"
+        },
+        {
+          "line": 463,
+          "text": "h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan: 0.2708"
+        },
+        {
+          "line": 465,
+          "text": "h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan: 0.2710"
+        },
+        {
+          "line": 469,
+          "text": "efd28-repro-20261003-1cc7dc534d51-nan: 0.2600"
+        },
+        {
+          "line": 758,
+          "text": "Full text: [`knowledge/owner_brief_2026-10-25_consolidated.md`](knowledge/owner_brief_2026-10-25_consolidated.md). GEMSDOE32 0.2778 analysis and ranked next hypotheses: [`knowledge/14_gemsdoe32_analysis_and_hypotheses_2026-10-25.md`](knowledge/14_gemsdoe32_analysis_and_hypotheses_2026-10-25.md). H31 pre-registration: [`knowledge/13_preregistered_h31_credit_field_emission_2026-10-25.md`](knowledge/13_preregistered_h31_credit_field_emission_2026-10-25.md). Run card: `registry/run_card_h31_2026-10-25.json`."
+        },
+        {
+          "line": 782,
+          "text": "7. Study the GEMSDOE32 page (0.2778, `h33-h33-2-b2-\u2026-zeros`): why it scored, how, and whether we can exceed 0.2778."
+        }
+      ]
+    },
+    {
+      "site": "GEMSDOE27",
+      "repo": "buffedlizard55-lab/GEMSDOE27",
+      "ref": "f55cda6b0a940e44f2b4fdc516d212cd2729933c",
+      "tree_sha": "f55cda6b0a940e44f2b4fdc516d212cd2729933c",
+      "published_tiffs": 25,
+      "other_array_paths_not_assumed_grid_aligned": [],
+      "readme_sha256": "421e8729fedafa864de0713bf5b28b227c0dffd17129f3e7ce5f528d1a37768b",
+      "readme_url": "https://github.com/buffedlizard55-lab/GEMSDOE27/blob/f55cda6b0a940e44f2b4fdc516d212cd2729933c/README.md",
+      "owner_published_claim_extracts_not_organizer_receipts": [
+        {
+          "line": 11,
+          "text": "  2. **24-Raster Uniqueness Gate (All 12 Peer Rasters + All 12 In-House Rasters) \u2014 `PASS`:** Unlike `H29-1 D-refill` (`c24b6371179c`) and `L-DCONFIRM` (`5ea0385b7e70`) which failed the self-registry screen against dense `H28-1` (`85.4% > 70%`), **`H29-S` (`511898747886`) clears ALL 24 rasters**: max 3-px dot overlap = **`64.21% <= 70%`** (`56.12%` vs `GEMSDOE32` `0.2778`, `56.43%` vs dense `H28-1`, `53.01%` vs `L-DCONFIRM`, `52.56%` vs `H29-1 D-refill`, `51.33%` vs `H29-1b`), pre-placement surface Spearman `max = 0.4776 <= 0.90`, post-placement Spearman `max = 0.0563 <= 0.90`."
+        },
+        {
+          "line": 21,
+          "text": "  - **`GEMSDOE32` (`h33-h33-2-b2-...-zeros`, `0.2778`):** Byte-verified (`c55bafc4\u2026`, `37,654` dots) = `(GEMSDOE25_D2.8 > 0) & (EDT(~existing_faults) > 2.0)` \u2014 zero new geology, removing `7,865` zero-credit `0\u2013200 m` collar FPs (`0.2586 -> 0.2778`)."
+        },
+        {
+          "line": 29,
+          "text": "Owner-reported reference: `24GEMSDOE` scored **0.2477** (`OWNER-REPORTED`); `27GEMSDOE` Slot 1 scored **0.2449** (`OWNER-REPORTED`); `GEMSDOE32` `H33-2-B2` scored **0.2778** (`OWNER-REPORTED`); leaderboard #1 is cited as **0.3195** / **0.4413** (`IR-2026-10-25-02`; unconfirmed; the agent never accesses `drivendata.org`)."
+        },
+        {
+          "line": 58,
+          "text": "## Session 6 (2026-10-25) \u2014 why 0.2778 won (pixel-exact), Lane L-2026-10-25 NEGATIVE, [0,1] fix shipped"
+        },
+        {
+          "line": 60,
+          "text": "* **Why 0.2778 won (`knowledge/12_why_02778_won.md`, MEASURED):** the GEMSDOE32 file"
+        },
+        {
+          "line": 61,
+          "text": "  `h33-h33-2-b2` (sha256 `c55bafc4\u2026`, hash-authenticated here) is *pixel-exactly* the 0.2708"
+        },
+        {
+          "line": 63,
+          "text": "  d1.5 \u2192 0.2600 d2.8 \u2192 0.2708 r\u22641 prune \u2192 0.2778 B2 prune (all OWNER-REPORTED; no"
+        },
+        {
+          "line": 65,
+          "text": "  mass; GEMSDOE36's independent PINN (0.2750) converges on the same B2 + ~38 k optimum."
+        },
+        {
+          "line": 66,
+          "text": "  All five top files are the same dot field (91\u2013100 % within 3 px), so beating 0.2778 needs"
+        },
+        {
+          "line": 140,
+          "text": "| Topology gap-closure (H27-1) and 100\u2013200 m flank-shadow pruning (H27-4) improve DTI on a **strictly out-of-fold 4-quadrant spatial-CV detector ($B_{\\text{oof}}$)** | pre-registered Addendum C gates passed on seeds 130-139 (`evidence/oof_hypothesis_gates.json`): `plus_T_v2` gains `+0.0115` (`4/4` folds); `prune_r1_100m` gains `+0.0022` solo (`4/4` folds, removed efficiency `0.0034` vs live break-even `0.0521`) and **`+0.0141` stacked with T-v2** (`4/4` folds); H27-3 isolated-dot removal refuted (`-0.0010`, `0/4` folds) |"
+        },
+        {
+          "line": 145,
+          "text": "| Modelled DTI of all four slots under both truth assumptions | `evidence/candidate_model_scores.json`: geo/hyb \u2014 slot 1 `0.2506`/`0.2580`, slot 2 `0.2585`/`0.2671`, slot 3 `0.2439`/`0.2704`, slot 4 `0.2484`/`0.2781`. **Models, not scores.** They disagree only on the targeted prune; the geometric model is validated for *unbiased* removal and is known to be biased against *targeted* removal (it charges pruned flank pixels average credit; the OOF gate measured 0.0034, ~15\u00d7 below the 0.0521 break-even) |"
+        },
+        {
+          "line": 153,
+          "text": "| `knowledge/` | `01` why `0.2477` won; `02` hypothesis ledger; `03` pre-registration; `04` topology & vector argument; `05` verified sources; `06` limitations/access; `07` live-score inversion; `08/09` `H28-1`; `10` far-field limit; `11` `H27-5b` review class; `12` why `0.2778` won; `13/14` `H28-3` & subsurface lane; **`15` geothermal vent discovery & frozen `H29-1` preregistration (`30accf8`)**; **`16` Session 7 `H29-1` results, limitations & next steps (`H29-6`)** |"
+        },
+        {
+          "line": 232,
+          "text": "31/32/33/36; study why `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros` scored 0.2778"
+        },
+        {
+          "line": 291,
+          "text": "Study GEMSDOE32's h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros (0.2778): why and how did it get the highest score, and can we generate a submission that scores higher? Answer with PhD-level judgement, then generate a unique TIF submission. Current competition leaderboard GEMSDOE high score: 0.4413 (also cited elsewhere as 0.3195 \u2014 flagged as an irregularity to verify)."
+        },
+        {
+          "line": 309,
+          "text": "Leaderboard context from the group's sites (owner-reported unless marked): GEMSDOE24 0.2477, GEMSDOE25 0.2600, GEMSDOE27 (unscored candidates), GEMSDOE28 up to 0.2710, GEMSDOE30 0.2600, GEMSDOE31 0.2708, GEMSDOE32 h33 0.2778, GEMSDOE33 0.2632, GEMSDOE36 0.2750. Public leaderboard #1 cited variously as 0.3195 / 0.3262 / 0.4413 across sources \u2014 irregularity, not verified by the agent (no drivendata.org access)."
+        }
+      ]
+    },
+    {
+      "site": "GEMSDOE28",
+      "repo": "buffedlizard55-lab/GEMSDOE28",
+      "ref": "604af8e87e88080d6cdc2e887b81ea60f2013c4c",
+      "tree_sha": "604af8e87e88080d6cdc2e887b81ea60f2013c4c",
+      "published_tiffs": 30,
+      "other_array_paths_not_assumed_grid_aligned": [],
+      "readme_sha256": "ab5cbfefe1a9307f947dc11b262d962e62ac16fdacf6a297f855d3f412a0abe2",
+      "readme_url": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/604af8e87e88080d6cdc2e887b81ea60f2013c4c/README.md",
+      "owner_published_claim_extracts_not_organizer_receipts": [
+        {
+          "line": 27,
+          "text": "standing prompt below. Session 16 re-verified why the OWNER-REPORTED 0.2778 champion won"
+        },
+        {
+          "line": 43,
+          "text": "  local HOLDOUT-DTI, and projections. The user-reported GEMSDOE32 value `0.2778` is not an"
+        },
+        {
+          "line": 173,
+          "text": "> **Scorecard (owner sites \u2192 reported live scores).** GEMSDOE `0.1563` \u00b7 6GEMSDOE `0.0286` \u00b7 GEMSDOE3 nodes `0.1193` / discovery `0.0830` / ridge `0.1152` \u00b7 GEMSDOE2 `0.1560` \u00b7 GEMSDOE4 `0.0343` \u00b7 5GEMSDOE `0.1563` \u00b7 7GEMSDOE `0.1461` \u00b7 8GEMSDOE `0.1563` \u00b7 GEMSDOE9 `0.0107` \u00b7 11GEMSDOE `0.0202` \u00b7 12GEMSDOE `0.1294` \u00b7 15GEMSDOE `0.0782` \u00b7 14GEMSDOE `0.0020` \u00b7 17GEMSDOE `0.0187` \u00b7 18GEMSDOE `0.0297` \u00b7 19GEMSDOE `0.1894`/`0.1922` \u00b7 GEMSDOE10 `0.0461`/`0.0921`/`0.1280`/`0.1839` \u00b7 13GEMSDOE `0.0904` \u00b7 16GEMSDOE `0.1855`/`0.0976`/`0.0360` \u00b7 GEMSDOE21 `0.1894` \u00b7 20GEMSDOE `0.1890`/`0.1859` \u00b7 GEMSDOE22 `0.1002`/`0.0748` \u00b7 GEMSDOE23 `0.1352` \u00b7 GEMSDOE24 `0.2477` \u00b7 **GEMSDOE25 `dotted-h19-5-d2-8` = `0.2600` (our best)** \u00b7 GEMSDOE26 `0.1223` \u00b7 GEMSDOE27 `0.2449` \u00b7 28\u201333GEMSDOE: no score yet."
+        },
+        {
+          "line": 175,
+          "text": "> **Study the highest score.** Site `https://buffedlizard55-lab.github.io/GEMSDOE25/`, submission `dotted-h19-5-d2-8-20261002-e56ea318af89-nan: 0.2600`. Why and how did it get the highest score, and can we generate a submission scoring higher than `0.26`? Answer with PhD-level experience, knowledge, and judgement. Official public leaderboard: `https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/` \u2014 `0.3195` is the current #1, so design a new strategy that can score higher than `0.3195`."
+        },
+        {
+          "line": 203,
+          "text": "The user-provided list reports `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros` at `0.2778` as the highest score among the listed GEMSDOE24/25/27/28/30/31/32/33/36 sites. The cross-site audit identifies the owner-repository TIFF paths and summarizes the page's H33-2-B2 method as pruning an existing dotted base by excluding predictions close to the catalogue; it also reports that the owner page says no organizer score exists for those artifacts. The raw TIFF bytes, full method code, and submission receipt are not available here, so the user-supplied `0.2778` is not organizer-confirmed and cannot be causally explained. The prompt also gives two current-leaderboard maxima (`0.4413` and `0.3195`), which conflict; the dated 2026-10-03 repository snapshot is not a current refresh. Do not infer a score, artifact identity, or winning mechanism from any of these claims."
+        },
+        {
+          "line": 215,
+          "text": "| Slot | Filename (`docs/downloads/`) | Content ID | Emitted px | 4-Fold Spatial-CV & LOSFO Far-Field Holdout | Hybrid Model vs `0.2600` Anchor | Registered Note ($\\le 200$ chars) |"
+        },
+        {
+          "line": 219,
+          "text": "| **Tertiary** | `gems28-h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif` | `8acb75e1f2cc` | `40,199` | +0.001766 (`10/10` seeds, `4/4` folds) \u2014 replicated `+0.001761` on fresh seeds 235\u2013239 (`5/5` seeds, `4/4` folds) AND `+0.002249` LOSFO far-field (`20/20` cells, exact `0.00` TP lost) | `0.2686` | `28GEMSDOE H27-4 d2.8 solo \\| \u0394DTI +0.00177 (10/10 seeds 180-189) replicated +0.00176 on fresh 235-239 (5/5 seeds, 4/4 folds) \\| 0.2600 d2.8 base, no T-v2 \\| id 8acb75e1f2cc` |"
+        },
+        {
+          "line": 221,
+          "text": "| **Conservative alternative (kept audited)** | `gems28-h32-1-tip-euler-dejitter-d2-8-20261003-c3aeda1d31a3-nan.tif` | `c3aeda1d31a3` | `41,656` | +0.001272 (`10/10` seeds, `4/4` folds) \u2014 conservative alternative: protects fault tips and shallow Euler depth clusters | `0.2663` | `28GEMSDOE H32-1 d2.8 post \\| OOF \u0394DTI +0.00127 (10/10 seeds, 4/4 folds, seeds 180-189) on 0.2600 d2.8 base; no T-v2 \\| id c3aeda1d31a3 \\| UNSCORED, not slot-approved` |"
+        },
+        {
+          "line": 223,
+          "text": "| **Reference** | `gems27-h27-4-r1-pruned-d1-5-20261003-450eb6859636-nan.tif` | `450eb6859636` | `54,714` | `+0.0022` on `d=1.5` (seeds `130\u2013139`, `4/4` folds) | `0.2598` (on `0.2477` `d=1.5`) | `28GEMSDOE H27-4 r1 reference \\| OOF DTI gain +0.0022 solo (4/4 folds); UNSCORED, unconfirmed \\| id 450eb6859636 \\| research only` |"
+        },
+        {
+          "line": 244,
+          "text": "- **Uniqueness:** only 37.2% of its dots lie within 3 px of the 0.2778 champion (genuinely re-derived), but 76.8%/79.9% lie within 3 px of two dense unscored detector-ridge probes in `docs/downloads`, and Spearman(prob_D1, prob_D0) = 0.977 \u2192 **FAIL** under the strict any-registry-raster rule (logged, `s15-uniqueness-dense-probes`)."
+        },
+        {
+          "line": 245,
+          "text": "- **Why the 0.2778 champion won (byte-verified, `knowledge/47` \u00a71):** it is exactly the owner-reported 0.2708 solo file minus every dot within 200 m of the catalogue (0 px symmetric difference). Rings 1\u20132 yielded a near-constant \u22482.76\u00d710\u207b\u2076 owner-reported DTI per deleted dot \u2014 pure false-positive-mass removal, not new detection. The obvious ring-3 continuation is a subset of the champion, hence a duplicate lane, and was not shipped."
+        },
+        {
+          "line": 246,
+          "text": "- **Can we beat 0.2778?** Not with this lane, and no file in this repository is validated above the champion. Beating it needs new dots earning > \u03c4 \u2248 0.059 credit/dot on genuinely unmapped structure; every live owner-reported addition test in the group so far (T-v2 \u22120.0028; GEMSDOE36 conduits \u22120.0028) and now H39-1's far-field holdout say current novel-dot sources do not clear that bar. Next ranked lanes (fresh preregistration + seeds 295+): H39-2 radiometric alteration lineaments, H39-3 drainage-chain collinearity, H39-4 artifact-swap (`knowledge/47` \u00a72, `knowledge/48` \u00a74). All live scores quoted are **OWNER-REPORTED**; no organizer receipt exists in any fetched repository, so none is ORGANIZER-CONFIRMED."
+        },
+        {
+          "line": 250,
+          "text": "## 2. PhD-Level Analysis of the `0.2600`, `0.2449`, and `0.1223` Live Scores"
+        },
+        {
+          "line": 252,
+          "text": "We restored the inversion scripts (`scripts/fetch_scored_corpus.py`, `scripts/invert_live_scores.py`, `scripts/optimize_budget.py`) and performed a local inversion over **24 hash-matched raster/score records** (`evidence/scored_corpus.json`, `evidence/live_inversion.json`, `evidence/budget_optimum.json`, plus `evidence/why_026_won.json`) at the blind-lattice-calibrated truth-size estimate $|G| = 12{,}226\\text{ px}$. The SHA-256 checks authenticate the recovered local raster bytes against repository records; they do **not** authenticate a DrivenData receipt or prove which portal upload received a score. The `0.2600` GEMSDOE25 score is owner-reported, and this inversion is conditional on the recorded score-to-file pairing and estimated $|G|$; no organizer-verified result for GEMSDOE28 exists."
+        },
+        {
+          "line": 254,
+          "text": "A separate one-off manual read of the official public leaderboard, recorded in `registry/leaderboard_snapshot_2026-10-03.json`, observed `DARD` at #1 with `0.3195` and a `wbg1` row at #15 with `0.2600`. That page observation does not identify the owner, establish that the `wbg1` row is the repository's `GEMSDOE25` submission, or prove a private score. No organizer receipt or score-to-file confirmation is stored."
+        },
+        {
+          "line": 260,
+          "text": "| **`dotted-h19-5-d2-8`** | `GEMSDOE25` | `e56ea318af89` | `44,090` | **`0.2600`** | `1.179` | `4,791.05` | `0.3919` |"
+        },
+        {
+          "line": 267,
+          "text": "### 2.1 Local explanation of the reported `0.2600` (conditional inversion)"
+        },
+        {
+          "line": 269,
+          "text": "2. **What the conditional inversion says about the reported `d=2.8` vs `d=1.5` pairing (`0.2477` $\\to$ `0.2600`) and the 2D geometric model (`0.2550` $\\to$ `0.2600`)**:"
+        },
+        {
+          "line": 279,
+          "text": "### 2.3 Can we generate a submission that scores higher than `0.2600`?"
+        },
+        {
+          "line": 280,
+          "text": "- **Yes \u2014 to `~0.2665\u20130.2701` directly on the `0.2600` (`d=2.8`) base by removing `100 m` catalogue-flank digitisation shadow (`c3aeda1d31a3`, `31e35eee884e`, `8acb75e1f2cc`) without `T-v2` drag**:"
+        },
+        {
+          "line": 281,
+          "text": "  - In `dotted-h19-5-d2-8` (`44,090` px, `0.2600`), **`3,891` dots (`8.83%` of all emitted pixels)** sit at $d_{\\text{cat}} = 1.0\\text{ px}$ ($100\\text{ m}$) immediately adjacent to masked known catalogue faults (`2,434` along interior segments with $d_{\\text{end}} > 300\\text{ m}$, $\\text{cat\\_nbrs} \\ge 2$, $d_{\\text{Euler}} > 300\\text{ m}$; and `1,457` within $300\\text{ m}$ of a catalogue tip or shallow Euler $N=0$ depth cluster)."
+        },
+        {
+          "line": 282,
+          "text": "  - Because `labels.tif` masks only the 1-px rasterised USGS trace while the true 1 m LiDAR scarp expression is offset by `100\u2013400 m` (Hermant et al., 2025, Fig. 2 & Fig. 9B), `H19-5` fires heavily on the $100\\text{ m}$ flank of known faults \u2014 pixels that are almost pure false-positive mass (`0.0040` credit/FP on mid-segment flank shadow vs `0.0549` break-even at `0.2600`)."
+        },
+        {
+          "line": 283,
+          "text": "  - Removing those `2,434` mid-segment flank-shadow pixels on `d=2.8` (`c3aeda1d31a3`, `41,656` px) passes all 4-fold spatially-blocked holdout gates (`+0.001272` mean \u0394DTI, `10/10` seeds, `4/4` folds on seeds `180\u2013189`) and projects to **`0.2665`** (`+0.0065` over `0.2600`), while pre-thinning de-jittering (`31e35eee884e`, `42,294` px, `+0.001399` mean \u0394DTI) projects to **`0.2685`** and solo `H27-4` `r=1` on `d=2.8` (`8acb75e1f2cc`, `40,199` px, `+0.001766` mean \u0394DTI) projects to **`0.2701`**."
+        },
+        {
+          "line": 299,
+          "text": "| Emitted px $N$ | credit for `0.2600` | credit for `0.2701` | credit for **`0.3195`** |"
+        },
+        {
+          "line": 302,
+          "text": "| **44,090 (the `0.2600` file)** | 4,836 | 5,024 | **5,942** |"
+        },
+        {
+          "line": 309,
+          "text": "> `0.2600` submission captures, `9.42` points of $|G|$.**"
+        },
+        {
+          "line": 315,
+          "text": "`0.2477`) to `d=2.8` (`44,090` px, `0.2600`) removed **`15,979` dots and lost `495.08` px of credit**,"
+        },
+        {
+          "line": 316,
+          "text": "i.e. **`0.03098` credit/px**, below the break-even `0.05485` at `0.2600`. A dot earning that little"
+        },
+        {
+          "line": 329,
+          "text": "`H33-1` as preregistered \u2014 is a *pruning* arm worth `~0.001\u20130.010`. Those are still worth taking"
+        },
+        {
+          "line": 345,
+          "text": "  dilated `300 m`, so en-echelon segments of one structure are held out together);"
+        },
+        {
+          "line": 367,
+          "text": "`scipy.ndimage.binary_dilation(iterations=0)` trap that returns an **all-True** array and would have"
+        },
+        {
+          "line": 372,
+          "text": "The ranking rule changed: **an arm that can only prune cannot reach the target, so addition arms rank"
+        },
+        {
+          "line": 373,
+          "text": "above pruning arms regardless of individual expected \u0394DTI.**"
+        },
+        {
+          "line": 380,
+          "text": "| 4 | **H33-1** kinematic reactivation favourability gate | PRUNE | `+0.0005\u2026+0.0030` | preregistered `knowledge/19`; bridge landed, **data not yet held locally** |"
+        },
+        {
+          "line": 381,
+          "text": "| 5 | **H33-2** multi-depth MT conductance alignment | PRUNE/score | `+0.0000\u2026+0.0022` | both probed GeoTIFFs pin-verified |"
+        },
+        {
+          "line": 395,
+          "text": "slip/dilation-tendency fields.**"
+        },
+        {
+          "line": 430,
+          "text": "| **`h33_1_prune_p10`** (primary) | 0.091618 | **\u22120.003014** | **0/10** | **0/4** | \u2212582.4 | **0.12855** |"
+        },
+        {
+          "line": 431,
+          "text": "| `h33_1_prune_p05` (dose) | 0.093018 | \u22120.001615 | 0/10 | 0/4 | \u2212290.0 | 0.14020 |"
+        },
+        {
+          "line": 448,
+          "text": "3. **Pruning is exhausted as a family.** All three arms removed pixels at `0.101\u20130.140` credit per"
+        },
+        {
+          "line": 450,
+          "text": "   With H31-1 and H32-2, that is three independent pruning arms failing the same way, reaching the"
+        },
+        {
+          "line": 493,
+          "text": "proxy scores `0.095` \u2192 $\\tau = 0.0193$. The `0.2600` submission those harnesses inform scores `0.26`"
+        },
+        {
+          "line": 494,
+          "text": "\u2192 $\\tau = 0.0548$, i.e. **2.85\u00d7 more permissive**. Every pruning arm in this repository has been"
+        },
+        {
+          "line": 519,
+          "text": "| dotted-h19-5-d2-8 | 44,090 | 0.2600 | 0.260627 | `+6.3e-04` |"
+        },
+        {
+          "line": 534,
+          "text": "preregistered H33-1 prune on seeds `200\u2013209` and refuted it \u2014 0 of 6 criteria, mean \u0394DTI `\u22120.003014`,"
+        },
+        {
+          "line": 538,
+          "text": "are independently damning: the direction control went the *wrong* way (a naive top-10 % prune destroys"
+        },
+        {
+          "line": 539,
+          "text": "less credit per unit of mass, $e = 0.10104$, than the kinematically-targeted prune does), and kinematic"
+        },
+        {
+          "line": 542,
+          "text": "> **The pruning family is now exhausted.** H32-2 (`e = 0.0344`), H33-1 (`e = 0.1286`) and H34"
+        },
+        {
+          "line": 544,
+          "text": "> detection gap no prune can close. Future effort belongs on **addition** arms (H33-3, H33-4, H33-5),"
+        },
+        {
+          "line": 557,
+          "text": "Session 10 ended with a hard constraint (\u00a73.1): beating `0.3195` from the `0.2600` emission needs"
+        },
+        {
+          "line": 624,
+          "text": "| anti-selective control (prune the *protected* pixels) | `+0.000479` | `+0.000490` | `5/5` | `4/4` |"
+        },
+        {
+          "line": 628,
+          "text": "(`0.000490`), so this is a **selective** prune, not a generic prune-harder effect. The promotion rule is"
+        },
+        {
+          "line": 640,
+          "text": "arm `PRUNE` (`e = 0.004`, `0.03435`, `0.008`, all `< 0.055`) and puts the optimal packing rung at `3.0`"
+        },
+        {
+          "line": 642,
+          "text": "Ranked next: (1) a rung-`3.0` re-thin combined with the flank prune, validated on a fresh decade;"
+        },
+        {
+          "line": 660,
+          "text": "\"re-thin\". It is not a thinning. On the full footprint the shipped `0.2600` file is *exactly*"
+        },
+        {
+          "line": 673,
+          "text": "| `rung30_unpruned` \u2014 the H34 claim in isolation | +0.000956 | 10/10 | 4/4 |"
+        },
+        {
+          "line": 674,
+          "text": "| **`rung30_blind_r1` \u2014 re-pack + H27-4 blind flank prune** | **+0.002599** | **10/10** | **4/4** |"
+        },
+        {
+          "line": 675,
+          "text": "| `rung30_flank_mid` \u2014 re-pack + H32-1 mid-segment prune | +0.002188 | 10/10 | 4/4 |"
+        },
+        {
+          "line": 682,
+          "text": "prune's removal efficiency (0.0096\u20130.0098) is far below `tau_live = 0.054852` (G3); the winner beats"
+        },
+        {
+          "line": 684,
+          "text": "below the winner, so the prunes are still selective (G5)."
+        },
+        {
+          "line": 696,
+          "text": "re-pack, +0.002834; the gate's measured prune efficiency for the flank prune, 3,673 px at 0.0098447)."
+        },
+        {
+          "line": 697,
+          "text": "The range, not a point value, is deliberate \u2014 `operating_point.prune_gain` is a first-order expansion"
+        },
+        {
+          "line": 698,
+          "text": "and over-states a 9 %-of-`N` prune by ~0.001, now registered as"
+        },
+        {
+          "line": 699,
+          "text": "`prune-gain-linearisation-overstates-large-prunes`. **No weekly slot is used by this arm; a gate is not"
+        },
+        {
+          "line": 723,
+          "text": "`H27-4` blind 1-px catalogue-flank prune:"
+        },
+        {
+          "line": 758,
+          "text": "**37,447 px** at the same 41,333-px pre-prune budget as the incumbent, SHA-256 `4557311baedb4e66\u2026`,"
+        },
+        {
+          "line": 846,
+          "text": "G5(b) check compared the **post-prune** emission to the **pre-prune** request, and `270\u2013279` was void"
+        },
+        {
+          "line": 853,
+          "text": "| `cover_r1` (incumbent) | D0 | coverage packing + blind `r1` prune | 0.10513 | 11,335.0 |"
+        },
+        {
+          "line": 855,
+          "text": "| **`rad_cover_r1`** | D1 | coverage packing + prune, count-matched | **0.10800** | 11,328.7 |"
+        },
+        {
+          "line": 887,
+          "text": "`h38-1-g5b-checked-post-prune-count`, `h38-1-g2-fold-statistic-used-base-not-incumbent`,"
+        },
+        {
+          "line": 898,
+          "text": "   - **F1 (`rung30_unpruned` vs matched-N random drop): PASS** \u2014 `+0.002073` mean DTI (`17/20` cells, `5/5` seeds)."
+        },
+        {
+          "line": 910,
+          "text": "**Answer to the standing question.** Why is `0.2600` reported, and can we beat it? Conditional on the owner-reported score-to-file pairing, the local inversion explains the reported `0.2600` by Poisson-disk thinning at `d = 2.8`: it cut 63 % of the H19-5 pixels while retaining an estimated 90.6 % of the `d=1.5` credit (`knowledge/01`). This mechanism is a reproducible local inference, not independent organizer verification of that score. `H36-1` (`b531dae0a36f`, `37,660` px) re-packs the `H19-5` surface at rung `3.0`"
+        },
+        {
+          "line": 911,
+          "text": "and prunes the `100 m` catalogue flank shadow, passing both the 10-seed interleaved gate (`+0.002599` on"
+        },
+        {
+          "line": 919,
+          "text": "**Plausibility of beating the reported `0.3195`.** It is mathematically possible, but not supported as a likely near-term outcome by current evidence. At the 44,090-dot budget, the conditional inversion requires about 1,151 additional weighted-credit pixels (24% above the reported `0.2600` estimate). Existing locally validated additions show positive LOSFO signal but the current artifact projections remain around `0.272\u20130.274`, not `0.3195`. The only credible route described here is a substantially more precise detector of genuinely off-catalogue faults; no present experiment demonstrates the required scale of gain. This is a research assessment, not an organizer score prediction."
+        },
+        {
+          "line": 961,
+          "text": "only an *addition* arm can supply, so **addition arms now rank above pruning arms regardless of"
+        },
+        {
+          "line": 964,
+          "text": "- **`H36-1` \u2014 EXECUTED Session 12 (interleaved `seeds 240\u2013249`) & VERIFIED Session 14 (LOSFO far-field `seeds 265\u2013269`), PROMOTED PRIMARY (`b531dae0a36f`, `37,660` px):** Re-pack the H19-5 surface from packing rung `2.828` to rung `3.0` (`41,333` px) and apply the `H27-4` blind 1-px catalogue-flank prune (`37,660` px). Passed 10-seed interleaved gate (`+0.002599` on `240\u2013249`, replicated `+0.002675` on `250\u2013259` and `+0.002804` on `270\u2013279`) AND passed all four frozen LOSFO far-field criteria `F1\u2013F4` on `seeds 265\u2013269` (`+0.001713` mean LOSFO $\\Delta\\text{DTI}$, `16/20` cells, `5/5` seeds, $e_{\\text{far}} = 0.01359 < \\tau_{\\text{live}} = 0.054852$, and exact `0.00` TP lost by the blind `r=1` prune)."
+        },
+        {
+          "line": 973,
+          "text": "- **`H32-2` \u2014 EXECUTED Session 9, FROZEN GATE FAILED (seeds `190\u2013199`, CLOSED):** shallow-over-deep magnetic de-screening scored `\u22120.003767` mean paired \u0394DTI (`0/10` seeds, `0/4` folds; `evidence/h32_2_holdout.json`, `knowledge/17_h32_2_result.md`). Run-1 sentinel defect disclosed and repaired (`evidence/h32_2_holdout_run1_invalid_2026-10-03.json`). The direction control supported the physics (shallow dots carry more credit/FP: `0.0383` vs `0.0343`) but the deep class sits far above the OOF inclusion threshold (`0.0193`), so pruning it loses. No confirmation, no retuning, no slot."
+        },
+        {
+          "line": 976,
+          "text": "  2. **`H38-4` (`= H37-5`) Cultural & constructional shoreline artifact-morphology suppression with budget-neutral `H38-1` reallocation.** Prunes zero-potential-field, ultra-linear 1 m LiDAR steps along constant `det_elev` contours and replaces them 1-for-1 with `H38-1` corroborated dots at fixed $N = 37{,}660\\text{ px}$."
+        },
+        {
+          "line": 982,
+          "text": "- **Standing consequence \u2014 pruning is closed as a family.** H31-1, H32-2 and H33-1 have now all failed the same way: the pixels they removed were worth `0.101\u20130.140` credit per FP against a `0.019292` break-even. **No further pruning arm should be preregistered.** The remaining budget goes to *addition* arms, validated on LOSFO (\u00a73.2), never on the interleaved holdout."
+        },
+        {
+          "line": 1085,
+          "text": "# 3h. Session 12: H36-1 packing-rung re-pack + flank prune, frozen 10-seed gate (seeds 240-249, ~105 s)"
+        }
+      ]
+    },
+    {
+      "site": "GEMSDOE30",
+      "repo": "buffedlizard55-lab/GEMSDOE30",
+      "ref": "44ebe89365ab5b5b5ac73e9c77787239ae51707b",
+      "tree_sha": "44ebe89365ab5b5b5ac73e9c77787239ae51707b",
+      "published_tiffs": 16,
+      "other_array_paths_not_assumed_grid_aligned": [],
+      "readme_sha256": "360f670124647a22c8e77df9a22039874126f994eb3bfec1023b78f3223083c8",
+      "readme_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/44ebe89365ab5b5b5ac73e9c77787239ae51707b/README.md",
+      "owner_published_claim_extracts_not_organizer_receipts": [
+        {
+          "line": 135,
+          "text": "GEMSDOE25/32 family scored well and whether a distinct method can beat 0.2778 (owner-reported)"
+        },
+        {
+          "line": 175,
+          "text": "- **Historical 0.2778 claim** (GEMSDOE32 H33-B2): unverified. Its support matches a GEMSDOE28 reference after a 2-pixel catalogue-flank deletion (zero mismatching pixels), so it is emission pruning, not a new signal ([review](docs/research/2026-10-25/review.md))."
+        },
+        {
+          "line": 251,
+          "text": "> `https://buffedlizard55-lab.github.io/GEMSDOE25/` \u2014 `dotted-h19-5-d2-8-20261002-e56ea318af89-nan: 0.2600`."
+        },
+        {
+          "line": 319,
+          "text": "> `dotted-h19-5-d2-8-20261002-e56ea318af89-nan` 0.2600; GEMSDOE26"
+        },
+        {
+          "line": 364,
+          "text": "- **Scores and TIFFs:** the dated public snapshot showed DARD 0.3195 and `wbg1` 0.2600 (rank 15); neither leaderboard row identifies a TIFF hash. The D2.8 attribution conflict is still open and is now logged as IR-30-048: the owner brief says 0.2600 while `mirror-pins.json` annotates that same SHA-256 (`91eae1ca\u2026`) as an \"unscored alternate\" and the d1.5 raster (`68d0e2e4\u2026`) as \"labelled 0.2477\". Catalogue-proxy DTI is **anti-correlated** with portal score (GBM 0.19020 > d2.8 0.16177 while the portal ordering is the reverse) and must never be used as a holdout \u2014 IR-30-046."
+        },
+        {
+          "line": 437,
+          "text": "   **official-snapshot** rows from the 2026-10-03 leaderboard read (DARD 0.3195 rank 1 \u2026 wbg1 0.2600"
+        },
+        {
+          "line": 580,
+          "text": "   consistent): leader DARD **0.3195**; `wbg1` 0.2600 at rank 15 confirmed; a rank-19 row of"
+        },
+        {
+          "line": 591,
+          "text": "- The official leaderboard was read on **2026-10-03**: the displayed leader was **DARD, 0.3195**. It is a live, changeable public score; it is not private-test performance. The supplied claim that the linked GEMSDOE25 D2.8 TIFF scored 0.2600 is **not authenticated to that exact file**: the GEMSDOE25 landing page currently describes that TIFF as unscored/not slot-approved, while the public leaderboard contains a 0.2600 row for participant `wbg1` at rank 15. See [analysis](docs/leaderboard-analysis.md) and [irregularities](docs/irregularities.md)."
+        },
+        {
+          "line": 764,
+          "text": "owner-reported scores for the same three artifacts rise 0.1922 \u2192 0.2477 \u2192 0.2600. The official metric"
+        },
+        {
+          "line": 843,
+          "text": "   at 100 m \u2192 0.1922; 60,069 at 200 m \u2192 0.2477; 44,090 at 282.8 m (median NN 300 m) \u2192 0.2600."
+        },
+        {
+          "line": 857,
+          "text": "8. **The 0.2600 attribution conflict is logged, not papered over (IR-30-048).** The owner brief"
+        },
+        {
+          "line": 858,
+          "text": "   says D2.8 = 0.2600; `mirror-pins.json` annotates that same SHA-256 (`91eae1ca\u2026`) as an"
+        },
+        {
+          "line": 864,
+          "text": "1. **A submittable file now exists; nothing has been uploaded.** `index.html` and `executive-summary.html` lead with `gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif` \u2014 all 12,279,160 cells finite `float32` in `[0, 1]`, 0 NaN, exact template grid, 44,090 off-catalogue predictions \u2014 plus a paste-ready note, a d1.5 alternate, and a NaN-outside twin. The range-error cause is diagnosed (IR-30-044), not \"undiagnosed\". **Remaining limit:** local format validation is not organizer acceptance, and no score is claimed. The prediction content is the owner's best-reported artifact re-encoded without altering a single in-footprint value, so it cannot itself beat 0.2600; a slot spent on it re-tests a known file. The next lever is a better score field, per \u00a77.3 of the knowledge base."
+        },
+        {
+          "line": 868,
+          "text": "5. **Scores and sources:** the public snapshot showed DARD 0.3195 and `wbg1` 0.2600; no row identifies a TIFF hash, so D2.8's score attribution remains unresolved. The official data page is login-gated; pinned owner mirrors are not organizer-authenticated. No credentials, login bypass, or automated DrivenData monitoring are used."
+        },
+        {
+          "line": 919,
+          "text": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros: 0.2778"
+        },
+        {
+          "line": 921,
+          "text": "Why and how did this get the highest score and are we able to generate a submission that scores higher than 0.2778?"
+        },
+        {
+          "line": 933,
+          "text": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros: 0.2778"
+        },
+        {
+          "line": 935,
+          "text": "Why and how did this get the highest score and are we able to generate a submission that scores higher than 0.2778?"
+        },
+        {
+          "line": 1100,
+          "text": "dotted-h19-5-d2-8-20261002-e56ea318af89-nan: 0.2600"
+        },
+        {
+          "line": 1118,
+          "text": "d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca: 0.2600"
+        },
+        {
+          "line": 1124,
+          "text": "h27-4-solo-d28-20261004-8acb75e1-nan:0.2708"
+        },
+        {
+          "line": 1148,
+          "text": "anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros: 0.2750"
+        },
+        {
+          "line": 1190,
+          "text": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros: 0.2778"
+        },
+        {
+          "line": 1196,
+          "text": "h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan: 0.2708"
+        },
+        {
+          "line": 1198,
+          "text": "h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan: 0.2710"
+        },
+        {
+          "line": 1205,
+          "text": "efd28-repro-20261003-1cc7dc534d51-nan: 0.2600"
+        }
+      ]
+    },
+    {
+      "site": "GEMSDOE31",
+      "repo": "buffedlizard55-lab/GEMSDOE31",
+      "ref": "ecdf391d955e1ae199e12f9537026b65aa5ddb7e",
+      "tree_sha": "ecdf391d955e1ae199e12f9537026b65aa5ddb7e",
+      "published_tiffs": 20,
+      "other_array_paths_not_assumed_grid_aligned": [
+        "evidence/h31_a/pilot/oof_residuals.npz",
+        "evidence/oof/oof_B_19_plus_lidar_u16.npz",
+        "evidence/oof/oof_D_19_plus_lidar_radiometric_u16.npz",
+        "evidence/oof_residuals.npz"
+      ],
+      "readme_sha256": "78aee8f6927c7ae261cbe3de3484292ab4554b21aec5b656780af17afbd63263",
+      "readme_url": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/ecdf391d955e1ae199e12f9537026b65aa5ddb7e/README.md",
+      "owner_published_claim_extracts_not_organizer_receipts": [
+        {
+          "line": 6,
+          "text": "> - **WEEKLY-SLOT AUTO-SELECTOR (`slot_approved = false`, Run Card `verdict = \"negative\"`):** Automatic agent slot spending remains `false` due to strict pre-declared **`G5b`** all-elevation mountain SGMC (`0.0816` vs `0.0940` `H33-2-B2`; `+13.6%` vs `Baseline-D = 0.0718`) and the unexempted `57GEMSDOE` `r13-lattice-s5` 5\u00d75 calibration-lattice rule (`100.0%` interior coverage within $\\sqrt{8} = 2.83 \\le 3\\text{ px}$). Explicit human weekly-slot selector sign-off is required before spending a live DrivenData slot."
+        },
+        {
+          "line": 16,
+          "text": ">   - **Off-Catalogue Proxies & Uniqueness (`37,654` dots, `31.5%` beyond `1.5 km`):** **Piedmont SGMC `DTI = 0.1233`** vs `GEMSDOE32 H33-2-B2 = 0.1091` (**`+13.0%`**); max single-feature leakage `AUC = 0.7624 <= 0.90`; max surface `|\u03c1| = 0.1073 <= 0.90` and max 3-px dot overlap `= 51.53% <= 70.0%` across all 22 genuine submissions (`GEMSDOE24..36, 70` + concurrent `TGJ31`, `AS-1`, `H31-B`, `H31-E surfexpr`, `MAGREST`)."
+        },
+        {
+          "line": 36,
+          "text": "> No ORGANIZER-CONFIRMED score exists. The prompt's 0.2778 / 0.3195 / 0.4413 values remain unverified claims."
+        },
+        {
+          "line": 57,
+          "text": "| H33 0.2778 claim audit, nine-site review, hypotheses and results | [research](docs/research.html) |"
+        },
+        {
+          "line": 117,
+          "text": "Why might GEMSDOE32 H33-2-B2 have performed well, and can a new detector beat the claimed 0.2778?"
+        },
+        {
+          "line": 118,
+          "text": "Exact-byte geometry is verified in `evidence/prior_lineage_20261025.json`: H27 = D2.8 pruned within one"
+        },
+        {
+          "line": 119,
+          "text": "catalogue pixel; H33 = D2.8 pruned within two; 2,545 H27 dots are removed and 35,483 dots beyond 300 m"
+        },
+        {
+          "line": 146,
+          "text": "   leaderboard claims from organizer receipts. The 0.2600 D2.8 claim remains unresolved against the pinned"
+        },
+        {
+          "line": 198,
+          "text": "- **Honesty limits:** no organizer receipt exists for any score; 0.2708 and 0.2600 are owner-reported. The arm"
+        },
+        {
+          "line": 316,
+          "text": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros: 0.2778"
+        },
+        {
+          "line": 318,
+          "text": "Why and how did this get the highest score and are we able to generate a submission that scores higher than 0.2778?"
+        },
+        {
+          "line": 330,
+          "text": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros: 0.2778"
+        },
+        {
+          "line": 332,
+          "text": "Why and how did this get the highest score and are we able to generate a submission that scores higher than 0.2778?"
+        },
+        {
+          "line": 508,
+          "text": "dotted-h19-5-d2-8-20261002-e56ea318af89-nan: 0.2600"
+        },
+        {
+          "line": 526,
+          "text": "d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca: 0.2600"
+        },
+        {
+          "line": 532,
+          "text": "h27-4-solo-d28-20261004-8acb75e1-nan:0.2708"
+        },
+        {
+          "line": 556,
+          "text": "anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros: 0.2750"
+        },
+        {
+          "line": 598,
+          "text": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros: 0.2778"
+        },
+        {
+          "line": 604,
+          "text": "h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan: 0.2708"
+        },
+        {
+          "line": 608,
+          "text": "h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan: 0.2710"
+        },
+        {
+          "line": 616,
+          "text": "efd28-repro-20261003-1cc7dc534d51-nan: 0.2600"
+        }
+      ]
+    },
+    {
+      "site": "GEMSDOE32",
+      "repo": "buffedlizard55-lab/GEMSDOE32",
+      "ref": "5786b21a1674b26ee525e8e9bf048e2e0f50fc0e",
+      "tree_sha": "5786b21a1674b26ee525e8e9bf048e2e0f50fc0e",
+      "published_tiffs": 35,
+      "other_array_paths_not_assumed_grid_aligned": [],
+      "readme_sha256": "4759a6052aa572759733d30207ae4753b5431659935a73e9ceb850091dc68387",
+      "readme_url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/5786b21a1674b26ee525e8e9bf048e2e0f50fc0e/README.md",
+      "owner_published_claim_extracts_not_organizer_receipts": [
+        {
+          "line": 17,
+          "text": "**[\u2b07 Download `gemsdoe32-h32-winning-46090-prune400-20261025T203017Z-c3459dcd-zeros.tif` (ONE CLICK, UNIQUE, VALIDATED)](docs/downloads/gemsdoe32-h32-winning-46090-prune400-20261025T203017Z-c3459dcd-zeros.tif)** \u00b7 [NaN twin](docs/downloads/gemsdoe32-h32-winning-46090-prune400-20261025T203017Z-c3459dcd-nan.tif) \u00b7 [validator receipt 12/12 PASS](docs/downloads/gemsdoe32-h32-winning-46090-prune400-20261025T203017Z-c3459dcd-audit.json) \u00b7 sha256 `04fd8a73eb584dd1\u2026` \u00b7 250,142 B \u00b7 46,090 px \u00b7 **HOLDOUT-DTI 0.14840 [0.115,0.182] vs incumbent 0.14801 \u2014 promote** \u2014 see [why 0.2778 scored](docs/research/why-02778-analysis-20261025.html) and [5 new hypotheses](docs/research/h35-hypotheses-20261025.html)"
+        },
+        {
+          "line": 19,
+          "text": "**Unique name for portal:** `GEMSDOE32-H32-WIN-46090` \u00b7 **Note (101/200 chars):** `H32-WIN 46090dots 0onCat prune400+add B50/C30/A20 HOLDOUT-DTI 0.1484 vs 0.1480 cat 0.0985 SGMC 0.0606` \u2014 copy-paste into DrivenData \u201cNote (optional)\u201d field. File is portal-legal (EPSG:32611, 3730\u00d73292, float32, [0,1], no NaN, no nodata tag) and will NOT trigger \u201cPredicted values must be in range [0,1]\u201d."
+        },
+        {
+          "line": 44,
+          "text": "## \ud83d\udd34 ROUND 5 \u2014 READ FIRST (2026-10-25): the champion scored 0.2778; two new unique files are DO-NOT-SUBMIT"
+        },
+        {
+          "line": 47,
+          "text": "**[\u2b07 `gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif` \u2014 0.2778](docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif)**"
+        },
+        {
+          "line": 52,
+          "text": "`h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros` = 0.2778** (ORGANIZER-CONFIRMED, owner-reported"
+        },
+        {
+          "line": 60,
+          "text": "the whole top cluster is one nested family \u2014 H19-5 (121,131 dots, 0.1922) \u2283 d2.8 (44,090, 0.2600) \u2283"
+        },
+        {
+          "line": 61,
+          "text": "solo (40,199, 0.2708) \u2283 champion (37,654, 0.2778) \u2014 and every gain came from *removing* dots. The"
+        },
+        {
+          "line": 64,
+          "text": "0.0556 break-even bar: pure denominator tax. The runner-up (GEMSDOE36 \"Anderson PINN\", 0.2750)"
+        },
+        {
+          "line": 88,
+          "text": "*backwards* (0.00460 < 0.03104 < 0.09832 for live 0.2778 > 0.2708 > 0.2600) because a B-gated"
+        },
+        {
+          "line": 90,
+          "text": "Do not gate B-pruned candidates on it; the SGMC off-catalogue instrument is the fair local gate."
+        },
+        {
+          "line": 126,
+          "text": "> `h33-h33-2-b2-\u2026-e5eb6e7e-zeros` scored **0.2778** (owner-reported); generate a **unique** TIF"
+        },
+        {
+          "line": 133,
+          "text": "**Champion answer (measured from bytes):** 0.2778 = D2.8 minus every dot within 200 m of the"
+        },
+        {
+          "line": 148,
+          "text": "**already submitted (0.2778) \u2014 do not resubmit it either. The Arena41 lane has no \ud83d\udfe2 file**"
+        },
+        {
+          "line": 165,
+          "text": "> (champion 0.2778), and this H32-D artifact remains unscored and is no longer the recommended"
+        },
+        {
+          "line": 172,
+          "text": "| instrument (blocked 4-quadrant holdout, draws 20/21) | this file | owner-reported 0.2600 incumbent | verdict |"
+        },
+        {
+          "line": 193,
+          "text": "  fault to the 0.2600 emission moves `drift_corrected_holdout_mean` from **0.14801 to 0.07831** while"
+        },
+        {
+          "line": 227,
+          "text": "> **Scored 2026-10-25: this file returned 0.2778** (ORGANIZER-CONFIRMED, owner-reported) \u2014 the"
+        },
+        {
+          "line": 231,
+          "text": "**[\u2b07 Download `gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif`](docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif)**"
+        },
+        {
+          "line": 232,
+          "text": "\u00b7 [`.zip`](docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.zip) \u00b7"
+        },
+        {
+          "line": 233,
+          "text": "[NaN-outside twin](docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif)"
+        },
+        {
+          "line": 237,
+          "text": "| **file** | `gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif` |"
+        },
+        {
+          "line": 243,
+          "text": "| **note to paste** (177/200 chars) | `GEMSDOE32 H33-2-B2 \\| flank B=2 prune on the 0.2708 base: 37,654 dots, 0 within 200 m of the catalogue; live-mirror +0.00487 in 4/4 folds, safety 2.08, projected 0.2747; UNSCORED` |"
+        },
+        {
+          "line": 244,
+          "text": "| **portal form's unique-name field** | `GEMSDOE32-H33-2-B2` |"
+        },
+        {
+          "line": 249,
+          "text": "0.2708 record was produced by B = 1; the group never tested anything else. The live-anchored"
+        },
+        {
+          "line": 256,
+          "text": "\u2014 in-footprint bit-identical to the owner-reported 0.2600 emission, so uploading it re-validates the"
+        },
+        {
+          "line": 325,
+          "text": "| 3 | **H62-3** geodetic strain prior, used **raw** | `geod_2ndinv` (4), `geod_shearrate` (7), `geod_dilaterate` (8) | 0.5721 / 0.5488 / 0.5377; raw beats every transform | live |"
+        },
+        {
+          "line": 369,
+          "text": "Every candidate allocated a weekly slot below strictly beats our verified `0.2600` LB baseline (`D2.8`) across **all three holdout metrics** (`catalogue_hidden_mean`, `sgmc_prevalence_calibrated_dti`, and `drift_corrected_holdout_mean`) with **zero on-catalogue pixel waste (`on_catalogue_positive_pixels == 0`)** and passes all **12 automated range-`[0, 1]` validator checks** ([`docs/downloads/submissions_manifest.json`](docs/downloads/submissions_manifest.json))."
+        },
+        {
+          "line": 375,
+          "text": "| **SLOT #1 (Primary \u2014 current recommendation)** | **`H33-2-B2`** | **37,654** | **LM-cal 0.267921** (`+0.004870` vs the 0.2708 base, **4/4 quads**) | \u2014 | **+0.004870, 4/4 quads** | \u2014 | **live-anchored safety 2.08**; projected live **0.2747** | [`gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif`](docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif) (`219.1 KB`, `c55bafc4\u2026`) | [`\u2026-nan.tif`](docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif) (`355.4 KB`, `baeae321\u2026`) |"
+        },
+        {
+          "line": 378,
+          "text": "| SUPERSEDED by H33-2-B2 | **`H32-D`** | **46,090** | **0.10122** (`+0.00290`, **4/4 Quads**) | **0.06129** (`+0.00070`) | **0.15188** (`+0.00388`, **4/4 Quads**) | **3.825** | **0.2716 \u00b1 0.0069** | [`gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-zeros.tif`](docs/downloads/gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-zeros.tif) (`250.6 KB`, `f81e26d7\u2026`) | [`gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-nan.tif`](docs/downloads/gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-nan.tif) (`385.7 KB`, `c3a0cbb1\u2026`) |"
+        },
+        {
+          "line": 383,
+          "text": "| **0.2600 LB Reference** | **`D2.8-Ref`** | **44,090** | **0.09832** (`0.00000`) | **0.06059** (`0.00000`) | **0.14801** (`0.00000`) | **0.884** | **0.2600 (Scored LB)** | [`gemsdoe32-d28-ref02600-repro-44090-20261004T183200Z-426073b6-zeros.tif`](docs/downloads/gemsdoe32-d28-ref02600-repro-44090-20261004T183200Z-426073b6-zeros.tif) (`243.8 KB`, `e4985b78\u2026`) | [`gemsdoe32-d28-ref02600-repro-44090-20261004T183200Z-426073b6-nan.tif`](docs/downloads/gemsdoe32-d28-ref02600-repro-44090-20261004T183200Z-426073b6-nan.tif) (`379.3 KB`, `fe01ebd3\u2026`) |"
+        },
+        {
+          "line": 409,
+          "text": "| `GEMS28-H27-4-R1-SOLO-D2.8` (dotted D2.8) | 44,090 | **0.2600** |"
+        },
+        {
+          "line": 410,
+          "text": "| `h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan` | 40,199 | **0.2708** |"
+        },
+        {
+          "line": 413,
+          "text": "prune that produced 0.2708 removed exactly the **3,891 dots within 1 px (100 m) of the published"
+        },
+        {
+          "line": 441,
+          "text": "| D2.8 emission (live 0.2600) | 44,090 | 0.251593 | \u2014 | \u2014 | \u2014 | the other anchor |"
+        },
+        {
+          "line": 442,
+          "text": "| **H33-2-B2 (catalogue flank B = 2)** | **37,654** | **+0.004870** | **4/4** | \u2014 | **2.08** | **WINNER \u2014 shipped primary** |"
+        },
+        {
+          "line": 456,
+          "text": "Outside its validated regime the live mirror (LM-cal) ranks a 7,943-dot \"safe-mass-pruned\" variant"
+        },
+        {
+          "line": 458,
+          "text": "that pruned file not to exceed 0.3262, **\u2265 16 % of the 0.2708 emission's weighted credit must sit on"
+        },
+        {
+          "line": 488,
+          "text": "h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan: 0.2708"
+        },
+        {
+          "line": 490,
+          "text": "Why and how did this get the highest score and are we able to generate a submission that scores higher than 0.2708?"
+        },
+        {
+          "line": 576,
+          "text": "| *\"the highest score from the GEMDOE site \u2026 `h27-4-r1-solo-d2-8-\u2026`: 0.2708\"* | the GEMSDOE28 page itself prints **\"NO GEMSDOE28 SCORE\"** and prices that family as a *projection* to **0.2701**. The live board's **0.2708 is rank #13, participant `smashi34`** \u2014 a coincidence, not a receipt | **[OWNER-REPORT, contradicted by its own source]** |"
+        },
+        {
+          "line": 605,
+          "text": "* the group's own 0.2600 inversion implies **39.2 %** recall (`[MODEL]`, `K\u0302 = 12,226`);"
+        },
+        {
+          "line": 615,
+          "text": "~0 credit; `d = 2.8 px` beat `d = 1.5 px` live for exactly that reason. **The pruning was correct."
+        },
+        {
+          "line": 625,
+          "text": "| dotted `d = 2.8` | 44,090 | **0.2600** | 0.1617720 |"
+        },
+        {
+          "line": 640,
+          "text": "| S1 | the 0.2600 emission | `1/s\u2081 = \u03b1 + \u03b1(F/T) + \u03b2(K/T)` | \u2014 |"
+        },
+        {
+          "line": 649,
+          "text": "slots the team possesses a *measured* hidden-set recall, and every subsequent pruning, extension"
+        },
+        {
+          "line": 665,
+          "text": "| **IR-32-BAR-01** | Two documents in this repo gave **different marginal bars** for the same metric: `src/gems32/metric.py` and a passing test say `alpha*s` (**0.0520** at s=0.26); `docs/research/score-ceiling-analysis.md` says `alpha*s/(1-alpha*s)` (**0.0549**). The test is right \u2014 brute force agrees **300/300**. The 5.5 %-too-high value propagated to the successor repo as `tau_live = 0.05485`, over-pruning. | medium |"
+        },
+        {
+          "line": 685,
+          "text": "| **H61-4** | **GNSS-derived full 2-D strain tensor \u2192 principal-axis anisotropic matched filter** | *requires new data*: Nevada Geodetic Laboratory MIDAS / EarthScope GNSS velocity field. The official bands give only `geod_2ndinv`, `geod_shearrate`, `geod_dilaterate` \u2014 **three scalars of a tensor, from which orientation is not recoverable** | the **principal extensional axis** at each pixel, used as the azimuth prior of an oriented matched filter; a fault strikes near-perpendicular to \u03c3\u2083 | orientation is what predicts *which way* a missing fault must run; the supplied invariants cannot supply it | **4 / medium \u2014 data check required** |"
+        },
+        {
+          "line": 815,
+          "text": "Study our previous research and submission to understand how we got 0.2600 for `dotted-h19-5-d2-8-20261002-e56ea318af89-nan` and reproduced it in https://github.com/buffedlizard55-lab/GEMSDOE29 and https://github.com/buffedlizard55-lab/GEMSDOE30 (feel free to inspect our other repos for the DOE Geothermal competition as well). Explain at a PhD level why this worked, and how we can do even better to beat 0.2600 and the current 0.3195 #1 score on the leaderboard."
+        },
+        {
+          "line": 847,
+          "text": "## 2. PhD-Level Forensic Autopsy of `dotted-h19-5-d2-8-20261002-e56ea318af89-nan` (0.2600 LB) & How to Surpass 0.2600 and 0.3195 / 0.3262"
+        },
+        {
+          "line": 852,
+          "text": "Direct pixel comparison ([`evidence/d28_forensic_autopsy.json`](evidence/d28_forensic_autopsy.json)) confirms that all three `0.2600` leaderboard submissions\u2014`dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif` (`GEMSDOE25`), `gems29-refd28-repro-20261003-1cc7dc534d51-nan.tif` (`GEMSDOE29`), and `gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif` (`GEMSDOE30`)\u2014are **100% pixel-identical (`max_abs_diff = 0.0`)**:"
+        },
+        {
+          "line": 857,
+          "text": "### 2.2 Mathematical Proof of Why Thinning `H19-5` Raised Leaderboard DTI by +35.3% (`0.1922 \u2192 0.2477 \u2192 0.2600`)"
+        },
+        {
+          "line": 868,
+          "text": "### 2.3 Three Structural Flaws in `D2.8` & Quantitative Path Past `0.2600` and `0.3195` / `0.3262`"
+        },
+        {
+          "line": 871,
+          "text": "3. **Down-Dip Potential-Field Offset & Concealed Blind Conduits:** Normal faults dipping at $45^\\circ\\text{\u2013}60^\\circ$ produce horizontal gravity/magnetic gradient maxima shifted **150\u2013300 m down-dip (basin-ward)** of the surface fault trace (`H32-A`), while active releasing step-overs (`H32-B`) and argillic clay-cap upflow zones (`H32-C`) lack topographic scarps. Surgical pruning of uncorroborated speckles paired with priority-ordered Poisson-disk augmentation across `H32-A/B/C` (`H32-D`) wins **4/4 spatial quadrants** on both `catalogue_hidden_mean` (`0.10122` vs `0.09832`) and `drift_corrected_holdout_mean` (`0.15188` vs `0.14801`)."
+        },
+        {
+          "line": 881,
+          "text": "| **#1** | **`H32-D`** | Joint fusion of `H32-A`, `H32-B`, `H32-C`, `D2.8`, `H19-5/H19-4/H16-1/TGC/Ens12`, `labels.tif` | Prunes 500 weakest uncorroborated `D2.8` speckles and adds +2,500 off-catalogue dots (+1,100 `H32-B`, +800 `H32-C`, +600 `H32-A`) at $r_{\\min}=2.35\\text{ px}$ (`46,090` px; also tested at exact equal budget `44,090` px in `H32-D-Eq44090`). | Removes BFS speckle waste while filling $>300\\text{ m}$ holes on dipping range-front, transtensional swarm, and clay-cap conduits without losing `D2.8`'s multi-line backbone. | `+0.0030` to `+0.0045` Holdout DTI; Low cost (~18s CPU) | **Cat-Hid: `0.10122`** (`+0.00290`, **4/4 Quads**)<br/>**SGMC-Cal: `0.06129`** (`+0.00070`)<br/>**Drift-Cal: `0.15188`** (`+0.00388`, **4/4 Quads**) |"
+        },
+        {
+          "line": 884,
+          "text": "| **#4** | **`H32-B`** | `[4] geod_2ndinv`, `[7] geod_shearrate`, `[8] geod_dilaterate`, `[10] deq_n100a15`, `[16] ieq_n100a15`, `[3] tmi_hg`, `[19] det_elev_slope`, 3DEP LiDAR | Kostrov transtensional invariant $\\Psi_{\\text{transt}} = z_+(\\dot{\\epsilon}_{kk}>0)\\,z_+(\\dot{\\gamma}) / (z_+(I_2)+0.35)$ coupled with microseismic swarm excess $\\ln(1+\\text{deq}) - 0.75\\ln(1+\\text{ieq})$. | Captures active Walker Lane / Great Basin releasing step-overs and fluid-driven swarm permeability where individual quaternary splays are unmapped. | `+0.0010` to `+0.0025` Holdout DTI; Low cost (~6s CPU) | **Cat-Hid: `0.09894`** (`+0.00061`, 3/4 Quads)<br/>**SGMC-Cal: `0.06174`** (`+0.00115`)<br/>**Drift-Cal: `0.14928`** (`+0.00127`, **4/4 Quads**) |"
+        },
+        {
+          "line": 931,
+          "text": "- **USGS ScienceBase Official Layer Releases:** GeoDAWN (`doi:10.5066/P93LGLVQ`), Great Basin MT Conductance (`doi:10.5066/P9TWT2LU`), Isostatic Gravity & Magnetics (`doi:10.5066/P9Z6SA1Z`), Detrended Elevation (`doi:10.5066/P9MQRCBY`), Quaternary Fault Slip/Dilation (`doi:10.5066/P9YL58W6`)."
+        }
+      ]
+    },
+    {
+      "site": "GEMSDOE33",
+      "repo": "buffedlizard55-lab/GEMSDOE33",
+      "ref": "f618cc54773bd9b4d6c2b3ebf78103a05cc10cb6",
+      "tree_sha": "f618cc54773bd9b4d6c2b3ebf78103a05cc10cb6",
+      "published_tiffs": 8,
+      "other_array_paths_not_assumed_grid_aligned": [],
+      "readme_sha256": "9c26adf1e7668549f1b6ed99e2b98cc5ab3d8114e4bc357ece26156b8f3b01e3",
+      "readme_url": "https://github.com/buffedlizard55-lab/GEMSDOE33/blob/f618cc54773bd9b4d6c2b3ebf78103a05cc10cb6/README.md",
+      "owner_published_claim_extracts_not_organizer_receipts": [
+        {
+          "line": 19,
+          "text": "> h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan: 0.2708"
+        },
+        {
+          "line": 20,
+          "text": "> Why and how did this get the highest score and are we able to generate a submission that scores higher than 0.2708?"
+        },
+        {
+          "line": 61,
+          "text": "> **Not cleared for upload. Historical reference only.** This is an owner-mirror reference emission from GEMSDOE28, not a new model or a demonstrated leaderboard improvement. The source is an owner-published mirror. Its claimed `0.2600` score is owner-reported; no organizer receipt ties that score to these exact bytes."
+        },
+        {
+          "line": 73,
+          "text": "> `GEMSDOE33 D2.8 reference | owner-mirror emission; 0.2600 is owner-reported, score/file pairing unconfirmed | format-checked, not a new model | id 426073b6b4ab`"
+        },
+        {
+          "line": 79,
+          "text": "## \u00a75. Historical metric analysis \u2014 not a verified explanation of score 0.2708"
+        },
+        {
+          "line": 81,
+          "text": "The following historical discussion and calculations have not been independently revalidated against organizer truth or a score-linked submission file. In particular, the owner-published GEMSDOE28 page is reported in the repository to label H27-4 unscored/research-only; the user's reported `0.2708` and `0.3195` are not organizer-confirmed in this checkout. No claim that GEMSDOE33 beats either value is justified. The full DTI definitions and old reasoning below are retained as historical notes only; they are not validation, a projected score, or permission to upload."
+        },
+        {
+          "line": 89,
+          "text": "The score/method list in the prompt is **user-provided context, not independently verified evidence**. It indicates a rising owner-reported sequence among the examples: H25 dotted-ridge (0.2477), D2.8 (0.2600), H27-4 (0.2708), H36-1 (0.2710), H33-2 B2 (0.2778), and a separately supplied leaderboard high (0.3195). None of these values alone establishes why an artifact scored well, its exact bytes, whether the score is official, or whether the experiment is comparable; repository evidence says H27-4 lacks an organizer-verified score/file pairing. **Do not claim H33-2 zeros is the reason for 0.2778 or infer a reproducible mechanism without its TIFF, code, validation details, and organizer receipt.** The most plausible general explanation for the incremental H25\u2192D2.8\u2192H27-4 progression is sparse, spatially regular emission plus pruning near known-catalogue mid-segment flanks, but this is a hypothesis based on owner-mirror campaign descriptions\u2014not causal proof. The distinct H33-6 edge-consensus intervention did not improve the local proxy control, so there is no validated basis to claim this repo can exceed 0.2778 or 0.3195."
+        }
+      ]
+    },
+    {
+      "site": "GEMSDOE36",
+      "repo": "buffedlizard55-lab/GEMSDOE36",
+      "ref": "c9ad59ec6f969ed931d089a03044c1567a633e84",
+      "tree_sha": "c9ad59ec6f969ed931d089a03044c1567a633e84",
+      "published_tiffs": 4,
+      "other_array_paths_not_assumed_grid_aligned": [],
+      "readme_sha256": "8721ef6355fe7baa263c9d23653f82424399bf172368b737fd154ee9ff08d235",
+      "readme_url": "https://github.com/buffedlizard55-lab/GEMSDOE36/blob/c9ad59ec6f969ed931d089a03044c1567a633e84/README.md",
+      "owner_published_claim_extracts_not_organizer_receipts": [
+        {
+          "line": 4,
+          "text": "> **Official Public Leaderboard Target:** 0.3195 (Historical Baseline: 0.2778)  "
+        },
+        {
+          "line": 27,
+          "text": "> 3. **Analyze WHY h33-2-b2 (GEMSDOE32, owner-reported 0.2778) was the best**"
+        },
+        {
+          "line": 91,
+          "text": "Review repo and understand how past submissions were generated, specifically analyzing why GEMSDOE32 reached 0.2778 (h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros) and how to target higher than 0.2778 (up to current public leaderboard top 0.3195). Generate 3\u20135 candidate geological hypotheses incorporating Anderson's faulting theory (1905) and Raissi et al. (2019) physics-informed loss (penalizing strikes/dips violating Great Basin extensional stress regime), ranked by expected DTI improvement and cost. Implement and generate a unique TIF submission file for the DOE GEMS competition adhering strictly to format specifications (single-band float32 GeoTIFF, EPSG:32611, 100 m resolution, values strictly in [0, 1] with null/NaN outside, unique filename and submission note). Fix the previous user error: \"Predicted values must be in range [0, 1]\". Put the required user prompt into README.md and preserve core values: Maximize P(Win) and Own the Outcome. Build an organized, clean GitHub Pages site (docs/index.html and docs/executive-summary.html) with an easy one-click download for the submission TIF file, full documentation, and verified official source citations. Complete 3 verification passes, open a PR from arena/01a10833-gemsdoe36, and merge into main."
+        },
+        {
+          "line": 116,
+          "text": "  `GEMSDOE36 Anderson PINN | H36-1/3 GDR geotherm conduit + B=2 catalogue-flank prune: 38,854 dots; 0 on-cat; LM holdout 0.2699 (+0.0020 vs 0.2778 base, 1/4 quads); projected 0.2798`"
+        },
+        {
+          "line": 133,
+          "text": "## 3. PhD-Level Forensic Autopsy: How GEMSDOE32 Reached 0.2778 & The Path to 0.3195"
+        },
+        {
+          "line": 145,
+          "text": "### 3.2 Why GEMSDOE32 Reached 0.2778: Submodular Catalogue-Flank Pruning"
+        },
+        {
+          "line": 147,
+          "text": "- In `GEMSDOE31`, the base prediction had 40,199 dots and scored 0.2708."
+        },
+        {
+          "line": 152,
+          "text": "- **Result:** Score leaped from 0.2708 to **0.2778** (+0.0070 net jump)."
+        },
+        {
+          "line": 154,
+          "text": "### 3.3 Why 0.2778 Plateaued & Analysis of Kinematic Deficiencies"
+        },
+        {
+          "line": 155,
+          "text": "Despite reaching 0.2778, the 37,654 dots in `GEMSDOE32` suffered from severe geological and physical flaws:"
+        },
+        {
+          "line": 162,
+          "text": "   - Active geothermal circulation in the Great Basin (e.g., Dixie Valley, Brady's) is controlled by active dilatational fault step-overs."
+        },
+        {
+          "line": 166,
+          "text": "### 3.4 Bridging the Gap from 0.2778 to 0.3195"
+        },
+        {
+          "line": 169,
+          "text": "2. **Geothermal Conduit Relocation:** Replacing pruned E-W artifacts with high-confidence GDR 1391 geothermal conduit dots."
+        },
+        {
+          "line": 178,
+          "text": "| **1 (Lead)** | **H36-1: Extensional Step-Over & Relay Ramp PINN** | GeoDAWN aeromagnetic tilt derivatives, Bouguer gravity HGM, WSM 2025 extension azimuth ($\\sigma_3 \\sim 105^\\circ$), Raissi et al. (2019) structure-tensor loss. | Relay ramps and step-overs host intense fracturing without continuous surface scarps. Prunes 9,972 E-W non-Andersonian dots and adds NNE relay dots. | **+0.001987** over base (Holdout LM: 0.269908 vs 0.267921; live projection: 0.2798). | Medium | Fully Ingested & Verified |"
+        },
+        {
+          "line": 179,
+          "text": "| **2** | **H36-3: Blind Hydrothermal Upflow Conduit Mapping** | GDR 1391 geothermal well/spring geochemistry ($T \\ge 130^\\circ\\text{C}$), 3 km IDW reservoir temperature field. | Active geothermal fluid circulation in the Great Basin is localized at high-dilation blind fault step-overs $>1.5\\text{ km}$ off-catalogue. | **+0.001858** over base (Holdout LM: 0.269778). | Low-Med | Fully Ingested & Verified |"
+        },
+        {
+          "line": 195,
+          "text": "BASE-0.2778          37,654   0.231908     0.284112     0.281145     0.274519     0.267921  +0.000000"
+        },
+        {
+          "line": 205,
+          "text": "- Calibrated to the 0.2778 leaderboard baseline, this $+0.001987$ holdout margin projects to a live score of **0.2798**."
+        }
+      ]
+    }
+  ]
+}

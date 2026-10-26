@@ -5,8 +5,9 @@ The complete latest task text (formatting normalized) is now embedded in
 [the task-text record](docs/research/texture-displacement/owner-prompt.txt).
 Read that record and the current run pointer before every session. The older
 brief below is retained as historical owner text, not the current status or a
-verified score/approval statement. New TDX-1 TIFF: research download only;
-[automated decision](docs/research/texture-displacement/readiness.json) is negative.
+verified score/approval statement. Latest TDX-C2 attempt: **duplicate-stopped, no new public TIFF**;
+[automated decision](docs/research/texture-controls/readiness.json) is negative.
+The previous TDX-1 TIFF remains an explicitly archived research-only download.
 
 ---
 
@@ -127,6 +128,17 @@ wins and the distilled list must be corrected.
 > **Branch note:** the literal brief above preserves the branch name recorded in the original request. This Arena session is fixed to `arena/01a103c1-gemsdoe30`; all changes, commits, pushes, and any PR from this session remain on that assigned branch. Earlier session branches are historical only. The brief's verbatim wording is preserved above unchanged.
 >
 > **Current-status pointer:** this duplicate persistent brief retains earlier session narratives for audit. The authoritative current status is maintained in [README.md](README.md), [the submission-format review](docs/research/submission-format-review-2026-10-03.md), and [docs/status.json](docs/status.json). Later correction records supersede stale earlier operational guidance below.
+
+> **S20 addendum (2026-10-25, branch `arena/15a1706d-gemsdoe30`):** the owner's S20 prompt (focus sites
+> GEMSDOE24/25/27/28/30/31/32/33/36; explain and try to beat the 0.2778 OWNER-REPORTED GEMSDOE32 H33 result;
+> generate a unique, machine-validated TIF; parallel-run protocol with leakage canaries, HOLDOUT-DTI labelling
+> and a JSON run card; 3–5 ranked untried hypotheses first) is distilled in
+> [docs/research/2026-10-25-s20/owner-request.md](docs/research/2026-10-25-s20/owner-request.md) and must be
+> read with this brief every session. Outcome: Lane G30-S20 (lidar scarp + GeoDAWN radiometrics) beat the
+> G30-S19 Candidate-C recipe on two preregistered holdouts but is **duplicate-stop vs Candidate C**
+> (89.58 % of dots within 3 px); Candidate C remains the only OK-to-submit file. See
+> [the S20 analysis](docs/research/2026-10-25-s20/analysis.md) and
+> [run card](docs/research/2026-10-25-s20/run-card.json).
 
 ## Mission and non-negotiable requirements
 

@@ -1,0 +1,23 @@
+{
+ "stem": "gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa",
+ "recipe": "B_combined",
+ "note": "G30-S20 19-band+lidar scarp+GeoDAWN rad GBM + EDGE 60k off-cat>2px",
+ "note_chars": 66,
+ "dots": 60000,
+ "keep_requested": 60000,
+ "edge_selfstop": 83582,
+ "dots_on_catalogue": 0,
+ "dots_within_2px_of_catalogue": 0,
+ "zeros_file": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif",
+ "nan_file": "docs/downloads/gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif",
+ "zeros_sha256": "1b07820d0066e56442ade4f4a3880af92f50b4ca9cac528ccf59696ec5299cd6",
+ "nan_sha256": "12bd6196cdebfbaa39960d0d6f600fde498f1fb7675321222ba49489dec69b22",
+ "zeros_bytes": 451460,
+ "nan_bytes": 525874,
+ "flagged_features_excluded": [],
+ "n_features": 66,
+ "train_pos": 60988,
+ "train_neg": 600000,
+ "belief_used": "final_belief_used.npy",
+ "seconds": 469.4
+}

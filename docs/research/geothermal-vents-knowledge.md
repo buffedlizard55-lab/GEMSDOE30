@@ -207,6 +207,17 @@ scoring. Recorded as `IR-30-046`.
 this register, measured in this checkout with the command listed, or explicitly tagged
 [CLAIM]/[INFERENCE]. Scores attributed to owner files remain unauthenticated ([CLAIM]).
 
+## 2026-10-25 TDX-C2: negative fault-signature evidence, not vent detection
+
+The [frozen full-stack displacement test](texture-controls/review.md) did not
+establish incremental recovery beyond its matched core19/zero-lag/phase controls
+and crossed the mandatory nearby-dot duplicate threshold. Its exact results,
+conditional confidence intervals and source hashes are retained; it is not a
+new unique submission or evidence for geothermal vents. Intrusive lithologic
+contacts and survey/gridding seams are named mimics of the proposed magnetic
+signature. Fault labels alone contain no temperature, permeability or flow
+observation.
+
 ---
 
 ## 8. 2026-10-25 GeoDAWN Acquisition Physics, Piedmont Deconfounding, and MS-CAPE Blind-Fault Synthesis [OFFICIAL + MEASURED]
@@ -218,4 +229,4 @@ this register, measured in this checkout with the command listed, or explicitly 
    - Mattéo et al. (2021, *JGR Solid Earth*) on automatic fault mapping in high-resolution topographic data (emphasizing multi-scale linear trace continuity vs. local slope noise);
    - Hermant, Kiersnowski & Bellanger (2025, *Proceedings, 50th Workshop on Geothermal Reservoir Engineering, Stanford University*) on deep-learning structural mapping for geothermal exploration.
 3. **Piedmont Range-Front Deconfounding Resolves the Supervised Slope Trap [MEASURED]:**
-   Across `5,167,373` valid footprint pixels, only **`24.03%`** of the `60,988` INGENIOUS Quaternary fault pixels lie in the top quartile of `100 m` DEM slope — the majority follow piedmont range-front toes (where steep horsts meet low-slope alluvial bajadas), relay ramps, and intrabasinal steps. Naive pixel-level trees across sibling repositories placed `~69.5%` of emitted dots on steep mountain crags (`[CLAIM]` `0.2343–0.2478`). Introducing the explicit **Piedmont Range-Front Index** (`1.2 km` slope ruggedness divided by `1 + local slope`) + two-stage 8-azimuth axial continuity (`±800 m`) + `300 m` submodular DW-Tversky set-cover (`MS-CAPE`, [`docs/research/ms-cape/review.md`](ms-cape/review.md)) calibrated emitted top-quartile slope share to **`26.06%`** (`+2.03 pp` vs. catalogue) while lifting `2,000 m`-buffered whole-component `HOLDOUT-DTI` from **`0.13571`** (`core19`) to **`0.18669`** (`95% CI [0.17333, 0.20032]`, paired `+0.05098`, `4/4` spatial folds positive) and recovering **`5,521.1`** weighted pixels of completely independent off-catalogue USGS SGMC faults (`DIAGNOSTIC-PROXY-DTI = 0.094114`).
+   Across `5,167,373` valid footprint pixels, only **`24.03%`** of the `60,988` INGENIOUS Quaternary fault pixels lie in the top quartile of `100 m` DEM slope — the majority follow piedmont range-front toes (where steep horsts meet low-slope alluvial bajadas), relay ramps, and intrabasinal steps. Naive pixel-level trees across sibling repositories placed `~69.5%` of emitted dots on steep mountain crags (`[CLAIM]` `0.2343–0.2478`). Introducing the explicit **Piedmont Concavity & Relief-Deconfounded Slope Prominence** (`det_elev`, `det_elev_slope`) + two-stage 8-azimuth axial continuity (`±800 m`) + `300 m` submodular DW-Tversky set-cover (`MS-CAPE`, [`docs/research/ms-cape/review.md`](ms-cape/review.md)) calibrated emitted top-quartile slope share to **`26.06%`** (`+2.03 pp` vs. catalogue) while lifting `2,000 m`-buffered whole-component `HOLDOUT-DTI` from **`0.135709`** (`core19`) to **`0.186687`** (`95% CI [0.173326, 0.200317]`, paired `+0.050978`, `4/4` spatial folds positive) and recovering **`5,521.1`** weighted pixels of completely independent off-catalogue USGS SGMC faults (`DIAGNOSTIC-PROXY-DTI = 0.094114`).

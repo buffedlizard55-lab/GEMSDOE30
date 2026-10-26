@@ -174,7 +174,7 @@ Direct inspection of `training_features.tif` and `sample_submission.tif` identif
    <https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/>
 3. **About the Geothermal Prize & Phase 1 / Phase 2 Evaluation Structure:**
    <https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/>
-4. **Live Public Leaderboard (`#1 = 0.4413`, `#5 = 0.3553`, read 2026-10-25/26 UTC):**
+4. **Live Public Leaderboard (`#1 = 0.4413`, `#5 = 0.3539`, read 2026-10-25 UTC):**
    <https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/>
 5. **DOE / NLR Official Prize Rules PDF (Sept 2026 — 3/week feedback limit, 1 final submission across both rounds, AI disclosure, U.S. eligibility):**
    <https://docs.nlr.gov/docs/fy26osti/96647.pdf>
@@ -201,3 +201,14 @@ Direct inspection of `training_features.tif` and `sample_submission.tif` identif
    Acquiring 10 m / 1 m 3DEP DEM + NHDPlus HR flowline tiles via the public-domain USGS National Map API in an external runner workflow to extract sub-100 m beheaded alluvial-fan channel offsets (`KNICK-DRAIN`) and 3D Euler structural-index contact worms (`EULER-CURV`) will add orthogonal structural resolving power in low-slope basins where `100 m` DEMs under-resolve `< 0.5 m` Holocene scarps.
 4. **Eligibility & AI-Use Narrative Verification Before Final Entry (Dec. 3, 2026):**
    Confirm U.S. entrant eligibility under Official Rules §1.3, resolve the `5:00 p.m. ET` vs. `11:59 p.m. UTC` deadline wording discrepancy (`IR-30-008`) by submitting ≥ 24 hours early, and include the generative-AI usage disclosure (`docs/ai-disclosure-draft.md`) in the finalist narrative (`§3.2`).
+
+---
+
+## 8. Three-Pass & Concurrent-Lane Merge Verification Journal
+
+- **Pass 1 (Implementation, Preregistered Execution & Machine Gate Verification):**
+  Authored `src/gemsdoe30/ms_cape.py`, `tests/test_ms_cape.py` (`6/6` unit tests passing), frozen `docs/research/ms-cape/preregistration.md` (`sha256 = 9fd9195854b5...`), and `scripts/run_ms_cape.py`. Executed the single preregistered 3-experiment ladder (`1,571.18 s <= 7,200 s`), achieving `HOLDOUT-DTI = 0.186687` (`95% CI [0.173326, 0.200317]`), beating `physics_tilt8`, `core19`, `g30s19_hist_best`, `ms_cape_e1`, and `ms_cape_e2` across `4/4` spatial folds, passing `204/204` leakage canaries (`max AUC = 0.640358`), and writing both `-nan.tif` (`002c5158...`) and `-zeros.tif` (`3ee82868...`).
+- **Pass 2 (Edge-Case, Band-Name, Path-Hygiene & Frozen-Hash Audit):**
+  Harmonized all 19 band identifiers and hypothesis IDs across `review.md`, `preregistration.md`, and `ms_cape.py`, stripped sandbox `/home/user/GEMSDOE30/` path prefixes from committed JSON receipts, protected `docs/research/ms-cape/preregistration.md` via `.gitattributes` so `git diff --check` preserves its frozen SHA-256, and verified bit-identical in-footprint values across `-nan.tif` and `-zeros.tif`.
+- **Pass 3 (Concurrent `origin/main` Merge, Bit-Exact Surface Reconstruction & Full CI Simulation):**
+  Merged concurrent `origin/main` lanes (`MSDB-1v2`, `TDX-C2`, `G30-LSM`, `G30-S20`), registered `"ms_cape"` in `src/gemsdoe30/experiments.py`, deterministically reconstructed `ms-cape-surface.tif` (`SHA-256 = d709d5dfd62901d8e8de2b8b74e1f3e83820fca8d63298486184046b3c42d7d5`, bit-for-bit identical to the original run), and audited both Stage-1 surface (`rho = 0.1147` vs `MSDB-1v2`, `0.1386` vs `G30-S20`) and Stage-2 dots (`3-px = 63.16%` vs `MSDB-1v2`, `63.39%` vs `G30-S20`) across all `119` unique aligned GeoTIFFs (`116` frozen + `3` newly merged). Verified `verify_current_run.py --require-promote` (`exit 0`, `12/12` passed), `verify_stopped_attempt.py` (`exit 0`), `verify_lsm_run.py` (`exit 0`), `build_research_site.py --check` (`exit 0`), and `pytest -q` (`253 passed, 5 skipped`).

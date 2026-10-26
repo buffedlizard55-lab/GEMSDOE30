@@ -4,13 +4,11 @@ from __future__ import annotations
 import math
 from typing import Any
 
+from .experiments import contract
+
 READINESS_VERSION = "research-readiness-v2-parallel-evidence-20261025"
-EXPECTED_FEATURES = frozenset({
-    "mag_anom", "rtp", "tmi_hg", "geod_2ndinv", "iso_grav_anom_slope", "tc",
-    "geod_shearrate", "geod_dilaterate", "tmi_vg", "deq_n100a15", "iso_grav_anom_vg",
-    "det_elev", "iso_grav_anom", "tmi", "depth_to_base_surf", "ieq_n100a15", "cond_surf",
-    "iso_grav_anom_hg", "det_elev_slope", "mag_texture", "rtp_texture", "texture_consensus",
-})
+
+EXPECTED_FEATURES = frozenset(contract({})["features"])
 
 
 def number(value):
@@ -21,37 +19,20 @@ def interval(ci, low=0, high=1):
     return isinstance(ci, list) and len(ci) == 2 and all(number(v) for v in ci) and low <= ci[0] <= ci[1] <= high
 
 
-def _resolve_schema(card: dict) -> tuple[str | None, set[str] | None, frozenset[str] | None]:
-    cand = card.get("candidate_arm", "tdx6")
-    if not isinstance(cand, str) or not cand.strip():
-        return None, None, None
-    raw_comps = card.get("comparator_arms", ["physics3", "core19"])
-    if (not isinstance(raw_comps, (list, tuple)) or not raw_comps
-            or not all(isinstance(c, str) and c.strip() for c in raw_comps)):
-        return None, None, None
-    comps = set(raw_comps)
-    if cand in comps or len(comps) != len(raw_comps):
-        return None, None, None
-    if "expected_features" in card:
-        raw_feats = card["expected_features"]
-        if (not isinstance(raw_feats, (list, tuple)) or len(raw_feats) < 19
-                or not all(isinstance(f, str) and f.strip() for f in raw_feats)
-                or len(set(raw_feats)) != len(raw_feats)):
-            return None, None, None
-        feats = frozenset(raw_feats)
-    else:
-        feats = EXPECTED_FEATURES
-    return cand, comps, feats
-
-
 def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool,
-           surface_audit: dict, dots_audit: dict, registry: dict) -> dict[str, Any]:
+           surface_audit: dict, dots_audit: dict, registry: dict,
+           artifact_public: bool = True) -> dict[str, Any]:
     """Separate file validity, research promotion and slot selection.
 
     Evidence absent from this function is unknown, never implicitly passed. A
     selector must separately verify current portal constraints and allocation;
     this function cannot approve or spend a competition slot.
     """
+    spec = contract(card)
+    expected_arms = set(spec["arms"])
+    expected_features = set(spec["features"])
+    comparators = expected_arms - {spec["candidate"]}
+    required_positive = set(spec.get("required_positive_deltas", comparators))
     gates = []
 
     def gate(name, status, detail):
@@ -59,14 +40,12 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
             raise ValueError("invalid gate status")
         gates.append({"name": name, "status": status, "detail": detail})
 
-    cand_arm, comp_arms, exp_features = _resolve_schema(card)
-    expected_arms = ({cand_arm} | comp_arms) if (cand_arm and comp_arms) else None
-
-    gate("file_contract", "passed" if format_passed and hash_matches else "failed",
-         "Reopened shared-writer GeoTIFF matches template; SHA-256 binds this decision to its exact bytes")
+    gate("file_contract", ("passed" if format_passed and hash_matches else "failed") if artifact_public else "unknown",
+         "Reopened shared-writer GeoTIFF matches template; SHA-256 binds this decision to its exact bytes"
+         if artifact_public else "Duplicate artifact withheld from publication; recorded local validation is not a current public-file reinspection")
     summary = results.get("summary", {})
     arms = summary.get("arms", {})
-    measures_valid = expected_arms is not None and set(arms) == expected_arms
+    measures_valid = set(arms) == expected_arms
     for arm in arms.values():
         ci = arm.get("ci95", [])
         value = arm.get("value")
@@ -79,18 +58,25 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
     gate("labelled_holdout_evidence", "passed" if measures_valid else "failed",
          "HOLDOUT-DTI requires evaluator/protocol, withheld positives and spatial-bootstrap 95% CI")
     deltas = summary.get("candidate_minus", {})
-    wins = comp_arms is not None and set(deltas) == comp_arms and all(
-        number(row.get("value")) and row["value"] > 0
-        and interval(row.get("ci95"), -1, 1) and row["ci95"][0] > 0 for row in deltas.values())
-    gate("paired_improvement", "passed" if wins else "failed",
-         "Fixed candidate must improve both same-protocol controls with positive paired CI lower bound"
-         if expected_arms == {"tdx6", "physics3", "core19"}
-         else "Fixed candidate must improve all same-protocol comparators with positive paired CI lower bound")
+    all_deltas_valid = set(deltas) == comparators and all(
+        number(row.get("value")) and interval(row.get("ci95"), -1, 1) for row in deltas.values()
+    )
+    wins = all_deltas_valid and all(
+        deltas[name]["value"] > 0 and deltas[name]["ci95"][0] > 0 for name in required_positive
+    )
+    if spec["id"] == "tdx1":
+        delta_detail = "Fixed candidate must improve both same-protocol controls with positive paired CI lower bound"
+    elif spec["id"] == "tdxc2":
+        delta_detail = "Fixed full-stack candidate must improve core19, zero-lag and phase-null controls with positive paired CI lower bounds"
+    elif spec["id"] == "ms_cape":
+        delta_detail = "Fixed candidate must improve all same-protocol comparators with positive paired CI lower bound"
+    else:
+        delta_detail = "Fixed candidate must improve preregistered core19 comparator with positive paired CI lower bound"
+    gate("paired_improvement", "passed" if wins else "failed", delta_detail)
     features = results.get("feature_canaries", [])
-    complete_canaries = (exp_features is not None and len(features) == 4
-                         and {f.get("fold") for f in features} == set(range(4))
-                         and all(len(fold.get("features", [])) == len(exp_features)
-                                 and {r.get("feature") for r in fold["features"]} == exp_features
+    complete_canaries = (len(features) == 4 and {f.get("fold") for f in features} == set(range(4))
+                         and all(len(fold.get("features", [])) == len(expected_features)
+                                 and {r.get("feature") for r in fold["features"]} == expected_features
                                  for fold in features))
     alarm = False
     for fold in features:
@@ -100,31 +86,27 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
             # Recompute, do not trust a mutable "alarm=false" boolean.
             if not valid_auc or max(raw, 1 - raw, uni, 1 - uni) > .90 or row.get("alarm_above_0_90") is not False:
                 alarm = True
-    n_feat_label = len(exp_features) if exp_features is not None else 0
     gate("single_feature_leakage_canaries", "passed" if complete_canaries and not alarm else "failed",
-         f"All {n_feat_label} raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC")
+         f"All {len(expected_features)} raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC")
     folds = results.get("folds", [])
-    counts_valid = (expected_arms is not None and len(folds) == 4
-                    and {f.get("fold") for f in folds} == set(range(4))
-                    and all(
-                        isinstance(fold.get("dot_budget_each_arm"), int)
-                        and not isinstance(fold["dot_budget_each_arm"], bool)
-                        and fold["dot_budget_each_arm"] > 0
-                        and set(fold.get("arms", {})) == expected_arms
-                        and all(isinstance(arm.get("emitted_pixels"), int)
-                                and not isinstance(arm["emitted_pixels"], bool)
-                                and arm["emitted_pixels"] == fold["dot_budget_each_arm"]
-                                for arm in fold["arms"].values())
-                        for fold in folds))
+    counts_valid = len(folds) == 4 and {f.get("fold") for f in folds} == set(range(4)) and all(
+        isinstance(fold.get("dot_budget_each_arm"), int) and not isinstance(fold["dot_budget_each_arm"], bool)
+        and fold["dot_budget_each_arm"] > 0
+        and set(fold.get("arms", {})) == expected_arms
+        and all(isinstance(arm.get("emitted_pixels"), int) and not isinstance(arm["emitted_pixels"], bool)
+                and arm["emitted_pixels"] == fold["dot_budget_each_arm"] for arm in fold["arms"].values())
+        for fold in folds)
     gate("count_matched_construction", "passed" if counts_valid else "failed",
          "All fixed arms must realize the same predeclared active-domain budget in every fold")
     observed = {}
+    duplicate_detected = False
     for stage, report in (("surface", surface_audit), ("dots", dots_audit)):
         rows = report.get("comparisons", [])
         duplicate = any(row.get("identical_inside_footprint")
-                        or (number(row.get("spearman_full_footprint")) and abs(row["spearman_full_footprint"]) > .90)
+                        or (number(row.get("spearman_full_footprint")) and row["spearman_full_footprint"] > .90)
                         or (stage == "dots" and number(row.get("candidate_fraction_within_3px_of_reference"))
                             and row["candidate_fraction_within_3px_of_reference"] > .70) for row in rows)
+        duplicate_detected |= duplicate
         defined = all(number(row.get("spearman_full_footprint")) and -1 <= row["spearman_full_footprint"] <= 1
                       and (stage != "dots" or (number(row.get("candidate_fraction_within_3px_of_reference"))
                            and 0 <= row["candidate_fraction_within_3px_of_reference"] <= 1)) for row in rows)
@@ -161,10 +143,10 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
              and isinstance(card.get("note"), str) and len(card["note"]) <= 140)
     gate("artifact_identity", "passed" if named else "failed", "Named artifact and note of at most 140 characters")
     promoted = all(row["status"] == "passed" for row in gates)
-    return {"schema_version": 1, "readiness_version": READINESS_VERSION,
+    return {"schema_version": 1, "readiness_version": READINESS_VERSION if spec["id"] in ("tdx1", "ms_cape") else "research-readiness-v3-matched-controls-20261025",
             "raster_sha256": card.get("raster_sha256"), "gates": gates,
             "observed_registry": observed,
-            "download_ok": bool(format_passed and hash_matches and named),
+            "download_ok": bool(artifact_public and format_passed and hash_matches and named and not duplicate_detected),
             "research_verdict": "promote" if promoted else "negative",
             "eligible_for_separate_slot_selector": promoted,
             "submission_approved": False, "slot_selected": False,

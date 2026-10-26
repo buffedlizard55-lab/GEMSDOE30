@@ -15,6 +15,7 @@ from gemsdoe30.fields import (
     distance_to_mask,
     geometric_mean,
     layer_belief,
+    line_coherent_belief,
     proximity_belief,
     scale_to_mass,
 )
@@ -91,3 +92,48 @@ def test_scale_to_mass_reproduces_the_requested_mass_and_validates():
     assert restricted[0, 1] == 0.0 and restricted[1, 0] == 0.0
     with pytest.raises(ValueError):
         scale_to_mass(np.zeros((3, 3), dtype=np.float32), 5.0)
+
+
+def test_line_coherent_belief_rewards_lines_and_penalises_speckles():
+    # Isolated speckle: only the centre tap of any 9-tap line is high, so the
+    # best line mean at the speckle is 1/9 and the reweighted value is 1/3.
+    speckle = np.zeros((21, 21), dtype=np.float32)
+    speckle[10, 10] = 1.0
+    out_speckle = line_coherent_belief(speckle, orientations=16, half_length=4)
+    assert out_speckle[10, 10] == pytest.approx(1.0 / 3.0, rel=1e-5)
+
+    # A horizontal line at least 9 px long: the theta=0 line mean is 1 at the
+    # centre, so the reweighted value stays 1.
+    line = np.zeros((21, 21), dtype=np.float32)
+    line[10, 5:16] = 1.0
+    out_line = line_coherent_belief(line, orientations=16, half_length=4)
+    assert out_line[10, 10] == pytest.approx(1.0, rel=1e-6)
+    assert out_line[10, 10] > out_speckle[10, 10]
+
+    # The transform cannot create belief from nothing, and a constant field
+    # is preserved away from the zero-padded border.
+    assert float(line_coherent_belief(np.zeros((9, 9), dtype=np.float32)).max()) == 0.0
+    assert out_line[3, 3] == 0.0
+    constant = line_coherent_belief(np.full((21, 21), 0.25, dtype=np.float32))
+    assert constant[10, 10] == pytest.approx(0.25, rel=1e-6)
+
+
+def test_line_coherent_belief_validates_and_respects_footprint():
+    good = np.zeros((11, 11), dtype=np.float32)
+    with pytest.raises(ValueError):
+        line_coherent_belief(-good - 1.0)
+    with pytest.raises(ValueError):
+        line_coherent_belief(np.full((4, 4), np.nan, dtype=np.float32))
+    with pytest.raises(ValueError):
+        line_coherent_belief(good, half_length=0)
+    with pytest.raises(ValueError):
+        line_coherent_belief(good, footprint=np.zeros((5, 5), dtype=bool))
+    field = np.ones((11, 11), dtype=np.float32)
+    footprint = np.zeros((11, 11), dtype=bool)
+    footprint[4:7, :] = True
+    masked, line_max = line_coherent_belief(
+        field, footprint=footprint, return_line_max=True
+    )
+    assert float(masked[~footprint].max()) == 0.0
+    assert float(line_max[~footprint].max()) == 0.0
+    assert float(masked.max()) <= 1.0

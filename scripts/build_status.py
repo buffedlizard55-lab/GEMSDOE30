@@ -334,6 +334,43 @@ def main() -> int:
             "promoted": bool(current_release and current_release.get("research_verdict") == "promote"),
             "decision": current_release.get("display_status") if current_release else "blocked: current inspection unavailable",
         }
+    # A stopped latest attempt is not the retained downloadable artifact. Verify
+    # its receipts without pretending unavailable private bytes were reopened.
+    additional_attempts = []
+    for extra in selection.get("additional_stopped_attempts", []):
+        row = {"lane": extra.get("lane"), "pointer": extra.get("pointer"), "verifier": extra.get("verifier")}
+        try:
+            if str(ROOT) not in sys.path:
+                sys.path.insert(0, str(ROOT))
+            from scripts.verify_lsm_run import verify as verify_lsm
+            ready = verify_lsm(ROOT / extra["pointer"], data_dir / "sample_submission.tif")
+            row.update({"verified_now": True, "error": None, "decision": ready["decision"],
+                        "ok_to_submit": ready["ok_to_submit"], "research_verdict": ready["research_verdict"],
+                        "gates": ready["gates"]})
+        except Exception as exc:  # record missing access, never a stale green receipt
+            row.update({"verified_now": False, "error": str(exc), "ok_to_submit": False})
+        additional_attempts.append(row)
+        gates[f"stopped_attempt_{str(extra.get('lane')).lower()}"] = {
+            "evidence": extra.get("pointer"), "promoted": False,
+            "decision": row.get("decision", "blocked: inspection unavailable")}
+    latest_attempt = None
+    if selection.get("latest_attempt"):
+        latest_path = ROOT / selection["latest_attempt"]
+        latest_card = load_json(latest_path)
+        latest_attempt = {"run_card": selection["latest_attempt"], "card": latest_card,
+                          "receipt_inspection": {"verified_now": False, "error": None},
+                          "decision": None, "public_download": False}
+        try:
+            from scripts.verify_stopped_attempt import verify as verify_stopped
+            latest_attempt["decision"] = verify_stopped(latest_path.parent, data_dir / "sample_submission.tif")
+            latest_attempt["receipt_inspection"] = {"verified_now": True, "error": None,
+                                                    "private_raster_reopened": False}
+        except Exception as exc:
+            latest_attempt["receipt_inspection"]["error"] = str(exc)
+        gates["latest_scientific_attempt"] = {
+            "evidence": selection["latest_attempt"], "promoted": False,
+            "decision": "duplicate-stop; no public TIFF" if latest_attempt["receipt_inspection"]["verified_now"]
+                        else "blocked: latest stopped-attempt inspection unavailable"}
     promoted = [name for name, gate in gates.items() if gate.get("promoted")]
     peer_reports = []
     for name, filename in (("G30-S19 habitat + EDGE", "lane-g30s19-run-card.json"),
@@ -365,7 +402,7 @@ def main() -> int:
         "submission_format": {
             "published_outside_convention": "null/NaN outside the data bounds; finite probabilities in [0, 1] inside",
             "official_problem_description": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-            "builder_default": "Current shared writer / TDX1: NaN nodata outside, finite [0,1] inside; no range-error-immunity claim",
+            "builder_default": "Current shared writer / retained TDX1 archive: NaN nodata outside, finite [0,1] inside; no range-error-immunity claim",
             "zero_outside": (
                 "Historical all-finite convention. The official reference notebook writes without an "
                 "explicit nodata argument; owner-reported scores are not organizer confirmation. "
@@ -399,6 +436,15 @@ def main() -> int:
         "current_readiness": current_card,
         "current_artifact_inspection": current_inspection,
         "current_release_decision": current_release,
+        "latest_scientific_attempt": latest_attempt,
+        "additional_stopped_attempts": additional_attempts,
+        "legacy_readiness_2026_10_25": load_json(research / "2026-10-25" / "run-card.json"),
+        "lane_g30s19_run_card": load_json(
+            research / "2026-10-25" / "lane-g30s19-run-card.json"
+        ),
+        "lane_g30s20_run_card": load_json(
+            research / "2026-10-25-s20" / "run-card.json"
+        ),
         "historical_promotion_warning": "Prior results require same-protocol re-evaluation after the shared footprint correction.",
         "promotion_gates": gates,
         "any_candidate_promoted": bool(promoted),
