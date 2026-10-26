@@ -1,5 +1,20 @@
 # GEMSDOE30 — DOE GEMS Concealed Fault Discovery & Automated Submission Lab
 
+## Verification follow-up — 2026-10-26: **NO NEW TIFF; DO NOT SUBMIT**
+
+The expanded-registry receipt is now verified even on FFL-1's negative path.
+Current exact bytes pass the strict shared format validator; the stored duplicate
+finding still prohibits upload. No new lane was assigned, no experiments were run,
+and no submission slot was selected. This does not meet the new high-scoring TIFF
+objective; it preserves an honest negative decision rather than fabricating one.
+
+[Decision page](receipt-integrity-review.html) ·
+[Audit and next steps](docs/research/2026-10-26-receipt-integrity/review.md) ·
+[Current byte validation](docs/research/2026-10-26-receipt-integrity/validation.json) ·
+[Run card](docs/research/2026-10-26-receipt-integrity/run-card.json).
+Read the complete [current owner prompt](#current-owner-prompt) every session;
+its full text remains below, including the conflicting, unverified leader claims.
+
 ## LATEST 2026-10-26 — FFL-1 MSDB × LiDAR Fusion: **DO NOT SUBMIT — DUPLICATE-STOPPED**
 
 - **Generated GeoTIFF (research artifact only):** [`gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3.tif`](docs/research/2026-10-26-fflidar/gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3.tif) (`SHA-256: 7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07`; 44,090 dots)
