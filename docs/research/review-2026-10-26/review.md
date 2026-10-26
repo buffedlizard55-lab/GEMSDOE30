@@ -1,8 +1,10 @@
-# Executive review — 26 October 2026
+# Executive review — 26 October 2026 (00:34 UTC snapshot; superseded)
+
+> **Historical snapshot only.** This review was written at 00:34 UTC, before the FFL-1 lane run recorded at 00:50 UTC. Its statement that no TIFF was generated describes that earlier audit only. The current lane decision is the later [FFL-1 review](../2026-10-26-fflidar/review.md): one unique research TIFF was generated, then duplicate-stopped; do not submit it.
 
 ## Decision first
 
-**OK to download existing format-valid research TIFFs. NOT cleared to submit. No new TIFF generated this session.** This is a negative, audit-only deliverable, not a claim of a better model. The prompt supplies no identifiable single-method lane paragraph; assigning ourselves a new lane would violate the parallel protocol. Complete parallel surfaces and an identical-protocol best-model comparison are also missing. Zero experiments and zero weekly slots were used.
+**At the 00:34 UTC snapshot: existing format-valid research TIFFs were downloadable but not cleared to submit; no new TIFF had yet been generated in that audit.** This was a negative, audit-only deliverable, not a claim of a better model. At that snapshot the prompt supplied no identifiable single-method lane paragraph, complete parallel surfaces, or identical-protocol best-model comparison. Zero experiments and zero weekly slots were used in that audit.
 
 Current bytes were reopened with the shared `gemsdoe30.submission` validator against the SHA-pinned owner-mirror template. Both H-NEARSPLAY and MSDB-1v2 pass format and SHA checks: [machine report](readiness.json). Neither is approved. These checks do not rerun training, holdout, canaries, or novelty. Template provenance remains an owner mirror, not organizer authentication.
 
@@ -54,6 +56,6 @@ All are conditional on restoring the existing pinned cached stack and confirming
 
 - Pass 1: inspected README, agent instructions, current pointers, run cards, shared readiness/writer code and public-registry review. Restored only pinned labels/template; reopened both primary TIFFs and checked SHA identities. No new raster built.
 - Pass 2: found README claiming both artifacts passed all gates despite MSDB's recorded negative readiness; added an overriding dated decision and corrected its current description. Added regression tests ensuring format validity cannot approve a slot and missing evidence stays unapproved.
-- Pass 3: reran the complete test suite and the dedicated review command. Machine receipt and test counts are recorded in `verification.json`. Linked the dated review from landing and submission-guide pages. Existing historical prose/receipts remain archival; no historical scientific result was silently rewritten.
+- Pass 3 (final follow-up after integrating receipt-integrity tests): restored only the SHA-pinned owner-mirror `sample_submission.tif`, then reran the complete suite: **282 passed, 5 optional torch-dependent skips, 2 warnings, 7 subtests passed**. The earlier run before the template was restored had 3 extra template-dependent skips and is superseded. Re-ran FFL/current/stopped/LSM/TAD verifiers successfully, confirmed `verify_fflidar_run.py --require-promote` exits 2 as designed, passed `build_research_site.py --check` and `git diff --check`. Machine receipts and current artifact hashes are recorded in `verification.json`. This is artifact/software verification only, not a new holdout or novelty rerun. Existing historical prose/receipts remain archival; no historical scientific result was silently rewritten.
 
 Unmet requests are explicit: no newly generated unique TIFF, no new holdout execution, no organizer-confirmed best submission, and no full literature-source verification. These cannot honestly be reported complete under the missing-lane and registry constraints. No automated competition portal access or upload is implemented.

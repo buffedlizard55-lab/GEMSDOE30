@@ -16,10 +16,13 @@ promotable submission:
 
 The file passes the strict all-cell finite `[0, 1]` check. It nevertheless must
 not be uploaded: **78.280789% of its dots lie within 3 px of the MSDB-1v2
-raster**, above the owner's 70% duplicate-stop threshold. Its continuous
-surface is not a near-copy (maximum Spearman `0.112546` against that raster in
-the expanded audit); the failure occurs at dot placement. This is precisely
-why surface correlation alone is not a sufficient uniqueness test.
+raster**, above the owner's 70% duplicate-stop threshold. The expanded dot
+receipt is hash-bound to this TIFF and supports that stop. The expanded
+pre-placement surface check is **not verified**: its file is labeled `stage=surface`
+but names the final binary TIFF as its candidate (same SHA-256), rather than a
+distinct continuous score raster. Thus the dot-stage duplicate is established,
+while the required expanded surface-stage check is an unresolved irregularity.
+Do not infer surface novelty from the mislabeled receipt.
 
 ---
 
@@ -181,25 +184,28 @@ the central procedural error (IR-FFL-01).
 
 ### 4.2 Expanded audit
 
-The corrected audit uses the pinned registry plus every TIFF in
-`docs/downloads/`, excluding only the candidate's own SHA-256: **172
-comparisons**. Results:
+The expanded observed-registry dot audit uses the pinned registry plus every
+TIFF in `docs/downloads/`, excluding the candidate's own SHA-256: **172
+comparisons**. The max forward dot overlap is **0.782808** (78.280789%) against
+MSDB-1v2, with `decision=duplicate-stop`. The directional reverse measurement
+is 0.799047 of MSDB dots within 3 px of FFL dots. Both directions exceed 70%;
+no orientation ambiguity rescues the candidate. This supports the negative
+verdict irrespective of the incomplete global registry.
 
-| Stage | Max Spearman | Reference at maximum | Max FFL dots within 3 px | Decision |
-|---|---:|---|---:|---|
-| Surface | 0.112546 | MSDB-1v2 | — | blocked-incomplete-evidence (global registry cannot be attested) |
-| Dots | 0.112546 against the dot raster | MSDB-1v2 | **0.782808** | **duplicate-stop** |
+**Pre-placement audit irregularity (IR-FFL-08):** the file
+`novelty-surface-expanded.json` records stage `surface`, but its `candidate`
+path and SHA identify the final binary submission TIFF, not the continuous
+score surface. It therefore does not satisfy the required before-placement
+surface comparison and its correlation values must not be interpreted as
+continuous-surface novelty. A separate earlier surface receipt exists
+(`novelty-surface.json`; candidate SHA `eba389…f8315`), but it used the stale
+pinned registry, was marked `blocked-incomplete-evidence`, and its referenced
+`runs/fflidar/ffl1-surface.tif` is not present in this checkout for byte-level
+revalidation. Surface novelty against the expanded registry remains unknown.
 
-The directional reverse measurement is 0.799047 of MSDB dots within 3 px of
-FFL dots. Both directions exceed 70%; no orientation ambiguity rescues the
-candidate.
-
-This outcome is scientifically plausible. Two independently trained models can
-produce modestly correlated continuous scores while an EDGE/top-ranked emitter
-selects the same compact maxima. Protocol compliance therefore requires the
-dual check mandated by the owner: continuous surface before placement and
-final dots after placement, against the broadest available local inventory —
-including this repo's latest downloads, not only a frozen external snapshot.
+This is precisely why the protocol needs both independently bound stages:
+continuous surface before placement and final dots after placement. The dot
+check caught an overlap the incomplete surface record cannot clear.
 
 ---
 

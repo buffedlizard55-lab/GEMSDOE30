@@ -1,19 +1,87 @@
 {
+  "generated_utc": "2026-10-26T15:49:37Z",
   "passes_completed": 3,
+  "verification_refreshed_utc": "2026-10-26T15:49:37Z",
+  "verification_scope": "Independent repository review and recorded-artifact verification only; no scientific experiment or submission slot used.",
   "pytest": {
-    "passed": 250,
-    "skipped": 6,
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 282,
+    "skipped": 5,
     "warnings": 2,
     "subtests_passed": 7,
-    "skips": "Five optional torch tests; one non-current preregistration schema test"
+    "skips": "Five optional Torch-dependent training/loss tests; no training or holdout experiment was executed."
+  },
+  "template_restore": {
+    "command": ".venv/bin/python scripts/restore_public_mirrors.py --ids sample_submission",
+    "result": "success",
+    "sha256_pinned": true,
+    "organizer_authenticated": false,
+    "note": "Restored the pinned owner-provided mirror to ignored data/raw/sample_submission.tif; no DrivenData portal access."
+  },
+  "artifact_verification": {
+    "pta1_current_pointer": {
+      "command": ".venv/bin/python scripts/verify_current_run.py",
+      "exit_code": 0,
+      "recorded_raster_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "verdict": "negative",
+      "submission_approved": false,
+      "slot_selected": false
+    },
+    "g30_tad": {
+      "command": ".venv/bin/python scripts/verify_tad_run.py",
+      "exit_code": 0,
+      "published_format_variant": "NaN-outside companion passes shared validator; zero-outside diagnostic fails null-outside check",
+      "verdict": "negative",
+      "submission_approved": false,
+      "slot_selected": false
+    },
+    "ffl1": {
+      "command": ".venv/bin/python scripts/verify_fflidar_run.py",
+      "exit_code": 0,
+      "recorded_raster_sha256": "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07",
+      "verdict": "negative duplicate-stop",
+      "submission_approved": false,
+      "slot_selected": false
+    },
+    "ffl1_require_promote": {
+      "command": ".venv/bin/python scripts/verify_fflidar_run.py --require-promote",
+      "expected_exit_code": 2,
+      "observed_exit_code": 2,
+      "meaning": "Recorded evidence is internally consistent, but promotion is not permitted."
+    },
+    "stopped_attempt": {
+      "command": ".venv/bin/python scripts/verify_stopped_attempt.py",
+      "exit_code": 0,
+      "meaning": "Stopped/duplicate negative record verified."
+    },
+    "h_nearsplay": {
+      "command": ".venv/bin/python scripts/review_submission_readiness.py",
+      "meaning": "Its older promote receipt is overridden by the byte-bound 196-raster expanded-registry duplicate stop (71.26% > 70%). Direct lane verifier is not applicable to the current pointer and remains fail-closed."
+    }
+  },
+  "site_generation_check": {
+    "command": ".venv/bin/python scripts/build_research_site.py --check",
+    "result": "passed"
   },
   "git_diff_check": "passed",
-  "primary_tiffs_reopened": 2,
-  "hash_matches": 2,
-  "shared_format_validation_passed": 2,
+  "readiness_review": "passed; PTA-1, G30-TAD NaN-outside, H-NEARSPLAY and MSDB-1v2 reopened; all four SHA matches and format checks passed",
+  "readiness_artifacts": {
+    "pta1": "format passed; research verdict negative; complete registry, lane assignment, and comparable-best gates unresolved",
+    "g30_tad_nan_outside": "format passed; research verdict negative because paired holdout CI gate failed",
+    "g30_tad_zeros_outside": "format failed null-outside-footprint check; range-only diagnostic, not recommended for upload",
+    "h_nearsplay": "format passed; older promote receipt overridden by bound 196-raster expanded-registry duplicate stop (71.26% > 70%)",
+    "msdb_1v2": "format passed; research verdict negative with completeness, lane, and comparable-best gates unresolved"
+  },
+  "primary_tiffs_reopened": 4,
+  "hash_matches": 4,
+  "shared_format_validation_passed": 4,
   "holdout_rerun": false,
   "novelty_rerun": false,
   "official_non_github_sources_fetched": false,
+  "live_leaderboard_refreshed": false,
   "new_experiments": 0,
-  "new_tiff_generated": false
+  "new_tiff_generated": false,
+  "submission_recommendation": "Do not submit. FFL-1 is duplicate-stopped; PTA-1 and G30-TAD are negative on required paired gates; H-NEARSPLAY is duplicate-stopped on expanded registry.",
+  "submission_approved": false,
+  "slot_selected": false
 }

@@ -24,10 +24,12 @@ attribution).
 > be submitted:** the corrected expanded audit (pinned registry + every TIFF
 > in `docs/downloads/`, candidate excluded) found **78.280789% of its dots
 > within 3 px of MSDB-1v2**, above the 70% duplicate-stop threshold. The
-> frozen stratified rescue was geometrically infeasible on the v3 quadrant
-> holdout (zero eligible pixels in the `(2,5]` and `(5,10]` strata in every
-> fold), so no production replacement was generated. **Submit nothing from
-> FFL-1 and spend no weekly slot.** Full reasoning:
+> purported expanded surface audit is mis-bound to the final binary TIFF, not
+> a pre-placement continuous surface; the required expanded surface novelty
+> check is therefore unverified (IR-FFL-08). The frozen stratified rescue was
+> geometrically infeasible on the v3 quadrant holdout (zero eligible pixels in
+> the `(2,5]` and `(5,10]` strata in every fold), so no production replacement
+> was generated. **Submit nothing from FFL-1 and spend no weekly slot.** Full reasoning:
 > [`review.md`](review.md); machine decision: [`readiness.json`](readiness.json).
 
 ## The one table that matters
@@ -89,7 +91,9 @@ geographic blocks; 2,000 paired bootstrap draws), never organizer scores:
 The LiDAR/MSDB feature fusion is therefore supported on the catalogue proxy,
 and 54 features × 4 folds produced zero leakage-canary alarms (max
 either-direction AUC 0.6667). But the production `fusion_edge` dots failed the
-expanded uniqueness audit (78.280789% within 3 px of MSDB-1v2), and the frozen
+expanded dot-stage audit (78.280789% within 3 px of MSDB-1v2); note that the
+expanded pre-placement surface receipt is mis-bound to the binary TIFF, so
+surface-stage uniqueness remains unverified (IR-FFL-08). The frozen
 distance-stratified alternative could not be scored on quadrant folds. **The
 feature result is positive; the submission result is negative.** See
 [`review.md`](review.md) for the full PhD-level analysis and

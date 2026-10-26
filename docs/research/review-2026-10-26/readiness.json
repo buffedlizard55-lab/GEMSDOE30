@@ -1,7 +1,55 @@
 {
-  "generated_utc": "2026-10-26T00:34:02.799659+00:00",
+  "generated_utc": "2026-10-26T15:49:39.828729+00:00",
   "scope": "Current local TIFF bytes and archived receipts only; no model/holdout rerun or live leaderboard read",
   "artifacts": [
+    {
+      "name": "PTA-1 current pointer",
+      "file": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "card": "docs/research/phase-tilt-asymmetry/run-card.json",
+      "readiness": "docs/research/phase-tilt-asymmetry/readiness.json",
+      "validation_errors": [],
+      "sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "format_passed": true,
+      "hash_matches": true,
+      "download_ok": true,
+      "recorded_research_verdict": "negative",
+      "effective_research_verdict": "negative",
+      "recorded_failed_or_unknown_gates": {
+        "paired_improvement": "failed",
+        "single_feature_leakage_canaries": "failed",
+        "complete_parallel_registry": "unknown",
+        "assigned_lane": "unknown",
+        "comparable_historical_best": "unknown"
+      },
+      "assigned_lane_verified": false,
+      "complete_parallel_registry_verified": false,
+      "identical_protocol_current_best_beaten": false,
+      "submission_approved": false,
+      "slot_selected": false,
+      "decision": "DO NOT SUBMIT: full scientific and selector gates unresolved"
+    },
+    {
+      "name": "G30-TAD published-format NaN-outside variant",
+      "file": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif",
+      "card": "docs/research/tilt-alteration-discontinuity/run-card.json",
+      "readiness": "docs/research/tilt-alteration-discontinuity/readiness.json",
+      "validation_errors": [],
+      "sha256": "54139f2cf86f75ba96bddba0f49409e934c77d716eb39150dbd04daf23b6b7e4",
+      "format_passed": true,
+      "hash_matches": true,
+      "download_ok": true,
+      "recorded_research_verdict": "negative",
+      "effective_research_verdict": "negative",
+      "recorded_failed_or_unknown_gates": {
+        "paired_holdout_improvement": "failed"
+      },
+      "assigned_lane_verified": false,
+      "complete_parallel_registry_verified": false,
+      "identical_protocol_current_best_beaten": false,
+      "submission_approved": false,
+      "slot_selected": false,
+      "decision": "DO NOT SUBMIT: full scientific and selector gates unresolved"
+    },
     {
       "name": "H-NEARSPLAY",
       "file": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
@@ -13,13 +61,23 @@
       "hash_matches": true,
       "download_ok": true,
       "recorded_research_verdict": "promote",
-      "recorded_failed_or_unknown_gates": {},
+      "effective_research_verdict": "negative",
+      "recorded_failed_or_unknown_gates": {
+        "expanded_registry_dot_novelty": "failed"
+      },
       "assigned_lane_verified": false,
       "complete_parallel_registry_verified": false,
       "identical_protocol_current_best_beaten": false,
       "submission_approved": false,
       "slot_selected": false,
-      "decision": "DO NOT SUBMIT: full scientific and selector gates unresolved"
+      "decision": "DO NOT SUBMIT: expanded-registry duplicate stop",
+      "expanded_registry_audit": {
+        "comparisons": 196,
+        "max_fraction_within_3px": 0.7126,
+        "threshold": 0.7,
+        "duplicate_stop": true,
+        "decision": "duplicate_on_expanded_registry"
+      }
     },
     {
       "name": "MSDB-1v2",
@@ -32,7 +90,9 @@
       "hash_matches": true,
       "download_ok": true,
       "recorded_research_verdict": "negative",
+      "effective_research_verdict": "negative",
       "recorded_failed_or_unknown_gates": {
+        "surface_observed_registry": "unknown",
         "complete_parallel_registry": "unknown",
         "assigned_lane": "unknown",
         "comparable_historical_best": "unknown"

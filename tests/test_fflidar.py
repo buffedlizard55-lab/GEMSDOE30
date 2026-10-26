@@ -35,6 +35,29 @@ def test_stratified_counts_sum_exactly_and_match_frozen_shares():
         assert got == pytest.approx(want, abs=1 / 44090)
 
 
+def test_expanded_dot_audit_verifier_requires_hash_bound_duplicate_evidence():
+    from scripts.verify_fflidar_run import verify_expanded_receipt
+
+    audit = json.loads((FFL_DIR / "novelty-dots-expanded.json").read_text())
+    card = json.loads((FFL_DIR / "run-card.json").read_text())
+    assert verify_expanded_receipt(audit, card["raster_sha256"], promote=False) is True
+    wrong_hash = dict(audit, candidate_sha256="0" * 64)
+    with pytest.raises(ValueError, match="not bound"):
+        verify_expanded_receipt(wrong_hash, card["raster_sha256"], promote=False)
+    cleared_audit = dict(audit, decision="blocked-incomplete-evidence")
+    with pytest.raises(ValueError, match="contradicts measured novelty"):
+        verify_expanded_receipt(cleared_audit, card["raster_sha256"], promote=False)
+
+
+def test_expanded_surface_receipt_is_not_misrepresented_as_preplacement():
+    readiness = json.loads((FFL_DIR / "readiness.json").read_text())
+    surface = json.loads((FFL_DIR / "novelty-surface-expanded.json").read_text())
+    card = json.loads((FFL_DIR / "run-card.json").read_text())
+    assert surface["candidate_sha256"] == card["raster_sha256"]
+    assert readiness["surface_audit"]["preplacement_surface_valid"] is False
+    assert readiness["surface_audit"]["status"] == "invalid_as_preplacement_evidence"
+
+
 def test_fflidar_final_artifact_is_duplicate_stopped_and_never_submittable():
     card = json.loads((FFL_DIR / "run-card.json").read_text())
     readiness = json.loads((FFL_DIR / "readiness.json").read_text())
@@ -63,6 +86,7 @@ def test_fflidar_banner_is_first_and_download_is_marked_do_not_upload():
         assert main.index("Latest lane FFL-1") < main.index('<section class="intro"')
         assert "Do not submit it." in html
         assert "78.280789%" in html
+        assert "pre-placement surface novelty against the expanded registry is <strong>unverified</strong>" in html
         assert card["published_tiff"] in html
         assert "Download FFL-1 research artifact — do not upload" in html
         assert card["submission_name"] in html

@@ -13,16 +13,32 @@
 
 ---
 
+## Verification follow-up — 2026-10-26: **NO NEW TIFF; DO NOT SUBMIT**
+
+The expanded-registry receipt is now verified even on FFL-1's negative path.
+Current exact bytes pass the strict shared format validator; the stored duplicate
+finding still prohibits upload. No new lane was assigned, no experiments were run,
+and no submission slot was selected. This does not meet the new high-scoring TIFF
+objective; it preserves an honest negative decision rather than fabricating one.
+
+[Decision page](receipt-integrity-review.html) ·
+[Audit and next steps](docs/research/2026-10-26-receipt-integrity/review.md) ·
+[Current byte validation](docs/research/2026-10-26-receipt-integrity/validation.json) ·
+[Run card](docs/research/2026-10-26-receipt-integrity/run-card.json).
+Read the complete [current owner prompt](#current-owner-prompt) every session;
+its full text remains below, including the conflicting, unverified leader claims.
+
 ## LATEST 2026-10-26 — FFL-1 MSDB × LiDAR Fusion: **DO NOT SUBMIT — DUPLICATE-STOPPED**
 
 - **Generated GeoTIFF (research artifact only):** [`gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3.tif`](docs/research/2026-10-26-fflidar/gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3.tif) (`SHA-256: 7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07`; 44,090 dots)
 - **Submission name:** `gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3`
 - **Note (107/140 chars):** `FFL1: MSDB31+LiDAR17 fusion x Rayleigh gate + 300m EDGE, >2px off-cat, 44090 dots, all-finite zeros-outside`
 - **Machine verdict:** `negative`; `ok_to_submit=false`; `submission_approved=false`; `slot_selected=false`; **organizer score: none**
-- **Why not submit:** the corrected expanded novelty audit (pinned registry + every TIFF in `docs/downloads/`, candidate excluded; 172 comparisons) found **78.280789% of FFL dots within 3 px of MSDB-1v2**, above the 70% duplicate-stop threshold. The strict whole-array `[0, 1]` file validator passes, but format validity does not rescue a duplicate.
+- **Why not submit:** the expanded dot audit (pinned registry + every TIFF in `docs/downloads/`, candidate excluded; 172 comparisons) found **78.280789% of FFL dots within 3 px of MSDB-1v2**, above the 70% duplicate-stop threshold. The strict whole-array `[0, 1]` file validator passes, but format validity does not rescue a duplicate.
+- **Audit caveat (IR-FFL-08):** the purported expanded *surface* audit is bound to the final binary TIFF, not a pre-placement continuous surface; expanded surface novelty is unverified. The hash-bound dot-stage duplicate stop is sufficient for the negative decision.
 - **Feature evidence (HOLDOUT-DTI only, evaluator `component-holdout-v3-blockstats-20261025`, 60,988 withheld positives):** Exp. 1 seed 3051 `fusion_edge` 0.182417 [0.168230, 0.196433] vs same-run `msdb_edge` 0.175639 [0.161471, 0.189566] (Δ +0.006779 [−0.000067, +0.012888]; frozen gate failed); disclosed Amendment-A1 fresh-seed confirmation 0.183949 [0.169419, 0.197874] vs 0.173427 [0.159043, 0.187952] (Δ +0.010522 [+0.004182, +0.016362]).
 - **Stratified rescue:** not produced. The frozen distance quotas are geometrically infeasible in the v3 quadrant folds (0 eligible pixels in both `(2,5]` and `(5,10]` strata in every fold), so Experiment 3 scored zero folds rather than redefining quotas after the fact.
-- **Read next:** [FFL-1 PhD review](docs/research/2026-10-26-fflidar/review.md) · [nine-site executive summary](docs/research/2026-10-26-fflidar/nine-site-executive-summary.md) · [run card](docs/research/2026-10-26-fflidar/run-card.json) · [readiness](docs/research/2026-10-26-fflidar/readiness.json) · [irregularities IR-FFL-01…07](docs/irregularities.md)
+- **Read next:** [Repository review (2026-10-26)](docs/repository-review-2026-10-26.md) · [FFL-1 PhD review](docs/research/2026-10-26-fflidar/review.md) · [nine-site executive summary](docs/research/2026-10-26-fflidar/nine-site-executive-summary.md) · [run card](docs/research/2026-10-26-fflidar/run-card.json) · [readiness](docs/research/2026-10-26-fflidar/readiness.json) · [irregularities IR-FFL-01…08](docs/irregularities.md)
 - **Verify the negative decision (no human inspection):** `.venv/bin/python scripts/verify_fflidar_run.py` (exit 0); `.venv/bin/python scripts/verify_fflidar_run.py --require-promote` (expected exit 2).
 
 FFL-1 does not replace the shared `docs/current-run.json` pointer (now PTA-1
@@ -35,8 +51,9 @@ exact late-registry evidence for the artifacts affected (see IR-FFL-05).
 ## START HERE — Unique `G30-TAD` & `PTA-1` GeoTIFFs Validated (`download_ok = true`) · **NOT APPROVED FOR SUBMISSION (`verdict = negative`)**
 
 
-- **`G30-TAD` dual-variant 38,000-dot GeoTIFFs (`verify_tad_run.py`, zero human inspection required):**
-  - Primary range-safe all-finite file: [`docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif`](docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif) (`234.6 KiB`, SHA-256 `3077db43ee72ee526d8b943d1db40f19ce49be9d8ccd3109068ca442964f26cc`; all `12,279,160` cells finite `{0.0, 1.0}` in `[0, 1]`, `nodata=None`) and spec-strict companion [`docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif`](docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif) (`273.5 KiB`, SHA-256 `54139f2cf86f75ba96bddba0f49409e934c77d716eb39150dbd04daf23b6b7e4`; `12/12` checks of `validate_submission_file` passed).
+- **`G30-TAD` dual-variant 38,000-dot research GeoTIFFs (`verify_tad_run.py`, zero human inspection required):**
+  - **Published-format file:** [`docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif`](docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif) (`273.5 KiB`, SHA-256 `54139f2cf86f75ba96bddba0f49409e934c77d716eb39150dbd04daf23b6b7e4`; passes all `12` checks of `validate_submission_file`, with finite in-footprint values in `[0, 1]` and NaN outside as permitted by format).
+  - The separate all-finite [`-zeros.tif`](docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif) copy has `12,279,160` finite `{0.0, 1.0}` cells and addresses whole-array range diagnostics, but **fails the shared format validator** because `7,111,787` out-of-footprint cells are zero rather than null/NaN/nodata. Do not present it as the format-validated file.
   - **193-raster two-stage novelty PASSED:** Pre-placement OOF surface `max Spearman = 0.1637 ≤ 0.90`; post-placement 38,000 dots **`max 3 px overlap = 51.44% ≤ 70%`** (`37.25%` vs `MSDB-1v2`, `21.36%` vs `H-NEARSPLAY`, `22.67%` vs `PTA-1`, `15.63%` vs `TDX-1`).
   - **Holdout & slot decision (`ok_to_submit = false`):** Coordinate-free 3D tilt-depth + fold-regressed radiometric potassium alteration (`rad_kd`) + MT clay-cap gradient + 1 m LiDAR dip-slip step scored **`HOLDOUT-DTI = 0.14405 [0.12717, 0.16007]`** vs `core19 = 0.13982` (`+0.00423`, Fold 0 NW Nevada `+0.01801`; pure-geophysical zero-DEM `subsurface16 = 0.10959`, `+0.03445`), **but** paired 95% CI vs `core19` `[-0.01554, +0.02398]` crosses zero → **do not spend a weekly submission slot** (`gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros`; note `82/140` chars: `G30-TAD OOF tilt-depth+Kd-alt+dip-slip 38k; negative gate (0.1440); DO NOT SUBMIT.`).
 - **`PTA-1` 44,090-dot subsurface GeoTIFF (`verify_current_run.py`, zero human inspection required):** [`docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif`](docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif) (`0.38 MiB`, SHA-256 `958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827`). Re-opened from disk and verified: 1 `float32` band, `EPSG:32611`, `3,730 × 3,292`, `100 m` north-up `(100, 0, 243350, 0, -100, 4508550)`, **`5,167,373` finite cells strictly in `[0.0, 1.0]` inside footprint**, `0` NaN inside footprint, `NaN` nodata outside, `0` positive catalogue pixels, `44,090` `3.0 px` Poisson-thinned dots.
@@ -47,6 +64,8 @@ exact late-registry evidence for the artifacts affected (see IR-FFL-05).
   - `PTA-1`: `gems30-PTA1-44090-20261025-9a3f7f9535a4` (`PTA1 subsurface 3D tilt-phase + dip-asymmetry 18-feat HGB; 44090d; research artifact, NOT slot-approved.`)
 
 **[Open GitHub Pages Site](https://buffedlizard55-lab.github.io/GEMSDOE30/) ·
+[Current Executive Review (26 Oct 2026)](review-2026-10-26.html) ·
+[Nine-Site Submission Review](priority-site-review.html) ·
 [Executive Submission Guide](executive-summary.html) ·
 [G30-TAD & PhD H33 Review](geothermal-tilt-alteration-review.html) ·
 [PTA-1 & 9-Site Audit](experiment-review.html) ·
