@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "verified_utc": "2026-10-26T22:03:42+00:00",
+  "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+  "all_cells_match_raw_sources": true,
+  "windows_checked": 56,
+  "comparison": "exact float32/bool equality, NaNs matched only where expected",
+  "array_sha256": {
+    "features_raw.npy": "e5df4fd665a586cd2986ab37cd48e4e3c915c0cd2f087282b51190280db85e9b",
+    "labels.npy": "1781dacedd12834f1bdbfb4be2f47097c3fe2b08be62d064c2f87369fab06dfb",
+    "valid.npy": "c446094771775c00802862e9ec58846fd1b278b4e608303e68811a2404dfd246",
+    "label_valid.npy": "c446094771775c00802862e9ec58846fd1b278b4e608303e68811a2404dfd246"
+  },
+  "raw_source_sha256": {
+    "training_features": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+    "labels": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+    "sample_submission": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc"
+  },
+  "organizer_authenticated": false,
+  "is_performance_measurement": false
+}

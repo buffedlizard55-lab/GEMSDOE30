@@ -1,0 +1,33 @@
+{
+  "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+  "feature_names": [
+    "mag_anom",
+    "rtp",
+    "tmi_hg",
+    "geod_2ndinv",
+    "iso_grav_anom_slope",
+    "tc",
+    "geod_shearrate",
+    "geod_dilaterate",
+    "tmi_vg",
+    "deq_n100a15",
+    "iso_grav_anom_vg",
+    "det_elev",
+    "iso_grav_anom",
+    "tmi",
+    "depth_to_base_surf",
+    "ieq_n100a15",
+    "cond_surf",
+    "iso_grav_anom_hg",
+    "det_elev_slope",
+    "qpc_mag_grav_phase_sigma1",
+    "qpc_mag_grav_phase_sigma3",
+    "qpc_mag_scale_persistence",
+    "qpc_grav_scale_persistence"
+  ],
+  "derived_array_sha256": "df5a061d23516ed62874e9a9a7df2e4174b56d1d592c1b87d7606f32a87d0d7e",
+  "transform_sha256": "b40274c98edf77fbde727f885e795c50a223d2b84f681b6884f510020beed50e",
+  "physical_support_px": 13,
+  "guard_px": 17,
+  "catalogue_or_template_values_used_as_features": false
+}

@@ -126,6 +126,20 @@ def contract(card: dict) -> dict:
             "transform_version": VERSION,
             "label": "GDX-1",
         }
+    if name == "qpc1":
+        from .quadrature_phase import FEATURE_NAMES, GUARD_PX, SUPPORT_PX, VERSION
+        return {
+            "id": name,
+            "candidate": "qpc23",
+            "arms": ("core19", "persistence21", "qpc23", "msdb_edge", "ffl_confirm"),
+            "required_positive_deltas": ("persistence21", "msdb_edge", "ffl_confirm"),
+            "features": CORE_FEATURES + FEATURE_NAMES,
+            "support_px": SUPPORT_PX,
+            "guard_px": GUARD_PX,
+            "transform_path": "src/gemsdoe30/quadrature_phase.py",
+            "transform_version": VERSION,
+            "label": "QPC-1",
+        }
     if name == "fflidar1":
         return {
             "id": name,

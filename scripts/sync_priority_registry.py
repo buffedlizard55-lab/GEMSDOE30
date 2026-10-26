@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """Snapshot public priority TIFFs without silently mutating frozen experiment evidence.
 
-A fresh public-source snapshot is discovery evidence only: it inventories GeoTIFFs
-published under ``docs/downloads/`` in the nine named repositories, records their
-immutable Git commits/blob identities, and notes *path-level* continuous-surface
-candidates. It never attests global parallel coverage or organizer authentication.
+A fresh public-source snapshot is discovery evidence only: it inventories tracked
+GeoTIFFs anywhere under ``docs/`` in the nine named repositories, including
+research and quarantine directories, records immutable Git commits/blob identities,
+and notes *path-level* continuous-surface candidates outside that inventory. It
+also enumerates open public PR head identities but does not scan their trees or
+compare their rasters. It never attests global parallel coverage or organizer
+authentication.
 
 The frozen registries bound to historic experiments must remain byte-identical. A
 new snapshot therefore requires an explicit ``--output`` outside those paths;
@@ -66,6 +69,15 @@ def repo_path(path: Path) -> Path:
     return path if path.is_absolute() else ROOT / path
 
 
+def is_public_raster_candidate(path: str) -> bool:
+    """Include published and quarantined TIFFs throughout a site's docs tree.
+
+    Do not treat raw data, labels or templates elsewhere as prediction rasters.
+    Other paths remain explicitly outside this snapshot's coverage.
+    """
+    return path.startswith("docs/") and Path(path).suffix.lower() in SURFACE_RASTER_SUFFIXES
+
+
 def is_surface_candidate(path: str) -> bool:
     """Classify likely stored arrays/rasters, without claiming usable data.
 
@@ -97,6 +109,30 @@ def sha(path: Path) -> str:
         return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
+def discover_open_pull_request_heads(repo: str, site: str) -> list[dict]:
+    """List public PR heads; never imply their trees or rasters were compared."""
+    heads = []
+    page = 1
+    while True:
+        rows = json.loads(api(f"repos/{repo}/pulls?state=open&per_page=100&page={page}"))
+        if not isinstance(rows, list):
+            raise ValueError(f"unexpected open-PR response: {repo}")
+        for pr in rows:
+            head = pr["head"]
+            head_repo = head.get("repo") or {}
+            if not head.get("sha"):
+                raise ValueError(f"open PR without a pinned head: {repo} #{pr.get('number')}")
+            heads.append({"site": site, "repo": repo, "number": pr["number"],
+                          "url": pr["html_url"], "head_sha": head["sha"],
+                          "head_repo": head_repo.get("full_name"), "head_ref": head.get("ref"),
+                          "updated_at": pr.get("updated_at"),
+                          "comparison_status": "UNKNOWN: head tree/rasters not scanned or compared"})
+        if len(rows) < 100:
+            break
+        page += 1
+    return heads
+
+
 def verified_cached_blob(row: dict, directory: Path) -> Path:
     """Restore one immutable Git blob only after checking its Git identity.
 
@@ -112,9 +148,17 @@ def verified_cached_blob(row: dict, directory: Path) -> Path:
         blob = hashlib.sha1(f"blob {len(content)}\0".encode() + content).hexdigest()
         if len(content) != row["expected_bytes"] or blob != row["git_blob_sha1"]:
             raise ValueError(f"Git blob mismatch: {row['source_path']}")
-        temp = path.with_suffix(path.suffix + ".partial")
-        temp.write_bytes(content)
-        temp.replace(path)
+        # Aliases from the same site can share a Git blob and are restored by
+        # different workers. A shared '.partial' pathname races during replace;
+        # use unique files and publish only verified complete bytes atomically.
+        with tempfile.NamedTemporaryFile(dir=path.parent, suffix=".partial", delete=False) as stream:
+            temp = Path(stream.name)
+            try:
+                stream.write(content)
+                stream.flush()
+                temp.replace(path)
+            finally:
+                temp.unlink(missing_ok=True)
     content = path.read_bytes()
     blob = hashlib.sha1(f"blob {len(content)}\0".encode() + content).hexdigest()
     if len(content) != row["expected_bytes"] or blob != row["git_blob_sha1"]:
@@ -193,21 +237,23 @@ def snapshot(output: Path, template: Path, *, inspect_surfaces: bool = False) ->
     pins = json.loads((ROOT / "docs/research/priority-site-pins.json").read_text())
     with rasterio.open(template) as ds:
         grid = (ds.shape, ds.crs, ds.transform)
-    inventory, snapshots, surface_candidates = [], [], []
+    inventory, snapshots, surface_candidates, open_pr_heads = [], [], [], []
     seen_repos = set()
     for row in pins["rasters"]:
         repo = row["repo"]
         if repo in seen_repos:
             continue
         seen_repos.add(repo)
+        # A main-tree snapshot cannot silently stand in for unmerged parallel work.
+        # List public open-PR heads, but do not fetch/compare their raster trees.
+        open_pr_heads.extend(discover_open_pull_request_heads(repo, row["site"]))
         # Resolve once, then pin every tree and blob request to this exact commit.
         ref = json.loads(api(f"repos/{repo}/commits/main"))["sha"]
         tree = json.loads(api(f"repos/{repo}/git/trees/{ref}?recursive=1"))
         if tree.get("truncated"):
             raise ValueError(f"truncated source tree: {repo}")
         blobs = [item for item in tree["tree"] if item["type"] == "blob"]
-        items = [item for item in blobs if item["path"].startswith("docs/downloads/")
-                 and item["path"].lower().endswith((".tif", ".tiff"))]
+        items = [item for item in blobs if is_public_raster_candidate(item["path"])]
         # This is deliberately path-level inventory only. Array contents may be
         # intermediate tensors, use another grid, or leak labels; no candidate is
         # restored, aligned, scored, or compared at this stage.
@@ -216,7 +262,7 @@ def snapshot(output: Path, template: Path, *, inspect_surfaces: bool = False) ->
              "git_blob_sha1": item["sha"], "expected_bytes": item["size"],
              "discovery_scope": "path-name only; not downloaded, grid-checked, or treated as a continuous prediction surface"}
             for item in blobs if is_surface_candidate(item["path"])
-            and not item["path"].startswith("docs/downloads/")
+            and not is_public_raster_candidate(item["path"])
         ]
         surface_candidates.extend(discovered)
         snapshots.append({
@@ -254,7 +300,7 @@ def snapshot(output: Path, template: Path, *, inspect_surfaces: bool = False) ->
         "schema_version": 4,
         "generated_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "complete": False,
-        "coverage": "All docs/downloads/**/*.tif[f] at the recorded nine main-branch snapshots; NOT the complete parallel-run registry.",
+        "coverage": "All tracked docs/**/*.tif[f] at the recorded nine main-branch snapshots, including research and quarantine; NOT the complete parallel-run registry.",
         "published_tiff_snapshot_inventory_complete": True,
         "continuous_surface_discovery": {
             "status": "metadata-inspected" if inspect_surfaces else "path-inventory-only",
@@ -263,7 +309,11 @@ def snapshot(output: Path, template: Path, *, inspect_surfaces: bool = False) ->
             "inspections": surface_inspection,
             "not_evidence": "A matching filename does not establish a continuous prediction surface, alignment, safe provenance, or availability for pre-placement novelty testing.",
         },
-        "missing_evidence": ["Other parallel sessions and repositories", "Original continuous surfaces for most published dots"],
+        "open_pull_request_heads": {
+            "scope": "Public open PR head identities only; none of these branch trees or rasters are scanned or compared",
+            "count": len(open_pr_heads), "heads": open_pr_heads,
+        },
+        "missing_evidence": ["Open PR head trees and their prediction rasters are unscanned", "Other parallel sessions and repositories", "Original continuous surfaces for most published dots", "Prediction rasters outside the tracked docs/ tree"],
         "organizer_authenticated": False,
         "snapshots": snapshots, "source_files": len(restored),
         "unique_aligned_byte_sequences": len(rasters), "rasters": rasters, "exclusions": exclusions,
@@ -271,7 +321,7 @@ def snapshot(output: Path, template: Path, *, inspect_surfaces: bool = False) ->
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2, allow_nan=False) + "\n")
     print(f"Snapshotted {len(restored)} TIFFs; {len(rasters)} unique aligned files; {len(exclusions)} excluded; "
-          f"{len(surface_candidates)} unverified surface-path candidates. Global coverage incomplete.")
+          f"{len(surface_candidates)} unverified surface-path candidates; {len(open_pr_heads)} unscanned open PR heads. Global coverage incomplete.")
     return result
 
 

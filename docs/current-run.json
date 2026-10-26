@@ -2,7 +2,7 @@
   "schema_version": 1,
   "run_card": "docs/research/phase-tilt-asymmetry/run-card.json",
   "readiness": "docs/research/phase-tilt-asymmetry/readiness.json",
-  "purpose": "Archived PTA-1 downloadable research artifact, not a current-slot recommendation. Historical 198-reference evidence is frozen; new public references receive blocking UNKNOWN coverage without rewriting it. See latest_review for GDX-1, the newest negative experiment. No organizer-confirmed score or slot selected.",
+  "purpose": "Archived PTA-1 downloadable research artifact, not a current-slot recommendation. See latest_review for QPC-1, the newest negative duplicate-stopped experiment. The separate GDX-1 TIFF is downloadable for research only. No organizer-confirmed score or slot selected.",
   "latest_attempt": "docs/research/texture-controls/run-card.json",
   "additional_stopped_attempts": [
     {
@@ -55,11 +55,17 @@
       "decision": "ARCHIVED record, not current approval: DUPLICATE ON EXPANDED REGISTRY (71.26% > 70% within 3 px on four GEMSDOE25 rasters, fulfilling IR-30-078 post-run check); DO NOT SUBMIT; retained for provenance only"
     }
   ],
-  "latest_review": {
+  "previous_review": {
     "lane": "GDX-1",
     "run_card": "docs/research/2026-10-26-gdx/run-card.json",
     "verifier": "scripts/verify_geothermal_chemistry_run.py",
-    "decision": "NEGATIVE / DO NOT SUBMIT: HOLDOUT-DTI 0.11965 vs same-protocol core19 0.13691; both paired-CI improvement gates failed; global uniqueness UNKNOWN; no slot selected",
+    "decision": "NEGATIVE / DO NOT SUBMIT; research TIFF retained; no slot selected"
+  },
+  "latest_review": {
+    "lane": "QPC-1",
+    "run_card": "docs/research/2026-10-26-qpc/run-card.json",
+    "verifier": "scripts/verify_quadrature_phase_run.py",
+    "decision": "NEGATIVE / DO NOT SUBMIT: duplicate-stop at 78.915854% dot overlap; paired-CI gates failed against the fixed strongest comparator; no QPC TIFF published or slot selected",
     "history_preserved": true
   }
 }

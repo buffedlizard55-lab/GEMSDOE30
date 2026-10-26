@@ -1,13 +1,68 @@
 # GEMSDOE30 — DOE GEMS Concealed Fault Discovery & Automated Submission Lab
 
-## Current decision — 2026-10-26 GDX-1: **RESEARCH DOWNLOAD OK · DO NOT SUBMIT**
+## Current decision — 2026-10-26 QPC-1: **DUPLICATE-STOP · DO NOT SUBMIT**
+
+**No QPC TIFF is offered.** The new magnetic–gravity phase-proxy hypothesis failed
+its matched scientific gate and **78.915854%** of its final dots were within 3 px
+of an existing GEMSDOE30 file, exceeding the 70% duplicate-stop rule. The run stopped;
+it was not perturbed, renamed as a new hypothesis, validated after the stop, or
+published. No competition slot was selected or uploaded.
+
+- **HOLDOUT-DTI** (evaluator `component-holdout-v3-blockstats-20261025`, 60,988
+  withheld positives, spatial-block 95% CI): QPC-1 **0.13866497 [0.12368501,
+  0.15499953]**, vs matched FFL-1 confirmation replay **0.18394914 [0.16941880,
+  0.19787439]**; QPC−FFL **−0.04528417 [−0.05937678,−0.03115278]**. The paired
+  lower-CI gates against within-field persistence and MSDB also failed. These are
+  mapped-fault proxies, not organizer scores or a leaderboard forecast.
+- All **308** individual candidate/comparator feature canaries were below the .90
+  bidirectional AUC alarm; the maximum was **0.663826**. The exact fixed FFL replay
+  matched all four historical folds, and MSDB geographic blocks matched.
+- Pre-placement surface maximum ρ was **0.159109** across 353 valid public references;
+  final dots hit the duplicate stop above. A malformed GEMSDOE31 reference, private
+  work, outside-snapshot files and original surfaces remain **UNKNOWN**. No global
+  uniqueness claim, portal acceptance, organizer receipt, or numeric score estimate.
+- A post-stop review found unmerged [PR #41](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/41),
+  which reports HOLDOUT-DTI **0.18668700 [0.17332555,0.20031682]** with 60,988
+  positives and evaluator `component-holdout-v3-blockstats-20261025`, but uses a
+  20 px guard versus QPC's 17 px and was not independently reproduced or compared.
+  Its TIFFs were outside the frozen main snapshot. A post-stop scan found 25 public
+  open-PR heads across the nine repositories whose trees were not systematically
+  scanned or compared; private work also remains unknown. The matched FFL replay is
+  not a claim of complete parallel coverage. [Audit](docs/research/2026-10-26-qpc/parallel-inventory.json) ·
+  [Head inventory](docs/research/2026-10-26-qpc/parallel-heads-inventory.json).
+- The **previous** [GDX-1 TIFF](docs/research/2026-10-26-gdx/gems30-GDX1-44090-20261026-2992ee3619f5.tif)
+  remains downloadable for research only. It is also negative and **must not be submitted**.
+
+[Clean overview](index.html) · [Executive decision and download](executive-summary.html) ·
+[QPC-1 science](geothermal-quadrature-review.html) · [Nine-site executive review](priority-executive-summary.html) ·
+[Canonical JSON run card](docs/research/2026-10-26-qpc/run-card.json) ·
+[Full results and next steps](docs/research/2026-10-26-qpc/review.md) ·
+[Preregistration](docs/research/2026-10-26-qpc/preregistration.md) ·
+[Source audit](docs/research/2026-10-26-qpc/source-audit.md) ·
+[Three-pass review](docs/research/2026-10-26-qpc/three-pass-review.md).
+
+**Verify without fitting:** restore pinned template and labels using
+`python scripts/restore_public_mirrors.py --ids sample_submission labels`, then run
+`python scripts/verify_quadrature_phase_run.py`. Exit 0 confirms the negative
+finding; `--require-promote` exits 2. The 2/3 experiments used 550.904 seconds;
+the duplicate stop ends the lane even though nominal budget remains. Never remove
+the exclusive start marker to retry. Next, obtain the missing assigned lane and a
+complete parallel registry, authenticate the inputs and independently preregister a
+truly different mechanism. No human-inspector gate or automated competition access.
+
+All older “LATEST” / “START HERE” headings below are **historical records**, not
+current approval or global uniqueness. The entire [owner prompt](#current-owner-prompt)
+remains below, unchanged; reread it each session.
+
+---
+
+## Previous decision — 2026-10-26 GDX-1: **RESEARCH DOWNLOAD OK · DO NOT SUBMIT**
 
 **Maximize P(Win):** reject a mechanism that did not beat its controls. **Own the Outcome:**
-ship the audited negative result, repair shared coverage checks, and do not spend a slot.
-This is the current decision; all older “LATEST” / “START HERE” sections below are
-historical lane records, not fresh global uniqueness or upload approval.
+retain the audited negative result and do not spend a slot. This older decision is
+superseded by QPC-1 above and does not establish current global uniqueness.
 
-- **New single-band TIFF (research only):** [`gems30-GDX1-44090-20261026-2992ee3619f5.tif`](docs/research/2026-10-26-gdx/gems30-GDX1-44090-20261026-2992ee3619f5.tif) · 44,090 dots · 474 KiB · SHA-256 `3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac`.
+- **Earlier single-band TIFF (research only):** [`gems30-GDX1-44090-20261026-2992ee3619f5.tif`](docs/research/2026-10-26-gdx/gems30-GDX1-44090-20261026-2992ee3619f5.tif) · 44,090 dots · 474 KiB · SHA-256 `3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac`.
 - **Automated format:** 1 float32 band, EPSG:32611, 3730 × 3292, exact template transform,
   finite `[0,1]` inside all 5,167,373 footprint cells, NaN outside, zero dots on / within
   2 px of the catalogue, ≥3 px dot spacing. No human-inspector gate. Not portal acceptance.
@@ -32,7 +87,7 @@ historical lane records, not fresh global uniqueness or upload approval.
 [Clean overview](index.html) · [Executive submission decision](executive-summary.html) ·
 [GDX-1 science / four ranked hypotheses](geothermal-chemistry-review.html) ·
 [Nine-site executive reviews](priority-executive-summary.html) ·
-[Canonical JSON run card](docs/research/2026-10-26-gdx/run-card.json) ·
+[GDX-1 JSON run card](docs/research/2026-10-26-gdx/run-card.json) ·
 [Full review / reproduction / next steps](docs/research/2026-10-26-gdx/review.md) ·
 [Three-pass review](docs/research/2026-10-26-gdx/three-pass-review.md).
 
@@ -48,16 +103,16 @@ then `python scripts/verify_geothermal_chemistry_run.py` (exit 0 validates a neg
 surface receipts are verified, and local surface bytes are reopened if retained. No refit
 or uploader. Do not remove `started.json` / `resumed.json` to run a fourth experiment.
 
-**Next session:** resolve the malformed reference, obtain the actual lane + complete
-parallel registry, restore the strongest comparable control, then preregister the next
-population-contrast test under a fresh budget. No rescue of negative/stopped predictions.
+**Next session:** resolve the malformed reference, obtain the actual assigned lane and
+complete parallel registry, and independently preregister a genuinely distinct test
+under a fresh budget. No rescue of negative/stopped predictions.
 The entire [owner prompt](#current-owner-prompt) remains below, unchanged; reread it each session.
 
 ---
 
 ## Archived 2026-10-26 — Geothermal-Corridor GeoTIFF: **DOWNLOAD OK · NOT OK TO SUBMIT (holdout-gated)**
 
-- **One-click download (research artifact):** [`GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif`](docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif) (375,154 bytes; SHA-256 `0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564`; 40,000 dots) — also featured at the top of the [site](index.html) and the [Executive Submission Guide](executive-summary.html).
+- **One-click download (research artifact):** [`GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif`](docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif) (375,154 bytes; SHA-256 `0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564`; 40,000 dots) — archived; it is not the current front-page recommendation.
 - **Unique submission name:** `GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z`
 - **Note (110/140 chars):** `Geothermal corridor off-cat: Q-volcanics x paleo-springs x 2m probes, SGMC-gated, 3px Poisson disk, 40000 dots`
 - **Machine verdict, obvious by design:** `download_ok=true` but **`ok_to_submit=false`**, `submission_approved=false`, `slot_selected=false`, `verdict=negative`; **organizer score: none**. Do not upload it to spend a weekly slot.

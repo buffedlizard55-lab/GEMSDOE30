@@ -11,10 +11,11 @@ name: status-feed
 # competition template fetched from the public mirror.  It never contacts
 # drivendata.org.
 #
-# Manual review links (open in a browser):
+# Reference links only; respect the platform Terms, including its restrictions
+# on automated access and unauthorized monitoring/copying:
 #   Competition rules and data tab   https://www.drivendata.org/competitions/306/competition-doe-gems/
 #   Official rules PDF               https://docs.nlr.gov/docs/fy26osti/96647.pdf
-#   Public leaderboard (manual read) https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/
+#   Public leaderboard               https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/
 
 on:
   push:
@@ -78,6 +79,7 @@ jobs:
           python scripts/ci_check.py python scripts/verify_current_run.py
           python scripts/ci_check.py python scripts/verify_stopped_attempt.py
           python scripts/ci_check.py python scripts/verify_geothermal_chemistry_run.py
+          python scripts/ci_check.py python scripts/verify_quadrature_phase_run.py
           python scripts/ci_check.py python scripts/verify_lsm_run.py
           python scripts/ci_check.py python scripts/build_research_site.py --check
 

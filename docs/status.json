@@ -1,20 +1,23 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-26T21:08:36Z",
+  "generated_utc": "2026-10-26T22:27:24Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
     "directory": "data/raw",
     "availability_scope": "This describes files present in the build worktree at generated_utc; data/raw and data/processed are Git-ignored and are not distributed by GitHub Pages.",
-    "required_files_present": false,
-    "sha256_verified_against_pins": false,
+    "required_files_present": true,
+    "sha256_verified_against_pins": true,
     "files": [
       {
         "dest": "training_features.tif",
         "path": "data/raw/training_features.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-        "expected_bytes": 418912844
+        "expected_bytes": 418912844,
+        "actual_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "actual_bytes": 418912844,
+        "sha256_matches_pin": true
       },
       {
         "dest": "labels.tif",
@@ -38,21 +41,22 @@
       }
     ],
     "prepared_dataset": {
-      "dataset_signature": null,
-      "matches_recorded_pin": null,
-      "positive_label_pixels": null,
-      "template_valid_pixels": null
+      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+      "matches_recorded_pin": true,
+      "positive_label_pixels": 60988,
+      "template_valid_pixels": 5167373
     },
     "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
   },
   "competition_data": {
     "owner_mirror_files_present": [
+      "training_features.tif",
       "labels.tif",
       "sample_submission.tif"
     ],
     "organizer_authenticated": false,
     "prepared_dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
-    "pins_core_sha256_verified_now": false,
+    "pins_core_sha256_verified_now": true,
     "historical_restore_receipt": "docs/research/2026-10-25/prepared-manifest.json",
     "pins_note": "Owner mirrors, not organizer-authenticated. Hash pins verify consistency only. Template values must never be used as features or predictions.",
     "extra_pins_files": [
@@ -427,7 +431,7 @@
       "range_error_immune": null,
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
-      "site_linked": null,
+      "site_linked": true,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan",
       "note": "G30-S19 habitat GBM (19-band, no catalogue-distance inputs) + EDGE 60k, off-cat >2px",
@@ -572,26 +576,6 @@
       "run_name": "GEMSDOE30_sgmc-hedge-t04-s4-d10_20261003T174409650983Z_ac08b41e",
       "note": "SGMC-hedge research raster; SGMC holdout is tautological; not promoted or scored",
       "performance_status": "unscored; local format validation is not a score"
-    },
-    {
-      "manifest": "gems30-GDX1-44090-20261026-2992ee3619f5.json",
-      "file": "docs/research/2026-10-26-gdx/gems30-GDX1-44090-20261026-2992ee3619f5.tif",
-      "present": true,
-      "sha256": "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
-      "sha256_matches_manifest": true,
-      "outside_convention": "NaN outside; matches published GEMS format",
-      "published_format_compliant": true,
-      "whole_raster_range_diagnostic_passed": false,
-      "all_cells_finite_and_in_range": null,
-      "nan_cells_anywhere": null,
-      "range_error_immune": null,
-      "legacy_manifest_claim_range_error_immunity": null,
-      "organizer_acceptance_confirmed": false,
-      "site_linked": true,
-      "submission_recommendation": false,
-      "run_name": "gems30-GDX1-44090-20261026-2992ee3619f5",
-      "note": "GDX1 site-deduped, effort-normalized geothermal chemistry + local edges; 44090 dots; research only, NOT slot-approved.",
-      "performance_status": "unscored; format validation is not a score"
     }
   ],
   "submission_format": {
@@ -617,7 +601,7 @@
     "schema_version": 1,
     "run_card": "docs/research/phase-tilt-asymmetry/run-card.json",
     "readiness": "docs/research/phase-tilt-asymmetry/readiness.json",
-    "purpose": "Archived PTA-1 downloadable research artifact, not a current-slot recommendation. Historical 198-reference evidence is frozen; new public references receive blocking UNKNOWN coverage without rewriting it. See latest_review for GDX-1, the newest negative experiment. No organizer-confirmed score or slot selected.",
+    "purpose": "Archived PTA-1 downloadable research artifact, not a current-slot recommendation. See latest_review for QPC-1, the newest negative duplicate-stopped experiment. The separate GDX-1 TIFF is downloadable for research only. No organizer-confirmed score or slot selected.",
     "latest_attempt": "docs/research/texture-controls/run-card.json",
     "additional_stopped_attempts": [
       {
@@ -670,134 +654,132 @@
         "decision": "ARCHIVED record, not current approval: DUPLICATE ON EXPANDED REGISTRY (71.26% > 70% within 3 px on four GEMSDOE25 rasters, fulfilling IR-30-078 post-run check); DO NOT SUBMIT; retained for provenance only"
       }
     ],
-    "latest_review": {
+    "previous_review": {
       "lane": "GDX-1",
       "run_card": "docs/research/2026-10-26-gdx/run-card.json",
       "verifier": "scripts/verify_geothermal_chemistry_run.py",
-      "decision": "NEGATIVE / DO NOT SUBMIT: HOLDOUT-DTI 0.11965 vs same-protocol core19 0.13691; both paired-CI improvement gates failed; global uniqueness UNKNOWN; no slot selected",
+      "decision": "NEGATIVE / DO NOT SUBMIT; research TIFF retained; no slot selected"
+    },
+    "latest_review": {
+      "lane": "QPC-1",
+      "run_card": "docs/research/2026-10-26-qpc/run-card.json",
+      "verifier": "scripts/verify_quadrature_phase_run.py",
+      "decision": "NEGATIVE / DO NOT SUBMIT: duplicate-stop at 78.915854% dot overlap; paired-CI gates failed against the fixed strongest comparator; no QPC TIFF published or slot selected",
       "history_preserved": true
     }
   },
   "latest_scientific_review": {
-    "lane": "GDX-1",
-    "run_card": "docs/research/2026-10-26-gdx/run-card.json",
-    "verifier": "scripts/verify_geothermal_chemistry_run.py",
+    "lane": "QPC-1",
+    "run_card": "docs/research/2026-10-26-qpc/run-card.json",
+    "verifier": "scripts/verify_quadrature_phase_run.py",
     "decision": {
-      "schema_version": 1,
-      "readiness_version": "research-readiness-v3-matched-controls-20261025",
-      "raster_sha256": "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
-      "gates": [
-        {
-          "name": "file_contract",
-          "status": "passed",
-          "detail": "Reopened shared-writer GeoTIFF matches template; SHA-256 binds this decision to its exact bytes"
-        },
-        {
-          "name": "labelled_holdout_evidence",
-          "status": "passed",
-          "detail": "HOLDOUT-DTI requires evaluator/protocol, withheld positives and spatial-bootstrap 95% CI"
-        },
-        {
-          "name": "paired_improvement",
-          "status": "failed",
-          "detail": "Fixed GDX-1 candidate must improve all 2 comparators (core19, effort6) with positive paired CI lower bounds"
-        },
-        {
-          "name": "single_feature_leakage_canaries",
-          "status": "passed",
-          "detail": "All 28 raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC"
-        },
-        {
-          "name": "count_matched_construction",
-          "status": "passed",
-          "detail": "All fixed arms must realize the same predeclared active-domain budget in every fold"
-        },
-        {
-          "name": "surface_observed_registry",
-          "status": "unknown",
-          "detail": "327 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
-        },
-        {
-          "name": "dots_observed_registry",
-          "status": "unknown",
-          "detail": "327 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
-        },
-        {
-          "name": "complete_parallel_registry",
-          "status": "unknown",
-          "detail": "Nine-site public snapshots cannot attest all parallel rasters or missing original surfaces"
-        },
-        {
-          "name": "assigned_lane",
-          "status": "unknown",
-          "detail": "Autonomous research continuation is not an externally supplied lane assignment"
-        },
-        {
-          "name": "comparable_historical_best",
-          "status": "unknown",
-          "detail": "Do not substitute an archived metric or a new comparator for a missing historical-best rerun"
-        },
-        {
-          "name": "experimental_budget",
-          "status": "passed",
-          "detail": "At most three experiments / two experimental hours"
-        },
-        {
-          "name": "artifact_identity",
-          "status": "passed",
-          "detail": "Named artifact and note of at most 140 characters"
-        }
-      ],
-      "observed_registry": {
-        "surface": {
-          "registry_entries_compared": 327,
-          "max_spearman": 0.1647020229678713,
-          "max_fraction_within_3px": null,
-          "status": "unknown"
-        },
-        "dots": {
-          "registry_entries_compared": 327,
-          "max_spearman": 0.09179766302937646,
-          "max_fraction_within_3px": 0.5424586073939669,
-          "status": "unknown"
-        }
-      },
-      "download_ok": true,
       "research_verdict": "negative",
-      "eligible_for_separate_slot_selector": false,
+      "download_ok": false,
       "submission_approved": false,
       "slot_selected": false,
-      "display_status": "NOT APPROVED FOR SUBMISSION",
-      "organizer_score": null,
-      "organizer_acceptance_confirmed": false,
-      "verification_scope": "Current TIFF reopened; CIs recomputed; historical continuous-surface receipts verified, not reopened in CI",
-      "saved_surface_reopened": false,
-      "catalogue_bytes_reopened": true,
-      "local_additional_comparisons_per_stage": 2
+      "reason": "duplicate-stop at dots; no perturbation or publication",
+      "global_uniqueness": "unknown",
+      "saved_surface_reopened": true
     },
     "history_preserved": true,
     "card": {
       "schema_version": 1,
-      "experiment_spec": "gdx1",
-      "run_id": "gems30-GDX1-44090-20261026-2992ee3619f5",
-      "lane": "GDX-1 autonomous geothermal-corridor continuation; not externally assigned",
-      "hypothesis": "Effort-normalized paired geothermal chemistry localizes cooling/mixing upflow conduits beyond surface-mapped faults.",
-      "mechanism": "Site-median reservoir/surface temperature contrasts and cation-quartz discordance normalized by chemical sampling effort; 12-channel local-physics HGB, 3px Poisson dots.",
-      "non_fault_mimic": "Aquifer mixing or steam loss at a lithologic contact; preferential sampling around developed geothermal fields.",
+      "experiment_spec": "qpc1",
+      "hypothesis": "Co-located magnetic and gravity quadrature-phase proxies identify concealed fault boundaries.",
+      "mechanism": "Two-scale high-pass/gradient normalized vector concordance, with within-field persistence.",
+      "non_fault_mimic": "Volcanic-flow or intrusive contacts, dike swarms, and survey leveling artifacts.",
       "holdout": {
         "label": "HOLDOUT-DTI",
-        "value": 0.11965057235973826,
+        "value": 0.13866497186828491,
         "withheld_positives": 60988,
         "ci95": [
-          0.10769925077601022,
-          0.13232384036729036
+          0.12368500865140516,
+          0.15499952977983888
         ],
-        "tp_weight": 6986.215594286964,
-        "fp_weight": 41004.207099288884,
+        "tp_weight": 8111.997449277898,
+        "fp_weight": 40439.485584975904,
         "evaluator_version": "component-holdout-v3-blockstats-20261025",
         "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
-        "buffer_px": 46,
-        "scope": "catalogue hide-and-recover proxy; NOT organizer performance or leaderboard estimate",
+        "comparators": {
+          "core19": {
+            "label": "HOLDOUT-DTI",
+            "value": 0.13362778873908637,
+            "withheld_positives": 60988,
+            "ci95": [
+              0.11828522390010657,
+              0.1488749805646302
+            ],
+            "tp_weight": 7813.020600502169,
+            "fp_weight": 40577.637846987476
+          },
+          "persistence21": {
+            "label": "HOLDOUT-DTI",
+            "value": 0.13885882625019214,
+            "withheld_positives": 60988,
+            "ci95": [
+              0.12322520986835993,
+              0.15497552287954106
+            ],
+            "tp_weight": 8123.869400985568,
+            "fp_weight": 40446.74584618314
+          },
+          "ffl_confirm": {
+            "label": "HOLDOUT-DTI",
+            "value": 0.1839491399944582,
+            "withheld_positives": 60988,
+            "ci95": [
+              0.16941879692179745,
+              0.19787438682807115
+            ],
+            "tp_weight": 10818.871162508625,
+            "fp_weight": 39301.47847761931
+          },
+          "msdb_edge": {
+            "label": "HOLDOUT-DTI",
+            "value": 0.1704616131030584,
+            "withheld_positives": 60988,
+            "ci95": [
+              0.15622652622271732,
+              0.18416757014609178
+            ],
+            "tp_weight": 10006.69118890733,
+            "fp_weight": 39558.74674711629
+          }
+        },
+        "candidate_minus": {
+          "core19": {
+            "label": "HOLDOUT-DTI difference",
+            "value": 0.005037183129198541,
+            "ci95": [
+              -0.0011837013615638506,
+              0.011186810392628517
+            ]
+          },
+          "persistence21": {
+            "label": "HOLDOUT-DTI difference",
+            "value": -0.00019385438190722137,
+            "ci95": [
+              -0.0061928093280117094,
+              0.006016672206040689
+            ]
+          },
+          "ffl_confirm": {
+            "label": "HOLDOUT-DTI difference",
+            "value": -0.04528416812617328,
+            "ci95": [
+              -0.05937678067103743,
+              -0.031152779444102902
+            ]
+          },
+          "msdb_edge": {
+            "label": "HOLDOUT-DTI difference",
+            "value": -0.03179664123477349,
+            "ci95": [
+              -0.04595774337033678,
+              -0.017890215715884537
+            ]
+          }
+        },
         "bootstrap": {
           "unit": "geographic block aggregated across folds",
           "blocks": 371,
@@ -805,136 +787,48 @@
           "seed": 3071,
           "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
         },
-        "comparators": {
-          "core19": {
-            "label": "HOLDOUT-DTI",
-            "value": 0.13690536488571922,
-            "withheld_positives": 60988,
-            "ci95": [
-              0.1209560629688432,
-              0.15334760284600843
-            ],
-            "tp_weight": 8007.4718728300295,
-            "fp_weight": 40486.03891853005
-          },
-          "effort6": {
-            "label": "HOLDOUT-DTI",
-            "value": 0.12149271765054521,
-            "withheld_positives": 60988,
-            "ci95": [
-              0.10946137772383079,
-              0.13475733811551627
-            ],
-            "tp_weight": 7095.821619902705,
-            "fp_weight": 40978.80174943272
-          }
-        },
-        "candidate_minus": {
-          "core19": {
-            "label": "HOLDOUT-DTI difference",
-            "value": -0.017254792525980958,
-            "ci95": [
-              -0.035453211957097976,
-              0.0017652626493339294
-            ]
-          },
-          "effort6": {
-            "label": "HOLDOUT-DTI difference",
-            "value": -0.0018421452908069513,
-            "ci95": [
-              -0.006235423612023698,
-              0.002651796661684326
-            ]
-          }
-        }
-      },
-      "feature_canaries": {
-        "features_per_fold": 28,
-        "folds": 4,
-        "alarm_count": 0,
-        "alarms": []
+        "scope": "mapped-fault holdout proxy; not an organizer score or leaderboard projection"
       },
       "registry": {
         "complete": false,
-        "receipt_surface": "docs/research/2026-10-26-gdx/novelty-surface.json",
-        "receipt_dots": "docs/research/2026-10-26-gdx/novelty-dots.json",
+        "surface_receipt": "docs/research/2026-10-26-qpc/novelty-surface.json",
         "surface": {
-          "registry_entries_compared": 327,
-          "max_spearman": 0.1647020229678713,
+          "decision": "blocked-incomplete-evidence",
+          "registry_entries_compared": 353,
+          "max_spearman": 0.15910948199244948,
           "max_fraction_within_3px": null,
-          "status": "unknown"
+          "errors": [
+            "data/raw/registry-expanded/GEMSDOE31-ed22e5c02a6d659b69ebf2d7084cd01061963e02.tif: non-finite values inside footprint"
+          ]
         },
+        "dots_receipt": "docs/research/2026-10-26-qpc/novelty-dots.json",
         "dots": {
-          "registry_entries_compared": 327,
-          "max_spearman": 0.09179766302937646,
-          "max_fraction_within_3px": 0.5424586073939669,
-          "status": "unknown"
-        },
-        "additional_local_evidence": {
-          "registry": "docs/research/2026-10-26-gdx/registry-local-addendum.json",
-          "surface": "docs/research/2026-10-26-gdx/novelty-local-surface.json",
-          "dots": "docs/research/2026-10-26-gdx/novelty-local-dots.json",
-          "successful_comparisons_per_stage": 1,
-          "chronology": "Post-run audit of the exact saved states; no refit; not part of frozen pre-placement coverage"
-        },
-        "global_uniqueness": "unknown",
-        "additional_postmerge_evidence": {
-          "registry": "docs/research/2026-10-26-gdx/registry-postmerge-addendum.json",
-          "surface": "docs/research/2026-10-26-gdx/novelty-postmerge-surface.json",
-          "dots": "docs/research/2026-10-26-gdx/novelty-postmerge-dots.json",
-          "successful_comparisons_per_stage": 1,
-          "chronology": "Exact saved-state audit during main integration, after the scientific run; no new experiment, refit or placement"
+          "decision": "duplicate-stop",
+          "registry_entries_compared": 353,
+          "max_spearman": 0.09793280932374733,
+          "max_fraction_within_3px": 0.7891585393513268,
+          "errors": [
+            "data/raw/registry-expanded/GEMSDOE31-ed22e5c02a6d659b69ebf2d7084cd01061963e02.tif: non-finite values inside footprint"
+          ]
         }
       },
-      "raster_sha256": "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
-      "surface_sha256": "80c1c5096958fbacd5addfb5afd3563417d544663e5d7c71a052fcc67e2980be",
-      "validator_output": {
-        "status": "passed",
-        "no_nan_inside_footprint": true,
-        "values_in_0_1": true,
-        "crs_match": true,
-        "shape_match": true,
-        "transform_match": true,
-        "single_float32_band": true,
-        "nan_nodata_outside_footprint": true,
-        "positive_catalogue_pixels": 0,
-        "emitted_dots": 44090,
-        "dots_within_2px_of_catalogue": 0,
-        "organizer_acceptance_confirmed": false
-      },
-      "submission_name": "gems30-GDX1-44090-20261026-2992ee3619f5",
-      "note": "GDX1 site-deduped, effort-normalized geothermal chemistry + local edges; 44090 dots; research only, NOT slot-approved.",
-      "published_tiff": "docs/research/2026-10-26-gdx/gems30-GDX1-44090-20261026-2992ee3619f5.tif",
-      "download_ok": true,
-      "organizer_score": null,
-      "leaderboard_estimate": null,
-      "externally_assigned_lane_verified": false,
-      "scientific_gate_passed": false,
-      "experiments_run": 3,
-      "experiment_cap": 3,
-      "protocol_deviation": "Amendment A1: pinned malformed reference unresolved; exact saved-surface recovery",
-      "amendment_sha256": "277b60374c94f54a7d808d40c60734b6282488d19d364d855e1b4e7b71a8282b",
-      "experimental_elapsed_seconds": 603.478,
-      "time_cap_hours": 2,
-      "archive_core19_parity_verified": true,
-      "preregistration_sha256": "aa3da2e3b6b794b95f6d720eefbb8443716af74abaab6398f7895ba3f52dc0d5",
-      "registry_sha256": "447f6062686215a20703cec5ace121a279e44619dd6f079438e1e34a7c8c386a",
-      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+      "raster_sha256": "8baa49d49c1f665f6633ba5296508242de3c5e4cd2c606d1e16a1aac51175faf",
+      "validator_output": null,
+      "submission_name": "gems30-QPC1-44090-20261026-b6ae3a8c9bab",
+      "note": "QPC1 magnetic-gravity quadrature phase, 44090 dots; research only, not approved for competition submission.",
+      "published_tiff": null,
+      "download_ok": false,
+      "ok_to_submit": false,
       "submission_approved": false,
       "slot_selected": false,
-      "ok_to_submit": false,
-      "created_utc": "2026-10-26T20:32:49.301630+00:00",
       "verdict": "negative",
-      "blockers": [
-        "paired_improvement: Fixed GDX-1 candidate must improve all 2 comparators (core19, effort6) with positive paired CI lower bounds",
-        "surface_observed_registry: 327 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop",
-        "dots_observed_registry: 327 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop",
-        "complete_parallel_registry: Nine-site public snapshots cannot attest all parallel rasters or missing original surfaces",
-        "assigned_lane: Autonomous research continuation is not an externally supplied lane assignment",
-        "comparable_historical_best: Do not substitute an archived metric or a new comparator for a missing historical-best rerun",
-        "Calibration and perturbation confirmation not completed; not eligible for slot selection",
-        "Current portal weekly cap, deadline and eligibility unverified"
-      ]
+      "reason": "duplicate-stop at dots; no perturbation or publication",
+      "experiments_run": 2,
+      "experiment_cap": 3,
+      "experimental_elapsed_seconds": 550.904,
+      "organizer_score": null,
+      "leaderboard_estimate": null,
+      "created_utc": "2026-10-26T22:12:46.812311+00:00"
     },
     "verified_now": true,
     "error": null,
@@ -2429,8 +2323,8 @@
       "promoted": false,
       "decision": "duplicate-stop; no public TIFF"
     },
-    "latest_gdx_scientific_review": {
-      "evidence": "docs/research/2026-10-26-gdx/run-card.json",
+    "latest_scientific_review": {
+      "evidence": "docs/research/2026-10-26-qpc/run-card.json",
       "promoted": false,
       "decision": "NOT APPROVED FOR SUBMISSION"
     }
@@ -2663,7 +2557,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "336 tests collected in 1.17s",
+      "pytest_collect": "365 tests collected in 1.00s",
       "exit_code": 0
     },
     "score_gain_claimed": false
