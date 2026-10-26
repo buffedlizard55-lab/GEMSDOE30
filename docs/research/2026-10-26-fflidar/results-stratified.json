@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment": 3,
+  "amendment": "amendment-stratified.md",
+  "label": "HOLDOUT-DTI",
+  "infeasible_as_frozen": true,
+  "folds_scored": 0,
+  "reason": "In the v3 quadrant whole-component folds the visible catalogue lies in other quadrants, so the (2,5]px and (5,10]px distance strata contain 0 eligible pixels and (10,30]px only a few thousand; the frozen quotas cannot emit the count-matched fold budget. Redefining strata after seeing this would be post-hoc design, so the stratified arm was not scored and cannot be promoted.",
+  "fold_stratum_availability": [
+    {
+      "fold": 0,
+      "active_pixels": 2449693,
+      "dot_budget": 20902,
+      "eligible_by_stratum": {
+        "(2.0,5.0]": 0,
+        "(5.0,10.0]": 0,
+        "(10.0,30.0]": 3209,
+        "(30.0,50.0]": 20659,
+        "(50.0,None]": 2425825
+      }
+    },
+    {
+      "fold": 1,
+      "active_pixels": 1366651,
+      "dot_budget": 11661,
+      "eligible_by_stratum": {
+        "(2.0,5.0]": 0,
+        "(5.0,10.0]": 0,
+        "(10.0,30.0]": 3166,
+        "(30.0,50.0]": 14919,
+        "(50.0,None]": 1348566
+      }
+    },
+    {
+      "fold": 2,
+      "active_pixels": 565057,
+      "dot_budget": 4821,
+      "eligible_by_stratum": {
+        "(2.0,5.0]": 0,
+        "(5.0,10.0]": 0,
+        "(10.0,30.0]": 2566,
+        "(30.0,50.0]": 20080,
+        "(50.0,None]": 542411
+      }
+    },
+    {
+      "fold": 3,
+      "active_pixels": 788574,
+      "dot_budget": 6728,
+      "eligible_by_stratum": {
+        "(2.0,5.0]": 0,
+        "(5.0,10.0]": 0,
+        "(10.0,30.0]": 2665,
+        "(30.0,50.0]": 15789,
+        "(50.0,None]": 770120
+      }
+    }
+  ],
+  "gate": {
+    "rule": "fusion_ffstrat-msdb_edge > 0 with paired 95% CI lower bound > 0",
+    "passed": false
+  },
+  "production": null
+}

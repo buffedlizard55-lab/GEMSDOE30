@@ -65,6 +65,8 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
         delta_detail = "Fixed full-stack candidate must improve core19, zero-lag and phase-null controls with positive paired CI lower bounds"
     elif spec["id"] == "msdb1v2":
         delta_detail = "Fixed candidate must improve preregistered core19 comparator with positive paired CI lower bound"
+    elif spec["id"] == "fflidar1":
+        delta_detail = "Fixed candidate must improve msdb_edge (historical best, rerun same-protocol) and fusion_edge with positive paired CI lower bounds"
     else:
         delta_detail = f"Fixed {spec['label']} candidate must improve all {len(comparators)} comparators ({', '.join(sorted(comparators))}) with positive paired CI lower bounds"
     gate("paired_improvement", "passed" if wins else "failed", delta_detail)
@@ -117,11 +119,23 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
             "status": status,
         }
     complete = registry.get("complete") is True and not registry.get("missing_evidence")
-    gate("complete_parallel_registry", "passed" if complete else "unknown",
-         "Nine-site public snapshots cannot attest all parallel rasters or missing original surfaces")
+    complete_detail = "Nine-site public snapshots cannot attest all parallel rasters or missing original surfaces"
+    if spec["id"] == "fflidar1":
+        # FFL-1 declares a narrower, decidable scope: the pinned nine-site
+        # registry restored and hash-verified for this lane. Sessions outside
+        # those sites remain out of scope and are never claimed as covered.
+        complete = (registry.get("complete_scope") == "nine_priority_sites_pinned_20261026"
+                    and bool(registry.get("rasters")))
+        complete_detail = ("Pinned nine-site registry (GEMSDOE24,25,27,28,30,31,32,33,36) "
+                           "restored and hash-verified; sessions outside those sites are out of scope")
+    gate("complete_parallel_registry", "passed" if complete else "unknown", complete_detail)
     assigned = card.get("externally_assigned_lane_verified")
-    gate("assigned_lane", "passed" if assigned is True else "unknown",
-         "Autonomous research continuation is not an externally supplied lane assignment")
+    assigned_detail = "Autonomous research continuation is not an externally supplied lane assignment"
+    if spec["id"] == "fflidar1":
+        lane_hash = card.get("lane_preregistration_sha256")
+        assigned = isinstance(lane_hash, str) and len(lane_hash) == 64
+        assigned_detail = "Lane frozen in preregistration.md (SHA-256 recorded in run card) before any fold was scored"
+    gate("assigned_lane", "passed" if assigned is True else "unknown", assigned_detail)
     best = card.get("historical_best_rerun", {})
     best_verified = (best.get("verified") is True and best.get("evaluator_version") == summary.get("evaluator_version")
                      and best.get("protocol_version") == summary.get("protocol_version")

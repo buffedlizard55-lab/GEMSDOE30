@@ -1,6 +1,26 @@
 # GEMSDOE30 — DOE GEMS Concealed Fault Discovery & Automated Submission Lab
 
+## LATEST 2026-10-26 — FFL-1 MSDB × LiDAR Fusion: **DO NOT SUBMIT — DUPLICATE-STOPPED**
+
+- **Generated GeoTIFF (research artifact only):** [`gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3.tif`](docs/research/2026-10-26-fflidar/gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3.tif) (`SHA-256: 7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07`; 44,090 dots)
+- **Submission name:** `gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3`
+- **Note (107/140 chars):** `FFL1: MSDB31+LiDAR17 fusion x Rayleigh gate + 300m EDGE, >2px off-cat, 44090 dots, all-finite zeros-outside`
+- **Machine verdict:** `negative`; `ok_to_submit=false`; `submission_approved=false`; `slot_selected=false`; **organizer score: none**
+- **Why not submit:** the corrected expanded novelty audit (pinned registry + every TIFF in `docs/downloads/`, candidate excluded; 172 comparisons) found **78.280789% of FFL dots within 3 px of MSDB-1v2**, above the 70% duplicate-stop threshold. The strict whole-array `[0, 1]` file validator passes, but format validity does not rescue a duplicate.
+- **Feature evidence (HOLDOUT-DTI only, evaluator `component-holdout-v3-blockstats-20261025`, 60,988 withheld positives):** Exp. 1 seed 3051 `fusion_edge` 0.182417 [0.168230, 0.196433] vs same-run `msdb_edge` 0.175639 [0.161471, 0.189566] (Δ +0.006779 [−0.000067, +0.012888]; frozen gate failed); disclosed Amendment-A1 fresh-seed confirmation 0.183949 [0.169419, 0.197874] vs 0.173427 [0.159043, 0.187952] (Δ +0.010522 [+0.004182, +0.016362]).
+- **Stratified rescue:** not produced. The frozen distance quotas are geometrically infeasible in the v3 quadrant folds (0 eligible pixels in both `(2,5]` and `(5,10]` strata in every fold), so Experiment 3 scored zero folds rather than redefining quotas after the fact.
+- **Read next:** [FFL-1 PhD review](docs/research/2026-10-26-fflidar/review.md) · [nine-site executive summary](docs/research/2026-10-26-fflidar/nine-site-executive-summary.md) · [run card](docs/research/2026-10-26-fflidar/run-card.json) · [readiness](docs/research/2026-10-26-fflidar/readiness.json) · [irregularities IR-FFL-01…07](docs/irregularities.md)
+- **Verify the negative decision (no human inspection):** `.venv/bin/python scripts/verify_fflidar_run.py` (exit 0); `.venv/bin/python scripts/verify_fflidar_run.py --require-promote` (expected exit 2).
+
+FFL-1 does not replace the shared `docs/current-run.json` pointer (now PTA-1
+on merged `main`); it is an additional 2026-10-26 lane retained for audit. Do
+not move the FFL TIFF back into `docs/downloads/` without regenerating the
+exact late-registry evidence for the artifacts affected (see IR-FFL-05).
+
+---
+
 ## START HERE — Unique `G30-TAD` & `PTA-1` GeoTIFFs Validated (`download_ok = true`) · **NOT APPROVED FOR SUBMISSION (`verdict = negative`)**
+
 
 - **`G30-TAD` dual-variant 38,000-dot GeoTIFFs (`verify_tad_run.py`, zero human inspection required):**
   - Primary range-safe all-finite file: [`docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif`](docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif) (`234.6 KiB`, SHA-256 `3077db43ee72ee526d8b943d1db40f19ce49be9d8ccd3109068ca442964f26cc`; all `12,279,160` cells finite `{0.0, 1.0}` in `[0, 1]`, `nodata=None`) and spec-strict companion [`docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif`](docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif) (`273.5 KiB`, SHA-256 `54139f2cf86f75ba96bddba0f49409e934c77d716eb39150dbd04daf23b6b7e4`; `12/12` checks of `validate_submission_file` passed).
@@ -121,14 +141,17 @@ pixel-wise visible-fault masking (`labels == 1`, zero buffer), and **95% paired 
 ```bash
 python -m venv .venv
 .venv/bin/pip install -e '.[research,test]' -c requirements-tdx1.txt
-
 # Autonomous raw competition data check / SHA-256-pinned mirror restore + cache build:
 bash scripts/download_competition_data.sh
+# Extra owner mirrors (note: there is no --include-extra flag; IR-FFL-04):
+.venv/bin/python scripts/restore_public_mirrors.py --pins docs/research/mirror-pins-extra.json --output-dir data/raw
 .venv/bin/python scripts/prepare_data.py
 
 # Publication & integrity checks (only sample_submission.tif required in CI):
 .venv/bin/python scripts/restore_public_mirrors.py --ids sample_submission
 .venv/bin/python scripts/verify_current_run.py
+# Inspect the newest FFL-1 negative/duplicate-stop decision (exit 0; --require-promote exits 2):
+.venv/bin/python scripts/verify_fflidar_run.py
 .venv/bin/python scripts/verify_stopped_attempt.py
 .venv/bin/python scripts/build_research_site.py --check
 .venv/bin/python scripts/validate_submission.py docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif --template data/raw/sample_submission.tif
