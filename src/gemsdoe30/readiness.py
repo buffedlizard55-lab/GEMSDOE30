@@ -95,6 +95,8 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
         delta_detail = "Fixed candidate must improve preregistered core19 comparator with positive paired CI lower bound"
     elif spec["id"] == "fflidar1":
         delta_detail = "Fixed candidate must improve msdb_edge (historical best, rerun same-protocol) and fusion_edge with positive paired CI lower bounds"
+    elif spec["id"] == "csr1":
+        delta_detail = "Fixed CSR-1 candidate must improve preregistered core19_edge and msdb_edge comparators with positive paired CI lower bounds"
     elif spec["id"] == "qpc1":
         delta_detail = ("Fixed QPC-1 candidate must improve the three preregistered controls "
                         f"({', '.join(sorted(required_positive))}) with positive paired CI lower bounds; core19 is descriptive")

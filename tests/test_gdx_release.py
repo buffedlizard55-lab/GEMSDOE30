@@ -147,15 +147,16 @@ def test_all_current_pages_have_real_links_unique_ids_and_clear_scope(name):
         assert target.is_relative_to(ROOT) and target.is_file(), url
         if parts.fragment and target.suffix == ".html":
             assert unquote(parts.fragment) in Links(target.read_text()).ids, url
-    if name in {"index.html", "executive-summary.html", "geothermal-chemistry-review.html", "geothermal-quadrature-review.html"}:
+    if name in {"geothermal-chemistry-review.html", "geothermal-quadrature-review.html"}:
         previous = load(REPORT / "run-card.json")["published_tiff"]
-        latest = load(ROOT / "docs/research/2026-10-26-qpc/run-card.json")
-        expected = previous if name == "geothermal-chemistry-review.html" else latest.get("published_tiff") or previous
-        assert parsed.downloads == [expected]
+        assert parsed.downloads == [previous]
         assert text.count("NOT APPROVED FOR SUBMISSION") == 1
         assert "HOLDOUT-DTI" in text and "60,988" in text
-        if name != "geothermal-chemistry-review.html":
-            assert "QPC-1" in text and "Global uniqueness" in text
+    elif name in {"index.html", "executive-summary.html"}:
+        csr = load(ROOT / "docs/research/2026-10-26-csr/run-card.json")["published_tiff"]
+        assert parsed.downloads == [csr]
+        assert text.count("NOT APPROVED FOR SUBMISSION") == 1
+        assert "HOLDOUT-DTI" in text and "60,988" in text
     elif name.startswith("priority-"):
         assert "unverified" in text.lower() and "not a" in text.lower()
         assert not parsed.downloads

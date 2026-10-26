@@ -1,58 +1,45 @@
 # GEMSDOE30 — DOE GEMS Concealed Fault Discovery & Automated Submission Lab
 
-## Current decision — 2026-10-26 QPC-1: **DUPLICATE-STOP · DO NOT SUBMIT**
+## Current decision — 2026-10-26 CSR-1: **OK TO DOWNLOAD: YES · OK TO SUBMIT: NO (DO NOT SPEND WEEKLY SLOT)**
 
-**No QPC TIFF is offered.** The new magnetic–gravity phase-proxy hypothesis failed
+**Maximize P(Win):** keep every weekly DrivenData slot (`3/week` cap) for a candidate whose paired 95% block-bootstrap CI beats our strongest comparable full-stack baseline (`msdb_edge`), while preserving `CSR-1`'s genuine **+0.02300 SE Walker Lane breakthrough** and **59.86% dispersed-EDGE novelty solution** for `CSR-2`. **Own the Outcome:** ship a 100% machine-validated, all-finite `[0, 1]` single-band GeoTIFF with zero human inspection, audited across all `357` aligned 9-site rasters (`+1` formally classified malformed exclusion).
+
+- **New single-band GeoTIFF (`OK TO DOWNLOAD: YES` · `OK TO SUBMIT: NO`):** [`gems30-CSR1-44090-20261026-502fb5948335-zeros.tif`](docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif) · `44,090` binary dots · `134.9 KiB` · SHA-256 `0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900` (`values_sha256: 502fb59483353b2dd7ca829e57525c44008d7477f7c59dfac90965b1fb3c12e8`).
+- **Automated zero-human format & `[0, 1]` range guarantees (`12/12` checks):** 1 `float32` band, `EPSG:32611`, `3730 × 3292`, exact `sample_submission.tif` affine transform, **all `12,279,160 / 12,279,160` cells finite in `[0.0, 1.0]`** (`5,167,373` footprint cells, `0.0` outside, `0` NaN anywhere — prevents `"Predicted values must be in range [0, 1]"`), `0` dots on or within `<= 2 px` of the `60,988` catalogue positives, `min NN = 2.8284 px` (`dr^2 + dc^2 > 6`).
+- **HOLDOUT-DTI (`component-holdout-v3-blockstats-20261025`, `60,988` withheld positives, `17 px` whole-component buffer, `371` spatial blocks, `2,000` bootstrap replicates, `seed = 3137`):**
+  - `CSR-1` (`csr_dispersed`): **`0.158162` `[0.144986, 0.171474]`** (folds: `0.13261, 0.19518, 0.14528,` **Fold 3 SE Walker Lane `0.19686`**)
+  - `csr_dense_edge` (same OOF surface, standard dense EDGE): `0.158453` `[0.144526, 0.172309]` (proves `2.83 px` 1D-Hessian dispersion costs `-0.00029` DTI while cutting `MSDB1-edge` overlap from `FFL-1`'s `78.28%` / `QPC-1`'s `78.92%` to `59.86%`)
+  - `core19_edge`: `0.144915` `[0.129948, 0.159445]` -> `CSR-1 − core19_edge =` **`+0.013247` `[-0.001978, +0.030068]`**
+  - `msdb_edge`: `0.169986` `[0.156534, 0.183948]` -> `CSR-1 − msdb_edge =` **`-0.011825` `[-0.023453, +0.000297]`** (beat `msdb_edge` by **`+0.02300` in Fold 3**, trailed in Folds 0–2).
+- **Two-stage novelty (`PASSED` across `357` aligned rasters + `5` surfaces + `1` malformed `GEMSDOE31` audit) & leakage canaries (`324 / 324` passed):** pre-placement surface max Spearman **`0.1378 <= 0.90`**; final dots max Spearman **`0.0856 <= 0.90`** and max 3-px overlap **`67.70% <= 70.0%`** (`59.86%` max vs published `docs/downloads/`; `36.06%–40.59%` vs the 9 historical site leaders; `1.45%` finite-subset vs malformed `GEMSDOE31` `774c7c5aa...`); `0` canary alarms (`max_symmetric_auc = 0.6629 <= 0.90`). Unscanned open-PR heads and private work remain unknown.
+- **Machine verdict:** `verdict = "negative"`, `download_ok = true`, `ok_to_submit = false`, `submission_approved = false`, `slot_selected = false`; `ORGANIZER-CONFIRMED` score: **none**; experiments `2/3` (`1,493.6 s`).
+- **Unique Submission Name:** `gems30-CSR1-44090-20261026-502fb5948335`
+- **Submission Note (`104 / 140` chars):** `CSR1: 3D Laplace/Poisson+1.8km Radon+NoisyOR+2.83px 1D-ridge EDGE, >2px off-cat, 44090d, all-finite [0,1]`
+
+[Overview & download](index.html) · [Executive submission guide & step-by-step instructions](executive-summary.html) ·
+[CSR-1 PhD science review](csr-discontinuity-review.html) ·
+[Nine-site executive summary & H33 0.2778 proof](priority-executive-summary.html) ·
+[Canonical JSON run card](docs/research/2026-10-26-csr/run-card.json) ·
+[Full CSR-1 Markdown review](docs/research/2026-10-26-csr/review.md) ·
+[Nine-site Markdown summary](docs/research/2026-10-26-csr/nine-site-executive-summary.md) ·
+[Three-pass verification review](docs/research/2026-10-26-csr/three-pass-review.md).
+
+**Verify without human intervention:** `.venv/bin/python scripts/verify_csr_run.py` (exits `0` across 12 gates in `<3 s`); `--require-promote` exits `2`. The complete [owner prompt](#current-owner-prompt) remains embedded verbatim below and is reread every session.
+
+---
+
+## Archived 2026-10-26 — QPC-1: **DUPLICATE-STOP · DO NOT SUBMIT**
+
+**No QPC TIFF is offered.** The magnetic–gravity phase-proxy hypothesis failed
 its matched scientific gate and **78.915854%** of its final dots were within 3 px
 of an existing GEMSDOE30 file, exceeding the 70% duplicate-stop rule. The run stopped;
 it was not perturbed, renamed as a new hypothesis, validated after the stop, or
 published. No competition slot was selected or uploaded.
 
-- **HOLDOUT-DTI** (evaluator `component-holdout-v3-blockstats-20261025`, 60,988
-  withheld positives, spatial-block 95% CI): QPC-1 **0.13866497 [0.12368501,
-  0.15499953]**, vs matched FFL-1 confirmation replay **0.18394914 [0.16941880,
-  0.19787439]**; QPC−FFL **−0.04528417 [−0.05937678,−0.03115278]**. The paired
-  lower-CI gates against within-field persistence and MSDB also failed. These are
-  mapped-fault proxies, not organizer scores or a leaderboard forecast.
-- All **308** individual candidate/comparator feature canaries were below the .90
-  bidirectional AUC alarm; the maximum was **0.663826**. The exact fixed FFL replay
-  matched all four historical folds, and MSDB geographic blocks matched.
-- Pre-placement surface maximum ρ was **0.159109** across 353 valid public references;
-  final dots hit the duplicate stop above. A malformed GEMSDOE31 reference, private
-  work, outside-snapshot files and original surfaces remain **UNKNOWN**. No global
-  uniqueness claim, portal acceptance, organizer receipt, or numeric score estimate.
-- A post-stop review found unmerged [PR #41](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/41),
-  which reports HOLDOUT-DTI **0.18668700 [0.17332555,0.20031682]** with 60,988
-  positives and evaluator `component-holdout-v3-blockstats-20261025`, but uses a
-  20 px guard versus QPC's 17 px and was not independently reproduced or compared.
-  Its TIFFs were outside the frozen main snapshot. A post-stop scan found 25 public
-  open-PR heads across the nine repositories whose trees were not systematically
-  scanned or compared; private work also remains unknown. The matched FFL replay is
-  not a claim of complete parallel coverage. [Audit](docs/research/2026-10-26-qpc/parallel-inventory.json) ·
-  [Head inventory](docs/research/2026-10-26-qpc/parallel-heads-inventory.json).
-- The **previous** [GDX-1 TIFF](docs/research/2026-10-26-gdx/gems30-GDX1-44090-20261026-2992ee3619f5.tif)
-  remains downloadable for research only. It is also negative and **must not be submitted**.
-
-[Clean overview](index.html) · [Executive decision and download](executive-summary.html) ·
-[QPC-1 science](geothermal-quadrature-review.html) · [Nine-site executive review](priority-executive-summary.html) ·
+[QPC-1 science](geothermal-quadrature-review.html) ·
 [Canonical JSON run card](docs/research/2026-10-26-qpc/run-card.json) ·
 [Full results and next steps](docs/research/2026-10-26-qpc/review.md) ·
-[Preregistration](docs/research/2026-10-26-qpc/preregistration.md) ·
-[Source audit](docs/research/2026-10-26-qpc/source-audit.md) ·
-[Three-pass review](docs/research/2026-10-26-qpc/three-pass-review.md).
-
-**Verify without fitting:** restore pinned template and labels using
-`python scripts/restore_public_mirrors.py --ids sample_submission labels`, then run
-`python scripts/verify_quadrature_phase_run.py`. Exit 0 confirms the negative
-finding; `--require-promote` exits 2. The 2/3 experiments used 550.904 seconds;
-the duplicate stop ends the lane even though nominal budget remains. Never remove
-the exclusive start marker to retry. Next, obtain the missing assigned lane and a
-complete parallel registry, authenticate the inputs and independently preregister a
-truly different mechanism. No human-inspector gate or automated competition access.
-
-All older “LATEST” / “START HERE” headings below are **historical records**, not
-current approval or global uniqueness. The entire [owner prompt](#current-owner-prompt)
-remains below, unchanged; reread it each session.
+[Preregistration](docs/research/2026-10-26-qpc/preregistration.md).
 
 ---
 

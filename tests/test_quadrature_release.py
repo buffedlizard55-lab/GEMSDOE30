@@ -72,17 +72,21 @@ def test_verifier_rejects_a_forged_pooled_score(copied_receipts):
 def test_front_page_offers_only_the_earlier_negative_research_artifact():
     qpc = load(REPORT / 'run-card.json')
     gdx = load(ROOT / 'docs/research/2026-10-26-gdx/run-card.json')
+    csr = load(ROOT / 'docs/research/2026-10-26-csr/run-card.json')
     assert qpc['published_tiff'] is None
-    for page in ('index.html', 'executive-summary.html', 'geothermal-quadrature-review.html'):
+    qpc_page = (ROOT / 'geothermal-quadrature-review.html').read_text()
+    assert 'NOT APPROVED FOR SUBMISSION' in qpc_page
+    assert gdx['published_tiff'] in qpc_page and 'previous' in qpc_page.lower()
+    assert qpc['submission_name'] not in qpc_page
+    assert '78.9159%' in qpc_page and '25 public open-PR heads' in qpc_page
+    assert 'not independently reproduced or paired' in qpc_page
+    for page in ('index.html', 'executive-summary.html'):
         text = (ROOT / page).read_text()
         assert 'NOT APPROVED FOR SUBMISSION' in text
-        assert gdx['published_tiff'] in text and 'previous' in text.lower()
+        assert csr['published_tiff'] in text
         assert qpc['submission_name'] not in text  # do not offer stopped QPC as an upload name
         assert '78.9159%' in text and '25 public open-PR heads' in text
         assert 'not independently reproduced or paired' in text
-    guide = (ROOT / 'executive-summary.html').read_text()
-    assert gdx['submission_name'] in guide and gdx['note'] in guide and len(gdx['note']) <= 140
-    assert 'not QPC-1' in guide and 'No portal acceptance' in guide
 
 
 def test_parallel_pr_observation_is_not_treated_as_matched_clearance():

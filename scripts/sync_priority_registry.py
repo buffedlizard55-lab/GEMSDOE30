@@ -30,6 +30,7 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from gemsdoe30.github_data import stream_raw
+from gemsdoe30.submission import valid_template_mask
 
 # These reports bind historical cards, novelty receipts and run-card hashes. A
 # discovery refresh must never overwrite them: doing so would turn an old
@@ -224,19 +225,73 @@ def inspect_surface_candidate(row: dict, grid) -> dict:
 
 
 
-def snapshot(output: Path, template: Path, *, inspect_surfaces: bool = False) -> dict:
+def classify_footprint_validity(row: dict, footprint) -> dict:
+    """Audit in-footprint finiteness and [0, 1] bounds on an aligned single-band GeoTIFF.
+
+    Malformed files that match the template grid metadata (shape/CRS/transform)
+    but contain NaN/Inf or out-of-[0, 1] values inside the active competition
+    footprint are never silently dropped: their exact SHA-256 and invalid-cell
+    counts are preserved and classified into ``exclusions``.
+    """
+    import numpy as np
+    import rasterio
+
+    if not row.get("aligned") or "path" not in row:
+        return row
+    path = repo_path(Path(row["path"]))
+    if not path.is_file():
+        return row
+    with rasterio.open(path) as ds:
+        arr = ds.read(1)
+    in_fp = arr[footprint]
+    finite_in_fp = np.isfinite(in_fp)
+    invalid_cells = int((~finite_in_fp).sum())
+    out_of_range = int((finite_in_fp & ((in_fp < 0.0) | (in_fp > 1.0))).sum())
+    complete = invalid_cells == 0 and out_of_range == 0
+    updated = {
+        **row,
+        "footprint_complete": complete,
+        "invalid_in_footprint_cells": invalid_cells,
+        "out_of_range_in_footprint_cells": out_of_range,
+    }
+    if not complete:
+        outside_fp = arr[~footprint]
+        reasons = []
+        if invalid_cells > 0:
+            reasons.append(f"{invalid_cells} non-finite cells inside competition footprint")
+        if out_of_range > 0:
+            reasons.append(f"{out_of_range} out-of-[0,1] cells inside competition footprint")
+        updated.update({
+            "finite_in_footprint_cells": int(finite_in_fp.sum()),
+            "positive_dots_in_footprint": int((finite_in_fp & (in_fp > 0.0)).sum()),
+            "positive_dots_outside_footprint": int((np.isfinite(outside_fp) & (outside_fp > 0.0)).sum()),
+            "excluded_reason": "; ".join(reasons),
+        })
+    return updated
+
+
+def snapshot(
+    output: Path,
+    template: Path,
+    *,
+    inspect_surfaces: bool = False,
+    include_docs_tiffs: bool = True,
+) -> dict:
     """Create a new, explicitly named public-source snapshot.
 
     The output guard runs before reading a source tree or downloading a TIFF. It
     protects historic novelty/holdout receipts even if a caller accidentally
     supplies their filename as a refresh target.
     """
+    import numpy as np
     import rasterio
+    from gemsdoe30.submission import valid_template_mask
 
     output = require_new_snapshot_target(output)
     pins = json.loads((ROOT / "docs/research/priority-site-pins.json").read_text())
     with rasterio.open(template) as ds:
         grid = (ds.shape, ds.crs, ds.transform)
+        footprint = valid_template_mask(ds, np)
     inventory, snapshots, surface_candidates, open_pr_heads = [], [], [], []
     seen_repos = set()
     for row in pins["rasters"]:
@@ -253,7 +308,12 @@ def snapshot(output: Path, template: Path, *, inspect_surfaces: bool = False) ->
         if tree.get("truncated"):
             raise ValueError(f"truncated source tree: {repo}")
         blobs = [item for item in tree["tree"] if item["type"] == "blob"]
-        items = [item for item in blobs if is_public_raster_candidate(item["path"])]
+        if include_docs_tiffs:
+            items = [item for item in blobs if is_public_raster_candidate(item["path"])]
+        else:
+            items = [item for item in blobs if item["path"].startswith("docs/downloads/")
+                     and item["path"].lower().endswith((".tif", ".tiff"))]
+        published_paths = {item["path"] for item in items}
         # This is deliberately path-level inventory only. Array contents may be
         # intermediate tensors, use another grid, or leak labels; no candidate is
         # restored, aligned, scored, or compared at this stage.
@@ -262,6 +322,7 @@ def snapshot(output: Path, template: Path, *, inspect_surfaces: bool = False) ->
              "git_blob_sha1": item["sha"], "expected_bytes": item["size"],
              "discovery_scope": "path-name only; not downloaded, grid-checked, or treated as a continuous prediction surface"}
             for item in blobs if is_surface_candidate(item["path"])
+            and item["path"] not in published_paths
             and not is_public_raster_candidate(item["path"])
         ]
         surface_candidates.extend(discovered)
@@ -276,11 +337,11 @@ def snapshot(output: Path, template: Path, *, inspect_surfaces: bool = False) ->
                               "expected_bytes": item["size"]})
 
     with ThreadPoolExecutor(max_workers=4) as executor:
-        restored = list(executor.map(lambda row: restore_row(row, grid), inventory))
+        restored = list(executor.map(lambda row: classify_footprint_validity(restore_row(row, grid), footprint), inventory))
     # Keep every source alias but avoid repeating byte-identical comparisons.
     rasters, by_sha, exclusions = [], {}, []
     for row in restored:
-        if not row["aligned"]:
+        if not row["aligned"] or not row.get("footprint_complete", True):
             exclusions.append(row)
             continue
         if row["sha256"] in by_sha:
@@ -352,17 +413,24 @@ def main() -> None:
     parser.add_argument("--inspect-surfaces", action="store_true",
                         help=("fetch and inspect metadata for likely public continuous-surface files; "
                               "never scores, compares, or approves them"))
+    parser.add_argument("--include-docs-tiffs", action="store_true",
+                        help=("snapshot all docs/**/*.tif[f] (including docs/research/) rather than only docs/downloads/"))
     args = parser.parse_args()
     template = repo_path(args.template)
     if args.restore_only:
-        if args.inspect_surfaces:
-            parser.error("--inspect-surfaces requires a fresh explicitly named snapshot, not --restore-only")
+        if args.inspect_surfaces or args.include_docs_tiffs:
+            parser.error("--inspect-surfaces / --include-docs-tiffs require a fresh explicitly named snapshot, not --restore-only")
         output = repo_path(args.output or DEFAULT_RESTORE_REGISTRY)
         restore_frozen(output, template)
         return
     if args.output is None:
         parser.error("fresh snapshots require an explicit --output outside the frozen experiment registries")
-    snapshot(repo_path(args.output), template, inspect_surfaces=args.inspect_surfaces)
+    snapshot(
+        repo_path(args.output),
+        template,
+        inspect_surfaces=args.inspect_surfaces,
+        include_docs_tiffs=args.include_docs_tiffs,
+    )
 
 
 if __name__ == "__main__":

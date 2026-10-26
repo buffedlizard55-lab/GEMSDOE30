@@ -52,9 +52,8 @@ def read(row, grid):
         return ds.read(1)
 
 
-def audit():
-    registry_path = REPORT / "registry.json"
-    registry = json.loads(registry_path.read_text())
+def audit(registry_path: Path = REPORT / "registry.json", candidate_path: Path | None = None):
+    registry = json.loads(Path(registry_path).read_text())
     snapshots = {s["site"]: s for s in registry["snapshots"]}
     pins = json.loads((ROOT / "docs/research/priority-site-pins.json").read_text())
     template = ROOT / "data/raw/sample_submission.tif"
@@ -106,6 +105,14 @@ def audit():
     for row in rows:
         row["exact_value_alias_sites"] = [r["site"] for r in rows
                                           if r["site"] != row["site"] and r["values_sha256"] == row["values_sha256"]]
+    if candidate_path is not None:
+        with rasterio.open(candidate_path) as cds:
+            cand_arr = cds.read(1)
+        cand_cache = rank_cache(cand_arr, valid)
+        for row in rows:
+            comp = compare(cand_arr, arrays[row["site"]], valid, stage="dots", cached_ranks=cand_cache)
+            row["csr1_spearman"] = float(comp["spearman_full_footprint"])
+            row["csr1_fraction_within_3px"] = float(comp["candidate_fraction_within_3px_of_reference"])
     d28 = arrays["GEMSDOE25"] > 0
     h33 = arrays["GEMSDOE32"] > 0
     r1_pin = next(r for r in pins["rasters"] if r["site"] == "GEMSDOE28")
@@ -137,10 +144,12 @@ def audit():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--registry", type=Path, default=REPORT / "registry.json")
+    parser.add_argument("--candidate", type=Path, default=None)
     parser.add_argument("--output", type=Path, default=REPORT / "fleet-audit.json")
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
-    content = json.dumps(audit(), indent=2, allow_nan=False) + "\n"
+    content = json.dumps(audit(args.registry, args.candidate), indent=2, allow_nan=False) + "\n"
     if args.check:
         if args.output.read_text() != content:
             raise SystemExit("fleet audit stale")

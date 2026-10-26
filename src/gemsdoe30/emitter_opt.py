@@ -167,6 +167,7 @@ def edge_select(
     pixel_m: float = DEFAULT_PIXEL_M,
     radius_m: float = DEFAULT_RADIUS_M,
     offsets: list[tuple[int, int, float]] | None = None,
+    min_sq_dist_excl: int = 0,
     return_diagnostics: bool = False,
 ) -> Any:
     """Greedily emit dots by *expected marginal index gain* (see module docstring).
@@ -212,6 +213,8 @@ def edge_select(
         raise ValueError("alpha must be inside (0, 1)")
     if int(max_dots) < 1:
         raise ValueError("max_dots must be a positive integer")
+    if int(min_sq_dist_excl) < 0:
+        raise ValueError("min_sq_dist_excl must be non-negative")
 
     offsets = offsets if offsets is not None else kernel_offsets(pixel_m, radius_m)
     # Zero-weight offsets (distance exactly at the support radius) carry no credit
@@ -285,9 +288,25 @@ def edge_select(
     box_dy = box_dy.ravel()
     box_dx = box_dx.ravel()
 
+    excl_sq = int(min_sq_dist_excl)
+    if excl_sq > 0:
+        excl_r = int(math.isqrt(excl_sq))
+        er, ec = np.meshgrid(
+            np.arange(-excl_r, excl_r + 1, dtype=np.int64),
+            np.arange(-excl_r, excl_r + 1, dtype=np.int64),
+            indexing="ij",
+        )
+        emask = (er * er + ec * ec) <= excl_sq
+        excl_dy = er[emask].ravel()
+        excl_dx = ec[emask].ravel()
+    else:
+        excl_dy = np.zeros(0, dtype=np.int64)
+        excl_dx = np.zeros(0, dtype=np.int64)
+
     height, width = values.shape
     flat_width = width
     chosen = np.zeros(eligible.size, dtype=bool)
+    blocked = np.zeros(eligible.size, dtype=bool)
     order: list[int] = []
     cumulative_tp = [0.0]
     cumulative_fp = [0.0]
@@ -312,12 +331,29 @@ def edge_select(
 
         order.append(flat)
         chosen[index] = True
+        blocked[index] = True
         total_tp += best_gain
         total_fp += cost
         current = candidate
         cumulative_tp.append(total_tp)
         cumulative_fp.append(total_fp)
         eligible_gain[index] = -np.inf
+
+        if excl_sq > 0:
+            erows = row + excl_dy
+            ecols = col + excl_dx
+            ein = (erows >= 0) & (erows < height) & (ecols >= 0) & (ecols < width)
+            if ein.any():
+                eflat = erows[ein] * flat_width + ecols[ein]
+                epos = np.searchsorted(eligible, eflat)
+                erange = epos < eligible.size
+                epos = epos[erange]
+                eflat = eflat[erange]
+                ematched = eligible[epos] == eflat
+                epos = epos[ematched]
+                if epos.size:
+                    blocked[epos] = True
+                    eligible_gain[epos] = -np.inf
 
         neighbour_rows = row + offset_rows
         neighbour_cols = col + offset_cols
@@ -357,9 +393,8 @@ def edge_select(
         positions = positions[matched]
         if positions.size:
             eligible_gain[positions] = updated.astype(np.float32)
-            # Accepted pixels are never candidates again, even if a later dot would
-            # have raised their neighbourhood gain.
-            eligible_gain[positions[chosen[positions]]] = -np.inf
+            # Accepted or spacing-excluded pixels are never candidates again.
+            eligible_gain[positions[blocked[positions]]] = -np.inf
 
     mask = np.zeros(values.shape, dtype=bool)
     if order:

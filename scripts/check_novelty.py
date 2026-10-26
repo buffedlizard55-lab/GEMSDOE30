@@ -58,12 +58,47 @@ def audit(candidate, template, registry, stage):
                                 **by_values[value_hash]})
         except (ValueError, OSError, KeyError) as exc:
             errors.append(f"{row.get('path', '<missing path>')}: {exc}")
+    malformed_audited = []
+    for row in manifest.get('exclusions', []):
+        if not row.get('aligned') or row.get('footprint_complete', True) or 'path' not in row:
+            continue
+        try:
+            path = row['path']
+            if digest(path) != row['sha256']:
+                raise ValueError(f'hash mismatch in malformed exclusion: {path}')
+            reference = read(path)
+            in_fp = reference[mask]
+            fin_in_fp = np.isfinite(in_fp)
+            invalid_cells = int((~fin_in_fp).sum())
+            out_of_range = int((fin_in_fp & ((in_fp < 0.0) | (in_fp > 1.0))).sum())
+            finite_mask = mask & np.isfinite(reference) & (reference >= 0.0) & (reference <= 1.0)
+            subset_stats = (
+                compare(a, np.where(finite_mask, reference, 0.0), finite_mask, stage=stage)
+                if finite_mask.any() else {'spearman': 0.0, 'duplicate': False}
+            )
+            if subset_stats.get('duplicate'):
+                errors.append(f"duplicate against finite subset of malformed exclusion: {path}")
+            malformed_audited.append({
+                'reference': path,
+                'site': row.get('site'),
+                'reference_sha256': row['sha256'],
+                'invalid_in_footprint_cells': invalid_cells,
+                'out_of_range_in_footprint_cells': out_of_range,
+                'finite_in_footprint_cells': int(finite_mask.sum()),
+                'excluded_reason': row.get('excluded_reason'),
+                'finite_subset_comparison': subset_stats,
+            })
+        except (ValueError, OSError, KeyError) as exc:
+            errors.append(f"{row.get('path', '<missing exclusion path>')}: {exc}")
     result = decision(comparisons, stage=stage,
                       registry_complete=manifest.get('complete') is True and not errors)
+    if errors and result == 'novelty-check-passed-not-submission-approval':
+        result = 'blocked-incomplete-registry'
     return {'schema_version': 1, 'stage': stage, 'candidate': str(candidate),
             'candidate_sha256': digest(candidate), 'template_sha256': digest(template),
             'registry_sha256': digest(registry), 'registry_complete': manifest.get('complete') is True,
-            'comparisons': comparisons, 'errors': errors, 'decision': result,
+            'comparisons': comparisons, 'malformed_exclusions_audited': malformed_audited,
+            'errors': errors, 'decision': result,
             'submission_approved': False}
 
 
