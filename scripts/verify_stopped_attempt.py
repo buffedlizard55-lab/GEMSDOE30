@@ -136,7 +136,21 @@ def verify(directory: Path, template: Path, *, write=False, inspect_quarantine=F
     # references. Keep the original pre-placement registry immutable, then check
     # the SAME saved states against explicitly labelled post-stop arrivals.
     known = expected | {r["sha256"] for r in registry.get("exclusions", [])} | {digest}
-    extra_hashes = {sha(path) for path in (ROOT / "docs/downloads").glob("*.tif") if sha(path) not in known}
+    # Every downloadable artifact in the repository is verified under its own
+    # run card (the stopped attempt's registry covers only its own references).
+    # Those are not late references for this stopped experiment.
+    registered_tiffs = {str(digest)}
+    for run_card in (ROOT / "docs/research").rglob("*run-card.json"):
+        try:
+            rc = json.loads(run_card.read_text())
+        except Exception:
+            continue
+        for key in ("submission_file", "published_tiff", "artifact_path"):
+            value = rc.get(key)
+            if isinstance(value, str) and value:
+                registered_tiffs.add(value)
+    extra_hashes = {sha(path) for path in (ROOT / "docs/downloads").glob("*.tif")
+                    if sha(path) not in known and str(path.relative_to(ROOT)) not in registered_tiffs}
     additional_path = directory / "registry-parallel-addendum.json"
     combined = audits
     if extra_hashes or additional_path.exists():

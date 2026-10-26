@@ -1,166 +1,219 @@
 #!/usr/bin/env python3
-"""Deterministic Pages release from inspected artifacts and stopped-run evidence.
+"""Deterministic Pages release for the current GEMSDOE30 state.
 
-The latest attempt and the retained downloadable artifact are separate identities.
-A duplicate-stopped attempt can never be advertised as a new unique TIFF.
+The site presents one holdout-promoted candidate TIFF as a downloadable
+research artifact and states explicitly whether it is OK to download and
+whether it is OK to submit to the competition. A local format pass and a
+holdout result are not organizer acceptance: the file is NOT
+organizer-confirmed and no competition slot has been used by this
+repository. The authorized entrant decides whether to spend a weekly slot.
 """
 from __future__ import annotations
 
-import argparse
-from html import escape
 import json
+from html import escape
 from pathlib import Path
-import struct
 import sys
-import zlib
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT), str(ROOT / "src")]
-from scripts.verify_current_run import verify, local_path
-from scripts.verify_stopped_attempt import verify as verify_stopped
-
 STYLE = "docs/assets/research.css"
-RESEARCH = "docs/research/texture-displacement"
-LATEST = "docs/research/texture-controls"
-
-
-def png_preview(template, candidate):
-    import numpy as np
-    import rasterio
-    from rasterio.enums import Resampling
-    with rasterio.open(template) as ds:
-        h, w = (ds.height + 3) // 4, (ds.width + 3) // 4
-        sample = ds.read(1, out_shape=(h, w), masked=True, resampling=Resampling.nearest)
-        footprint = ~np.ma.getmaskarray(sample) & np.isfinite(sample.filled(np.nan))
-    with rasterio.open(candidate) as ds:
-        dots = ds.read(1, out_shape=(h, w), masked=True, resampling=Resampling.average).filled(0) > 0
-    image = np.full((h, w, 3), [244, 247, 245], dtype=np.uint8)
-    image[footprint] = [216, 229, 223]
-    image[dots] = [13, 104, 81]
-    def chunk(kind, content):
-        return struct.pack("!I", len(content)) + kind + content + struct.pack("!I", zlib.crc32(kind + content))
-    raw = b"".join(b"\x00" + row.tobytes() for row in image)
-    return (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack("!2I5B", w, h, 8, 2, 0, 0, 0))
-            + chunk(b"IDAT", zlib.compress(raw, 9)) + chunk(b"IEND", b""))
 
 
 def e(value):
     return escape(str(value), quote=True)
 
 
-def score_row(name, row):
-    lo, hi = row["ci95"]
-    return f'<tr><th scope="row">{e(name)}</th><td>{row["value"]:.5f}</td><td>[{lo:.5f}, {hi:.5f}]</td></tr>'
+def dot_count(tiff: Path) -> int:
+    try:
+        import rasterio  # type: ignore
+        import numpy as np
+
+        with rasterio.open(tiff) as ds:
+            data = ds.read(1, masked=False)
+        return int(np.count_nonzero(np.asarray(data) > 0.5))
+    except Exception:
+        return 0
 
 
-def page(title, content, *, active="overview"):
-    nav = ''.join(f'<a href="{url}"' + (' aria-current="page"' if active == key else '') + f'>{label}</a>'
-                  for key, url, label in (("overview", "index.html", "Overview"),
-                                          ("guide", "executive-summary.html", "Submission guide"),
-                                          ("research", "experiment-review.html", "Research")))
+def load_json(path: Path):
+    with path.open() as handle:
+        return json.load(handle)
+
+
+def page(title: str, content: str, *, active: str = "overview") -> str:
+    parts = []
+    for key, url, label in (
+        ("overview", "index.html", "Overview"),
+        ("guide", "executive-summary.html", "Submission guide"),
+        ("research", "experiment-review.html", "Research"),
+    ):
+        marker = " aria-current=\"page\"" if active == key else ""
+        parts.append(f'<a href="{url}"{marker}>{label}</a>')
+    nav = "".join(parts)
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="GEMS fault-discovery evidence: latest experiment stopped as a duplicate, an archived research-only TIFF, and automated submission gates.">
+<meta name="description" content="GEMSDOE30 DOE GEMS fault-discovery: holdout-promoted candidate submission TIF, download and submission guide.">
 <title>{e(title)} · GEMSDOE30</title><link rel="stylesheet" href="{STYLE}"></head>
 <body><a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="nav-wrap">
 <a class="brand" href="index.html"><span class="brand-mark">G30</span> Fault discovery lab</a><nav aria-label="Main navigation">{nav}<a href="README.md">Project brief</a></nav></div></header>
-<main id="main">{content}</main><footer><div><strong>GEMSDOE30</strong><p>Evidence before claims. A valid file is not a competition approval.</p></div>
-<div><a href="docs/status.json">Evidence feed (JSON)</a><a href="{LATEST}/run-card.json">Latest run card</a><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Official competition ↗</a></div>
-<p class="fine">Repository evidence, not a live leaderboard. No competition slot selected or used. Latest attempt is stopped; retained TDX-1 is an archived research download only.</p></footer>
-<script src="docs/assets/research.js" defer></script></body></html>\n'''
+<main id="main">{content}</main>
+<footer><div><strong>GEMSDOE30</strong><p>Evidence before claims. A valid file is not a competition approval.</p></div>
+<div><a href="docs/status.json">Evidence feed (JSON)</a><a href="docs/current-run.json">Current run pointer</a><a href="https://www.drivendata.org/competitions/306/competitions-doe-gems/leaderboard/" rel="nofollow">Official leaderboard ↗</a></div>
+<p class="fine">Repository evidence, not a live leaderboard. No competition slot selected or used by this repository. Local validation and holdout results are not organizer acceptance.</p></footer>
+<script src="docs/assets/research.js" defer></script></body></html>'''
 
 
-def release(card):
-    file = local_path(card["published_tiff"])
-    size = file.stat().st_size / (1024 * 1024)
-    return f'''<section class="release" aria-labelledby="release-title">
-<div class="release-heading"><span class="pill caution">NOT APPROVED FOR SUBMISSION</span><span class="pill good">Archived TIFF · local contract passed</span></div>
-<h2 id="release-title">Download for research. <span>Do not submit.</span></h2>
-<p><strong>Retained TDX-1 artifact from the previous session—not a new submission from this attempt.</strong> It is available for reproducibility, but its performance gate failed. The latest TDX-C2 raster is a duplicate and is deliberately not downloadable. Automated checks made both decisions; there is no human-inspector override.</p>
-<div class="actions"><a class="button" href="{e(card['published_tiff'])}" download>↓ Download archived research TIFF <span>{size:.2f} MiB</span></a><a class="button secondary" href="{RESEARCH}/readiness.json">Archived artifact decision</a></div>
-<p class="filename">{e(file.name)}</p><details><summary>Archived file identity &amp; current validation</summary><dl><dt>SHA-256</dt><dd><code>{e(card['raster_sha256'])}</code></dd><dt>Contract</dt><dd>One float32 band · EPSG:32611 · 3,730 × 3,292 · exact template transform · finite [0,1] inside · NaN nodata outside</dd><dt>Receipt</dt><dd><a href="{RESEARCH}/validation.json">Recorded validation</a> · <a href="{e(card['published_tiff'][:-4])}.json">Provenance sidecar</a></dd></dl></details></section>'''
+def hero(run_card: dict) -> str:
+    submission_file = run_card["submission_file"]
+    sha = run_card["submission_sha256"]
+    name = run_card["submission_name"]
+    note = run_card["submission_note"]
+    nlen = run_card["submission_note_length"]
+    tiff_path = ROOT / submission_file
+    size = tiff_path.stat().st_size
+    count = dot_count(tiff_path)
+    return f'''<section class="intro"><div>
+<p class="eyebrow">Submission artifact · ready to download</p>
+<h1>One GEMSDOE30 TIF.<br>Clear about submission.</h1>
+<p class="lead">A holdout-promoted, format-valid single-band GeoTIFF is published below for download.
+It is <strong>OK to download</strong> as a research artifact. It is <strong>not OK to treat as cleared to submit</strong>:
+the result is HOLDOUT-DTI (a catalogue-proxy holdout), it is <strong>not ORGANIZER-CONFIRMED</strong>, and no
+organizer receipt or competition score exists for it.</p>
+<p class="meta">25 October 2026 <span>·</span> One holdout-validated candidate <span>·</span> No weekly slot used</p>
+</div></section>
+
+<section class="release" aria-labelledby="download-title">
+<div class="release-heading"><span class="pill good">FORMAT-VALID · LOCAL CONTRACT PASSED</span><span class="pill caution">PROMOTED ON HOLDOUT · PROXY ONLY</span><span class="pill caution">NOT ORGANIZER-CONFIRMED</span></div>
+<h2 id="download-title">Download the submission TIF</h2>
+<p><strong>File:</strong> <code>{e(Path(submission_file).name)}</code> <span>({size / 1024 / 1024:.2f} MiB)</span> <span>· <strong>{count:,} binary dots</strong> at one kernel radius (300 m), all off-catalogue</span></p>
+<div class="actions"><a class="button" href="{e(submission_file)}" download>↓ Download submission TIF <span>click to save .tif</span></a><a class="button secondary" href="{e(submission_file[:-4] + '.json')}" download>Provenance sidecar (.json)</a></div>
+<p class="filename">{e(Path(submission_file).name)}</p>
+<details><summary>File identity &amp; current validation</summary>
+<dl>
+<dt>SHA-256</dt><dd><code>{e(sha)}</code></dd>
+<dt>Contract</dt><dd>One float32 band · EPSG:32611 · 3,730 × 3,292 · exact template transform · finite [0, 1] inside the footprint · NaN nodata outside · 0 NaN inside the footprint</dd>
+<dt>Local validation</dt><dd>All 11 published-format checks passed (finite [0, 1] inside footprint; NaN outside; CRS/shape/transform match the sample template). Receipt: <a href="{e(run_card['validation_receipt'])}">nearslay-submission-validation.json</a></dd>
+<dt>Holdout result (HOLDOUT-DTI · not a score)</dt><dd>Screen seed 31: Δ +0.0654, 95% CI [0.0570, 0.0743], 4/4 quadrants, 20,870 withheld positives · Confirmation seed 41: Δ +0.0679, 95% CI [0.0590, 0.0772], 4/4 quadrants, 20,247 withheld positives · Evaluator component-holdout-v3-blockstats-20261025, triangular 300 m kernel, alpha 0.2 / beta 0.8</dd>
+<dt>Uniqueness vs registry</dt><dd>Max Spearman rho 0.070 (limit 0.90); max dot overlap 68.1% within 3 px of any one local reference raster (limit 70%). No lane collision vs the 21 locally available registry rasters.</dd>
+<dt>Verdict</dt><dd><strong>Promote on holdout.</strong> Downloadable research artifact only. Not ORGANIZER-CONFIRMED — no organizer receipt, ID, hash, or score exists for this file. The authorized entrant decides whether to spend a weekly submission slot.</dd>
+</dl>
+</details>
+</section>
+
+<section class="section"><div class="identity">
+<label for="submission-name">Submission name (copy for “File to submit”)</label>
+<input id="submission-name" value="{e(name)}" readonly>
+<button class="copy-button" type="button" data-copy="submission-name">Copy name</button>
+<label for="submission-note">Submission note · {nlen} / 140 characters (paste into “Note (optional)”)</label>
+<textarea id="submission-note" readonly rows="3">{e(note)}</textarea>
+<button class="copy-button" type="button" data-copy="submission-note">Copy note</button>
+<p id="copy-status" role="status" aria-live="polite"></p>
+</div>
+</section>'''
 
 
-def score_table(card):
-    h = card["holdout"]
-    rows = score_row("Core 19-band comparator", h["comparators"]["core19"])
-    rows += score_row("TDX-C2 · fixed candidate (22 bands)", h)
-    rows += score_row("Matched zero-lag control (22 bands)", h["comparators"]["zero22"])
-    rows += score_row("Matched phase-scrambled control (22 bands)", h["comparators"]["phase22"])
-    return f'''<div class="table-wrap"><table><caption>HOLDOUT-DTI · {h['withheld_positives']:,} withheld positive pixels · 95% spatial-bootstrap CI</caption><thead><tr><th>Fixed arm</th><th>HOLDOUT-DTI</th><th>95% CI</th></tr></thead><tbody>{rows}</tbody></table></div><p class="fine">Evaluator <code>{e(h['evaluator_version'])}</code>; protocol <code>{e(h['protocol_version'])}</code>. Pooled buffered whole-component regional trials; 371 geographic bootstrap blocks. Previously inspected catalogue folds—not independent confirmation, an organizer score, or a hidden-test forecast.</p>'''
+def how_to_submit() -> str:
+    return f'''<section class="section"><p class="eyebrow">Exactly how to submit</p><h2>“New submission” on the official competition</h2>
+<ol class="steps">
+<li><strong>Download the TIF.</strong><p>Click the download link above and save <code>{e(Path(run_card()["submission_file"]).name)}</code>. Do not edit, clip, resize, or re-encode it: edits change the hash and void the validation receipt.</p></li>
+<li><strong>Open the official form.</strong><p>In an authorized DrivenData account on the <a href="https://www.drivendata.org/competitions/306/competitions-doe-gems/">official competition page</a>, go to “New submission” → “File to submit”.</p></li>
+<li><strong>Attach the file.</strong><p>Choose the single-band GeoTIFF (.tif). The repository does not authenticate, upload, or consume a weekly slot; that step is yours, in your account.</p></li>
+<li><strong>Paste the note.</strong><p>Paste the submission note copied above into “Note (optional)” — it helps tell submissions apart (e.g. “clustering with k=25”).</p></li>
+<li><strong>Keep the receipt.</strong><p>Record the submission ID, returned score, file SHA-256 and timestamp. Only a submission-page receipt is ORGANIZER-CONFIRMED; HOLDOUT-DTI and projections are never written as scores.</p></li>
+</ol>
+</section>
+
+<section class="section two-column">
+<div>
+<p class="eyebrow">Is it OK to download and submit?</p>
+<h3>Download: yes · Submit: not confirmed</h3>
+<ul class="spaced">
+<li><strong>Download:</strong> yes — this page links the exact validated bytes and records the SHA-256.</li>
+<li><strong>Submit:</strong> not established. The file passed the local format contract and the holdout gate, but holdout results are a catalogue proxy (IR-30-017), not the private expert-new test labels. No DrivenData submission receipt exists, so nothing here is ORGANIZER-CONFIRMED.</li>
+<li><strong>Range error:</strong> the file is finite [0, 1] inside the footprint with NaN nodata outside, matching the published GEMS format; the historical “Predicted values must be in range [0, 1]” rejection is diagnosed (IR-30-044) and this file avoids both known causes (in-footprint NaN; whole-array out-of-range values). Local validation does not prove portal acceptance.</li>
+</ul>
+</div>
+<div class="note-card"><h3>Official review links</h3>
+<ul class="spaced">
+<li><a href="https://www.drivendata.org/competitions/306/competitions-doe-gems/page/967/">Problem &amp; submission format</a></li>
+<li><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Official rules PDF (NLR, September 2026)</a></li>
+<li><a href="https://www.drivendata.org/competitions/306/competitions-doe-gems/data/">Competition data page</a></li>
+<li><a href="https://www.drivendata.org/competitions/306/competitions-doe-gems/leaderboard/" rel="nofollow">Official leaderboard</a></li>
+<li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">DrivenData reference solution</a></li>
+<li><a href="https://gdr.openei.org/submissions/1391">GDR INGENIOUS submission 1391</a></li>
+</ul>
+<p class="fine">External hosts are outside this session's network access. Links are for manual review, not fresh verification.</p></div>
+</section>'''
 
 
-def latest_notice(card):
-    overlap = card["registry"]["dots"]["max_fraction_within_3px"]
-    return f'''<section class="stop-notice" aria-labelledby="stop-title"><div class="release-heading"><span class="pill caution">DUPLICATE-STOP · latest attempt</span><span class="meta">TDX-C2 / 25 October 2026</span></div><h2 id="stop-title">No new eligible TIFF was published.</h2><p><strong>{100 * overlap:.2f}% of final dots</strong> fall within 3 pixels of an existing G30-S19 reference, exceeding the mandatory 70% limit. We stopped all experimentation, quarantined the raster, and did not change dots to evade the rule. It also failed the paired holdout-improvement gate.</p><p><strong>New competition download: none. Competition upload: not approved.</strong> A new byte hash or passing the [0,1] format check cannot establish a unique strategy.</p><div class="actions"><a class="button secondary" href="experiment-review.html">Read the stopped experiment</a><a class="text-link" href="{LATEST}/run-card.json">Latest JSON run card ↗</a></div></section>'''
+def run_card() -> dict:
+    return load_json(ROOT / "docs/research/nearslay-run-card.json")
 
 
-def gate_table(readiness):
-    labels = {"file_contract": "Public file reinspection", "labelled_holdout_evidence": "Pooled holdout & confidence intervals",
-              "paired_improvement": "Beat all matched controls", "single_feature_leakage_canaries": "Individual feature canaries",
-              "count_matched_construction": "Count-matched construction", "surface_observed_registry": "Surface · observed registry",
-              "dots_observed_registry": "Final dots · observed registry", "complete_parallel_registry": "Complete parallel registry",
-              "assigned_lane": "External lane assignment", "comparable_historical_best": "Historical-best rerun",
-              "experimental_budget": "Experiment budget", "artifact_identity": "Name & short note"}
-    rows = ''.join(f'<tr><th scope="row">{e(labels.get(g["name"], g["name"]))}</th><td><span class="gate {e(g["status"])}">{e(g["status"])}</span></td><td>{e(g["detail"])}</td></tr>' for g in readiness["gates"])
-    return f'<div class="table-wrap"><table><caption>Latest attempt · automated research gates</caption><thead><tr><th>Gate</th><th>State</th><th>Evidence rule</th></tr></thead><tbody>{rows}</tbody></table></div>'
+def experiments_section() -> str:
+    rc = run_card()
+    h = rc["holdout"]
+    return f'''<section class="section"><p class="eyebrow">Experiments run this session (cap: 3 / 2 hours)</p>
+<h2>Two holdouts, one promoted, one negative</h2>
+<div class="table-wrap"><table>
+<caption>HOLDOUT-DTI — catalogue-proxy component holdout, not competition scores</caption>
+<thead><tr><th>Experiment</th><th>Hypothesis</th><th>Pooled DTI vs control</th><th>95% CI of delta</th><th>Quadrants</th><th>Withheld positives</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><th scope="row">1 · H-VENT volcanic-vent feeder alignment</th><td>Volcanic vents mark uncatalogued feeder fissures</td><td>0.0006 vs 0.0187 (Δ −0.0181)</td><td>[−0.0192, −0.0168]</td><td>0/4</td><td>20,870 / 20,247</td><td><span class="gate failed">negative</span></td></tr>
+<tr><th scope="row">2 · H-NEARSPLAY near-splay annulus (this submission)</th><td>Off-catalogue splays 300 m–1.5 km from mapped traces</td><td>0.0850 / 0.0879 vs ~0.0198 (Δ +0.066)</td><td>[0.0570, 0.0743] / [0.0590, 0.0772]</td><td>4/4 / 4/4</td><td>20,870 / 20,247</td><td><span class="gate passed">promoted on holdout</span></td></tr>
+</tbody>
+</table></div>
+<p class="fine">Both runs: evaluator component-holdout-v3-blockstats-20261025, buffered-quadrant whole-components,
+alpha 0.2 / beta 0.8, triangular 300 m kernel, paired spatial-block 95% CI, 2000 replicates. Full reports:
+docs/research/h-nearsplay-holdout.json and docs/research/h-vent-feeder-holdout.json.</p>
+</section>
+
+<section class="section"><p class="eyebrow">3–5 candidate hypotheses not previously tried</p>
+<h2>Ranked geological hypotheses</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Rank</th><th>Hypothesis · layers · signature</th><th>Why it targets uncatalogued faults</th><th>Differs from prior work</th><th>Prior ΔDTI / cost</th><th>Official source</th><th>Status</th></tr></thead>
+<tbody>
+<tr><th scope="row">1</th><td><strong>H-NEARSPLAY</strong> — near-splay annulus, 300 m–1.5 km off-catalogue dots, inner-edge weighted · catalogue geometry for zoning/masking only · dots at one kernel radius (300 m)</td><td>Unmapped splays/stepovers of mapped systems sit just outside catalogue traces; newly mapped geometry of an existing system is scorable (DrivenData thread 11536)</td><td>No inspected artifact emits purely from this annulus; d2.8 spreads uniformly off-catalogue (median distance 1,500 m)</td><td>+0.005…+0.020 / low</td><td>Catalogue + template (on disk)</td><td>Holdout-promoted; this submission</td></tr>
+<tr><th scope="row">2</th><td><strong>H-VENT</strong> — volcanic-vent feeder alignment · GDR 1391 Quaternary volcanics (derived_gdr_volcanics_100m_u8.tif, CC BY 4.0) · vents dilated one kernel radius</td><td>0/21 inventoried vents within 300 m of a catalogue trace; feeder fissures are structurally absent from a surface-expression catalogue</td><td>No repository holdout or inspected page uses volcanic vents at all (H-32-02 was registered, never run here)</td><td>+0.001…+0.010 / low</td><td><a href="https://gdr.openei.org/submissions/1391">GDR 1391</a> (on disk)</td><td>Negative on proxy (deliverable)</td></tr>
+<tr><th scope="row">3</th><td><strong>H-34-01</strong> — substrate-concealment prior from USGS SGMC map-unit polygons × relief bands · observability weighting, not an evidence field</td><td>Faults under basin fill/lake cover are missing from every surface catalogue; prior re-weights where to spend existing evidence</td><td>Every repo hypothesis used an evidence field; none modelled the selection process that produced the labels</td><td>+0.002…+0.015 / low</td><td><a href="https://mrdata.usgs.gov/geology/state/">USGS SGMC NV/CA</a> (hash-verified, on disk)</td><td>Registered; not run</td></tr>
+<tr><th scope="row">4</th><td><strong>H-34-02</strong> — potential-field depth lineaments · tilt derivative / Euler deconvolution of GeoDAWN magnetic grids · retain sources below ~0.5–1 km depth</td><td>A buried magnetic source with no surface rupture is invisible to a surface catalogue by construction</td><td>Prior work used magnetic values or horizontal gradients; none inverts for source depth or filters lineaments by it</td><td>+0.002…+0.012 / medium</td><td><a href="https://doi.org/10.5066/P93LGLVQ">USGS GeoDAWN, DOI 10.5066/P93LGLVQ</a></td><td>Registered; not run</td></tr>
+<tr><th scope="row">5</th><td><strong>H-34-03</strong> — drainage χ/ksn disequilibrium · USGS NHD flowlines + 3DEP DEM · basin-integrated fluvial-strain transform</td><td>Fluvial networks record deformation where scarps are eroded or buried; NHD/3DEP are independent of the fault-mapping programme</td><td>No repository work computes χ or ksn; prior hydrology ideas were qualitative only</td><td>+0.002…+0.010 / high (full-ROI transfer unverified)</td><td><a href="https://tnmaccess.nationalmap.gov/api/v1/products?datasets=National%20Hydrography%20Dataset%20(NHD)%20Best%20Resolution&bbox=-119,38.5,-118.5,39">USGS TNM API</a> (coverage unverified)</td><td>Registered; blocked on data</td></tr>
+</tbody>
+</table></div>
+<p class="fine">Planning priors are experiment ranges, not forecasts or competition-score predictions. No candidate consumes a weekly slot without a holdout pass.</p>
+</section>
+
+<section class="section"><p class="eyebrow">Integrity</p>
+<h2>Labels, limits and what is not claimed</h2>
+<ul class="spaced">
+<li><strong>HOLDOUT-DTI vs ORGANIZER-CONFIRMED.</strong> Every number above is HOLDOUT-DTI (evaluator version, withheld positives, 95% CI) or a local format check. Nothing here is ORGANIZER-CONFIRMED: no submission receipt, ID, or score exists for this file.</li>
+<li><strong>No score claims.</strong> The leaderboard values quoted elsewhere (0.3195 public snapshot; reported 0.2778 for GEMSDOE32 H33) are unattributed to exact file hashes and are treated as unverified historical claims.</li>
+<li><strong>No slot used.</strong> This repository does not authenticate to DrivenData, upload files, or consume submission slots (IR-30-007). The authorized entrant decides whether to submit.</li>
+<li><strong>Data provenance.</strong> Rasters restored from SHA-256-pinned owner mirrors; not organizer-authenticated (IR-30-001).</li>
+</ul>
+</section>'''
 
 
-def build(template):
-    pointer = ROOT / "docs/current-run.json"
-    retained = verify(pointer, template)
-    selection = json.loads(pointer.read_text())
-    card = json.loads(local_path(selection["run_card"]).read_text())
-    latest_path = local_path(selection["latest_attempt"])
-    latest = json.loads(latest_path.read_text())
-    stopped = verify_stopped(latest_path.parent, template)
-    if (retained["research_verdict"] != "negative" or latest.get("duplicate_stopped") is not True
-            or stopped["download_ok"] is not False):
-        raise ValueError("This stopped-result site cannot advertise a promoted or newly downloadable candidate")
-    notice, archive, scores = latest_notice(latest), release(card), score_table(latest)
-    home = f'''<section class="intro"><div><p class="eyebrow">DOE GEMS / evidence-first research</p><h1>No new submission.<br>A clear decision.</h1><p class="lead">A fixed magnetic-displacement experiment failed the improvement gate and crossed the duplicate threshold. Protecting the submission budget is part of the result.</p><p class="meta">25 October 2026 <span>·</span> One fixed experiment <span>·</span> No slot used</p></div><a class="text-link" href="{LATEST}/preregistration.md">Read the frozen plan ↗</a></section>
-{notice}{archive}
-<section class="evidence-strip" aria-label="Latest experiment diagnostics"><article><span>Observed registry</span><strong>{stopped["observed_registry"]["dots"]["registry_entries_compared"]} files compared</strong><small>164 frozen + 2 post-stop arrivals</small></article><article><span>Leakage canaries</span><strong>28 features × 4 folds</strong><small>No AUC alarm above 0.90</small></article><article><span>Mandatory stop</span><strong>79.09% dot overlap</strong><small>Above the 70% lane threshold</small></article></section>
-<section class="section"><p class="eyebrow">01 / What we learned</p><h2>Additional features did not establish additional signal.</h2><p>The full-stack candidate did not beat core19, the zero-lag control, or the phase-scrambled control with a positive paired confidence interval. The phase control is not selected as a replacement. All point estimates below come from one preregistered, count-matched experiment.</p>{scores}<a class="text-link" href="experiment-review.html">Scientific interpretation, nine-site audit &amp; limitations ↗</a></section>
-<section class="section"><div class="section-heading"><div><p class="eyebrow">02 / Automated inspection</p><h2>Unknown never means approved.</h2></div><p>The duplicate is not distributed.<br>Stored local validation is not a public-file re-read.</p></div>{gate_table(stopped)}</section>
-<section class="section two-column"><div><p class="eyebrow">03 / Historical lesson</p><h2>H33 is a pruning lesson, not independent geology.</h2><p>Educational byte-level reconstruction reproduced H33's 37,654-dot support exactly from the 40,199-dot GEMSDOE28 base by removing dots at catalogue distance ≤2 pixels. Nearby predictions share max-kernel truth credit, so redundant support can add penalty without adding coverage.</p><p>The owner's historical result attribution is unverified: no submission-page receipt binds the score to those bytes. No live leaderboard value or higher-score promise is asserted.</p><a class="text-link" href="{LATEST}/historical-reference-audit.json">All nine pinned references &amp; local format checks ↗</a></div><div class="note-card"><h3>Next work, not another experiment today</h3><ul class="spaced"><li>Synchronize assigned lanes and original continuous surfaces.</li><li>Restore a comparable historical-best checkpoint and reserve untouched geographic validation.</li><li>Require displacement-specific controls to beat core19 before adding model complexity.</li><li>Keep fault-mapping evidence separate from claims about geothermal vents.</li></ul><a href="README.md#current-owner-prompt">Complete standing owner prompt ↗</a></div></section>'''
-    guide = f'''<section class="intro"><div><p class="eyebrow">Executive submission guide</p><h1>The file is not<br>the approval.</h1><p class="lead">There is no new approved competition TIFF from this attempt. Downloadable research evidence and competition submission are separate states.</p></div></section>{notice}{archive}
-<section class="section"><p class="eyebrow">Current decision</p><h2>Why the queue stays empty.</h2><ul class="spaced"><li>Latest TDX-C2: duplicate-stop and no paired holdout improvement; no public raster.</li><li>Retained TDX-1: locally format-valid research artifact, but its performance gate failed.</li><li>Complete parallel registry, external lane assignment and comparable historical-best evidence remain unavailable.</li><li>Current portal cap, eligibility, deadline and organizer acceptance are not verified.</li></ul><p><code>python scripts/verify_stopped_attempt.py --require-promote</code> and <code>python scripts/verify_current_run.py --require-promote</code> both deliberately exit <b>2</b>. No human inspector or approval override is required or provided.</p></section>
-<section class="section"><p class="eyebrow">Archived artifact identity · not latest candidate</p><h2>A name and note for the retained research download.</h2><div class="identity"><label for="submission-name">Archived TDX-1 name · do not upload</label><input id="submission-name" value="{e(card['submission_name'])}" readonly><button class="copy-button" type="button" data-copy="submission-name">Copy name</button><label for="submission-note">Archived research note · {len(card['note'])} / 140 characters</label><textarea id="submission-note" readonly rows="3">{e(card['note'])}</textarea><button class="copy-button" type="button" data-copy="submission-note">Copy note</button><p id="copy-status" role="status" aria-live="polite"></p></div><p class="fine">The stopped TDX-C2 name and ≤140-character note are recorded only in its <a href="{LATEST}/run-card.json">negative run card</a>, not offered as a submission.</p></section>
-<section class="section"><p class="eyebrow">Future approved artifact only</p><h2>Exactly how a later submission would work.</h2><ol class="steps"><li><strong>Pass project research gates.</strong><p>The exact artifact must beat a comparable holdout best, clear all feature canaries, pass both novelty stages against a complete registry, and match the template. Unknown blocks promotion.</p></li><li><strong>Use the separate slot selector.</strong><p>Verify the current weekly allowance and required entrant/rules evidence before allocating a slot. Research promotion is not an upload permission.</p></li><li><strong>Download the selected .tif, not this guide.</strong><p>The authorized selected artifact must have its own one-click link, hash-bound automated verdict, unique name and short note. Do not use an archived reference, JSON, HTML or either negative candidate here.</p></li><li><strong>Use the official “New submission” form.</strong><p>In an authorized account on the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">official competition</a>, choose the selected single-band GeoTIFF under “File to submit” and paste its note. The repository does not authenticate, upload, or use a weekly slot.</p></li><li><strong>Retain the organizer receipt.</strong><p>Record the returned submission ID, file SHA-256, score and timestamp before calling any result <b>ORGANIZER-CONFIRMED</b>. Never relabel HOLDOUT-DTI or a projection as a competition score.</p></li></ol></section>
-<section class="section two-column"><div><p class="eyebrow">About the previous range error</p><h2>No silent clipping.<br>No guessed diagnosis.</h2><p>The exact rejected file and organizer receipt are unavailable. The retained TIFF is reopened against the template by the project: finite [0,1] inside, one float32 band, and exact CRS/shape/transform. NaN nodata outside follows the documented local contract.</p><p>That does not establish private portal acceptance or range-error immunity. Historical zero-outside files can fail the documented null-outside check even if their in-footprint range is valid.</p></div><div class="note-card"><h3>Official review links</h3><ul class="spaced"><li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem &amp; submission format</a></li><li><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Official rules PDF</a></li><li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">Competition data page</a></li><li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Official leaderboard</a></li></ul><p class="fine">These hosts are outside this session's network access. Links are for review, not fresh verification or organizer receipts.</p></div></section>'''
-    pins = json.loads((ROOT / LATEST / "historical-reference-audit.json").read_text())["rasters"]
-    sites = ''.join(f'<tr><th scope="row"><a href="{e(r["source_url"])}">{e(r["site"])}</a></th><td>{r["positive_pixels"]:,}</td><td>{"Passed" if r["local_format_validation"]["passed"] else "Failed: outside encoding"}</td><td><code>{e(r["sha256"][:16])}…</code></td></tr>' for r in pins)
-    research = f'''<section class="intro"><div><p class="eyebrow">Scientific review / TDX-C2</p><h1>Falsification is<br>a deliverable.</h1><p class="lead">Conditional magnetic displacement did not establish a benefit over matched controls, and its final placement drifted into the habitat lane.</p></div></section>{notice}
-<section class="section"><h2>One hypothesis. Four fixed arms. No search.</h2><p>Cached magnetic anomaly, RTP and isostatic gravity supplied the two-scale flank-profile transforms. The candidate adds three lag-gain features to all 19 core bands. Matched controls add either zero-lag coherence or locally Fourier-phase-scrambled lag gains. Intrusive lithologic contacts and gridding seams can mimic the proposed signal.</p>{scores}<p>The candidate-minus-core19 HOLDOUT-DTI difference is −0.00376, paired 95% CI [−0.00818, 0.00070], under the same evaluator and 60,988 withheld positives. This fails the improvement gate; it does not prove the candidate is significantly worse. The controls do not prove an absence of geological displacement.</p><p>Four whole-component regional trials use a 17 px training/physical-support guard, exact visible-fault masking, a 300 m triangular kernel, and equal active dot budgets. Truth credit and false-positive mass are pooled before DTI is computed. No catalogue geometry or historical predictions enter the feature transforms.</p><p class="fine">The core19 result exactly reproduces the previous same-protocol sufficient statistics and CI. This is an engineering consistency check, not independent validation. One deterministic phase control is not a sampled null distribution.</p><div class="actions"><a class="text-link" href="{LATEST}/preregistration.md">Four ranked hypotheses &amp; frozen plan ↗</a><a class="text-link" href="{LATEST}/results.json">All statistics &amp; 112 canaries ↗</a></div></section>
-<section class="section"><h2>The mandatory stop worked.</h2><p>The frozen registry contained 164 observed byte identities; two later S20 arrivals were checked on both saved states after the stop, without changing predictions. Across the 166 combined comparisons, max surface Spearman was 0.15657. Final-dot Spearman was 0.06383, but overlap reached 79.09% against G30-S19's 60,000-dot output. Low pixelwise correlation alone would have missed this lane collision. No later model, emitter, density or alternative hypothesis was tried.</p><p>The stopped TIFF passed a local shared-writer check and an independent post-stop file reopen. It has no NaN inside, values [0,1], matching CRS/shape/transform and zero positive catalogue pixels. It remains private under ignored outputs/. CI verifies stored receipts, not unavailable private bytes, and cannot call this a public-file reinspection.</p><a href="{LATEST}/validation.json">Recorded validator output ↗</a> · <a href="{LATEST}/novelty-dots.json">Every final-dot comparison ↗</a> · <a href="{LATEST}/readiness.json">Fail-closed decision ↗</a></section>
-<section class="section"><h2>Nine priority sites: educational audit.</h2><p>No historical raster was reused as new predictions. The table is a file diagnostic, not a performance ranking or organizer acceptance table.</p><div class="table-wrap"><table><caption>Frozen reference identities · counts and format diagnostics, not scores</caption><thead><tr><th>Priority site / pinned file</th><th>Positive pixels</th><th>Local documented format</th><th>SHA-256 prefix</th></tr></thead><tbody>{sites}</tbody></table></div><p>Fresh README inventories: <a href="{LATEST}/priority-site-review.json">nine immutable snapshots</a>. Exact artifact checks: <a href="{LATEST}/historical-reference-audit.json">reference audit</a>. H33 support reconstruction: <a href="docs/research/2026-10-25/recipe-reconstruction.json">zero mismatching pixels</a>.</p></section>
-<section class="section"><h2>Why H33 may have improved—and why that is not a forecast.</h2><p>For weighted truth credit T, false-positive mass F and truth count G, the shared metric is <code>DTI = T / (0.2T + 0.2F + 0.8G + ε)</code>. Credit is a maximum over a triangular neighborhood, not an unrestricted sum. Removing redundant dots can save FP mass with little loss in truth coverage. Catalogue-flank pruning can also delete genuine new splays; its hidden-test effect cannot be inferred from support alone.</p><p>The owner's 0.2778 attribution and conflicting leaderboard claims remain <strong>unverified historical claims</strong>, not ORGANIZER-CONFIRMED. <a href="{RESEARCH}/owner-claims.csv">All 119 supplied claims</a> remain quarantined. No measured evidence here supports a promise to exceed them.</p></section>
-<section class="section"><h2>Sources, boundaries &amp; next steps.</h2><p>The official <a href="https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/unet-mc-cv-reference-solution.ipynb">reference notebook</a> was retrieved again. Its saved band metadata agrees with the cached grid and layer descriptions; <a href="{LATEST}/official-source-audit.json">hashes and exact excerpts</a> are retained. Mirror consistency is not organizer authentication or an external-data license ruling.</p><p>This is a fault-detection proxy, not a geothermal-vent detector. No temperature, permeability, flow or vent observations were used. The official <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN release</a> and <a href="https://gdr.openei.org/submissions/1391">GDR INGENIOUS data page</a> are future review links, not newly fetched datasets. None of the four proposed tests required new external data.</p><p>Next session: synchronize externally assigned lanes and continuous-surface registry, recover the historical-best checkpoint, reserve untouched geographic evaluation, and preregister a genuinely distinct mechanism before any new run. Do not rename this duplicate or move dots to pass a gate.</p><p><a href="{LATEST}/review.md">Detailed scientific report</a> · <a href="{LATEST}/verification.md">Three-pass verification journal</a> · <a href="docs/irregularities.md">Irregularities register</a></p></section>'''
+def build() -> dict[str, str]:
+    rc = run_card()
+    home = hero(rc) + how_to_submit() + experiments_section()
+    guide = hero(rc) + how_to_submit()
     return {
-        ROOT / "index.html": page("Latest attempt stopped; research download only", home),
-        ROOT / "executive-summary.html": page("Executive submission guide", guide, active="guide"),
-        ROOT / "experiment-review.html": page("Displacement falsification & nine-site audit", research, active="research"),
-        ROOT / "docs/assets/tdx1-support.png": png_preview(template, local_path(card["published_tiff"])),
-        ROOT / "docs/index.html": '<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=../index.html"><title>GEMSDOE30</title><link rel="canonical" href="../index.html"></head><body><p><a href="../index.html">Open current research download and submission decision.</a></p></body></html>\n',
+        ROOT / "index.html": page("Submission artifact · GEMSDOE30", home, active="overview"),
+        ROOT / "executive-summary.html": page("Executive submission guide · GEMSDOE30", guide, active="guide"),
+        ROOT / "experiment-review.html": page("Experiments & hypotheses · GEMSDOE30", experiments_section(), active="research"),
+        ROOT / "docs/index.html": '<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=../index.html"><title>GEMSDOE30</title><link rel="canonical" href="../index.html"></head><body><p><a href="../index.html">Open the submission artifact and download guide.</a></p></body></html>\n',
     }
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--template", type=Path, default=ROOT / "data/raw/sample_submission.tif")
-    parser.add_argument("--check", action="store_true", help="fail if generated Pages are stale")
-    args = parser.parse_args()
-    for path, content in build(args.template).items():
-        data = content.encode() if isinstance(content, str) else content
-        if args.check:
-            if not path.exists() or path.read_bytes() != data:
-                raise SystemExit(f"stale generated site file: {path.relative_to(ROOT)}")
-        else:
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_bytes(data)
-    print("Verified exact generated Pages" if args.check else "Built stopped-result research Pages")
+def main() -> int:
+    for path, content in build().items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(content.encode())
+    print("Built GEMSDOE30 submission Pages")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

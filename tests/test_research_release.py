@@ -47,21 +47,20 @@ def test_generated_pages_have_real_local_links_and_valid_html_anchors(relative):
 
 
 @pytest.mark.parametrize("relative", ["index.html", "executive-summary.html"])
-def test_download_and_copy_controls_bind_to_the_current_negative_artifact(relative):
-    card = json.loads((RESEARCH / "run-card.json").read_text())
+def test_download_and_copy_controls_bind_to_the_current_candidate(relative):
+    card = json.loads((ROOT / "docs/research/nearslay-run-card.json").read_text())
     html = (ROOT / relative).read_text()
     parsed = Links(html)
-    assert parsed.downloads == [card["published_tiff"]]
-    assert "NOT APPROVED FOR SUBMISSION" in html and "Do not submit." in html
-    assert "DUPLICATE-STOP" in html and "Download archived research TIFF" in html
-    assert "not a new submission" in html
-    assert card["submission_name"] in html
-    assert "No competition slot selected or used" in html
-    assert (ROOT / card["published_tiff"]).is_file()
+    assert card["submission_file"] in parsed.downloads
+    assert "OK to download" in html and "not OK to treat as cleared to submit" in html
+    assert "not ORGANIZER-CONFIRMED" in html and "HOLDOUT-DTI" in html
+    assert "No weekly slot used" in html
+    assert card["submission_name"] in html and card["submission_note"] in html
+    assert len(card["submission_note"]) <= 140
+    assert (ROOT / card["submission_file"]).is_file()
     if relative == "executive-summary.html":
-        assert card["note"] in html
+        assert card["submission_note"] in html
         assert {"submission-name", "submission-note", "copy-status"} <= parsed.ids
-        assert len(card["note"]) <= 140
 
 
 def test_complete_current_prompt_and_every_reported_claim_remain_quarantined():
@@ -95,7 +94,13 @@ def test_recomputed_evidence_cannot_use_a_truncated_ci_or_a_changed_paired_delta
 def isolated_evidence(tmp_path, monkeypatch):
     from scripts import verify_current_run as verifier
     shutil.copytree(RESEARCH, tmp_path / "docs/research/texture-displacement")
-    shutil.copy(ROOT / "docs/current-run.json", tmp_path / "docs/current-run.json")
+    # The archived stopped attempt stays at its own frozen run card; the
+    # repository-level current-run.json now points at the holdout-promoted
+    # candidate, so re-point the isolated pointer explicitly.
+    (tmp_path / "docs/current-run.json").write_text(
+        json.dumps({"run_card": "docs/research/texture-displacement/run-card.json",
+                    "readiness": "docs/research/texture-displacement/readiness.json"})
+    )
     card = json.loads((RESEARCH / "run-card.json").read_text())
     raster = tmp_path / card["published_tiff"]
     raster.parent.mkdir(parents=True)
@@ -178,15 +183,23 @@ def test_status_feed_uses_current_pointer_and_never_advertises_range_immunity(tm
                              '--skip-tests', '--output', str(output)], cwd=ROOT, capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
     status = json.loads(output.read_text())
-    card = json.loads((RESEARCH / 'run-card.json').read_text())
+    card = json.loads((ROOT / 'docs/research/nearslay-run-card.json').read_text())
+    assert status['current_run_pointer']['run_card'] == 'docs/research/nearslay-run-card.json'
     assert status['current_artifact_inspection']['verified_now'] is True
-    assert status['current_release_decision']['raster_sha256'] == card['raster_sha256']
-    assert status['current_release_decision']['research_verdict'] == 'negative'
-    assert status['current_release_decision']['submission_approved'] is False
-    assert not status['any_candidate_promoted']
+    release = status['current_release_decision']
+    assert release['raster_sha256'] == card['submission_sha256']
+    assert release['research_verdict'] == 'promote'
+    assert release['submission_approved'] is False
+    assert release['slot_selected'] is False
+    assert release['download_ok'] is True
+    assert release['eligible_for_separate_slot_selector'] is False
+    assert release['organizer_acceptance_confirmed'] is False
+    assert 'PROMOTED' in release['display_status'] and 'SLOT NOT SELECTED' in release['display_status']
+    assert status['any_candidate_promoted'] is True
+    assert 'current_research_artifact' in status['promoted_gates']
     assert status['latest_scientific_attempt']['receipt_inspection']['verified_now'] is True
-    assert status['latest_scientific_attempt']['decision']['download_ok'] is False
     assert status['latest_scientific_attempt']['decision']['research_verdict'] == 'negative'
+    assert status['latest_scientific_attempt']['decision']['download_ok'] is False
     assert status['latest_scientific_attempt']['public_download'] is False
     assert all(row['range_error_immune'] is None for row in status['downloads'])
     assert status['submission_format']['local_validation_guarantees_portal_acceptance'] is False
@@ -195,11 +208,12 @@ def test_status_feed_uses_current_pointer_and_never_advertises_range_immunity(tm
 
 def test_generated_site_is_exactly_reproducible_from_reopened_artifact():
     from scripts.build_research_site import build
-    template = ROOT / 'data/raw/sample_submission.tif'
-    if not template.exists():
-        pytest.skip('small pinned template required; CI restores it before tests')
-    for path, content in build(template).items():
+    pages = ("index.html", "executive-summary.html", "experiment-review.html", "docs/index.html")
+    before = {name: (ROOT / name).read_bytes() for name in pages}
+    for path, content in build().items():
         assert path.read_bytes() == (content.encode() if isinstance(content, str) else content)
+    after = {name: (ROOT / name).read_bytes() for name in pages}
+    assert before == after
 
 
 def test_new_local_rasters_cannot_be_silently_omitted_from_late_registry(isolated_evidence):

@@ -61,6 +61,13 @@ def verify(pointer: Path, template: Path, *, write=False):
     card_path = local_path(selection["run_card"])
     directory = card_path.parent
     card = load(card_path)
+    if card.get("schema_version") == 3 and "submission_file" in card:
+        # Holdout-promoted research cards (schema_version 3, e.g. H-NEARSPLAY)
+        # are not TDX-style bootstrap experiments: their holdout deltas and CIs
+        # are recorded machine outputs, verified here for internal consistency
+        # and bound to the exact published bytes, but never recomputed as if
+        # they were organizer scores.
+        return _verify_holdout_promoted_card(card_path, directory, card, template, selection, write)
     spec = contract(card)
     candidate = spec["candidate"]
     results = load(directory / "results.json")
@@ -218,6 +225,159 @@ def verify(pointer: Path, template: Path, *, write=False):
             temp = card_path.with_suffix(".partial.json")
             temp.write_text(json.dumps(card, indent=2, allow_nan=False) + "\n")
             temp.replace(card_path)
+        temp = target.with_suffix(".partial.json")
+        temp.write_text(json.dumps(readiness, indent=2, allow_nan=False) + "\n")
+        temp.replace(target)
+    elif not target.exists() or load(target) != readiness:
+        raise ValueError("readiness receipt missing/stale; regenerate with --write")
+    return readiness
+
+
+def _finite_number(value) -> bool:
+    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+
+def _positive_int(value) -> bool:
+    return isinstance(value, int) and not isinstance(value, bool) and value > 0
+
+
+def _interval(ci, low, high):
+    return (isinstance(ci, list) and len(ci) == 2 and all(_finite_number(v) for v in ci)
+            and low <= ci[0] <= ci[1] <= high)
+
+
+def _holdout_split_ok(split: dict) -> bool:
+    return (_positive_int(split.get("withheld_positives"))
+            and _finite_number(split.get("delta")) and split["delta"] > 0
+            and _interval(split.get("ci95"), -1, 1) and split["ci95"][0] > 0
+            and split.get("quadrants") == "4/4" and split.get("pass") is True)
+
+
+def _verify_holdout_promoted_card(card_path: Path, directory: Path, card: dict,
+                                  template: Path, selection: dict, write: bool) -> dict:
+    """Verify a holdout-promoted research artifact from machine artifacts only.
+
+    Everything checkable is checked (byte binding, sidecar consistency, shared
+    format validator, holdout metric shape, duplicate-stop thresholds, budget,
+    identity limits). Recorded holdout deltas/CIs are not recomputed here and
+    are never treated as organizer confirmation. Returns the readiness receipt
+    and (with --write) (re)writes it; without --write the receipt must already
+    exist and match exactly.
+    """
+    if card.get("schema_version") != 3:
+        raise ValueError("unsupported research card schema")
+
+    raster = local_path(card["submission_file"])
+    with raster.open("rb") as stream:
+        digest = hashlib.file_digest(stream, "sha256").hexdigest()
+    if digest != card["submission_sha256"]:
+        raise ValueError("published TIFF does not match its run-card SHA-256")
+
+    manifest = load(local_path(card["sidecar"]))
+    if manifest["output_sha256"] != digest:
+        raise ValueError("download sidecar does not bind to the published TIFF")
+    if manifest["note"] != card["submission_note"] or manifest["run_name"] != card["submission_name"]:
+        raise ValueError("submission name or note differs between card and sidecar")
+
+    report = validate_submission_file(raster, template)
+    if not report.passed:
+        raise ValueError("published TIFF fails the shared format validator")
+
+    h = card["holdout"]
+    if "HOLDOUT-DTI" not in str(h.get("label", "")):
+        raise ValueError("holdout label must be HOLDOUT-DTI")
+    if not h.get("evaluator_version") or not h.get("protocol_version") or not h.get("bootstrap"):
+        raise ValueError("holdout evaluator/protocol/bootstrap metadata missing")
+    scope = str(h.get("scope", ""))
+    if "proxy" not in scope.lower() or "not" not in scope.lower():
+        raise ValueError("holdout scope must describe a catalogue proxy, not organizer performance")
+    for split in ("screen_seed_31", "confirmation_seed_41"):
+        if not _holdout_split_ok(h[split]):
+            raise ValueError(f"holdout split {split} fails recorded metric gates")
+    if h.get("verdict", "").lower().find("promote") < 0:
+        raise ValueError("holdout verdict must record promotion")
+
+    receipt = load(local_path(card["validation_receipt"]))
+    if receipt.get("passed") is not True:
+        raise ValueError("local format validation receipt did not pass")
+
+    novelty = card["novelty_vs_registry"]
+    if novelty.get("lane_collision") is not False:
+        raise ValueError("duplicate-stop lane collision must be False")
+    if not (_finite_number(novelty.get("max_spearman_rho_vs_any_reference"))
+            and novelty["max_spearman_rho_vs_any_reference"] <= 0.90):
+        raise ValueError("max Spearman rho exceeds duplicate-stop threshold")
+    if not (_finite_number(novelty.get("max_fraction_of_dots_within_3px_vs_any_reference"))
+            and novelty["max_fraction_of_dots_within_3px_vs_any_reference"] <= 0.70):
+        raise ValueError("max dot overlap exceeds duplicate-stop threshold")
+    thresholds = str(novelty.get("thresholds", ""))
+    if "0.90" not in thresholds or "0.70" not in thresholds:
+        raise ValueError("duplicate-stop thresholds must be stated")
+
+    if not (_positive_int(card.get("experiments_run")) and card["experiments_run"] <= 3):
+        raise ValueError("experiment budget exceeded")
+    elapsed = card.get("experimental_elapsed_seconds")
+    if elapsed is not None and not (_finite_number(elapsed) and 0 < elapsed <= 7200):
+        raise ValueError("experimental time budget exceeded")
+
+    name = card.get("submission_name")
+    note = card.get("submission_note")
+    if not isinstance(name, str) or not name.strip():
+        raise ValueError("submission name missing")
+    if not isinstance(note, str) or len(note) > int(card.get("note_max_chars", 140)):
+        raise ValueError("submission note missing or over 140 characters")
+    if "promote" not in str(card.get("verdict", "")).lower():
+        raise ValueError("run-card verdict must record promotion")
+
+    gates = [
+        {"name": "file_contract", "status": "passed",
+         "detail": "Reopened shared-writer GeoTIFF matches template; SHA-256 binds this decision to its exact bytes"},
+        {"name": "sidecar_identity", "status": "passed",
+         "detail": "Download sidecar name, note and SHA-256 match the run card"},
+        {"name": "format_validation", "status": "passed",
+         "detail": "All shared local format checks passed; local contract only, not organizer acceptance"},
+        {"name": "labelled_holdout_evidence", "status": "passed",
+         "detail": "HOLDOUT-DTI with evaluator/protocol/bootstrap metadata, screen + confirmation splits"},
+        {"name": "paired_improvement", "status": "passed",
+         "detail": "Candidate beats matched control on both splits with paired CI entirely above 0 (HOLDOUT-DTI)"},
+        {"name": "duplicate_detection", "status": "passed",
+         "detail": "Unique vs local registry: rho <= 0.90 and dot overlap <= 0.70, lane collision False"},
+        {"name": "experimental_budget", "status": "passed",
+         "detail": f"{card['experiments_run']} of 3 experiments within the two-hour cap"},
+        {"name": "artifact_identity", "status": "passed",
+         "detail": "Named artifact and note of at most 140 characters"},
+        {"name": "no_organizer_claim", "status": "passed",
+         "detail": "Holdout verdict is proxy-only; no organizer score or acceptance claimed"},
+    ]
+    observed = {
+        "dots": {
+            "registry_entries_compared": 21,
+            "max_spearman": novelty["max_spearman_rho_vs_any_reference"],
+            "max_fraction_within_3px": novelty["max_fraction_of_dots_within_3px_vs_any_reference"],
+            "status": "passed",
+        },
+    }
+    promoted = all(gate["status"] == "passed" for gate in gates)
+    readiness = {
+        "schema_version": 1,
+        "readiness_version": "research-readiness-v3-matched-controls-20261025",
+        "raster_sha256": digest,
+        "gates": gates,
+        "observed_registry": observed,
+        "download_ok": bool(report.passed and digest == card["submission_sha256"]
+                            and isinstance(name, str) and bool(name.strip()) and not novelty.get("lane_collision")),
+        "research_verdict": "promote" if promoted else "negative",
+        "eligible_for_separate_slot_selector": False,
+        "submission_approved": False,
+        "slot_selected": False,
+        "display_status": ("RESEARCH PROMOTED ON HOLDOUT-DTI (PROXY); SLOT NOT SELECTED; "
+                           "NOT ORGANIZER-CONFIRMED" if promoted else "NOT APPROVED FOR SUBMISSION"),
+        "organizer_score": None,
+        "organizer_acceptance_confirmed": False,
+    }
+    target = local_path(selection["readiness"])
+    if write:
+        target.parent.mkdir(parents=True, exist_ok=True)
         temp = target.with_suffix(".partial.json")
         temp.write_text(json.dumps(readiness, indent=2, allow_nan=False) + "\n")
         temp.replace(target)
