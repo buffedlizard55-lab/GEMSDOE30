@@ -36,17 +36,17 @@ def test_stratified_counts_sum_exactly_and_match_frozen_shares():
 
 
 def test_expanded_dot_audit_verifier_requires_hash_bound_duplicate_evidence():
-    from scripts.verify_fflidar_run import verify_expanded_dot_audit
+    from scripts.verify_fflidar_run import verify_expanded_receipt
 
     audit = json.loads((FFL_DIR / "novelty-dots-expanded.json").read_text())
     card = json.loads((FFL_DIR / "run-card.json").read_text())
-    assert verify_expanded_dot_audit(audit, card["raster_sha256"]) == pytest.approx(0.7828078929462463)
+    assert verify_expanded_receipt(audit, card["raster_sha256"], promote=False) is True
     wrong_hash = dict(audit, candidate_sha256="0" * 64)
     with pytest.raises(ValueError, match="not bound"):
-        verify_expanded_dot_audit(wrong_hash, card["raster_sha256"])
+        verify_expanded_receipt(wrong_hash, card["raster_sha256"], promote=False)
     cleared_audit = dict(audit, decision="blocked-incomplete-evidence")
-    with pytest.raises(ValueError, match="does not support"):
-        verify_expanded_dot_audit(cleared_audit, card["raster_sha256"])
+    with pytest.raises(ValueError, match="contradicts measured novelty"):
+        verify_expanded_receipt(cleared_audit, card["raster_sha256"], promote=False)
 
 
 def test_expanded_surface_receipt_is_not_misrepresented_as_preplacement():
