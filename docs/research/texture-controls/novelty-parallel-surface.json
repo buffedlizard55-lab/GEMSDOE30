@@ -4,7 +4,7 @@
   "candidate": "/home/user/GEMSDOE30/outputs/texture-controls/tdxc2-surface.tif",
   "candidate_sha256": "1f1f372c75642b025750ac5e69221b800cca30c5f553479538f19e6fe9885788",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "registry_sha256": "d496ef788380097d3712f3e7efd138c68d9552814b0316dcf23267d9967ed4f1",
+  "registry_sha256": "fa2d5224f921cc2453d32283be6dead7d85a5bf956ed33e383c2b680c2f288f1",
   "registry_complete": false,
   "comparisons": [
     {
@@ -54,6 +54,15 @@
       "correlation_duplicate": false,
       "dot_duplicate": false,
       "undefined": true
+    },
+    {
+      "stage": "surface",
+      "reference_sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+      "reference_path": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "spearman_full_footprint": null,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "comparison_note": "The stopped candidate's private bytes are quarantined under ignored outputs/ and are not reopened here, so the saved-state correlation and 3-px overlap cannot be recomputed for this reference. The stopped TDX-C2 decision was already frozen and negative (79.09% overlap with G30-S19) and is unchanged by this arrival. This reference is nevertheless registered so no local raster is silently omitted; the reverse direction (this reference against the registry) is computed and published in docs/research/nearsplay/run-card.json."
     }
   ],
   "errors": [],

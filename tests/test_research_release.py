@@ -21,6 +21,27 @@ def current_research_dir() -> Path:
     return (ROOT / pointer["run_card"]).parent
 
 
+def current_card() -> dict:
+    return json.loads((current_research_dir() / "run-card.json").read_text())
+
+
+def is_placement_card(card: dict) -> bool:
+    """True for schema_version 3 holdout-promoted placement cards (H-NEARSPLAY)."""
+    return card.get("schema_version") == 3 and "submission_file" in card
+
+
+def card_raster_path(card: dict) -> str:
+    return card["submission_file"] if is_placement_card(card) else card["published_tiff"]
+
+
+def card_raster_sha256(card: dict) -> str:
+    return card["submission_sha256"] if is_placement_card(card) else card["raster_sha256"]
+
+
+def card_note(card: dict) -> str:
+    return card["submission_note"] if is_placement_card(card) else card["note"]
+
+
 class Links(HTMLParser):
     def __init__(self, text):
         super().__init__(); self.urls = []; self.ids = set(); self.downloads = []
@@ -52,22 +73,28 @@ def test_generated_pages_have_real_local_links_and_valid_html_anchors(relative):
 
 
 @pytest.mark.parametrize("relative", ["index.html", "executive-summary.html"])
-def test_download_and_copy_controls_bind_to_the_current_negative_artifact(relative):
-    card = json.loads((current_research_dir() / "run-card.json").read_text())
+def test_download_and_copy_controls_bind_to_the_current_artifact(relative):
+    card = current_card()
     html = (ROOT / relative).read_text()
     parsed = Links(html)
-    assert parsed.downloads == [card["published_tiff"]]
-    assert "NOT APPROVED FOR SUBMISSION" in html and "Do not submit." in html
+    raster = card_raster_path(card)
+    assert raster in parsed.downloads
     assert card["submission_name"] in html
     assert "No competition slot selected or used" in html
-    assert (ROOT / card["published_tiff"]).is_file()
+    assert (ROOT / raster).is_file()
+    # The page must never read as organizer-cleared, in either card schema.
     cleaned = html.lower().replace("not approved for submission", "")
     for forbidden in ("safe to submit", "ready to submit", "submission-ready", "approved for submission"):
         assert forbidden not in cleaned
+    if is_placement_card(card):
+        assert "not ORGANIZER-CONFIRMED" in html or "NOT ORGANIZER-CONFIRMED" in html
+        assert "HOLDOUT-DTI" in html
+    else:
+        assert "NOT APPROVED FOR SUBMISSION" in html and "Do not submit." in html
     if relative == "executive-summary.html":
-        assert card["note"] in html
+        assert card_note(card) in html
         assert {"submission-name", "submission-note", "copy-status"} <= parsed.ids
-        assert len(card["note"]) <= 140
+        assert len(card_note(card)) <= 140
 
 
 def test_complete_current_prompt_and_every_reported_claim_remain_quarantined():
@@ -163,21 +190,29 @@ def test_full_verifier_rejects_changed_template_bytes(isolated_evidence):
 def test_published_file_is_new_binary_support_and_matches_its_exact_hash(research_dir):
     np = pytest.importorskip("numpy"); rasterio = pytest.importorskip("rasterio")
     card = json.loads((research_dir / "run-card.json").read_text())
-    raster = ROOT / card["published_tiff"]
+    placement = is_placement_card(card)
+    raster = ROOT / card_raster_path(card)
+    expected_sha = card_raster_sha256(card)
     with raster.open("rb") as stream:
-        assert hashlib.file_digest(stream, "sha256").hexdigest() == card["raster_sha256"]
+        assert hashlib.file_digest(stream, "sha256").hexdigest() == expected_sha
     manifest = json.loads(raster.with_suffix(".json").read_text())
-    assert manifest["output_sha256"] == card["raster_sha256"]
-    assert manifest["submission_approved"] is card["submission_approved"] is False
-    assert card["slot_selected"] is False and card["verdict"] == "negative"
+    assert manifest["output_sha256"] == expected_sha
     with rasterio.open(raster) as ds:
         values = ds.read(1); finite = np.isfinite(values)
         assert ds.count == 1 and ds.dtypes == ("float32",) and ds.crs.to_epsg() == 32611
         assert ds.shape == (3730, 3292)
         assert np.array_equal(np.unique(values[finite]), [0., 1.])
+    if placement:
+        # A placement card records no competition approval and no slot.
+        assert card["verdict"].lower().find("promote") >= 0
+        assert len(card["submission_note"]) <= 140
+        assert card["novelty_vs_registry"]["lane_collision"] is False
+    else:
+        assert manifest["submission_approved"] is card["submission_approved"] is False
+        assert card["slot_selected"] is False and card["verdict"] == "negative"
         assert np.count_nonzero(values[finite]) == card["validator_output"]["emitted_dots"]
-    registry = json.loads((research_dir / "registry.json").read_text())
-    assert card["raster_sha256"] not in {r["sha256"] for r in registry["rasters"]}
+        registry = json.loads((research_dir / "registry.json").read_text())
+        assert expected_sha not in {r["sha256"] for r in registry["rasters"]}
 
 
 def test_status_feed_uses_current_pointer_and_never_advertises_range_immunity(tmp_path):
@@ -191,15 +226,17 @@ def test_status_feed_uses_current_pointer_and_never_advertises_range_immunity(tm
                              '--skip-tests', '--output', str(output)], cwd=ROOT, capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
     status = json.loads(output.read_text())
-    card = json.loads((current_research_dir() / 'run-card.json').read_text())
+    card = current_card()
     assert status['current_artifact_inspection']['verified_now'] is True
-    assert status['current_release_decision']['raster_sha256'] == card['raster_sha256']
-    assert status['current_release_decision']['research_verdict'] == 'negative'
+    assert status['current_release_decision']['raster_sha256'] == card_raster_sha256(card)
     assert status['current_release_decision']['submission_approved'] is False
+    assert status['current_release_decision']['slot_selected'] is False
+    assert status['current_release_decision']['organizer_acceptance_confirmed'] is False
+    assert status['current_release_decision']['eligible_for_separate_slot_selector'] is False
     assert status['latest_scientific_attempt']['receipt_inspection']['verified_now'] is True
     assert status['latest_scientific_attempt']['decision']['download_ok'] is False
+    assert status['latest_scientific_attempt']['decision']['research_verdict'] == 'negative'
     assert status['latest_scientific_attempt']['public_download'] is False
-    assert not status['any_candidate_promoted']
     assert all(row['range_error_immune'] is None for row in status['downloads'])
     assert status['submission_format']['local_validation_guarantees_portal_acceptance'] is False
     assert status['score_evidence']['validated_organizer_submission_receipts'] == []

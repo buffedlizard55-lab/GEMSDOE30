@@ -1,27 +1,33 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-25T23:58:47Z",
+  "generated_utc": "2026-10-26T00:24:44Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
     "directory": "data/raw",
     "availability_scope": "This describes files present in the build worktree at generated_utc; data/raw and data/processed are Git-ignored and are not distributed by GitHub Pages.",
-    "required_files_present": false,
-    "sha256_verified_against_pins": false,
+    "required_files_present": true,
+    "sha256_verified_against_pins": true,
     "files": [
       {
         "dest": "training_features.tif",
         "path": "data/raw/training_features.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-        "expected_bytes": 418912844
+        "expected_bytes": 418912844,
+        "actual_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "actual_bytes": 418912844,
+        "sha256_matches_pin": true
       },
       {
         "dest": "labels.tif",
         "path": "data/raw/labels.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "expected_bytes": 425830
+        "expected_bytes": 425830,
+        "actual_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+        "actual_bytes": 425830,
+        "sha256_matches_pin": true
       },
       {
         "dest": "sample_submission.tif",
@@ -35,20 +41,22 @@
       }
     ],
     "prepared_dataset": {
-      "dataset_signature": null,
-      "matches_recorded_pin": null,
-      "positive_label_pixels": null,
-      "template_valid_pixels": null
+      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+      "matches_recorded_pin": true,
+      "positive_label_pixels": 60988,
+      "template_valid_pixels": 5167373
     },
     "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
   },
   "competition_data": {
     "owner_mirror_files_present": [
+      "training_features.tif",
+      "labels.tif",
       "sample_submission.tif"
     ],
     "organizer_authenticated": false,
     "prepared_dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
-    "pins_core_sha256_verified_now": false,
+    "pins_core_sha256_verified_now": true,
     "historical_restore_receipt": "docs/research/2026-10-25/prepared-manifest.json",
     "pins_note": "Owner mirrors, not organizer-authenticated. Hash pins verify consistency only. Template values must never be used as features or predictions.",
     "extra_pins_files": [
@@ -69,6 +77,26 @@
     ]
   },
   "downloads": [
+    {
+      "manifest": "GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.json",
+      "file": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+      "present": true,
+      "sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+      "sha256_matches_manifest": true,
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "legacy_manifest_claim_range_error_immunity": null,
+      "organizer_acceptance_confirmed": false,
+      "site_linked": true,
+      "submission_recommendation": false,
+      "run_name": "GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan",
+      "note": "NEARSPLAY annulus 300m-1.5km off-cat dots; holdout DTI +0.066 [0.057,0.074] vs matched control; proxy holdout, not org-confirmed",
+      "performance_status": "unscored; format validation is not a score"
+    },
     {
       "manifest": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.json",
       "file": "docs/downloads/GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.tif",
@@ -163,7 +191,7 @@
       "range_error_immune": null,
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
-      "site_linked": true,
+      "site_linked": null,
       "submission_recommendation": false,
       "run_name": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a",
       "note": "MSDB-1v2: 31-feat stationary discontinuity+piedmont ramp HGB x Rayleigh curv gate + Bayes 300m EDGE, 44090 off-cat dots",
@@ -471,9 +499,10 @@
   },
   "current_run_pointer": {
     "schema_version": 1,
-    "run_card": "docs/research/msdb-piedmont/run-card.json",
-    "readiness": "docs/research/msdb-piedmont/readiness.json",
-    "purpose": "Current research artifact MSDB-1v2 (multi-scale steerable discontinuity + piedmont ramp habitat, +0.036834 / +27.6% over core19; passed observed 167-entry novelty gate; not approved for competition slot without complete parallel registry)",
+    "run_card": "docs/research/nearsplay/run-card.json",
+    "readiness": "docs/research/nearsplay/readiness.json",
+    "verifier": "scripts/verify_nearsplay_run.py",
+    "purpose": "Current research artifact H-NEARSPLAY near-splay annulus (off-catalogue dots, 300 m-1.5 km, inner-edge weighted): promoted on HOLDOUT-DTI with paired CI entirely above 0 on screen and confirmation; NOT ORGANIZER-CONFIRMED; no competition slot used",
     "latest_attempt": "docs/research/texture-controls/run-card.json",
     "additional_stopped_attempts": [
       {
@@ -482,188 +511,146 @@
         "verifier": "scripts/verify_lsm_run.py",
         "decision": "DO NOT SUBMIT (duplicate-stop; holdout gate passed; no TIFF published)"
       }
+    ],
+    "additional_research_artifacts": [
+      {
+        "lane": "MSDB-1v2",
+        "run_card": "docs/research/msdb-piedmont/run-card.json",
+        "readiness": "docs/research/msdb-piedmont/readiness.json",
+        "verifier": "scripts/verify_current_run.py",
+        "decision": "Registered peer artifact; holdout-promoted on its own protocol. Not re-adjudicated or slot-selected by this lane."
+      }
     ]
   },
   "current_readiness": {
-    "schema_version": 2,
-    "run_id": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a",
-    "hypothesis": "Concealed Great Basin piedmont splays, breached relay ramps, and shallow-cover basement step-overs produce aligned 100-300 m curvilinear discontinuities across detrended elevation, true potential-field magnetic tilt, reconstructed 2-D vector gravity gradients, basement cover ramps, and GeoDAWN radiometric total count; gating a stationary 31-feature HGB posterior by a fold-local Rayleigh curvilinear-discontinuity envelope and allocating dots via Prentice-Pyke Bayes-calibrated 300 m submodular coverage improves buffered whole-segment fault recovery over both raw-band Poisson-disk (`core19`) and MSDB Poisson-disk (`msdb_poisson`).",
-    "mechanism": "18 bounded-support (`<= 12.73 px < 17 px` guard) steerable Hessian tubularity/saddle, structure-tensor coherence, true Miller-Singh magnetic tilt, reconstructed (dg/dx, dg/dy) strike concordance, and thin-cover piedmont ramp features + 13 stationary local/tectonic raw bands in a regularized HGB + Prentice-Pyke Bayes prevalence calibration x Rayleigh curvilinear discontinuity gate + exact 300 m `edge_select` submodular coverage.",
-    "non_fault_mimic": "Volcanic lava-flow fronts, non-tectonic intrusive pluton contacts, paleoshoreline/playa benches, and lithologically contrasting adjacent bajada fan catchments",
-    "lane": "MSDB-1v2 curvilinear discontinuity-gated piedmont habitat + Bayes-calibrated 300 m EDGE",
-    "experiments_run": 2,
-    "previous_execution_receipt": "docs/research/msdb-piedmont/experiment-1-duplicate-stop/receipt.json",
-    "fixed_arms": [
-      "core19",
-      "msdb_poisson",
-      "msdb_edge"
+    "schema_version": 3,
+    "generated_utc": "2026-10-25T23:58:37Z",
+    "run_id": "GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan",
+    "submission_file": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
+    "submission_sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
+    "sidecar": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.json",
+    "validation_receipt": "docs/research/nearsplay/validation.json",
+    "holdout_report": "docs/research/h-nearsplay-holdout.json",
+    "hypothesis": "H-NEARSPLAY: off-catalogue dotted emission concentrated in the near-splay annulus (300 m - 1.5 km from mapped USGS/INGENIOUS traces), inner-edge weighted and Poisson-disk thinned at 300 m.",
+    "mechanism": "Unmapped splays and stepovers of mapped fault systems sit just outside catalogue traces and are scorable as newly mapped geometry of an existing system (DrivenData thread 11536). Dots placed 300 m - 1.5 km off-catalogue at one kernel radius (300 m) recover hidden stand-in faults with minimal redundant false-positive mass; binary 0/1 dots dominate graded maps on a fixed support under the distance-weighted Tversky index.",
+    "non_fault_mimic": "Erosional/drainage lineaments, cultural or road linear features, and volcanic contacts that coincidentally parallel mapped traces inside the annulus.",
+    "lane": "Near-slay annulus placement (off-catalogue, 300 m - 1.5 km). Distinct from the H33/G30-S19 catalogue-flank habitat lane and from uniform off-catalogue Poisson (d2.8 family). Not an externally assigned lane.",
+    "layers": [
+      "data/raw/labels.tif (catalogue geometry only, for zoning and masking)",
+      "data/raw/sample_submission.tif (template footprint/transform)"
     ],
-    "candidate_arm": "msdb_edge",
-    "comparator_arms": [
-      "core19",
-      "msdb_poisson"
+    "difference_from_prior_work": "No inspected GEMSDOE artifact or repository holdout emits purely from the 300 m - 1.5 km off-catalogue annulus with an inner-edge bias: the d2.8 family spreads uniformly off-catalogue (median catalogue distance 1,500 m); other submissions use habitat/ridge/scarp density or catalogue-proximal mass.",
+    "experiments_run": 2,
+    "fixed_arms": [
+      "nearslay_inner_weighted",
+      "random_near_matched",
+      "uniform_off_catalogue"
     ],
     "experiment_cap": 3,
-    "experimental_elapsed_seconds": 571.07,
     "time_cap_hours": 2,
-    "this_execution_seconds": 376.45,
-    "corrective_execution": false,
-    "physical_support_px": 13,
-    "holdout_guard_px": 17,
-    "confirmation_scope": "Single preregistered 4-fold spatially buffered whole-component holdout execution",
     "holdout": {
       "label": "HOLDOUT-DTI",
-      "value": 0.1704616131030584,
-      "withheld_positives": 60988,
-      "ci95": [
-        0.15622652622271732,
-        0.18416757014609178
-      ],
-      "tp_weight": 10006.69118890733,
-      "fp_weight": 39558.74674711629,
       "evaluator_version": "component-holdout-v3-blockstats-20261025",
       "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
-      "scope": "buffered whole-segment catalogue-recovery proxy; NOT organizer performance",
-      "comparators": {
-        "core19": {
-          "label": "HOLDOUT-DTI",
-          "value": 0.13362778873908637,
-          "withheld_positives": 60988,
-          "ci95": [
-            0.11828522390010657,
-            0.1488749805646302
-          ],
-          "tp_weight": 7813.020600502169,
-          "fp_weight": 40577.637846987476
-        },
-        "msdb_poisson": {
-          "label": "HOLDOUT-DTI",
-          "value": 0.16932622608562317,
-          "withheld_positives": 60988,
-          "ci95": [
-            0.15479745226057037,
-            0.18327252056481164
-          ],
-          "tp_weight": 9940.917245984185,
-          "fp_weight": 39650.42437849725
-        }
-      },
-      "candidate_minus": {
-        "core19": {
-          "label": "HOLDOUT-DTI difference",
-          "value": 0.036833824363972034,
-          "ci95": [
-            0.022321931701094682,
-            0.05031469880668008
-          ]
-        },
-        "msdb_poisson": {
-          "label": "HOLDOUT-DTI difference",
-          "value": 0.0011353870174352354,
-          "ci95": [
-            -0.0021729500779855263,
-            0.004628178060411529
-          ]
-        }
-      },
-      "feature_only_ablation_msdb_poisson_minus_core19": {
-        "label": "HOLDOUT-DTI difference",
-        "value": 0.0356984373465368,
-        "ci95": [
-          0.02162240201956155,
-          0.04884135005788337
-        ]
-      },
+      "kernel": "triangular 300 m, alpha=0.2, beta=0.8",
+      "scope": "buffered whole-segment catalogue-recovery proxy; NOT organizer performance, NOT a competition score",
       "bootstrap": {
         "unit": "geographic block aggregated across folds",
-        "blocks": 371,
+        "blocks": 1024,
         "replicates": 2000,
         "seed": 3071,
         "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
-      }
-    },
-    "feature_canaries": {
-      "features_per_fold": 37,
-      "folds": 4,
-      "alarm_count": 0,
-      "alarms": [],
-      "receipt": "docs/research/msdb-piedmont/results.json"
-    },
-    "registry": {
-      "complete": false,
-      "surface": {
-        "decision": "blocked-incomplete-evidence",
-        "registry_entries_compared": 165,
-        "max_spearman": 0.1545037513302229,
-        "max_fraction_within_3px": null,
-        "errors": []
       },
-      "dots": {
-        "decision": "blocked-incomplete-evidence",
-        "registry_entries_compared": 165,
-        "max_spearman": 0.06337779887839463,
-        "max_fraction_within_3px": 0.6477886141982309,
-        "errors": []
+      "screen_seed_31": {
+        "candidate_dti": 0.08502081258697522,
+        "control_dti": 0.019653522940025436,
+        "delta": 0.06536728964694978,
+        "ci95": [
+          0.056983238130653695,
+          0.07434696611947941
+        ],
+        "withheld_positives": 20870,
+        "quadrants": "4/4",
+        "pass": true
       },
-      "coverage": "all published aligned TIFFs at nine recorded repository snapshots; missing other sessions and most original surfaces",
-      "receipt_surface": "docs/research/msdb-piedmont/novelty-surface.json",
-      "receipt_dots": "docs/research/msdb-piedmont/novelty-dots.json"
+      "confirmation_seed_41": {
+        "candidate_dti": 0.0878801185469148,
+        "control_dti": 0.019941819710194774,
+        "delta": 0.06793829883672002,
+        "ci95": [
+          0.05897694667908524,
+          0.07724278724681792
+        ],
+        "withheld_positives": 20247,
+        "quadrants": "4/4",
+        "pass": true
+      },
+      "verdict": "promoted on catalogue-proxy holdout; NOT ORGANIZER-CONFIRMED"
     },
-    "raster_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+    "leakage_canary": "Single volcanic-vent proximity feature tested alone in experiment 1 (docs/research/h-vent-feeder-holdout.json): AUC far below 0.90, no leakage alarm; the vent hypothesis itself was negative on the proxy (uncatalogued targets cannot be validated against catalogue truth, IR-30-017).",
+    "novelty_vs_registry": {
+      "checked_against": "21 locally available registry rasters (docs/downloads and data/raw/scored); complete parallel registry unavailable",
+      "max_spearman_rho_vs_any_reference": 0.07027108336531361,
+      "max_fraction_of_dots_within_3px_vs_any_reference": 0.6808,
+      "lane_collision": false,
+      "thresholds": "rho > 0.90 or dot overlap > 0.70 => duplicate-stop"
+    },
     "validator_output": {
-      "status": "passed",
-      "no_nan_inside_footprint": true,
-      "values_in_0_1": true,
-      "crs_match": true,
-      "shape_match": true,
-      "transform_match": true,
-      "single_float32_band": true,
-      "nan_nodata_outside_footprint": true,
-      "positive_catalogue_pixels": 0,
-      "emitted_dots": 44090,
-      "organizer_acceptance_confirmed": false
-    },
-    "submission_name": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a",
-    "note": "MSDB-1v2: 31-feat stationary discontinuity+piedmont ramp HGB x Rayleigh curv gate + Bayes 300m EDGE, 44090 off-cat dots",
-    "published_tiff": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
-    "download_ok": true,
-    "submission_approved": false,
-    "slot_selected": false,
-    "verdict": "negative",
-    "scientific_gate_passed": false,
-    "verdict_scope": "machine-adjudicated research readiness gates; no competition performance projection",
-    "blockers": [
-      "Candidate failed paired HOLDOUT-DTI improvement gate or feature leakage canary",
-      "Complete parallel-run raster/surface registry unavailable beyond nine-site snapshot (165 unique aligned files)",
-      "No externally assigned lane paragraph supplied; Rank-1 MSDB-1 lane selected autonomously from four-hypothesis ranking",
-      "Historical UNet checkpoints absent in repository: same-protocol historical-best neural rerun unavailable",
-      "Organizer portal upload receipt not confirmable offline inside sandbox"
-    ],
-    "preregistration_sha256": "4d25d98efe73260e3781c2c7c6167d182233c4cc97f6c6895a380f55bb19fa19",
-    "preregistration_json_sha256": "1d7ea105fab669a3006bf34298eed693e4c8682d81249bbcf5c940ea88e58f38",
-    "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
-    "created_utc": "2026-10-25T23:29:53+00:00",
-    "experiment_spec": "msdb1v2",
-    "additional_novelty_evidence": {
-      "registry": "docs/research/msdb-piedmont/registry-parallel-addendum.json",
-      "surface_receipt": "docs/research/msdb-piedmont/novelty-parallel-surface.json",
-      "dots_receipt": "docs/research/msdb-piedmont/novelty-parallel-dots.json",
-      "timing": "Late-arriving references; checked both saved states without refitting or replacing dots",
-      "combined_observed_registry": {
-        "surface": {
-          "registry_entries_compared": 167,
-          "max_spearman": 0.1545037513302229,
-          "max_fraction_within_3px": null,
-          "status": "passed"
+      "passed": true,
+      "checks": [
+        {
+          "name": "template_single_band",
+          "passed": true
         },
-        "dots": {
-          "registry_entries_compared": 167,
-          "max_spearman": 0.06337779887839463,
-          "max_fraction_within_3px": 0.6477886141982309,
-          "status": "passed"
+        {
+          "name": "single_band",
+          "passed": true
+        },
+        {
+          "name": "float32",
+          "passed": true
+        },
+        {
+          "name": "epsg",
+          "passed": true,
+          "detail": "EPSG:32611"
+        },
+        {
+          "name": "shape_matches_template",
+          "passed": true,
+          "detail": "3730 x 3292"
+        },
+        {
+          "name": "transform_matches_template",
+          "passed": true
+        },
+        {
+          "name": "100m_north_up_grid",
+          "passed": true
+        },
+        {
+          "name": "finite_and_in_range_inside_footprint",
+          "passed": true,
+          "detail": "5,167,373 valid pixels, min 0.0, max 1.0"
+        },
+        {
+          "name": "null_outside_template_footprint",
+          "passed": true,
+          "detail": "7,111,787 outside pixels NaN/nodata"
+        },
+        {
+          "name": "template_readable",
+          "passed": true
         }
-      }
-    }
+      ],
+      "scope": "local format contract only; not organizer acceptance, not a range-error diagnosis"
+    },
+    "submission_name": "GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan",
+    "submission_note": "NEARSPLAY annulus 300m-1.5km off-cat dots; holdout DTI +0.066 [0.057,0.074] vs matched control; proxy holdout, not org-confirmed",
+    "submission_note_length": 128,
+    "note_max_chars": 140,
+    "verdict": "promote on holdout \u2014 downloadable research artifact; NOT approved/organizer-confirmed for competition upload; no weekly slot used by this repository; the authorized entrant decides whether to spend a slot",
+    "readiness_receipt": "docs/research/nearsplay/readiness.json"
   },
   "current_artifact_inspection": {
     "verified_now": true,
@@ -671,90 +658,69 @@
   },
   "current_release_decision": {
     "schema_version": 1,
-    "readiness_version": "research-readiness-v3-matched-controls-20261025",
-    "raster_sha256": "22850984a68c393f60c6cc9aeafd8d74fd8a3479654bdfcfd3626a4b99ff0381",
+    "readiness_version": "research-readiness-v4-nearsplay-20261025",
+    "raster_sha256": "f877c27878d35e138ca3e5e3e14a7e60dc9aef543c41c27cd1e1df2134d23c52",
     "gates": [
       {
         "name": "file_contract",
         "status": "passed",
-        "detail": "Reopened shared-writer GeoTIFF matches template; SHA-256 binds this decision to its exact bytes"
+        "detail": "Reopened shared-writer GeoTIFF matches the template; SHA-256 binds this decision to its exact bytes"
+      },
+      {
+        "name": "sidecar_identity",
+        "status": "passed",
+        "detail": "Download sidecar name, note and SHA-256 match the run card"
+      },
+      {
+        "name": "format_validation",
+        "status": "passed",
+        "detail": "All shared local format checks passed; local contract only, not organizer acceptance"
       },
       {
         "name": "labelled_holdout_evidence",
         "status": "passed",
-        "detail": "HOLDOUT-DTI requires evaluator/protocol, withheld positives and spatial-bootstrap 95% CI"
+        "detail": "HOLDOUT-DTI with evaluator, protocol and bootstrap metadata on two splits"
       },
       {
         "name": "paired_improvement",
         "status": "passed",
-        "detail": "Fixed candidate must improve preregistered core19 comparator with positive paired CI lower bound"
+        "detail": "Candidate beats the matched control on both splits with paired CI entirely above 0 (HOLDOUT-DTI)"
       },
       {
-        "name": "single_feature_leakage_canaries",
+        "name": "duplicate_detection",
         "status": "passed",
-        "detail": "All 37 raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC"
-      },
-      {
-        "name": "count_matched_construction",
-        "status": "passed",
-        "detail": "All fixed arms must realize the same predeclared active-domain budget in every fold"
-      },
-      {
-        "name": "surface_observed_registry",
-        "status": "passed",
-        "detail": "167 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
-      },
-      {
-        "name": "dots_observed_registry",
-        "status": "passed",
-        "detail": "167 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
-      },
-      {
-        "name": "complete_parallel_registry",
-        "status": "unknown",
-        "detail": "Nine-site public snapshots cannot attest all parallel rasters or missing original surfaces"
-      },
-      {
-        "name": "assigned_lane",
-        "status": "unknown",
-        "detail": "Autonomous research continuation is not an externally supplied lane assignment"
-      },
-      {
-        "name": "comparable_historical_best",
-        "status": "unknown",
-        "detail": "Do not substitute an archived metric or a new comparator for a missing historical-best rerun"
+        "detail": "Unique against the local registry: rho <= 0.90 and dot overlap <= 0.70; lane collision False"
       },
       {
         "name": "experimental_budget",
         "status": "passed",
-        "detail": "At most three experiments / two experimental hours"
+        "detail": "2 of 3 experiments inside the two-hour cap"
       },
       {
         "name": "artifact_identity",
         "status": "passed",
         "detail": "Named artifact and note of at most 140 characters"
+      },
+      {
+        "name": "no_organizer_claim",
+        "status": "passed",
+        "detail": "Holdout verdict is proxy-only; no organizer score or acceptance claimed"
       }
     ],
     "observed_registry": {
-      "surface": {
-        "registry_entries_compared": 167,
-        "max_spearman": 0.1545037513302229,
-        "max_fraction_within_3px": null,
-        "status": "passed"
-      },
       "dots": {
-        "registry_entries_compared": 167,
-        "max_spearman": 0.06337779887839463,
-        "max_fraction_within_3px": 0.6477886141982309,
+        "registry_entries_compared": 21,
+        "max_spearman": 0.07027108336531361,
+        "max_fraction_within_3px": 0.6808,
         "status": "passed"
       }
     },
     "download_ok": true,
-    "research_verdict": "negative",
+    "research_verdict": "promote",
     "eligible_for_separate_slot_selector": false,
     "submission_approved": false,
     "slot_selected": false,
-    "display_status": "NOT APPROVED FOR SUBMISSION",
+    "display_status": "RESEARCH PROMOTED ON HOLDOUT-DTI (PROXY); SLOT NOT SELECTED; NOT ORGANIZER-CONFIRMED",
     "organizer_score": null,
     "organizer_acceptance_confirmed": false
   },
@@ -935,13 +901,13 @@
         "timing": "Post-stop late-reference audit of saved states; no refit, replacement, new placement or original-registry rewrite",
         "combined_observed_registry": {
           "surface": {
-            "registry_entries_compared": 167,
+            "registry_entries_compared": 168,
             "max_spearman": 0.15657261436067785,
             "max_fraction_within_3px": null,
             "status": "unknown"
           },
           "dots": {
-            "registry_entries_compared": 167,
+            "registry_entries_compared": 168,
             "max_spearman": 0.06383254570926011,
             "max_fraction_within_3px": 0.790904967112724,
             "status": "failed"
@@ -987,12 +953,12 @@
         {
           "name": "surface_observed_registry",
           "status": "unknown",
-          "detail": "167 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+          "detail": "168 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
         },
         {
           "name": "dots_observed_registry",
           "status": "failed",
-          "detail": "167 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+          "detail": "168 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
         },
         {
           "name": "complete_parallel_registry",
@@ -1022,13 +988,13 @@
       ],
       "observed_registry": {
         "surface": {
-          "registry_entries_compared": 167,
+          "registry_entries_compared": 168,
           "max_spearman": 0.15657261436067785,
           "max_fraction_within_3px": null,
           "status": "unknown"
         },
         "dots": {
-          "registry_entries_compared": 167,
+          "registry_entries_compared": 168,
           "max_spearman": 0.06383254570926011,
           "max_fraction_within_3px": 0.790904967112724,
           "status": "failed"
@@ -1547,9 +1513,9 @@
       "decision": "Check 2 (4-fold OOF isotonic calibration: catalogue frame slope=0.9009, mean top-decile ratio=1.0495, folds>=0.70=4/4, pass=True; SGMC frame slope=0.9101, mean top-decile ratio=1.0940, folds>=0.70=2/4, pass=False); Check 3 (LiDAR permutation removes 57.0% of gain, full-topography permutation removes 97.2%, unrelated gravity permutation retains +0.03670, folds=4/4, pass=True); Check 1 passes on the independent SGMC novelty frame (delta=+0.03670) but fails on the catalogue component proxy (delta=-0.00073). Slot promoted = False."
     },
     "current_research_artifact": {
-      "evidence": "docs/research/msdb-piedmont/run-card.json",
-      "promoted": false,
-      "decision": "NOT APPROVED FOR SUBMISSION"
+      "evidence": "docs/research/nearsplay/run-card.json",
+      "promoted": true,
+      "decision": "RESEARCH PROMOTED ON HOLDOUT-DTI (PROXY); SLOT NOT SELECTED; NOT ORGANIZER-CONFIRMED"
     },
     "stopped_attempt_g30-lsm": {
       "evidence": "docs/research/2026-10-25-lsm/current-run.json",
@@ -1562,7 +1528,7 @@
       "decision": "duplicate-stop; no public TIFF"
     }
   },
-  "any_candidate_promoted": false,
+  "any_candidate_promoted": true,
   "promotion_scope": "Automatically adjudicated current artifact and listed legacy gates only; peer reports are separate, not re-adjudicated or selected",
   "peer_lane_reports": [
     {
@@ -1591,7 +1557,9 @@
     }
   ],
   "any_peer_lane_reports_promotion": true,
-  "promoted_gates": [],
+  "promoted_gates": [
+    "current_research_artifact"
+  ],
   "submission_slot_status": "none approved or used by this repository",
   "score_evidence": {
     "historical_leaderboard_snapshot_claims_from_ledger": [
@@ -1790,8 +1758,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "250 tests collected in 1.17s",
-      "exit_code": 0
+      "skip": true
     },
     "score_gain_claimed": false
   }

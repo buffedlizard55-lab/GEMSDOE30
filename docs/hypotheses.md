@@ -1,5 +1,16 @@
 # Ranked geological hypotheses — preregistration candidates
 
+**2026-10-25 session results.** Two holdout experiments ran within the three-experiment / two-hour
+cap (docs/research/h-vent-feeder-holdout.json, docs/research/h-nearsplay-holdout.json). H-VENT
+(volcanic-vent feeder alignment) was negative on the catalogue proxy and is not promoted. H-NEARSPLAY
+(near-splay annulus, 300 m–1.5 km off-catalogue, inner-edge weighted) passed screen and confirmation
+(Δ +0.066, CI entirely above 0, 4/4 quadrants on both splits) and is promoted on holdout; its TIFF
+is published at docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif
+with SHA-256 f877c278…623c52. The holdout is a catalogue proxy (HOLDOUT-DTI), not an organizer score;
+the file is NOT ORGANIZER-CONFIRMED and no competition slot was used. The file is unique vs the 21
+locally available registry rasters (max Spearman rho 0.070 < 0.90; max dot overlap 68.1% < 70% within
+3 px). No candidate below may consume a weekly slot without its own holdout pass.
+
 **Status of this file (reviewed 2026-10-03):** the active five-hypothesis shortlist immediately
 below contains genuinely untried candidates bounded by inspected repository experiments and public
 owner summaries. H-31-01, H-31-02b, H-31-02r, H-32-01, H-32-05, H-32-05b, and H-33-01 have measured
