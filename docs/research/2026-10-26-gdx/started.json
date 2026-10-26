@@ -1,0 +1,11 @@
+{
+  "started_utc": "2026-10-26T20:22:45.807290+00:00",
+  "preregistration_sha256": "aa3da2e3b6b794b95f6d720eefbb8443716af74abaab6398f7895ba3f52dc0d5",
+  "registry_sha256": "447f6062686215a20703cec5ace121a279e44619dd6f079438e1e34a7c8c386a",
+  "runner_sha256": "a2bb396caf55c44e8bfdedd7810e86769a604cc28fbb22819014ebb65574df80",
+  "transform_sha256": "700e3bc348dd4e2b9090485f775f33dcc0249646a7f474151e002d9c5d219161",
+  "experiment_cap": 3,
+  "planned_experiments": 2,
+  "max_seconds": 6000,
+  "externally_assigned_lane_verified": false
+}
