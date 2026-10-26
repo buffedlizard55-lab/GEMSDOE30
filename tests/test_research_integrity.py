@@ -235,3 +235,16 @@ def test_static_preview_accepts_preview_hosts_but_never_serves_private_paths(tmp
             assert exc.value.code == 403
     finally:
         server.shutdown(); server.server_close(); thread.join(timeout=5)
+
+
+def test_newer_lane_and_generic_snapshot_cannot_be_overwritten(tmp_path, monkeypatch):
+    from scripts import sync_priority_registry as sync
+    monkeypatch.setattr(sync, "ROOT", tmp_path)
+    monkeypatch.setattr(sync, "api", lambda *a, **k: pytest.fail("must fail before network"))
+    for relative in ("docs/research/2026-10-26-gdx/registry.json", "docs/research/registry-snapshots/another.json"):
+        target = tmp_path / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(b'{"immutable": true}\n')
+        with pytest.raises(ValueError, match="existing snapshot"):
+            sync.require_new_snapshot_target(target)
+        assert target.read_bytes() == b'{"immutable": true}\n'

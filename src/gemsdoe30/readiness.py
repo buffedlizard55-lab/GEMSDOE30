@@ -19,6 +19,34 @@ def interval(ci, low=0, high=1):
     return isinstance(ci, list) and len(ci) == 2 and all(number(v) for v in ci) and low <= ci[0] <= ci[1] <= high
 
 
+def with_current_inventory(readiness: dict, *, recorded_hashes: set[str], current_hashes: set[str]) -> dict:
+    """Overlay live coverage without rewriting a frozen, hash-bound receipt.
+
+    A new reference is missing evidence, not corrupt historical evidence. Keep
+    archived comparisons auditable, mark current coverage unknown, and block
+    promotion. Never manufacture retrospective surface comparisons or silently
+    extend a frozen registry. File downloadability alone is unchanged.
+    """
+    from copy import deepcopy
+
+    result = deepcopy(readiness)
+    unassessed = sorted(current_hashes - recorded_hashes)
+    if not unassessed:
+        return result
+    result["archived_research_verdict"] = result.get("research_verdict", "unknown")
+    result["unassessed_current_reference_sha256"] = unassessed
+    result["current_inventory_coverage"] = "unknown"
+    result["gates"].append({
+        "name": "current_published_inventory_coverage", "status": "unknown",
+        "detail": f"{len(unassessed)} new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage",
+    })
+    result.update(research_verdict="negative", eligible_for_separate_slot_selector=False,
+                  ok_to_submit=False, submission_approved=False, slot_selected=False,
+                  decision="DO NOT SPEND WEEKLY SUBMISSION SLOT",
+                  display_status="DOWNLOAD IS RESEARCH ONLY; CURRENT NOVELTY COVERAGE UNKNOWN; DO NOT SUBMIT")
+    return result
+
+
 def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool,
            surface_audit: dict, dots_audit: dict, registry: dict,
            artifact_public: bool = True) -> dict[str, Any]:

@@ -14,14 +14,15 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -e '.[research,test]' -c requirements-tdx1.txt
-      - name: Restore only the hash-pinned output template
+      - name: Restore only the hash-pinned output template and catalogue
         env:
           GH_TOKEN: ${{ github.token }}
-        run: python scripts/ci_check.py python scripts/restore_public_mirrors.py --ids sample_submission
+        run: python scripts/ci_check.py python scripts/restore_public_mirrors.py --ids sample_submission labels
       - name: Verify the current research artifact and the preserved negative decisions
         run: |
           python scripts/ci_check.py python scripts/verify_current_run.py
           python scripts/ci_check.py python scripts/verify_stopped_attempt.py
+          python scripts/ci_check.py python scripts/verify_geothermal_chemistry_run.py
           python scripts/ci_check.py python scripts/verify_lsm_run.py
           python scripts/ci_check.py python scripts/verify_tad_run.py
           python scripts/ci_check.py python scripts/build_research_site.py --check

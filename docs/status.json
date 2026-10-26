@@ -1,27 +1,33 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-26T15:53:42Z",
+  "generated_utc": "2026-10-26T21:05:25Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
     "directory": "data/raw",
     "availability_scope": "This describes files present in the build worktree at generated_utc; data/raw and data/processed are Git-ignored and are not distributed by GitHub Pages.",
-    "required_files_present": false,
-    "sha256_verified_against_pins": false,
+    "required_files_present": true,
+    "sha256_verified_against_pins": true,
     "files": [
       {
         "dest": "training_features.tif",
         "path": "data/raw/training_features.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-        "expected_bytes": 418912844
+        "expected_bytes": 418912844,
+        "actual_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "actual_bytes": 418912844,
+        "sha256_matches_pin": true
       },
       {
         "dest": "labels.tif",
         "path": "data/raw/labels.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "expected_bytes": 425830
+        "expected_bytes": 425830,
+        "actual_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+        "actual_bytes": 425830,
+        "sha256_matches_pin": true
       },
       {
         "dest": "sample_submission.tif",
@@ -35,20 +41,22 @@
       }
     ],
     "prepared_dataset": {
-      "dataset_signature": null,
-      "matches_recorded_pin": null,
-      "positive_label_pixels": null,
-      "template_valid_pixels": null
+      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+      "matches_recorded_pin": true,
+      "positive_label_pixels": 60988,
+      "template_valid_pixels": 5167373
     },
     "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
   },
   "competition_data": {
     "owner_mirror_files_present": [
+      "training_features.tif",
+      "labels.tif",
       "sample_submission.tif"
     ],
     "organizer_authenticated": false,
     "prepared_dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
-    "pins_core_sha256_verified_now": false,
+    "pins_core_sha256_verified_now": true,
     "historical_restore_receipt": "docs/research/2026-10-25/prepared-manifest.json",
     "pins_note": "Owner mirrors, not organizer-authenticated. Hash pins verify consistency only. Template values must never be used as features or predictions.",
     "extra_pins_files": [
@@ -69,6 +77,46 @@
     ]
   },
   "downloads": [
+    {
+      "manifest": "GEMSDOE30-blind-thermal-corridor-h1-annulus-20261026T202136Z.json",
+      "file": "docs/downloads/GEMSDOE30-blind-thermal-corridor-h1-annulus-20261026T202136Z.tif",
+      "present": true,
+      "sha256": "20fc7b107e9e1a3a19e5e082d41720f0ce2204ad0ae8ca632b9884d16534af26",
+      "sha256_matches_manifest": true,
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "legacy_manifest_claim_range_error_immunity": null,
+      "organizer_acceptance_confirmed": false,
+      "site_linked": null,
+      "submission_recommendation": false,
+      "run_name": "GEMSDOE30-blind-thermal-corridor-h1-annulus",
+      "note": "Blind thermal corridor off-cat: paleo-springs x 2m probes, SGMC 3-30px annulus, volcanics-excluded, 3px Poisson disk, 18766 dots",
+      "performance_status": "unscored; format validation is not a score"
+    },
+    {
+      "manifest": "GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.json",
+      "file": "docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif",
+      "present": true,
+      "sha256": "0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564",
+      "sha256_matches_manifest": true,
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "legacy_manifest_claim_range_error_immunity": null,
+      "organizer_acceptance_confirmed": false,
+      "site_linked": null,
+      "submission_recommendation": false,
+      "run_name": "GEMSDOE30-geothermal-corridor-offcat-d3",
+      "note": "Geothermal corridor off-cat: Q-volcanics x paleo-springs x 2m probes, SGMC-gated, 3px Poisson disk, 40000 dots",
+      "performance_status": "unscored; format validation is not a score"
+    },
     {
       "manifest": "GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.json",
       "file": "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif",
@@ -203,7 +251,7 @@
       "range_error_immune": null,
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
-      "site_linked": true,
+      "site_linked": null,
       "submission_recommendation": false,
       "run_name": "gems30-PTA1-44090-20261025-9a3f7f9535a4",
       "note": "PTA1 subsurface 3D tilt-phase + dip-asymmetry 18-feat HGB; 44090d; research artifact, NOT slot-approved.",
@@ -223,7 +271,7 @@
       "range_error_immune": null,
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
-      "site_linked": true,
+      "site_linked": null,
       "submission_recommendation": false,
       "run_name": "gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan",
       "note": "G30-TAD OOF tilt-depth+Kd-alt+dip-slip 38k; negative gate (0.1440); DO NOT SUBMIT.",
@@ -243,7 +291,7 @@
       "range_error_immune": null,
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
-      "site_linked": true,
+      "site_linked": null,
       "submission_recommendation": false,
       "run_name": "gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros",
       "note": "G30-TAD OOF tilt-depth+Kd-alt+dip-slip 38k; negative gate (0.1440); DO NOT SUBMIT.",
@@ -528,6 +576,26 @@
       "run_name": "GEMSDOE30_sgmc-hedge-t04-s4-d10_20261003T174409650983Z_ac08b41e",
       "note": "SGMC-hedge research raster; SGMC holdout is tautological; not promoted or scored",
       "performance_status": "unscored; local format validation is not a score"
+    },
+    {
+      "manifest": "gems30-GDX1-44090-20261026-2992ee3619f5.json",
+      "file": "docs/research/2026-10-26-gdx/gems30-GDX1-44090-20261026-2992ee3619f5.tif",
+      "present": true,
+      "sha256": "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
+      "sha256_matches_manifest": true,
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "legacy_manifest_claim_range_error_immunity": null,
+      "organizer_acceptance_confirmed": false,
+      "site_linked": true,
+      "submission_recommendation": false,
+      "run_name": "gems30-GDX1-44090-20261026-2992ee3619f5",
+      "note": "GDX1 site-deduped, effort-normalized geothermal chemistry + local edges; 44090 dots; research only, NOT slot-approved.",
+      "performance_status": "unscored; format validation is not a score"
     }
   ],
   "submission_format": {
@@ -553,7 +621,7 @@
     "schema_version": 1,
     "run_card": "docs/research/phase-tilt-asymmetry/run-card.json",
     "readiness": "docs/research/phase-tilt-asymmetry/readiness.json",
-    "purpose": "Current unique downloadable research artifact PTA-1 (unit-consistent 3D magnetic/gravity phase-tilt curvature + signed hanging-wall conductive-cover step; clears all 198 registry rasters with max 54.60% <= 70% 3 px overlap; beats raw 8-band subsurface baseline +0.008870 [+0.001561, +0.015976], +32.7% vs TDX-1; does NOT beat core19; research-only download, NOT approved for competition upload, no slot selected)",
+    "purpose": "Archived PTA-1 downloadable research artifact, not a current-slot recommendation. Historical 198-reference evidence is frozen; new public references receive blocking UNKNOWN coverage without rewriting it. See latest_review for GDX-1, the newest negative experiment. No organizer-confirmed score or slot selected.",
     "latest_attempt": "docs/research/texture-controls/run-card.json",
     "additional_stopped_attempts": [
       {
@@ -568,7 +636,7 @@
         "lane": "G30-TAD",
         "pointer": "docs/research/tilt-alteration-discontinuity/current-run.json",
         "verifier": "scripts/verify_tad_run.py",
-        "decision": "DO NOT SPEND WEEKLY SUBMISSION SLOT (technical format [0,1] & 193-raster novelty validated at 51.44% <= 70%; HOLDOUT-DTI 0.14405 vs core19 0.13982, paired CI crosses zero)"
+        "decision": "ARCHIVED subset evidence only: DO NOT SPEND WEEKLY SUBMISSION SLOT (technical format [0,1] & 193-raster novelty validated at 51.44% <= 70%; HOLDOUT-DTI 0.14405 vs core19 0.13982, paired CI crosses zero); current live-coverage overlay may be UNKNOWN"
       }
     ],
     "additional_research_artifacts": [
@@ -578,14 +646,24 @@
         "run_card": "docs/research/tilt-alteration-discontinuity/run-card.json",
         "readiness": "docs/research/tilt-alteration-discontinuity/readiness.json",
         "verifier": "scripts/verify_tad_run.py",
-        "decision": "Unique dual-variant downloadable research artifact (OOF 3D tilt-depth + Kd radiometric alteration + dip-slip step + 30/40/30 decensored collar; HOLDOUT-DTI 0.14405 vs core19 0.13982, CI [-0.01554, +0.02398]; subsurface16 0.10959, +0.03445; max 51.44% <= 70% across 193 aligned rasters; verdict negative, NOT approved for competition upload, no slot selected)"
+        "decision": "ARCHIVED record, not current approval: Unique dual-variant downloadable research artifact (OOF 3D tilt-depth + Kd radiometric alteration + dip-slip step + 30/40/30 decensored collar; HOLDOUT-DTI 0.14405 vs core19 0.13982, CI [-0.01554, +0.02398]; subsurface16 0.10959, +0.03445; max 51.44% <= 70% across 193 aligned rasters; verdict negative, NOT approved for competition upload, no slot selected)"
       },
       {
         "lane": "MSDB-1v2",
         "run_card": "docs/research/msdb-piedmont/run-card.json",
         "readiness": "docs/research/msdb-piedmont/readiness.json",
         "verifier": "scripts/verify_current_run.py",
-        "decision": "Registered full-stack peer artifact (HOLDOUT-DTI 0.170462 vs core19 0.133628; max 64.78% <= 70% across 198 rasters; readiness negative pending complete registry; no slot selected)"
+        "decision": "ARCHIVED record, not current approval: Registered full-stack peer artifact (HOLDOUT-DTI 0.170462 vs core19 0.133628; max 64.78% <= 70% across 198 rasters; readiness negative pending complete registry; no slot selected)"
+      },
+      {
+        "lane": "geothermal-corridor",
+        "run_card": "docs/research/geothermal-corridor/run-card.json",
+        "submission_tif": "docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif",
+        "validation": "docs/research/geothermal-corridor/validation.json",
+        "novelty_registry": "docs/research/geothermal-corridor/novelty-dots.json",
+        "novelty_downloads_audit": "docs/research/geothermal-corridor/novelty-downloads-audit.json",
+        "verifier": "scripts/validate_submission.py docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif --template docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+        "decision": "ARCHIVED record, not current approval: DOWNLOAD OK; NOT OK TO SUBMIT (unique Q-volcanics x paleo-springs x 2m-probe off-SGMC corridor, 40,000 dots >2px off SGMC; 12/12 format checks; max rho 0.018 and max 60.6% <= 70% 3px overlap vs all 23 downloads rasters; HOLDOUT-DTI not computable without organizer labels; verdict negative, no slot selected)"
       },
       {
         "lane": "H-NEARSPLAY",
@@ -593,10 +671,280 @@
         "readiness": "docs/research/nearsplay/readiness.json",
         "verifier": "scripts/verify_nearsplay_run.py",
         "full_registry_audit": "docs/research/nearsplay/full-registry-audit.json",
-        "decision": "DUPLICATE ON EXPANDED REGISTRY (71.26% > 70% within 3 px on four GEMSDOE25 rasters, fulfilling IR-30-078 post-run check); DO NOT SUBMIT; retained for provenance only"
+        "decision": "ARCHIVED record, not current approval: DUPLICATE ON EXPANDED REGISTRY (71.26% > 70% within 3 px on four GEMSDOE25 rasters, fulfilling IR-30-078 post-run check); DO NOT SUBMIT; retained for provenance only"
       }
-    ]
+    ],
+    "latest_review": {
+      "lane": "GDX-1",
+      "run_card": "docs/research/2026-10-26-gdx/run-card.json",
+      "verifier": "scripts/verify_geothermal_chemistry_run.py",
+      "decision": "NEGATIVE / DO NOT SUBMIT: HOLDOUT-DTI 0.11965 vs same-protocol core19 0.13691; both paired-CI improvement gates failed; global uniqueness UNKNOWN; no slot selected",
+      "history_preserved": true
+    }
   },
+  "latest_scientific_review": {
+    "lane": "GDX-1",
+    "run_card": "docs/research/2026-10-26-gdx/run-card.json",
+    "verifier": "scripts/verify_geothermal_chemistry_run.py",
+    "decision": {
+      "schema_version": 1,
+      "readiness_version": "research-readiness-v3-matched-controls-20261025",
+      "raster_sha256": "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
+      "gates": [
+        {
+          "name": "file_contract",
+          "status": "passed",
+          "detail": "Reopened shared-writer GeoTIFF matches template; SHA-256 binds this decision to its exact bytes"
+        },
+        {
+          "name": "labelled_holdout_evidence",
+          "status": "passed",
+          "detail": "HOLDOUT-DTI requires evaluator/protocol, withheld positives and spatial-bootstrap 95% CI"
+        },
+        {
+          "name": "paired_improvement",
+          "status": "failed",
+          "detail": "Fixed GDX-1 candidate must improve all 2 comparators (core19, effort6) with positive paired CI lower bounds"
+        },
+        {
+          "name": "single_feature_leakage_canaries",
+          "status": "passed",
+          "detail": "All 28 raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC"
+        },
+        {
+          "name": "count_matched_construction",
+          "status": "passed",
+          "detail": "All fixed arms must realize the same predeclared active-domain budget in every fold"
+        },
+        {
+          "name": "surface_observed_registry",
+          "status": "unknown",
+          "detail": "327 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+        },
+        {
+          "name": "dots_observed_registry",
+          "status": "unknown",
+          "detail": "327 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+        },
+        {
+          "name": "complete_parallel_registry",
+          "status": "unknown",
+          "detail": "Nine-site public snapshots cannot attest all parallel rasters or missing original surfaces"
+        },
+        {
+          "name": "assigned_lane",
+          "status": "unknown",
+          "detail": "Autonomous research continuation is not an externally supplied lane assignment"
+        },
+        {
+          "name": "comparable_historical_best",
+          "status": "unknown",
+          "detail": "Do not substitute an archived metric or a new comparator for a missing historical-best rerun"
+        },
+        {
+          "name": "experimental_budget",
+          "status": "passed",
+          "detail": "At most three experiments / two experimental hours"
+        },
+        {
+          "name": "artifact_identity",
+          "status": "passed",
+          "detail": "Named artifact and note of at most 140 characters"
+        }
+      ],
+      "observed_registry": {
+        "surface": {
+          "registry_entries_compared": 327,
+          "max_spearman": 0.1647020229678713,
+          "max_fraction_within_3px": null,
+          "status": "unknown"
+        },
+        "dots": {
+          "registry_entries_compared": 327,
+          "max_spearman": 0.09179766302937646,
+          "max_fraction_within_3px": 0.5424586073939669,
+          "status": "unknown"
+        }
+      },
+      "download_ok": true,
+      "research_verdict": "negative",
+      "eligible_for_separate_slot_selector": false,
+      "submission_approved": false,
+      "slot_selected": false,
+      "display_status": "NOT APPROVED FOR SUBMISSION",
+      "organizer_score": null,
+      "organizer_acceptance_confirmed": false,
+      "verification_scope": "Current TIFF reopened; CIs recomputed; historical continuous-surface receipts verified, not reopened in CI",
+      "saved_surface_reopened": true,
+      "catalogue_bytes_reopened": true,
+      "local_additional_comparisons_per_stage": 2
+    },
+    "history_preserved": true,
+    "card": {
+      "schema_version": 1,
+      "experiment_spec": "gdx1",
+      "run_id": "gems30-GDX1-44090-20261026-2992ee3619f5",
+      "lane": "GDX-1 autonomous geothermal-corridor continuation; not externally assigned",
+      "hypothesis": "Effort-normalized paired geothermal chemistry localizes cooling/mixing upflow conduits beyond surface-mapped faults.",
+      "mechanism": "Site-median reservoir/surface temperature contrasts and cation-quartz discordance normalized by chemical sampling effort; 12-channel local-physics HGB, 3px Poisson dots.",
+      "non_fault_mimic": "Aquifer mixing or steam loss at a lithologic contact; preferential sampling around developed geothermal fields.",
+      "holdout": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.11965057235973826,
+        "withheld_positives": 60988,
+        "ci95": [
+          0.10769925077601022,
+          0.13232384036729036
+        ],
+        "tp_weight": 6986.215594286964,
+        "fp_weight": 41004.207099288884,
+        "evaluator_version": "component-holdout-v3-blockstats-20261025",
+        "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+        "buffer_px": 46,
+        "scope": "catalogue hide-and-recover proxy; NOT organizer performance or leaderboard estimate",
+        "bootstrap": {
+          "unit": "geographic block aggregated across folds",
+          "blocks": 371,
+          "replicates": 2000,
+          "seed": 3071,
+          "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+        },
+        "comparators": {
+          "core19": {
+            "label": "HOLDOUT-DTI",
+            "value": 0.13690536488571922,
+            "withheld_positives": 60988,
+            "ci95": [
+              0.1209560629688432,
+              0.15334760284600843
+            ],
+            "tp_weight": 8007.4718728300295,
+            "fp_weight": 40486.03891853005
+          },
+          "effort6": {
+            "label": "HOLDOUT-DTI",
+            "value": 0.12149271765054521,
+            "withheld_positives": 60988,
+            "ci95": [
+              0.10946137772383079,
+              0.13475733811551627
+            ],
+            "tp_weight": 7095.821619902705,
+            "fp_weight": 40978.80174943272
+          }
+        },
+        "candidate_minus": {
+          "core19": {
+            "label": "HOLDOUT-DTI difference",
+            "value": -0.017254792525980958,
+            "ci95": [
+              -0.035453211957097976,
+              0.0017652626493339294
+            ]
+          },
+          "effort6": {
+            "label": "HOLDOUT-DTI difference",
+            "value": -0.0018421452908069513,
+            "ci95": [
+              -0.006235423612023698,
+              0.002651796661684326
+            ]
+          }
+        }
+      },
+      "feature_canaries": {
+        "features_per_fold": 28,
+        "folds": 4,
+        "alarm_count": 0,
+        "alarms": []
+      },
+      "registry": {
+        "complete": false,
+        "receipt_surface": "docs/research/2026-10-26-gdx/novelty-surface.json",
+        "receipt_dots": "docs/research/2026-10-26-gdx/novelty-dots.json",
+        "surface": {
+          "registry_entries_compared": 327,
+          "max_spearman": 0.1647020229678713,
+          "max_fraction_within_3px": null,
+          "status": "unknown"
+        },
+        "dots": {
+          "registry_entries_compared": 327,
+          "max_spearman": 0.09179766302937646,
+          "max_fraction_within_3px": 0.5424586073939669,
+          "status": "unknown"
+        },
+        "additional_local_evidence": {
+          "registry": "docs/research/2026-10-26-gdx/registry-local-addendum.json",
+          "surface": "docs/research/2026-10-26-gdx/novelty-local-surface.json",
+          "dots": "docs/research/2026-10-26-gdx/novelty-local-dots.json",
+          "successful_comparisons_per_stage": 1,
+          "chronology": "Post-run audit of the exact saved states; no refit; not part of frozen pre-placement coverage"
+        },
+        "global_uniqueness": "unknown",
+        "additional_postmerge_evidence": {
+          "registry": "docs/research/2026-10-26-gdx/registry-postmerge-addendum.json",
+          "surface": "docs/research/2026-10-26-gdx/novelty-postmerge-surface.json",
+          "dots": "docs/research/2026-10-26-gdx/novelty-postmerge-dots.json",
+          "successful_comparisons_per_stage": 1,
+          "chronology": "Exact saved-state audit during main integration, after the scientific run; no new experiment, refit or placement"
+        }
+      },
+      "raster_sha256": "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
+      "surface_sha256": "80c1c5096958fbacd5addfb5afd3563417d544663e5d7c71a052fcc67e2980be",
+      "validator_output": {
+        "status": "passed",
+        "no_nan_inside_footprint": true,
+        "values_in_0_1": true,
+        "crs_match": true,
+        "shape_match": true,
+        "transform_match": true,
+        "single_float32_band": true,
+        "nan_nodata_outside_footprint": true,
+        "positive_catalogue_pixels": 0,
+        "emitted_dots": 44090,
+        "dots_within_2px_of_catalogue": 0,
+        "organizer_acceptance_confirmed": false
+      },
+      "submission_name": "gems30-GDX1-44090-20261026-2992ee3619f5",
+      "note": "GDX1 site-deduped, effort-normalized geothermal chemistry + local edges; 44090 dots; research only, NOT slot-approved.",
+      "published_tiff": "docs/research/2026-10-26-gdx/gems30-GDX1-44090-20261026-2992ee3619f5.tif",
+      "download_ok": true,
+      "organizer_score": null,
+      "leaderboard_estimate": null,
+      "externally_assigned_lane_verified": false,
+      "scientific_gate_passed": false,
+      "experiments_run": 3,
+      "experiment_cap": 3,
+      "protocol_deviation": "Amendment A1: pinned malformed reference unresolved; exact saved-surface recovery",
+      "amendment_sha256": "277b60374c94f54a7d808d40c60734b6282488d19d364d855e1b4e7b71a8282b",
+      "experimental_elapsed_seconds": 603.478,
+      "time_cap_hours": 2,
+      "archive_core19_parity_verified": true,
+      "preregistration_sha256": "aa3da2e3b6b794b95f6d720eefbb8443716af74abaab6398f7895ba3f52dc0d5",
+      "registry_sha256": "447f6062686215a20703cec5ace121a279e44619dd6f079438e1e34a7c8c386a",
+      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+      "submission_approved": false,
+      "slot_selected": false,
+      "ok_to_submit": false,
+      "created_utc": "2026-10-26T20:32:49.301630+00:00",
+      "verdict": "negative",
+      "blockers": [
+        "paired_improvement: Fixed GDX-1 candidate must improve all 2 comparators (core19, effort6) with positive paired CI lower bounds",
+        "surface_observed_registry: 327 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop",
+        "dots_observed_registry: 327 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop",
+        "complete_parallel_registry: Nine-site public snapshots cannot attest all parallel rasters or missing original surfaces",
+        "assigned_lane: Autonomous research continuation is not an externally supplied lane assignment",
+        "comparable_historical_best: Do not substitute an archived metric or a new comparator for a missing historical-best rerun",
+        "Calibration and perturbation confirmation not completed; not eligible for slot selection",
+        "Current portal weekly cap, deadline and eligibility unverified"
+      ]
+    },
+    "verified_now": true,
+    "error": null,
+    "ok_to_submit": false
+  },
+  "current_readiness_scope": "Legacy retained research artifact; newest negative experiment is latest_scientific_review, not a slot selection",
   "current_readiness": {
     "schema_version": 3,
     "experiment_spec": "pta1",
@@ -852,6 +1200,11 @@
         "name": "artifact_identity",
         "status": "passed",
         "detail": "Named artifact and note of at most 140 characters"
+      },
+      {
+        "name": "current_published_inventory_coverage",
+        "status": "unknown",
+        "detail": "4 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
       }
     ],
     "observed_registry": {
@@ -873,9 +1226,19 @@
     "eligible_for_separate_slot_selector": false,
     "submission_approved": false,
     "slot_selected": false,
-    "display_status": "NOT APPROVED FOR SUBMISSION",
+    "display_status": "DOWNLOAD IS RESEARCH ONLY; CURRENT NOVELTY COVERAGE UNKNOWN; DO NOT SUBMIT",
     "organizer_score": null,
-    "organizer_acceptance_confirmed": false
+    "organizer_acceptance_confirmed": false,
+    "archived_research_verdict": "negative",
+    "unassessed_current_reference_sha256": [
+      "0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564",
+      "20fc7b107e9e1a3a19e5e082d41720f0ce2204ad0ae8ca632b9884d16534af26",
+      "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
+      "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07"
+    ],
+    "current_inventory_coverage": "unknown",
+    "ok_to_submit": false,
+    "decision": "DO NOT SPEND WEEKLY SUBMISSION SLOT"
   },
   "latest_scientific_attempt": {
     "run_card": "docs/research/texture-controls/run-card.json",
@@ -1137,6 +1500,11 @@
           "name": "artifact_identity",
           "status": "passed",
           "detail": "Named artifact and note of at most 140 characters"
+        },
+        {
+          "name": "current_published_inventory_coverage",
+          "status": "unknown",
+          "detail": "4 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
         }
       ],
       "observed_registry": {
@@ -1158,7 +1526,7 @@
       "eligible_for_separate_slot_selector": false,
       "submission_approved": false,
       "slot_selected": false,
-      "display_status": "NOT APPROVED FOR SUBMISSION",
+      "display_status": "DOWNLOAD IS RESEARCH ONLY; CURRENT NOVELTY COVERAGE UNKNOWN; DO NOT SUBMIT",
       "organizer_score": null,
       "organizer_acceptance_confirmed": false,
       "recorded_local_validation": {
@@ -1166,7 +1534,17 @@
         "receipt_sha256": "e6ce438196a609e6a0b504619c2b85473d27a1c2a38e7b9ed1a05748ac1ac2d8",
         "current_bytes_reopened": false,
         "scope": "Stored validator receipt only; duplicate raster is not distributed"
-      }
+      },
+      "archived_research_verdict": "negative",
+      "unassessed_current_reference_sha256": [
+        "0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564",
+        "20fc7b107e9e1a3a19e5e082d41720f0ce2204ad0ae8ca632b9884d16534af26",
+        "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
+        "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07"
+      ],
+      "current_inventory_coverage": "unknown",
+      "ok_to_submit": false,
+      "decision": "DO NOT SPEND WEEKLY SUBMISSION SLOT"
     },
     "public_download": false
   },
@@ -1268,6 +1646,11 @@
           "name": "budget_and_identity",
           "status": "passed",
           "detail": "3/3 experiments in 769.0s <= 7,200s; note 82/140 chars"
+        },
+        {
+          "name": "current_published_inventory_coverage",
+          "status": "unknown",
+          "detail": "4 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
         }
       ]
     }
@@ -2033,7 +2416,7 @@
     "current_research_artifact": {
       "evidence": "docs/research/phase-tilt-asymmetry/run-card.json",
       "promoted": false,
-      "decision": "NOT APPROVED FOR SUBMISSION"
+      "decision": "DOWNLOAD IS RESEARCH ONLY; CURRENT NOVELTY COVERAGE UNKNOWN; DO NOT SUBMIT"
     },
     "stopped_attempt_g30-lsm": {
       "evidence": "docs/research/2026-10-25-lsm/current-run.json",
@@ -2049,6 +2432,11 @@
       "evidence": "docs/research/texture-controls/run-card.json",
       "promoted": false,
       "decision": "duplicate-stop; no public TIFF"
+    },
+    "latest_gdx_scientific_review": {
+      "evidence": "docs/research/2026-10-26-gdx/run-card.json",
+      "promoted": false,
+      "decision": "NOT APPROVED FOR SUBMISSION"
     }
   },
   "any_candidate_promoted": false,
@@ -2279,7 +2667,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "287 tests collected in 0.73s",
+      "pytest_collect": "336 tests collected in 0.81s",
       "exit_code": 0
     },
     "score_gain_claimed": false

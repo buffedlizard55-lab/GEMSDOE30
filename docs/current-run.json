@@ -2,7 +2,7 @@
   "schema_version": 1,
   "run_card": "docs/research/phase-tilt-asymmetry/run-card.json",
   "readiness": "docs/research/phase-tilt-asymmetry/readiness.json",
-  "purpose": "Current unique downloadable research artifact PTA-1 (unit-consistent 3D magnetic/gravity phase-tilt curvature + signed hanging-wall conductive-cover step; clears all 198 registry rasters with max 54.60% <= 70% 3 px overlap; beats raw 8-band subsurface baseline +0.008870 [+0.001561, +0.015976], +32.7% vs TDX-1; does NOT beat core19; research-only download, NOT approved for competition upload, no slot selected)",
+  "purpose": "Archived PTA-1 downloadable research artifact, not a current-slot recommendation. Historical 198-reference evidence is frozen; new public references receive blocking UNKNOWN coverage without rewriting it. See latest_review for GDX-1, the newest negative experiment. No organizer-confirmed score or slot selected.",
   "latest_attempt": "docs/research/texture-controls/run-card.json",
   "additional_stopped_attempts": [
     {
@@ -17,7 +17,7 @@
       "lane": "G30-TAD",
       "pointer": "docs/research/tilt-alteration-discontinuity/current-run.json",
       "verifier": "scripts/verify_tad_run.py",
-      "decision": "DO NOT SPEND WEEKLY SUBMISSION SLOT (technical format [0,1] & 193-raster novelty validated at 51.44% <= 70%; HOLDOUT-DTI 0.14405 vs core19 0.13982, paired CI crosses zero)"
+      "decision": "ARCHIVED subset evidence only: DO NOT SPEND WEEKLY SUBMISSION SLOT (technical format [0,1] & 193-raster novelty validated at 51.44% <= 70%; HOLDOUT-DTI 0.14405 vs core19 0.13982, paired CI crosses zero); current live-coverage overlay may be UNKNOWN"
     }
   ],
   "additional_research_artifacts": [
@@ -27,14 +27,14 @@
       "run_card": "docs/research/tilt-alteration-discontinuity/run-card.json",
       "readiness": "docs/research/tilt-alteration-discontinuity/readiness.json",
       "verifier": "scripts/verify_tad_run.py",
-      "decision": "Unique dual-variant downloadable research artifact (OOF 3D tilt-depth + Kd radiometric alteration + dip-slip step + 30/40/30 decensored collar; HOLDOUT-DTI 0.14405 vs core19 0.13982, CI [-0.01554, +0.02398]; subsurface16 0.10959, +0.03445; max 51.44% <= 70% across 193 aligned rasters; verdict negative, NOT approved for competition upload, no slot selected)"
+      "decision": "ARCHIVED record, not current approval: Unique dual-variant downloadable research artifact (OOF 3D tilt-depth + Kd radiometric alteration + dip-slip step + 30/40/30 decensored collar; HOLDOUT-DTI 0.14405 vs core19 0.13982, CI [-0.01554, +0.02398]; subsurface16 0.10959, +0.03445; max 51.44% <= 70% across 193 aligned rasters; verdict negative, NOT approved for competition upload, no slot selected)"
     },
     {
       "lane": "MSDB-1v2",
       "run_card": "docs/research/msdb-piedmont/run-card.json",
       "readiness": "docs/research/msdb-piedmont/readiness.json",
       "verifier": "scripts/verify_current_run.py",
-      "decision": "Registered full-stack peer artifact (HOLDOUT-DTI 0.170462 vs core19 0.133628; max 64.78% <= 70% across 198 rasters; readiness negative pending complete registry; no slot selected)"
+      "decision": "ARCHIVED record, not current approval: Registered full-stack peer artifact (HOLDOUT-DTI 0.170462 vs core19 0.133628; max 64.78% <= 70% across 198 rasters; readiness negative pending complete registry; no slot selected)"
     },
     {
       "lane": "geothermal-corridor",
@@ -44,7 +44,7 @@
       "novelty_registry": "docs/research/geothermal-corridor/novelty-dots.json",
       "novelty_downloads_audit": "docs/research/geothermal-corridor/novelty-downloads-audit.json",
       "verifier": "scripts/validate_submission.py docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif --template docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
-      "decision": "DOWNLOAD OK; NOT OK TO SUBMIT (unique Q-volcanics x paleo-springs x 2m-probe off-SGMC corridor, 40,000 dots >2px off SGMC; 12/12 format checks; max rho 0.018 and max 60.6% <= 70% 3px overlap vs all 23 downloads rasters; HOLDOUT-DTI not computable without organizer labels; verdict negative, no slot selected)"
+      "decision": "ARCHIVED record, not current approval: DOWNLOAD OK; NOT OK TO SUBMIT (unique Q-volcanics x paleo-springs x 2m-probe off-SGMC corridor, 40,000 dots >2px off SGMC; 12/12 format checks; max rho 0.018 and max 60.6% <= 70% 3px overlap vs all 23 downloads rasters; HOLDOUT-DTI not computable without organizer labels; verdict negative, no slot selected)"
     },
     {
       "lane": "H-NEARSPLAY",
@@ -52,7 +52,14 @@
       "readiness": "docs/research/nearsplay/readiness.json",
       "verifier": "scripts/verify_nearsplay_run.py",
       "full_registry_audit": "docs/research/nearsplay/full-registry-audit.json",
-      "decision": "DUPLICATE ON EXPANDED REGISTRY (71.26% > 70% within 3 px on four GEMSDOE25 rasters, fulfilling IR-30-078 post-run check); DO NOT SUBMIT; retained for provenance only"
+      "decision": "ARCHIVED record, not current approval: DUPLICATE ON EXPANDED REGISTRY (71.26% > 70% within 3 px on four GEMSDOE25 rasters, fulfilling IR-30-078 post-run check); DO NOT SUBMIT; retained for provenance only"
     }
-  ]
+  ],
+  "latest_review": {
+    "lane": "GDX-1",
+    "run_card": "docs/research/2026-10-26-gdx/run-card.json",
+    "verifier": "scripts/verify_geothermal_chemistry_run.py",
+    "decision": "NEGATIVE / DO NOT SUBMIT: HOLDOUT-DTI 0.11965 vs same-protocol core19 0.13691; both paired-CI improvement gates failed; global uniqueness UNKNOWN; no slot selected",
+    "history_preserved": true
+  }
 }

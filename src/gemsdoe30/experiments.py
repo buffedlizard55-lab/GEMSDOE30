@@ -112,6 +112,20 @@ def contract(card: dict) -> dict:
             "label": "PTA-1",
             "image_name": "pta1-support.png",
         }
+    if name == "gdx1":
+        from .geothermal_chemistry import EXTRA_NAMES, GUARD_PX, SUPPORT_PX, VERSION
+        return {
+            "id": name,
+            "candidate": "gdx12",
+            "arms": ("core19", "effort6", "gdx12"),
+            "required_positive_deltas": ("core19", "effort6"),
+            "features": CORE_FEATURES + EXTRA_NAMES,
+            "support_px": SUPPORT_PX,
+            "guard_px": GUARD_PX,
+            "transform_path": "src/gemsdoe30/geothermal_chemistry.py",
+            "transform_version": VERSION,
+            "label": "GDX-1",
+        }
     if name == "fflidar1":
         return {
             "id": name,

@@ -66,17 +66,18 @@ jobs:
       - name: Install readers and test dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install numpy scipy rasterio shapely pyproj pytest -c requirements-tdx1.txt
+          python -m pip install -e '.[research,test]' -c requirements-tdx1.txt
 
-      - name: Fetch only the hash-pinned competition template (public mirror)
+      - name: Fetch hash-pinned template and catalogue (public mirrors, not training stack)
         env:
           GH_TOKEN: ${{ github.token }}
-        run: python scripts/ci_check.py python scripts/restore_public_mirrors.py --ids sample_submission
+        run: python scripts/ci_check.py python scripts/restore_public_mirrors.py --ids sample_submission labels
 
       - name: Verify current artifact, automatic decision and generated site
         run: |
           python scripts/ci_check.py python scripts/verify_current_run.py
           python scripts/ci_check.py python scripts/verify_stopped_attempt.py
+          python scripts/ci_check.py python scripts/verify_geothermal_chemistry_run.py
           python scripts/ci_check.py python scripts/verify_lsm_run.py
           python scripts/ci_check.py python scripts/build_research_site.py --check
 
@@ -86,7 +87,7 @@ jobs:
           set -x
           shopt -s nullglob
           mkdir -p docs/research/format-checks
-          for file in docs/downloads/*.tif; do
+          while IFS= read -r -d '' file; do
             [ -f "$file" ] || continue
             # NOTE: receipts go to docs/research/format-checks/, never over the
             # provenance sidecar next to the TIFF (IR-30-042: an earlier version
@@ -96,7 +97,7 @@ jobs:
               --template data/raw/sample_submission.tif \
               --json "docs/research/format-checks/$(basename "${file%.tif}").json" \
               && echo "OK $file" || echo "::warning file=$file::local format check failed or template missing"
-          done
+          done < <(find docs -type f \( -iname '*.tif' -o -iname '*.tiff' \) -print0)
 
       - name: Regenerate status after validation (not before it)
         run: python scripts/build_status.py --output docs/status.json

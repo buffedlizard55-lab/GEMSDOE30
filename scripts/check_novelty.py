@@ -57,7 +57,7 @@ def audit(candidate, template, registry, stage):
                                 'reference_values_sha256': value_hash,
                                 **by_values[value_hash]})
         except (ValueError, OSError, KeyError) as exc:
-            errors.append(str(exc))
+            errors.append(f"{row.get('path', '<missing path>')}: {exc}")
     result = decision(comparisons, stage=stage,
                       registry_complete=manifest.get('complete') is True and not errors)
     return {'schema_version': 1, 'stage': stage, 'candidate': str(candidate),

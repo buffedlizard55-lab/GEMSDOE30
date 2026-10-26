@@ -89,17 +89,24 @@ def main() -> int:
                         return block_data[key]
         return None
 
-    # Downloads inventory straight from the published manifests.
+    # Published manifests include the newest small research TIFF outside downloads/.
     download_entries = []
-    for manifest_path in sorted(downloads.glob("*.json")):
+    selection = load_json(ROOT / "docs/current-run.json") or {}
+    manifest_paths = list(downloads.glob("*.json"))
+    latest_pointer = selection.get("latest_review", {})
+    latest_card = load_json(ROOT / latest_pointer["run_card"]) if latest_pointer.get("run_card") else None
+    if latest_card and latest_card.get("published_tiff"):
+        latest_tiff = (ROOT / latest_card["published_tiff"]).resolve()
+        if latest_tiff.is_relative_to(ROOT / "docs"):
+            manifest_paths.append(latest_tiff.with_suffix(".json"))
+    for manifest_path in sorted(set(manifest_paths)):
         manifest = load_json(manifest_path) or {}
-        # Sidecars disagree on whether `output_file` is a bare filename or a
-        # repo-relative path; joining a path onto `downloads` silently produced
-        # `docs/downloads/docs/downloads/x.tif` and reported every artifact as
-        # missing. Reduce to the basename and resolve inside `downloads`.
+        # Sidecars may contain a basename or a repo-relative output_file.
+        # Resolve only the basename next to its public sidecar, avoiding a
+        # duplicated path or an escape into unrelated workspace files.
         raw_name = manifest.get("output_file") or (manifest_path.stem + ".tif")
         tif_name = Path(str(raw_name)).name
-        tif_path = downloads / tif_name
+        tif_path = manifest_path.parent / tif_name
         present = tif_path.is_file()
         measured_sha = sha256_file(tif_path) if present else None
         claimed_sha = manifest.get("output_sha256")
@@ -115,7 +122,7 @@ def main() -> int:
         nan_cells = _nested(manifest, "nan_cells_anywhere")
         entry = {
             "manifest": manifest_path.name,
-            "file": f"docs/downloads/{tif_name}",
+            "file": str(tif_path.relative_to(ROOT)),
             "present": present,
             "sha256": measured_sha or claimed_sha,
             "sha256_matches_manifest": (measured_sha == claimed_sha) if (present and claimed_sha) else None,
@@ -399,6 +406,20 @@ def main() -> int:
             "evidence": selection["latest_attempt"], "promoted": False,
             "decision": "duplicate-stop; no public TIFF" if latest_attempt["receipt_inspection"]["verified_now"]
                         else "blocked: latest stopped-attempt inspection unavailable"}
+    latest_review = None
+    if selection.get("latest_review"):
+        ref = selection["latest_review"]
+        latest_review = {**ref, "card": load_json(ROOT / ref["run_card"]), "verified_now": False,
+                         "error": None, "decision": None, "ok_to_submit": False}
+        try:
+            from scripts.verify_geothermal_chemistry_run import verify as verify_gdx
+            decision = verify_gdx(template=data_dir / "sample_submission.tif")
+            latest_review.update(verified_now=True, decision=decision, ok_to_submit=False)
+        except Exception as exc:
+            latest_review["error"] = str(exc)
+        gates["latest_gdx_scientific_review"] = {
+            "evidence": ref["run_card"], "promoted": False,
+            "decision": decision["display_status"] if latest_review["verified_now"] else "blocked: newest review inspection unavailable"}
     promoted = [name for name, gate in gates.items() if gate.get("promoted")]
     peer_reports = []
     for name, filename in (("G30-S19 habitat + EDGE", "lane-g30s19-run-card.json"),
@@ -461,6 +482,8 @@ def main() -> int:
             "local_validation_guarantees_portal_acceptance": False,
         },
         "current_run_pointer": selection,
+        "latest_scientific_review": latest_review,
+        "current_readiness_scope": "Legacy retained research artifact; newest negative experiment is latest_scientific_review, not a slot selection",
         "current_readiness": current_card,
         "current_artifact_inspection": current_inspection,
         "current_release_decision": current_release,

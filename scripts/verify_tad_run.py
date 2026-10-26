@@ -356,15 +356,17 @@ def verify(pointer: Path, template: Path, *, write: bool = False) -> dict:
 
     add_path = report_dir / "registry-parallel-addendum.json"
     total_compared = len(expected_refs)
-    if extra_hashes or add_path.exists():
-        if not add_path.is_file():
-            raise ValueError("new local reference TIFFs require registry-parallel-addendum.json in tilt-alteration-discontinuity")
+    if add_path.is_file():
         add_doc = load(add_path)
         add_sha = sha(add_path)
         add_rows = add_doc.get("rasters", [])
         expected_extra = {r["sha256"] for r in add_rows}
-        if expected_extra != extra_hashes or len(add_rows) != len(expected_extra):
-            raise ValueError("G30-TAD late registry does not match current new local reference TIFFs")
+        # Validate every recorded late reference exactly, but do not mistake a
+        # newly published raster for corruption of the historical receipt.
+        # Additional live references are overlaid as UNKNOWN coverage below;
+        # they can never inherit the archived novelty pass or enable promotion.
+        if not expected_extra <= extra_hashes or len(add_rows) != len(expected_extra):
+            raise ValueError("G30-TAD late registry references are missing from current local reference TIFFs")
         if add_doc.get("original_registry_sha256") != reg_sha:
             raise ValueError("G30-TAD late registry does not extend frozen registry.json")
         for r in add_rows:
@@ -506,7 +508,16 @@ def verify(pointer: Path, template: Path, *, write: bool = False) -> dict:
         tmp.replace(target)
     elif not target.is_file() or load(target) != readiness:
         raise ValueError("G30-TAD readiness.json missing or stale; regenerate with --write")
-    return readiness
+    # readiness.json remains the frozen recorded-inventory decision. The
+    # returned view adds a fail-closed live overlay, without forging missing
+    # continuous-surface evidence or replacing old comparisons. Include public
+    # research directories as well as downloads so moving a file cannot hide it.
+    from gemsdoe30.readiness import with_current_inventory
+    recorded_hashes = known_hashes | (expected_extra if add_path.is_file() else set())
+    current_hashes = {sha(p) for p in (ROOT / "docs").rglob("*")
+                      if p.is_file() and p.suffix.lower() in (".tif", ".tiff")}
+    return with_current_inventory(readiness, recorded_hashes=recorded_hashes,
+                                  current_hashes=current_hashes)
 
 
 def main() -> int:
