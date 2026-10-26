@@ -1,154 +1,155 @@
-# GEMSDOE30 — DOE GEMS fault-discovery research
+# GEMSDOE30 — DOE GEMS Concealed Fault Discovery & Automated Submission Lab
 
-## START HERE — latest attempt **DUPLICATE-STOP; DO NOT SUBMIT**
+## START HERE — Unique `PTA-1` GeoTIFF Validated (`download_ok = true`) · **NOT APPROVED FOR SUBMISSION (`verdict = negative`)**
 
-**No new unique/approved competition TIFF was published.** The fixed TDX-C2
-candidate crossed the mandatory duplicate limit, so all experimentation stopped.
-It was **not** re-encoded, renamed, perturbed, or replaced with a better-looking
-control. **No competition slot was selected or used.**
+- **Unique, format-validated GeoTIFF (zero human inspection required):** [`docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif`](docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif) (`0.38 MiB`, SHA-256 `958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827`). Re-opened from disk and verified: 1 `float32` band, `EPSG:32611`, `3,730 × 3,292`, `100 m` north-up `(100, 0, 243350, 0, -100, 4508550)`, **`5,167,373` finite cells strictly in `[0.0, 1.0]` inside footprint**, `0` NaN inside footprint, `NaN` nodata outside, `0` positive catalogue pixels, `44,090` `3.0 px` Poisson-thinned dots.
+- **194-raster two-stage cross-site novelty PASSED:** Checked chronologically on both the continuous surface BEFORE placement (`max Spearman = 0.10548 ≤ 0.90`) and final dots (`max Spearman = 0.03191 ≤ 0.90`, **`max 3 px overlap = 54.60% ≤ 70%`** across all `194` unique aligned rasters across `GEMSDOE24, 25, 27, 28, 30, 31, 32, 33, 36`; only **`19.74%`** within 3 px of `GEMSDOE32` H33).
+- **Competition slot decision (`verdict = negative`, `submission_approved = false`, `slot_selected = false`):** **Do not upload to spend a weekly competition slot.** `PTA-1` statistically significantly beats the raw 8-band subsurface baseline (`+0.008870` `HOLDOUT-DTI`, paired 95% CI `[+0.001561, +0.015976]`) and improves our prior zero-topography subsurface benchmark `TDX-1` by **`+32.7%`** (`0.096683` vs `0.072844`), while trailing scarp-bearing `core19` (`0.139821`) on the public Quaternary scarp catalogue proxy (`-0.043137`). Per Protocol Rule 5, negative promotion decisions protect weekly DrivenData slots (`3/week` cap; `1` final selected entry for Phase 1 `$50k` + Phase 2 `$250k`).
+- **Unique submission name & ≤140-char note:**
+  - Name: `gems30-PTA1-44090-20261025-9a3f7f9535a4`
+  - Note (`106` chars): `PTA1 subsurface 3D tilt-phase + dip-asymmetry 18-feat HGB; 44090d; research artifact, NOT slot-approved.`
 
-**[Open the site](https://buffedlizard55-lab.github.io/GEMSDOE30/) ·
-[Executive submission guide](executive-summary.html) ·
-[Latest scientific review](experiment-review.html) ·
-[Final JSON run card](docs/research/texture-controls/run-card.json)**
+**[Open GitHub Pages Site](https://buffedlizard55-lab.github.io/GEMSDOE30/) ·
+[Executive Submission Guide](executive-summary.html) ·
+[Deep Scientific Review & 9-Site Audit](experiment-review.html) ·
+[PTA-1 JSON Run Card](docs/research/phase-tilt-asymmetry/run-card.json) ·
+[12-Gate Readiness JSON](docs/research/phase-tilt-asymmetry/readiness.json) ·
+[Live Status Feed (`docs/status.json`)](docs/status.json)**
 
-**Archived download only:** [previous-session TDX-1 research TIFF](docs/downloads/gems30-TDX1-44090-20261025-5fc508ea81ac.tif).
-It remains format-valid and downloadable for reproducibility, **not approved for
-competition upload**, and is **not a new submission from this session**. The
-latest duplicate's TIFF is deliberately private under ignored `outputs/`.
+Read the [complete verbatim owner prompt](#current-owner-prompt), [current pointers](docs/current-run.json),
+and [frozen PTA-1 preregistration](docs/research/phase-tilt-asymmetry/preregistration.md) before
+working on this project. **Maximize P(Win):** protect organizer feedback slots for candidates that beat
+full-stack holdout best while building genuinely orthogonal basin-concealed subsurface signal.
+**Own the Outcome:** automated machine verification from raw mirrors to GeoTIFF bytes with zero human-inspector handoffs.
 
-Read the [complete owner prompt](#current-owner-prompt), [current pointers](docs/current-run.json)
-and [frozen TDX-C2 plan](docs/research/texture-controls/preregistration.md) before
-working on this project. **Maximize P(Win):** protect organizer feedback slots for
-unique reproducible improvements. **Own the Outcome:** deliver honest negative
-results and automated decisions, not a manual-inspector handoff.
+---
 
-### Latest evidence — one fixed experiment, four arms, no tuning
+### 1. Latest Evidence — `PTA-1` Preregistered Subsurface Experiment (`1` of `3` runs, `304.9 s`)
 
-All performance numbers in this table are **HOLDOUT-DTI**, evaluator
-`component-holdout-v3-blockstats-20261025`, protocol
-`buffered-quadrant-whole-components-v1-20261025`, **60,988** withheld positive pixels,
-with **95% paired spatial-bootstrap CI**. This is a catalogue proxy on previously
-inspected folds—not an organizer score, projection, or independent confirmation.
+All performance figures below are **`HOLDOUT-DTI`**, evaluator `component-holdout-v3-blockstats-20261025`,
+protocol `buffered-quadrant-whole-components-v1-20261025`, **`60,988` withheld positive pixels** across
+4 buffered whole-component quadrant folds (`buffer_px = 17` matching physical operator support), exact
+pixel-wise visible-fault masking (`labels == 1`, zero buffer), and **95% paired spatial-block bootstrap CI**
+(`371` geographic blocks, `2,000` replicates, `seed = 3071`). None is an organizer score or hidden-test forecast.
 
-| Fixed arm / difference | HOLDOUT-DTI | 95% CI |
-|---|---:|---|
-| **TDX-C2: core19 + three magnetic displacement features** | **0.136061** | **[0.120028, 0.152034]** |
-| Same-protocol core19 comparator | 0.139821 | [0.124178, 0.155905] |
-| Matched zero-lag control | 0.136713 | [0.122039, 0.151906] |
-| Matched local Fourier-phase control | 0.140185 | [0.124203, 0.155878] |
-| Candidate − core19 (paired HOLDOUT-DTI difference) | −0.003760 | [−0.008176, 0.000704] |
+| Fixed Arm / Paired Difference | Features | HOLDOUT-DTI | 95% Paired Spatial-Block CI |
+|---|---:|---:|---|
+| `core19` (full 19-band scarp + regional comparator; exact 16-decimal match to `TDX-1` / `TDX-C2`) | 19 | `0.139821` | `[0.124178, 0.155905]` |
+| **`pta1_cand` (8 subsurface bands + 10 unit-consistent `1000× tmi_vg` 3D tilt & signed dip-asymmetry features)** | **18** | **`0.096683`** | **`[0.085289, 0.108433]`** |
+| `pta_naive_sym` (matched 18-feature control: unscaled `1× tmi_vg` + dip-sign-erased symmetric differences) | 18 | `0.093374` | `[0.082536, 0.104402]` |
+| `sub8_raw` (raw 8-band subsurface baseline: `tmi_anom, tmi_hg, tmi_vg, rtp, iso_grav_anom, iso_grav_anom_slope, tc, depth_to_base_surf`) | 8 | `0.087814` | `[0.076810, 0.099620]` |
+| *(Archived session reference)* `TDX-1` (`tdx6` zero-topography magnetic-texture subsurface candidate) | 6 | `0.072844` | `[0.063480, 0.083059]` |
+| **`pta1_cand − sub8_raw` (paired subsurface value-add; wins 3/4 folds, 95% CI > 0)** | — | **`+0.008870`** | **`[+0.001561, +0.015976]`** |
+| **`pta1_cand − pta_naive_sym` (unit-consistency + hanging-wall polarity control; wins 3/4 folds)** | — | **`+0.003310`** | `[-0.002587, +0.009260]` |
+| **`pta1_cand − core19` (zero-topography specialist vs scarp-inclusive stack)** | — | **`-0.043137`** | `[-0.059768, -0.025808]` |
 
-**Interpretation:** no positive paired lower bound against any control; no
-established incremental displacement benefit. The intervals cross zero: do not
-call this statistically significant inferiority or select the phase control.
-
-| Automated diagnostic (not a performance score) | Result |
+| Automated Gate / Diagnostic | Verified Result |
 |---|---|
-| Observed registry | 179 source TIFFs; 164 distinct aligned byte sequences; one unaligned exclusion; all nine priority sites snapshotted; +2 post-stop S20 arrivals = 166 observed comparisons |
-| Before-placement surface comparison | Max Spearman 0.156573; threshold not crossed; original/private surfaces still missing |
-| Final-dot comparison | Max Spearman 0.063833; **79.090497%** within 3 px of G30-S19 — **DUPLICATE-STOP** (>70%) |
-| Individual canaries | 28 distinct features × 4 folds; max bidirectional AUC 0.643433; no alarm above .90 |
-| Local stopped-file validator | Passed: no NaN inside, values [0,1], exact CRS/shape/transform, one float32 band, NaN outside, zero positive catalogue pixels |
-| Artifact distribution | **Not published; not downloadable.** Stored validator receipt is not a current public-byte reinspection |
-| Execution budget | One experiment/four frozen arms; 373 seconds UTC start-to-stop; no second experiment |
-| Approval | **Negative.** Format validity and a new SHA-256 cannot rescue duplicate/performance failures |
+| **9-repo registry snapshot (`docs/research/phase-tilt-asymmetry/registry.json`)** | `209` discovered TIFFs → **`194` unique grid-aligned rasters** (`1` unaligned diagnostic excluded; all `9` priority sites + all local `docs/downloads/*.tif` covered) |
+| **Stage 1 novelty — continuous surface before placement** | `194` comparisons (`0` errors, `0` undefined): **`max Spearman = 0.105478 ≤ 0.90`** (**PASSED**) |
+| **Stage 2 novelty — final `44,090` Poisson dots** | `194` comparisons (`0` errors, `0` undefined): `max Spearman = 0.031906 ≤ 0.90`; **`max fraction within 3 px = 54.60% ≤ 70%`** (**PASSED**; `19.74%` vs `GEMSDOE32` H33) |
+| **Single-feature leakage canaries (`37` features × `4` folds = `148` checks)** | **`0` alarms above `0.90`** (max `0.6434` on `det_elev_slope`). **`pta_dip_cover_step`** achieves bidirectional raw AUC **`0.5988`** (Fold 3) / **`0.5933`** (Fold 1) — highest among all 18 subsurface inputs |
+| **Topographic regime orthogonality** | **`54.15%`** of `PTA-1`'s `44,090` dots lie in `<5°` basin/piedmont terrain (`p50 = 4.37°`), vs only `19.1%` for `GEMSDOE32` H33 and `39.9%` for `G30-S19` |
+| **Standalone GeoTIFF format check** | **12 / 12 checks passed** ([`docs/research/format-checks/gems30-PTA1-44090-20261025-9a3f7f9535a4.json`](docs/research/format-checks/gems30-PTA1-44090-20261025-9a3f7f9535a4.json)) |
+| **Archived `TDX-C2` (`DUPLICATE-STOP`) & `TDX-1`** | Preserved intact with read-only late-registry addenda (`167` and `111` entries) verified by `verify_stopped_attempt.py` and `verify_current_run.py` |
 
-The mandatory stop takes precedence over manufacturing a “unique TIFF” delivery.
-The accepted deliverable is the negative experiment and machine-bound JSON card,
-not a falsely certified upload. No current portal limit, eligibility, deadline,
-acceptance receipt or leaderboard value was invented.
+---
 
-[PR #30 — verified code review and delivery timeline](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/30)
+### 2. PhD Analysis: Why `GEMSDOE32` (`h33-h33-2-b2`: `0.2778` owner-reported) Topped the GEMSDOE Sites & How to Beat `0.2778` / `0.3195` / `0.4413`
 
-### Why H33 may have improved
+1. **Exact Metric Calculus & Official Masking Resolution (`IR-PTA-04`):**
+   - Official pooled Distance-Tversky Index ([Problem Description `/page/967/`](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/); [Forum `11550`](https://community.drivendata.org/t/clarification-on-metric-pooling-across-connected-components-or-samples/11550)):
+     $$\mathrm{DTI} = \frac{\mathrm{TP}_w}{\mathrm{TP}_w + 0.2\,\mathrm{FP}_w + 0.8\,\mathrm{FN}_w + \varepsilon} = \frac{\mathrm{TP}_w}{0.8\,G + 0.2\,(\mathrm{TP}_w + \mathrm{FP}_w) + \varepsilon}$$
+     where $\mathrm{TP}_w$ is **max-pooled** per hidden truth pixel over a $R = 300\text{ m}$ ($3\text{ px}$) triangular kernel $k(d) = \max(0, 1 - d/300\text{ m})$, while $\mathrm{FP}_w = \sum_{x \notin \mathcal{M}} p(x)\,(1 - \tilde{y}(x))$ sums **linearly** across unmasked non-truth pixels.
+   - DrivenData Staff (`chrisk-dd`, [Forum `11516/4`](https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516) & [`11536`](https://community.drivendata.org/t/clarification-on-spatial-relationship-between-existing-and-new-faults/11536)) confirmed that known USGS/INGENIOUS faults are masked **pixel-exactly (`labels == 1` only, zero buffer)** while hidden faults can occur `<300 m` from known traces.
+   - Byte-exact reconstruction ([`docs/research/2026-10-25/recipe-reconstruction.json`](docs/research/2026-10-25/recipe-reconstruction.json), **0 mismatching pixels**) proves `GEMSDOE32`'s `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif` (`37,654` binary dots; `0.2778` owner-reported, unverified) is **identically** `GEMSDOE28`'s `h27-4-r1-solo-d2-8` (`40,199` dots; `0.2708` owner-reported) after deleting the **`2,545` dots at Euclidean distance $0 < d_{\mathrm{cat}} \le 2\text{ px}$** from `labels == 1`:
+     - Under pixel-exact masking, cells at $d_{\mathrm{cat}} \in \{1, 2\}\text{ px}$ are **unmasked** and predominantly represent halo spillover from smoothing known fault scarps, incurring $\approx 2,545 \times 0.2 \approx 509$ weighted denominator penalty units (`0.2 * FP_w`), whereas surviving dots at $d_{\mathrm{cat}} = 3\text{ px}$ still reach hidden splays at $d_{\mathrm{cat}} \in [1, 2]\text{ px}$ via the $300\text{ m}$ kernel.
+     - Conversely, `GEMSDOE36` (`anderson-geothermal-pinn-38854`, `0.2750` owner-reported) = `H33` (`37,654`) **plus `1,200` extra dots**, slightly diluting precision.
+2. **Why the `0.2449–0.2778` Family Plateaus Below `0.3195` (Oct 3 Snapshot) and `0.4413` (Oct 25 Live `#1 xiaofanhu`):**
+   - At $s = 0.4413$, the marginal break-even condition $\Delta \mathrm{TP}_w / \Delta \mathrm{FP}_w > \frac{0.2 s}{1 - 0.2 s} \approx 0.0968$ cannot be met by pruning ~38k–44k range-front dots alone: it requires **substantially higher recall $T/G$ across concealed intrabasin structures** without flooding background `FP_w`.
+   - Every `0.2449–0.2778` submission places **`70–81%`** of its dots on steep topographic scarps (`det_elev_slope >= 5°`; `H33` places only `19.1%` in `<5°` basins), missing blind Great Basin geothermal faults buried under Quaternary playas and alluvial fans (e.g., Dixie Valley piedmont, Carson Sink, Granite Springs Valley, Humboldt House).
+   - Meanwhile, feeding raw regional amplitude levels (`core19`) to pointwise GBDTs causes severe **range-front polygon memorization** (`TDX-C2` `79.09%` and `G30-S20` `89.58%` 3 px overlap with `G30-S19`).
+3. **Concrete Blueprint to Beat `0.2778` / `0.3195` / `0.4413`:**
+   - **Stage A (Multi-Scale Spatial Scarp + Continuity Backbone):** Train a 2D multi-scale spatial CNN/UNet (`6.4–12.8 km` receptive field, GPU session) with regional Tversky + `300 m` kernel-geometry loss so stepovers, horse-tail splays, and subtle piedmont scarps (`dem_1m_std_slope` decoupled from regional `det_elev_slope`, Hypothesis `PGR-2`) are learned from 2D trace topology rather than pointwise coordinates.
+   - **Stage B (Slope-Gated Orthogonal Subsurface Specialist — Validated Here by `PTA-1`):** In low-slope alluvial basins (`det_elev_slope < 3°–5°`), fuse the calibrated probability field of **`PTA-1`** (unit-consistent `1000× tmi_vg` 3D tilt-phase curvature + signed Grauch–Hudson hanging-wall cover thickening `pta_dip_cover_step`, which has only `19.74%` overlap with `H33` and statistically significant subsurface signal `+0.00887`).
+   - **Stage C (Exact Masking + Metric-Exact `EDGE` Emission):** Apply pixel-exact `labels == 1` zeroing, `0 < d_cat <= 2 px` halo suppression where cross-strike scarp novelty is absent, and greedy `EDGE` marginal-credit selection (`src/gemsdoe30/emitter_opt.py`).
 
-Reproduced again: its **37,654-dot support** equals the **40,199-dot GEMSDOE28 base**
-with all dots at catalogue distance ≤2 px deleted—**zero support mismatches**.
-GEMSDOE25/30 and GEMSDOE28/31 references also have identical in-footprint values.
-These are raster diagnostics, not scores. Pruning can save FP mass while preserving
-max-kernel truth coverage; it can also remove genuine splays. This does not identify
-a hidden-test cause or establish a new geological discovery. The owner's **0.2778**
-attribution remains **unverified**, not ORGANIZER-CONFIRMED. [Detailed mathematical
-analysis and all nine audited references](docs/research/texture-controls/review.md).
+---
 
-### Autonomous inspection (CPU, Python 3.11+)
+### 3. Verified Official Sources, 4 Ranked Geological Hypotheses & 9-Site Audit
+
+| Official Verified Source | Link | Verified Takeaway |
+|---|---|---|
+| DrivenData GEMS Problem & Metric | <https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/> | `float32` `[0,1]`, `EPSG:32611`, `100 m`, `DTI` (`α=0.2, β=0.8`, `R=300 m` triangular kernel); official definitions of `tc` (gravity terrain correction) & `depth_to_base_surf` (MT conductive base). |
+| DrivenData Live Leaderboard (`2026-10-25`) | <https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/> | `#1 xiaofanhu 0.4413`, `#2 cfld__ 0.3916`, `#3 Batik Shirt Brothers 0.3904`, `#8 joeyfezster 0.3413`, `#9 DARD 0.3398` (`0.3195` on `2026-10-03`). Deadline `Dec. 3, 2026, 11:59 p.m. UTC`. |
+| DOE / NLR Official Prize Rules PDF | <https://docs.nlr.gov/docs/fy26osti/96647.pdf> | Up to `3` platform submissions/week; **1 single final selected submission** evaluated on both Phase 1 (`$50k`) and expert-updated Phase 2 (`$250k`); AI disclosure & reproducible code required. |
+| DrivenData Staff Forum Clarifications | <https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516> | Threads `11516`, `11536`, `11550`, `11556`, `11557`, `11563`: pixel-exact `labels == 1` masking, new faults allowed `<300 m` of known traces, pooled `TP_w/FP_w/FN_w`, `deq`/`ieq` earthquake rate densities, unresolved NBMG CC-BY-NC notice (avoided). |
+| USGS GeoDAWN Airborne Survey (`CC0`) | <https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and> | `DOI: 10.5066/P93LGLVQ` — E–W (`90°`) 200–400 m flight-line magnetic & radiometric data; motivates `1000× tmi_vg` unit fix (`IR-PTA-01`) and E–W leveling seam awareness. |
+| OpenEI GDR 1391 INGENIOUS (`CC-BY-4.0`) | <https://gdr.openei.org/submissions/1391> | `DOI: 10.15121/1881483` — Great Basin gravity, MT conductive-base depth, geodetic strain, seismicity, and fault compilation. |
+
+**Four Ranked Prospective Geological Hypotheses** (frozen prior to execution in [`docs/research/phase-tilt-asymmetry/preregistration.md`](docs/research/phase-tilt-asymmetry/preregistration.md)):
+1. **`PTA-1` (Executed — Top Subsurface Candidate):** *Unit-Consistent 3D Potential-Field Phase-Tilt Curvature & Signed Grauch–Hudson Hanging-Wall Dip-Asymmetry* (`8` subsurface bands + `10` derived features; `HOLDOUT-DTI = 0.096683`, `+0.008870` `[+0.001561, +0.015976]` over `sub8_raw`; `54.60%` max 3 px overlap across 194 rasters).
+2. **`PGR-2` (Prospective Rank 2):** *Piedmont Geomorphic-Scarp vs Range-Front Relief Decoupling* (`dem_1m_std_slope` & `dem_1m_med_slope` anomalies normalized by regional `det_elev_slope`, gated by basinward `iso_grav_anom` dip).
+3. **`KUS-3` (Prospective Rank 3):** *Potassium-to-Thorium (`K/eTh`) Hydrothermal Alteration Halo Along Subsurface Tilt Contacts* (requires aligning external CC0 USGS GeoDAWN radiometric grids `10.5066/P93LGLVQ` to `EPSG:32611`).
+4. **`MCS-4` (Prospective Rank 4):** *Transtensional Geodetic Shear × Independent Background Microseismicity (`ieq_n100a15 / deq_n100a15`) Partitioning* (coarse ~km regional prior).
+
+**Nine Priority Sites — Owner-Reported Claims vs Measured `PTA-1` Uniqueness:**
+
+| Priority Site | Pinned Reference Artifact | Owner-Reported Claim *(unverified)* | Ref Dots | `PTA-1` Surface `ρ` | `PTA-1` Dots `≤3 px` |
+|---|---|---|---:|---:|---:|
+| `GEMSDOE24` | `h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif` | `0.2477` | `60,069` | `0.0443` | **`29.84%`** |
+| `GEMSDOE25` | `dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif` | `0.2600` | `44,090` | `0.0373` | **`28.53%`** |
+| `GEMSDOE27` | `topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif` | `0.2449` | `61,328` | `0.0452` | **`30.93%`** |
+| `GEMSDOE28` | `h27-4-r1-solo-d2-8-20261003-8acb75e1f2cc-nan.tif` *(+ `0.2710 / 0.2707 / 0.2649` siblings)* | `0.2708` (`0.2710` max) | `40,199` | `0.0298` | **`23.34%`** |
+| `GEMSDOE30` | `gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif` | `0.2600` *(D2.8 twin)* | `44,090` | `0.0373` | **`28.53%`** |
+| `GEMSDOE31` | `h27-4-solo-d28-20261004-8acb75e1-nan.tif` | `0.2708` *(G28 twin)* | `40,199` | `0.0298` | **`23.34%`** |
+| `GEMSDOE32` | `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif` | **`0.2778`** *(2 px pruned G28)* | `37,654` | `0.0252` | **`19.74%`** |
+| `GEMSDOE33` | `h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif` | `0.2632` | `41,865` | `0.0324` | **`25.32%`** |
+| `GEMSDOE36` | `anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif` | `0.2750` *(H33 + 1,200)* | `38,854` | `0.0258` | **`20.25%`** |
+
+*(Full 119-entry historical owner-reported cross-site ledger from `GEMSDOE` through `GEMSDOE92` is preserved verbatim in [`#current-owner-prompt`](#current-owner-prompt) and quarantined in [`docs/research/texture-displacement/owner-claims.csv`](docs/research/texture-displacement/owner-claims.csv).)*
+
+---
+
+### 4. Autonomous Data Restoration, Preparation & Verification (CPU, Python 3.11+)
 
 ```bash
 python -m venv .venv
 .venv/bin/pip install -e '.[research,test]' -c requirements-tdx1.txt
-# Only the small pinned template is required for all publication checks.
+
+# Autonomous raw competition data check / SHA-256-pinned mirror restore + cache build:
+bash scripts/download_competition_data.sh
+.venv/bin/python scripts/prepare_data.py
+
+# Publication & integrity checks (only sample_submission.tif required in CI):
 .venv/bin/python scripts/restore_public_mirrors.py --ids sample_submission
 .venv/bin/python scripts/verify_current_run.py
 .venv/bin/python scripts/verify_stopped_attempt.py
 .venv/bin/python scripts/build_research_site.py --check
+.venv/bin/python scripts/validate_submission.py docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif --template data/raw/sample_submission.tif
 .venv/bin/python -m pytest -q
-# Both deliberately exit 2: no eligible competition candidate.
+# Both deliberately exit 2 because neither PTA-1 nor stopped TDX-C2 is slot-promoted:
 .venv/bin/python scripts/verify_current_run.py --require-promote
 .venv/bin/python scripts/verify_stopped_attempt.py --require-promote
 ```
 
-`verify_current_run.py` reopens the actual **retained archive**, rechecks its hash
-and recomputes its uncertainty. `verify_stopped_attempt.py` recomputes the latest
-holdout/canary/duplicate decision from immutable receipts, without claiming the
-private TIFF is distributed. Add `--inspect-quarantine` only where ignored local
-bytes exist to reopen them too. No human-inspector override, clipping workaround,
-competition authentication or uploader exists.
+### 5. Newly Flagged Irregularities (`IR-PTA-01..09`) & Next-Session Recommendations
 
-The builder `scripts/run_texture_controls.py` intentionally refuses to overwrite
-an already registered/stopped execution. Its exact executed version is frozen at
-commit `79d1be92e578f4e555fe5a5ae8d273728221c8af`. A subsequent audit-only finalizer
-fixed negative run-card logging; **no refit or replacement TIFF followed the stop**.
-The shared evaluator/writer are `src/gemsdoe30/{holdout,submission}.py`; the literal
-template filenames in the prompt are absent, so those shared equivalents are reused.
-
-### Sources, constraints and next session
-
-- Official GitHub [reference notebook](https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/unet-mc-cv-reference-solution.ipynb)
-  retrieved again: [hashes, saved band metadata and exact excerpts](docs/research/texture-controls/official-source-audit.json).
-- Four ranked prospective geological hypotheses were frozen before implementation;
-  only the habitat-conditioned displacement-specificity test ran. All use existing
-  cached bands; no inaccessible external dataset was claimed viable.
-- [Full results / bootstrap statistics](docs/research/texture-controls/results.json),
-  [registry](docs/research/texture-controls/registry.json),
-  [readiness](docs/research/texture-controls/readiness.json),
-  [three-pass journal](docs/research/texture-controls/verification.md),
-  [source/irregularity boundaries](docs/irregularities.md).
-- Data placement is not the old blocker: pinned owner mirrors were restored and
-  prepared, then verified cell-for-cell. Integrity ≠ organizer authentication.
-  Large training data, arrays and stopped TIFFs remain ignored.
-- The prompt omits an identifiable assigned-lane paragraph. This was an autonomous
-  continuation of the previous next step, not an asserted external allocation.
-- Complete private/parallel surfaces, the historical-best checkpoint, untouched
-  evaluation regions and current organizer constraints remain unavailable. GPU is
-  not required for this fixed CPU experiment; legacy UNet training is separate.
-- Network access excludes DrivenData/USGS/GDR/NLR hosts. Official links are retained
-  for review, not freshly verified claims. Fault mapping is not geothermal-vent
-  detection: no temperature, permeability, flow or vent observations were used.
-
-**Next session, in order:** preserve the stop; synchronize externally assigned lanes
-and original continuous surfaces; restore a comparable historical-best model;
-reserve untouched spatial evaluation; only then preregister a distinct mechanism
-with matched physical controls. Do not move dots or rename this duplicate to pass.
-Research promotion and a real weekly slot remain separate decisions.
-
-### Concurrent PR #29 records retained (G30-S20)
-
-Main advanced during this audit. The [G30-S20 run card](docs/research/2026-10-25-s20/run-card.json),
-[analysis](docs/research/2026-10-25-s20/analysis.md) and two research TIFFs are
-preserved as **peer records**, not new outputs or approved selections by this lane.
-S20 also records a duplicate-stop against G30-S19; its different component-holdout
-results are not ranked against the buffered TDX-C2 regional trials. No peer
-`promote` claim allocates a weekly slot here. The retained TDX-1 addendum honestly
-marks its missing continuous-surface comparisons against those arrivals unknown.
-TDX-C2's saved states were checked against both post-stop arrivals: 166 total
-observed comparisons, same maximum overlap. No model or dot changes followed.
+- **Key newly documented irregularities ([`docs/irregularities.md`](docs/irregularities.md)):**
+  - `IR-PTA-01`: **`1,000×` unit mismatch** between `tmi_hg` (`nT/km`) and `tmi_vg` (`nT/m`) collapses naive Miller–Singh magnetic tilt dynamic range by `>20×` (`tests/test_phase_tilt.py`).
+  - `IR-PTA-02`: **GDAL band-description discrepancies** vs `/page/967/` & Forum `11557/2`: `tc` is gravity terrain correction (`12` extra in-footprint nodata cells), `deq`/`ieq` are earthquake rate densities, and `depth_to_base_surf` is MT conductive-base depth (not pre-Tertiary basement depth).
+  - `IR-PTA-03`: **`iso_grav_anom_hg` is signed (`[-10.41, +11.45]`)**, unlike unsigned `iso_grav_anom_slope`.
+  - `IR-PTA-05` & `IR-PTA-06`: `GEMSDOE32` mislabels owner-reported `0.2778` as organizer-confirmed and promotes a `>94%` D2.8 duplicate; `GEMSDOE33` `/docs/index.html` returns 404 (root `/` works); NBMG vector compilations have an unresolved CC-BY-NC notice on Forum `11563` (strictly avoided).
+- **Remaining limitations & ordered next-session plan:**
+  1. **Multi-scale 2D spatial encoder on GPU:** Train a 2D spatial UNet/ConvNeXt combining scarp dipoles (`PGR-2`) in `≥3°` terrain with `PTA-1`'s unit-consistent 3D tilt-phase + `pta_dip_cover_step` features in `<3°` alluvial basins, evaluated on reserved geographic folds before any slot promotion.
+  2. **Organizer-authenticated raw files & complete private surface registry:** Restored mirrors match pinned SHA-256 hashes cell-for-cell (`dataset_signature = 291d3467…dee855ed`) but are not organizer-authenticated DrivenData downloads; private continuous surfaces from external sessions remain unavailable.
+  3. **Archived records preserved:** Previous `TDX-C2` (`DUPLICATE-STOP`, [review](docs/research/texture-controls/review.md)), `TDX-1` ([run card](docs/research/texture-displacement/run-card.json)), and `G30-S20` ([run card](docs/research/2026-10-25-s20/run-card.json)) remain intact and independently verifiable.
 
 ---
 
 > **Historical archive below.** Older status, score projections, zero-outside
 > “ready” copy and data-placement blockers are retained as history, not current
-> operating instructions. The current pointer, automated gates and TDX-1 report
+> operating instructions. The current pointer, automated gates and PTA-1 report
 > above supersede contradictory historical statements. Quoted owner text records
 > requirements/claims, not verified scientific facts or organizer receipts.
 
@@ -935,7 +936,7 @@ measurements taken this session rather than on judgement.
 
 **Requirements and owner-reported claims, not verified results.** Read this at the start of every session.
 Whitespace and link formatting are normalized; repeated requests and the supplied submission list are retained.
-The [current run card](docs/research/texture-displacement/run-card.json) and automated gates, not the quoted claims, determine readiness.
+The [current run card](docs/research/phase-tilt-asymmetry/run-card.json) and automated gates, not the quoted claims, determine readiness.
 
 <details>
 <summary>Expand the complete owner task text (2026-10-25)</summary>

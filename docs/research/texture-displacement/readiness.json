@@ -31,12 +31,12 @@
     {
       "name": "surface_observed_registry",
       "status": "unknown",
-      "detail": "110 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+      "detail": "111 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
     },
     {
       "name": "dots_observed_registry",
       "status": "passed",
-      "detail": "110 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+      "detail": "111 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
     },
     {
       "name": "complete_parallel_registry",
@@ -66,14 +66,14 @@
   ],
   "observed_registry": {
     "surface": {
-      "registry_entries_compared": 110,
+      "registry_entries_compared": 111,
       "max_spearman": 0.05313281983245325,
       "max_fraction_within_3px": null,
       "status": "unknown"
     },
     "dots": {
-      "registry_entries_compared": 110,
-      "max_spearman": 0.013710147110263877,
+      "registry_entries_compared": 111,
+      "max_spearman": 0.017084013661885982,
       "max_fraction_within_3px": 0.4049217509639374,
       "status": "passed"
     }

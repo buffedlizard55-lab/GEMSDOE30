@@ -5,6 +5,12 @@ promotion gate. Old TDX-1 receipts keep their original schema and expectations.
 """
 from __future__ import annotations
 
+from gemsdoe30.phase_tilt import (
+    ALL_DERIVED_NAMES as PTA1_DERIVED_NAMES,
+    SUPPORT_PX as PTA1_SUPPORT_PX,
+    TRANSFORM_VERSION as PTA1_TRANSFORM_VERSION,
+)
+
 CORE_FEATURES = (
     "mag_anom", "rtp", "tmi_hg", "geod_2ndinv", "iso_grav_anom_slope", "tc",
     "geod_shearrate", "geod_dilaterate", "tmi_vg", "deq_n100a15", "iso_grav_anom_vg",
@@ -31,6 +37,13 @@ def contract(card: dict) -> dict:
                 "parent_transform_version": "tdx1-profiles-v2-euclidean-support-20261025",
                 "transform_version": "tdxc2-local-profile-controls-v1-20261025",
                 "label": "TDX-C2", "image_name": "tdxc2-support.png"}
+    if name == "pta1":
+        return {"id": name, "candidate": "pta1_cand",
+                "arms": ("core19", "sub8_raw", "pta_naive_sym", "pta1_cand"),
+                "features": CORE_FEATURES + PTA1_DERIVED_NAMES, "support_px": PTA1_SUPPORT_PX,
+                "transform_path": "src/gemsdoe30/phase_tilt.py",
+                "transform_version": PTA1_TRANSFORM_VERSION,
+                "label": "PTA-1", "image_name": "pta1-support.png"}
     raise ValueError(f"unknown research experiment contract: {name!r}")
 
 

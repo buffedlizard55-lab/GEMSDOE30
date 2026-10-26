@@ -1,7 +1,9 @@
 {
-  "schema_version": 1,
-  "run_card": "docs/research/texture-displacement/run-card.json",
-  "readiness": "docs/research/texture-displacement/readiness.json",
-  "purpose": "Retained TDX-1 archive for research download; latest TDX-C2 attempt is duplicate-stopped, not a new downloadable submission",
-  "latest_attempt": "docs/research/texture-controls/run-card.json"
+  "schema_version": 3,
+  "run_card": "docs/research/phase-tilt-asymmetry/run-card.json",
+  "readiness": "docs/research/phase-tilt-asymmetry/readiness.json",
+  "previous_run_card": "docs/research/texture-displacement/run-card.json",
+  "previous_readiness": "docs/research/texture-displacement/readiness.json",
+  "archived_stopped_attempt": "docs/research/texture-controls/run-card.json",
+  "archived_stopped_readiness": "docs/research/texture-controls/readiness.json"
 }

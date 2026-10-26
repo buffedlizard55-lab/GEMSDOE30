@@ -60,9 +60,13 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
     wins = set(deltas) == comparators and all(
         number(row.get("value")) and row["value"] > 0
         and interval(row.get("ci95"), -1, 1) and row["ci95"][0] > 0 for row in deltas.values())
-    gate("paired_improvement", "passed" if wins else "failed",
-         ("Fixed candidate must improve both same-protocol controls with positive paired CI lower bound"
-          if spec["id"] == "tdx1" else "Fixed full-stack candidate must improve core19, zero-lag and phase-null controls with positive paired CI lower bounds"))
+    if spec["id"] == "tdx1":
+        paired_detail = "Fixed candidate must improve both same-protocol controls with positive paired CI lower bound"
+    elif spec["id"] == "tdxc2":
+        paired_detail = "Fixed full-stack candidate must improve core19, zero-lag and phase-null controls with positive paired CI lower bounds"
+    else:
+        paired_detail = f"Fixed {spec['label']} candidate must improve all {len(comparators)} comparators ({', '.join(sorted(comparators))}) with positive paired CI lower bounds"
+    gate("paired_improvement", "passed" if wins else "failed", paired_detail)
     features = results.get("feature_canaries", [])
     complete_canaries = (len(features) == 4 and {f.get("fold") for f in features} == set(range(4))
                          and all(len(fold.get("features", [])) == len(expected_features)

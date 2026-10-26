@@ -334,26 +334,27 @@ def main() -> int:
             "promoted": bool(current_release and current_release.get("research_verdict") == "promote"),
             "decision": current_release.get("display_status") if current_release else "blocked: current inspection unavailable",
         }
-    # A stopped latest attempt is not the retained downloadable artifact. Verify
-    # its receipts without pretending unavailable private bytes were reopened.
-    latest_attempt = None
-    if selection.get("latest_attempt"):
-        latest_path = ROOT / selection["latest_attempt"]
-        latest_card = load_json(latest_path)
-        latest_attempt = {"run_card": selection["latest_attempt"], "card": latest_card,
-                          "receipt_inspection": {"verified_now": False, "error": None},
-                          "decision": None, "public_download": False}
+    # Archived stopped attempt (TDX-C2) remains verified separately from the
+    # current unique downloadable PTA-1 research artifact.
+    stopped_key = "archived_stopped_attempt" if selection.get("archived_stopped_attempt") else "latest_attempt"
+    archived_stopped = None
+    if selection.get(stopped_key):
+        stopped_path = ROOT / selection[stopped_key]
+        stopped_card = load_json(stopped_path)
+        archived_stopped = {"run_card": selection[stopped_key], "card": stopped_card,
+                            "receipt_inspection": {"verified_now": False, "error": None},
+                            "decision": None, "public_download": False}
         try:
             from scripts.verify_stopped_attempt import verify as verify_stopped
-            latest_attempt["decision"] = verify_stopped(latest_path.parent, data_dir / "sample_submission.tif")
-            latest_attempt["receipt_inspection"] = {"verified_now": True, "error": None,
-                                                    "private_raster_reopened": False}
+            archived_stopped["decision"] = verify_stopped(stopped_path.parent, data_dir / "sample_submission.tif")
+            archived_stopped["receipt_inspection"] = {"verified_now": True, "error": None,
+                                                      "private_raster_reopened": False}
         except Exception as exc:
-            latest_attempt["receipt_inspection"]["error"] = str(exc)
-        gates["latest_scientific_attempt"] = {
-            "evidence": selection["latest_attempt"], "promoted": False,
-            "decision": "duplicate-stop; no public TIFF" if latest_attempt["receipt_inspection"]["verified_now"]
-                        else "blocked: latest stopped-attempt inspection unavailable"}
+            archived_stopped["receipt_inspection"]["error"] = str(exc)
+        gates["archived_stopped_attempt_tdxc2"] = {
+            "evidence": selection[stopped_key], "promoted": False,
+            "decision": "duplicate-stop; no public TIFF" if archived_stopped["receipt_inspection"]["verified_now"]
+                        else "blocked: archived stopped-attempt inspection unavailable"}
     promoted = [name for name, gate in gates.items() if gate.get("promoted")]
     peer_reports = []
     for name, filename in (("G30-S19 habitat + EDGE", "lane-g30s19-run-card.json"),
@@ -385,7 +386,7 @@ def main() -> int:
         "submission_format": {
             "published_outside_convention": "null/NaN outside the data bounds; finite probabilities in [0, 1] inside",
             "official_problem_description": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-            "builder_default": "Current shared writer / retained TDX1 archive: NaN nodata outside, finite [0,1] inside; no range-error-immunity claim",
+            "builder_default": "Current shared writer (PTA-1 & archived TDX-1): NaN nodata outside, finite [0,1] inside; no range-error-immunity claim",
             "zero_outside": (
                 "Historical all-finite convention. The official reference notebook writes without an "
                 "explicit nodata argument; owner-reported scores are not organizer confirmation. "
@@ -419,7 +420,7 @@ def main() -> int:
         "current_readiness": current_card,
         "current_artifact_inspection": current_inspection,
         "current_release_decision": current_release,
-        "latest_scientific_attempt": latest_attempt,
+        "archived_stopped_attempt": archived_stopped,
         "legacy_readiness_2026_10_25": load_json(research / "2026-10-25" / "run-card.json"),
         "lane_g30s19_run_card": load_json(
             research / "2026-10-25" / "lane-g30s19-run-card.json"

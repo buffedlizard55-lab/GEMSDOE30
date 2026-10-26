@@ -4,7 +4,7 @@
   "candidate": "outputs/texture-displacement/tdx1-surface.tif",
   "candidate_sha256": "b5545eae3898e96cdf00a5898b63d52a616024e795f9e7a98fd822573fffa275",
   "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-  "registry_sha256": "01ca9c60052d0f0bf04a6a3c32cbd1be1dba637507e6ed6678790668b275538c",
+  "registry_sha256": "4447e4d56e950009fe2c31930adfc1bbbdc4a3f0a88625f643866fe059774a61",
   "registry_complete": false,
   "comparisons": [
     {
@@ -102,10 +102,27 @@
       "correlation_duplicate": false,
       "dot_duplicate": false,
       "undefined": true
+    },
+    {
+      "reference": "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
+      "site": "GEMSDOE30-PTA1",
+      "reference_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+      "reference_values_sha256": "e17e9783cc288242399b74d71c724ebe7baa76ee11fecf537d774ca96b92780e",
+      "stage": "surface",
+      "spearman_full_footprint": null,
+      "candidate_dots": null,
+      "candidate_positive_support": 5167373,
+      "reference_dots": 44090,
+      "candidate_fraction_within_3px_of_reference": null,
+      "identical_inside_footprint": false,
+      "correlation_duplicate": false,
+      "dot_duplicate": false,
+      "undefined": true
     }
   ],
   "errors": [
-    "G30-S20 late references (PR #29): surface-stage Spearman undefined; tdx1-surface.tif bytes unavailable (git-ignored outputs/) in the post-merge worktree. Recorded undefined; gate must fail closed."
+    "G30-S20 late references (PR #29): surface-stage Spearman undefined; tdx1-surface.tif bytes unavailable (git-ignored outputs/) in the post-merge worktree. Recorded undefined; gate must fail closed.",
+    "PTA-1 late reference: surface-stage Spearman undefined because tdx1-surface.tif is git-ignored under outputs/; gate stays fail-closed."
   ],
   "decision": "blocked-incomplete-evidence",
   "submission_approved": false
