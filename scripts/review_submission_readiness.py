@@ -12,6 +12,12 @@ from gemsdoe30.submission import validate_submission_file
 
 ROOT = Path(__file__).resolve().parents[1]
 ARTIFACTS = (
+    ("PTA-1 current pointer", "docs/research/phase-tilt-asymmetry/run-card.json",
+     "docs/research/phase-tilt-asymmetry/readiness.json",
+     "docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif", "raster_sha256"),
+    ("G30-TAD published-format NaN-outside variant", "docs/research/tilt-alteration-discontinuity/run-card.json",
+     "docs/research/tilt-alteration-discontinuity/readiness.json",
+     "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif", "companion_nan_sha256"),
     ("H-NEARSPLAY", "docs/research/nearsplay/run-card.json", "docs/research/nearsplay/readiness.json",
      "docs/downloads/GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif", "submission_sha256"),
     ("MSDB-1v2", "docs/research/msdb-piedmont/run-card.json", "docs/research/msdb-piedmont/readiness.json",
@@ -25,6 +31,7 @@ def adjudicate(*, format_passed, hash_matches, readiness):
     return {
         "download_ok": format_passed is True and hash_matches is True,
         "recorded_research_verdict": readiness.get("research_verdict", "unknown"),
+        "effective_research_verdict": readiness.get("research_verdict", "unknown"),
         "recorded_failed_or_unknown_gates": {k: v for k, v in gates.items() if v != "passed"},
         # These are absent in the current public evidence; do not infer them
         # from a matched-control win, a format check, or a public registry subset.
@@ -35,6 +42,37 @@ def adjudicate(*, format_passed, hash_matches, readiness):
         "slot_selected": False,
         "decision": "DO NOT SUBMIT: full scientific and selector gates unresolved",
     }
+
+
+def apply_expanded_registry_audit(row, late):
+    """Overlay a later duplicate-stop when an older readiness receipt predates it."""
+    if late.get("candidate_sha256") != row.get("sha256"):
+        raise ValueError("expanded-registry audit does not bind to the reopened candidate TIFF")
+    fraction = late.get("max_fraction_within_3px")
+    threshold = late.get("duplicate_threshold_fraction_within_3px")
+    comparisons = late.get("registry_entries_compared")
+    if (not isinstance(fraction, (int, float)) or isinstance(fraction, bool)
+            or not 0 <= fraction <= 1 or not isinstance(threshold, (int, float))
+            or isinstance(threshold, bool) or not 0 < threshold <= 1
+            or not isinstance(comparisons, int) or isinstance(comparisons, bool) or comparisons <= 0):
+        raise ValueError("expanded-registry audit has invalid overlap, threshold, or comparison count")
+    duplicate = fraction > threshold
+    if late.get("exceeds_duplicate_threshold") is not duplicate:
+        raise ValueError("expanded-registry duplicate flag contradicts the numeric overlap threshold")
+    if duplicate and late.get("decision") != "duplicate_on_expanded_registry":
+        raise ValueError("expanded-registry duplicate decision contradicts numeric threshold")
+    row["expanded_registry_audit"] = {
+        "comparisons": comparisons,
+        "max_fraction_within_3px": fraction,
+        "threshold": threshold,
+        "duplicate_stop": duplicate,
+        "decision": late.get("decision"),
+    }
+    if duplicate:
+        row["recorded_failed_or_unknown_gates"]["expanded_registry_dot_novelty"] = "failed"
+        row["effective_research_verdict"] = "negative"
+        row["decision"] = "DO NOT SUBMIT: expanded-registry duplicate stop"
+    return row
 
 
 def review(root=ROOT):
@@ -54,6 +92,9 @@ def review(root=ROOT):
             row.update(sha256=None, format_passed=False, hash_matches=False)
             row["validation_errors"].append(str(exc))
         row.update(adjudicate(format_passed=row["format_passed"], hash_matches=row["hash_matches"], readiness=readiness))
+        if label == "H-NEARSPLAY":
+            late = json.loads((root / "docs/research/nearsplay/full-registry-audit.json").read_text())
+            apply_expanded_registry_audit(row, late)
         artifacts.append(row)
     return {
         "generated_utc": datetime.now(timezone.utc).isoformat(),
