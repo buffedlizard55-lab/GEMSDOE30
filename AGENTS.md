@@ -29,3 +29,12 @@ GDX-1 is negative; 3/3 experiments exhausted. Never remove its `started.json` or
 a negative receipt was reproduced, not that a slot is approved; use
 `--require-promote` to require a promotion (the current preflight exits 2).
 Archived novelty receipts remain unchanged; live additions are blocking UNKNOWN.
+
+POOL-1 (parallel 2026-10-27 lane, merged after the preflight): pooled
+MSDB+CSR+LiDAR mechanism beat `msdb_edge` on HOLDOUT-DTI on two seeds, but its
+raster is duplicate-stopped (88.74% vs FFL1 on its frozen 394-raster registry,
+which predates CTD-1/FC-1 and excludes the lattice witness); 3/3 experiments
+exhausted, no TIFF published. Never remove
+`docs/research/2026-10-27-pool/started.json` or rescue its quarantined raster.
+Use `scripts/verify_pool_run.py` (exit 0 verifies the negative; `--require-promote`
+exits 2). POOL-2 requires the same policy resolution as every other lane.

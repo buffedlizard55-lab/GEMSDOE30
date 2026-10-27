@@ -70,6 +70,34 @@ older claims and download permissions are superseded, not silently rewritten.
 The [prior README narrative](README-archive-20261026.md) is archived verbatim with
 a warning. The complete owner prompt is preserved verbatim below.
 
+
+## Parallel lane 2026-10-27 — POOL-1: **MECHANISM CONFIRMED · RASTER DUPLICATE-STOPPED · DO NOT SUBMIT**
+
+POOL-1 ran in parallel with the registry preflight above, under its own frozen
+preregistration/registry (394 dotted-submission rasters from 2026-10-27 HEAD clones of
+GEMSDOE24/25/27/28/30/31/32/33/36; dense calibration parents reported separately; the
+13GEMSDOE lattice witness and CTD-1/FC-1 postdate its registry freeze — coverage of
+those is UNKNOWN, see `docs/research/2026-10-27-pool/postmerge-addendum.json`; under the
+preflight's literal lattice bound every ≥22,164-dot candidate is stopped regardless).
+
+- **Science (HOLDOUT-DTI, `component-holdout-v3-blockstats-20261025`, 60,988 withheld):**
+  pooled 75-feature HGB (13 raw + MSDB-18 + CSR-27 + LiDAR-17 — first lane to pool
+  MSDB-18 with CSR-27) scored **0.186699** (seed 4201) and **0.187694** (seed 4219) vs
+  same-protocol `msdb_edge` 0.169468/0.174247: Δ **+0.017231 [+0.010515, +0.023980]** and
+  **+0.013446 [+0.006993, +0.019757]**, 4/4 folds both seeds, 0/324 canary alarms.
+  Catalogue-recovery evidence only — not a leaderboard score or projection.
+- **Artifact: DUPLICATE-STOP, no TIFF published.** Final dots: 88.74% within 3 px of
+  FFL1, 75.81% of MSDB1-edge, 71.08% of CSR1 (gate 70%); surface ρ ≤ 0.1366 passed;
+  format 12/12 on the quarantined raster (ignored `runs/pool1/`, sha256 `1d9cab5d…`).
+  Experiments 3/3. Verify: `.venv/bin/python scripts/verify_pool_run.py` (exit 0;
+  `--require-promote` exit 2). Never perturb/rescue the stopped raster.
+- **Nine-site finding (re-verified pixel-exactly 2026-10-27):** the historical leaders
+  are one h19-5 emission family — GEMSDOE25 = GEMSDOE30 and GEMSDOE28 = GEMSDOE31
+  identical; H33-B2 (0.2778 owner-reported) = D2.8 minus exactly the ≤2 px
+  catalogue-halo dots. [Executive summary & table](pool1-executive-summary.html) ·
+  [Full review](docs/research/2026-10-27-pool/review.md) ·
+  [Run card](docs/research/2026-10-27-pool/run-card.json).
+
 ---
 
 <a id="current-owner-prompt"></a>

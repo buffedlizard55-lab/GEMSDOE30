@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "audited_utc": "2026-10-27",
+  "method": "Reopened the nine pinned historical-leader rasters (docs/research/priority-site-pins.json SHAs) from depth-1 clones at 2026-10-27 HEADs; dots = finite values > 0.5; distances vs data/raw/labels.tif (pinned sha256 7ba308cc...).",
+  "dot_counts": {
+    "GEMSDOE24_D1.5": 60069,
+    "GEMSDOE25_D2.8": 44090,
+    "GEMSDOE27_gapclosure_on_D1.5": 61328,
+    "GEMSDOE28_r1": 40199,
+    "GEMSDOE30_d28": 44090,
+    "GEMSDOE31_solo_d28": 40199,
+    "GEMSDOE32_H33-B2": 37654,
+    "GEMSDOE33_H33D": 41865,
+    "GEMSDOE36_PINN": 38854
+  },
+  "exact_relations": [
+    "GEMSDOE25 D2.8 == GEMSDOE30 d28 (0 residual dots both directions)",
+    "GEMSDOE28 r1 == GEMSDOE31 solo-d28 (0 residual both directions); r1 is an exact subset of D2.8; the 3891 removed dots are ALL at exactly 1.0 px from the catalogue",
+    "GEMSDOE32 H33-B2 is an exact subset of r1; the 2545 removed dots are ALL at 1.414-2.0 px from the catalogue",
+    "GEMSDOE36 PINN == H33-B2 + 1200 dots (all >2 px, up to 91.0 px from catalogue)",
+    "GEMSDOE27 == GEMSDOE24 D1.5 + 1259 dots (D1.5 exact subset)",
+    "GEMSDOE33 H33D is neither subset nor superset of H33-B2 (10251 / 6040 residuals)"
+  ],
+  "interpretation": "The owner-reported 0.2600 -> 0.2708 -> 0.2778 ladder (D2.8 -> r1 -> H33-B2) adds zero dots and zero new geology; it only deletes unmasked 1-2 px catalogue-halo dots, cutting the 0.2*FP denominator term. PINN's +1200 dots coincided with 0.2750 (< 0.2778). All four scores are OWNER-REPORTED (prompt ledger), not organizer receipts."
+}

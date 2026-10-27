@@ -1,0 +1,72 @@
+{
+  "candidate": "docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif",
+  "candidate_sha256": "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900",
+  "registry": "docs/research/2026-10-27-pool/registry.json",
+  "unique_sha_references_compared": 380,
+  "top": [
+    {
+      "overlap": 0.6770015876616012,
+      "spearman": 0.08564358754545594,
+      "site": "GEMSDOE30",
+      "reference": "docs/research/2026-10-26-fflidar/gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3.tif"
+    },
+    {
+      "overlap": 0.5985711045588569,
+      "spearman": 0.036780307660469025,
+      "site": "GEMSDOE30",
+      "reference": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif"
+    },
+    {
+      "overlap": 0.5662735314130188,
+      "spearman": 0.03851094884358361,
+      "site": "GEMSDOE32",
+      "reference": "data/raw/registry-clones/GEMSDOE32/docs/downloads/gemsdoe32-h45-kernelspacing-37654dots-20261026T163401Z-2fe5944c-zeros.tif"
+    },
+    {
+      "overlap": 0.5519392152415513,
+      "spearman": 0.014220134546536884,
+      "site": "GEMSDOE30",
+      "reference": "docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif"
+    },
+    {
+      "overlap": 0.5519392152415513,
+      "spearman": 0.014220134546536884,
+      "site": "GEMSDOE30",
+      "reference": "docs/downloads/gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e-zeros.tif"
+    },
+    {
+      "overlap": 0.5483329553186663,
+      "spearman": 0.026314367326929662,
+      "site": "GEMSDOE28",
+      "reference": "data/raw/registry-clones/GEMSDOE28/docs/downloads/gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-nan.tif"
+    },
+    {
+      "overlap": 0.5483329553186663,
+      "spearman": 0.026314367326929662,
+      "site": "GEMSDOE28",
+      "reference": "data/raw/registry-clones/GEMSDOE28/docs/downloads/gems28-h37-1-probe-union-pool-r1-20261003-52a13184267e-allfinite.tif"
+    },
+    {
+      "overlap": 0.5428668632342935,
+      "spearman": 0.026537518172309982,
+      "site": "GEMSDOE28",
+      "reference": "data/raw/registry-clones/GEMSDOE28/docs/downloads/gems28-s19-radlin-cover-20261026-6fa38f9d317b-nan.tif"
+    },
+    {
+      "overlap": 0.5428668632342935,
+      "spearman": 0.026537518172309982,
+      "site": "GEMSDOE28",
+      "reference": "data/raw/registry-clones/GEMSDOE28/docs/downloads/gems28-s19-radlin-cover-20261026-6fa38f9d317b-allfinite.tif"
+    },
+    {
+      "overlap": 0.5070991154456793,
+      "spearman": 0.03176486352399639,
+      "site": "GEMSDOE27",
+      "reference": "data/raw/registry-clones/GEMSDOE27/docs/downloads/gems27-h28-1-edge-coherence-plus-t-v2-h27-4-20261002-1113fba5f6cb-nan.tif"
+    }
+  ],
+  "max_overlap": 0.6770015876616012,
+  "max_spearman": 0.08564358754545594,
+  "decision": "still unique vs observed 2026-10-27 registry subset",
+  "scope": "directional: fraction of CSR-1 dots within 3px of each reference; excludes CSR-1's own sha entries"
+}

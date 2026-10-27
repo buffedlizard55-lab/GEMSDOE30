@@ -16,6 +16,12 @@
       "run_card": "docs/research/2026-10-26-qpc/run-card.json",
       "verifier": "scripts/verify_quadrature_phase_run.py",
       "decision": "DO NOT SUBMIT (duplicate-stop at 78.915854% dot overlap; paired-CI gates failed; no QPC TIFF published)"
+    },
+    {
+      "lane": "POOL-1",
+      "run_card": "docs/research/2026-10-27-pool/run-card.json",
+      "verifier": "scripts/verify_pool_run.py",
+      "decision": "DO NOT SUBMIT (mechanism confirmed: HOLDOUT-DTI 0.186699/0.187694 vs msdb_edge on two seeds, paired CIs > 0; DUPLICATE-STOP at 88.74% dot overlap vs FFL1 on frozen 394-raster registry predating CTD-1/FC-1 and the lattice witness; no TIFF published; experiments 3/3)"
     }
   ],
   "additional_verified_lanes": [
@@ -92,5 +98,14 @@
     "site_page": "csr-discontinuity-review.html",
     "decision": "ARCHIVED HISTORICAL RECEIPT ONLY: superseded by the 2026-10-27 lattice duplicate stop and published-format failure; do not submit.",
     "history_preserved": true
+  },
+  "pool1_parallel_review": {
+    "lane": "POOL-1",
+    "run_card": "docs/research/2026-10-27-pool/run-card.json",
+    "readiness": "docs/research/2026-10-27-pool/readiness.json",
+    "verifier": "scripts/verify_pool_run.py",
+    "report": "docs/research/2026-10-27-pool/review.md",
+    "site_page": "pool1-executive-summary.html",
+    "decision": "PARALLEL LANE, NOT THE LATEST_REVIEW POINTER: science confirmed, artifact duplicate-stopped, no TIFF published; lattice/CTD/FC coverage UNKNOWN (see postmerge-addendum.json)"
   }
 }

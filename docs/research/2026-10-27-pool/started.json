@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "lane": "POOL-1",
+  "experiment_spec": "pool1",
+  "started_utc": "2026-10-27T17:29:51+00:00",
+  "experiment_cap": 3,
+  "preregistration_md_sha256": "ae3d7c89350d5319dcdf9d3e909e9906033b98764f8be27562ce3d9d80ae5e78",
+  "preregistration_json_sha256": "083fb44be3bd653d18d4cfecc4469fe19860b4ee047e7b55bf306d9813cb29f1",
+  "registry_sha256": "5b6f77da636cd964a6a498cebb1cbd283f956e71cdf413529402bac5c078e9a5"
+}
