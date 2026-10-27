@@ -38,6 +38,7 @@ Confirm with the organizer and plan for the earlier time. The rules allow up to
 three feedback submissions per week and require one final selection for both rounds.
 
 [Clean overview](index.html) · [Nine-site snapshot](priority-executive-summary.html) ·
+[Repository review (2026-10-27)](docs/repository-review-2026-10-27.md) ·
 [Science and four hypotheses](csr-discontinuity-review.html) ·
 [Submission guide](executive-summary.html) ·
 [**Current JSON run card**](docs/research/2026-10-27-registry-preflight/run-card.json) ·
