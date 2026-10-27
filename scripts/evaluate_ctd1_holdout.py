@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
-"""Holdout-DTI report for the CTD-1 concealed stepover candidate vs baselines.
+"""ARCHIVED INVALID HOLDOUT: CLI scoring is disabled; do not use for selection.
+
+CTD-1 and FC-1 were emitted using the full catalogue before this script hid
+components, and this script re-emitted those saved predictions. That is not a
+leakage-safe spatially buffered holdout, regardless of the original description
+below. FC-1's recorded candidate/control dot counts also differ. Historical
+code is retained only for provenance; see 2026-10-27 registry-preflight.
+
+Original description (superseded):
 
 Protocol (component-holdout-v3-blockstats-20261025 / buffered-quadrant whole
 components): whole 8-connected catalogue components are split into stand-in
@@ -69,7 +77,8 @@ def emit(prediction, domain):
                                    max_dots=N_DOTS)
 
 
-def main() -> int:
+def _historical_contaminated_diagnostic_for_provenance_only() -> int:
+    """Retained historical implementation; it is not valid selection evidence."""
     valid, catalogue = load_grids()
     hidden, known, n_components = split_components(catalogue, seed=31, stratify=32)
     scored = valid & ~known
@@ -151,6 +160,12 @@ def main() -> int:
     print(json.dumps(report, indent=1))
     print(f"\nwrote {out}")
     return 0
+
+
+def main() -> int:
+    print("BLOCKED: the saved candidate used the full catalogue before the split; "
+          "this is not a leakage-safe buffered holdout. Do not rerun or use it for selection.", file=sys.stderr)
+    return 2
 
 
 if __name__ == "__main__":

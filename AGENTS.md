@@ -17,7 +17,10 @@ Read `docs/research/2026-10-27-registry-preflight/run-card.json` and run
 witness. No new lane, fit, placement, raster or slot was authorized. Under the
 literal 70%-within-3-pixels rule, the pinned lattice proves a stop for any
 budget of 22,164 or more distinct valid-footprint dots; a lower budget is NOT
-an automatic pass and must not be chosen solely to evade the rule. A scientific
+an automatic pass and must not be chosen solely to evade the rule. The CTD-1
+and FC-1 files merged in PR #54 both measurably exceed 99.9% overlap and are
+stopped; their saved-prediction holdout used the full catalogue before hiding
+faults and is not leakage-safe. Do not regenerate or submit either. A scientific
 continuation requires an explicit assigned lane and a policy resolution, plus
 fresh complete two-stage novelty checks and separate selector approval.
 

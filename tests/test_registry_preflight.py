@@ -113,3 +113,52 @@ def test_independent_integer_disk_clips_edges_without_wrap():
     # Outside-footprint positives cannot create reference neighbourhoods.
     footprint[0, 0] = False
     assert preflight.independent_three_pixel_coverage(reference, footprint) == 0
+
+
+@requires_mirrors
+def test_parallel_pr_candidates_both_fail_lattice_even_below_the_budget_bound():
+    m = preflight.verify()['measurement']
+    ctd, fc = m['parallel_candidates_merged_during_audit']
+    assert ctd['lane'] == 'CTD-1' and ctd['matching_dots'] == 39_984
+    assert ctd['comparison']['candidate_dots'] == 40_000 and ctd['budget_bound_decision'] == 'duplicate-stop'
+    assert fc['lane'] == 'FC-1' and fc['matching_dots'] == 10_844
+    assert fc['comparison']['candidate_dots'] == 10_848 and fc['budget_bound_decision'] == 'not-proven'
+    for item in (ctd, fc):
+        assert item['comparison']['dot_duplicate'] is True
+        assert item['published_format_validator_passed'] is True
+        assert item['whole_array_finite_range_diagnostic_passed'] is False
+        assert item['produced_by_this_audit'] is False
+    card = json.loads(preflight.CARD.read_text())
+    assert card['parallel_holdout_review']['valid_leakage_safe_holdout'] is False
+
+
+@pytest.mark.parametrize('script,word', [
+    ('scripts/build_concealed_stepper_submission.py', 'DUPLICATE-STOP'),
+    ('scripts/build_flank_concealed_submission.py', 'DUPLICATE-STOP'),
+    ('scripts/evaluate_ctd1_holdout.py', 'BLOCKED'),
+])
+def test_archived_unsafe_command_lines_fail_before_generating_anything(script, word):
+    p = subprocess.run([sys.executable, script], cwd=ROOT, capture_output=True, text=True)
+    assert p.returncode == 2 and word in p.stderr
+
+
+def test_legacy_local_scan_requires_explicit_pinned_registry():
+    p = subprocess.run([sys.executable, 'scripts/scan_novelty.py', 'does-not-matter.tif', 'dots'],
+                       cwd=ROOT, capture_output=True, text=True)
+    assert p.returncode == 2
+    assert json.loads(p.stdout)['decision'] == 'blocked-incomplete-registry'
+
+
+@requires_mirrors
+def test_legacy_wrapper_delegates_pinned_witness_to_shared_auditor(tmp_path):
+    witness = preflight.PARALLEL_CANDIDATES[0]
+    registry = tmp_path / 'registry.json'
+    registry.write_text(json.dumps({'complete': False, 'rasters': [
+        {'path': str(LATTICE), 'sha256': preflight.sha(LATTICE), 'site': '13GEMSDOE'}]}))
+    p = subprocess.run([sys.executable, 'scripts/scan_novelty.py', witness['path'], 'dots',
+                        '--registry', str(registry), '--template', str(TEMPLATE)],
+                       cwd=ROOT, capture_output=True, text=True)
+    assert p.returncode == 2
+    result = json.loads(p.stdout)
+    assert result['decision'] == 'duplicate-stop' and result['submission_approved'] is False
+    assert result['comparisons'][0]['candidate_fraction_within_3px_of_reference'] == pytest.approx(.9996)

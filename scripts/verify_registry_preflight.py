@@ -28,6 +28,15 @@ CARD = REPORT / "run-card.json"
 TEMPLATE = ROOT / "data/raw/sample_submission.tif"
 LATTICE = ROOT / "data/raw/registry-extra/13gems-lattice-s5.tif"
 HISTORIC_CARD = ROOT / "docs/research/2026-10-26-csr/run-card.json"
+# These were independently merged into main in PR #54 while this audit was in
+# progress. We inspect their original saved bytes, never generate replacements.
+PARALLEL_CANDIDATES = (
+    {"lane": "CTD-1", "path": "docs/downloads/gems30-ctd1-concealed-stepper-20261027T172620Z-c39a9264.tif",
+     "sha256": "13074a02b38e7edea5faaccbaa18f382dffd395fd211139becb7d66278f02297"},
+    {"lane": "FC-1", "path": "docs/downloads/gems30-fc1-concealed-flank-20261027T172846Z-f182c780.tif",
+     "sha256": "d6dadb9c6119767f0b4af2f2122e73529829b3c1b36cf1131165cb68b8da2612"},
+)
+PARALLEL_SOURCE_COMMIT = "99b9cc9693bd19c474f298a99618599ade6f3c60"
 
 
 def load(path: Path) -> dict:
@@ -104,6 +113,34 @@ def inspect(template: Path = TEMPLATE, lattice: Path = LATTICE) -> dict:
         require(matching >= proof["minimum_overlapping_dots"], "observed overlap violates bound")
         grid_record = {"shape_hw": list(tpl.shape), "crs": str(tpl.crs),
                        "transform": list(tpl.transform)[:6]}
+        parallel = []
+        for entry in PARALLEL_CANDIDATES:
+            path = ROOT / entry["path"]
+            require(sha(path) == entry["sha256"], f"{entry['lane']} historic SHA-256 mismatch")
+            with rasterio.open(path) as ds:
+                require(ds.count == 1 and (ds.shape, ds.crs, ds.transform) == grid,
+                        f"{entry['lane']} grid/band mismatch")
+                values = ds.read(1)
+            inside = values[footprint]
+            require(np.isfinite(inside).all() and np.all((inside == 0) | (inside == 1)),
+                    f"{entry['lane']} is not a finite binary-dot raster")
+            dot_count = int(np.count_nonzero(inside))
+            require(dot_count > 0, f"{entry['lane']} has no dots")
+            stats = compare(values, reference, footprint, stage="dots")
+            matched = int(round(stats["candidate_fraction_within_3px_of_reference"] * dot_count))
+            require(stats["dot_duplicate"] is True, f"{entry['lane']} duplicate not reproduced")
+            min_matches = max(0, dot_count - proof["uncovered_pixels"])
+            parallel.append({
+                "lane": entry["lane"], "path": entry["path"], "raster_sha256": entry["sha256"],
+                "source_commit": PARALLEL_SOURCE_COMMIT,
+                "matching_dots": matched, "comparison": stats,
+                "budget_bound_decision": "duplicate-stop" if 10 * min_matches > 7 * dot_count else "not-proven",
+                "minimum_overlapping_dots": min_matches,
+                "published_format_validator_passed": validate_submission_file(path, template).passed,
+                "whole_array_finite_range_diagnostic_passed": validate_submission_file(
+                    path, template, require_finite_all_cells=True).passed,
+                "produced_by_this_audit": False,
+            })
     published = validate_submission_file(candidate, template)
     diagnostic = validate_submission_file(candidate, template, require_finite_all_cells=True)
     return {
@@ -114,6 +151,7 @@ def inspect(template: Path = TEMPLATE, lattice: Path = LATTICE) -> dict:
         "bound": proof,
         "independent_coverage": {"method": "explicit clipped 29-offset Euclidean integer disk, no wrap",
                                  "covered_within_radius_pixels": independent_covered},
+        "parallel_candidates_merged_during_audit": parallel,
         "previous_candidate": {
             "path": historical["published_tiff"], "raster_sha256": sha(candidate),
             "matching_dots": matching, "comparison": comparison,
@@ -148,6 +186,13 @@ def make_card(measured: dict) -> dict:
             "matched_control": results["summary"]["arms"]["msdb_edge"],
             "paired_difference": results["summary"]["candidate_minus"]["msdb_edge"],
             "scope": "Archived catalogue proxy, not a hidden-test score or a CSR-2 result.",
+        },
+        "parallel_holdout_review": {
+            "source_commit": PARALLEL_SOURCE_COMMIT,
+            "candidates": ["CTD-1", "FC-1"],
+            "valid_leakage_safe_holdout": False,
+            "finding": "Both saved rasters used the full catalogue for emission before the evaluator hid components; the evaluator then re-emitted those saved rasters. Its random component split is not the claimed four buffered regional folds. FC-1 also has unequal candidate/control dot counts. Archived scores are not valid evidence for the requested protocol.",
+            "source_files": ["scripts/build_concealed_stepper_submission.py", "scripts/build_flank_concealed_submission.py", "scripts/evaluate_ctd1_holdout.py"],
         },
         "registry": {
             "pre_placement_surface": None,
@@ -211,6 +256,10 @@ def verify(template: Path = TEMPLATE, lattice: Path = LATTICE) -> dict:
             "historical holdout must match the archived receipt")
     require(card["historical_raster_sha256"] == measured["previous_candidate"]["raster_sha256"],
             "historical candidate identity mismatch")
+    parallel_review = card.get("parallel_holdout_review", {})
+    require(parallel_review.get("valid_leakage_safe_holdout") is False
+            and parallel_review.get("source_commit") == PARALLEL_SOURCE_COMMIT,
+            "parallel holdout cannot be presented as leakage-safe evidence")
     return {"research_verdict": "negative", "display_status": card["decision"],
             "download_ok": False, "ok_to_submit": False, "submission_approved": False,
             "slot_selected": False, "measurement": measured}

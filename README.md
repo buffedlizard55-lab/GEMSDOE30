@@ -4,7 +4,7 @@
 
 ## Current decision · 2026-10-27: **DUPLICATE-STOP · DO NOT SUBMIT**
 
-**No new model, TIFF, submission name, note, or weekly-slot selection was made.**
+**This audit made no new model, TIFF, submission name, note, or weekly-slot selection.**
 The pinned [13GEMSDOE lattice](https://github.com/buffedlizard55-lab/13GEMSDOE/blob/92ee6f074323f161eed837b80ec3ee5b662e26f5/docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif)
 covers all but 6,649 of 5,167,373 valid footprint cells within 3 pixels. Any
 44,090-dot candidate must overlap it by at least **37,441/44,090 = 84.9195%**,
@@ -12,6 +12,11 @@ above the literal >70% stop. The previously published CSR-1 TIFF actually
 matches **44,084/44,090 = 99.9864%**. Its older 357-raster screen did not
 include this reference. A bound that does not prove a stop (budgets below
 22,164) is **not a novelty pass**; do not change the budget merely to evade it.
+Two files merged concurrently in PR #54 are also stopped: CTD-1 overlaps the
+lattice at **39,984/40,000 (99.9600%)**, and FC-1 at **10,844/10,848 (99.9631%)**.
+Their published-format checks pass, but their archived holdout used predictions
+built from the full catalogue before hiding faults; it is not a leakage-safe
+comparison. Their original generation and scoring commands now fail closed.
 
 The historical CSR-1 file is [available for research only](docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif)
 (SHA-256 `0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900`).

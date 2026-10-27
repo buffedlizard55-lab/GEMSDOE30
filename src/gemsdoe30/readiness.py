@@ -136,11 +136,10 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
                         or (stage == "dots" and number(row.get("candidate_fraction_within_3px_of_reference"))
                             and row["candidate_fraction_within_3px_of_reference"] > .70) for row in rows)
         # A broken reference can still prove a directional stop via a lower
-        # bound using ALL candidate dots. Do not ignore that proof just because
-        # the ordinary comparisons themselves are clear. Recorded stop flags
-        # also fail closed; numeric proof guards against stale flags.
+        # bound using ALL candidate dots. Do not ignore that numeric proof just
+        # because ordinary comparisons are clear; an unverified string flag by
+        # itself is not evidence of a measured duplicate.
         malformed = report.get("malformed_exclusions_audited", [])
-        duplicate |= report.get("decision") == "duplicate-stop"
         if stage == "dots":
             duplicate |= any(
                 isinstance(row.get("known_matching_candidate_dots"), int)

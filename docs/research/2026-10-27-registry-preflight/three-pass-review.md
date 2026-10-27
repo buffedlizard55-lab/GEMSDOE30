@@ -54,11 +54,20 @@ score, slot, or external upload was created.
   duplicate-propagation, invalid-input, edge-wrapping and tampered-witness/card
   tests. A partial 100% subset overlap cannot pass as a whole-candidate proof;
   a known-match lower bound strictly greater than 70% cannot be ignored.
-- Ran the full test suite with restored data: **402 passed, 5 skipped** (optional
-  PyTorch tests), 7 subtests passed; the final test count after adding the last
-  readiness regressions is recorded in the PR. Deterministic Pages `--check`,
+- Ran the full test suite with restored data: **410 passed, 5 skipped** (optional
+  PyTorch tests), 7 subtests passed. Deterministic Pages `--check`,
   `git diff --check`, pinned restoration and current negative verifier are
   required locally and in GitHub CI. The verifier's `--require-promote` exits 2.
+- During this pass PR #54 merged two more research TIFFs. Preserved their bytes,
+  rechecked them without model fitting or placement, and found CTD-1 overlap
+  39,984/40,000 (99.9600%) and FC-1 overlap 10,844/10,848 (99.9631%): both
+  duplicate-stopped, even though FC-1's 10,848-dot budget alone does not prove
+  a stop. Their saved predictions used the full catalogue before components
+  were hidden; the recorded single random split is not the requested buffered
+  regional protocol. The FC controls also have different budgets. Archived
+  scores are not accepted as leakage-safe selection evidence. Disabled the
+  unsafe old generation and scoring entry points, and replaced the separate
+  local scan with a fail-closed wrapper around the shared registry auditor.
 - Remaining blockers: no externally assigned method lane, incomplete live
   parallel registry and the literal lattice duplicate rule. Even after those
   are resolved, a fresh same-protocol holdout, feature leakage checks, exact

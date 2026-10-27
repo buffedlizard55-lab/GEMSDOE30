@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-27T17:38:14Z",
+  "generated_utc": "2026-10-27T17:50:19Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -348,6 +348,48 @@
       "submission_recommendation": false,
       "run_name": "gems30-TDX1-44090-20261025-5fc508ea81ac",
       "note": "TDX1 gravity-normal magnetic texture lag; 6-feature HGB; negative research result, NOT approved for competition upload.",
+      "performance_status": "unscored; format validation is not a score"
+    },
+    {
+      "manifest": "gems30-ctd1-concealed-stepper-20261027T172620Z-c39a9264.json",
+      "file": "docs/downloads/gems30-ctd1-concealed-stepper-20261027T172620Z-c39a9264.tif",
+      "present": true,
+      "sha256": "13074a02b38e7edea5faaccbaa18f382dffd395fd211139becb7d66278f02297",
+      "sha256_matches_manifest": true,
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "legacy_manifest_claim_range_error_immunity": null,
+      "organizer_acceptance_confirmed": false,
+      "site_linked": null,
+      "historical_manifest_recommendation": null,
+      "submission_recommendation": false,
+      "run_name": "gems30-ctd1-concealed-stepper-20261027T172620Z-c39a9264",
+      "note": "CTD1 concealed piedmont stepover: basement step+gravity+mag edge AND volcanics+paleo springs; off-catalogue; EDGE dots; all-finite [0,1]",
+      "performance_status": "unscored; format validation is not a score"
+    },
+    {
+      "manifest": "gems30-fc1-concealed-flank-20261027T172846Z-f182c780.json",
+      "file": "docs/downloads/gems30-fc1-concealed-flank-20261027T172846Z-f182c780.tif",
+      "present": true,
+      "sha256": "d6dadb9c6119767f0b4af2f2122e73529829b3c1b36cf1131165cb68b8da2612",
+      "sha256_matches_manifest": true,
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "legacy_manifest_claim_range_error_immunity": null,
+      "organizer_acceptance_confirmed": false,
+      "site_linked": null,
+      "historical_manifest_recommendation": null,
+      "submission_recommendation": false,
+      "run_name": "gems30-fc1-concealed-flank-20261027T172846Z-f182c780",
+      "note": "FC1 concealed near-trace flank: 3px ring on low-slope alluvial side of known traces; heat+fluid+gravity ranked; EDGE dots; [0,1]",
       "performance_status": "unscored; format validation is not a score"
     },
     {
@@ -789,6 +831,56 @@
           "method": "explicit clipped 29-offset Euclidean integer disk, no wrap",
           "covered_within_radius_pixels": 5160724
         },
+        "parallel_candidates_merged_during_audit": [
+          {
+            "lane": "CTD-1",
+            "path": "docs/downloads/gems30-ctd1-concealed-stepper-20261027T172620Z-c39a9264.tif",
+            "raster_sha256": "13074a02b38e7edea5faaccbaa18f382dffd395fd211139becb7d66278f02297",
+            "source_commit": "99b9cc9693bd19c474f298a99618599ade6f3c60",
+            "matching_dots": 39984,
+            "comparison": {
+              "stage": "dots",
+              "spearman_full_footprint": -0.0002990201174810405,
+              "candidate_dots": 40000,
+              "candidate_positive_support": 40000,
+              "reference_dots": 206895,
+              "candidate_fraction_within_3px_of_reference": 0.9996,
+              "identical_inside_footprint": false,
+              "correlation_duplicate": false,
+              "dot_duplicate": true,
+              "undefined": false
+            },
+            "budget_bound_decision": "duplicate-stop",
+            "minimum_overlapping_dots": 33351,
+            "published_format_validator_passed": true,
+            "whole_array_finite_range_diagnostic_passed": false,
+            "produced_by_this_audit": false
+          },
+          {
+            "lane": "FC-1",
+            "path": "docs/downloads/gems30-fc1-concealed-flank-20261027T172846Z-f182c780.tif",
+            "raster_sha256": "d6dadb9c6119767f0b4af2f2122e73529829b3c1b36cf1131165cb68b8da2612",
+            "source_commit": "99b9cc9693bd19c474f298a99618599ade6f3c60",
+            "matching_dots": 10844,
+            "comparison": {
+              "stage": "dots",
+              "spearman_full_footprint": -0.00017986531544301798,
+              "candidate_dots": 10848,
+              "candidate_positive_support": 10848,
+              "reference_dots": 206895,
+              "candidate_fraction_within_3px_of_reference": 0.9996312684365781,
+              "identical_inside_footprint": false,
+              "correlation_duplicate": false,
+              "dot_duplicate": true,
+              "undefined": false
+            },
+            "budget_bound_decision": "not-proven",
+            "minimum_overlapping_dots": 4199,
+            "published_format_validator_passed": true,
+            "whole_array_finite_range_diagnostic_passed": false,
+            "produced_by_this_audit": false
+          }
+        ],
         "previous_candidate": {
           "path": "docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif",
           "raster_sha256": "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900",
@@ -869,6 +961,20 @@
         },
         "scope": "Archived catalogue proxy, not a hidden-test score or a CSR-2 result."
       },
+      "parallel_holdout_review": {
+        "source_commit": "99b9cc9693bd19c474f298a99618599ade6f3c60",
+        "candidates": [
+          "CTD-1",
+          "FC-1"
+        ],
+        "valid_leakage_safe_holdout": false,
+        "finding": "Both saved rasters used the full catalogue for emission before the evaluator hid components; the evaluator then re-emitted those saved rasters. Its random component split is not the claimed four buffered regional folds. FC-1 also has unequal candidate/control dot counts. Archived scores are not valid evidence for the requested protocol.",
+        "source_files": [
+          "scripts/build_concealed_stepper_submission.py",
+          "scripts/build_flank_concealed_submission.py",
+          "scripts/evaluate_ctd1_holdout.py"
+        ]
+      },
       "registry": {
         "pre_placement_surface": null,
         "new_final_dots": null,
@@ -910,6 +1016,56 @@
             "method": "explicit clipped 29-offset Euclidean integer disk, no wrap",
             "covered_within_radius_pixels": 5160724
           },
+          "parallel_candidates_merged_during_audit": [
+            {
+              "lane": "CTD-1",
+              "path": "docs/downloads/gems30-ctd1-concealed-stepper-20261027T172620Z-c39a9264.tif",
+              "raster_sha256": "13074a02b38e7edea5faaccbaa18f382dffd395fd211139becb7d66278f02297",
+              "source_commit": "99b9cc9693bd19c474f298a99618599ade6f3c60",
+              "matching_dots": 39984,
+              "comparison": {
+                "stage": "dots",
+                "spearman_full_footprint": -0.0002990201174810405,
+                "candidate_dots": 40000,
+                "candidate_positive_support": 40000,
+                "reference_dots": 206895,
+                "candidate_fraction_within_3px_of_reference": 0.9996,
+                "identical_inside_footprint": false,
+                "correlation_duplicate": false,
+                "dot_duplicate": true,
+                "undefined": false
+              },
+              "budget_bound_decision": "duplicate-stop",
+              "minimum_overlapping_dots": 33351,
+              "published_format_validator_passed": true,
+              "whole_array_finite_range_diagnostic_passed": false,
+              "produced_by_this_audit": false
+            },
+            {
+              "lane": "FC-1",
+              "path": "docs/downloads/gems30-fc1-concealed-flank-20261027T172846Z-f182c780.tif",
+              "raster_sha256": "d6dadb9c6119767f0b4af2f2122e73529829b3c1b36cf1131165cb68b8da2612",
+              "source_commit": "99b9cc9693bd19c474f298a99618599ade6f3c60",
+              "matching_dots": 10844,
+              "comparison": {
+                "stage": "dots",
+                "spearman_full_footprint": -0.00017986531544301798,
+                "candidate_dots": 10848,
+                "candidate_positive_support": 10848,
+                "reference_dots": 206895,
+                "candidate_fraction_within_3px_of_reference": 0.9996312684365781,
+                "identical_inside_footprint": false,
+                "correlation_duplicate": false,
+                "dot_duplicate": true,
+                "undefined": false
+              },
+              "budget_bound_decision": "not-proven",
+              "minimum_overlapping_dots": 4199,
+              "published_format_validator_passed": true,
+              "whole_array_finite_range_diagnostic_passed": false,
+              "produced_by_this_audit": false
+            }
+          ],
           "previous_candidate": {
             "path": "docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif",
             "raster_sha256": "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900",
@@ -951,7 +1107,8 @@
       "slot_selected": false,
       "organizer_score": null,
       "historical_organizer_score_receipt": null,
-      "historical_raster_sha256": "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900"
+      "historical_raster_sha256": "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900",
+      "parallel_review_utc": "2026-10-27T17:46:53+00:00"
     },
     "verified_now": true,
     "error": null,
@@ -1217,7 +1374,7 @@
       {
         "name": "current_published_inventory_coverage",
         "status": "unknown",
-        "detail": "5 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
+        "detail": "7 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
       }
     ],
     "observed_registry": {
@@ -1246,9 +1403,11 @@
     "unassessed_current_reference_sha256": [
       "0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564",
       "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900",
+      "13074a02b38e7edea5faaccbaa18f382dffd395fd211139becb7d66278f02297",
       "20fc7b107e9e1a3a19e5e082d41720f0ce2204ad0ae8ca632b9884d16534af26",
       "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
-      "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07"
+      "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07",
+      "d6dadb9c6119767f0b4af2f2122e73529829b3c1b36cf1131165cb68b8da2612"
     ],
     "current_inventory_coverage": "unknown",
     "ok_to_submit": false,
@@ -1518,7 +1677,7 @@
         {
           "name": "current_published_inventory_coverage",
           "status": "unknown",
-          "detail": "5 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
+          "detail": "7 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
         }
       ],
       "observed_registry": {
@@ -1553,9 +1712,11 @@
       "unassessed_current_reference_sha256": [
         "0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564",
         "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900",
+        "13074a02b38e7edea5faaccbaa18f382dffd395fd211139becb7d66278f02297",
         "20fc7b107e9e1a3a19e5e082d41720f0ce2204ad0ae8ca632b9884d16534af26",
         "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
-        "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07"
+        "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07",
+        "d6dadb9c6119767f0b4af2f2122e73529829b3c1b36cf1131165cb68b8da2612"
       ],
       "current_inventory_coverage": "unknown",
       "ok_to_submit": false,
@@ -1676,7 +1837,7 @@
         {
           "name": "current_published_inventory_coverage",
           "status": "unknown",
-          "detail": "5 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
+          "detail": "7 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
         }
       ]
     }
@@ -2698,7 +2859,8 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "skip": true
+      "pytest_collect": "415 tests collected in 1.11s",
+      "exit_code": 0
     },
     "score_gain_claimed": false
   }

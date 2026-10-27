@@ -34,6 +34,38 @@ this witness; its pass was therefore scoped, not evidence of global uniqueness.
 The lattice is a coverage baseline, not proof that two models have the same
 geologic meaning. It is used only as a registry witness, never as a feature.
 
+### Parallel work merged during this audit
+
+PR [#54](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/54) merged while
+this review was underway. We preserved its exact files and checked their saved
+bytes against the same witness, without building new candidates:
+
+| Already-published file | Measured matches within 3 px | Budget proof | Local published format | Decision |
+| --- | ---: | --- | --- | --- |
+| [CTD-1](../../downloads/gems30-ctd1-concealed-stepper-20261027T172620Z-c39a9264.tif), SHA-256 `13074a02b38e7edea5faaccbaa18f382dffd395fd211139becb7d66278f02297` | **39,984/40,000 = 99.9600%** | proven >70% before placement | passes; NaN outside | **DUPLICATE-STOP; DO NOT SUBMIT** |
+| [FC-1](../../downloads/gems30-fc1-concealed-flank-20261027T172846Z-f182c780.tif), SHA-256 `d6dadb9c6119767f0b4af2f2122e73529829b3c1b36cf1131165cb68b8da2612` | **10,844/10,848 = 99.9631%** | not proven by budget alone | passes; NaN outside | **DUPLICATE-STOP; DO NOT SUBMIT** |
+
+FC-1 demonstrates why a sub-22,164 budget is not automatically unique. The
+old CTD 27-raster scan was limited to local downloads and omitted 13GEMSDOE.
+Its note says “all-finite”, but its saved bytes have NaN outside: normal
+published format passes and the *whole-array finite* diagnostic fails. Neither
+result proves portal acceptance. The preserved PR page is explicitly marked
+[historical](../../../ctd1-history.html).
+
+**Holdout integrity:** both original builders used the complete `labels.tif`
+catalogue when deciding where to emit dots. The archived evaluator then hid
+components and re-emitted the already-built file, rather than rebuilding each
+catalogue-derived feature and prediction from visible faults. It calls a single
+random component split, not the claimed buffered four regional folds; FC-1's
+candidate and controls also have unequal dot counts. Consequently the stored
+CTD/FC scores are not valid evidence under the requested leakage-safe
+same-protocol holdout, regardless of their reported direction. See the immutable
+[CTD builder](https://github.com/buffedlizard55-lab/GEMSDOE30/blob/99b9cc9693bd19c474f298a99618599ade6f3c60/scripts/build_concealed_stepper_submission.py),
+[FC builder](https://github.com/buffedlizard55-lab/GEMSDOE30/blob/99b9cc9693bd19c474f298a99618599ade6f3c60/scripts/build_flank_concealed_submission.py)
+and [evaluator](https://github.com/buffedlizard55-lab/GEMSDOE30/blob/99b9cc9693bd19c474f298a99618599ade6f3c60/scripts/evaluate_ctd1_holdout.py).
+Their historical command-line generation/scoring paths are disabled; the local
+novelty wrapper now delegates to the shared, explicit-registry auditor.
+
 ### The saved TIFF and score are separate questions
 
 The exact CSR-1 TIFF has SHA-256
