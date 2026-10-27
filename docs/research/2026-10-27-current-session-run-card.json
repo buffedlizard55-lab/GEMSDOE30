@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "run_id": "gemsdoe30-current-session-review-20261027",
+  "hypothesis": "No candidate hypothesis was executed: the assigned lane is unknown and the verified registry preflight stops new work before fitting or placement.",
+  "mechanism": "Not run; no model, holdout, placement, raster, or score estimate was created.",
+  "named_non_fault_process": "Not applicable because no candidate mechanism was tested. The candidate slate names mimic processes for each proposal in the linked review.",
+  "holdout_dti": {
+    "label": "HOLDOUT-DTI",
+    "value": null,
+    "ci95": null,
+    "evaluator_version": null,
+    "withheld_positives": null,
+    "reason": "No new holdout was authorized or run. Prior POOL-1 results are historical receipts and are not this session's result."
+  },
+  "registry_comparison": {
+    "candidate_surface_spearman": null,
+    "candidate_dot_overlap_within_3px": null,
+    "candidate_generated": false,
+    "blocking_witness": {
+      "site": "13GEMSDOE",
+      "raster_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+      "reference_dots": 206895,
+      "footprint_pixels": 5167373,
+      "uncovered_beyond_3px": 6649,
+      "minimum_overlap_at_44090_dots": 37441,
+      "minimum_overlap_fraction_at_44090_dots": 0.8491948287593558,
+      "first_budget_provably_above_70_percent": 22164,
+      "interpretation": "A one-witness lower bound proving a duplicate stop at the listed budgets; not a complete novelty clearance."
+    }
+  },
+  "raster_sha256": null,
+  "validator_output": {
+    "new_candidate_exists": false,
+    "no_nan_inside_footprint": null,
+    "values_in_0_1_inside_footprint": null,
+    "crs_shape_transform_match": null,
+    "note": "Not applicable: no new candidate raster was written. Historical CSR-1 diagnostics are recorded in the preflight card and fail the published null-outside-footprint check."
+  },
+  "submission_name": null,
+  "note": null,
+  "download_ok": false,
+  "ok_to_submit": false,
+  "slot_selected": false,
+  "organizer_score": null,
+  "experiments_run": 0,
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200,
+  "verdict": "negative",
+  "decision": "DUPLICATE-STOP: no TIFF generated, no download or submission approved, no weekly slot selected",
+  "review": "docs/research/2026-10-27-current-session-review.md"
+}

@@ -370,6 +370,32 @@ def ffl_section() -> str:
 
 def build(template: Path) -> dict[Path, str | bytes]:
     pointer = ROOT / "docs/current-run.json"
+    selection = json.loads(pointer.read_text())
+    latest = selection.get("latest_review", {})
+    if (latest.get("run_card") == "docs/research/2026-10-27-registry-preflight/run-card.json"
+            and latest.get("verifier") == "scripts/verify_registry_preflight.py"):
+        # Render the selected current snapshot directly. The historical PTA/TAD
+        # builder below requires caches and emits obsolete download language;
+        # it must never run first and overwrite a newer fail-closed decision.
+        from scripts.verify_registry_preflight import verify as verify_preflight
+        from scripts.verify_pool_run import verify as verify_pool
+        from scripts.render_registry_preflight import render as render_preflight
+
+        verify_preflight(template=template)
+        verify_pool()
+        card = json.loads((ROOT / latest["run_card"]).read_text())
+        fleet = json.loads((ROOT / "docs/research/2026-10-26-csr/fleet-audit.json").read_text())
+        pool_card = json.loads((ROOT / "docs/research/2026-10-27-pool/run-card.json").read_text())
+        pool_dots = json.loads((ROOT / "docs/research/2026-10-27-pool/novelty-dots.json").read_text())
+        pages = {ROOT / name: content for name, content in
+                 render_preflight(card, fleet, pool_card, pool_dots).items()}
+        pages[ROOT / "docs/csr-discontinuity-review.html"] = redirect_html(
+            "../csr-discontinuity-review.html", "Current registry and science review · GEMSDOE30")
+        pages[ROOT / "docs/priority-executive-summary.html"] = redirect_html(
+            "../priority-executive-summary.html", "Nine-site executive summary · GEMSDOE30")
+        pages[ROOT / "priority-site-review.html"] = redirect_html(
+            "priority-executive-summary.html", "Current nine-site review · GEMSDOE30")
+        return pages
     retained = verify(pointer, template)
     selection = json.loads(pointer.read_text())
     card = json.loads(local_path(selection["run_card"]).read_text())

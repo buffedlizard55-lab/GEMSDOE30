@@ -357,6 +357,16 @@ def main() -> int:
                 row.update({"verified_now": True, "error": None, "decision": ready.get("reason", "duplicate-stop"),
                             "ok_to_submit": False, "research_verdict": ready["research_verdict"],
                             "gates": ready.get("gates", [])})
+            elif extra.get("verifier") == "scripts/verify_pool_run.py":
+                from scripts.verify_pool_run import verify as verify_pool
+                ready = verify_pool()
+                row.update({"verified_now": True, "error": None,
+                            "decision": "POOL-1 verified negative: duplicate-stop; no TIFF published",
+                            "ok_to_submit": False, "research_verdict": "negative",
+                            "holdout_dti_e1": ready["holdout_dti_e1"],
+                            "delta_vs_msdb_e1": ready["delta_vs_msdb_e1"],
+                            "delta_vs_msdb_e2": ready["delta_vs_msdb_e2"],
+                            "breaching_references": ready["breaching_references"]})
             else:
                 from scripts.verify_lsm_run import verify as verify_lsm
                 ready = verify_lsm(ROOT / extra["pointer"], data_dir / "sample_submission.tif")

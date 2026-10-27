@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-27T17:58:33Z",
+  "generated_utc": "2026-10-27T23:43:54Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -699,6 +699,12 @@
         "run_card": "docs/research/2026-10-26-qpc/run-card.json",
         "verifier": "scripts/verify_quadrature_phase_run.py",
         "decision": "DO NOT SUBMIT (duplicate-stop at 78.915854% dot overlap; paired-CI gates failed; no QPC TIFF published)"
+      },
+      {
+        "lane": "POOL-1",
+        "run_card": "docs/research/2026-10-27-pool/run-card.json",
+        "verifier": "scripts/verify_pool_run.py",
+        "decision": "DO NOT SUBMIT (mechanism confirmed: HOLDOUT-DTI 0.186699/0.187694 vs msdb_edge on two seeds, paired CIs > 0; DUPLICATE-STOP at 88.74% dot overlap vs FFL1 on frozen 394-raster registry predating CTD-1/FC-1 and the lattice witness; no TIFF published; experiments 3/3)"
       }
     ],
     "additional_verified_lanes": [
@@ -775,6 +781,15 @@
       "site_page": "csr-discontinuity-review.html",
       "decision": "ARCHIVED HISTORICAL RECEIPT ONLY: superseded by the 2026-10-27 lattice duplicate stop and published-format failure; do not submit.",
       "history_preserved": true
+    },
+    "pool1_parallel_review": {
+      "lane": "POOL-1",
+      "run_card": "docs/research/2026-10-27-pool/run-card.json",
+      "readiness": "docs/research/2026-10-27-pool/readiness.json",
+      "verifier": "scripts/verify_pool_run.py",
+      "report": "docs/research/2026-10-27-pool/review.md",
+      "site_page": "pool1-executive-summary.html",
+      "decision": "PARALLEL LANE, NOT THE LATEST_REVIEW POINTER: science confirmed, artifact duplicate-stopped, no TIFF published; lattice/CTD/FC coverage UNKNOWN (see postmerge-addendum.json)"
     }
   },
   "latest_scientific_review": {
@@ -836,7 +851,7 @@
             "matching_dots": 39984,
             "comparison": {
               "stage": "dots",
-              "spearman_full_footprint": -0.0002990201174810385,
+              "spearman_full_footprint": -0.0002990201174810405,
               "candidate_dots": 40000,
               "candidate_positive_support": 40000,
               "reference_dots": 206895,
@@ -860,7 +875,7 @@
             "matching_dots": 10844,
             "comparison": {
               "stage": "dots",
-              "spearman_full_footprint": -0.000179865315443018,
+              "spearman_full_footprint": -0.00017986531544301798,
               "candidate_dots": 10848,
               "candidate_positive_support": 10848,
               "reference_dots": 206895,
@@ -883,7 +898,7 @@
           "matching_dots": 44084,
           "comparison": {
             "stage": "dots",
-            "spearman_full_footprint": -0.00013208291292993258,
+            "spearman_full_footprint": -0.0001320829129299334,
             "candidate_dots": 44090,
             "candidate_positive_support": 44090,
             "reference_dots": 206895,
@@ -1778,6 +1793,38 @@
       "ok_to_submit": false,
       "research_verdict": "negative",
       "gates": []
+    },
+    {
+      "lane": "POOL-1",
+      "pointer": "docs/research/2026-10-27-pool/run-card.json",
+      "verifier": "scripts/verify_pool_run.py",
+      "verified_now": true,
+      "error": null,
+      "decision": "POOL-1 verified negative: duplicate-stop; no TIFF published",
+      "ok_to_submit": false,
+      "research_verdict": "negative",
+      "holdout_dti_e1": 0.18669934883303288,
+      "delta_vs_msdb_e1": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.0172314144285598,
+        "ci95": [
+          0.010515082153209168,
+          0.0239796274372901
+        ]
+      },
+      "delta_vs_msdb_e2": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.013446169787765805,
+        "ci95": [
+          0.006993408806786897,
+          0.019756554273043812
+        ]
+      },
+      "breaching_references": [
+        "docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif",
+        "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+        "docs/research/2026-10-26-fflidar/gems30-FFL1-fusion_edge-44090-20261026-eacd73e854a3.tif"
+      ]
     }
   ],
   "additional_verified_lanes": [
@@ -2611,6 +2658,11 @@
       "promoted": false,
       "decision": "duplicate-stop at dots; no perturbation or publication"
     },
+    "stopped_attempt_pool-1": {
+      "evidence": "docs/research/2026-10-27-pool/run-card.json",
+      "promoted": false,
+      "decision": "POOL-1 verified negative: duplicate-stop; no TIFF published"
+    },
     "verified_lane_g30_tad": {
       "evidence": "docs/research/tilt-alteration-discontinuity/current-run.json",
       "promoted": false,
@@ -2855,7 +2907,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "415 tests collected in 1.36s",
+      "pytest_collect": "423 tests collected in 1.02s",
       "exit_code": 0
     },
     "score_gain_claimed": false

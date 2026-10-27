@@ -20,7 +20,7 @@ def layout(title: str, body: str) -> str:
 <link rel="stylesheet" href="docs/assets/research.css"></head><body>
 <a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="nav-wrap">
 <a class="brand" href="index.html"><span class="brand-mark">G30</span> GEMS research</a>
-<nav aria-label="Primary"><a href="index.html">Overview</a><a href="priority-executive-summary.html">Nine sites</a><a href="csr-discontinuity-review.html">Research</a><a href="executive-summary.html">Submission guide</a></nav>
+<nav aria-label="Primary"><a href="index.html">Overview</a><a href="priority-executive-summary.html">Nine sites</a><a href="csr-discontinuity-review.html">Research</a><a href="executive-summary.html">Submission guide</a><a href="pool1-executive-summary.html">POOL-1</a></nav>
 </div></header><main id="main">{body}</main><footer><div><strong>GEMS30 · research, not a selector</strong><p>Static evidence snapshot · verified 27 Oct 2026 · parallel work may change.</p></div><div><a href="{REPORT}/run-card.json">Current run card</a><a href="docs/status.json">GitHub status snapshot</a><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Organizer leaderboard</a></div>
 <p class="fine">No automated organizer-page monitoring. Hash-pinned public mirrors are not organizer-authenticated. No competition slot selected.</p></footer></body></html>'''
 
@@ -44,6 +44,30 @@ def stop_card(card: dict) -> str:
 <p class="fine">Historical download only, not a new or approved candidate. SHA-256 <code>{e(old['raster_sha256'])}</code>. No submission identity or note was generated.</p></section>'''
 
 
+def pool1_summary(pool_card: dict, dot_receipt: dict, *, detail: bool) -> str:
+    """Render the independently verified POOL-1 negative without implying promotion."""
+    h = pool_card["holdout"]
+    d1 = h["candidate_minus"]["msdb_edge"]
+    h2 = h["confirmation_seed4219"]
+    d2 = h2["candidate_minus"]["msdb_edge"]
+    matches = {}
+    for row in dot_receipt["comparisons"]:
+        ref = row["reference"]
+        if "gems30-FFL1-fusion_edge" in ref:
+            matches["FFL1"] = row["candidate_fraction_within_3px_of_reference"]
+        elif "gems30-MSDB1-edge" in ref:
+            matches["MSDB1-edge"] = row["candidate_fraction_within_3px_of_reference"]
+        elif "gems30-CSR1-44090" in ref:
+            matches["CSR1"] = row["candidate_fraction_within_3px_of_reference"]
+    if set(matches) != {"FFL1", "MSDB1-edge", "CSR1"}:
+        raise ValueError("POOL-1 duplicate references are missing from the frozen dot receipt")
+    metrics = (f"{100*matches['FFL1']:.2f}% / {100*matches['MSDB1-edge']:.2f}% / "
+               f"{100*matches['CSR1']:.2f}%")
+    if detail:
+        return f'''<section class="section" id="pool1"><div class="section-heading"><h2>Parallel lane POOL-1: best holdout mechanism, stopped raster.</h2><p>HOLDOUT-DTI improved twice; duplication blocks publication.</p></div><p><strong>POOL-1</strong> scored HOLDOUT-DTI <strong>{h['value']:.6f}</strong> and <strong>{h2['arms']['pool_dispersed']['value']:.6f}</strong> vs same-protocol <code>msdb_edge</code> (paired differences {d1['value']:+.6f} [{d1['ci95'][0]:+.6f}, {d1['ci95'][1]:+.6f}] and {d2['value']:+.6f} [{d2['ci95'][0]:+.6f}, {d2['ci95'][1]:+.6f}]; <code>{e(h['evaluator_version'])}</code>, {h['withheld_positives']:,} withheld positives). Final dots were within 3 px of FFL1 / MSDB1-edge / CSR1 at <strong>{metrics}</strong>, exceeding the 70% gate. <strong>No TIFF was published; no slot is approved.</strong> See <a href="pool1-executive-summary.html">POOL-1 review</a> · <a href="docs/research/2026-10-27-pool/run-card.json">run card</a> · verifier <code>scripts/verify_pool_run.py</code>.</p></section>'''
+    return f'''<p class="fine"><strong>Parallel lane POOL-1:</strong> two-seed holdout improvement is not an upload approval. Its dots overlap FFL1 / MSDB1-edge / CSR1 at {metrics} within 3 px, above the 70% stop; no TIFF was published. See <a href="pool1-executive-summary.html">POOL-1 review</a>.</p>'''
+
+
 def evidence_strip(card: dict) -> str:
     h = card["historical_holdout_reference"]
     c, base, diff = h["candidate"], h["matched_control"], h["paired_difference"]
@@ -65,9 +89,10 @@ def table(fleet: dict, card: dict) -> str:
         rows.append(f'''<tr><th scope="row"><a href="{e(row['review_url'])}">{e(row['site'])}</a><br><small>{k:,} dots</small></th>
 <td><a href="{e(row['source_url'])}">{e(row['historical_file'])}</a><br><small>Historical file · {fmt}{alias}</small></td>
 <td><strong>{e(row['quoted_owner_claim'])}</strong><br><small>unverified owner claim; no receipt</small></td>
-<td><strong>STOP</strong><br><small>≥{100*lower:.2f}% lattice bound</small></td><td><strong>DO NOT RESUBMIT</strong><br><small>no new candidate or slot approved here</small></td></tr>''')
-    return '''<div class="table-wrap"><table><caption>Frozen nine-site historical selections · 26 Oct 2026, not live leadership or a complete registry</caption><thead><tr><th scope="col">Site</th><th scope="col">Owner-identified best / pinned source</th><th scope="col">Reported value</th><th scope="col">Uniqueness under literal rule</th><th scope="col">Submit status</th></tr></thead><tbody>''' + ''.join(rows) + '''</tbody></table></div>
-<p class="fine">Values are unverified owner reports, not HOLDOUT-DTI or ORGANIZER-CONFIRMED scores. No defensible leaderboard forecast. Each bound is mathematical, not an individually measured overlap; the earlier fleet audit verified each file's aligned footprint and dot count. Historical bytes are not new submissions. Remote pages may have changed; no fleet-wide selector has approved a slot.</p>'''
+<td><strong>Not available</strong><br><small>no validated new candidate; no forecast</small></td>
+<td><strong>STOP</strong><br><small>≥{100*lower:.2f}% lower-bound overlap vs lattice</small></td><td><strong>DO NOT DOWNLOAD FOR SUBMISSION</strong><br><small>historical bytes only; no new file or slot approved</small></td></tr>''')
+    return '''<div class="table-wrap"><table><caption>Frozen nine-site historical selections · 26 Oct 2026, not live leadership or a complete registry</caption><thead><tr><th scope="col">Site</th><th scope="col">Historical file / source</th><th scope="col">Reported value</th><th scope="col">New submission score estimate</th><th scope="col">Unique under literal rule?</th><th scope="col">Download / submit status</th></tr></thead><tbody>''' + ''.join(rows) + '''</tbody></table></div>
+<p class="fine">Values are unverified owner reports, not HOLDOUT-DTI or ORGANIZER-CONFIRMED scores. “Not available” is deliberate: the listed historical scores cannot validly estimate an untested candidate. The lattice bound proves the literal duplicate stop for every listed historical dot budget; it does not prove all other comparisons or provide a novelty clearance. No fleet-wide selector has approved a slot.</p>'''
 
 
 def h33(fleet: dict) -> str:
@@ -84,7 +109,7 @@ def research_section() -> str:
 <article><h3>2. Buried contact discordance</h3><p>Project geology-unit contacts beneath alluvium and compare with independent geophysical edges. Mimics: unfaulted unconformities. New geology data and moderate GIS work; exclude fault-derived tables.</p></article>
 <article><h3>3. Drainage deflection</h3><p>Find repeated channel offsets/knickpoint alignments coincident with an independent geophysical edge. Mimics: terraces, roads and lava dams. Requires DEM conditioning and catchments.</p></article>
 <article><h3>4. Alteration persistence</h3><p>Test GeoDAWN K/Th/U log-ratio residuals along coherent lines with a survey-block null. Mimics: soil, rock and flight-line seams. Cached radiometry; survey masks still needed.</p></article></div>
-<p><a class="text-link" href="{REPORT}/review.md#ranked-geological-hypotheses--proposals-not-runs">Full mechanisms, physical rationale, costs, and official sources ↗</a></p></section>'''
+<p><a class="text-link" href="{REPORT}/review.md#ranked-geological-hypotheses--proposals-not-runs">Prior mechanisms, physical rationale, costs, and official sources ↗</a> · <a class="text-link" href="docs/research/2026-10-27-current-session-review.md">Current four-candidate ranking, source-access blockers, and three-pass review ↗</a> · <a class="text-link" href="docs/hypotheses.html">Full hypothesis register ↗</a></p></section>'''
 
 
 def links_and_protocol() -> str:
@@ -111,10 +136,17 @@ def priority_page(row: dict, card: dict) -> str:
     return layout(site, body)
 
 
-def render(card: dict, fleet: dict) -> dict[str, str]:
+def render(card: dict, fleet: dict, pool_card: dict | None = None,
+           pool_dots: dict | None = None) -> dict[str, str]:
+    if pool_card is None:
+        import json
+        pool_card = json.loads((ROOT / "docs/research/2026-10-27-pool/run-card.json").read_text())
+    if pool_dots is None:
+        import json
+        pool_dots = json.loads((ROOT / "docs/research/2026-10-27-pool/novelty-dots.json").read_text())
     common = hero() + stop_card(card) + evidence_strip(card)
-    overview = common + '''<section class="section"><div class="section-heading"><div><p class="eyebrow">Historical evidence / nine priority sites</p><h2>A fleet snapshot, not a leaderboard.</h2></div><p>Historic sources are linked.<br>No upload is authorized.</p></div>''' + table(fleet, card) + '</section>' + h33(fleet) + research_section() + links_and_protocol()
-    summary = common + '''<section class="section"><p class="eyebrow">Submission guide</p><h2>There is no file to submit.</h2><p>Do not upload the historical CSR-1 file, rename an old prediction, or use a weekly slot. Its published-format failure and duplicate stop are independently sufficient blockers. A future submission requires the protocol and separate selector approval below.</p></section>''' + links_and_protocol()
+    overview = common + pool1_summary(pool_card, pool_dots, detail=True) + '''<section class="section"><div class="section-heading"><div><p class="eyebrow">Historical evidence / nine priority sites</p><h2>A fleet snapshot, not a leaderboard.</h2></div><p>Historic sources are linked.<br>No upload is authorized.</p></div>''' + table(fleet, card) + '</section>' + h33(fleet) + research_section() + links_and_protocol()
+    summary = pool1_summary(pool_card, pool_dots, detail=False) + common + '''<section class="section"><p class="eyebrow">Submission guide</p><h2>There is no file to submit.</h2><p>Do not upload the historical CSR-1 file, rename an old prediction, or use a weekly slot. Its published-format failure and duplicate stop are independently sufficient blockers. A future submission requires the protocol and separate selector approval below.</p></section>''' + links_and_protocol()
     research = common + research_section() + h33(fleet) + links_and_protocol()
     priority = '''<section class="intro"><div><p class="eyebrow">Priority sites / frozen 26 Oct 2026</p><h1>Nine sites. One clear stop.</h1><p class="lead">Owner-reported historical scores, immutable source files and the literal lattice bound; not a live registry or submit selector.</p></div></section>''' + table(fleet, card) + h33(fleet) + links_and_protocol()
     pages = {'index.html': layout('Research overview', overview),
