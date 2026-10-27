@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Unique submission artifact · GEMS30</title><meta name="description" unique-artifact="1"><link rel="stylesheet" href="docs/assets/research.css"></head><body>
+<a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="nav-wrap"><a class="brand" href="../index.html"><span class="brand-mark">G30</span> GEMS research</a><nav aria-label="Primary"><a href="../index.html">Overview</a><a href="../priority-executive-summary.html">Nine sites</a><a href="../csr-discontinuity-review.html">Research</a><a href="../executive-summary.html">Submission guide</a></nav></div></header><main id="main"><section class="intro"><div><p class="eyebrow">GEMS30 · unique submission artifact · 27 Oct 2026</p><h1>Generated submission TIF: download and audit</h1><div class="meta"><span class="pill ok">OK TO DOWNLOAD</span><span class="pill failed">NOT OK TO SUBMIT (research artifact)</span><span class="pill caution">NO SLOT SELECTED</span></div></div></section>
+
+<section class="section"><h2>File to download</h2><p>Single-band float32 GeoTIFF, exact competition grid (EPSG:32611, 3730×3292, 100 m, transform and CRS matching <code>data/raw/sample_submission.tif</code>), finite values in [0, 1] inside the footprint, NaN outside. 20,000 dots: all 6,649 lattice-uncovered cells plus 13,351 dots outside the stopped CTD-1/FC-1 neighbourhoods.</p><div class="actions"><a class="button" href="downloads/gems30-unique-uncovered-cells-20k-20261027T233516Z.tif" download>Download submission TIF</a><a class="button secondary" href="downloads/gems30-unique-uncovered-cells-20k-20261027T233516Z.json">Download provenance sidecar (JSON)</a><a class="button secondary" href="research/2026-10-27-unique-submission/run-card.json">Open run card</a><a class="button secondary" href="research/2026-10-27-unique-submission/holdout-report.json">Open holdout report</a></div></section>
+
+<section class="section"><h2>Why it is unique</h2><p>Numerically novel vs all 29 registered rasters (13GEMSDOE lattice witness, CTD-1, FC-1, and 26 GEMSDOE fleet archive rasters): maximum dot overlap 66.76% within 3 px of the lattice (stop is &gt; 70%), 1.85% vs CTD-1, 0.35% vs FC-1, maximum |Spearman| 0.0078 (stop is &gt; 0.90). Not an exact duplicate of any previous submission from GEMSDOE24/25/27/28/30/31/32/33/36. Registry inventory is not attested complete, so this is a numerical novelty check, not submission approval.</p></section>
+
+<section class="section"><h2>Format validation (12/12 passed)</h2><table><caption><code>python scripts/validate_submission.py</code> against <code>data/raw/sample_submission.tif</code></caption><thead><tr><th scope="col">Check</th><th scope="col">Result</th></tr></thead><tbody>
+<tr><td>SHA-256</td><td>286aced318f03e32c03886d086ec36115d36dab390100e377592843198f4a10f</td></tr>
+<tr><td>Single band, float32</td><td>Passed</td></tr>
+<tr><td>CRS EPSG:32611, shape 3730×3292, transform match</td><td>Passed</td></tr>
+<tr><td>100 m north-up grid</td><td>Passed</td></tr>
+<tr><td>Finite, in [0, 1] inside footprint</td><td>Passed (min 0.0, max 1.0, 5,167,373 valid pixels)</td></tr>
+<tr><td>NaN outside footprint</td><td>Passed (7,111,787 cells)</td></tr>
+</tbody></table></section>
+
+<section class="section"><h2>Holdout (catalogue proxy — NOT an organizer score)</h2><table><caption><code>component-holdout-v3-blockstats-20261025</code>, alpha 0.2 / beta 0.8, 300 m triangular kernel</caption><thead><tr><th scope="col">Arm</th><th scope="col">HOLDOUT-DTI</th><th scope="col">95% CI</th></tr></thead><tbody>
+<tr><td>Unique raster (20,000 dots)</td><td>0.030752</td><td>[0.027582, 0.034455]</td></tr>
+<tr><td>Count-matched random-dots control</td><td>0.030371</td><td>[0.028689, 0.031941]</td></tr>
+<tr><td>Paired difference</td><td>+0.000381</td><td>[-0.002989, +0.004218] — crosses zero</td></tr>
+<tr><td>Leakage canary (AUC)</td><td>0.4998</td><td>&le; 0.90: no leakage</td></tr>
+</tbody></table><p>No holdout skill above random placement; CI excludes no improvement. Not a leaderboard forecast.</p></section>
+
+<section class="section stop-notice"><div class="release-heading"><span class="pill failed">NOT OK TO SUBMIT</span></div><h2>Is it OK to download and submit?</h2><ul class="spaced">
+<li><strong>Download:</strong> YES — button above; SHA-256 pinned; format-valid.</li>
+<li><strong>Submit to DrivenData as a competitive entry:</strong> NO. The holdout shows no skill above random dots, the registry inventory is incomplete, and the lattice duplicate-stop is active (no competition slot selected or approved). Do not upload this raster to the organizer portal.</li>
+</ul></section>
+
+<p class="fine">See ../executive-summary.html for how to submit, the nine-site summary, and authoritative links. GEMS30 is research, not a selector.</p></main><footer><div><strong>GEMS30 · research, not a selector</strong><p>Static evidence snapshot · 27 Oct 2026.</p></div></footer></body></html>

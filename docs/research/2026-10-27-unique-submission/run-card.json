@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "run_id": "gems30-unique-uncovered-cells-20261027",
+  "created_utc": "2026-10-27T23:35:17+00:00",
+  "lane": "unique-sparse-research-raster (2026-10-27 session)",
+  "hypothesis": "A unique submission raster can be built under the current 13GEMSDOE lattice duplicate-stop by placing dots only where the lattice has no cover: all 6,649 valid cells farther than 3 px from any lattice dot, plus 13,351 dots inside the lattice neighbourhood but outside the stopped CTD-1/FC-1 3 px neighbourhoods (20,000 dots total; 66.76% within 3 px of lattice dots, below the 70% stop). On the catalogue-proxy holdout it should show distance-weighted Tversky skill above a count-matched random-dots control.",
+  "mechanism": "Sparse binary dots (value 1.0) on geometrically selected cells, 0.0 elsewhere inside the footprint, NaN outside; no catalogue-derived features, no labels used in placement, no model fitting. The dot locations are the entire signal; the metric rewards dots landing within 300 m of hidden new-fault pixels and penalises dots near mapped faults.",
+  "named_non_fault_process": "Erosional scarps, lava-flow fronts, lithologic boundaries and survey/flight-line artifacts can produce line-like or clustered geophysical/topographic evidence that a dot-based raster would credit even though no concealed fault exists.",
+  "lane_assignment": "single assigned lane: this session's unique-raster lane; registry constraint resolved numerically (not by a complete inventory attestation)",
+  "new_holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "catalogue_proxy": "docs/external/derived_gdr_qfaults_v2_100m_u8.tif (INGENIOUS Qfaults v2 raster, 59,065 catalogue pixels)",
+    "truth_stand_in": "hidden whole catalogue components (component holdout), not organizer labels",
+    "withheld_positives": 59065,
+    "value": 0.03075207564586017,
+    "ci95": [0.027582036340911366, 0.03445472356071957],
+    "tp_weight": 1580.810263254422,
+    "fp_weight": 19184.159604780252,
+    "control": {
+      "label": "HOLDOUT-DTI count-matched random dots (20,000, seed 777)",
+      "value": 0.030370724439177304,
+      "ci95": [0.028689038775161487, 0.03194087739660214],
+      "tp_weight": 1562.5090677886194,
+      "fp_weight": 19416.83846815517
+    },
+    "paired_difference": {
+      "value": 0.00038135120668286726,
+      "ci95": [-0.0029887765411569112, 0.00421812801468442],
+      "interpretation": "CI crosses zero: no holdout evidence of skill above count-matched random placement"
+    },
+    "leakage_canary_auc": 0.49983779616011614,
+    "scope": "catalogue-proxy holdout, NOT an organizer score and NOT a leaderboard forecast"
+  },
+  "correlation_overlap_vs_registry": {
+    "registry": "docs/research/2026-10-27-unique-submission/registry.json (29 rasters: 13GEMSDOE lattice witness, CTD-1, FC-1, 26 GEMSDOE fleet archive rasters; complete=false, inventory not attested)",
+    "surface_stage": { "max_abs_spearman": 0.007781927395324415, "threshold": 0.90, "pass": true, "decision": "blocked-incomplete-evidence" },
+    "dots_stage": {
+      "candidate_dots": 20000,
+      "max_fraction_within_3px": 0.66755,
+      "argmax_reference": "registry-extra/13gems-lattice-s5.tif",
+      "ctd1_fraction": 0.0185,
+      "fc1_fraction": 0.0035,
+      "threshold": 0.70,
+      "pass": true,
+      "decision": "blocked-incomplete-evidence"
+    },
+    "note": "Numerically novel vs every registered raster (all overlaps < 70%, all |rho| < 0.90), including the lattice witness whose provable bound stops every budget >= 22,164 dots at 84.92%. Certification is blocked only because the registry inventory is not attested complete; unknown is not approved."
+  },
+  "raster_sha256": "286aced318f03e32c03886d086ec36115d36dab390100e377592843198f4a10f",
+  "raster_path": "docs/downloads/gems30-unique-uncovered-cells-20k-20261027T233516Z.tif",
+  "validator_output": {
+    "source": "scripts/validate_submission.py --template data/raw/sample_submission.tif",
+    "passed": true,
+    "checks_passed": 12,
+    "checks_total": 12,
+    "key_checks": {
+      "float32": true,
+      "epsg_EPSG_32611": true,
+      "shape_matches_template": "3730x3292 == 3730x3292",
+      "transform_matches_template": true,
+      "100m_north_up_grid": true,
+      "finite_and_in_range_inside_footprint": "min=0.0 max=1.0 valid_pixels=5167373",
+      "null_outside_template_footprint": "7,111,787 NaN cells",
+      "whole_raster_finite_range_diagnostic_advisory": "advisory only: NaN outside footprint is the published GEMS convention"
+    }
+  },
+  "submission_name": "gems30-unique-uncovered-cells-20261027T233516Z",
+  "note": "Unique sparse research raster: 20,000 dots on lattice-uncovered cells; format-valid, not a competitive or approved submission",
+  "note_length_chars": 125,
+  "download_url": "https://buffedlizard55-lab.github.io/GEMSDOE30/docs/downloads/gems30-unique-uncovered-cells-20k-20261027T233516Z.tif",
+  "ok_to_download": true,
+  "ok_to_submit": false,
+  "submission_approved": false,
+  "slot_selected": false,
+  "verdict": "negative",
+  "experiments_run": 1,
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200,
+  "decision": "NEGATIVE: format-valid and numerically unique vs the registered fleet, but the holdout shows no skill above count-matched random dots (paired CI crosses zero) and the registry inventory is incomplete, so no competition slot is selected or approved. Do not upload to DrivenData.",
+  "limitations": [
+    "Owner-mirrored template/labels/lattice are not organizer-authenticated (docs/research/mirror-pins.json, lattice-pin.json).",
+    "Registry inventory is not complete, so novelty cannot be certified; a full selector-grade novelty check requires the complete current registry.",
+    "Holdout is a catalogue proxy (hidden catalogue components as stand-in truth), biased toward catalogue-like faults; it cannot measure the expert-new-fault hit rate that drives leaderboard score.",
+    "The lattice witness provably stops every raster with >= 22,164 distinct dots (>= 84.92% within 3 px); a competitive H33-class raster (~37,654 dots) cannot be unique under this witness, so no competitive unique submission can be authorized in this lane.",
+    "DrivenData terms restrict automated access; organizer scores are owner-reported/unverified unless copied from a submission-page receipt."
+  ]
+}
