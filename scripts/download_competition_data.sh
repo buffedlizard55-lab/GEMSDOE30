@@ -74,7 +74,7 @@ if [[ "${missing}" -eq 1 && "${CHECK_ONLY}" -eq 0 ]]; then
     echo "[restore] Missing raw competition rasters in ${DATA_DIR}; restoring SHA-256-pinned owner mirrors via gh api..."
     echo "[note] Restored files are hash-verified owner mirrors, NOT organizer-authenticated DrivenData downloads."
     "${PYTHON_BIN}" "${ROOT_DIR}/scripts/restore_public_mirrors.py" \
-      --dest "${DATA_DIR}" \
+      --output-dir "${DATA_DIR}" \
       --ids training_features labels sample_submission
   fi
 fi
