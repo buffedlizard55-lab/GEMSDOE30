@@ -1,0 +1,97 @@
+{
+  "status": "passed",
+  "no_nan_inside_footprint": true,
+  "no_nan_anywhere": true,
+  "values_in_0_1_inside_footprint": true,
+  "values_in_0_1_whole_array": true,
+  "min_whole_array": 0.0,
+  "max_whole_array": 1.0,
+  "crs_match": true,
+  "shape_match": true,
+  "transform_match": true,
+  "single_float32_band": true,
+  "outside_footprint_value": 0.0,
+  "positive_catalogue_pixels": 0,
+  "dots_within_2px_of_catalogue": 0,
+  "emitted_dots": 44090,
+  "min_interdot_nn_px": 2.8284271247461903,
+  "p10_interdot_nn_px": 3.0,
+  "median_interdot_nn_px": 4.123105625617661,
+  "catalogue_distance_quantiles_px": {
+    "p10": 3.605551275463989,
+    "p25": 4.47213595499958,
+    "p50": 9.486832980505138,
+    "p75": 19.924858845171276,
+    "p90": 38.603107901279365,
+    "frac_gt_5px": 0.6950555681560444,
+    "frac_gt_15px": 0.3389657518711726,
+    "frac_gt_50px": 0.06241778180993422
+  },
+  "organizer_acceptance_confirmed": false,
+  "submission_report": {
+    "path": "/home/user/GEMSDOE30/runs/pool1/gems30-POOL1-44090-20261027-fabc56fb91db-zeros.tif",
+    "passed": true,
+    "checks": [
+      {
+        "name": "template_single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "float32",
+        "passed": true,
+        "detail": "dtypes=('float32',)"
+      },
+      {
+        "name": "epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "template_epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "shape_matches_template",
+        "passed": true,
+        "detail": "output=(3730, 3292) template=(3730, 3292)"
+      },
+      {
+        "name": "transform_matches_template",
+        "passed": true,
+        "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "100m_north_up_grid",
+        "passed": true,
+        "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "finite_and_in_range_inside_footprint",
+        "passed": true,
+        "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+      },
+      {
+        "name": "finite_in_range_outside_footprint_diagnostic",
+        "passed": true,
+        "detail": "outside_pixels=7111787; finite in-range values required for the nonstandard whole-array diagnostic (finite=7111787)"
+      },
+      {
+        "name": "whole_raster_finite_range_diagnostic",
+        "passed": true,
+        "detail": "all_pixels=12279160 finite and in [0, 1]"
+      },
+      {
+        "name": "template_readable",
+        "passed": true,
+        "detail": "shape=(3730, 3292)"
+      }
+    ]
+  }
+}

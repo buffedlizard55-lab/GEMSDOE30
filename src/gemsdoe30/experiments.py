@@ -168,6 +168,20 @@ def contract(card: dict) -> dict:
             "transform_version": TRANSFORM_VERSION,
             "label": "CSR-1",
         }
+    if name == "pool1":
+        from .csr_discontinuity import CSR_ALL_DERIVED_NAMES, GUARD_PX, SUPPORT_PX, TRANSFORM_VERSION
+        return {
+            "id": name,
+            "candidate": "pool_dispersed",
+            "arms": ("msdb_edge", "pool_dense_edge", "pool_dispersed"),
+            "required_positive_deltas": ("msdb_edge",),
+            "features": CORE_FEATURES + MSDB_FEATURES + CSR_ALL_DERIVED_NAMES + LIDAR_FEATURES,
+            "support_px": SUPPORT_PX,
+            "guard_px": GUARD_PX,
+            "transform_path": "src/gemsdoe30/csr_discontinuity.py",
+            "transform_version": TRANSFORM_VERSION,
+            "label": "POOL-1",
+        }
     raise ValueError(f"unknown research experiment contract: {name!r}")
 
 

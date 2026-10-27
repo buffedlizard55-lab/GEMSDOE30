@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "lane": "POOL-1",
+  "experiment_spec": "pool1",
+  "frozen_utc": "2026-10-27T17:40:00Z",
+  "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+  "registry_path": "docs/research/2026-10-27-pool/registry.json",
+  "registry_sha256": "5b6f77da636cd964a6a498cebb1cbd283f956e71cdf413529402bac5c078e9a5",
+  "registry_aligned_rasters": 394,
+  "registry_exclusions": 2,
+  "registry_calibration_exclusions": 6,
+  "guard_px": 17,
+  "support_px": 16,
+  "dot_budget": 44090,
+  "off_catalogue_min_distance_px": 2.0,
+  "min_interdot_sq_dist_exclusive": 6,
+  "ridge_concentration_gamma": 1.25,
+  "primary_seed": 4201,
+  "confirmation_seed": 4219,
+  "bootstrap_seed": 4231,
+  "bootstrap_replicates": 2000,
+  "max_experiments": 3,
+  "max_wall_seconds": 7200,
+  "arms": [
+    "msdb_edge",
+    "pool_dense_edge",
+    "pool_dispersed"
+  ],
+  "candidate_arm": "pool_dispersed",
+  "required_positive_deltas": [
+    "msdb_edge"
+  ],
+  "pool_feature_columns": "MSDB_RAW_KEEP_INDICES (13 raw) + MSDB18 (stack 19-36) + CSR27 (stack 37-63) + LIDAR17 (stack 64-80) = 75",
+  "msdb_feature_columns": "MSDB_RAW_KEEP_INDICES (13 raw) + MSDB18 (stack 19-36) = 31",
+  "canary_max_symmetric_auc": 0.9,
+  "novelty_max_spearman": 0.9,
+  "novelty_max_dot_overlap_3px": 0.7
+}

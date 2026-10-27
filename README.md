@@ -1,6 +1,20 @@
 # GEMSDOE30 — DOE GEMS Concealed Fault Discovery & Automated Submission Lab
 
-## Current decision — 2026-10-26 CSR-1: **OK TO DOWNLOAD: YES · OK TO SUBMIT: NO (DO NOT SPEND WEEKLY SLOT)**
+## Current decision — 2026-10-27 POOL-1: **MECHANISM CONFIRMED · NO NEW TIFF · OK TO SUBMIT: NO (DUPLICATE-STOP)**
+
+**Maximize P(Win):** the first lane ever to beat our standing best (`msdb_edge`) on the shared evaluator — confirmed on two seeds — produced dots that collide with our own MSDB-family rasters, so the artifact was stopped and the slot protected. **Own the Outcome:** publish the confirmed mechanism, the exact breach numbers, and the next-lane design; never perturb a stopped raster into a "unique" file.
+
+- **New TIFF: NONE PUBLISHED (duplicate-stop).** The quarantined production raster `gems30-POOL1-44090-20261027-fabc56fb91db` (44,090 dots, sha256 `1d9cab5d76f885f05209677c16173bc17a32df7d521639d3291fb8c4089344e8`) lives only in ignored `runs/pool1/`. It passes 12/12 strict format checks (all-finite `[0,1]`, immune to the portal `"Predicted values must be in range [0, 1]"` rejection) but **88.74%** of its dots lie within 3 px of `FFL1-fusion_edge` (75.81% vs published `MSDB1-edge`, 71.08% vs published `CSR1`), breaching the frozen 70% stop across the fresh **394-raster** 2026-10-27 registry. Surface novelty passed (max ρ 0.1366).
+- **HOLDOUT-DTI (`component-holdout-v3-blockstats-20261025`, 60,988 withheld positives, 17 px whole-component guard, 371 blocks, 2,000 paired replicates):** E1 (seed 4201) `pool_dispersed` **0.186699 [0.173113, 0.200171]** vs `msdb_edge` 0.169468 → **+0.017231 [+0.010515, +0.023980]**; E2 confirmation (seed 4219) **0.187694** vs 0.174247 → **+0.013446 [+0.006993, +0.019757]** (4/4 folds both seeds; canaries 0/324 alarms, max AUC 0.6635). Previous repo best on this evaluator: 0.170462 (MSDB-1v2). This is catalogue-recovery evidence, **not** a leaderboard score.
+- **Nine-site answer (GEMSDOE24/25/27/28/30/31/32/33/36, HEAD-verified 2026-10-27):** no unsubmitted, unique, gate-passing file exists on any site. The historical "leaders" are one h19-5 emission family (25=30 and 28=31 identical; H33-B2 0.2778 owner-reported = D2.8 minus exactly the ≤2 px catalogue-halo dots). CSR-1 remains this repo's latest downloadable research file — still unique today (67.70% max vs 380 unique-SHA rasters) and still **DO NOT SUBMIT** (trails `msdb_edge`). Live public leaderboard 2026-10-27: **#1 = 0.4544**.
+- **Machine verdict:** `verdict="negative"`, `download_ok=false`, `ok_to_submit=false`, `slot_selected=false`; ORGANIZER-CONFIRMED score: **none**; experiments **3/3** (1,396 s). Verify with zero human inspection: `.venv/bin/python scripts/verify_pool_run.py` (exit 0); `--require-promote` exits 2.
+- **Next session (fresh budget, new preregistration):** POOL-2 — same confirmed 75-feature pooled model with a *pre-declared* novelty-constrained emitter (spacing ≥3.46 px + 3 px exclusion around the three breaching dot sets), cost measured in-fold. See [`docs/research/2026-10-27-pool/review.md`](docs/research/2026-10-27-pool/review.md) §7. Do not rescue the POOL-1 raster.
+
+[POOL-1 executive summary & nine-site table](pool1-executive-summary.html) · [Full review](docs/research/2026-10-27-pool/review.md) · [Nine-site summary (Markdown)](docs/research/2026-10-27-pool/nine-site-executive-summary.md) · [JSON run card](docs/research/2026-10-27-pool/run-card.json) · [Preregistration](docs/research/2026-10-27-pool/preregistration.md). The complete [owner prompt](#current-owner-prompt) remains embedded verbatim below and is reread every session.
+
+---
+
+## Archived decision — 2026-10-26 CSR-1: **OK TO DOWNLOAD: YES · OK TO SUBMIT: NO (DO NOT SPEND WEEKLY SLOT)**
 
 **Maximize P(Win):** keep every weekly DrivenData slot (`3/week` cap) for a candidate whose paired 95% block-bootstrap CI beats our strongest comparable full-stack baseline (`msdb_edge`), while preserving `CSR-1`'s genuine **+0.02300 SE Walker Lane breakthrough** and **59.86% dispersed-EDGE novelty solution** for `CSR-2`. **Own the Outcome:** ship a 100% machine-validated, all-finite `[0, 1]` single-band GeoTIFF with zero human inspection, audited across all `357` aligned 9-site rasters (`+1` formally classified malformed exclusion).
 

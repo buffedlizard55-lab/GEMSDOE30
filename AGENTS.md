@@ -11,7 +11,10 @@
    organizer slot selection. Unknown is never approved. No uploader/override.
 6. Keep large data/caches and quarantined predictions ignored; no credentials.
 
-Current continuation: GDX-1 is negative; 3/3 experiments exhausted. Never remove its
-`started.json` or `resumed.json`. Use `scripts/verify_geothermal_chemistry_run.py`;
-exit 0 verifies the negative finding, while `--require-promote` must exit 2.
-Archived novelty receipts remain unchanged; live additions are blocking UNKNOWN.
+Current continuation (2026-10-27): POOL-1's pooled MSDB+CSR+LiDAR mechanism beat
+`msdb_edge` on HOLDOUT-DTI on two seeds, but its raster is duplicate-stopped
+(88.74% vs FFL1); 3/3 experiments exhausted, no TIFF published. Never remove
+`docs/research/2026-10-27-pool/started.json` or rescue its quarantined raster.
+Use `scripts/verify_pool_run.py`; exit 0 verifies the negative artifact decision,
+while `--require-promote` must exit 2. Next lane = POOL-2 (review.md §7) under a
+fresh preregistration/budget. Archived novelty receipts remain unchanged.

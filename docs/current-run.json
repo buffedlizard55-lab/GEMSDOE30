@@ -16,6 +16,12 @@
       "run_card": "docs/research/2026-10-26-qpc/run-card.json",
       "verifier": "scripts/verify_quadrature_phase_run.py",
       "decision": "DO NOT SUBMIT (duplicate-stop at 78.915854% dot overlap; paired-CI gates failed; no QPC TIFF published)"
+    },
+    {
+      "lane": "POOL-1",
+      "run_card": "docs/research/2026-10-27-pool/run-card.json",
+      "verifier": "scripts/verify_pool_run.py",
+      "decision": "DO NOT SUBMIT (mechanism confirmed: HOLDOUT-DTI 0.186699/0.187694 vs msdb_edge on two seeds, paired CIs > 0; DUPLICATE-STOP at 88.74% dot overlap vs FFL1 across 394-raster 2026-10-27 registry; no TIFF published; experiments 3/3)"
     }
   ],
   "additional_verified_lanes": [
@@ -69,12 +75,6 @@
     }
   ],
   "previous_review": {
-    "lane": "QPC-1",
-    "run_card": "docs/research/2026-10-26-qpc/run-card.json",
-    "verifier": "scripts/verify_quadrature_phase_run.py",
-    "decision": "NEGATIVE / DO NOT SUBMIT: duplicate-stop at 78.915854% dot overlap; paired-CI gates failed; no QPC TIFF published or slot selected"
-  },
-  "latest_review": {
     "lane": "CSR-1",
     "run_card": "docs/research/2026-10-26-csr/run-card.json",
     "readiness": "docs/research/2026-10-26-csr/readiness.json",
@@ -82,6 +82,16 @@
     "report": "docs/research/2026-10-26-csr/review.md",
     "site_page": "csr-discontinuity-review.html",
     "decision": "NEGATIVE / DOWNLOAD OK, DO NOT SUBMIT: HOLDOUT-DTI 0.158162 vs core19_edge 0.144915 (+0.013247) and msdb_edge 0.169986 (-0.011825 pooled; Fold 3 SE Walker Lane +0.02300); 324/324 canaries <= 0.6629; 357-raster two-stage novelty PASSED (max 67.70% <= 70%, 59.86% vs published downloads); 12/12 format checks all-finite [0,1]; no slot selected",
+    "history_preserved": true
+  },
+  "latest_review": {
+    "lane": "POOL-1",
+    "run_card": "docs/research/2026-10-27-pool/run-card.json",
+    "readiness": "docs/research/2026-10-27-pool/readiness.json",
+    "verifier": "scripts/verify_pool_run.py",
+    "report": "docs/research/2026-10-27-pool/review.md",
+    "site_page": "pool1-executive-summary.html",
+    "decision": "NEGATIVE / NO TIFF PUBLISHED, DO NOT SUBMIT: science gates passed on two seeds (E1 +0.017231 [+0.010515,+0.023980], E2 +0.013446 [+0.006993,+0.019757] vs msdb_edge; 0/324 canary alarms) but final dots breached the 70% duplicate-stop (88.74% FFL1 / 75.81% MSDB1 / 71.08% CSR1); surface novelty passed (rho 0.1366); format 12/12 on quarantined raster; no slot selected",
     "history_preserved": true
   }
 }
