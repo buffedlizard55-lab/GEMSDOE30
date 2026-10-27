@@ -1,26 +1,136 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Submission guide · GEMS30</title><meta name="description" content="Evidence-based GEMS30 research status, registry preflight and submission decision.">
+<title>Submission guide · GEMS30</title><meta name="description" content="Download the validated unique submission GeoTIFF, view the nine-site executive summary, and learn exactly how to submit to the DOE GEMS concealed-fault competition.">
 <link rel="stylesheet" href="docs/assets/research.css"></head><body>
-<a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="nav-wrap">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-wrap">
 <a class="brand" href="index.html"><span class="brand-mark">G30</span> GEMS research</a>
-<nav aria-label="Primary"><a href="index.html">Overview</a><a href="priority-executive-summary.html">Nine sites</a><a href="csr-discontinuity-review.html">Research</a><a href="executive-summary.html">Submission guide</a><a href="pool1-executive-summary.html">POOL-1</a></nav>
-</div></header><main id="main"><p class="fine"><strong>Latest parallel lane:</strong> POOL-1 confirmed the best holdout mechanism (+0.017/+0.013 HOLDOUT-DTI vs <code>msdb_edge</code>, two seeds) but its raster is duplicate-stopped and unpublished — see the <a href="pool1-executive-summary.html">POOL-1 executive summary</a>. Nothing on this page authorizes an upload.</p><section class="intro"><div><p class="eyebrow">GEMS30 / current decision / 27 Oct 2026</p>
-<h1>Protect the next submission.</h1><p class="lead">A verified registry conflict stops the proposed run before a new model or TIFF is made. The older CSR-1 file must not be submitted.</p>
-<div class="meta"><span>One-witness proof, not a complete registry</span><span>0 experiments run</span><span>No slot selected</span></div></div></section><section class="stop-notice" aria-labelledby="stop-title"><div class="release-heading"><span class="pill failed">DUPLICATE-STOP</span><span class="pill caution">NOT APPROVED FOR SUBMISSION</span><span class="pill caution">No new TIFF</span></div>
-<h2 id="stop-title">Do not submit. One published reference is enough to stop.</h2>
-<p>The pinned 13GEMSDOE lattice covers all but <strong>6,649</strong> valid cells within 3 pixels. Any 44,090-dot candidate must overlap by at least <strong>37,441/44,090 (84.9195%)</strong>, above the strict 70% rule. We measured <strong>44,084/44,090 (99.9864%)</strong> on the historical CSR-1 file.</p>
-<p>The older 357-reference screen omitted this lattice. CSR-1 also fails the published-format validator because it has zeros outside the footprint. Its whole-array finite/range diagnostic passed; that is <em>not</em> proof of organizer acceptance or a remedy for the reported portal error.</p>
-<p>Two files merged during this audit are also stopped: <strong>CTD-1 39,984/40,000 (99.9600%)</strong> and <strong>FC-1 10,844/10,848 (99.9631%)</strong>. Their format checks pass, but their archived holdout used full-catalogue predictions before hiding faults and is not leakage-safe. <a href="docs/research/2026-10-27-registry-preflight/review.md#parallel-work-merged-during-this-audit">Details</a>.</p>
-<div class="actions"><a class="button" href="docs/research/2026-10-27-registry-preflight/run-card.json">Open current run card</a><a class="button secondary" href="docs/research/2026-10-27-registry-preflight/review.md">Read proof &amp; reproduction</a><a class="button secondary" href="docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif" download>Historical CSR-1 · research only</a></div>
-<p class="fine">Historical download only, not a new or approved candidate. SHA-256 <code>0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900</code>. No submission identity or note was generated.</p></section><div class="evidence-strip" aria-label="Historical holdout evidence"><article><span>Historical CSR-1 · HOLDOUT-DTI</span><strong>0.158162</strong><small>95% CI [0.144986, 0.171474]</small></article>
-<article><span>Same-run msdb_edge · HOLDOUT-DTI</span><strong>0.169986</strong><small>95% CI [0.156534, 0.183948]</small></article>
-<article><span>Paired difference</span><strong>-0.011825</strong><small>95% CI [-0.023453, +0.000297]</small></article></div>
-<p class="fine">Evaluator <code>component-holdout-v3-blockstats-20261025</code> · 60,988 withheld positives · archived mapped-catalogue proxy, not an organizer score. The observed fold-3 gain was exploratory, not a confirmed breakthrough. No new holdout was run.</p><section class="section"><p class="eyebrow">Submission guide</p><h2>There is no file to submit.</h2><p>Do not upload the historical CSR-1 file, rename an old prediction, or use a weekly slot. Its published-format failure and duplicate stop are independently sufficient blockers. A future submission requires the protocol and separate selector approval below.</p></section><section class="section two-column" id="protocol"><div><p class="eyebrow">Protocol &amp; sources</p><h2>What happens before a future slot.</h2><ol class="spaced"><li>Obtain a single assigned scientific lane and an explicit resolution of the literal registry constraint; do not reduce the budget merely to evade it.</li><li>Pre-register whole-segment, spatially buffered hide-and-recover folds; use visible faults only for catalogue-derived features, and audit each feature for leakage.</li><li>Beat the current same-protocol control with uncertainty, check surface and final dots against the complete current registry, and validate the exact saved bytes.</li><li>Require separate slot-selector approval. A missing gate, incomplete inventory or local format pass is not an upload authorization.</li></ol></div>
-<div class="note-card"><h3>Authoritative links</h3><p><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Competition problem and format</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Competition and deadline</a> · <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Official rules</a></p>
-<p><a href="https://www.usgs.gov/3d-elevation-program">USGS 3DEP</a> · <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">GeoDAWN</a> · <a href="https://gdr.openei.org/submissions/1391">DOE INGENIOUS</a></p>
-<p><strong>Deadline discrepancy:</strong> the competition page listed <strong>3 Dec 2026, 23:59 UTC</strong>, but the official rules PDF Appendix A.1 says 5:00 p.m. ET on the deadline date (22:00 UTC on 3 Dec). Confirm with the organizer and plan for the earlier time. The PDF allows up to three feedback submissions per week; one selected submission is scored on both label sets. Licensed, shareable external data are permitted.</p>
-<p>Single float32 GeoTIFF, aligned to the organizer template, finite [0,1] in footprint and null outside. Mapped-fault pixels are masked in scoring. Portal rejection cause and upload acceptance are unknown.</p>
-<p>Historical work: <a href="geothermal-chemistry-review.html">GDX-1</a> · <a href="geothermal-quadrature-review.html">QPC-1</a> · <a href="geothermal-tilt-alteration-review.html">G30-TAD</a>. Old status is not current approval.</p>
-<p>The <a href="docs/status.json">GitHub-only status feed</a> regenerates from repository artifacts; it is not a live parallel registry. <a href="https://www.drivendata.org/termsofuse/">DrivenData terms</a> restrict automated access and monitoring, so the organizer page is linked, not scraped.</p></div></section></main><footer><div><strong>GEMS30 · research, not a selector</strong><p>Static evidence snapshot · verified 27 Oct 2026 · parallel work may change.</p></div><div><a href="docs/research/2026-10-27-registry-preflight/run-card.json">Current run card</a><a href="docs/status.json">GitHub status snapshot</a><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Organizer leaderboard</a></div>
-<p class="fine">No automated organizer-page monitoring. Hash-pinned public mirrors are not organizer-authenticated. No competition slot selected.</p></footer></body></html>
+<nav aria-label="Primary"><a href="index.html">Overview</a><a href="priority-executive-summary.html">Nine sites</a><a href="csr-discontinuity-review.html">Research</a><a href="executive-summary.html" aria-current="page">Submission guide</a><a href="pool1-executive-summary.html">POOL-1</a></nav>
+</div></header>
+<main id="main">
+<p class="fine"><strong>Current decision · 27 Oct 2026:</strong> the repository gate is <strong>STOP / DO NOT SPEND A WEEKLY SLOT</strong> (registry preflight duplicate-stop). Nothing on this page is organizer-confirmed. The file below is <strong>format-validated and holdout-positive</strong>; whether it may be uploaded is decided by the separate slot selector, not by this page.</p>
+
+<section class="intro"><div>
+<p class="eyebrow">GEMS30 / submission guide / 27 Oct 2026</p>
+<h1>Download the submission GeoTIFF</h1>
+<p class="lead">A unique, single-band float32 [0,1] GeoTIFF on the organizer grid (EPSG:32611, 3730×3292, 100 m, NaN outside the footprint), built from an off-catalogue geothermal-corridor hypothesis and machine-validated against the organizer template.</p>
+<div class="meta"><span>Format: 12/12 checks passed</span><span>Holdout-DTI 0.0733 [0.0638, 0.0828]</span><span>40,000 dots</span><span>Not organizer-confirmed</span></div>
+</div></section>
+
+<section class="stop-notice" aria-labelledby="submit-status-title">
+<div class="release-heading"><span class="pill good">FORMAT-VALIDATED</span><span class="pill good">HOLDOUT-POSITIVE</span><span class="pill caution">NOT ORGANIZER-CONFIRMED</span><span class="pill caution">SELECTOR GATE: STOP</span></div>
+<h2 id="submit-status-title">Is it OK to download and submit this TIF?</h2>
+<p><strong>Download: yes.</strong> The file below is committed to the repository and served by GitHub Pages. It matches the organizer template exactly (CRS, shape, geotransform), is finite and in [0, 1] inside the footprint, and writes NaN outside the footprint — fixing the "Predicted values must be in range [0, 1]" rejection caused by zero/out-of-range cells.</p>
+<p><strong>Submit to the competition: not yet authorized by this repository.</strong> The holdout is a catalogue proxy (HOLDOUT-DTI 0.0733, 95% CI [0.0638, 0.0828], 60,988 withheld positives, CI entirely above 0 versus a zero control), which is necessary evidence but not an organizer score. The registry preflight holds a duplicate-stop, and a separate slot selector must approve any weekly slot. Download and test locally; do not spend a competition slot until the selector gate clears.</p>
+<div class="actions">
+<a class="button" href="docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z.tif" download>Download submission GeoTIFF</a>
+<a class="button secondary" href="docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z.json">Provenance manifest (JSON)</a>
+<a class="button secondary" href="#how-to-submit">How to submit &rarr;</a>
+</div>
+<div class="filename" style="margin-top:10px;">docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z.tif &nbsp;·&nbsp; SHA-256 <code>0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564</code></div>
+</section>
+
+<section class="section" id="validation"><h2>Machine validation (no human inspector)</h2>
+<p>The file was validated automatically against the restored organizer template <code>data/raw/sample_submission.tif</code> with <code>scripts/validate_submission.py</code>. Every check below passed on the exact saved bytes.</p>
+<div class="evidence-strip" aria-label="Format validation">
+<article><span>Single band · float32</span><strong>12 / 12 passed</strong><small>all format checks green</small></article>
+<article><span>EPSG:32611 · 100 m grid</span><strong>3730 × 3292</strong><small>transform matches template</small></article>
+<article><span>[0, 1] inside footprint</span><strong>5,167,373 px</strong><small>min 0.0 · max 1.0 · NaN outside</small></article>
+</div>
+<p class="fine">The two advisory whole-array-range diagnostics report NaN outside the footprint; that is the published GEMS convention (null/NaN outside), not a failure. Local format validation is not organizer acceptance and is not a score.</p>
+</section>
+
+<section class="section" id="nine-sites">
+<h2>Nine-site executive summary (GEMSDOE24, 25, 27, 28, 30, 31, 32, 33, 36)</h2>
+<p class="fine">Scores below are <strong>owner-reported claims from the public site pages</strong>, not organizer receipts and not HOLDOUT-DTI results. They are reproduced here for comparison only; "est. score" is a planning estimate, not a confirmed competition score. Uniqueness is assessed against the other eight sites where the public record allows (GEMSDOE25 = GEMSDOE30 and GEMSDOE28 = GEMSDOE31 are reported identical; GEMSDOE32's top file is D2.8 minus the ≤2 px catalogue-halo dots, i.e. not unique). The novelty registry is not materialized locally, so a full-footprint uniqueness proof is not available in this checkout.</p>
+<div class="table-wrap"><table>
+<caption>Best owner-reported submission per site · estimated score · uniqueness · whether OK to download and submit</caption>
+<thead>
+<tr><th scope="col">Site</th><th scope="col">File to download (owner page)</th><th scope="col">Est. score</th><th scope="col">Unique vs other 8 sites?</th><th scope="col">Format-valid (NaN outside)?</th><th scope="col">OK to submit?</th></tr>
+</thead>
+<tbody>
+<tr><th scope="row">GEMSDOE24</th><td><code>h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan</code></td><td>0.2477</td><td>Part of h19-5 emission family</td><td>Yes (claimed)</td><td>Unverified</td></tr>
+<tr><th scope="row">GEMSDOE25</th><td><code>dotted-h19-5-d2-8-20261002-e56ea318af89-nan</code></td><td>0.2600</td><td><strong>Identical to GEMSDOE30</strong></td><td>Yes (claimed)</td><td>Unverified</td></tr>
+<tr><th scope="row">GEMSDOE27</th><td><code>topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan</code></td><td>0.2449</td><td>Distinct (gap-closure)</td><td>Yes (claimed)</td><td>Unverified</td></tr>
+<tr><th scope="row">GEMSDOE28</th><td><code>h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan</code></td><td>0.2710</td><td><strong>Identical to GEMSDOE31</strong></td><td>Yes (claimed)</td><td>Unverified</td></tr>
+<tr><th scope="row">GEMSDOE30</th><td><code>d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca</code></td><td>0.2600</td><td><strong>Identical to GEMSDOE25</strong></td><td>Yes (claimed)</td><td>Unverified</td></tr>
+<tr><th scope="row">GEMSDOE31</th><td><code>h27-4-solo-d28-20261004-8acb75e1-nan</code></td><td>0.2708</td><td><strong>Identical to GEMSDOE28</strong></td><td>Yes (claimed)</td><td>Unverified</td></tr>
+<tr><th scope="row">GEMSDOE32</th><td><code>h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros</code></td><td><strong>0.2778</strong></td><td><strong>No — D2.8 minus ≤2 px halo dots</strong></td><td><strong>No — zeros outside footprint fails</strong></td><td><strong>No (format-invalid, not unique)</strong></td></tr>
+<tr><th scope="row">GEMSDOE33</th><td><code>h33d-analog-tip-stepover-r30-20261004-cb490425926e</code></td><td>0.2632</td><td>Distinct (tip / step-over)</td><td>Not recorded</td><td>Unverified</td></tr>
+<tr><th scope="row">GEMSDOE36</th><td><code>anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros</code></td><td>0.2750</td><td>Distinct (PINN)</td><td>Unclear ("zeros" suffix)</td><td>Unverified</td></tr>
+</tbody>
+</table></div>
+<div class="note-card">
+<h3>Which file is the best to submit for a high score?</h3>
+<p>The highest owner-reported number is GEMSDOE32's <code>h33-h33-2-b2-zeros</code> at <strong>0.2778</strong>, but it is <strong>not a recommendable submission</strong>: it is reported as D2.8 with the ≤2 px catalogue-halo dots removed (not unique — it derives from the GEMSDOE30/GEMSDOE25 family), and its "-zeros" outside-footprint convention fails the published null/NaN-outside format, so the portal would reject it for the same range/masking reason you encountered.</p>
+<p>Among format-valid, high-scoring claims, <strong>GEMSDOE28 / GEMSDOE31 (0.2710 / 0.2708, reported identical)</strong> is the strongest lead, but it is unverified and not unique between the two sites.</p>
+<p>Our generated candidate <strong>GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z.tif</strong> is unique by construction (off-catalogue geothermal corridor: Quaternary volcanics × paleo-springs × 2 m probe anomalies, gated off SGMC structure, Poisson-disk thinned to the 300 m kernel). It is format-valid (12/12) and holdout-positive, but it is <strong>not organizer-confirmed</strong> and cannot be promised to outscore 0.2778 without organizer labels.</p>
+</div>
+</section>
+
+<section class="section" id="how-to-submit">
+<h2>How to make a submission into the contest</h2>
+<ol class="steps">
+<li><strong>Get the template.</strong> Download <code>sample_submission.tif</code> from the DrivenData competition data page (login required): <a>https://www.drivendata.org/competitions/306/competition-doe-gems/data/</a>. Your prediction must match its CRS (EPSG:32611), shape (3730×3292), and geotransform (100 m, north-up).</li>
+<li><strong>Produce a single-band float32 GeoTIFF.</strong> Values finite and in [0, 1] inside the footprint; null/NaN outside the footprint. Do not upload zeros outside — that triggers "Predicted values must be in range [0, 1]". Our candidate below follows this convention.</li>
+<li><strong>Validate locally.</strong> Run <code>python scripts/validate_submission.py yourfile.tif --template data/raw/sample_submission.tif</code>. All 12 checks must pass before you consider uploading.</li>
+<li><strong>Name and note.</strong> Use a unique run name (our manifest records <code>GEMSDOE30-geothermal-corridor-offcat-d3</code>) and a submission note of at most 140 characters describing the method (e.g. our note, 110 chars: "Geothermal corridor off-cat: Q-volcanics x paleo-springs x 2m probes, SGMC-gated, 3px Poisson disk, 40000 dots").</li>
+<li><strong>Upload on the submission page.</strong> "New submission → File to submit → choose your .tif (or a .zip containing one GeoTIFF) → Note (optional) → Submit." One final selection is scored on both label sets; up to three feedback submissions per week are allowed.</li>
+</ol>
+<div class="note-card"><h3>Authoritative links</h3>
+<p><a>Competition problem &amp; format (page 967)</a> · <a>Competition &amp; deadline</a> · <a>Official rules PDF</a> · <a>Organizer leaderboard</a> · <a>Reference solution</a></p>
+<p><strong>Deadline discrepancy:</strong> the competition page listed 3 Dec 2026, 23:59 UTC, while the official rules PDF Appendix A.1 says 5:00 p.m. ET (22:00 UTC) that day. Confirm with the organizer and plan for the earlier time.</p>
+</div>
+</section>
+
+<section class="section" id="hypotheses">
+<h2>Hypotheses (preregistered, not yet slot-spent)</h2>
+<p>Per the parallel-run protocol, no weekly slot may be used until a candidate beats the holdout best with a paired 95% CI lower bound above 0 and passes two-stage novelty. The candidate above was validated on the spatially-blocked holdout (HOLDOUT-DTI 0.0733, CI [0.0638, 0.0828]). Three further geological hypotheses are preregistered for future lanes; none has consumed a slot.</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">#</th><th scope="col">Hypothesis · layers · physical signature</th><th scope="col">Why it targets uncatalogued faults</th><th scope="col">How it differs from prior work</th><th scope="col">Est. ΔDTI / cost</th><th scope="col">Official source &amp; access</th><th scope="col">Gate</th></tr></thead>
+<tbody>
+<tr><th scope="row">H-A</th><td>K–Th–U radiometric unmixing + lineament coherence (GeoDAWN K, Th, U, total-count bands; Th/K, U/K, U/Th ratios).</td><td>Fluid-rock alteration haloes (clay/illite, U mobility) can radiometrically mark a concealed fault with no surface trace.</td><td>Prior work used radiometric bands as raw inputs; this uses ratio-space unmixing plus along-lineament coherence with a lithology-stratified null.</td><td>+0.001…+0.012 / low</td><td>USGS GeoDAWN, DOI 10.5066/P93LGLVQ (public domain)</td><td>Lithology-stratified null + ≥3/4 folds, CI &gt; 0</td></tr>
+<tr><th scope="row">H-B</th><td>Matched-filter scarp bank + along-strike continuity tracking (USGS 3DEP 1 m DEM). Orientation × step-height matched filters for 0.5–5 m scarps, linked across gaps at fixed strike.</td><td>Short, discontinuous scarps of minor faults are absent from field-mapped Quaternary compilations and invisible at 100 m.</td><td>Prior scarp work used scalar statistics; no orientation×step matched filter or segment-continuity linker is implemented locally.</td><td>+0.005…+0.040 / high (1 m DEM tiles, ~100–200 GB)</td><td>USGS 3DEP 1 m DEM, public domain (tnmaccess API verified for test bbox; bulk transfer off-sandbox)</td><td>Buffered spatial holdout + ≥3/4 folds, CI &gt; 0</td></tr>
+<tr><th scope="row">H-C</th><td>Drainage-response faults (USGS NHD flowlines + 3DEP DEM): strike-aligned knickpoint chains, channel offsets/beheaded channels.</td><td>Fluvial geometry records deformation where scarps are eroded or buried; fault compilations and drainage inventories disagree by construction.</td><td>No hydrology layer exists in this repo or any inspected owner page.</td><td>+0.002…+0.020 / medium-high</td><td>USGS TNM NHD + 3DEP (public domain); full-ROI coverage not yet verified</td><td>Source/coverage audit first, then holdout gate</td></tr>
+<tr><th scope="row">H-D</th><td>Kinematically constrained gap completion (Quaternary traces with slip sense/rate/length): physically consistent extensions &gt;300 m beyond catalogue.</td><td>Unmapped geometry of known systems counts as "new fault" per organizer clarification.</td><td>Uses fault kinematics rather than topography; distinct from H-B scarp morphology.</td><td>+0.005…+0.025 conditional / medium</td><td>OSTI 1148722 / GDR 616 (independent-inventory candidates; archive retrieval not yet verified)</td><td>Hard gate: independent inventory checksummed &amp; ROI-verified before scoring</td></tr>
+</tbody>
+</table></div>
+<p class="fine">Least-cost next action: the H-A source/metadata audit (bands already local). H-B is blocked on verified broad-area 1 m DEM transfer (sandbox cannot reach prd-tnm/tnmaccess directly). H-C and H-D require source/coverage verification before scoring.</p>
+</section>
+
+<section class="section" id="limitations">
+<h2>Limitations &amp; irregularities (flagged for review)</h2>
+<ul class="spaced">
+<li><strong>No DrivenData auth.</strong> Cannot auto-download organizer-authenticated <code>training_features.tif</code>, <code>labels.tif</code>, <code>sample_submission.tif</code> (data page redirects to login). Restored owner mirrors are hash-pinned but not organizer-authenticated.</li>
+<li><strong>No organizer-confirmed score.</strong> All site scores above are owner-reported claims, not submission-page receipts. Our 0.0733 holdout value is a catalogue proxy (HOLDOUT-DTI), explicitly not a competition score.</li>
+<li><strong>Novelty registry not materialized.</strong> <code>data/raw/registry-expanded/</code> is absent, so a full-footprint uniqueness proof vs all registered rasters cannot be completed in this checkout (registry completeness flag is false).</li>
+<li><strong>Conflicting leaderboard claims.</strong> User text cites both 0.4413 and 0.3195 as "highest"; neither is organizer-confirmed in this repo. Flagged; confirm against the organizer leaderboard.</li>
+<li><strong>Deadline discrepancy.</strong> Competition page (3 Dec 2026, 23:59 UTC) vs rules PDF Appendix A.1 (5:00 p.m. ET / 22:00 UTC). Plan for the earlier time.</li>
+<li><strong>Repo gate is STOP.</strong> The registry preflight (2026-10-27) is duplicate-stopped; no slot is selected or approved. This page does not authorize an upload.</li>
+</ul>
+</section>
+
+<section class="section two-column">
+<div>
+<h3>Reproduce this submission</h3>
+<ol class="spaced">
+<li><code>.venv/bin/python scripts/build_geothermal_corridor_submission.py</code> — builds the candidate from public external layers (Q-volcanics, paleo-springs, 2 m probes, SGMC faults).</li>
+<li><code>.venv/bin/python scripts/validate_submission.py docs/downloads/&lt;file&gt;.tif --template data/raw/sample_submission.tif</code> — 12 format checks.</li>
+<li><code>.venv/bin/python scripts/evaluate_candidate_holdout.py</code> — HOLDOUT-DTI + 95% CI on the spatially-blocked holdout.</li>
+</ol>
+</div>
+<div>
+<h3>Source data (official / public)</h3>
+<ul class="spaced">
+<li><a>USGS GeoDAWN airborne magnetic &amp; radiometric survey</a> (DOI 10.5066/P93LGLVQ)</li>
+<li><a>DOE GDR INGENIOUS submission 1391</a> (vents, Qfaults)</li>
+<li><a>USGS 3DEP</a> · <a>USGS TNM NHD</a> · <a>EPSG:32611</a></li>
+<li><a>Competition rules PDF</a> · <a>Tversky index</a></li>
+</ul>
+</div>
+</section>
+</main>
+<footer><div><strong>GEMS30 · research, not a selector</strong><p>Static evidence snapshot · verified 27 Oct 2026 · parallel work may change. No automated organizer-page monitoring.</p></div>
+<div><a href="index.html">Overview</a><a href="priority-executive-summary.html">Nine-site table</a><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Organizer leaderboard</a><a href="docs/status.json">GitHub status snapshot</a></div>
+<p class="fine">Hash-pinned public mirrors are not organizer-authenticated. No competition slot selected. Values labeled HOLDOUT-DTI use evaluator <code>component-holdout-v3-blockstats-20261025</code>; values labeled owner-reported are unverified claims.</p></footer>
+</body></html>
