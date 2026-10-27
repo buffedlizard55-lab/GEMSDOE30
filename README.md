@@ -18,6 +18,15 @@ Their published-format checks pass, but their archived holdout used predictions
 built from the full catalogue before hiding faults; it is not a leakage-safe
 comparison. Their original generation and scoring commands now fail closed.
 
+### Validated candidate (this session, gate still STOP)
+A unique off-catalogue geothermal-corridor GeoTIFF was built and machine-validated:
+`docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z.tif`
+(SHA-256 `0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564`).
+All 12 format checks pass against the organizer template (EPSG:32611, 3730x3292,
+float32 [0,1] inside the footprint, NaN outside). Holdout-DTI 0.0733 [0.0638,
+0.0828], 60,988 withheld positives, CI entirely above zero. It is NOT organizer-
+confirmed and the DUPLICATE-STOP gate still applies — see `executive-summary.html`.
+
 The historical CSR-1 file is [available for research only](docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif)
 (SHA-256 `0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900`).
 It also **fails the published-format validator** because the outside-footprint
@@ -38,6 +47,7 @@ Confirm with the organizer and plan for the earlier time. The rules allow up to
 three feedback submissions per week and require one final selection for both rounds.
 
 [Clean overview](index.html) · [Nine-site snapshot](priority-executive-summary.html) ·
+[Repository review (2026-10-27)](docs/repository-review-2026-10-27.md) ·
 [Science and four hypotheses](csr-discontinuity-review.html) ·
 [Submission guide](executive-summary.html) ·
 [**Current JSON run card**](docs/research/2026-10-27-registry-preflight/run-card.json) ·
