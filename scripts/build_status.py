@@ -139,7 +139,9 @@ def main() -> int:
             else None,
             "organizer_acceptance_confirmed": False,
             "site_linked": (tif_name in site_html) or None,
-            "submission_recommendation": manifest.get("submission_recommendation", False),
+            # Sidecars are historical records, never a current slot selector.
+            "historical_manifest_recommendation": manifest.get("submission_recommendation"),
+            "submission_recommendation": False,
             "run_name": manifest.get("run_name"),
             "note": manifest.get("note") or manifest.get("drivendata_note"),
             "performance_status": manifest.get("performance_status", "unscored"),
@@ -420,7 +422,9 @@ def main() -> int:
                          "error": None, "decision": None, "ok_to_submit": False}
         try:
             verifier = ref.get("verifier")
-            if verifier == "scripts/verify_csr_run.py":
+            if verifier == "scripts/verify_registry_preflight.py":
+                from scripts.verify_registry_preflight import verify as verify_latest
+            elif verifier == "scripts/verify_csr_run.py":
                 from scripts.verify_csr_run import verify as verify_latest
             elif verifier == "scripts/verify_geothermal_chemistry_run.py":
                 from scripts.verify_geothermal_chemistry_run import verify as verify_latest
@@ -499,7 +503,7 @@ def main() -> int:
         },
         "current_run_pointer": selection,
         "latest_scientific_review": latest_review,
-        "current_readiness_scope": "Legacy retained research artifact; newest negative experiment is latest_scientific_review, not a slot selection",
+        "current_readiness_scope": "Archived retained research artifact only; latest_scientific_review is the current zero-experiment duplicate-stop preflight. Neither field selects a slot.",
         "current_readiness": current_card,
         "current_artifact_inspection": current_inspection,
         "current_release_decision": current_release,

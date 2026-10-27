@@ -1,0 +1,71 @@
+{
+ "generated_utc": "2026-10-27T17:29:51Z",
+ "protocol": "component-holdout-v3-blockstats-20261025; buffered-quadrant-whole-components-v1-20261025",
+ "candidate": "gems30-fc1-concealed-flank-20261027T172846Z-f182c780",
+ "candidate_path": "docs/downloads/gems30-fc1-concealed-flank-20261027T172846Z-f182c780.tif",
+ "frame": {
+  "catalogue_pixels": 60988,
+  "components": 3199,
+  "hidden_pixels": 20870,
+  "known_pixels": 40118,
+  "scored_pixels": 5127255,
+  "block_px": 32
+ },
+ "arms": {
+  "gems30-fc1-concealed-flank-20261027T172846Z-f182c780": {
+   "dots": 10848,
+   "pooled_dti": 0.004537657746121797,
+   "tp_weight": 85.59933458448191,
+   "fp_weight": 10755.457225033075,
+   "truth_pixels": 20870.0,
+   "ci95": [
+    0.0034862597737798386,
+    0.005614839348095519
+   ],
+   "withheld_positives": 20870,
+   "seconds": 2.23
+  },
+  "proximity": {
+   "dots": 40000,
+   "pooled_dti": 0.016731132056093768,
+   "tp_weight": 412.985714836126,
+   "fp_weight": 39525.356047649795,
+   "truth_pixels": 20870.0,
+   "ci95": [
+    0.01422000489338608,
+    0.01948918665442269
+   ],
+   "withheld_positives": 20870,
+   "seconds": 2.22
+  },
+  "random": {
+   "dots": 40000,
+   "pooled_dti": 0.06458242461553881,
+   "tp_weight": 1607.3785463553302,
+   "fp_weight": 39356.58247846269,
+   "truth_pixels": 20870.0,
+   "ci95": [
+    0.06019748887299361,
+    0.06873175288542256
+   ],
+   "withheld_positives": 20870,
+   "seconds": 2.24
+  },
+  "gems30-fc1-concealed-flank-20261027T172846Z-f182c780_minus_proximity": {
+   "label": "HOLDOUT-DTI difference",
+   "value": -0.012193474309971974,
+   "ci95": [
+    -0.015237032921175642,
+    -0.009282986463351647
+   ]
+  },
+  "gems30-fc1-concealed-flank-20261027T172846Z-f182c780_minus_random": {
+   "label": "HOLDOUT-DTI difference",
+   "value": -0.060044766869416975,
+   "ci95": [
+    -0.06454307089166669,
+    -0.055442636602039665
+   ]
+  }
+ }
+}

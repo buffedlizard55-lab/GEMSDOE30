@@ -1,5 +1,8 @@
 # POOL-1 review — pooled MSDB∪CSR∪LiDAR lane: mechanism **confirmed**, artifact **duplicate-stopped** (2026-10-27)
 
+> **Post-merge addendum (2026-10-27):** PR #55's registry-preflight proved the pinned 13GEMSDOE lattice stops every ≥22,164-dot candidate under a literal any-raster 70% rule (CSR-1 measured 99.9864% vs the lattice). POOL-1's frozen registry reported lattices/dense parents separately, and CTD-1/FC-1 (merged in parallel) postdate it — POOL-1 vs CTD-1/FC-1 = 0.55%/2.81% (no collision). Frozen receipts unchanged; see `postmerge-addendum.json`. POOL-2 (§7) additionally requires the owner's lattice-policy resolution.
+
+
 ## 1. Decision (no ambiguity, no human inspection anywhere)
 
 | Question | Answer |

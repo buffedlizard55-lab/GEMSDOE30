@@ -132,9 +132,25 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
     for stage, report in (("surface", surface_audit), ("dots", dots_audit)):
         rows = report.get("comparisons", [])
         duplicate = any(row.get("identical_inside_footprint")
-                        or (number(row.get("spearman_full_footprint")) and row["spearman_full_footprint"] > .90)
+                        or (number(row.get("spearman_full_footprint")) and abs(row["spearman_full_footprint"]) > .90)
                         or (stage == "dots" and number(row.get("candidate_fraction_within_3px_of_reference"))
                             and row["candidate_fraction_within_3px_of_reference"] > .70) for row in rows)
+        # A broken reference can still prove a directional stop via a lower
+        # bound using ALL candidate dots. Do not ignore that numeric proof just
+        # because ordinary comparisons are clear; an unverified string flag by
+        # itself is not evidence of a measured duplicate.
+        malformed = report.get("malformed_exclusions_audited", [])
+        if stage == "dots":
+            duplicate |= any(
+                isinstance(row.get("known_matching_candidate_dots"), int)
+                and not isinstance(row.get("known_matching_candidate_dots"), bool)
+                and isinstance(row.get("candidate_total_dots"), int)
+                and not isinstance(row.get("candidate_total_dots"), bool)
+                and 0 <= row["known_matching_candidate_dots"] <= row["candidate_total_dots"]
+                and row["candidate_total_dots"] > 0
+                and 10 * row["known_matching_candidate_dots"] > 7 * row["candidate_total_dots"]
+                for row in malformed
+            )
         duplicate_detected |= duplicate
         defined = all(number(row.get("spearman_full_footprint")) and -1 <= row["spearman_full_footprint"] <= 1
                       and (stage != "dots" or (number(row.get("candidate_fraction_within_3px_of_reference"))
@@ -161,6 +177,13 @@ def assess(card: dict, results: dict, *, format_passed: bool, hash_matches: bool
                     and bool(registry.get("rasters")))
         complete_detail = ("Pinned nine-site registry (GEMSDOE24,25,27,28,30,31,32,33,36) "
                            "restored and hash-verified; sessions outside those sites are out of scope")
+    # New audit reports explicitly account for excluded malformed references.
+    # Preserve historical receipts, but never let a newly generated incomplete
+    # audit be overridden by a registry manifest claiming completeness.
+    if any("malformed_exclusions_proving_duplicate" in report and report.get("registry_complete") is not True
+           for report in (surface_audit, dots_audit)):
+        complete = False
+        complete_detail = "New audit has excluded or otherwise unassessed reference coverage"
     gate("complete_parallel_registry", "passed" if complete else "unknown", complete_detail)
     assigned = card.get("externally_assigned_lane_verified")
     assigned_detail = "Autonomous research continuation is not an externally supplied lane assignment"

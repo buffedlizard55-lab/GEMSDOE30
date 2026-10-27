@@ -145,7 +145,10 @@ def test_csr_pages_links_downloads_and_decision_badges(name: str):
 
     if name in {"index.html", "executive-summary.html", "csr-discontinuity-review.html"}:
         assert parsed.downloads == [load(REPORT / "run-card.json")["published_tiff"]]
-        assert "OK TO DOWNLOAD: YES" in text
+        assert "DUPLICATE-STOP" in text and "99.9864%" in text
+        assert "Historical CSR-1 · research only" in text
+        assert "fails the published-format validator" in text
+        assert "OK TO DOWNLOAD: YES" not in text
         assert text.count("NOT APPROVED FOR SUBMISSION") == 1
         assert "HOLDOUT-DTI" in text and "60,988" in text
     elif name.startswith("priority-"):
@@ -165,4 +168,6 @@ def test_csr_fleet_audit_and_workflows_wired():
     assert hashlib.sha256(prompt_tail.encode()).hexdigest() == expected_sha
     for wf in ("review-tests.yml", "status-feed.yml"):
         wf_text = (ROOT / ".github/workflows" / wf).read_text()
-        assert "scripts/verify_csr_run.py" in wf_text
+        assert "scripts/verify_csr_run.py" in wf_text  # preserved historical verifier
+        assert "scripts/verify_registry_preflight.py" in wf_text
+        assert "lattice-pin.json" in wf_text
