@@ -1,0 +1,69 @@
+{
+ "generated_utc": "2026-10-27T17:27:03Z",
+ "protocol": "component-holdout-v3-blockstats-20261025; buffered-quadrant-whole-components-v1-20261025",
+ "frame": {
+  "catalogue_pixels": 60988,
+  "components": 3199,
+  "hidden_pixels": 20870,
+  "known_pixels": 40118,
+  "scored_pixels": 5127255,
+  "block_px": 32
+ },
+ "arms": {
+  "ctd1": {
+   "dots": 40000,
+   "pooled_dti": 0.00026832516656357595,
+   "tp_weight": 6.626174805763112,
+   "fp_weight": 39986.22750115195,
+   "truth_pixels": 20870.0,
+   "ci95": [
+    2.6298798180842094e-05,
+    0.0005825462968569645
+   ],
+   "withheld_positives": 20870,
+   "seconds": 2.37
+  },
+  "proximity": {
+   "dots": 40000,
+   "pooled_dti": 0.016731132056093768,
+   "tp_weight": 412.985714836126,
+   "fp_weight": 39525.356047649795,
+   "truth_pixels": 20870.0,
+   "ci95": [
+    0.01422000489338608,
+    0.01948918665442269
+   ],
+   "withheld_positives": 20870,
+   "seconds": 2.34
+  },
+  "random": {
+   "dots": 40000,
+   "pooled_dti": 0.06458242461553881,
+   "tp_weight": 1607.3785463553302,
+   "fp_weight": 39356.58247846269,
+   "truth_pixels": 20870.0,
+   "ci95": [
+    0.06019748887299361,
+    0.06873175288542256
+   ],
+   "withheld_positives": 20870,
+   "seconds": 2.46
+  },
+  "ctd1_minus_proximity": {
+   "label": "HOLDOUT-DTI difference",
+   "value": -0.016462806889530196,
+   "ci95": [
+    -0.019269449550786272,
+    -0.013918334899098462
+   ]
+  },
+  "ctd1_minus_random": {
+   "label": "HOLDOUT-DTI difference",
+   "value": -0.06431409944897519,
+   "ci95": [
+    -0.06846406483290662,
+    -0.05986197094205525
+   ]
+  }
+ }
+}

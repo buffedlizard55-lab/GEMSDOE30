@@ -1,5 +1,7 @@
 # GEMSDOE30 — DOE GEMS Concealed Fault Discovery & Automated Submission Lab
 
+> **SESSION MISSION (read every session):** Place top of the DOE GEMS concealed-fault leaderboard by generating a **unique** single-band `float32` `[0,1]` GeoTIFF submission (EPSG:32611, 3730×3292, 100 m, `sample_submission.tif` grid, `NaN` outside the footprint) that is obvious to download and obvious whether it is OK to submit. Core values: **Maximize P(Win)** and **Own the Outcome**. Never copy a previous submission as your own; never submit a candidate that has not beaten the holdout best with a paired 95% CI lower bound > 0; protect the 3-per-week DrivenData slot. The full operating protocol is in the `#current-owner-prompt` section below — reread it before changing code.
+
 ## Current decision — 2026-10-26 CSR-1: **OK TO DOWNLOAD: YES · OK TO SUBMIT: NO (DO NOT SPEND WEEKLY SLOT)**
 
 **Maximize P(Win):** keep every weekly DrivenData slot (`3/week` cap) for a candidate whose paired 95% block-bootstrap CI beats our strongest comparable full-stack baseline (`msdb_edge`), while preserving `CSR-1`'s genuine **+0.02300 SE Walker Lane breakthrough** and **59.86% dispersed-EDGE novelty solution** for `CSR-2`. **Own the Outcome:** ship a 100% machine-validated, all-finite `[0, 1]` single-band GeoTIFF with zero human inspection, audited across all `357` aligned 9-site rasters (`+1` formally classified malformed exclusion).
