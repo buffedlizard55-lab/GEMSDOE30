@@ -6,9 +6,71 @@ fail closed, including constant surfaces and empty supports.
 """
 from __future__ import annotations
 
+from fractions import Fraction
+import math
+from numbers import Real
+
 import numpy as np
+from scipy.ndimage import distance_transform_edt
 from scipy.spatial import cKDTree
 from scipy.stats import rankdata
+
+
+def dot_budget_bound(reference, footprint, budget, *, radius_px=3.0, threshold=0.70):
+    """Prove a directional overlap STOP before a candidate is produced.
+
+    If only ``U`` footprint cells are farther than ``radius_px`` from a
+    reference dot, any ``budget`` distinct candidate dots must have at least
+    ``max(0, budget - U)`` dots inside that reference's neighbourhood. This is
+    a necessary bound, not a novelty test: no proof of a STOP is *not* a pass.
+    The reference support is defined by its positive in-footprint values, the
+    same definition used by :func:`compare`. No candidates are constructed.
+    """
+    ref = np.asarray(reference)
+    mask = np.asarray(footprint, dtype=bool)
+    if ref.ndim != 2 or ref.shape != mask.shape or not mask.any():
+        raise ValueError('reference and nonempty footprint must be same-shaped 2D arrays')
+    inside = ref[mask]
+    if not np.isfinite(inside).all() or np.any((inside < 0) | (inside > 1)):
+        raise ValueError('reference must be finite and in [0, 1] throughout the footprint')
+    if isinstance(budget, bool) or not isinstance(budget, (int, np.integer)):
+        raise ValueError('budget must be an integer number of distinct dots')
+    n = int(mask.sum())
+    if budget < 1 or budget > n:
+        raise ValueError('budget must be between one and the footprint pixel count')
+    if (isinstance(radius_px, (bool, np.bool_)) or not isinstance(radius_px, Real)
+            or not math.isfinite(radius_px) or radius_px < 0
+            or isinstance(threshold, (bool, np.bool_)) or not isinstance(threshold, Real)
+            or not math.isfinite(threshold) or not 0 <= threshold < 1):
+        raise ValueError('radius must be finite and nonnegative; threshold must be in [0, 1)')
+    dots = mask & (ref > 0)
+    if not dots.any():
+        raise ValueError('reference has no in-footprint positive support')
+    # EDT uses exact Euclidean pixel geometry; no edge wrapping or approximated
+    # square dilation. Restrict support AND the count to the template footprint.
+    distance = distance_transform_edt(~dots)
+    covered = int(np.count_nonzero(mask & (distance <= radius_px)))
+    uncovered = n - covered
+    minimum = max(0, int(budget) - uncovered)
+    # Compare integers rather than rounded floating-point percentages. At
+    # exactly 70% the requested strictly-greater-than rule does not stop.
+    limit = Fraction(str(threshold))
+    stop = minimum * limit.denominator > int(budget) * limit.numerator
+    first = (uncovered * limit.denominator // (limit.denominator - limit.numerator)) + 1
+    return {
+        'reference_dots': int(dots.sum()),
+        'footprint_pixels': n,
+        'covered_within_radius_pixels': covered,
+        'uncovered_pixels': uncovered,
+        'radius_px': float(radius_px),
+        'threshold': float(threshold),
+        'candidate_dot_budget': int(budget),
+        'minimum_overlapping_dots': minimum,
+        'minimum_fraction_within_radius': minimum / int(budget),
+        'first_provably_stopped_budget': first if first <= n else None,
+        'decision': 'duplicate-stop' if stop else 'not-proven',
+        'scope': 'one-reference lower bound; not a complete novelty or submission approval',
+    }
 
 
 def rank_cache(candidate, footprint):
@@ -77,7 +139,9 @@ def compare(candidate, reference, footprint, *, stage='dots', cached_ranks=None)
         'reference_dots': reference_count,
         'candidate_fraction_within_3px_of_reference': overlap,
         'identical_inside_footprint': bool(np.array_equal(av, bv)),
-        'correlation_duplicate': rho is not None and rho > 0.90,
+        # Treat a strongly inverted rank as suspicious too. This conservative
+        # absolute-rho rule is at least as strict as the owner's >0.90 stop.
+        'correlation_duplicate': rho is not None and abs(rho) > 0.90,
         'dot_duplicate': overlap is not None and overlap > 0.70,
         'undefined': rho is None or (stage == 'dots' and overlap is None),
     }
@@ -88,11 +152,26 @@ def decision(comparisons, *, stage, registry_complete):
     if stage not in ('surface', 'dots'):
         raise ValueError('stage must be surface or dots')
     rows = list(comparisons)
-    duplicate = any(r['identical_inside_footprint'] or r['correlation_duplicate'] or
-                    (stage == 'dots' and r['dot_duplicate']) for r in rows)
-    undefined = any(r['spearman_full_footprint'] is None or
-                    (stage == 'dots' and r['candidate_fraction_within_3px_of_reference'] is None)
-                    for r in rows)
+    # Derive the stop from the numeric measurements as well as the recorded
+    # flags: a stale or tampered flag must not turn a duplicate into a pass.
+    def finite_number(value):
+        return isinstance(value, (int, float, np.number)) and not isinstance(value, (bool, np.bool_)) and math.isfinite(value)
+
+    duplicate = any(
+        r.get('identical_inside_footprint') or r.get('correlation_duplicate')
+        or (finite_number(r.get('spearman_full_footprint')) and abs(r['spearman_full_footprint']) > 0.90)
+        or (stage == 'dots' and (r.get('dot_duplicate')
+            or (finite_number(r.get('candidate_fraction_within_3px_of_reference'))
+                and r['candidate_fraction_within_3px_of_reference'] > 0.70)))
+        for r in rows
+    )
+    undefined = any(
+        not finite_number(r.get('spearman_full_footprint'))
+        or not -1 <= r['spearman_full_footprint'] <= 1
+        or (stage == 'dots' and (not finite_number(r.get('candidate_fraction_within_3px_of_reference'))
+            or not 0 <= r['candidate_fraction_within_3px_of_reference'] <= 1))
+        for r in rows
+    )
     if duplicate:
         return 'duplicate-stop'
     if not rows or not registry_complete or undefined:

@@ -18,6 +18,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python scripts/ci_check.py python scripts/restore_public_mirrors.py --ids sample_submission labels
+      - name: Restore the hash-pinned 13GEMSDOE duplicate witness
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/ci_check.py python scripts/restore_public_mirrors.py --pins docs/research/2026-10-27-registry-preflight/lattice-pin.json --ids registry_lattice
       - name: Verify the current research artifact and the preserved negative decisions
         run: |
           python scripts/ci_check.py python scripts/verify_current_run.py
@@ -25,6 +29,7 @@ jobs:
           python scripts/ci_check.py python scripts/verify_geothermal_chemistry_run.py
           python scripts/ci_check.py python scripts/verify_quadrature_phase_run.py
           python scripts/ci_check.py python scripts/verify_csr_run.py
+          python scripts/ci_check.py python scripts/verify_registry_preflight.py
           python scripts/ci_check.py python scripts/verify_lsm_run.py
           python scripts/ci_check.py python scripts/verify_tad_run.py
           python scripts/ci_check.py python scripts/build_research_site.py --check

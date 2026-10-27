@@ -34,6 +34,8 @@ def audit(candidate, template, registry, stage):
                 raise ValueError(f'grid/band mismatch: {path}')
             return ds.read(1)
     a = read(candidate)
+    if not np.isfinite(a[mask]).all() or np.any((a[mask] < 0) | (a[mask] > 1)):
+        raise ValueError('candidate must be finite and in [0, 1] throughout the footprint')
     comparisons, errors = [], []
     seen = set()
     cached = rank_cache(a, mask)
@@ -49,6 +51,9 @@ def audit(candidate, template, registry, stage):
             if digest(path) != row['sha256']:
                 raise ValueError(f'hash mismatch: {path}')
             reference = read(path)
+            if (not np.isfinite(reference[mask]).all()
+                    or np.any((reference[mask] < 0) | (reference[mask] > 1))):
+                raise ValueError(f'invalid in-footprint reference values: {path}')
             value_hash = hashlib.sha256(np.ascontiguousarray(reference[mask], dtype=np.float64).tobytes()).hexdigest()
             if value_hash not in by_values:
                 by_values[value_hash] = compare(a, reference, mask, stage=stage, cached_ranks=cached)
@@ -59,6 +64,10 @@ def audit(candidate, template, registry, stage):
         except (ValueError, OSError, KeyError) as exc:
             errors.append(f"{row.get('path', '<missing path>')}: {exc}")
     malformed_audited = []
+    proven_malformed_duplicates = []
+    # Count all candidate dots, not only the finite subset of a malformed
+    # reference. The latter denominator can greatly overstate overlap.
+    candidate_total_dots = int(np.count_nonzero(mask & (a > 0))) if stage == 'dots' else None
     for row in manifest.get('exclusions', []):
         if not row.get('aligned') or row.get('footprint_complete', True) or 'path' not in row:
             continue
@@ -74,10 +83,22 @@ def audit(candidate, template, registry, stage):
             finite_mask = mask & np.isfinite(reference) & (reference >= 0.0) & (reference <= 1.0)
             subset_stats = (
                 compare(a, np.where(finite_mask, reference, 0.0), finite_mask, stage=stage)
-                if finite_mask.any() else {'spearman': 0.0, 'duplicate': False}
+                if finite_mask.any() else None
             )
-            if subset_stats.get('duplicate'):
-                errors.append(f"duplicate against finite subset of malformed exclusion: {path}")
+            # Partial-footprint Spearman, identity, or subset overlap cannot
+            # establish the full-footprint statistic. However, known matches
+            # are a rigorous *lower bound* on the final directional overlap:
+            # divide known matched dots by ALL candidate dots. A strict >70%
+            # lower bound proves a duplicate even when the reference is broken.
+            known_matches = None
+            lower_bound = None
+            if stage == 'dots' and candidate_total_dots:
+                overlap = subset_stats.get('candidate_fraction_within_3px_of_reference') if subset_stats else None
+                count = subset_stats.get('candidate_dots') if subset_stats else None
+                known_matches = int(round(overlap * count)) if overlap is not None and count is not None else 0
+                lower_bound = known_matches / candidate_total_dots
+                if 10 * known_matches > 7 * candidate_total_dots:
+                    proven_malformed_duplicates.append(path)
             malformed_audited.append({
                 'reference': path,
                 'site': row.get('site'),
@@ -87,17 +108,24 @@ def audit(candidate, template, registry, stage):
                 'finite_in_footprint_cells': int(finite_mask.sum()),
                 'excluded_reason': row.get('excluded_reason'),
                 'finite_subset_comparison': subset_stats,
+                'known_matching_candidate_dots': known_matches,
+                'candidate_total_dots': candidate_total_dots,
+                'full_candidate_overlap_lower_bound': lower_bound,
+                'partial_correlation_is_full_footprint_evidence': False,
             })
         except (ValueError, OSError, KeyError) as exc:
             errors.append(f"{row.get('path', '<missing exclusion path>')}: {exc}")
-    result = decision(comparisons, stage=stage,
-                      registry_complete=manifest.get('complete') is True and not errors)
-    if errors and result == 'novelty-check-passed-not-submission-approval':
-        result = 'blocked-incomplete-registry'
+    # Every exclusion is unassessed coverage, even when its finite subset was
+    # inspected. An inventory declaration alone cannot make it complete.
+    complete = manifest.get('complete') is True and not errors and not manifest.get('exclusions')
+    result = decision(comparisons, stage=stage, registry_complete=complete)
+    if proven_malformed_duplicates:
+        result = 'duplicate-stop'
     return {'schema_version': 1, 'stage': stage, 'candidate': str(candidate),
             'candidate_sha256': digest(candidate), 'template_sha256': digest(template),
-            'registry_sha256': digest(registry), 'registry_complete': manifest.get('complete') is True,
+            'registry_sha256': digest(registry), 'registry_complete': complete,
             'comparisons': comparisons, 'malformed_exclusions_audited': malformed_audited,
+            'malformed_exclusions_proving_duplicate': proven_malformed_duplicates,
             'errors': errors, 'decision': result,
             'submission_approved': False}
 

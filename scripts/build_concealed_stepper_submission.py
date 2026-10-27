@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Build a UNIQUE GeoTIFF submission: CTD-1 Concealed Piedmont Stepover Corridor.
+"""ARCHIVED DUPLICATE-STOP. CLI generation is disabled; do not resubmit.
+
+The original description below is preserved for provenance, not current proof of
+uniqueness or scientific performance. See 2026-10-27 registry-preflight.
 
 Scientific hypothesis (concealed fault discovery, NOT a copy of any shipped lane):
 
@@ -182,7 +185,8 @@ def build_belief() -> tuple[np.ndarray, np.ndarray]:
     return belief, valid
 
 
-def main() -> int:
+def _historical_generation_for_provenance_only() -> int:
+    """The original implementation is retained for review, not re-execution."""
     belief, valid = build_belief()
 
     with rasterio.open(RAW / "labels.tif") as ds:
@@ -235,6 +239,13 @@ def main() -> int:
     print(f"Note ({len(note)}/140): {note}")
     print(f"Run name: {run_name}")
     return 0 if manifest["published_format_compliant"] else 1
+
+
+def main() -> int:
+    print("DUPLICATE-STOP: archived CTD-1 overlaps the pinned 13GEMSDOE lattice; "
+          "do not regenerate, perturb or rename it. See docs/research/2026-10-27-registry-preflight/run-card.json.",
+          file=sys.stderr)
+    return 2
 
 
 if __name__ == "__main__":

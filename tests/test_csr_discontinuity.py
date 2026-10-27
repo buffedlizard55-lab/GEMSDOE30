@@ -200,7 +200,9 @@ def test_malformed_footprint_exclusion_classified_and_audited(tmp_path: Path):
         )
     )
     res = audit(cand, tpl, reg, "dots")
-    assert res["decision"] == "novelty-check-passed-not-submission-approval"
+    # Inspecting a finite subset cannot establish full-registry uniqueness.
+    assert res["decision"] == "blocked-incomplete-evidence"
+    assert res["registry_complete"] is False
     assert res["errors"] == []
     assert len(res["malformed_exclusions_audited"]) == 1
     assert res["malformed_exclusions_audited"][0]["invalid_in_footprint_cells"] == 128

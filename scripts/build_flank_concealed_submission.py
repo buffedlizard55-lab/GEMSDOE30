@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Build a UNIQUE GeoTIFF submission: FC-1 Concealed Flank Corridor (Experiment 2).
+"""ARCHIVED DUPLICATE-STOP. CLI generation is disabled; do not resubmit.
+
+The original description below is preserved for provenance, not current proof of
+uniqueness or scientific performance. See 2026-10-27 registry-preflight.
 
 Scientific hypothesis (concealed fault discovery, distinct from CTD-1 and every
 shipped lane):
@@ -153,7 +156,8 @@ def build_belief_and_domain() -> tuple[np.ndarray, np.ndarray]:
     return belief, domain
 
 
-def main() -> int:
+def _historical_generation_for_provenance_only() -> int:
+    """The original implementation is retained for review, not re-execution."""
     belief, domain = build_belief_and_domain()
     n_domain = int(domain.sum())
     print(f"concealed near-trace domain pixels: {n_domain:,}")
@@ -193,6 +197,13 @@ def main() -> int:
     print(f"Note ({len(note)}/140): {note}")
     print(f"Run name: {run_name}")
     return 0 if manifest["published_format_compliant"] else 1
+
+
+def main() -> int:
+    print("DUPLICATE-STOP: archived FC-1 overlaps the pinned 13GEMSDOE lattice; "
+          "do not regenerate, perturb or rename it. See docs/research/2026-10-27-registry-preflight/run-card.json.",
+          file=sys.stderr)
+    return 2
 
 
 if __name__ == "__main__":
