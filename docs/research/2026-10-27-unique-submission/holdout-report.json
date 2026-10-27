@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-27T23:40:56+00:00",
+  "evaluator_version": "component-holdout-v3-blockstats-20261025",
+  "candidate": "docs/downloads/gems30-unique-uncovered-cells-20k-20261027T233516Z.tif",
+  "candidate_sha256": "286aced318f03e32c03886d086ec36115d36dab390100e377592843198f4a10f",
+  "catalogue": "data/external/derived_gdr_qfaults_v2_100m_u8.tif",
+  "labels": "data/raw/labels.tif",
+  "withheld_positives": 19490,
+  "single_split": {
+    "dti": 0.023673582792271733,
+    "tp_weight": 464.02521710000036,
+    "fp_weight": 19580.831328972647,
+    "hidden_truth_pixels": 19490.0,
+    "hidden_pixels_with_credit": 1188,
+    "hidden_credit_fraction": 0.06095433555669574,
+    "emitted_pixels": 20000
+  },
+  "leakage_canary_auc": 0.49983779616011614,
+  "bootstrap": {
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "bootstrap": {
+      "unit": "geographic block aggregated across folds",
+      "blocks": 105,
+      "replicates": 2000,
+      "seed": 3071,
+      "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+    },
+    "arms": {
+      "candidate": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.03075207564586017,
+        "withheld_positives": 59065,
+        "ci95": [
+          0.027582036340911366,
+          0.03445472356071957
+        ],
+        "tp_weight": 1580.810263254422,
+        "fp_weight": 19184.159604780252
+      },
+      "control": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.030370724439177304,
+        "withheld_positives": 59065,
+        "ci95": [
+          0.028689038775161487,
+          0.03194087739660214
+        ],
+        "tp_weight": 1562.5090677886194,
+        "fp_weight": 19416.83846815517
+      }
+    },
+    "candidate_minus": {
+      "control": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.00038135120668286726,
+        "ci95": [
+          -0.0029887765411569112,
+          0.00421812801468442
+        ]
+      }
+    }
+  },
+  "scope": "catalogue-proxy holdout; NOT an organizer score; not a leaderboard forecast"
+}
