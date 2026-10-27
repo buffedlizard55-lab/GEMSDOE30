@@ -72,5 +72,37 @@
       "dot_duplicate": false,
       "undefined": false
     }
-  ]
+  ],
+  "lattice_measured": {
+    "witness": "data/raw/registry-extra/13gems-lattice-s5.tif (13GEMSDOE@92ee6f0, sha256 b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2, restored via git clone because the shared GitHub API quota was exhausted)",
+    "comparisons": {
+      "POOL-1 quarantined": {
+        "path": "runs/pool1/gems30-POOL1-44090-20261027-fabc56fb91db-zeros.tif",
+        "stage": "dots",
+        "spearman_full_footprint": -0.0005721031841092772,
+        "candidate_dots": 44090,
+        "candidate_positive_support": 44090,
+        "reference_dots": 206895,
+        "candidate_fraction_within_3px_of_reference": 1.0,
+        "identical_inside_footprint": false,
+        "correlation_duplicate": false,
+        "dot_duplicate": true,
+        "undefined": false
+      },
+      "CSR-1 published": {
+        "path": "docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif",
+        "stage": "dots",
+        "spearman_full_footprint": -0.0001320829129299334,
+        "candidate_dots": 44090,
+        "candidate_positive_support": 44090,
+        "reference_dots": 206895,
+        "candidate_fraction_within_3px_of_reference": 0.9998639147198911,
+        "identical_inside_footprint": false,
+        "correlation_duplicate": false,
+        "dot_duplicate": true,
+        "undefined": false
+      }
+    },
+    "reading": "Under the literal any-raster rule both POOL-1 and CSR-1 breach vs the lattice; under POOL-1's frozen dotted-submission registry the lattice was a separately reported dense calibration exclusion. Policy resolution is an owner decision; either way POOL-1 remains stopped (88.74% vs FFL1) and CSR-1 remains DO NOT SUBMIT."
+  }
 }
