@@ -1,20 +1,23 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-26T23:27:07Z",
+  "generated_utc": "2026-10-27T17:38:14Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
     "directory": "data/raw",
     "availability_scope": "This describes files present in the build worktree at generated_utc; data/raw and data/processed are Git-ignored and are not distributed by GitHub Pages.",
-    "required_files_present": false,
-    "sha256_verified_against_pins": false,
+    "required_files_present": true,
+    "sha256_verified_against_pins": true,
     "files": [
       {
         "dest": "training_features.tif",
         "path": "data/raw/training_features.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-        "expected_bytes": 418912844
+        "expected_bytes": 418912844,
+        "actual_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "actual_bytes": 418912844,
+        "sha256_matches_pin": true
       },
       {
         "dest": "labels.tif",
@@ -38,21 +41,22 @@
       }
     ],
     "prepared_dataset": {
-      "dataset_signature": null,
-      "matches_recorded_pin": null,
-      "positive_label_pixels": null,
-      "template_valid_pixels": null
+      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
+      "matches_recorded_pin": true,
+      "positive_label_pixels": 60988,
+      "template_valid_pixels": 5167373
     },
     "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
   },
   "competition_data": {
     "owner_mirror_files_present": [
+      "training_features.tif",
       "labels.tif",
       "sample_submission.tif"
     ],
     "organizer_authenticated": false,
     "prepared_dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
-    "pins_core_sha256_verified_now": false,
+    "pins_core_sha256_verified_now": true,
     "historical_restore_receipt": "docs/research/2026-10-25/prepared-manifest.json",
     "pins_note": "Owner mirrors, not organizer-authenticated. Hash pins verify consistency only. Template values must never be used as features or predictions.",
     "extra_pins_files": [
@@ -88,6 +92,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "GEMSDOE30-blind-thermal-corridor-h1-annulus",
       "note": "Blind thermal corridor off-cat: paleo-springs x 2m probes, SGMC 3-30px annulus, volcanics-excluded, 3px Poisson disk, 18766 dots",
@@ -108,6 +113,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "GEMSDOE30-geothermal-corridor-offcat-d3",
       "note": "Geothermal corridor off-cat: Q-volcanics x paleo-springs x 2m probes, SGMC-gated, 3px Poisson disk, 40000 dots",
@@ -128,6 +134,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan",
       "note": "NEARSPLAY annulus 300m-1.5km off-cat dots; holdout DTI +0.066 [0.057,0.074] vs matched control; proxy holdout, not org-confirmed",
@@ -148,6 +155,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": false,
       "submission_recommendation": false,
       "run_name": "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13",
       "note": "4-fold OOF GBM; adaptive emission missed its proxy gate; unpromoted and unscored",
@@ -168,6 +176,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": false,
       "submission_recommendation": false,
       "run_name": "GEMSDOE30_oof-gbm-adaptive-r5-zeros_20261003T172937560000Z",
       "note": "Archived zero-outside diagnostic; not published-format compliant or upload-recommended",
@@ -188,6 +197,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": false,
       "submission_recommendation": false,
       "run_name": "GEMSDOE25_dotted-h19-5-d2-8_20261002_e56ea318af89",
       "note": "External D2.8 research reference; 0.2600 score attribution unverified; owner page says unscored/not slot-approved",
@@ -208,6 +218,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": false,
       "submission_recommendation": false,
       "run_name": "gems25-dotted-h19-5-d2-8-zeros_20261003T172939460962Z",
       "note": "Archived zero-outside diagnostic; not published-format compliant or upload-recommended",
@@ -228,6 +239,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": true,
+      "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "gems30-CSR1-44090-20261026-502fb5948335",
       "note": "CSR1: 3D Laplace/Poisson+1.8km Radon+NoisyOR+2.83px 1D-ridge EDGE, >2px off-cat, 44090d, all-finite [0,1]",
@@ -248,6 +260,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": false,
       "submission_recommendation": false,
       "run_name": "gems30-MSDB1-edge44090-20261025-e7856ec3f14a",
       "note": "MSDB-1v2: 31-feat stationary discontinuity+piedmont ramp HGB x Rayleigh curv gate + Bayes 300m EDGE, 44090 off-cat dots",
@@ -268,6 +281,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": false,
       "submission_recommendation": false,
       "run_name": "gems30-PTA1-44090-20261025-9a3f7f9535a4",
       "note": "PTA1 subsurface 3D tilt-phase + dip-asymmetry 18-feat HGB; 44090d; research artifact, NOT slot-approved.",
@@ -288,6 +302,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan",
       "note": "G30-TAD OOF tilt-depth+Kd-alt+dip-slip 38k; negative gate (0.1440); DO NOT SUBMIT.",
@@ -308,6 +323,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros",
       "note": "G30-TAD OOF tilt-depth+Kd-alt+dip-slip 38k; negative gate (0.1440); DO NOT SUBMIT.",
@@ -328,6 +344,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": false,
       "submission_recommendation": false,
       "run_name": "gems30-TDX1-44090-20261025-5fc508ea81ac",
       "note": "TDX1 gravity-normal magnetic texture lag; 6-feature HGB; negative research result, NOT approved for competition upload.",
@@ -348,6 +365,7 @@
       "legacy_manifest_claim_range_error_immunity": true,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-d15-poisson200m-offcat-60069-20261003T233210Z-68d0e2e4",
       "note": "GEMSDOE30 d1.5 Poisson-200m off-catalogue 60069 dots; all-finite 0-1; range-error hardened",
@@ -368,6 +386,7 @@
       "legacy_manifest_claim_range_error_immunity": false,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca-nanoutside",
       "note": "GEMSDOE30 d2.8 Poisson-300m off-catalogue 44090 dots; NaN outside per published spec",
@@ -387,7 +406,8 @@
       "range_error_immune": null,
       "legacy_manifest_claim_range_error_immunity": true,
       "organizer_acceptance_confirmed": false,
-      "site_linked": null,
+      "site_linked": true,
+      "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca",
       "note": "GEMSDOE30 d2.8 Poisson-300m off-catalogue 44090 dots; all-finite 0-1; range-error hardened",
@@ -408,6 +428,7 @@
       "legacy_manifest_claim_range_error_immunity": true,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-edge-hybrid-80k-02845bd4-20261003T234340Z-allfinite",
       "note": "GEMSDOE30 EDGE hybrid 80000 dots off-catalogue; all-finite 0-1; range-error hardened",
@@ -428,6 +449,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": false,
       "submission_recommendation": false,
       "run_name": "edge-emitter-session30",
       "note": "GEMSDOE30 EDGE emitter, hybrid belief field, 80,000 dots; unpromoted research artifact (see docs/research/emitter-opt-holdout.md)",
@@ -448,6 +470,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan",
       "note": "G30-S19 habitat GBM (19-band, no catalogue-distance inputs) + EDGE 60k, off-cat >2px",
@@ -468,6 +491,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros",
       "note": "G30-S19 habitat GBM (19-band, no catalogue-distance inputs) + EDGE 60k, off-cat >2px",
@@ -488,6 +512,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan",
       "note": "G30-S20 19-band+lidar scarp+GeoDAWN rad GBM + EDGE 60k off-cat>2px",
@@ -508,6 +533,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros",
       "note": "G30-S20 19-band+lidar scarp+GeoDAWN rad GBM + EDGE 60k off-cat>2px",
@@ -528,6 +554,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-h-cc1-dispersed3px-32058dots",
       "note": "H-CC1 dispersed 3px contact-coincidence, 32058 dots; catalogue-proxy holdout-DTI 0.0539 (unscored, not slot-approved)",
@@ -548,6 +575,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "residual-gate-session-2026-10-25",
       "note": "GEMSDOE30 review-hyp3 residual-ridge gate, 3km catalogue corridor, 400m Poisson",
@@ -568,6 +596,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": false,
       "submission_recommendation": false,
       "run_name": "gemsdoe30-sgmc-hedge-d10-85k_20261003T182842779739Z",
       "note": "Archived zero-outside diagnostic; not published-format compliant or upload-recommended",
@@ -588,6 +617,7 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": null,
+      "historical_manifest_recommendation": false,
       "submission_recommendation": false,
       "run_name": "GEMSDOE30_sgmc-hedge-t04-s4-d10_20261003T174409650983Z_ac08b41e",
       "note": "SGMC-hedge research raster; SGMC holdout is tautological; not promoted or scored",
@@ -617,7 +647,7 @@
     "schema_version": 1,
     "run_card": "docs/research/phase-tilt-asymmetry/run-card.json",
     "readiness": "docs/research/phase-tilt-asymmetry/readiness.json",
-    "purpose": "Archived PTA-1 downloadable research artifact, not a current-slot recommendation. Historical 198-reference evidence is frozen; new public references receive blocking UNKNOWN coverage without rewriting it. See latest_review for CSR-1, the newest verified negative experiment (OK to download: YES; OK to submit: NO). No organizer-confirmed score or slot selected.",
+    "purpose": "Archived top-level PTA-1 pointer retained for historical verifier compatibility; latest_review is the current zero-experiment registry preflight. No file or slot is approved.",
     "latest_attempt": "docs/research/texture-controls/run-card.json",
     "additional_stopped_attempts": [
       {
@@ -690,513 +720,244 @@
       "decision": "NEGATIVE / DO NOT SUBMIT: duplicate-stop at 78.915854% dot overlap; paired-CI gates failed; no QPC TIFF published or slot selected"
     },
     "latest_review": {
+      "lane": "registry-preflight-20261027",
+      "run_card": "docs/research/2026-10-27-registry-preflight/run-card.json",
+      "verifier": "scripts/verify_registry_preflight.py",
+      "report": "docs/research/2026-10-27-registry-preflight/review.md",
+      "site_page": "csr-discontinuity-review.html",
+      "decision": "DUPLICATE-STOP: no new raster produced, no weekly slot selected or used",
+      "history_preserved": true
+    },
+    "historical_csr_review": {
       "lane": "CSR-1",
       "run_card": "docs/research/2026-10-26-csr/run-card.json",
       "readiness": "docs/research/2026-10-26-csr/readiness.json",
       "verifier": "scripts/verify_csr_run.py",
       "report": "docs/research/2026-10-26-csr/review.md",
       "site_page": "csr-discontinuity-review.html",
-      "decision": "NEGATIVE / DOWNLOAD OK, DO NOT SUBMIT: HOLDOUT-DTI 0.158162 vs core19_edge 0.144915 (+0.013247) and msdb_edge 0.169986 (-0.011825 pooled; Fold 3 SE Walker Lane +0.02300); 324/324 canaries <= 0.6629; 357-raster two-stage novelty PASSED (max 67.70% <= 70%, 59.86% vs published downloads); 12/12 format checks all-finite [0,1]; no slot selected",
+      "decision": "ARCHIVED HISTORICAL RECEIPT ONLY: superseded by the 2026-10-27 lattice duplicate stop and published-format failure; do not submit.",
       "history_preserved": true
     }
   },
   "latest_scientific_review": {
-    "lane": "CSR-1",
-    "run_card": "docs/research/2026-10-26-csr/run-card.json",
-    "readiness": "docs/research/2026-10-26-csr/readiness.json",
-    "verifier": "scripts/verify_csr_run.py",
-    "report": "docs/research/2026-10-26-csr/review.md",
+    "lane": "registry-preflight-20261027",
+    "run_card": "docs/research/2026-10-27-registry-preflight/run-card.json",
+    "verifier": "scripts/verify_registry_preflight.py",
+    "report": "docs/research/2026-10-27-registry-preflight/review.md",
     "site_page": "csr-discontinuity-review.html",
     "decision": {
-      "schema_version": 1,
-      "readiness_version": "research-readiness-v3-matched-controls-20261025",
-      "raster_sha256": "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900",
-      "gates": [
-        {
-          "name": "file_contract",
-          "status": "passed",
-          "detail": "Reopened shared-writer GeoTIFF matches template; SHA-256 binds this decision to its exact bytes"
-        },
-        {
-          "name": "labelled_holdout_evidence",
-          "status": "passed",
-          "detail": "HOLDOUT-DTI requires evaluator/protocol, withheld positives and spatial-bootstrap 95% CI"
-        },
-        {
-          "name": "paired_improvement",
-          "status": "failed",
-          "detail": "Fixed CSR-1 candidate must improve preregistered core19_edge and msdb_edge comparators with positive paired CI lower bounds"
-        },
-        {
-          "name": "single_feature_leakage_canaries",
-          "status": "passed",
-          "detail": "All 81 raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC"
-        },
-        {
-          "name": "count_matched_construction",
-          "status": "passed",
-          "detail": "All fixed arms must realize the same predeclared active-domain budget in every fold"
-        },
-        {
-          "name": "surface_observed_registry",
-          "status": "passed",
-          "detail": "357 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
-        },
-        {
-          "name": "dots_observed_registry",
-          "status": "passed",
-          "detail": "357 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
-        },
-        {
-          "name": "complete_parallel_registry",
-          "status": "unknown",
-          "detail": "Nine-site public snapshots cannot attest all parallel rasters or missing original surfaces"
-        },
-        {
-          "name": "assigned_lane",
-          "status": "unknown",
-          "detail": "Autonomous research continuation is not an externally supplied lane assignment"
-        },
-        {
-          "name": "comparable_historical_best",
-          "status": "unknown",
-          "detail": "Do not substitute an archived metric or a new comparator for a missing historical-best rerun"
-        },
-        {
-          "name": "experimental_budget",
-          "status": "passed",
-          "detail": "At most three experiments / two experimental hours"
-        },
-        {
-          "name": "artifact_identity",
-          "status": "passed",
-          "detail": "Named artifact and note of at most 140 characters"
-        }
-      ],
-      "observed_registry": {
-        "surface": {
-          "registry_entries_compared": 357,
-          "max_spearman": 0.13783236890895245,
-          "max_fraction_within_3px": null,
-          "status": "passed"
-        },
-        "dots": {
-          "registry_entries_compared": 357,
-          "max_spearman": 0.0856435875454567,
-          "max_fraction_within_3px": 0.6770015876616012,
-          "status": "passed"
-        }
-      },
-      "download_ok": true,
       "research_verdict": "negative",
-      "eligible_for_separate_slot_selector": false,
+      "display_status": "DUPLICATE-STOP: no new raster produced, no weekly slot selected or used",
+      "download_ok": false,
+      "ok_to_submit": false,
       "submission_approved": false,
       "slot_selected": false,
-      "display_status": "NOT APPROVED FOR SUBMISSION",
-      "organizer_score": null,
-      "organizer_acceptance_confirmed": false
+      "measurement": {
+        "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+        "reference_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+        "reference_source": "https://github.com/buffedlizard55-lab/13GEMSDOE/blob/92ee6f074323f161eed837b80ec3ee5b662e26f5/docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+        "grid": {
+          "shape_hw": [
+            3730,
+            3292
+          ],
+          "crs": "EPSG:32611",
+          "transform": [
+            100.0,
+            0.0,
+            243350.0,
+            0.0,
+            -100.0,
+            4508550.0
+          ]
+        },
+        "bound": {
+          "reference_dots": 206895,
+          "footprint_pixels": 5167373,
+          "covered_within_radius_pixels": 5160724,
+          "uncovered_pixels": 6649,
+          "radius_px": 3.0,
+          "threshold": 0.7,
+          "candidate_dot_budget": 44090,
+          "minimum_overlapping_dots": 37441,
+          "minimum_fraction_within_radius": 0.8491948287593558,
+          "first_provably_stopped_budget": 22164,
+          "decision": "duplicate-stop",
+          "scope": "one-reference lower bound; not a complete novelty or submission approval"
+        },
+        "independent_coverage": {
+          "method": "explicit clipped 29-offset Euclidean integer disk, no wrap",
+          "covered_within_radius_pixels": 5160724
+        },
+        "previous_candidate": {
+          "path": "docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif",
+          "raster_sha256": "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900",
+          "matching_dots": 44084,
+          "comparison": {
+            "stage": "dots",
+            "spearman_full_footprint": -0.0001320829129299334,
+            "candidate_dots": 44090,
+            "candidate_positive_support": 44090,
+            "reference_dots": 206895,
+            "candidate_fraction_within_3px_of_reference": 0.9998639147198911,
+            "identical_inside_footprint": false,
+            "correlation_duplicate": false,
+            "dot_duplicate": true,
+            "undefined": false
+          },
+          "outside_convention": "zero outside the template footprint",
+          "published_format_validator_passed": false,
+          "whole_array_finite_range_diagnostic_passed": true,
+          "published_failed_checks": [
+            "null_outside_template_footprint"
+          ],
+          "organizer_acceptance_confirmed": false
+        }
+      }
     },
     "history_preserved": true,
     "card": {
       "schema_version": 1,
-      "experiment_spec": "csr1",
-      "run_id": "gems30-CSR1-44090-20261026-502fb5948335",
-      "submission_name": "gems30-CSR1-44090-20261026-502fb5948335",
-      "note": "CSR1: 3D Laplace/Poisson+1.8km Radon+NoisyOR+2.83px 1D-ridge EDGE, >2px off-cat, 44090d, all-finite [0,1]",
-      "created_utc": "2026-10-26T22:53:13+00:00",
-      "lane": "CSR-1 (preregistered 2026-10-26 before any fold fit)",
-      "lane_preregistration_sha256": "28383a271211f7ae1090f2cd89926f37ca756d3fcac8a6d442ad7b6b7b3009c9",
-      "externally_assigned_lane_verified": false,
-      "hypothesis": "Cover-compensated 3D Laplace/Poisson gravity vertical derivatives, unit-consistent 1000x tmi_vg magnetic tilt/analytic signal, and 12-azimuth 1.8 km flank-subtracted Radon line-integrals inside a cover-decoupled Noisy-OR dual-expert ensemble with 1D ridge concentration and >=2.83 px dispersed submodular EDGE emission improve concealed-fault recovery over core19 and MSDB-1v2 while avoiding 1-2 px range-front dot collisions.",
-      "mechanism": "Dual-expert HGB (33-feature cover-blind subsurface expert with inverse cover-censoring weights + 56-feature DC-free structural-geomorphic Radon expert) combined via Noisy-OR x Rayleigh curvilinear gate, concentrated onto 1D Hessian ridge crests (gamma=1.25) and emitted via submodular 300 m EDGE with dr^2+dc^2>6 (>=282.8 m) spacing and >2 px off-catalogue collar.",
-      "non_fault_mimic": "Buried pluton/caldera margins, incised bedrock paleochannels, unreactivated Mesozoic contacts, saline playa clay pans, and Lake Lahontan recessional shorelines.",
-      "experiments_run": 2,
-      "experiment_cap": 3,
-      "experimental_elapsed_seconds": 1493.61,
-      "dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
-      "published_tiff": "docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif",
-      "tif_path": "docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif",
-      "sha256": "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900",
-      "raster_sha256": "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900",
-      "values_sha256": "502fb59483353b2dd7ca829e57525c44008d7477f7c59dfac90965b1fb3c12e8",
-      "holdout_dti": 0.15816185919666023,
-      "ci95": [
-        0.14498623625179088,
-        0.17147419427326102
-      ],
-      "baseline_dti": {
-        "core19_edge": 0.1449146680023674,
-        "msdb_edge": 0.16998645976471358,
-        "csr_dense_edge": 0.15845299999741633
-      },
-      "max_feature_auc": 0.6629223465915133,
-      "max_registry_corr": 0.13783236890895245,
-      "dot_overlap_pct": 67.7002,
-      "holdout": {
+      "run_id": "gems30-registry-preflight-20261027",
+      "created_utc": "2026-10-27T17:27:31+00:00",
+      "hypothesis": "Prior-session CSR-2 proposal: preserve piedmont-scarp evidence while gating the cover-blind potential-field expert to transtensional regions.",
+      "mechanism": "Regime-weighted combination of terrain/MSDB and cover-blind potential-field/Radon evidence; proposal only, never fitted here.",
+      "named_non_fault_process": "Erosional fan or paleoshoreline scarps and non-fault lithologic boundaries can mimic the targeted edges.",
+      "lane_assignment": "unknown: this prompt supplies no single assigned method paragraph; CSR-2 is a prior-session proposal only",
+      "new_holdout": {
         "label": "HOLDOUT-DTI",
-        "value": 0.15816185919666023,
-        "withheld_positives": 60988,
-        "ci95": [
-          0.14498623625179088,
-          0.17147419427326102
-        ],
-        "tp_weight": 9284.515745169661,
-        "fp_weight": 40276.59140695901,
+        "value": null,
+        "ci95": null,
+        "evaluator_version": null,
+        "withheld_positives": null,
+        "reason": "No new model or holdout experiment after the preflight stop."
+      },
+      "historical_holdout_reference": {
+        "source": "docs/research/2026-10-26-csr/results.json",
+        "label": "HOLDOUT-DTI",
         "evaluator_version": "component-holdout-v3-blockstats-20261025",
         "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
-        "bootstrap": {
-          "unit": "geographic block aggregated across folds",
-          "blocks": 371,
-          "replicates": 2000,
-          "seed": 3137,
-          "interval": "paired spatial-block percentile 95%; conditional catalogue proxy"
+        "candidate": {
+          "label": "HOLDOUT-DTI",
+          "value": 0.15816185919666023,
+          "withheld_positives": 60988,
+          "ci95": [
+            0.14498623625179088,
+            0.17147419427326102
+          ],
+          "tp_weight": 9284.515745169661,
+          "fp_weight": 40276.59140695901
         },
-        "comparators": {
-          "core19_edge": {
-            "label": "HOLDOUT-DTI",
-            "value": 0.1449146680023674,
-            "withheld_positives": 60988,
-            "ci95": [
-              0.12994752346007402,
-              0.15944508076763406
-            ],
-            "tp_weight": 8492.992988797643,
-            "fp_weight": 40589.28386730382
-          },
-          "msdb_edge": {
-            "label": "HOLDOUT-DTI",
-            "value": 0.16998645976471358,
-            "withheld_positives": 60988,
-            "ci95": [
-              0.1565342444969894,
-              0.1839480382133582
-            ],
-            "tp_weight": 9980.286501079772,
-            "fp_weight": 39628.933459526714
-          },
-          "csr_dense_edge": {
-            "label": "HOLDOUT-DTI",
-            "value": 0.15845299999741633,
-            "withheld_positives": 60988,
-            "ci95": [
-              0.1445260070957728,
-              0.1723092643095573
-            ],
-            "tp_weight": 9292.769947638742,
-            "fp_weight": 39989.4997656018
-          }
+        "matched_control": {
+          "label": "HOLDOUT-DTI",
+          "value": 0.16998645976471358,
+          "withheld_positives": 60988,
+          "ci95": [
+            0.1565342444969894,
+            0.1839480382133582
+          ],
+          "tp_weight": 9980.286501079772,
+          "fp_weight": 39628.933459526714
         },
-        "candidate_minus": {
-          "core19_edge": {
-            "label": "HOLDOUT-DTI difference",
-            "value": 0.013247191194292823,
-            "ci95": [
-              -0.001978189913756232,
-              0.030067970379719998
-            ]
-          },
-          "msdb_edge": {
-            "label": "HOLDOUT-DTI difference",
-            "value": -0.011824600568053345,
-            "ci95": [
-              -0.02345328353893821,
-              0.000296573866001773
-            ]
-          },
-          "csr_dense_edge": {
-            "label": "HOLDOUT-DTI difference",
-            "value": -0.0002911408007560956,
-            "ci95": [
-              -0.002060289560826304,
-              0.0013972376401649082
-            ]
-          }
-        },
-        "confirmation_seed3119": null
-      },
-      "feature_canaries": {
-        "features_per_fold": 81,
-        "folds": 4,
-        "alarms": [],
-        "max_auc_either_direction": 0.6629223465915133
-      },
-      "registry": {
-        "registry_path": "docs/research/2026-10-26-csr/registry.json",
-        "registry_sha256": "cf8ccc608e01ed233b350b0b48fc6904c3ec1fd8f7517863dbf2ecc0a9f9d62b",
-        "aligned_rasters_compared": 357,
-        "malformed_exclusions_audited": 1,
-        "surface_max_spearman": 0.13783236890895245,
-        "dots_max_spearman": 0.0856435875454567,
-        "dots_max_fraction_within_3px": 0.6770015876616012,
-        "dots_closest_reference": "data/raw/registry-expanded/GEMSDOE30-99e3f4dc50cdc770776a2fb35971856562aa1321.tif",
-        "dots_closest_reference_site": "GEMSDOE30"
-      },
-      "validator_output": {
-        "status": "passed",
-        "no_nan_inside_footprint": true,
-        "no_nan_anywhere": true,
-        "values_in_0_1_inside_footprint": true,
-        "values_in_0_1_whole_array": true,
-        "min_whole_array": 0.0,
-        "max_whole_array": 1.0,
-        "crs_match": true,
-        "shape_match": true,
-        "transform_match": true,
-        "single_float32_band": true,
-        "outside_footprint_value": 0.0,
-        "positive_catalogue_pixels": 0,
-        "dots_within_2px_of_catalogue": 0,
-        "emitted_dots": 44090,
-        "min_interdot_nn_px": 2.8284271247461903,
-        "p10_interdot_nn_px": 3.0,
-        "median_interdot_nn_px": 4.123105625617661,
-        "catalogue_distance_quantiles_px": {
-          "p10": 3.605551275463989,
-          "p25": 4.47213595499958,
-          "p50": 10.0,
-          "p75": 20.12461179749811,
-          "p90": 37.20215047547655,
-          "frac_gt_5px": 0.716148786572919,
-          "frac_gt_15px": 0.34853708323882965,
-          "frac_gt_50px": 0.05559083692447267
-        },
-        "organizer_acceptance_confirmed": false,
-        "submission_report": {
-          "path": "/home/user/GEMSDOE30/docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif",
-          "passed": true,
-          "checks": [
-            {
-              "name": "template_single_band",
-              "passed": true,
-              "detail": "count=1"
-            },
-            {
-              "name": "single_band",
-              "passed": true,
-              "detail": "count=1"
-            },
-            {
-              "name": "float32",
-              "passed": true,
-              "detail": "dtypes=('float32',)"
-            },
-            {
-              "name": "epsg",
-              "passed": true,
-              "detail": "crs=EPSG:32611"
-            },
-            {
-              "name": "template_epsg",
-              "passed": true,
-              "detail": "crs=EPSG:32611"
-            },
-            {
-              "name": "shape_matches_template",
-              "passed": true,
-              "detail": "output=(3730, 3292) template=(3730, 3292)"
-            },
-            {
-              "name": "transform_matches_template",
-              "passed": true,
-              "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
-            },
-            {
-              "name": "100m_north_up_grid",
-              "passed": true,
-              "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
-            },
-            {
-              "name": "finite_and_in_range_inside_footprint",
-              "passed": true,
-              "detail": "valid_pixels=5167373 min=0.0 max=1.0"
-            },
-            {
-              "name": "finite_in_range_outside_footprint_diagnostic",
-              "passed": true,
-              "detail": "outside_pixels=7111787; finite in-range values required for the nonstandard whole-array diagnostic (finite=7111787)"
-            },
-            {
-              "name": "whole_raster_finite_range_diagnostic",
-              "passed": true,
-              "detail": "all_pixels=12279160 finite and in [0, 1]"
-            },
-            {
-              "name": "template_readable",
-              "passed": true,
-              "detail": "shape=(3730, 3292)"
-            }
+        "paired_difference": {
+          "label": "HOLDOUT-DTI difference",
+          "value": -0.011824600568053345,
+          "ci95": [
+            -0.02345328353893821,
+            0.000296573866001773
           ]
         },
-        "write_info": {
-          "schema_version": 3,
-          "run_name": "gems30-CSR1-44090-20261026-502fb5948335",
-          "note": "CSR1: 3D Laplace/Poisson+1.8km Radon+NoisyOR+2.83px 1D-ridge EDGE, >2px off-cat, 44090d, all-finite [0,1]",
-          "output_file": "gems30-CSR1-44090-20261026-502fb5948335-zeros.tif",
-          "output_sha256": "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900",
-          "prediction_array_sha256": "aebd51cfb45dd2a8b7861ee4262835f90a5e0c0b177ecb351082d44b018f9adb",
-          "outside_convention": "0.0 outside; nonstandard diagnostic only; does not match published null/NaN-outside format",
-          "published_format_compliant": false,
-          "template_file": "/home/user/GEMSDOE30/data/raw/sample_submission.tif",
-          "created_utc": "2026-10-26T22:51:20+00:00",
-          "format_validation": {
-            "path": "/home/user/GEMSDOE30/docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif",
-            "passed": false,
-            "checks": [
-              {
-                "name": "template_single_band",
-                "passed": true,
-                "detail": "count=1"
-              },
-              {
-                "name": "single_band",
-                "passed": true,
-                "detail": "count=1"
-              },
-              {
-                "name": "float32",
-                "passed": true,
-                "detail": "dtypes=('float32',)"
-              },
-              {
-                "name": "epsg",
-                "passed": true,
-                "detail": "crs=EPSG:32611"
-              },
-              {
-                "name": "template_epsg",
-                "passed": true,
-                "detail": "crs=EPSG:32611"
-              },
-              {
-                "name": "shape_matches_template",
-                "passed": true,
-                "detail": "output=(3730, 3292) template=(3730, 3292)"
-              },
-              {
-                "name": "transform_matches_template",
-                "passed": true,
-                "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
-              },
-              {
-                "name": "100m_north_up_grid",
-                "passed": true,
-                "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
-              },
-              {
-                "name": "finite_and_in_range_inside_footprint",
-                "passed": true,
-                "detail": "valid_pixels=5167373 min=0.0 max=1.0"
-              },
-              {
-                "name": "null_outside_template_footprint",
-                "passed": false,
-                "detail": "outside_pixels=7111787; null/NaN/nodata required"
-              },
-              {
-                "name": "whole_raster_finite_range_diagnostic_advisory",
-                "passed": true,
-                "detail": "advisory only: all_pixels=12279160 finite and in [0, 1]; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
-              },
-              {
-                "name": "template_readable",
-                "passed": true,
-                "detail": "shape=(3730, 3292)"
-              }
+        "scope": "Archived catalogue proxy, not a hidden-test score or a CSR-2 result."
+      },
+      "registry": {
+        "pre_placement_surface": null,
+        "new_final_dots": null,
+        "scope": "One valid registered 13GEMSDOE witness is sufficient to prove STOP; this is not a complete inventory.",
+        "measurement": {
+          "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+          "reference_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+          "reference_source": "https://github.com/buffedlizard55-lab/13GEMSDOE/blob/92ee6f074323f161eed837b80ec3ee5b662e26f5/docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+          "grid": {
+            "shape_hw": [
+              3730,
+              3292
+            ],
+            "crs": "EPSG:32611",
+            "transform": [
+              100.0,
+              0.0,
+              243350.0,
+              0.0,
+              -100.0,
+              4508550.0
             ]
           },
-          "whole_raster_range_diagnostic": {
-            "path": "/home/user/GEMSDOE30/docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif",
-            "passed": true,
-            "checks": [
-              {
-                "name": "template_single_band",
-                "passed": true,
-                "detail": "count=1"
-              },
-              {
-                "name": "single_band",
-                "passed": true,
-                "detail": "count=1"
-              },
-              {
-                "name": "float32",
-                "passed": true,
-                "detail": "dtypes=('float32',)"
-              },
-              {
-                "name": "epsg",
-                "passed": true,
-                "detail": "crs=EPSG:32611"
-              },
-              {
-                "name": "template_epsg",
-                "passed": true,
-                "detail": "crs=EPSG:32611"
-              },
-              {
-                "name": "shape_matches_template",
-                "passed": true,
-                "detail": "output=(3730, 3292) template=(3730, 3292)"
-              },
-              {
-                "name": "transform_matches_template",
-                "passed": true,
-                "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
-              },
-              {
-                "name": "100m_north_up_grid",
-                "passed": true,
-                "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
-              },
-              {
-                "name": "finite_and_in_range_inside_footprint",
-                "passed": true,
-                "detail": "valid_pixels=5167373 min=0.0 max=1.0"
-              },
-              {
-                "name": "finite_in_range_outside_footprint_diagnostic",
-                "passed": true,
-                "detail": "outside_pixels=7111787; finite in-range values required for the nonstandard whole-array diagnostic (finite=7111787)"
-              },
-              {
-                "name": "whole_raster_finite_range_diagnostic",
-                "passed": true,
-                "detail": "all_pixels=12279160 finite and in [0, 1]"
-              },
-              {
-                "name": "template_readable",
-                "passed": true,
-                "detail": "shape=(3730, 3292)"
-              }
-            ]
+          "bound": {
+            "reference_dots": 206895,
+            "footprint_pixels": 5167373,
+            "covered_within_radius_pixels": 5160724,
+            "uncovered_pixels": 6649,
+            "radius_px": 3.0,
+            "threshold": 0.7,
+            "candidate_dot_budget": 44090,
+            "minimum_overlapping_dots": 37441,
+            "minimum_fraction_within_radius": 0.8491948287593558,
+            "first_provably_stopped_budget": 22164,
+            "decision": "duplicate-stop",
+            "scope": "one-reference lower bound; not a complete novelty or submission approval"
           },
-          "whole_raster_range_diagnostic_passed": true,
-          "performance_status": "unscored; format validation is not a score"
+          "independent_coverage": {
+            "method": "explicit clipped 29-offset Euclidean integer disk, no wrap",
+            "covered_within_radius_pixels": 5160724
+          },
+          "previous_candidate": {
+            "path": "docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif",
+            "raster_sha256": "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900",
+            "matching_dots": 44084,
+            "comparison": {
+              "stage": "dots",
+              "spearman_full_footprint": -0.0001320829129299334,
+              "candidate_dots": 44090,
+              "candidate_positive_support": 44090,
+              "reference_dots": 206895,
+              "candidate_fraction_within_3px_of_reference": 0.9998639147198911,
+              "identical_inside_footprint": false,
+              "correlation_duplicate": false,
+              "dot_duplicate": true,
+              "undefined": false
+            },
+            "outside_convention": "zero outside the template footprint",
+            "published_format_validator_passed": false,
+            "whole_array_finite_range_diagnostic_passed": true,
+            "published_failed_checks": [
+              "null_outside_template_footprint"
+            ],
+            "organizer_acceptance_confirmed": false
+          }
         }
       },
-      "historical_best_rerun": {
-        "verified": true,
-        "benchmark_arm": "msdb_edge",
-        "evaluator_version": "component-holdout-v3-blockstats-20261025",
-        "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
-        "candidate_beats_best_with_paired_ci": false
-      },
-      "lane_scientific_gates_all_passed": false,
-      "lane_scientific_verdict": "negative",
+      "raster_sha256": null,
+      "validator_output": null,
+      "submission_name": null,
+      "note": null,
+      "experiments_run": 0,
+      "experiment_cap": 3,
+      "time_cap_seconds": 7200,
       "verdict": "negative",
+      "decision": "DUPLICATE-STOP: no new raster produced, no weekly slot selected or used",
+      "download_ok": false,
+      "ok_to_submit": false,
       "submission_approved": false,
       "slot_selected": false,
-      "download_ok": true,
-      "ok_to_submit": false,
       "organizer_score": null,
-      "global_readiness_verdict": "negative",
-      "display_status": "NEGATIVE \u2014 RESEARCH DOWNLOAD OK; DO NOT SUBMIT TO PORTAL"
+      "historical_organizer_score_receipt": null,
+      "historical_raster_sha256": "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900"
     },
     "verified_now": true,
     "error": null,
     "ok_to_submit": false
   },
-  "current_readiness_scope": "Legacy retained research artifact; newest negative experiment is latest_scientific_review, not a slot selection",
+  "current_readiness_scope": "Archived retained research artifact only; latest_scientific_review is the current zero-experiment duplicate-stop preflight. Neither field selects a slot.",
   "current_readiness": {
     "schema_version": 3,
     "experiment_spec": "pta1",
@@ -2704,9 +2465,9 @@
       "decision": "duplicate-stop; no public TIFF"
     },
     "latest_scientific_review": {
-      "evidence": "docs/research/2026-10-26-csr/run-card.json",
+      "evidence": "docs/research/2026-10-27-registry-preflight/run-card.json",
       "promoted": false,
-      "decision": "NOT APPROVED FOR SUBMISSION"
+      "decision": "DUPLICATE-STOP: no new raster produced, no weekly slot selected or used"
     }
   },
   "any_candidate_promoted": false,
@@ -2937,8 +2698,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "396 tests collected in 1.98s",
-      "exit_code": 0
+      "skip": true
     },
     "score_gain_claimed": false
   }

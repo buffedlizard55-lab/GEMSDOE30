@@ -85,8 +85,9 @@ def test_front_page_offers_only_the_earlier_negative_research_artifact():
         assert 'NOT APPROVED FOR SUBMISSION' in text
         assert csr['published_tiff'] in text
         assert qpc['submission_name'] not in text  # do not offer stopped QPC as an upload name
-        assert '78.9159%' in text and '25 public open-PR heads' in text
-        assert 'not independently reproduced or paired' in text
+        # QPC details remain on its archive page, not presented as the latest stop.
+        assert 'geothermal-quadrature-review.html' in text
+        assert 'DUPLICATE-STOP' in text and '99.9864%' in text
 
 
 def test_parallel_pr_observation_is_not_treated_as_matched_clearance():

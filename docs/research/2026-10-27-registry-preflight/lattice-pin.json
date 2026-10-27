@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "source": "https://github.com/buffedlizard55-lab/13GEMSDOE/blob/92ee6f074323f161eed837b80ec3ee5b662e26f5/docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+  "warning": "Previously published prediction, used exclusively as an immutable duplicate witness; never as a training feature or new submission.",
+  "files": [
+    {
+      "id": "registry_lattice",
+      "repo": "buffedlizard55-lab/13GEMSDOE",
+      "ref": "92ee6f074323f161eed837b80ec3ee5b662e26f5",
+      "path": "docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+      "dest": "registry-extra/13gems-lattice-s5.tif",
+      "git_blob_sha1": "81c802618e6d46c6d62289d856ae74439439bbc6",
+      "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+      "bytes": 1706456,
+      "provenance": "Public historical 13GEMSDOE research prediction; not an organizer-authenticated training layer or upload receipt."
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "run_id": "gems30-registry-preflight-20261027",
+  "created_utc": "2026-10-27T17:27:31+00:00",
+  "hypothesis": "Prior-session CSR-2 proposal: preserve piedmont-scarp evidence while gating the cover-blind potential-field expert to transtensional regions.",
+  "mechanism": "Regime-weighted combination of terrain/MSDB and cover-blind potential-field/Radon evidence; proposal only, never fitted here.",
+  "named_non_fault_process": "Erosional fan or paleoshoreline scarps and non-fault lithologic boundaries can mimic the targeted edges.",
+  "lane_assignment": "unknown: this prompt supplies no single assigned method paragraph; CSR-2 is a prior-session proposal only",
+  "new_holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": null,
+    "ci95": null,
+    "evaluator_version": null,
+    "withheld_positives": null,
+    "reason": "No new model or holdout experiment after the preflight stop."
+  },
+  "historical_holdout_reference": {
+    "source": "docs/research/2026-10-26-csr/results.json",
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "candidate": {
+      "label": "HOLDOUT-DTI",
+      "value": 0.15816185919666023,
+      "withheld_positives": 60988,
+      "ci95": [
+        0.14498623625179088,
+        0.17147419427326102
+      ],
+      "tp_weight": 9284.515745169661,
+      "fp_weight": 40276.59140695901
+    },
+    "matched_control": {
+      "label": "HOLDOUT-DTI",
+      "value": 0.16998645976471358,
+      "withheld_positives": 60988,
+      "ci95": [
+        0.1565342444969894,
+        0.1839480382133582
+      ],
+      "tp_weight": 9980.286501079772,
+      "fp_weight": 39628.933459526714
+    },
+    "paired_difference": {
+      "label": "HOLDOUT-DTI difference",
+      "value": -0.011824600568053345,
+      "ci95": [
+        -0.02345328353893821,
+        0.000296573866001773
+      ]
+    },
+    "scope": "Archived catalogue proxy, not a hidden-test score or a CSR-2 result."
+  },
+  "registry": {
+    "pre_placement_surface": null,
+    "new_final_dots": null,
+    "scope": "One valid registered 13GEMSDOE witness is sufficient to prove STOP; this is not a complete inventory.",
+    "measurement": {
+      "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "reference_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+      "reference_source": "https://github.com/buffedlizard55-lab/13GEMSDOE/blob/92ee6f074323f161eed837b80ec3ee5b662e26f5/docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+      "grid": {
+        "shape_hw": [
+          3730,
+          3292
+        ],
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ]
+      },
+      "bound": {
+        "reference_dots": 206895,
+        "footprint_pixels": 5167373,
+        "covered_within_radius_pixels": 5160724,
+        "uncovered_pixels": 6649,
+        "radius_px": 3.0,
+        "threshold": 0.7,
+        "candidate_dot_budget": 44090,
+        "minimum_overlapping_dots": 37441,
+        "minimum_fraction_within_radius": 0.8491948287593558,
+        "first_provably_stopped_budget": 22164,
+        "decision": "duplicate-stop",
+        "scope": "one-reference lower bound; not a complete novelty or submission approval"
+      },
+      "independent_coverage": {
+        "method": "explicit clipped 29-offset Euclidean integer disk, no wrap",
+        "covered_within_radius_pixels": 5160724
+      },
+      "previous_candidate": {
+        "path": "docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif",
+        "raster_sha256": "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900",
+        "matching_dots": 44084,
+        "comparison": {
+          "stage": "dots",
+          "spearman_full_footprint": -0.0001320829129299334,
+          "candidate_dots": 44090,
+          "candidate_positive_support": 44090,
+          "reference_dots": 206895,
+          "candidate_fraction_within_3px_of_reference": 0.9998639147198911,
+          "identical_inside_footprint": false,
+          "correlation_duplicate": false,
+          "dot_duplicate": true,
+          "undefined": false
+        },
+        "outside_convention": "zero outside the template footprint",
+        "published_format_validator_passed": false,
+        "whole_array_finite_range_diagnostic_passed": true,
+        "published_failed_checks": [
+          "null_outside_template_footprint"
+        ],
+        "organizer_acceptance_confirmed": false
+      }
+    }
+  },
+  "raster_sha256": null,
+  "validator_output": null,
+  "submission_name": null,
+  "note": null,
+  "experiments_run": 0,
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200,
+  "verdict": "negative",
+  "decision": "DUPLICATE-STOP: no new raster produced, no weekly slot selected or used",
+  "download_ok": false,
+  "ok_to_submit": false,
+  "submission_approved": false,
+  "slot_selected": false,
+  "organizer_score": null,
+  "historical_organizer_score_receipt": null,
+  "historical_raster_sha256": "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900"
+}

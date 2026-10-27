@@ -132,3 +132,36 @@ def test_private_artifact_receipts_cannot_imply_a_current_public_file_inspection
                     surface_audit=audit, dots_audit=audit, registry={'complete': True}, artifact_public=False)
     assert gate(result, 'file_contract') == 'unknown'
     assert not result['download_ok'] and result['research_verdict'] == 'negative'
+
+
+def test_strong_inverse_correlation_is_a_conservative_duplicate_stop():
+    card, results, audit = evidence()
+    audit['comparisons'][0]['spearman_full_footprint'] = -.91
+    result = decide(card, results, audit)
+    assert gate(result, 'surface_observed_registry') == 'failed'
+    assert result['research_verdict'] == 'negative'
+
+
+def test_malformed_duplicate_lower_bound_overrides_clear_normal_rows_and_flags():
+    card, results, audit = evidence()
+    audit['decision'] = 'novelty-check-passed-not-submission-approval'  # stale flag
+    audit['registry_complete'] = False
+    audit['malformed_exclusions_proving_duplicate'] = []  # stale flag
+    audit['malformed_exclusions_audited'] = [
+        {'known_matching_candidate_dots': 8, 'candidate_total_dots': 10}]
+    r = decide(card, results, audit)
+    assert gate(r, 'dots_observed_registry') == 'failed'
+    assert gate(r, 'complete_parallel_registry') == 'unknown'
+    assert r['research_verdict'] == 'negative' and r['download_ok'] is False
+
+
+def test_new_malformed_exclusion_blocks_full_readiness_without_a_duplicate_proof():
+    card, results, audit = evidence()
+    audit['registry_complete'] = False
+    audit['malformed_exclusions_proving_duplicate'] = []
+    audit['malformed_exclusions_audited'] = [
+        {'known_matching_candidate_dots': 7, 'candidate_total_dots': 10}]
+    r = decide(card, results, audit)
+    assert gate(r, 'dots_observed_registry') == 'passed'  # no strict >70% proof
+    assert gate(r, 'complete_parallel_registry') == 'unknown'
+    assert r['research_verdict'] == 'negative' and not r['eligible_for_separate_slot_selector']

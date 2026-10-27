@@ -82,14 +82,16 @@ def test_tad_subpage_and_executive_summary_expose_clear_gate_and_deadline_facts(
     assert card["note"] in sub and len(card["note"]) <= 140
     assert (ROOT / "docs/assets/tad24-support.png").is_file()
 
-    for html in (home, guide, sub):
-        assert "G30-TAD" in html
-        assert "Do not spend a weekly slot." in html
-        assert "51.44%" in html
-
-    assert "5:00 p.m. ET" in guide
-    assert "0.4413" in guide
-    assert "Predicted values must be in range [0, 1]" in guide
+    # Historical details remain on their own archived page; do not imply that
+    # the old partial-registry pass, score snapshot or format diagnostic is current.
+    assert "G30-TAD" in sub and "Do not spend a weekly slot." in sub and "51.44%" in sub
+    for html in (home, guide):
+        assert "G30-TAD" in html and "Old status is not current approval" in html
+        assert "DUPLICATE-STOP" in html and "99.9864%" in html
+        assert "0.4413" not in html
+    assert "3 Dec 2026, 23:59 UTC" in guide
+    assert "5:00 p.m. ET" in guide and "22:00 UTC" in guide and "Deadline discrepancy" in guide
+    assert "Portal rejection cause and upload acceptance are unknown" in guide
 
 
 def test_tad_real_verifier_and_cli_exit_codes():
