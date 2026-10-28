@@ -1,0 +1,25 @@
+{
+  "retrieved_date_utc": "2026-10-28",
+  "source_class": "OFFICIAL ORGANIZER GITHUB REFERENCE; not leaderboard evidence",
+  "source_url": "https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/unet-mc-cv-reference-solution.ipynb",
+  "notebook_sha256": "1a7622732ba00f67237058bc0efe79b45ba4e87c449fc9c1e5d6ea659de92ca0",
+  "verified_excerpts": [
+    {
+      "cell_index_zero_based": 0,
+      "source": "# GEMS Prize Reference Solution\n\n_author_: John Lipor, Associate Professor at Portland State University\n\n# Fault Detection Using U-Net with Monte Carlo Cross-Validation\n\nThis benchmark notebook implements a deep learning approach to geological fault detection. \nThe solution uses an ensemble of U-Net models trained across multiple train/test splits to \nproduce predictions.\n\n### Approach Overview:\n\n1. Load and pre-process multi-channel geospatial features (elevation, gradients, etc.) and fault labels\n\n1. Split feature and fault label rasters into patches\n\n1. Train U-Net models on patches with data augmentation, applying random train/test splits for cross-validation, and using a Tversky loss function weighted to penalize false negatives more than false positives\n\n1. Average predictions from best model across each iteration for final output\n\n### Steps to run this notebook\n\n1. Create a python environment and install the required dependencies using your chosen package manager.\n1. Download the feature data and fault label GeoTIFFs from the [data download page](https://www.drivendata.org/competitions/306/competition-doe-gems/data/) into the `data/` directory.\n1. Run the notebook!"
+    },
+    {
+      "cell_index_zero_based": 19,
+      "source": "# match size to original image\ny_final = y_combined[: y_orig.shape[0], : y_orig.shape[1]]\n\n# get CRS and georeferencing from faults.tif\nfname_out = \"predicted_faults_example.tif\"\nfault_dataset = rasterio.open(FAULT_LABELS_PATH)\n\nnew_dataset = rasterio.open(\n    fname_out,\n    \"w\",\n    driver=\"GTiff\",\n    height=y_final.shape[0],\n    width=y_final.shape[1],\n    count=1,\n    dtype=y_final.dtype,\n    crs=fault_dataset.crs,\n    transform=fault_dataset.transform,\n)\nnew_dataset.write(y_final, 1)\nnew_dataset.close()"
+    }
+  ],
+  "training_loss_parameters": {
+    "cell_index_zero_based": 16,
+    "quote": "alpha = 0.2  # weight for false positives in Tversky loss\nbeta = 0.8  # weight for false negatives in Tversky loss"
+  },
+  "limits": [
+    "This notebook uses Tversky training loss; it does not independently verify the project distance-tolerant holdout evaluator.",
+    "Writer copies labels CRS/transform and uses a single band; no explicit nodata argument appears in this cell. That omission does not prove portal nodata behavior.",
+    "No current competition rules, official data download, leaderboard, or submission receipt was accessed."
+  ]
+}
