@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-28T00:03:15Z",
+  "generated_utc": "2026-10-28T00:07:13Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -923,7 +923,7 @@
             "matching_dots": 39984,
             "comparison": {
               "stage": "dots",
-              "spearman_full_footprint": -0.0002990201174810405,
+              "spearman_full_footprint": -0.0002990201174810385,
               "candidate_dots": 40000,
               "candidate_positive_support": 40000,
               "reference_dots": 206895,
@@ -947,7 +947,7 @@
             "matching_dots": 10844,
             "comparison": {
               "stage": "dots",
-              "spearman_full_footprint": -0.00017986531544301798,
+              "spearman_full_footprint": -0.000179865315443018,
               "candidate_dots": 10848,
               "candidate_positive_support": 10848,
               "reference_dots": 206895,
@@ -970,7 +970,7 @@
           "matching_dots": 44084,
           "comparison": {
             "stage": "dots",
-            "spearman_full_footprint": -0.0001320829129299334,
+            "spearman_full_footprint": -0.00013208291292993258,
             "candidate_dots": 44090,
             "candidate_positive_support": 44090,
             "reference_dots": 206895,
@@ -2981,7 +2981,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "424 tests collected in 1.06s",
+      "pytest_collect": "424 tests collected in 3.16s",
       "exit_code": 0
     },
     "score_gain_claimed": false
