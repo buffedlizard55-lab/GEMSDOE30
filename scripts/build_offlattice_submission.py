@@ -1,36 +1,35 @@
 #!/usr/bin/env python3
 """
-Build a UNIQUE GEMS submission GeoTIFF: off-lattice geothermal structural emission.
+Build an experimental off-lattice GEMS GeoTIFF (research only; do not submit).
 
-Scientific rationale (PhD-level), distinct from every prior GEMSDOE lane:
----------------------------------------------------------------
-The h19-5 / D2.8 / H33 family (GEMSDOE24/25/27/28/30/31/32/33/36; owner-reported
-0.1922–0.2778) emits dense dots immediately off catalogue faults. This is now a
-single known lane: the pinned 13GEMSDOE lattice (206,895 dots) covers
-5,160,724 of 5,167,373 valid footprint cells within 3 px, so every high-dot-budget
-candidate in that family is provably a literal duplicate (≥70% of dots within
-3 px of lattice dots for any budget ≥ 22,164). Pruning dots near catalogue
-faults cannot produce a unique, higher-scoring file.
+The pinned 13GEMSDOE lattice (206,895 dots) covers 5,160,724 of 5,167,373
+valid footprint cells within 3 px. The repository's density-independent bound
+shows that candidates with at least 22,164 dots are duplicate-stopped; smaller
+budgets are not automatically cleared.
 
-This lane does the opposite: it places dots ONLY in pixels that are ≥3 px from
-every lattice dot — the 6,649 valid cells the lane family never reaches — and
-ranks them with public geothermal structural layers (USGS GDR Quaternary faults
-and Quaternary volcanics, GDR paleo springs and 2 m temperature-probe points,
-USGS SGMC faults). These target concealed geothermal feeder faults (step-overs,
-relay ramps, blind volcanic-hosted structures) most likely to be missing from the
-USGS/INGENIOUS catalogue, at pixels the catalogue-adjacent lanes provably miss.
+The original research hypothesis proposed concealed geothermal feeder faults
+(step-overs, relay ramps, blind volcanic-hosted structures) in the lattice's
+6,649 uncovered valid cells, ranked using public USGS/GDR and geothermal layers.
+A post-run static audit invalidates that claimed ranking for this artifact:
+`select_dots` emits every uncovered cell, so score ordering cannot change the
+dot support. `W_SGMC` is unused, applied weights sum to 0.9 rather than 1.0,
+and the pinned source receipt reports no GDR Quaternary-fault features intersect
+the grid. The raster is a lattice-complement pattern, not demonstrated evidence
+for the geological hypothesis; see `post_run_code_audit` in the run card.
 
 Output contract: single-band float32 GeoTIFF, EPSG:32611, 3730×3292, 100 m
-north-up, identical grid to the pinned public reference (same CRS/shape/transform
-as the organizer sample_submission.tip per recorded metadata), finite values in
-[0,1] inside the footprint, NaN outside (published GEMS format).
+north-up, grid metadata independently checked against a restored owner-mirror
+sample_submission.tif (not organizer-authenticated), finite values in [0,1]
+inside the footprint, NaN outside (published GEMS format).
 
-Status: research artifact. Holdout validation is BLOCKED in this checkout because
-data/raw/ (training_features.tif, labels.tif, sample_submission.tif) requires a
-DrivenData login and is not present. Per the parallel-run protocol this file is
-NOT approved for a weekly submission slot and NOT OK to upload to DrivenData;
-the verdict below is negative. Downloading the file is safe (format-valid), but
-submitting it is at the submitter's own risk until the holdout gate passes.
+Status: research artifact only. The required organizer-authenticated
+training_features.tif is absent; restored owner-mirror sample_submission.tif and
+labels.tif are not organizer-authenticated. Holdout and feature-alone leakage
+canaries were not run. The lane was self-assigned, the complete registry and
+pre-placement surface comparisons are unavailable, and the static source audit
+found that geological layer ordering does not affect the emitted support. This
+file is NOT OK TO SUBMIT, NOT slot-approved, and has no score estimate. It may
+be downloaded for research only; no weekly slot was selected.
 """
 
 from __future__ import annotations

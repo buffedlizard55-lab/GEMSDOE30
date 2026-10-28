@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-28T11:54:53Z",
+  "generated_utc": "2026-10-28T12:21:57Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -19,16 +19,22 @@
       {
         "dest": "labels.tif",
         "path": "data/raw/labels.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-        "expected_bytes": 425830
+        "expected_bytes": 425830,
+        "actual_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+        "actual_bytes": 425830,
+        "sha256_matches_pin": true
       },
       {
         "dest": "sample_submission.tif",
         "path": "data/raw/sample_submission.tif",
-        "present": false,
+        "present": true,
         "expected_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-        "expected_bytes": 1599597
+        "expected_bytes": 1599597,
+        "actual_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+        "actual_bytes": 1599597,
+        "sha256_matches_pin": true
       }
     ],
     "prepared_dataset": {
@@ -40,7 +46,10 @@
     "note": "placement + SHA-256 verification is a precondition for training, not evidence of model quality; mirrors are owner-supplied and not organizer-authenticated"
   },
   "competition_data": {
-    "owner_mirror_files_present": [],
+    "owner_mirror_files_present": [
+      "labels.tif",
+      "sample_submission.tif"
+    ],
     "organizer_authenticated": false,
     "prepared_dataset_signature": "291d346794ba20730708eaf1ab0f5695396732d7f1b183382ec1f3aeede855ed",
     "pins_core_sha256_verified_now": false,
@@ -452,8 +461,8 @@
       "range_error_immune": null,
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
-      "site_linked": false,
-      "mentioned_on_site": false,
+      "site_linked": true,
+      "mentioned_on_site": true,
       "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "gems30-offlattice-geothermal-structural-20261028-s7",
@@ -474,8 +483,8 @@
       "range_error_immune": null,
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
-      "site_linked": false,
-      "mentioned_on_site": false,
+      "site_linked": true,
+      "mentioned_on_site": true,
       "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "gems30-offlattice-geothermal-structural-20261028-s7",
@@ -930,7 +939,182 @@
     "verifier": "scripts/verify_registry_preflight.py",
     "report": "docs/research/2026-10-27-registry-preflight/review.md",
     "site_page": "csr-discontinuity-review.html",
-    "decision": null,
+    "decision": {
+      "research_verdict": "negative",
+      "display_status": "DUPLICATE-STOP: no new raster produced, no weekly slot selected or used",
+      "download_ok": false,
+      "ok_to_submit": false,
+      "submission_approved": false,
+      "slot_selected": false,
+      "measurement": {
+        "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+        "reference_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+        "reference_source": "https://github.com/buffedlizard55-lab/13GEMSDOE/blob/92ee6f074323f161eed837b80ec3ee5b662e26f5/docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+        "grid": {
+          "shape_hw": [
+            3730,
+            3292
+          ],
+          "crs": "EPSG:32611",
+          "transform": [
+            100.0,
+            0.0,
+            243350.0,
+            0.0,
+            -100.0,
+            4508550.0
+          ]
+        },
+        "bound": {
+          "reference_dots": 206895,
+          "footprint_pixels": 5167373,
+          "covered_within_radius_pixels": 5160724,
+          "uncovered_pixels": 6649,
+          "radius_px": 3.0,
+          "threshold": 0.7,
+          "candidate_dot_budget": 44090,
+          "minimum_overlapping_dots": 37441,
+          "minimum_fraction_within_radius": 0.8491948287593558,
+          "first_provably_stopped_budget": 22164,
+          "decision": "duplicate-stop",
+          "scope": "one-reference lower bound; not a complete novelty or submission approval"
+        },
+        "independent_coverage": {
+          "method": "explicit clipped 29-offset Euclidean integer disk, no wrap",
+          "covered_within_radius_pixels": 5160724
+        },
+        "parallel_candidates_merged_during_audit": [
+          {
+            "lane": "CTD-1",
+            "path": "docs/downloads/gems30-ctd1-concealed-stepper-20261027T172620Z-c39a9264.tif",
+            "raster_sha256": "13074a02b38e7edea5faaccbaa18f382dffd395fd211139becb7d66278f02297",
+            "source_commit": "99b9cc9693bd19c474f298a99618599ade6f3c60",
+            "matching_dots": 39984,
+            "comparison": {
+              "stage": "dots",
+              "spearman_full_footprint": -0.0002990201174810405,
+              "candidate_dots": 40000,
+              "candidate_positive_support": 40000,
+              "reference_dots": 206895,
+              "candidate_fraction_within_3px_of_reference": 0.9996,
+              "identical_inside_footprint": false,
+              "correlation_duplicate": false,
+              "dot_duplicate": true,
+              "undefined": false
+            },
+            "budget_bound_decision": "duplicate-stop",
+            "minimum_overlapping_dots": 33351,
+            "published_format_validator_passed": true,
+            "whole_array_finite_range_diagnostic_passed": false,
+            "produced_by_this_audit": false
+          },
+          {
+            "lane": "FC-1",
+            "path": "docs/downloads/gems30-fc1-concealed-flank-20261027T172846Z-f182c780.tif",
+            "raster_sha256": "d6dadb9c6119767f0b4af2f2122e73529829b3c1b36cf1131165cb68b8da2612",
+            "source_commit": "99b9cc9693bd19c474f298a99618599ade6f3c60",
+            "matching_dots": 10844,
+            "comparison": {
+              "stage": "dots",
+              "spearman_full_footprint": -0.00017986531544301798,
+              "candidate_dots": 10848,
+              "candidate_positive_support": 10848,
+              "reference_dots": 206895,
+              "candidate_fraction_within_3px_of_reference": 0.9996312684365781,
+              "identical_inside_footprint": false,
+              "correlation_duplicate": false,
+              "dot_duplicate": true,
+              "undefined": false
+            },
+            "budget_bound_decision": "not-proven",
+            "minimum_overlapping_dots": 4199,
+            "published_format_validator_passed": true,
+            "whole_array_finite_range_diagnostic_passed": false,
+            "produced_by_this_audit": false
+          }
+        ],
+        "previous_candidate": {
+          "path": "docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif",
+          "raster_sha256": "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900",
+          "matching_dots": 44084,
+          "comparison": {
+            "stage": "dots",
+            "spearman_full_footprint": -0.0001320829129299334,
+            "candidate_dots": 44090,
+            "candidate_positive_support": 44090,
+            "reference_dots": 206895,
+            "candidate_fraction_within_3px_of_reference": 0.9998639147198911,
+            "identical_inside_footprint": false,
+            "correlation_duplicate": false,
+            "dot_duplicate": true,
+            "undefined": false
+          },
+          "outside_convention": "zero outside the template footprint",
+          "published_format_validator_passed": false,
+          "whole_array_finite_range_diagnostic_passed": true,
+          "published_failed_checks": [
+            "null_outside_template_footprint"
+          ],
+          "organizer_acceptance_confirmed": false
+        }
+      },
+      "postmerge_candidates": [
+        {
+          "lane": "GC-1",
+          "path": "docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif",
+          "raster_sha256": "0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564",
+          "source_commit": "48d4b0f0c997e3f033d7c1e0cfc9f4533a974fe5",
+          "matching_dots": 39960,
+          "comparison": {
+            "stage": "dots",
+            "spearman_full_footprint": -0.00010754844987874165,
+            "candidate_dots": 40000,
+            "candidate_positive_support": 40000,
+            "reference_dots": 206895,
+            "candidate_fraction_within_3px_of_reference": 0.999,
+            "identical_inside_footprint": false,
+            "correlation_duplicate": false,
+            "dot_duplicate": true,
+            "undefined": false
+          },
+          "budget_bound_decision": "duplicate-stop",
+          "minimum_overlapping_dots": 33351,
+          "published_format_validator_passed": true,
+          "whole_array_finite_range_diagnostic_passed": false,
+          "produced_by_this_audit": false,
+          "ok_to_submit": false,
+          "dots_on_catalogue_d0": 676,
+          "dots_within_2px_of_catalogue": 3177
+        },
+        {
+          "lane": "VS-1",
+          "path": "docs/downloads/GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif",
+          "raster_sha256": "e701076a93df45ae911b15519bcce66d88cca318686fa39df4117e921dd1876b",
+          "source_commit": "d3435433ca015a84ff2eaf41a1304a301dca0f47",
+          "matching_dots": 37654,
+          "comparison": {
+            "stage": "dots",
+            "spearman_full_footprint": -0.00013483744101948792,
+            "candidate_dots": 37654,
+            "candidate_positive_support": 37654,
+            "reference_dots": 206895,
+            "candidate_fraction_within_3px_of_reference": 1.0,
+            "identical_inside_footprint": false,
+            "correlation_duplicate": false,
+            "dot_duplicate": true,
+            "undefined": false
+          },
+          "budget_bound_decision": "duplicate-stop",
+          "minimum_overlapping_dots": 31005,
+          "published_format_validator_passed": true,
+          "whole_array_finite_range_diagnostic_passed": false,
+          "produced_by_this_audit": false,
+          "ok_to_submit": false,
+          "dots_on_catalogue_d0": 13098,
+          "dots_within_2px_of_catalogue": 17084
+        }
+      ]
+    },
     "history_preserved": true,
     "card": {
       "schema_version": 1,
@@ -1134,8 +1318,8 @@
       "historical_raster_sha256": "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900",
       "parallel_review_utc": "2026-10-27T17:46:53+00:00"
     },
-    "verified_now": false,
-    "error": "[Errno 2] No such file or directory: '/home/user/GEMSDOE30/data/raw/sample_submission.tif'",
+    "verified_now": true,
+    "error": null,
     "ok_to_submit": false
   },
   "current_readiness_scope": "Archived retained research artifact only; latest_scientific_review is the current zero-experiment duplicate-stop preflight. Neither field selects a slot.",
@@ -1327,10 +1511,118 @@
     }
   },
   "current_artifact_inspection": {
-    "verified_now": false,
-    "error": "/home/user/GEMSDOE30/data/raw/sample_submission.tif"
+    "verified_now": true,
+    "error": null
   },
-  "current_release_decision": null,
+  "current_release_decision": {
+    "schema_version": 1,
+    "readiness_version": "research-readiness-v3-matched-controls-20261025",
+    "raster_sha256": "958f733cbd3501bd0ea92451a848cc28f62c913691ab3f4bc9b61aeebaaeb827",
+    "gates": [
+      {
+        "name": "file_contract",
+        "status": "passed",
+        "detail": "Reopened shared-writer GeoTIFF matches template; SHA-256 binds this decision to its exact bytes"
+      },
+      {
+        "name": "labelled_holdout_evidence",
+        "status": "passed",
+        "detail": "HOLDOUT-DTI requires evaluator/protocol, withheld positives and spatial-bootstrap 95% CI"
+      },
+      {
+        "name": "paired_improvement",
+        "status": "failed",
+        "detail": "Fixed PTA-1 candidate must improve all 3 comparators (core19, pta_naive_sym, sub8_raw) with positive paired CI lower bounds"
+      },
+      {
+        "name": "single_feature_leakage_canaries",
+        "status": "failed",
+        "detail": "All 37 raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC"
+      },
+      {
+        "name": "count_matched_construction",
+        "status": "passed",
+        "detail": "All fixed arms must realize the same predeclared active-domain budget in every fold"
+      },
+      {
+        "name": "surface_observed_registry",
+        "status": "passed",
+        "detail": "198 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+      },
+      {
+        "name": "dots_observed_registry",
+        "status": "passed",
+        "detail": "198 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+      },
+      {
+        "name": "complete_parallel_registry",
+        "status": "unknown",
+        "detail": "Nine-site public snapshots cannot attest all parallel rasters or missing original surfaces"
+      },
+      {
+        "name": "assigned_lane",
+        "status": "unknown",
+        "detail": "Autonomous research continuation is not an externally supplied lane assignment"
+      },
+      {
+        "name": "comparable_historical_best",
+        "status": "unknown",
+        "detail": "Do not substitute an archived metric or a new comparator for a missing historical-best rerun"
+      },
+      {
+        "name": "experimental_budget",
+        "status": "passed",
+        "detail": "At most three experiments / two experimental hours"
+      },
+      {
+        "name": "artifact_identity",
+        "status": "passed",
+        "detail": "Named artifact and note of at most 140 characters"
+      },
+      {
+        "name": "current_published_inventory_coverage",
+        "status": "unknown",
+        "detail": "9 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
+      }
+    ],
+    "observed_registry": {
+      "surface": {
+        "registry_entries_compared": 198,
+        "max_spearman": 0.10547821858490214,
+        "max_fraction_within_3px": null,
+        "status": "passed"
+      },
+      "dots": {
+        "registry_entries_compared": 198,
+        "max_spearman": 0.03190577117988539,
+        "max_fraction_within_3px": 0.5459741437967793,
+        "status": "passed"
+      }
+    },
+    "download_ok": true,
+    "research_verdict": "negative",
+    "eligible_for_separate_slot_selector": false,
+    "submission_approved": false,
+    "slot_selected": false,
+    "display_status": "DOWNLOAD IS RESEARCH ONLY; CURRENT NOVELTY COVERAGE UNKNOWN; DO NOT SUBMIT",
+    "organizer_score": null,
+    "organizer_acceptance_confirmed": false,
+    "archived_research_verdict": "negative",
+    "unassessed_current_reference_sha256": [
+      "0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564",
+      "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900",
+      "13074a02b38e7edea5faaccbaa18f382dffd395fd211139becb7d66278f02297",
+      "20fc7b107e9e1a3a19e5e082d41720f0ce2204ad0ae8ca632b9884d16534af26",
+      "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
+      "572df94e8d3106a90dc7f85e2d81aa944d38dd59ac40df840e09d14f2ea6ccfb",
+      "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07",
+      "d6dadb9c6119767f0b4af2f2122e73529829b3c1b36cf1131165cb68b8da2612",
+      "e701076a93df45ae911b15519bcce66d88cca318686fa39df4117e921dd1876b"
+    ],
+    "current_inventory_coverage": "unknown",
+    "ok_to_submit": false,
+    "decision": "DO NOT SPEND WEEKLY SUBMISSION SLOT"
+  },
   "latest_scientific_attempt": {
     "run_card": "docs/research/texture-controls/run-card.json",
     "card": {
@@ -1523,10 +1815,125 @@
       }
     },
     "receipt_inspection": {
-      "verified_now": false,
-      "error": "[Errno 2] No such file or directory: '/home/user/GEMSDOE30/data/raw/sample_submission.tif'"
+      "verified_now": true,
+      "error": null,
+      "private_raster_reopened": false
     },
-    "decision": null,
+    "decision": {
+      "schema_version": 1,
+      "readiness_version": "research-readiness-v3-matched-controls-20261025",
+      "raster_sha256": "af499375cec73f42f98f398370b390e96c3d3b23943477eb1f613570baa98e0d",
+      "gates": [
+        {
+          "name": "file_contract",
+          "status": "unknown",
+          "detail": "Duplicate artifact withheld from publication; recorded local validation is not a current public-file reinspection"
+        },
+        {
+          "name": "labelled_holdout_evidence",
+          "status": "passed",
+          "detail": "HOLDOUT-DTI requires evaluator/protocol, withheld positives and spatial-bootstrap 95% CI"
+        },
+        {
+          "name": "paired_improvement",
+          "status": "failed",
+          "detail": "Fixed full-stack candidate must improve core19, zero-lag and phase-null controls with positive paired CI lower bounds"
+        },
+        {
+          "name": "single_feature_leakage_canaries",
+          "status": "passed",
+          "detail": "All 28 raw/derived inputs tested alone in four folds; raw bidirectional and training-only univariate AUC"
+        },
+        {
+          "name": "count_matched_construction",
+          "status": "passed",
+          "detail": "All fixed arms must realize the same predeclared active-domain budget in every fold"
+        },
+        {
+          "name": "surface_observed_registry",
+          "status": "unknown",
+          "detail": "171 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+        },
+        {
+          "name": "dots_observed_registry",
+          "status": "failed",
+          "detail": "171 recorded comparisons; threshold rho >0.90 or dot overlap >0.70 is duplicate-stop"
+        },
+        {
+          "name": "complete_parallel_registry",
+          "status": "unknown",
+          "detail": "Nine-site public snapshots cannot attest all parallel rasters or missing original surfaces"
+        },
+        {
+          "name": "assigned_lane",
+          "status": "unknown",
+          "detail": "Autonomous research continuation is not an externally supplied lane assignment"
+        },
+        {
+          "name": "comparable_historical_best",
+          "status": "unknown",
+          "detail": "Do not substitute an archived metric or a new comparator for a missing historical-best rerun"
+        },
+        {
+          "name": "experimental_budget",
+          "status": "passed",
+          "detail": "At most three experiments / two experimental hours"
+        },
+        {
+          "name": "artifact_identity",
+          "status": "passed",
+          "detail": "Named artifact and note of at most 140 characters"
+        },
+        {
+          "name": "current_published_inventory_coverage",
+          "status": "unknown",
+          "detail": "9 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
+        }
+      ],
+      "observed_registry": {
+        "surface": {
+          "registry_entries_compared": 171,
+          "max_spearman": 0.15657261436067785,
+          "max_fraction_within_3px": null,
+          "status": "unknown"
+        },
+        "dots": {
+          "registry_entries_compared": 171,
+          "max_spearman": 0.06383254570926011,
+          "max_fraction_within_3px": 0.790904967112724,
+          "status": "failed"
+        }
+      },
+      "download_ok": false,
+      "research_verdict": "negative",
+      "eligible_for_separate_slot_selector": false,
+      "submission_approved": false,
+      "slot_selected": false,
+      "display_status": "DOWNLOAD IS RESEARCH ONLY; CURRENT NOVELTY COVERAGE UNKNOWN; DO NOT SUBMIT",
+      "organizer_score": null,
+      "organizer_acceptance_confirmed": false,
+      "recorded_local_validation": {
+        "status": "passed",
+        "receipt_sha256": "e6ce438196a609e6a0b504619c2b85473d27a1c2a38e7b9ed1a05748ac1ac2d8",
+        "current_bytes_reopened": false,
+        "scope": "Stored validator receipt only; duplicate raster is not distributed"
+      },
+      "archived_research_verdict": "negative",
+      "unassessed_current_reference_sha256": [
+        "0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564",
+        "0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900",
+        "13074a02b38e7edea5faaccbaa18f382dffd395fd211139becb7d66278f02297",
+        "20fc7b107e9e1a3a19e5e082d41720f0ce2204ad0ae8ca632b9884d16534af26",
+        "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
+        "572df94e8d3106a90dc7f85e2d81aa944d38dd59ac40df840e09d14f2ea6ccfb",
+        "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07",
+        "d6dadb9c6119767f0b4af2f2122e73529829b3c1b36cf1131165cb68b8da2612",
+        "e701076a93df45ae911b15519bcce66d88cca318686fa39df4117e921dd1876b"
+      ],
+      "current_inventory_coverage": "unknown",
+      "ok_to_submit": false,
+      "decision": "DO NOT SPEND WEEKLY SUBMISSION SLOT"
+    },
     "public_download": false
   },
   "additional_stopped_attempts": [
@@ -1581,9 +1988,12 @@
       "lane": "QPC-1",
       "pointer": "docs/research/2026-10-26-qpc/run-card.json",
       "verifier": "scripts/verify_quadrature_phase_run.py",
-      "verified_now": false,
-      "error": "[Errno 2] No such file or directory: '/home/user/GEMSDOE30/data/raw/sample_submission.tif'",
-      "ok_to_submit": false
+      "verified_now": true,
+      "error": null,
+      "decision": "duplicate-stop at dots; no perturbation or publication",
+      "ok_to_submit": false,
+      "research_verdict": "negative",
+      "gates": []
     },
     {
       "lane": "POOL-1",
@@ -1623,9 +2033,57 @@
       "lane": "G30-TAD",
       "pointer": "docs/research/tilt-alteration-discontinuity/current-run.json",
       "verifier": "scripts/verify_tad_run.py",
-      "verified_now": false,
-      "error": "/home/user/GEMSDOE30/data/raw/sample_submission.tif: No such file or directory",
-      "ok_to_submit": false
+      "verified_now": true,
+      "error": null,
+      "decision": "DO NOT SPEND WEEKLY SUBMISSION SLOT",
+      "download_ok": true,
+      "ok_to_submit": false,
+      "research_verdict": "negative",
+      "primary_file": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif",
+      "companion_nan_file": "docs/downloads/gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif",
+      "raster_sha256": "3077db43ee72ee526d8b943d1db40f19ce49be9d8ccd3109068ca442964f26cc",
+      "gates": [
+        {
+          "name": "file_contract",
+          "status": "passed",
+          "detail": "Reopened both -zeros.tif (all 12,279,160 cells finite in [0, 1]) and -nan.tif (shared validator passed): exact EPSG:32611 / (3730, 3292) / transform match, 38,000 {0,1} dots, 0 on or <=2 px of catalogue"
+        },
+        {
+          "name": "preregistration_and_support_guard",
+          "status": "passed",
+          "detail": "Preregistration 9c7e91953be2 locked before start; transform tilt-alt-v1-20261025 (6f3cdfebe6fe) verified with impulse support 15 px <= 17 px fold guard"
+        },
+        {
+          "name": "paired_holdout_improvement",
+          "status": "failed",
+          "detail": "HOLDOUT-DTI tilt_alt24=0.14405 vs core19=0.13982 (delta=+0.00423, 95% CI [-0.01554, +0.02398]); subsurface16=0.10959; CI lower bound vs core19 <= 0"
+        },
+        {
+          "name": "single_feature_leakage_canaries",
+          "status": "passed",
+          "detail": "144 univariate checks (36 unique features x 4 folds); max bidirectional AUC = 0.6434 <= 0.90"
+        },
+        {
+          "name": "novelty_surface",
+          "status": "passed",
+          "detail": "Pre-placement OOF surface max Spearman = 0.1637 <= 0.90 across 193 registry rasters"
+        },
+        {
+          "name": "novelty_dots",
+          "status": "passed",
+          "detail": "Post-placement 38,000 dots max 3-px overlap = 0.5144 <= 0.70 (max Spearman = 0.0397 <= 0.90) across 193 registry rasters"
+        },
+        {
+          "name": "budget_and_identity",
+          "status": "passed",
+          "detail": "3/3 experiments in 769.0s <= 7,200s; note 82/140 chars"
+        },
+        {
+          "name": "current_published_inventory_coverage",
+          "status": "unknown",
+          "detail": "9 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
+        }
+      ]
     }
   ],
   "lane_g30_tad_run_card": {
@@ -2389,7 +2847,7 @@
     "current_research_artifact": {
       "evidence": "docs/research/phase-tilt-asymmetry/run-card.json",
       "promoted": false,
-      "decision": "blocked: current inspection unavailable"
+      "decision": "DOWNLOAD IS RESEARCH ONLY; CURRENT NOVELTY COVERAGE UNKNOWN; DO NOT SUBMIT"
     },
     "stopped_attempt_g30-lsm": {
       "evidence": "docs/research/2026-10-25-lsm/current-run.json",
@@ -2399,7 +2857,7 @@
     "stopped_attempt_qpc-1": {
       "evidence": "docs/research/2026-10-26-qpc/run-card.json",
       "promoted": false,
-      "decision": "blocked: inspection unavailable"
+      "decision": "duplicate-stop at dots; no perturbation or publication"
     },
     "stopped_attempt_pool-1": {
       "evidence": "docs/research/2026-10-27-pool/run-card.json",
@@ -2409,17 +2867,17 @@
     "verified_lane_g30_tad": {
       "evidence": "docs/research/tilt-alteration-discontinuity/current-run.json",
       "promoted": false,
-      "decision": "blocked: inspection unavailable"
+      "decision": "DO NOT SPEND WEEKLY SUBMISSION SLOT"
     },
     "latest_scientific_attempt": {
       "evidence": "docs/research/texture-controls/run-card.json",
       "promoted": false,
-      "decision": "blocked: latest stopped-attempt inspection unavailable"
+      "decision": "duplicate-stop; no public TIFF"
     },
     "latest_scientific_review": {
       "evidence": "docs/research/2026-10-27-registry-preflight/run-card.json",
       "promoted": false,
-      "decision": "blocked: newest review inspection unavailable"
+      "decision": "DUPLICATE-STOP: no new raster produced, no weekly slot selected or used"
     }
   },
   "any_candidate_promoted": false,
@@ -2650,7 +3108,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "437 tests collected in 1.16s",
+      "pytest_collect": "438 tests collected in 1.12s",
       "exit_code": 0
     },
     "score_gain_claimed": false

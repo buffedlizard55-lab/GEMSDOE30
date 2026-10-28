@@ -46,6 +46,27 @@ def test_current_overview_discloses_merged_tiffs_as_stopped_without_download_con
     assert "whole-array finite-range diagnostic fails" in pages["index.html"]
 
 
+def test_generated_offlattice_artifact_is_linked_but_never_claimed_submit_ready():
+    pages = render(
+        _receipt("docs/research/2026-10-27-registry-preflight/run-card.json"),
+        _receipt("docs/research/2026-10-26-csr/fleet-audit.json"),
+    )
+    candidate = "gems30-offlattice-geothermal-structural-20261028-s7.tif"
+    for page_name in ("index.html", "executive-summary.html", "csr-discontinuity-review.html", "priority-executive-summary.html"):
+        page = pages[page_name]
+        assert candidate in page
+        assert "Download research TIFF — NOT OK TO SUBMIT" in page
+        assert "HOLDOUT BLOCKED" in page
+        assert "No score forecast" in page
+        assert "global registry status remains UNKNOWN" in page
+        assert "Static code review blocks the geological interpretation" in page
+        assert "score sorting cannot affect support" in page
+        assert f'href="docs/downloads/{candidate}" download' in page
+    assert "maximum within-3-pixel overlap is 21.16%" in pages["executive-summary.html"]
+    assert "maximum absolute Spearman is 0.001591" in pages["executive-summary.html"]
+    assert "No competition slot selected" in pages["executive-summary.html"]
+
+
 def test_current_overview_discloses_pool_duplicate_stop_not_submission():
     pages = render(
         _receipt("docs/research/2026-10-27-registry-preflight/run-card.json"),

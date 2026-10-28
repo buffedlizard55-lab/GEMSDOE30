@@ -1,6 +1,6 @@
 # Repository review — 2026-10-28
 
-Scope: a read-only review of the `arena/9d8019dc-gemsdoe30` checkout (base `b76762e`, `main`). No new model, raster, submission name, note, score estimate, or weekly-slot selection was made in this review.
+Scope: review of the repository state after syncing this session branch with the intervening `main` updates. The historical review observations below are retained from the merged review; the independent recheck section at the end records commands actually rerun in this session. No new model, raster, submission name, note, score estimate, or weekly-slot selection was made.
 
 ## Executive decision
 
@@ -71,3 +71,17 @@ Authoritative sources for manual review: [DrivenData competition page](https://w
 - **Pass 1 — implement and verify.** Restored the owner mirrors, ran all nine verifiers, the site check and the test suite. All passed (negative verdicts reproduced).
 - **Pass 2 — bugs and assumptions.** Found the environment-only missing-template failure (resolved by the README restore), confirmed the score attribution gaps, the 0.3195/0.4413 conflict and the pointer drift. No code change was needed.
 - **Pass 3 — cross-check.** Re-read the claims above against the verifier output and the ledger; this report makes no score claim beyond the labelled sources. No new raster or submission was created.
+
+
+## Independent verification in this session branch (2026-10-28)
+
+After restoring the SHA-pinned owner mirrors for `sample_submission.tif`, `labels.tif`, and the 13GEMSDOE lattice witness (not organizer-authenticated), I independently reran:
+
+- `scripts/verify_registry_preflight.py`: **PASS as negative**; duplicate-stop reproduced. The 37,441/44,090 figure is the one-witness lower-bound overlap, not a score or registry-wide clearance.
+- `scripts/verify_pool_run.py`: **PASS as negative receipt**; two-seed paired **HOLDOUT-DTI** advantages reproduce under evaluator `component-holdout-v3-blockstats-20261025`, with 60,988 withheld positives and paired spatial-block 95% CIs in the run card. The candidate dots breach the duplicate stop; no published candidate TIFF exists. This is not `ORGANIZER-CONFIRMED` and not comparable to leaderboard scores.
+- `scripts/build_research_site.py --check`: PASS.
+- `scripts/build_status.py`: PASS; refreshed the generated status feed. It records the latest local test-collection result and makes no score-gain claim.
+- `.venv/bin/python -m pytest -q`: **424 passed, 5 skipped, 4 warnings, 7 subtests passed**. Five skips are optional PyTorch-dependent loss tests because PyTorch is not installed; warnings are Rasterio affine-transform pending deprecations.
+- JSON parsing for the run card, local Markdown target checks for `README.md` and this report, and `git diff --check`: PASS.
+
+The current session's [ranked four-hypothesis slate](research/2026-10-27-current-session-review.md#candidate-hypotheses--proposals-only-no-lane-authorized) remains proposals only. The assigned lane is unspecified, the required feature stack is absent, and previous duplicate-stop/budget gates remain controlling. Therefore no holdout, candidate output, TIF, leaderboard estimate, or slot selection was made. The [machine-readable run card](repository-review-2026-10-28-run-card.json) records those null candidate fields and the negative verdict.

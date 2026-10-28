@@ -18,6 +18,8 @@ const chromium = chromiumModule.default || chromiumModule;
   try {
     const base = process.env.PREVIEW_URL || 'http://127.0.0.1:8000';
     const receipt = JSON.parse(fs.readFileSync('docs/research/2026-10-28-priority-audit.json'));
+    const historicalCsr = JSON.parse(fs.readFileSync('docs/research/2026-10-26-csr/run-card.json')).published_tiff;
+    const researchTiff = 'docs/downloads/gems30-offlattice-geothermal-structural-20261028-s7.tif';
     const result = {engine: 'headless Chromium / playwright-core', chromium_version: browser.version(),
       playwright_version: browserRequire('playwright-core/package.json').version,
       viewports: [], checked_priority_pages: [], errors: [], prediction_downloaded: false};
@@ -41,9 +43,13 @@ const chromium = chromiumModule.default || chromiumModule;
       await page.screenshot({path: `outputs/browser/priority-audit-${viewport.width}.png`, fullPage: true});
       await page.getByRole('link', {name: 'Submission guide', exact: true}).click();
       await page.waitForLoadState('networkidle');
-      if (!(await page.getByRole('heading', {name: 'There is no approved file to submit.', exact: true}).count())) throw new Error('Guide lost approval warning');
+      if (!(await page.getByRole('heading', {name: 'Off-lattice file exists; download only for research, not competition upload.', exact: true}).count())) throw new Error('Guide lost the separately labelled research artifact');
+      if (!(await page.getByText('NOT OK TO SUBMIT · HOLDOUT BLOCKED', {exact: true}).count())) throw new Error('Research artifact lost its non-submission badge');
+      if (!(await page.getByText('Static code review blocks the geological interpretation.', {exact: true}).count())) throw new Error('Guide lost the generator code-review warning');
+      const downloads = await page.locator('a[download]').evaluateAll(links => links.map(link => link.getAttribute('href')));
+      if (JSON.stringify(downloads) !== JSON.stringify([historicalCsr, researchTiff])) throw new Error('Guide must preserve the archived CSR-1 link and add only the labelled research TIFF');
       if (await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)) throw new Error('Guide viewport overflow');
-      result.viewports.push({...viewport, audit: true, guide: true, no_download_controls_on_audit: true, no_overflow: true});
+      result.viewports.push({...viewport, audit: true, guide: true, research_download_only: true, no_overflow: true});
     }
     for (const row of receipt.rows) {
       await page.goto(`${base}/priority-${row.site}.html`, {waitUntil: 'networkidle'});

@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "run_id": "gemsdoe30-repository-review-20261028",
+  "review_kind": "verification-only; no model experiment",
+  "hypothesis": "No new geological hypothesis was run; this pass independently rechecked the existing duplicate-stop and negative research decisions.",
+  "mechanism": "Restore hash-pinned owner mirrors, re-run the shared registry-preflight verifier and POOL-1 receipt verifier, check the generated site, refresh the evidence-derived status feed, and run the test suite.",
+  "named_non_fault_process": "Not applicable: no candidate mechanism was executed. The prior four-proposal slate records individual mimics in docs/research/2026-10-27-current-session-review.md.",
+  "holdout_dti": {
+    "label": "HOLDOUT-DTI",
+    "value": null,
+    "ci95": null,
+    "evaluator_version": null,
+    "withheld_positives": null,
+    "reason": "No holdout was run in this review; the feature stack is absent and the assigned lane/novelty policy remain unresolved. Prior measurements are historical receipts, not this run's result."
+  },
+  "prior_pool1_receipt": {
+    "score_label": "HOLDOUT-DTI",
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "withheld_positives": 60988,
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "screen": {
+      "candidate": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.18669934883303288,
+        "ci95": [0.1731134701441063, 0.2001708617623156]
+      },
+      "matched_control_msdb_edge": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.16946793440447308,
+        "ci95": [0.1554449465830234, 0.18346479375294594]
+      },
+      "paired_difference": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.0172314144285598,
+        "ci95": [0.010515082153209168, 0.0239796274372901]
+      }
+    },
+    "confirmation_seed4219": {
+      "candidate": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.18769353035658679,
+        "ci95": [0.17363128345116452, 0.20198941065603107]
+      },
+      "matched_control_msdb_edge": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.17424736056882098,
+        "ci95": [0.16015308522975494, 0.18851637247088185]
+      },
+      "paired_difference": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.013446169787765805,
+        "ci95": [0.006993408806786897, 0.019756554273043812]
+      }
+    },
+    "interpretation": "Historical catalogue-proxy result only; paired improvement receipts reproduced, but duplicate-stop remains fatal. Not ORGANIZER-CONFIRMED and not a leaderboard estimate.",
+    "receipt": "docs/research/2026-10-27-pool/run-card.json"
+  },
+  "registry_comparison": {
+    "candidate_generated": false,
+    "candidate_surface_spearman": null,
+    "candidate_dot_overlap_within_3px": null,
+    "duplicate_policy": "strict stop if |rank correlation| > 0.90 OR more than 70 percent of candidate dots fall within 3 px of any registry raster",
+    "preexisting_witness": {
+      "path": "data/raw/registry-extra/13gems-lattice-s5.tif",
+      "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+      "source_status": "owner-provided GitHub mirror; not organizer-authenticated",
+      "candidate_budget_lower_bound": {
+        "dots": 44090,
+        "minimum_within_3px": 37441,
+        "minimum_fraction": 0.8491948287593558,
+        "decision": "duplicate-stop",
+        "scope": "mathematical one-witness lower bound; not full registry clearance and not a score"
+      }
+    }
+  },
+  "raster_sha256": null,
+  "validator_output": {
+    "candidate_exists": false,
+    "no_nan_inside_footprint": null,
+    "values_in_0_1": null,
+    "crs_shape_transform_match": null,
+    "reason": "No candidate raster was written."
+  },
+  "submission_name": null,
+  "submission_note": null,
+  "download_ok": false,
+  "ok_to_submit": false,
+  "slot_selected": false,
+  "organizer_confirmed_score": null,
+  "experiments_run": 0,
+  "experiment_cap": 3,
+  "verdict": "negative",
+  "decision": "DUPLICATE-STOP; no new TIFF, download approval, or weekly slot selection",
+  "verification": {
+    "registry_preflight": "PASS as negative",
+    "pool1_receipt": "PASS as negative",
+    "research_site_check": "PASS",
+    "status_feed_build": "PASS",
+    "pytest": "424 passed, 5 skipped, 4 warnings, 7 subtests passed",
+    "git_diff_check": "PASS"
+  },
+  "report": "docs/repository-review-2026-10-28.md"
+}

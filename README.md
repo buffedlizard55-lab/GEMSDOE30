@@ -4,9 +4,13 @@
 
 ## Latest repository audit · 2026-10-28: **NO APPROVED SUBMISSION DOWNLOAD**
 
-The current owner prompt below remains the operating brief, including the unique-TIFF requirement, three-experiment/two-hour cap, Core Values and separate slot selector. This session supplies no single method paragraph assigning a new lane. We must not bypass the existing duplicate stop to satisfy the download aspiration.
+The current owner prompt below remains the operating brief, including the unique-TIFF requirement, three-experiment/two-hour cap, Core Values and separate slot selector. The prompt supplies no single method paragraph assigning a lane; the later off-lattice artifact is explicitly self-assigned. Its local novelty checks do not resolve the missing full registry or blocked holdout, and do not override the repository's stop/selector gates.
 
-**[Open the nine-site executive byte audit](priority-readiness-audit.html)** — it reopens the exact historical leaders from all nine requested sites and now measures actual final-dot overlap against the pinned lattice, instead of only reporting budget bounds. All nine exceed **99.90%** overlap and fail the literal uniqueness rule. Five pass the shared published-format validator; four fail its outside-footprint null convention. Format validity does not establish competitiveness or portal acceptance. There is no new model, TIFF, score estimate, submission name/note, or weekly-slot selection. The old historical scores, including H33-B2's owner-reported 0.2778, are **not organizer-confirmed receipts**.
+**[Open the nine-site executive byte audit](priority-readiness-audit.html)** — it reopens the exact historical leaders from all nine requested sites and measures final-dot overlap against the pinned lattice. All nine exceed **99.90%** overlap and fail the literal uniqueness rule. Five pass the shared published-format validator; four fail its outside-footprint null convention. Format validity does not establish competitiveness or portal acceptance. This historical audit generated no TIFF.
+
+A separate off-lattice research artifact was later added: [download the GeoTIFF for research](docs/downloads/gems30-offlattice-geothermal-structural-20261028-s7.tif) (SHA-256 `572df94e8d3106a90dc7f85e2d81aa944d38dd59ac40df840e09d14f2ea6ccfb`). **It is format-valid and not an exact duplicate of the nine pinned final-dot arrays, but it is NOT OK TO SUBMIT.** Final-dot overlap checks are 16.3–21.2% for these nine references; no pre-placement surface comparison against all nine or complete live registry was available. The generating session self-assigned a lane, and the required holdout is blocked because the required organizer-authenticated `training_features.tif` is absent; the locally restored template and labels are owner mirrors only. Static review of the hash-pinned generator found that it emits every lattice-uncovered cell, making its score-based ordering irrelevant to the output; `W_SGMC` is unused, the applied weights sum to 0.9, and the GDR Quaternary-fault receipt says no features intersect the grid. This is not evidence that the claimed geological ranking worked. No score or leaderboard estimate exists. The old historical scores, including H33-B2's owner-reported 0.2778, are **not organizer-confirmed receipts**.
+
+The direct download, manifest, and run card appear at the top of the [submission guide](executive-summary.html). The page labels it **download for research only — NOT OK TO SUBMIT**. No weekly slot was selected.
 
 - [Machine audit with all hashes and validator checks](docs/research/2026-10-28-priority-audit.json)
 - [Review, four explicitly differentiated hypothesis proposals, three-pass verification and next actions](docs/research/2026-10-28-review.md)
@@ -61,7 +65,7 @@ Confirm with the organizer and plan for the earlier time. The rules allow up to
 three feedback submissions per week and require one final selection for both rounds.
 
 [Clean overview](index.html) · [Nine-site snapshot](priority-executive-summary.html) ·
-[Repository review (2026-10-27)](docs/repository-review-2026-10-27.md) ·
+[Repository review (2026-10-27)](docs/repository-review-2026-10-27.md) · [Latest verification-only review (2026-10-28)](docs/repository-review-2026-10-28.md) · [Its JSON run card](docs/repository-review-2026-10-28-run-card.json) ·
 [Science and four hypotheses](csr-discontinuity-review.html) ·
 [Submission guide](executive-summary.html) ·
 [**Current JSON run card**](docs/research/2026-10-27-registry-preflight/run-card.json) ·

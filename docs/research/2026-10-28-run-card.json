@@ -53,10 +53,96 @@
   "review": "docs/research/2026-10-28-review.md",
   "verification": {
     "preflight": "PASS as negative",
+    "later_parallel_artifact_recheck": {
+      "candidate_path": "docs/downloads/gems30-offlattice-geothermal-structural-20261028-s7.tif",
+      "raster_sha256": "572df94e8d3106a90dc7f85e2d81aa944d38dd59ac40df840e09d14f2ea6ccfb",
+      "candidate_generated_by_this_audit": false,
+      "format_validation": "PASS against the restored owner-mirror sample_submission.tif; organizer acceptance unverified",
+      "comparison_receipt": "docs/research/2026-10-28-offlattice/priority-site-dot-audit.json",
+      "priority_historical_final_dot_arrays_compared": 9,
+      "max_fraction_within_3px": 0.21161076853662206,
+      "max_absolute_full_footprint_spearman": 0.001590831755721472,
+      "exact_array_duplicates": 0,
+      "scope": "Final dots only against nine frozen sites; no pre-placement surface check against all nine or complete live registry",
+      "holdout_dti": {
+        "label": "HOLDOUT-DTI",
+        "value": null,
+        "ci95": null,
+        "evaluator_version": "component-holdout-v3-blockstats-20261025",
+        "withheld_positives": null,
+        "reason": "Blocked in generating receipt: required organizer-authenticated training_features.tif is absent; restored owner-mirror sample_submission.tif and labels.tif are not organizer-authenticated. This audit did not run a holdout."
+      },
+      "download_for_research_only": true,
+      "ok_to_submit": false,
+      "slot_selected": false,
+      "post_run_code_audit": {
+        "receipt": "docs/research/2026-10-28-offlattice/run-card.json",
+        "status": "negative; static source review only; no modeling or regeneration",
+        "generator_sha256": "dfc2667e27122499bbecc1fb926165ffefb3e9a52a993609b918f2405d423366",
+        "key_finding": "The emitter sets every lattice-uncovered cell as a dot, so the score-based ordering cannot affect support; W_SGMC is unused, applied weights sum to 0.9, and the pinned GDR Quaternary-fault receipt reports no grid-intersecting features.",
+        "scientific_conclusion": "No evidence that the proposed geological ranking influenced the output or that its hypothesis improved DTI."
+      }
+    },
+    "pool1_historical_receipt_recheck": {
+      "verdict": "negative; final dots duplicate-stopped and no public TIFF exists",
+      "score_label": "HOLDOUT-DTI",
+      "evaluator_version": "component-holdout-v3-blockstats-20261025",
+      "withheld_positives": 60988,
+      "screen_candidate": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.18669934883303288,
+        "ci95": [
+          0.1731134701441063,
+          0.2001708617623156
+        ]
+      },
+      "screen_msdb_edge_control": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.16946793440447308,
+        "ci95": [
+          0.1554449465830234,
+          0.18346479375294594
+        ]
+      },
+      "screen_paired_difference": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.0172314144285598,
+        "ci95": [
+          0.010515082153209168,
+          0.0239796274372901
+        ]
+      },
+      "confirmation_candidate": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.18769353035658679,
+        "ci95": [
+          0.17363128345116452,
+          0.20198941065603107
+        ]
+      },
+      "confirmation_msdb_edge_control": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.17424736056882098,
+        "ci95": [
+          0.16015308522975494,
+          0.18851637247088185
+        ]
+      },
+      "confirmation_paired_difference": {
+        "label": "HOLDOUT-DTI difference",
+        "value": 0.013446169787765805,
+        "ci95": [
+          0.006993408806786897,
+          0.019756554273043812
+        ]
+      },
+      "source": "docs/research/2026-10-27-pool/run-card.json",
+      "scope": "Historic mapped-catalogue proxy; not ORGANIZER-CONFIRMED and not comparable to leaderboard scores."
+    },
     "nine_site_audit_offline": "PASS as negative; float diagnostics use shared 1e-12 tolerance",
     "site_build_check": "PASS",
     "tests": {
-      "passed": 432,
+      "passed": 433,
       "skipped": 5,
       "warnings": 4,
       "subtests_passed": 7,
@@ -64,16 +150,20 @@
     },
     "git_diff_check": "PASS",
     "browser": {
-      "receipt": "docs/research/2026-10-28-browser-check.json",
-      "sha256": "b62e3d494fc7cc6ea69fe282fabb0a8157e9c411fb7994a7224034026795178a",
+      "receipt": "docs/research/2026-10-28-artifact-browser-check.json",
+      "sha256": "60c014cbe985a6190217f75b6054d5558a9a8f3fd668cf9f182714a4a9a80448",
       "passed": true,
       "viewports": [
         1440,
         390
       ],
       "per_site_pages_checked": 9,
+      "research_download_link_present": true,
+      "candidate_downloaded": false,
+      "non_submission_badge_verified": true,
+      "code_review_warning_verified": true,
       "private_paths_blocked": true,
-      "prediction_downloaded": false
+      "no_overflow": true
     }
   }
 }

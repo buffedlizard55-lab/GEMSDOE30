@@ -154,9 +154,16 @@ def test_all_current_pages_have_real_links_unique_ids_and_clear_scope(name):
         assert "HOLDOUT-DTI" in text and "60,988" in text
     elif name in {"index.html", "executive-summary.html"}:
         csr = load(ROOT / "docs/research/2026-10-26-csr/run-card.json")["published_tiff"]
-        assert parsed.downloads == [csr]
+        research_tiff = "docs/downloads/gems30-offlattice-geothermal-structural-20261028-s7.tif"
+        assert parsed.downloads == [csr, research_tiff]
+        assert "Download research TIFF — NOT OK TO SUBMIT" in text
         assert text.count("NOT APPROVED FOR SUBMISSION") == 1
         assert "HOLDOUT-DTI" in text and "60,988" in text
+    elif name == "priority-executive-summary.html":
+        research_tiff = "docs/downloads/gems30-offlattice-geothermal-structural-20261028-s7.tif"
+        assert "unverified" in text.lower() and "not a" in text.lower()
+        assert parsed.downloads == [research_tiff]
+        assert "Download research TIFF — NOT OK TO SUBMIT" in text
     elif name.startswith("priority-"):
         assert "unverified" in text.lower() and "not a" in text.lower()
         assert not parsed.downloads
