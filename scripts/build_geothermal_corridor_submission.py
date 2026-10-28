@@ -88,7 +88,7 @@ def decay_surface(binary: np.ndarray, decay_m: float, pixel_m: float = 100.0) ->
     return np.exp(-distance / decay_m)
 
 
-def main() -> int:
+def _archived_main() -> int:
     for path in LAYERS.values():
         if not path.is_file():
             print(f"BLOCKED: required layer missing: {path}", file=sys.stderr)
@@ -183,6 +183,16 @@ def main() -> int:
     print(f"Published GEMS format compliant: {manifest['published_format_compliant']}")
     print(f"Note ({len(note)}/140): {note}")
     return 0 if manifest["published_format_compliant"] else 1
+
+
+def main() -> int:
+    print(
+        "DUPLICATE-STOP: archived geothermal-corridor offcat-d3 (GC-1) overlaps the pinned "
+        "13GEMSDOE lattice at 39,960/40,000 (99.9000%); do not regenerate, perturb or rename it. "
+        "See docs/research/2026-10-27-registry-preflight/run-card.json.",
+        file=sys.stderr,
+    )
+    return 2
 
 
 if __name__ == "__main__":

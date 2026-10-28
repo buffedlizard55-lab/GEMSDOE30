@@ -44,9 +44,22 @@ bytes against the same witness, without building new candidates:
 | --- | ---: | --- | --- | --- |
 | [CTD-1](../../downloads/gems30-ctd1-concealed-stepper-20261027T172620Z-c39a9264.tif), SHA-256 `13074a02b38e7edea5faaccbaa18f382dffd395fd211139becb7d66278f02297` | **39,984/40,000 = 99.9600%** | proven >70% before placement | passes; NaN outside | **DUPLICATE-STOP; DO NOT SUBMIT** |
 | [FC-1](../../downloads/gems30-fc1-concealed-flank-20261027T172846Z-f182c780.tif), SHA-256 `d6dadb9c6119767f0b4af2f2122e73529829b3c1b36cf1131165cb68b8da2612` | **10,844/10,848 = 99.9631%** | not proven by budget alone | passes; NaN outside | **DUPLICATE-STOP; DO NOT SUBMIT** |
+| [GC-1](../../downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif), SHA-256 `0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564` | **39,960/40,000 = 99.9000%** | proven >70% before placement (≥83.38%) | passes; NaN outside | **DUPLICATE-STOP; DO NOT SUBMIT** |
+| [VS-1](../../downloads/GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif), SHA-256 `e701076a93df45ae911b15519bcce66d88cca318686fa39df4117e921dd1876b` | **37,654/37,654 = 100.0000%** | proven >70% before placement (≥82.34%) | passes; NaN outside | **DUPLICATE-STOP; DO NOT SUBMIT** |
 
 FC-1 demonstrates why a sub-22,164 budget is not automatically unique. The
-old CTD 27-raster scan was limited to local downloads and omitted 13GEMSDOE.
+old CTD 27-raster scan and VS-1 28-raster scan were limited to local downloads
+and omitted 13GEMSDOE. PR #58 re-ran `build_geothermal_corridor_submission.py`
+and produced a byte-for-byte duplicate of GC-1 under a new timestamp
+(`20261027T233111Z.tif`), which was removed per `AGENTS.md` Rule 2; its
+`evaluate_candidate_holdout.py` script also passed `truth=catalogue` (including
+guard segments, inflating `withheld_positives` to 63,562) against a zero
+control. PR #59's VS-1 (`build_unique_submission.py`) weighted
+`derived_gdr_qfaults_v2_100m_u8.tif` and `derived_sgmc_faults_100m_u8.tif`
+without masking `labels.tif`, placing **13,098/37,654 (34.7851%)** of its dots
+directly on known catalogue pixels (`d = 0 px`, masked to zero credit by the
+organizer) and **17,084/37,654 (45.3710%)** within `d <= 2 px`, with no holdout
+run. See the [post-merge addendum](postmerge-addendum.json).
 Its note says “all-finite”, but its saved bytes have NaN outside: normal
 published format passes and the *whole-array finite* diagnostic fails. Neither
 result proves portal acceptance. The preserved PR page is explicitly marked

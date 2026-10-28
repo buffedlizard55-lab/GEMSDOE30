@@ -136,10 +136,45 @@ def test_parallel_pr_candidates_both_fail_lattice_even_below_the_budget_bound():
     ('scripts/build_concealed_stepper_submission.py', 'DUPLICATE-STOP'),
     ('scripts/build_flank_concealed_submission.py', 'DUPLICATE-STOP'),
     ('scripts/evaluate_ctd1_holdout.py', 'BLOCKED'),
+    ('scripts/build_geothermal_corridor_submission.py', 'DUPLICATE-STOP'),
+    ('scripts/build_unique_submission.py', 'DUPLICATE-STOP'),
+    ('scripts/evaluate_candidate_holdout.py', 'BLOCKED'),
 ])
 def test_archived_unsafe_command_lines_fail_before_generating_anything(script, word):
     p = subprocess.run([sys.executable, script], cwd=ROOT, capture_output=True, text=True)
     assert p.returncode == 2 and word in p.stderr
+
+
+@requires_mirrors
+def test_postmerge_candidates_both_fail_lattice_and_renamed_duplicate_removed():
+    res = preflight.verify()
+    gc, vs = res['postmerge_candidates']
+    assert gc['lane'] == 'GC-1' and gc['matching_dots'] == 39_960
+    assert gc['comparison']['candidate_dots'] == 40_000 and gc['budget_bound_decision'] == 'duplicate-stop'
+    assert vs['lane'] == 'VS-1' and vs['matching_dots'] == 37_654
+    assert vs['comparison']['candidate_dots'] == 37_654 and vs['budget_bound_decision'] == 'duplicate-stop'
+    if (ROOT / 'data/raw/labels.tif').is_file():
+        assert gc['dots_on_catalogue_d0'] == 676 and gc['dots_within_2px_of_catalogue'] == 3_177
+        assert vs['dots_on_catalogue_d0'] == 13_098 and vs['dots_within_2px_of_catalogue'] == 17_084
+    for item in (gc, vs):
+        assert item['comparison']['dot_duplicate'] is True
+        assert item['published_format_validator_passed'] is True
+        assert item['whole_array_finite_range_diagnostic_passed'] is False
+        assert item['produced_by_this_audit'] is False
+        assert item['ok_to_submit'] is False
+    addendum = json.loads(preflight.POSTMERGE_ADDENDUM.read_text())
+    assert addendum['renamed_duplicate_removed'] is True
+    assert not (ROOT / addendum['removed_renamed_duplicate']['path']).exists()
+
+
+@requires_mirrors
+def test_status_feed_verifies_pool1_and_preflight_without_error():
+    status = json.loads((ROOT / 'docs/status.json').read_text())
+    by_lane = {r['lane']: r for r in status['additional_stopped_attempts']}
+    assert by_lane['POOL-1']['verified_now'] is True and by_lane['POOL-1']['error'] is None
+    assert by_lane['POOL-1']['ok_to_submit'] is False
+    assert status['latest_scientific_review']['verified_now'] is True
+    assert status['latest_scientific_review']['ok_to_submit'] is False
 
 
 def test_legacy_local_scan_requires_explicit_pinned_registry():

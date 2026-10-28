@@ -14,18 +14,21 @@ include this reference. A bound that does not prove a stop (budgets below
 22,164) is **not a novelty pass**; do not change the budget merely to evade it.
 Two files merged concurrently in PR #54 are also stopped: CTD-1 overlaps the
 lattice at **39,984/40,000 (99.9600%)**, and FC-1 at **10,844/10,848 (99.9631%)**.
-Their published-format checks pass, but their archived holdout used predictions
-built from the full catalogue before hiding faults; it is not a leakage-safe
-comparison. Their original generation and scoring commands now fail closed.
-
-### Validated candidate (this session, gate still STOP)
-A unique off-catalogue geothermal-corridor GeoTIFF was built and machine-validated:
-`docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z.tif`
-(SHA-256 `0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564`).
-All 12 format checks pass against the organizer template (EPSG:32611, 3730x3292,
-float32 [0,1] inside the footprint, NaN outside). Holdout-DTI 0.0733 [0.0638,
-0.0828], 60,988 withheld positives, CI entirely above zero. It is NOT organizer-
-confirmed and the DUPLICATE-STOP gate still applies — see `executive-summary.html`.
+Two additional files from PRs #50/#58 and #59 are likewise stopped in the
+[post-merge addendum](docs/research/2026-10-27-registry-preflight/postmerge-addendum.json):
+GC-1 (`GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif`, SHA-256
+`0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564`; a byte-identical
+renamed timestamp copy `20261027T233111Z.tif` from PR #58 was removed per
+`AGENTS.md` Rule 2) overlaps the lattice at **39,960/40,000 (99.9000%)** and
+places 676 dots on `labels.tif`; VS-1 (`GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif`,
+SHA-256 `e701076a93df45ae911b15519bcce66d88cca318686fa39df4117e921dd1876b`,
+PR #59) overlaps the lattice at **37,654/37,654 (100.0000%)** and places
+**13,098/37,654 (34.7851%)** of its dots directly on known catalogue pixels
+(masked to zero credit by the organizer). Their published-format checks pass,
+but CTD-1/FC-1/GC-1 archived holdouts scored saved full-grid rasters without
+rebuilding per fold (and GC-1's evaluator passed `truth=catalogue` including
+guard segments against a zero control), while VS-1 ran no holdout. All six
+archived generation and scoring CLI scripts now fail closed (`exit 2`).
 
 The historical CSR-1 file is [available for research only](docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif)
 (SHA-256 `0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900`).

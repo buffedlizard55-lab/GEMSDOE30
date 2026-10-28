@@ -5,12 +5,21 @@ The complete latest task text (formatting normalized) is now embedded in
 [the task-text record](docs/research/texture-displacement/owner-prompt.txt).
 Read that record and the current run pointer before every session. The older
 brief below is retained as historical owner text, not the current status or a
-verified score/approval statement. The newest GDX-1 report is **negative / DO NOT SUBMIT**:
+verified score/approval statement. The current 2026-10-27 registry preflight is
+**DUPLICATE-STOP / DO NOT SUBMIT**: [run card](docs/research/2026-10-27-registry-preflight/run-card.json),
+[review](docs/research/2026-10-27-registry-preflight/review.md), and
+[post-merge addendum](docs/research/2026-10-27-registry-preflight/postmerge-addendum.json).
+Parallel lane **POOL-1** ([run card](docs/research/2026-10-27-pool/run-card.json),
+[review](docs/research/2026-10-27-pool/review.md)) confirmed the best holdout
+mechanism (`HOLDOUT-DTI` 0.186699 / 0.187694 vs `msdb_edge` on two seeds, paired
+CIs > 0), but its final raster is duplicate-stopped (88.74% vs FFL1; 100.0000%
+vs the 13GEMSDOE lattice; 3/3 experiments exhausted; no TIFF published). The
+earlier GDX-1 report is also **negative / DO NOT SUBMIT**:
 [run card](docs/research/2026-10-26-gdx/run-card.json), [review](docs/research/2026-10-26-gdx/review.md).
-Its 3/3 experiment cap is exhausted; keep started/resumed guards. Read-only nine-site
-executive reviews and the shared live-coverage UNKNOWN overlay supersede blanket historical
-novelty claims. No slot is approved. The legacy PTA pointer remains for compatibility;
-`latest_review` in `docs/current-run.json` selects GDX, not a submission.
+Read-only nine-site executive reviews and the shared live-coverage UNKNOWN
+overlay supersede blanket historical novelty claims. No slot is approved. The
+legacy PTA pointer remains for compatibility; `latest_review` in
+`docs/current-run.json` selects `registry-preflight-20261027`, not a submission.
 
 ---
 

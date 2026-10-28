@@ -18,15 +18,33 @@
   "registry": {
     "pre_placement_surface": null,
     "new_final_dots": {
+      "decision": "duplicate-stop",
+      "pinned_lattice_witness": {
+        "reference": "data/raw/registry-extra/13gems-lattice-s5.tif",
+        "reference_sha256": "c28c88c4b13c6b532f5fb5a727bf6e905e3a46489a39543967ba3680e7908f90",
+        "matching_dots_within_3px": 37654,
+        "candidate_dots": 37654,
+        "fraction_within_3px": 1.0,
+        "budget_lower_bound_dots": 31005,
+        "budget_lower_bound_fraction": 0.8234184947150369,
+        "threshold": 0.70,
+        "pass": false
+      },
+      "catalogue_overlap_audit": {
+        "dots_on_catalogue_d0": 13098,
+        "dots_within_2px_of_catalogue": 17084,
+        "candidate_dots": 37654,
+        "note": "Despite the offcat-d3 name, build_unique_submission.py weighted derived_gdr_qfaults_v2_100m_u8.tif and derived_sgmc_faults_100m_u8.tif without masking labels.tif, placing 34.7851% of dots directly on known catalogue pixels (masked to 0 credit by the organizer) and 45.3710% within 2 px."
+      },
       "measured_vs_28_local_rasters": {
         "max_3px_dot_overlap": 0.660,
         "max_3px_dot_overlap_vs": "gemsdoe30-edge-hybrid-80k-02845bd4-*.tif",
         "threshold": 0.70,
-        "pass": true,
-        "note": "Below the 70% duplicate-stop threshold vs all 28 locally available rasters. Organizer registry coverage is UNKNOWN."
+        "pass": false,
+        "note": "Local 28-raster scan omitted the pinned 13GEMSDOE lattice witness, against which 37,654/37,654 (100.0000%) of dots fall within 3 px (DUPLICATE-STOP)."
       },
       "surface_rank_correlation": null,
-      "note": "Self-overlap (1.000) in the local audit is an artifact of the output raster being present in docs/downloads during the audit; excluded from the max."
+      "note": "Mandatory duplicate-stop triggered by the pinned 13GEMSDOE lattice witness (100.0000% > 70%)."
     }
   },
   "raster": {
