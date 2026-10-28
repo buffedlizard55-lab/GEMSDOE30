@@ -1,11 +1,11 @@
 # GEMSDOE30 — GEMS concealed-fault research
 
-> **SESSION MISSION (read every session):** Place top of the DOE GEMS concealed-fault leaderboard by generating a **unique** single-band `float32` `[0,1]` GeoTIFF submission (EPSG:32611, 3730×3292, 100 m, `sample_submission.tif` grid, `NaN` outside the footprint) that is obvious to download and obvious whether it is OK to submit. Core values: **Maximize P(Win)** and **Own the Outcome**. Never copy a previous submission as your own; never submit a candidate that has not beaten the holdout best with a paired 95% CI lower bound > 0; protect the 3-per-week DrivenData slot. The full operating protocol is in the `#current-owner-prompt` section below, together with the current-task addendum above — reread both before changing code.
+> **SESSION MISSION (read every session):** Place top of the DOE GEMS concealed-fault leaderboard by generating a **unique** single-band `float32` `[0,1]` GeoTIFF submission (EPSG:32611, 3730×3292, 100 m, `sample_submission.tif` grid, `NaN` outside the footprint) that is obvious to download and obvious whether it is OK to submit. Core values: **Maximize P(Win)** and **Own the Outcome**. Never copy a previous submission as your own; never submit a candidate that has not beaten the holdout best with a paired 95% CI lower bound > 0; protect the 3-per-week DrivenData slot. The full operating protocol is in the `#current-owner-prompt` section below; reread it and the current-task addendum before changing code. The addendum requires 3–5 explicitly differentiated geological hypotheses, source/access checks, a same-protocol blocked holdout before slot consideration, repeated code/site review, and no score projections presented as results; see [the dated review](docs/research/2026-10-27-current-session-review.md). A prior duplicate-stop and lane/budget restriction overrides the aspiration to generate a TIFF whenever its gates fail.
 
 ## Current decision · 2026-10-27: **DUPLICATE-STOP · DO NOT SUBMIT**
 
 **This audit made no new model, TIFF, submission name, note, or weekly-slot selection.**
-**Current-task addendum:** no single experimental lane was assigned, and the latest follow-up confirms that no file is approved to download for submission and no defensible public-score estimate exists. See the [follow-up review](docs/research/2026-10-27-followup-review.md) and its [negative JSON run card](docs/research/2026-10-27-followup-run-card.json). The prospective shortlist is research-only; the top idea has not been fitted or holdout-tested.
+**File to download for a new submission: NONE.** No historical or upstream research artifact is approved for download or submission; see the [current session review](docs/research/2026-10-27-current-session-review.md).
 The pinned [13GEMSDOE lattice](https://github.com/buffedlizard55-lab/13GEMSDOE/blob/92ee6f074323f161eed837b80ec3ee5b662e26f5/docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif)
 covers all but 6,649 of 5,167,373 valid footprint cells within 3 pixels. Any
 44,090-dot candidate must overlap it by at least **37,441/44,090 = 84.9195%**,
@@ -18,6 +18,9 @@ lattice at **39,984/40,000 (99.9600%)**, and FC-1 at **10,844/10,848 (99.9631%)*
 Their published-format checks pass, but their archived holdout used predictions
 built from the full catalogue before hiding faults; it is not a leakage-safe
 comparison. Their original generation and scoring commands now fail closed.
+
+### Upstream research artifacts (PRs #58/#59; both gate-stopped)
+Two TIFFs arrived from upstream PRs #58/#59; this review generated neither. The geothermal-corridor artifact is `docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z.tif` (SHA-256 `0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564`). It passes the published-format checks (EPSG:32611, 3730×3292, float32 [0,1] in-footprint, NaN outside), but **39,960/40,000 dots (99.9%)** fall within 3 px of the pinned lattice. Its catalogue-proxy **HOLDOUT-DTI 0.073314** [0.063811, 0.082800], 60,988 withheld positives, evaluator `component-holdout-v3-blockstats-20261025`, is not an organizer score or leaderboard forecast and is not comparable to the current same-protocol best. The vent-structural artifact (`docs/downloads/GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif`, SHA-256 `e701076a93df45ae911b15519bcce66d88cca318686fa39df4117e921dd1876b`) also passes published-format checks, but **37,654/37,654 dots (100%)** fall within 3 px of the lattice; no verified HOLDOUT-DTI receipt was found. Both fail the duplicate rule; the pre-placement surfaces are unavailable for this review. Their separate whole-array finite-range diagnostics fail because outside-footprint values are NaN. **Neither is approved to download or submit.** See the current review and run card for the hash-bound audit.
 
 The historical CSR-1 file is [available for research only](docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif)
 (SHA-256 `0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900`).
@@ -39,12 +42,12 @@ Confirm with the organizer and plan for the earlier time. The rules allow up to
 three feedback submissions per week and require one final selection for both rounds.
 
 [Clean overview](index.html) · [Nine-site snapshot](priority-executive-summary.html) ·
+[Repository review (2026-10-27)](docs/repository-review-2026-10-27.md) ·
 [Science and four hypotheses](csr-discontinuity-review.html) ·
 [Submission guide](executive-summary.html) ·
-[Follow-up review and ranked hypotheses](docs/research/2026-10-27-followup-review.md) ·
-[Follow-up negative JSON card](docs/research/2026-10-27-followup-run-card.json) ·
 [**Current JSON run card**](docs/research/2026-10-27-registry-preflight/run-card.json) ·
 [Full preflight proof and reproduction](docs/research/2026-10-27-registry-preflight/review.md) ·
+[Current session review, nine-site score-estimate table, and future hypothesis slate](docs/research/2026-10-27-current-session-review.md) · [Current session JSON card](docs/research/2026-10-27-current-session-run-card.json) ·
 [GitHub-only status snapshot](docs/status.json) · [Historical research](research-history.html).
 
 ### Reproduce the current stop
@@ -74,9 +77,10 @@ older claims and download permissions are superseded, not silently rewritten.
 The [prior README narrative](README-archive-20261026.md) is archived verbatim with
 a warning. The complete owner prompt is preserved verbatim below.
 
+
 ## Current-task addendum · 2026-10-27
 
-Before implementation, rank **3–5 distinct, previously untried mechanisms** with their geological layers/signatures, why they could find catalogue-missing structures, differences from implemented work, named non-fault mimics, qualitative expected HOLDOUT-DTI value and implementation cost. Mark earlier proposals as prior proposals, not wholly new ideas. For any external input, name the free official source and verify its exact product/coverage is obtainable before calling the idea viable. The top-ranked candidate must pass the leakage-safe spatially blocked holdout before any slot is considered. Do not convert a projection or HOLDOUT-DTI proxy into a public score. Use the shared `gemsdoe30.holdout` / `gemsdoe30.submission` implementation, the prescribed visible-only feature derivation and pixel-exact masks, and the full two-stage registry rule; keep the three-experiment / two-hour cap. This follow-up is review-only and assigns no lane, so these ideas are not run authorizations.
+Before implementation, rank **3–5 distinct, previously proposed-but-unrun mechanisms** with their geological layers/signatures, why they could find catalogue-missing structures, differences from implemented work, named non-fault mimics, qualitative expected HOLDOUT-DTI value, and cost. Label prior proposals accurately rather than calling them wholly novel. For every external input, name the free official source and verify exact product/coverage availability before calling it viable. The top candidate must pass leakage-safe spatially blocked holdout before any slot is considered. Never turn a projection or HOLDOUT-DTI proxy into a public score. Use shared `gemsdoe30.holdout` / `gemsdoe30.submission`, visible-only feature derivation, pixel-exact masks, and the full two-stage registry rule; respect the three-experiment/two-hour cap. The four-item slate in the [current session review](docs/research/2026-10-27-current-session-review.md) is research-only: no lane is assigned and no candidate is authorized.
 
 ## Parallel lane 2026-10-27 — POOL-1: **MECHANISM CONFIRMED · RASTER DUPLICATE-STOPPED · DO NOT SUBMIT**
 

@@ -23,10 +23,10 @@ stopped; their saved-prediction holdout used the full catalogue before hiding
 faults and is not leakage-safe. Do not regenerate or submit either. A scientific
 continuation requires an explicit assigned lane and a policy resolution, plus
 fresh complete two-stage novelty checks and separate selector approval. The
-2026-10-27 follow-up review is `docs/research/2026-10-27-followup-review.md`;
-its ranked hypotheses are proposals only and its negative card is
-`docs/research/2026-10-27-followup-run-card.json`. The README includes the
-latest owner-prompt addendum and must be reread before each change.
+2026-10-27 current-session review is `docs/research/2026-10-27-current-session-review.md`;
+its ranked hypotheses are proposals only and its run card is
+`docs/research/2026-10-27-current-session-run-card.json`. The README includes the
+current-task addendum and must be reread before each change.
 
 GDX-1 is negative; 3/3 experiments exhausted. Never remove its `started.json` or
 `resumed.json`, or the CSR/QPC/FFL stop/start evidence. A verifier exit 0 means

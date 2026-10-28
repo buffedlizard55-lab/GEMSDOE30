@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "run_id": "gems30-vent-structural-20261027",
+  "created_utc": "2026-10-27T00:00:00+00:00",
+  "lane": "vent-structural (contrarian lane, distinct from h19-5 off-catalogue family)",
+  "hypothesis": "Concealed geothermal faults are most probable where Quaternary fault traces, young volcanism, and surface fluid indicators (paleo-springs / 2 m geothermal probes) co-occur — step-overs, relay ramps, and volcanic-fed blind structures. Placing dots on this additive structural score (0.5×qfaults + 0.3×volcanics + 0.2×fluid) targets the domain where the USGS/INGENIOUS catalogue is most likely incomplete, unlike the h19-5 family which only prunes catalogue-proximal dots.",
+  "mechanism": "Additive structural score from five public USGS/DOE external layers (derived_gdr_qfaults_v2_100m_u8, derived_gdr_volcanics_100m_u8, derived_gdr_paleo_100m_u8, derived_gdr_2m_probes_100m_u8, derived_sgmc_faults_100m_u8), all on the 3730×3292 EPSG:32611 100 m grid. Top 37,654 pixels by score become dots (value 1.0), everything else 0.0, NaN outside footprint. Deterministic seed 7.",
+  "named_non_fault_process": "Erosional fan scarps, paleoshoreline features, non-fault lithologic boundaries, and volcanic flow fronts can mimic fault proximity and radiometric/fluid indicators, producing false positives on the structural score.",
+  "new_holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": null,
+    "ci95": null,
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "withheld_positives": null,
+    "reason": "Organizer labels.tif requires DrivenData login; not available in this sandbox. Holdout gate not run."
+  },
+  "historical_holdout_reference": null,
+  "registry": {
+    "pre_placement_surface": null,
+    "new_final_dots": {
+      "measured_vs_28_local_rasters": {
+        "max_3px_dot_overlap": 0.660,
+        "max_3px_dot_overlap_vs": "gemsdoe30-edge-hybrid-80k-02845bd4-*.tif",
+        "threshold": 0.70,
+        "pass": true,
+        "note": "Below the 70% duplicate-stop threshold vs all 28 locally available rasters. Organizer registry coverage is UNKNOWN."
+      },
+      "surface_rank_correlation": null,
+      "note": "Self-overlap (1.000) in the local audit is an artifact of the output raster being present in docs/downloads during the audit; excluded from the max."
+    }
+  },
+  "raster": {
+    "file": "docs/downloads/GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif",
+    "sha256": "e701076a93df45ae911b15519bcce66d88cca318686fa39df4117e921dd1876b",
+    "sidecar": "docs/downloads/GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.json",
+    "grid": { "shape_hw": [3730, 3292], "epsg": 32611, "resolution_m": 100.0 },
+    "active_pixels": 37654,
+    "generator": "scripts/build_unique_submission.py (seed 7)"
+  },
+  "validator": {
+    "published_format_compliant": true,
+    "checks_passed": 12,
+    "checks": [
+      { "name": "template_single_band", "passed": true },
+      { "name": "single_band", "passed": true },
+      { "name": "float32", "passed": true },
+      { "name": "epsg", "passed": true },
+      { "name": "template_epsg", "passed": true },
+      { "name": "shape_matches_template", "passed": true },
+      { "name": "transform_matches_template", "passed": true },
+      { "name": "100m_north_up_grid", "passed": true },
+      { "name": "finite_and_in_range_inside_footprint", "passed": true },
+      { "name": "null_outside_template_footprint", "passed": true },
+      { "name": "whole_raster_finite_range_diagnostic_advisory", "passed": true },
+      { "name": "template_readable", "passed": true }
+    ],
+    "details": { "valid_pixels": 5167373, "in_footprint_min": 0.0, "in_footprint_max": 1.0, "outside_pixels": 7111787, "outside_all_nan": true }
+  },
+  "submission": {
+    "run_name": "GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z",
+    "note": "Contrarian vent-structural targeting: qfaults x volcanics x springs, 37654 dots; research artifact not for submission",
+    "note_length": 119,
+    "ok_to_submit": false,
+    "reason": "DUPLICATE-STOP in effect; holdout gate not run (no organizer labels); novelty vs organizer registry unknown; no lane assigned; no selector approval."
+  },
+  "verdict": "negative",
+  "budget": { "experiments_used": 0, "experiments_cap": 3, "hours_cap": 2 },
+  "next_actions": [
+    "Obtain DrivenData auth for labels.tif and sample_submission.tif",
+    "Run holdout gate vs msdb_edge control (paired CI > 0 on two seeds)",
+    "Run both novelty stages vs refreshed organizer registry",
+    "Obtain fresh lane assignment and preregistration (POOL-2)",
+    "Obtain separate selector approval before any weekly slot"
+  ]
+}

@@ -22,7 +22,9 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import html
 import json
+import re
 import subprocess
 import sys
 import time
@@ -75,6 +77,14 @@ def main() -> int:
     for page in (ROOT / "index.html", ROOT / "executive-summary.html"):
         if page.is_file():
             site_html += page.read_text(encoding="utf-8", errors="replace")
+
+    def site_download_linked(filename: str) -> bool:
+        for pattern in ('href="([^"]+)"', "href='([^']+)'"):
+            for match in re.finditer(pattern, site_html, re.IGNORECASE):
+                href = html.unescape(match.group(1)).split("#", 1)[0].split("?", 1)[0]
+                if not href.startswith(("https://", "http://", "mailto:")) and Path(href).name == filename:
+                    return True
+        return False
 
     def _nested(manifest: dict, *keys: str):
         """Read a scalar from either the flat or the nested sidecar schema."""
@@ -138,7 +148,8 @@ def main() -> int:
             if isinstance(manifest.get("range_error_immunity"), dict)
             else None,
             "organizer_acceptance_confirmed": False,
-            "site_linked": (tif_name in site_html) or None,
+            "site_linked": site_download_linked(tif_name),
+            "mentioned_on_site": tif_name in site_html,
             # Sidecars are historical records, never a current slot selector.
             "historical_manifest_recommendation": manifest.get("submission_recommendation"),
             "submission_recommendation": False,
@@ -357,6 +368,16 @@ def main() -> int:
                 row.update({"verified_now": True, "error": None, "decision": ready.get("reason", "duplicate-stop"),
                             "ok_to_submit": False, "research_verdict": ready["research_verdict"],
                             "gates": ready.get("gates", [])})
+            elif extra.get("verifier") == "scripts/verify_pool_run.py":
+                from scripts.verify_pool_run import verify as verify_pool
+                ready = verify_pool()
+                row.update({"verified_now": True, "error": None,
+                            "decision": "POOL-1 verified negative: duplicate-stop; no TIFF published",
+                            "ok_to_submit": False, "research_verdict": "negative",
+                            "holdout_dti_e1": ready["holdout_dti_e1"],
+                            "delta_vs_msdb_e1": ready["delta_vs_msdb_e1"],
+                            "delta_vs_msdb_e2": ready["delta_vs_msdb_e2"],
+                            "breaching_references": ready["breaching_references"]})
             else:
                 from scripts.verify_lsm_run import verify as verify_lsm
                 ready = verify_lsm(ROOT / extra["pointer"], data_dir / "sample_submission.tif")

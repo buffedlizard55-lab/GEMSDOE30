@@ -1,6 +1,6 @@
 # Archived nine-site executive summary — superseded 27 Oct 2026
 
-> **Use the current [follow-up review](../2026-10-27-followup-review.md), not this archival page, for today’s file, estimate, or uniqueness decision.** The earlier draft mixed a dotted-submission-only novelty result with a later literal any-raster stop, included a speculative public-score range, and overstated the causal meaning of H33-B2 pruning. Those interpretations are withdrawn below; source run cards and frozen negative receipts remain unchanged.
+> **Use the [current session review](../2026-10-27-current-session-review.md), not this archival page, for today’s file, estimate, or uniqueness decision.** The earlier draft mixed a dotted-submission-only novelty result with a later literal any-raster stop, included a speculative public-score range, and overstated the causal meaning of H33-B2 pruning. Those interpretations are withdrawn below; source run cards and frozen negative receipts remain unchanged.
 
 ## Current answer
 
@@ -9,7 +9,7 @@
 - **Uniqueness / slot:** no current candidate is cleared. The 44,090-dot preflight has a 37,441/44,090 (84.9195%) minimum overlap within 3 px of the pinned lattice, above the strict 70% stop. No new holdout or slot decision was made.
 - **Leaderboard freshness:** no live organizer-page check was made. The repository’s 27 Oct snapshot value and the user-supplied current value conflict; neither is asserted current.
 
-The exact historical files, owner-reported values, pairwise dot overlaps, and lattice bounds for all nine sites are in the [current evidence table](../2026-10-27-followup-review.md#nine-site-evidence-table) and frozen [`fleet-audit.json`](../2026-10-26-csr/fleet-audit.json).
+The exact historical files, owner-reported values, and lattice bounds for all nine sites are in the [current session review](../2026-10-27-current-session-review.md#nine-site-executive-record); directional pairwise dot overlaps are summarized [here](../2026-10-27-current-session-review.md#pairwise-nine-site-evidence) and preserved in frozen [`fleet-audit.json`](../2026-10-26-csr/fleet-audit.json).
 
 ## Historical scores and holdout evidence
 
@@ -30,4 +30,4 @@ The reported 0.2778 for H33-B2 is an owner claim with no organizer receipt. Prun
 
 ## Research continuation
 
-The prior POOL-1 follow-up plan is not a slot authorization. The current repository shortlist contains four previously proposed-but-unrun mechanisms, ranked qualitatively with source-access limits in the [follow-up review](../2026-10-27-followup-review.md#ranked-untried-hypotheses). No candidate is being fitted now: the lane was not assigned, the active novelty stop remains, and the training-feature raster/processed arrays are not present in this checkout (raw owner-mirror labels are present). Preserve the experiment cap and shared holdout/writer implementation; only a positive leakage-safe spatial holdout, complete two-stage novelty pass, exact saved-byte validation, and a separate selector can authorize a later file.
+The prior POOL-1 continuation plan is not a slot authorization. The current repository shortlist contains four proposed-but-unrun mechanisms, ranked qualitatively with source-access limits in the [current session review](../2026-10-27-current-session-review.md#candidate-hypotheses--proposals-only-no-lane-authorized). No candidate is being fitted now: the lane was not assigned, the active novelty stop remains, and the training-feature raster/processed arrays are not present in this checkout (raw owner-mirror labels are present). Preserve the experiment cap and shared holdout/writer implementation; only a positive leakage-safe spatial holdout, complete two-stage novelty pass, exact saved-byte validation, and a separate selector can authorize a later file.

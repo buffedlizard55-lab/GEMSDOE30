@@ -1,0 +1,146 @@
+{
+  "schema_version": 3,
+  "run_name": "GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z",
+  "note": "Contrarian vent-structural targeting: qfaults x volcanics x springs, 3px min spacing, 37654 dots; research artifact not for submission",
+  "output_file": "GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif",
+  "output_sha256": "e701076a93df45ae911b15519bcce66d88cca318686fa39df4117e921dd1876b",
+  "prediction_array_sha256": "89aaedd9c72d1c771c29d45da460e22cde921bb0d0372dd870800c7714bd579b",
+  "outside_convention": "NaN outside; matches published GEMS format",
+  "published_format_compliant": true,
+  "template_file": "docs/downloads/gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif",
+  "created_utc": "2026-10-27T23:35:28+00:00",
+  "format_validation": {
+    "path": "docs/downloads/GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif",
+    "passed": true,
+    "checks": [
+      {
+        "name": "template_single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "float32",
+        "passed": true,
+        "detail": "dtypes=('float32',)"
+      },
+      {
+        "name": "epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "template_epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "shape_matches_template",
+        "passed": true,
+        "detail": "output=(3730, 3292) template=(3730, 3292)"
+      },
+      {
+        "name": "transform_matches_template",
+        "passed": true,
+        "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "100m_north_up_grid",
+        "passed": true,
+        "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "finite_and_in_range_inside_footprint",
+        "passed": true,
+        "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+      },
+      {
+        "name": "null_outside_template_footprint",
+        "passed": true,
+        "detail": "outside_pixels=7111787; null/NaN/nodata required"
+      },
+      {
+        "name": "whole_raster_finite_range_diagnostic_advisory",
+        "passed": true,
+        "detail": "advisory only: whole-array diagnostic found 7111787 NaN/Inf cell(s); this is not a diagnosis of portal behavior; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+      },
+      {
+        "name": "template_readable",
+        "passed": true,
+        "detail": "shape=(3730, 3292)"
+      }
+    ]
+  },
+  "whole_raster_range_diagnostic": {
+    "path": "docs/downloads/GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif",
+    "passed": false,
+    "checks": [
+      {
+        "name": "template_single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "float32",
+        "passed": true,
+        "detail": "dtypes=('float32',)"
+      },
+      {
+        "name": "epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "template_epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "shape_matches_template",
+        "passed": true,
+        "detail": "output=(3730, 3292) template=(3730, 3292)"
+      },
+      {
+        "name": "transform_matches_template",
+        "passed": true,
+        "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "100m_north_up_grid",
+        "passed": true,
+        "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "finite_and_in_range_inside_footprint",
+        "passed": true,
+        "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+      },
+      {
+        "name": "finite_in_range_outside_footprint_diagnostic",
+        "passed": false,
+        "detail": "outside_pixels=7111787; finite in-range values required for the nonstandard whole-array diagnostic (finite=0)"
+      },
+      {
+        "name": "whole_raster_finite_range_diagnostic",
+        "passed": false,
+        "detail": "whole-array diagnostic found 7111787 NaN/Inf cell(s); this is not a diagnosis of portal behavior"
+      },
+      {
+        "name": "template_readable",
+        "passed": true,
+        "detail": "shape=(3730, 3292)"
+      }
+    ]
+  },
+  "whole_raster_range_diagnostic_passed": false,
+  "performance_status": "unscored; format validation is not a score"
+}
