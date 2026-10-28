@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "audit_id": "offlattice-s7-vs-nine-priority-sites-final-dots-20261028",
+  "candidate": {
+    "path": "docs/downloads/gems30-offlattice-geothermal-structural-20261028-s7.tif",
+    "sha256": "572df94e8d3106a90dc7f85e2d81aa944d38dd59ac40df840e09d14f2ea6ccfb",
+    "dots": 6649,
+    "format_validation": "PASS against restored owner-mirror sample_submission.tif using scripts/validate_submission.py; not organizer-authenticated and not evidence of portal acceptance"
+  },
+  "method": {
+    "shared_comparator": "gemsdoe30.novelty.compare",
+    "stage": "dots",
+    "grid_requirement": "verified equal CRS, shape and transform against restored template for candidate and every reference",
+    "dot_duplicate_rule": "more than 70 percent of candidate positive pixels within Euclidean 3 px of any one reference",
+    "surface_duplicate_rule": "absolute full-footprint Spearman correlation above 0.90",
+    "interpretation": "final-dot comparison only; no pre-placement surface raster was available for pairwise comparison against these nine sites"
+  },
+  "historical_registry": {
+    "manifest": "docs/research/2026-10-28-priority-audit.json",
+    "coverage": "the nine specifically requested frozen historical references only; not a complete or live parallel-run registry",
+    "all_source_hashes_verified": true,
+    "rows": [
+      {"site":"GEMSDOE24","reference_sha256":"68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310","candidate_fraction_within_3px":0.21161076853662206,"spearman_full_footprint":-0.0015256302428836338,"identical_inside_footprint":false,"dot_duplicate":false,"correlation_duplicate":false},
+      {"site":"GEMSDOE25","reference_sha256":"91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8","candidate_fraction_within_3px":0.19747330425627915,"spearman_full_footprint":-0.0011581344347204297,"identical_inside_footprint":false,"dot_duplicate":false,"correlation_duplicate":false},
+      {"site":"GEMSDOE27","reference_sha256":"33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d","candidate_fraction_within_3px":0.21161076853662206,"spearman_full_footprint":-0.001590831755721472,"identical_inside_footprint":false,"dot_duplicate":false,"correlation_duplicate":false},
+      {"site":"GEMSDOE28","reference_sha256":"5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641","candidate_fraction_within_3px":0.17566551361106933,"spearman_full_footprint":-0.0009176189772803093,"identical_inside_footprint":false,"dot_duplicate":false,"correlation_duplicate":false},
+      {"site":"GEMSDOE30","reference_sha256":"8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd","candidate_fraction_within_3px":0.19747330425627915,"spearman_full_footprint":-0.0011581344347204297,"identical_inside_footprint":false,"dot_duplicate":false,"correlation_duplicate":false},
+      {"site":"GEMSDOE31","reference_sha256":"07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40","candidate_fraction_within_3px":0.1788238832907204,"spearman_full_footprint":-0.0011505752150375909,"identical_inside_footprint":false,"dot_duplicate":false,"correlation_duplicate":false},
+      {"site":"GEMSDOE32","reference_sha256":"c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9","candidate_fraction_within_3px":0.16333283200481274,"spearman_full_footprint":-0.001044146043687119,"identical_inside_footprint":false,"dot_duplicate":false,"correlation_duplicate":false},
+      {"site":"GEMSDOE33","reference_sha256":"87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757","candidate_fraction_within_3px":0.18814859377349977,"spearman_full_footprint":-0.0010760653883851593,"identical_inside_footprint":false,"dot_duplicate":false,"correlation_duplicate":false},
+      {"site":"GEMSDOE36","reference_sha256":"e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a","candidate_fraction_within_3px":0.16333283200481274,"spearman_full_footprint":-0.001124507450590738,"identical_inside_footprint":false,"dot_duplicate":false,"correlation_duplicate":false}
+    ],
+    "maximum_dot_overlap": 0.21161076853662206,
+    "maximum_absolute_spearman": 0.001590831755721472,
+    "exact_array_duplicates": 0,
+    "verdict_for_these_nine_final_dot_arrays": "no pair crosses the stated dot or correlation gates; not complete uniqueness clearance"
+  },
+  "preplacement_surface_vs_nine": "NOT CHECKED: preplacement surface arrays were not preserved",
+  "holdout_dti": {
+    "label": "HOLDOUT-DTI",
+    "value": null,
+    "ci95": null,
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "withheld_positives": null,
+    "reason": "blocked; competition training stack and labels are unavailable in the generating checkout"
+  },
+  "organizer_confirmed_score": null,
+  "overall_download_and_submission_decision": "download for research only; NOT OK TO SUBMIT",
+  "blockers": [
+    "holdout gate blocked; no HOLDOUT-DTI or score estimate",
+    "complete live parallel registry not checked",
+    "no externally assigned lane paragraph; generator self-assigned a lane",
+    "pre-placement surface comparison against the nine references not recorded",
+    "organizer format acceptance and submission receipt unavailable"
+  ]
+}

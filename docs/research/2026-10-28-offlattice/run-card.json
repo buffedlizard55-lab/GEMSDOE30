@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "run_id": "gems30-offlattice-geothermal-structural-20261028-s7",
+  "created_utc": "2026-10-28T00:00:00+00:00",
+  "lane": "off-lattice geothermal structural emission (self-assigned; no externally assigned lane paragraph supplied for this session)",
+  "hypothesis": "Proposed hypothesis (not demonstrated by the emitted raster; see post_run_code_audit): concealed geothermal feeder faults may occur in the pinned lattice 3 px coverage holes. The run proposed one dot per lattice-uncovered valid cell, ranked by public structural layers; source review found that the implementation emits all those cells, so the score ordering has no effect on output support.",
+  "mechanism": "The saved artifact is binary {0,1} on all 6,649 valid footprint cells more than 300 m from every pinned lattice dot; it is not a layer-ranked subset. The original plan specified weights 0.4 (GDR Quaternary faults/SGMC), 0.3 (Quaternary volcanics), and 0.2 (paleo springs/2 m probes), but static review found W_SGMC unused and the applied terms sum to 0.9; the GDR Quaternary-fault layer receipt reports no grid intersection. The artifact uses the published DTI marginal algebra (alpha 0.2, beta 0.8, 300 m triangular kernel) only for raster values. No holdout validates the geological premise.",
+  "named_non_fault_process": "Erosional scarps, Lake Lahontan paleo-shoreline/terrace risers, lithologic contacts, and dike or flow-front edges can produce geophysical/topographic steps without fault offset.",
+  "experiments_run": 1,
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200,
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": null,
+    "ci95": null,
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "withheld_positives": null,
+    "reason": "The required organizer-authenticated training_features.tif is absent from this checkout and cannot be restored from the public owner mirror. A restored owner-mirror sample_submission.tif and labels.tif are present, but they are not organizer-authenticated; no catalogue-proxy holdout can be run without the training feature stack. No HOLDOUT-DTI number is reported and none is projected. Per protocol this gate is BLOCKED, not passed.",
+    "leakage_canary": "not run (no features derived; no model fitted)"
+  },
+  "registry": {
+    "reference": "pinned 13GEMSDOE lattice 13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+    "reference_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+    "reference_source": "https://github.com/buffedlizard55-lab/13GEMSDOE/blob/92ee6f074323f161eed837b80ec3ee5b662e26f5/docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+    "surface": {
+      "decision": "measured",
+      "spearman_full_footprint_vs_lattice": -0.007330541952695577,
+      "gate": "rank correlation > 0.90 is duplicate-stop",
+      "result": "PASS"
+    },
+    "dots": {
+      "decision": "measured",
+      "candidate_dots": 6649,
+      "reference_dots": 206895,
+      "fraction_of_candidate_dots_within_3px_of_lattice_dots": 0.0,
+      "gate": "more than 0.70 of candidate dots within 3 px of one registry raster's dots is duplicate-stop",
+      "result": "PASS",
+      "max_vs_locally_available_downloads": {
+        "fraction_within_3px": 0.47345465483531357,
+        "raster": "gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e-zeros.tif",
+        "note": "locally available downloads are not the complete parallel-run registry"
+      }
+    },
+    "provable_stop_budget_note": "any candidate budget >= 22,164 dots is provably >= 70% within 3 px of the lattice; this candidate uses 6,649 dots, so the provable-stop bound does not apply and the measured overlap is 0.0%"
+  },
+  "raster_sha256": "572df94e8d3106a90dc7f85e2d81aa944d38dd59ac40df840e09d14f2ea6ccfb",
+  "prediction_array_sha256": "367020c52813c2e3882ca718beb28a8a3dafd67d558272db624cab4e2facb0d2",
+  "validator_output": {
+    "status": "passed",
+    "no_nan_inside_footprint": true,
+    "values_in_0_1": true,
+    "in_footprint_min": 0.0,
+    "in_footprint_max": 1.0,
+    "valid_footprint_pixels": 5167373,
+    "crs_match": true,
+    "crs": "EPSG:32611",
+    "shape_match": true,
+    "shape": [
+      3730,
+      3292
+    ],
+    "transform_match": true,
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "single_float32_band": true,
+    "null_nodata_outside_footprint": true,
+    "outside_pixels": 7111787,
+    "template_proxy_note": "The candidate was generated against docs/research/2026-10-28-offlattice/lattice-reference.tif. A later independent format check also passed against the restored data/raw/sample_submission.tif owner mirror (SHA-256 2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc); grid metadata match. Neither source is organizer-authenticated; portal acceptance is unverified.",
+    "format_validation_source": "docs/downloads/gems30-offlattice-geothermal-structural-20261028-s7.tif.json",
+    "independent_owner_mirror_receipt": "docs/research/2026-10-28-offlattice/template-validation.json",
+    "independent_owner_mirror_receipt_sha256": "d6175853609364531b56f68059c290aefd71123e0735e6448ff5f2a064a3e087"
+  },
+  "submission_name": "gems30-offlattice-geothermal-structural-20261028-s7",
+  "note": "Unique off-lattice geothermal structural dots; research artifact; holdout gate blocked; not slot-approved",
+  "note_chars": 105,
+  "file": "docs/downloads/gems30-offlattice-geothermal-structural-20261028-s7.tif",
+  "file_sha256": "572df94e8d3106a90dc7f85e2d81aa944d38dd59ac40df840e09d14f2ea6ccfb",
+  "receipt": "docs/research/2026-10-28-offlattice/gems30-offlattice-geothermal-structural-20261028-s7.receipt.json",
+  "verdict": "negative",
+  "download_ok": true,
+  "ok_to_submit": false,
+  "submission_approved": false,
+  "slot_selected": false,
+  "organizer_score": null,
+  "organizer_acceptance_confirmed": false,
+  "performance_status": "unscored; format validation is not a score; no leaderboard forecast is made",
+  "blockers": [
+    "Required organizer-authenticated training_features.tif is absent; restored owner-mirror sample_submission.tif and labels.tif are not organizer-authenticated and cannot substitute for the missing training feature stack.",
+    "No externally assigned lane paragraph was supplied for this session; lane is self-assigned",
+    "Complete parallel-run raster/surface registry is unavailable locally",
+    "Historical best rerun unavailable; no organizer-confirmed score receipts exist for any prior GEMSDOE file"
+  ],
+  "display_status": "DOWNLOAD OK (format-valid research artifact); NOT OK TO SUBMIT TO DRIVENDATA; no weekly slot selected or used",
+  "post_run_code_audit": {
+    "review_status": "negative; no artifact regenerated or experiment run",
+    "generator_path": "scripts/build_offlattice_submission.py",
+    "generator_sha256": "dfc2667e27122499bbecc1fb926165ffefb3e9a52a993609b918f2405d423366",
+    "source_findings": [
+      "select_dots sorts uncovered cells by structural score but sets every uncovered row/column to True; ordering does not change the emitted dot support, which is all 6,649 cells.",
+      "W_SGMC is declared but unused; the score expression applies 0.4 + 0.3 + 0.2 = 0.9, contradicting the code comment that weights sum to 1.",
+      "The applied 0.4 fault term takes max(GDR Quaternary faults, SGMC faults); the pinned external receipt states the GDR Quaternary-fault layer has no features intersecting the grid."
+    ],
+    "external_receipt_path": "data/external/external_receipt.json",
+    "external_receipt_sha256": "b3b5a6f9b3bd43fcd37aa5f1ee326eef9f8064c0e22883e021951ca1a62f97ce",
+    "gdr_qfaults_v2_grid_intersection": false,
+    "dots_emitted_on_all_uncovered_cells": true,
+    "declared_weights_sum": 1.0,
+    "applied_weights_sum": 0.9,
+    "w_sgmc_used": false,
+    "conclusion": "The emitted raster is the lattice-complement support, not an output whose dot support was ranked by the claimed geothermal layers. No geological-hypothesis validation can be inferred."
+  }
+}

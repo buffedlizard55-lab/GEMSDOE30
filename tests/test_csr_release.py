@@ -143,14 +143,19 @@ def test_csr_pages_links_downloads_and_decision_badges(name: str):
         if parts.fragment and target.suffix == ".html":
             assert unquote(parts.fragment) in PageLinks(target.read_text()).ids, f"{name} -> {url}"
 
+    research_tiff = "docs/downloads/gems30-offlattice-geothermal-structural-20261028-s7.tif"
     if name in {"index.html", "executive-summary.html", "csr-discontinuity-review.html"}:
-        assert parsed.downloads == [load(REPORT / "run-card.json")["published_tiff"]]
+        assert parsed.downloads == [load(REPORT / "run-card.json")["published_tiff"], research_tiff]
         assert "DUPLICATE-STOP" in text and "99.9864%" in text
         assert "Historical CSR-1 · research only" in text
         assert "fails the published-format validator" in text
         assert "OK TO DOWNLOAD: YES" not in text
         assert text.count("NOT APPROVED FOR SUBMISSION") == 1
         assert "HOLDOUT-DTI" in text and "60,988" in text
+    elif name == "priority-executive-summary.html":
+        assert "unverified" in text.lower() and "not a" in text.lower()
+        assert parsed.downloads == [research_tiff]
+        assert "Download research TIFF — NOT OK TO SUBMIT" in text
     elif name.startswith("priority-"):
         assert "unverified" in text.lower() and "not a" in text.lower()
         assert not parsed.downloads
