@@ -1,55 +1,87 @@
 # Repository review — 2026-10-28
 
-## Decision
+Scope: review of the repository state after syncing this session branch with the intervening `main` updates. The historical review observations below are retained from the merged review; the independent recheck section at the end records commands actually rerun in this session. No new model, raster, submission name, note, score estimate, or weekly-slot selection was made.
 
-**Negative / stop: no new submission TIFF was generated, no TIFF is approved for download or portal submission, and no weekly slot was selected or used.** This is a verification-only continuation, not a geological experiment. `AGENTS.md`, the README's current-owner prompt and decision, `docs/current-run.json`, and the latest registry-preflight and POOL-1 receipts all require a duplicate stop; the assigned single-method lane is unspecified in the prompt. Do not lower the dot budget, re-encode, rename, perturb, or otherwise try to bypass the novelty stop.
+## Executive decision
 
-The current public-site table remains the [nine-site executive summary](priority-executive-summary.html). Its historic entries and scores are owner-reported research references, not a verified current leaderboard or an estimate for a new candidate. In particular, the claimed GEMSDOE32 `0.2778` cannot identify the hidden TP/FP contributions or prove that H33-B2's pruning caused the score. The repo's byte-lineage review supports a plausible precision/false-positive explanation only. No comparable organizer receipt is available to say a new method will exceed that value or the reported `0.3195`.
+**DO NOT SUBMIT. No new GeoTIFF is approved.** Every archived candidate in this checkout is either a duplicate-stop, a format-only pass, or a zero-experiment preflight, and no candidate has an organizer-confirmed score. The repository's gates are behaving as designed: the registry preflight still reproduces the duplicate stop, and the historical evidence has not changed.
 
-## Protocol and candidate slate
+Quick answer to "is there a file I can download and submit?": **no.** The only downloadable TIFFs are historical research artifacts with recorded stop decisions. The [current submission guide](../executive-summary.html) and [overview](../index.html) say the same thing.
 
-The repo already documents four ranked, differentiated hypothesis proposals in [the prior current-session review](research/2026-10-27-current-session-review.md#candidate-hypotheses--proposals-only-no-lane-authorized): polygon-conditioned map-unit concealment, buried-source-depth magnetic lineaments, drainage χ/normalized channel-steepness disequilibrium, and heat-flow/borehole-gradient corridors. Their layers, target signatures, distinctions from implemented work, non-fault mimics, source requirements, and qualitative cost ranking are recorded there. These are proposals—not globally novel claims, validated experiments, or score projections. No additional slate was invented or experiment started because the lane and novelty policy are unresolved and the experiment cap is already exhausted in parallel attempts.
+## What was verified in this review (reproduced, not assumed)
 
-Sources named in that slate include the official [USGS SGMC](https://www.usgs.gov/data/state-geologic-map-compilation-sgmc-geodatabase-conterminous-united-states), [USGS GeoDAWN](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and), [USGS National Map](https://www.usgs.gov/the-national-map-data-delivery), [USGS 3DEP](https://www.usgs.gov/3d-elevation-program), and [IHFC Global Heat Flow Database](https://ihfc-iugg.org/products/global-heat-flow-database). The source availability/coverage caveats in the linked review remain in force: the necessary feature stack is not staged; some external layers are absent; and no official source archive, full-footprint coverage, licensing, or checksums were newly revalidated during this verification-only pass. A URL in a document is not evidence that its data are locally available or validated.
-
-## Reproduced checks
-
-The following checks were executed in this checkout on 2026-10-28. The owner-provided sample grid, labels, and 13GEMSDOE lattice witness were restored from hash-pinned public GitHub mirrors. They are explicitly **not organizer-authenticated**. The 418,912,844-byte training feature stack remains absent; no holdout was run.
-
-| Check | Result | Interpretation |
+| Check | Command | Result |
 |---|---|---|
-| `scripts/verify_registry_preflight.py` | PASS as a negative | Reproduced the pinned-lattice stop: the lower-bound overlap for a 44,090-dot candidate exceeds the strict 70% threshold. This is a geometry/novelty bound, not a score or full-registry clearance. |
-| `scripts/verify_pool_run.py` | PASS as a negative receipt | POOL-1's paired `HOLDOUT-DTI` improvements reproduce in the stored receipt, but its final dots breach the duplicate stop. The verifier also confirms no public POOL-1 TIFF is published. This does not make POOL-1 a selectable submission. |
-| `scripts/build_research_site.py --check` | PASS | Current receipt-driven pages and the download/readiness disclosures match their source artifacts. |
-| `scripts/build_status.py` | PASS | Regenerated the machine-derived status feed from repository evidence; the feed does not claim a score gain. |
-| `.venv/bin/python -m pytest -q` | **424 passed, 5 skipped, 4 warnings, 7 subtests passed** | The five skips are optional PyTorch-dependent loss tests; PyTorch was not installed. The four warnings are Rasterio affine-transform pending deprecations. |
-| `git diff --check` | PASS | No whitespace errors. |
+| Restore owner mirrors (SHA-256 pinned, not organizer-authenticated) | `scripts/restore_public_mirrors.py --ids sample_submission labels` and `--pins docs/research/2026-10-27-registry-preflight/lattice-pin.json --ids registry_lattice` | Restored; `labels.tif` and `sample_submission.tif` match pins |
+| Registry preflight (duplicate stop) | `scripts/verify_registry_preflight.py` | Exit 0: **VERIFIED NEGATIVE**. 37,441/44,090 minimum overlap; historic CSR-1 44,084/44,090 within 3 px |
+| Stopped-attempt verifier | `scripts/verify_stopped_attempt.py` | Exit 0, `archived_research_verdict: negative` |
+| Current-run verifier | `scripts/verify_current_run.py` | Exit 0, `archived_research_verdict: negative` |
+| CSR-1 verifier | `scripts/verify_csr_run.py` | Exit 0: research verdict negative, download flag True (12 gates) |
+| GDX-1 verifier | `scripts/verify_geothermal_chemistry_run.py` | Exit 0; current TIFF reopened, CIs recomputed |
+| QPC-1 verifier | `scripts/verify_quadrature_phase_run.py` | Exit 0; duplicate-stop at dots, no publication |
+| LSM verifier | `scripts/verify_lsm_run.py` | Exit 0; its own `file_contract` check reports "No TIFF published" (protocol stop at dot stage) |
+| TAD verifier | `scripts/verify_tad_run.py` | Exit 0, archived negative |
+| POOL-1 verifier | `scripts/verify_pool_run.py` | Exit 0; receipt-only (raster absent by design) |
+| Site generator check | `scripts/build_research_site.py --check` | Exit 0: receipts, download link and generated pages are deterministic |
+| Test suite | `python -m pytest -q` | **424 passed, 5 skipped** (optional torch/scipy), 7 subtests passed |
+| Local link check | Relative `href`/markdown links in `README.md`, `index.html`, `executive-summary.html`, `docs/*.md` | No broken local targets |
+| Git state | `git status` | Clean; generated data stays in Git-ignored `data/raw/` |
 
-For transparent context, the POOL-1 receipt records **HOLDOUT-DTI** (evaluator `component-holdout-v3-blockstats-20261025`, 60,988 withheld positives; paired spatial-block 95% CI): screen candidate 0.186699 [0.173113, 0.200171] versus same-run `msdb_edge` control 0.169468 [0.155445, 0.183465], with paired difference **HOLDOUT-DTI** +0.017231 [+0.010515, +0.023980]. Its seed-confirmation receipt records **HOLDOUT-DTI** 0.187694 [0.173631, 0.201989] versus control 0.174247 [0.160153, 0.188516], with paired difference **HOLDOUT-DTI** +0.013446 [+0.006993, +0.019757], under the same evaluator and withheld-positive count. These are catalogue-proxy results, not `ORGANIZER-CONFIRMED` scores, leaderboard estimates, or a comparison to the owner's historical H33-B2 score. Although the paired holdout gains are positive, the submission artifact is duplicate-stopped and therefore not promotable. See the [POOL-1 run card](research/2026-10-27-pool/run-card.json) for the source receipts and duplicate references.
+Note: the first run of several verifiers failed with `FileNotFoundError` on `data/raw/sample_submission.tif`. That was an environment precondition (the file is restored by the README's own command), not a repository defect. After the restore step, every verifier passed.
 
-## Nine requested sites and download status
+## Score evidence status (what each number is)
 
-The site-by-site table in the [executive summary](priority-executive-summary.html) records the pinned historical reference, owner-reported value, a new-score estimate marked unavailable, novelty clearance status, and whether a file is safe to submit. The answer for all nine is unchanged: **none is a cleared new candidate; do not download a historical artifact for submission.** A mathematical lower bound from one pinned lattice witness is enough to stop those listed dot budgets under the literal rule, but it is not an exact pairwise measurement for every raster or a complete global registry audit.
+| Number | Source in repo | Status |
+|---|---|---|
+| 0.4413 | Ledger row for DrivenData leaderboard rank 1 (`xiaofanhu`), read 2026-10-25 | Public-leaderboard snapshot; not a private-test score; not attributable to a file |
+| 0.3195 | Ledger rows read 2026-10-03 (DARD, rank 1) | **Stale snapshot.** Not on the 2026-10-25 page; the owner's "highest" claim conflicts with the 0.4413 current leader (see IR-30-057, IR-30-072) |
+| 0.2778 (H33-B2, GEMSDOE32) | Owner-reported | Unverified; no submission receipt |
+| 0.2600 (GEMSDOE25 / GEMSDOE30 D2.8) | Owner-reported | Unverified; IR-30-002 says the file-to-score link is not established |
+| Holdout DTI values in archived receipts | Evaluator `component-holdout-v3-blockstats-20261025` | HOLDOUT-DTI only; not comparable to leaderboard scores |
 
-The latest reconciled current run is still `DUPLICATE-STOP`. No run card for a new candidate can honestly provide a raster SHA, prediction validator result, HOLDOUT-DTI, or submission name because no candidate raster was created. Machine-readable statement: [`repository-review-2026-10-28-run-card.json`](repository-review-2026-10-28-run-card.json).
+Authoritative sources for manual review: [DrivenData competition page](https://www.drivendata.org/competitions/306/competition-doe-gems/), [leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/), [rules PDF](https://docs.nlr.gov/docs/fy26osti/96647.pdf), [reference solution](https://github.com/drivendataorg/gems-prize-reference-solution), [INGENIOUS GDR 1391](https://gdr.openei.org/submissions/1391).
 
-## Limitations and next actions
+## Irregularities flagged for review
 
-1. **Do not generate a TIFF until there is an explicit lane assignment and a documented resolution of the novelty policy.** The prompt says “the single method paragraph below” but contains no unambiguous assigned paragraph; all new fitting/placement is blocked by that ambiguity and the existing stop.
-2. Restore `training_features.tif` from the competition's authorized account/session or another explicitly authorized source; it is absent here and cannot be recovered from the login-walled competition page without credentials. No credentials were requested or used.
-3. Obtain a fresh, complete, policy-approved registry and repeat surface novelty before placement and final-dot novelty after placement. The lattice witness is sufficient to stop a candidate, but never sufficient to clear one.
-4. After authorization and data restoration only, preregister one candidate, re-use the shared holdout and submission modules, run feature-alone leakage canaries, use buffered whole-segment hide-and-recover with all catalogue-derived features recomputed from visible faults, and require a paired spatial-block 95% CI improvement over the same-protocol best.
-5. Only after scientific and novelty gates pass should the separate selector evaluate the weekly slot cap. Portal acceptance remains unknown until an organizer receipt exists; local TIFF validation is not portal confirmation.
-6. The feed is generated from local receipts and dated repository artifacts. DrivenData authentication is unavailable in this run, so the current live leaderboard and submission-page receipts are not automatically verified. The supplied changing values `0.3195`, `0.4413`, and other historical claims must not be represented as fresh confirmed standings.
+1. **Leader value conflict (High).** The owner brief states 0.3195 is the highest score; the ledger's 2026-10-25 read shows 0.4413 at rank 1 and no 0.3195 entry on pages 1–2 (IR-30-057, IR-30-072). The official page is the reference. Re-read the leaderboard manually before treating either number as current.
+2. **Score-to-file attribution unproven (Critical).** The 0.2600 and 0.2778 values are not tied to a submission receipt (IR-30-002, IR-30-080). Do not state that any named TIFF earned a score.
+3. **Portal rejection cause undiagnosed (High).** The "Predicted values must be in range [0, 1]" error is consistent with NaN/zero handling outside or inside the footprint, but the validator is not public (IR-30-012). The writer and validator in this repo check the local contract; they are not organizer acceptance.
+4. **Competition data not organizer-authenticated (Critical).** `training_features.tif` is absent from `data/raw/` (status.json: `required_files_present: false`). Only `labels.tif` and `sample_submission.tif` were restored from owner mirrors. The DrivenData data page requires login; no bypass was attempted (IR-30-001).
+5. **Deadline discrepancy (Medium).** Competition page: 3 Dec 2026, 23:59 UTC. Rules PDF Appendix A.1: 5:00 p.m. ET. Confirm with the organizer; plan for the earlier time (IR-30-008).
+6. **Pointer/README drift (Low).** `docs/current-run.json` still names the archived PTA-1 run card as `run_card`, while its `latest_attempt` points at `docs/research/texture-controls/run-card.json`. Both paths resolve, but a reader could take the wrong one. Keep the pointer as-is for verifier compatibility and rely on the README's current decision.
+7. **Ignored `.venv`/`data/raw`.** Environment artifacts created here are Git-ignored (`.venv/`, `data/raw/`) and are not part of the deliverable.
 
-## Sources for manual review
+## Gaps in the project (blocking a competitive submission)
 
-- [DrivenData competition overview and rules](https://www.drivendata.org/competitions/306/competition-doe-gems/)
-- [DrivenData problem description](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/)
-- [DrivenData leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) — login/current page not checked in this audit.
-- [Official GEMS technical report / submission rules PDF](https://docs.nlr.gov/docs/fy26osti/96647.pdf)
-- [DrivenData reference solution](https://github.com/drivendataorg/gems-prize-reference-solution)
-- [USGS GeoDAWN data record](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and)
-- [Official IHFC heat-flow database](https://ihfc-iugg.org/products/global-heat-flow-database)
+- No verified organizer-authenticated training features; a full model cannot be trained or cross-validated against the official data (IR-30-001, status.json).
+- No candidate has passed the promotion gate: no paired holdout improvement with a 95% CI lower bound above zero, and no non-duplicate registry result at the 44,090-dot scale. The current governing rule (>70% of dots within 3 px) makes many otherwise-valid ideas stop.
+- The complete live registry of public submissions is not known; archived comparisons do not cover every new raster (IR-30-009). The 21 named external repositories in the prompt returned HTTP 404 in the 2026-10-27 review (see ledger).
+- DrivenData's terms restrict automated monitoring; the leaderboard feed must stay a manually refreshed, time-stamped snapshot (IR-30-007).
 
-The existing [sources index](sources.html) and [hypothesis register](hypotheses.html) include additional citations and their evidence-status caveats.
+## Recommended next steps (for the next session)
+
+1. Obtain organizer-authenticated copies of the four competition files through a permitted, logged-in session, then re-run `scripts/verify_current_run.py` against them.
+2. Ask the organizer (or read the submission-page receipt) to confirm the submission validator's exact rule for NaN/zero outside the footprint; resolve the 0–1 range error before any further upload attempt.
+3. Re-read the public leaderboard manually and update the ledger with the read date; reconcile the 0.3195 vs 0.4413 conflict.
+4. Only after a preregistered, leakage-safe holdout beats the same-protocol best with a paired CI lower bound above zero, and the duplicate policy is resolved, run the selector step for a weekly slot.
+5. Confirm the controlling deadline with the organizer.
+
+## Three-pass record
+
+- **Pass 1 — implement and verify.** Restored the owner mirrors, ran all nine verifiers, the site check and the test suite. All passed (negative verdicts reproduced).
+- **Pass 2 — bugs and assumptions.** Found the environment-only missing-template failure (resolved by the README restore), confirmed the score attribution gaps, the 0.3195/0.4413 conflict and the pointer drift. No code change was needed.
+- **Pass 3 — cross-check.** Re-read the claims above against the verifier output and the ledger; this report makes no score claim beyond the labelled sources. No new raster or submission was created.
+
+
+## Independent verification in this session branch (2026-10-28)
+
+After restoring the SHA-pinned owner mirrors for `sample_submission.tif`, `labels.tif`, and the 13GEMSDOE lattice witness (not organizer-authenticated), I independently reran:
+
+- `scripts/verify_registry_preflight.py`: **PASS as negative**; duplicate-stop reproduced. The 37,441/44,090 figure is the one-witness lower-bound overlap, not a score or registry-wide clearance.
+- `scripts/verify_pool_run.py`: **PASS as negative receipt**; two-seed paired **HOLDOUT-DTI** advantages reproduce under evaluator `component-holdout-v3-blockstats-20261025`, with 60,988 withheld positives and paired spatial-block 95% CIs in the run card. The candidate dots breach the duplicate stop; no published candidate TIFF exists. This is not `ORGANIZER-CONFIRMED` and not comparable to leaderboard scores.
+- `scripts/build_research_site.py --check`: PASS.
+- `scripts/build_status.py`: PASS; refreshed the generated status feed. It records the latest local test-collection result and makes no score-gain claim.
+- `.venv/bin/python -m pytest -q`: **424 passed, 5 skipped, 4 warnings, 7 subtests passed**. Five skips are optional PyTorch-dependent loss tests because PyTorch is not installed; warnings are Rasterio affine-transform pending deprecations.
+- JSON parsing for the run card, local Markdown target checks for `README.md` and this report, and `git diff --check`: PASS.
+
+The current session's [ranked four-hypothesis slate](research/2026-10-27-current-session-review.md#candidate-hypotheses--proposals-only-no-lane-authorized) remains proposals only. The assigned lane is unspecified, the required feature stack is absent, and previous duplicate-stop/budget gates remain controlling. Therefore no holdout, candidate output, TIF, leaderboard estimate, or slot selection was made. The [machine-readable run card](repository-review-2026-10-28-run-card.json) records those null candidate fields and the negative verdict.
