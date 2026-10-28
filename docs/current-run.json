@@ -132,5 +132,11 @@
     "verifier": "scripts/audit_priority_readiness.py --check",
     "scope": "Zero-experiment audit of frozen historical leaders; does not replace latest scientific review or authorize a lane or slot",
     "decision": "NEGATIVE: all nine historical references exceed 99.90% overlap against the pinned lattice; no new TIFF or score estimate"
+  },
+  "latest_safety_review": {
+    "run_card": "docs/research/2026-10-28-offlattice-safety-run-card.json",
+    "report": "docs/research/2026-10-28-offlattice-safety-review.md",
+    "site_page": "offlattice-safety-review.html",
+    "decision": "NEGATIVE: off-lattice generator disabled; no new scientific lane or slot"
   }
 }

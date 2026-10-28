@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-28T16:13:28Z",
+  "generated_utc": "2026-10-28T16:19:33Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -492,6 +492,50 @@
       "performance_status": "unscored; format validation is not a score"
     },
     {
+      "manifest": "gems30-unique-offlattice-structural-20261028-s8.json",
+      "file": "docs/downloads/gems30-unique-offlattice-structural-20261028-s8.tif",
+      "present": true,
+      "sha256": "b7946faeb578e53e44a3dfa4bfb3ecd7c528ddf52373a0fd4f6fdf21347cc7a9",
+      "sha256_matches_manifest": null,
+      "outside_convention": "unknown; inspect the sidecar",
+      "published_format_compliant": null,
+      "whole_raster_range_diagnostic_passed": null,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "legacy_manifest_claim_range_error_immunity": null,
+      "organizer_acceptance_confirmed": false,
+      "site_linked": false,
+      "mentioned_on_site": false,
+      "historical_manifest_recommendation": null,
+      "submission_recommendation": false,
+      "run_name": null,
+      "note": "Unique off-lattice geothermal structural dots; holdout blocked; not slot-approved",
+      "performance_status": "unscored; format validation is not a score"
+    },
+    {
+      "manifest": "gems30-unique-offlattice-structural-20261028-s8.validation.json",
+      "file": "docs/downloads/gems30-unique-offlattice-structural-20261028-s8.validation.tif",
+      "present": false,
+      "sha256": null,
+      "sha256_matches_manifest": null,
+      "outside_convention": "unknown; inspect the sidecar",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": null,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "legacy_manifest_claim_range_error_immunity": null,
+      "organizer_acceptance_confirmed": false,
+      "site_linked": false,
+      "mentioned_on_site": false,
+      "historical_manifest_recommendation": null,
+      "submission_recommendation": false,
+      "run_name": null,
+      "note": null,
+      "performance_status": "unscored"
+    },
+    {
       "manifest": "gemsdoe30-d15-poisson200m-offcat-60069-20261003T233210Z-68d0e2e4.json",
       "file": "docs/downloads/gemsdoe30-d15-poisson200m-offcat-60069-20261003T233210Z-68d0e2e4.tif",
       "present": true,
@@ -931,6 +975,12 @@
       "verifier": "scripts/audit_priority_readiness.py --check",
       "scope": "Zero-experiment audit of frozen historical leaders; does not replace latest scientific review or authorize a lane or slot",
       "decision": "NEGATIVE: all nine historical references exceed 99.90% overlap against the pinned lattice; no new TIFF or score estimate"
+    },
+    "latest_safety_review": {
+      "run_card": "docs/research/2026-10-28-offlattice-safety-run-card.json",
+      "report": "docs/research/2026-10-28-offlattice-safety-review.md",
+      "site_page": "offlattice-safety-review.html",
+      "decision": "NEGATIVE: off-lattice generator disabled; no new scientific lane or slot"
     }
   },
   "latest_scientific_review": {
@@ -1582,7 +1632,7 @@
       {
         "name": "current_published_inventory_coverage",
         "status": "unknown",
-        "detail": "9 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
+        "detail": "10 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
       }
     ],
     "observed_registry": {
@@ -1616,6 +1666,7 @@
       "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
       "572df94e8d3106a90dc7f85e2d81aa944d38dd59ac40df840e09d14f2ea6ccfb",
       "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07",
+      "b7946faeb578e53e44a3dfa4bfb3ecd7c528ddf52373a0fd4f6fdf21347cc7a9",
       "d6dadb9c6119767f0b4af2f2122e73529829b3c1b36cf1131165cb68b8da2612",
       "e701076a93df45ae911b15519bcce66d88cca318686fa39df4117e921dd1876b"
     ],
@@ -1887,7 +1938,7 @@
         {
           "name": "current_published_inventory_coverage",
           "status": "unknown",
-          "detail": "9 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
+          "detail": "10 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
         }
       ],
       "observed_registry": {
@@ -1927,6 +1978,7 @@
         "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
         "572df94e8d3106a90dc7f85e2d81aa944d38dd59ac40df840e09d14f2ea6ccfb",
         "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07",
+        "b7946faeb578e53e44a3dfa4bfb3ecd7c528ddf52373a0fd4f6fdf21347cc7a9",
         "d6dadb9c6119767f0b4af2f2122e73529829b3c1b36cf1131165cb68b8da2612",
         "e701076a93df45ae911b15519bcce66d88cca318686fa39df4117e921dd1876b"
       ],
@@ -2081,7 +2133,7 @@
         {
           "name": "current_published_inventory_coverage",
           "status": "unknown",
-          "detail": "9 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
+          "detail": "10 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
         }
       ]
     }
@@ -3108,7 +3160,8 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "skip": true
+      "pytest_collect": "442 tests collected in 1.05s",
+      "exit_code": 0
     },
     "score_gain_claimed": false
   }
