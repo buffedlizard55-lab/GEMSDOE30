@@ -79,6 +79,14 @@
       "verifier": "scripts/verify_nearsplay_run.py",
       "full_registry_audit": "docs/research/nearsplay/full-registry-audit.json",
       "decision": "ARCHIVED record, not current approval: DUPLICATE ON EXPANDED REGISTRY (71.26% > 70% within 3 px on four GEMSDOE25 rasters, fulfilling IR-30-078 post-run check); DO NOT SUBMIT; retained for provenance only"
+    },
+    {
+      "lane": "offlattice-geothermal-structural-20261028-s7",
+      "run_card": "docs/research/2026-10-28-offlattice/run-card.json",
+      "submission_tif": "docs/downloads/gems30-offlattice-geothermal-structural-20261028-s7.tif",
+      "validation": "docs/downloads/gems30-offlattice-geothermal-structural-20261028-s7.tif.json",
+      "verifier": "scripts/build_offlattice_submission.py",
+      "decision": "ARCHIVED record, not current approval: FORMAT-VALID RESEARCH ARTIFACT, NOT OK TO SUBMIT (verdict negative; 6,649 binary dots all >300 m from the pinned 13GEMSDOE lattice \u2014 0.0000 within 3 px <= gate 0.70; Spearman vs lattice surface -0.0073 <= gate 0.90; unique vs locally available downloads max 0.4735 <= 0.70; 12/12 GEMS format checks passed vs grid reference, values in [0,1], EPSG:32611, 3730x3292, 100 m north-up, NaN outside footprint; holdout gate BLOCKED \u2014 organizer rasters require DrivenData login; no HOLDOUT-DTI, no score forecast, no slot selected)"
     }
   ],
   "previous_review": {
