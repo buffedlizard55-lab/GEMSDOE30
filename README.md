@@ -22,6 +22,7 @@ The current owner prompt below remains the operating brief, including the unique
 
 - [Machine audit with all hashes and validator checks](docs/research/2026-10-28-priority-audit.json)
 - [Review, four explicitly differentiated hypothesis proposals, three-pass verification and next actions](docs/research/2026-10-28-review.md)
+- [Follow-up repository verification, refreshed status/site build and remaining blockers](docs/research/2026-10-28-followup-review.md)
 - [Current audit JSON run card](docs/research/2026-10-28-run-card.json)
 - [Freshly checked official reference-source excerpts and limits](docs/research/2026-10-28-official-source-check.json)
 
