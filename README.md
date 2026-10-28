@@ -1,6 +1,6 @@
 # GEMSDOE30 — GEMS concealed-fault research
 
-> **SESSION MISSION (read every session):** Place top of the DOE GEMS concealed-fault leaderboard by generating a **unique** single-band `float32` `[0,1]` GeoTIFF submission (EPSG:32611, 3730×3292, 100 m, `sample_submission.tif` grid, `NaN` outside the footprint) that is obvious to download and obvious whether it is OK to submit. Core values: **Maximize P(Win)** and **Own the Outcome**. Never copy a previous submission as your own; never submit a candidate that has not beaten the holdout best with a paired 95% CI lower bound > 0; protect the 3-per-week DrivenData slot. The full operating protocol is in the `#current-owner-prompt` section below — reread it before changing code.
+> **SESSION MISSION (read every session):** Place top of the DOE GEMS concealed-fault leaderboard by generating a **unique** single-band `float32` `[0,1]` GeoTIFF submission (EPSG:32611, 3730×3292, 100 m, `sample_submission.tif` grid, `NaN` outside the footprint) that is obvious to download and obvious whether it is OK to submit. Core values: **Maximize P(Win)** and **Own the Outcome**. Never copy a previous submission as your own; never submit a candidate that has not beaten the holdout best with a paired 95% CI lower bound > 0; protect the 3-per-week DrivenData slot. The full operating protocol is in the `#current-owner-prompt` section below — reread it before changing code. The current-session addendum requires 3–5 explicitly differentiated geological hypotheses, source/access checks, a same-protocol blocked holdout before slot consideration, repeated code/site review, and no score projections presented as results; see [the dated review](docs/research/2026-10-27-current-session-review.md). A prior duplicate-stop and lane/budget restriction overrides the aspiration to generate a TIFF whenever its gates fail.
 
 ## Current decision · 2026-10-27: **DUPLICATE-STOP · DO NOT SUBMIT**
 
@@ -18,14 +18,8 @@ Their published-format checks pass, but their archived holdout used predictions
 built from the full catalogue before hiding faults; it is not a leakage-safe
 comparison. Their original generation and scoring commands now fail closed.
 
-### Validated candidate (this session, gate still STOP)
-A unique off-catalogue geothermal-corridor GeoTIFF was built and machine-validated:
-`docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z.tif`
-(SHA-256 `0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564`).
-All 12 format checks pass against the organizer template (EPSG:32611, 3730x3292,
-float32 [0,1] inside the footprint, NaN outside). Holdout-DTI 0.0733 [0.0638,
-0.0828], 60,988 withheld positives, CI entirely above zero. It is NOT organizer-
-confirmed and the DUPLICATE-STOP gate still applies — see `executive-summary.html`.
+### Upstream research artifacts (PRs #58/#59; both gate-stopped)
+Two TIFFs arrived from upstream PRs #58/#59; this review generated neither. The geothermal-corridor artifact is `docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z.tif` (SHA-256 `0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564`). It passes the published-format checks (EPSG:32611, 3730×3292, float32 [0,1] in-footprint, NaN outside), but **39,960/40,000 dots (99.9%)** fall within 3 px of the pinned lattice. Its catalogue-proxy **HOLDOUT-DTI 0.073314** [0.063811, 0.082800], 60,988 withheld positives, evaluator `component-holdout-v3-blockstats-20261025`, is not an organizer score or leaderboard forecast and is not comparable to the current same-protocol best. The vent-structural artifact (`docs/downloads/GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif`, SHA-256 `e701076a93df45ae911b15519bcce66d88cca318686fa39df4117e921dd1876b`) also passes published-format checks, but **37,654/37,654 dots (100%)** fall within 3 px of the lattice; no verified HOLDOUT-DTI receipt was found. Both fail the duplicate rule; the pre-placement surfaces are unavailable for this review. Their separate whole-array finite-range diagnostics fail because outside-footprint values are NaN. **Neither is approved to download or submit.** See the current review and run card for the hash-bound audit.
 
 The historical CSR-1 file is [available for research only](docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif)
 (SHA-256 `0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900`).
@@ -52,6 +46,7 @@ three feedback submissions per week and require one final selection for both rou
 [Submission guide](executive-summary.html) ·
 [**Current JSON run card**](docs/research/2026-10-27-registry-preflight/run-card.json) ·
 [Full preflight proof and reproduction](docs/research/2026-10-27-registry-preflight/review.md) ·
+[Current session review, nine-site score-estimate table, and future hypothesis slate](docs/research/2026-10-27-current-session-review.md) · [Current session JSON card](docs/research/2026-10-27-current-session-run-card.json) ·
 [GitHub-only status snapshot](docs/status.json) · [Historical research](research-history.html).
 
 ### Reproduce the current stop
