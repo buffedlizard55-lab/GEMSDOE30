@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "run_id": "gemsdoe30-priority-byte-audit-20261028",
+  "hypothesis": "No new geological hypothesis executed: the existing registry stop remains binding and no single method lane is assigned in the prompt.",
+  "mechanism": "Zero-experiment byte audit of nine frozen historical leaders using the shared novelty comparator and submission validator; no fit, placement or prediction writing.",
+  "named_non_fault_process": "Not tested. Proposed top profile-parity hypothesis can be mimicked by fluvial terrace risers, asymmetric channels, roads and shorelines.",
+  "holdout_dti": {
+    "label": "HOLDOUT-DTI",
+    "value": null,
+    "ci95": null,
+    "evaluator_version": null,
+    "withheld_positives": null,
+    "reason": "Not run after mandatory stop; no forecast and no historical cross-protocol ranking."
+  },
+  "registry_comparison": {
+    "audit_receipt": "docs/research/2026-10-28-priority-audit.json",
+    "audit_receipt_sha256": "aba4809121ea499c8f6d5cf431250a4999151f36fbacf9751ddb525c18841e0c",
+    "historical_references_reopened": 9,
+    "historical_final_dot_overlap_min": 0.9990971853425386,
+    "historical_final_dot_overlap_max": 0.9992336290112184,
+    "historical_all_dot_duplicate": true,
+    "new_surface_spearman": null,
+    "new_final_dot_overlap": null,
+    "preplacement_surfaces_available": false,
+    "complete_registry_checked": false,
+    "witness_raster_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+    "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "scope": "One pinned registered witness suffices for a stop; not a novelty clearance or live fleet inventory."
+  },
+  "raster_sha256": null,
+  "validator_output": {
+    "new_candidate_exists": false,
+    "no_nan_inside_footprint": null,
+    "values_in_0_1_inside_footprint": null,
+    "crs_shape_transform_match": null,
+    "historical_format_passes": 5,
+    "historical_format_failures": 4,
+    "historical_all_finite_and_in_0_1_inside": true,
+    "details": "docs/research/2026-10-28-priority-audit.json"
+  },
+  "submission_name": null,
+  "note": null,
+  "experiments_run": 0,
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200,
+  "download_ok": false,
+  "ok_to_submit": false,
+  "slot_selected": false,
+  "organizer_confirmed_score": null,
+  "remote_sites_modified": false,
+  "verdict": "negative",
+  "decision": "DUPLICATE-STOP: no new TIFF, score estimate, download approval or weekly-slot selection",
+  "review": "docs/research/2026-10-28-review.md",
+  "verification": {
+    "preflight": "PASS as negative",
+    "nine_site_audit_offline": "PASS as negative; float diagnostics use shared 1e-12 tolerance",
+    "site_build_check": "PASS",
+    "tests": {
+      "passed": 432,
+      "skipped": 5,
+      "warnings": 4,
+      "subtests_passed": 7,
+      "skip_reason": "Optional PyTorch-dependent loss tests; no torch training install in this research environment"
+    },
+    "git_diff_check": "PASS",
+    "browser": {
+      "receipt": "docs/research/2026-10-28-browser-check.json",
+      "sha256": "b62e3d494fc7cc6ea69fe282fabb0a8157e9c411fb7994a7224034026795178a",
+      "passed": true,
+      "viewports": [
+        1440,
+        390
+      ],
+      "per_site_pages_checked": 9,
+      "private_paths_blocked": true,
+      "prediction_downloaded": false
+    }
+  }
+}

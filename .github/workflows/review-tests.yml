@@ -22,6 +22,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python scripts/ci_check.py python scripts/restore_public_mirrors.py --pins docs/research/2026-10-27-registry-preflight/lattice-pin.json --ids registry_lattice
+      - name: Restore nine pinned historical references without rewriting receipts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/ci_check.py python scripts/audit_priority_readiness.py --restore-only
+      - name: Remeasure all nine references offline and check the executive audit
+        run: python scripts/ci_check.py python scripts/audit_priority_readiness.py --check
       - name: Verify the current research artifact and the preserved negative decisions
         run: |
           python scripts/ci_check.py python scripts/verify_current_run.py
