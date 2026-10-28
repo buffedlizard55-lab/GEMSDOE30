@@ -118,3 +118,15 @@ and per-site pages. The status feed was regenerated after restoring inputs;
 its preflight verifier now reproduces the negative rather than reporting a
 missing local template. These checks validate the safety change, not a new
 scientific result or competition submission.
+
+### Concurrent upstream addition during PR merge
+
+Main advanced through PR #69 while this patch was being reviewed. Its
+`gems30-unique-offlattice-structural-20261028-s8.tif` arrived from upstream,
+not from this review. It is retained as historical evidence, but is **not unique**:
+its decoded array (including NaNs) and grid match the existing s7 artifact
+exactly. The s8 sidecar itself reports 1.0 maximum local dot overlap against s7,
+yet its uniqueness boolean ignores that local result. This independently fails
+the strict >70% rule. No new holdout is present. Resolved the site conflict by
+regenerating from the receipt-driven renderer, removing the misleading new
+“unique submission” promotion while preserving all upstream artifact bytes.

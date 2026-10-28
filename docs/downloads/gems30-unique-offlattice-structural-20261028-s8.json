@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "run_id": "gems30-unique-offlattice-structural-20261028-s8",
+  "created_utc": "2026-10-28T16:11:43+00:00",
+  "lane": "off-lattice geothermal structural emission (self-assigned; not an externally assigned lane)",
+  "hypothesis": "Concealed geothermal feeder faults (step-overs, relay ramps, blind volcanic-hosted structures) are systematically missed by the catalogue-adjacent dot lane and lie in the pinned lattice's 3-px coverage holes; ranking those holes by public geothermal structural favorability recovers unmapped faults without touching any catalogue-adjacent dot.",
+  "mechanism": "Binary dots at one dot per lattice-uncovered valid cell (\u2265300 m from every pinned 13GEMSDOE lattice dot), prioritized by a weighted sum of public layers: GDR Quaternary faults + SGMC faults (0.4), GDR Quaternary volcanics (0.3), GDR paleo springs + 2 m probes (0.2). Binary emission on a fixed support follows the published DTI marginal algebra.",
+  "named_non_fault_process": "Erosional scarps, paleo-shoreline/terrace risers, lithologic contacts, and dike edges can produce geophysical/topographic steps without fault offset.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": null,
+    "ci95": null,
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "withheld_positives": null,
+    "reason": "data/raw/ (training_features.tif, labels.tif, sample_submission.tif) requires a DrivenData login and is absent from this checkout; the catalogue-proxy holdout cannot be run here, so no HOLDOUT-DTI number is reported and none is projected."
+  },
+  "registry": {
+    "surface": {
+      "decision": "measured",
+      "reference": "pinned 13GEMSDOE lattice (sha256 b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2)",
+      "spearman_full_footprint": -0.007330541952695577,
+      "gate": "rank correlation > 0.90 is duplicate-stop",
+      "result": "PASS"
+    },
+    "dots": {
+      "vs_lattice_dots": {
+        "candidate_dots": 6649,
+        "reference_dots": 206895,
+        "fraction_within_3px": 0.0,
+        "duplicate_stop": false
+      },
+      "max_vs_local_downloads": {
+        "fraction_within_3px": 1.0,
+        "raster": "gems30-offlattice-geothermal-structural-20261028-s7.tif"
+      }
+    }
+  },
+  "raster_sha256": "b7946faeb578e53e44a3dfa4bfb3ecd7c528ddf52373a0fd4f6fdf21347cc7a9",
+  "prediction_array_sha256": "367020c52813c2e3882ca718beb28a8a3dafd67d558272db624cab4e2facb0d2",
+  "validator_output": {
+    "path": "docs/downloads/gems30-unique-offlattice-structural-20261028-s8.tif",
+    "passed": true,
+    "checks": [
+      {
+        "name": "template_single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "float32",
+        "passed": true,
+        "detail": "dtypes=('float32',)"
+      },
+      {
+        "name": "epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "template_epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "shape_matches_template",
+        "passed": true,
+        "detail": "output=(3730, 3292) template=(3730, 3292)"
+      },
+      {
+        "name": "transform_matches_template",
+        "passed": true,
+        "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "100m_north_up_grid",
+        "passed": true,
+        "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "finite_and_in_range_inside_footprint",
+        "passed": true,
+        "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+      },
+      {
+        "name": "null_outside_template_footprint",
+        "passed": true,
+        "detail": "outside_pixels=7111787; null/NaN/nodata required"
+      },
+      {
+        "name": "whole_raster_finite_range_diagnostic_advisory",
+        "passed": true,
+        "detail": "advisory only: whole-array diagnostic found 7111787 NaN/Inf cell(s); this is not a diagnosis of portal behavior; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+      },
+      {
+        "name": "template_readable",
+        "passed": true,
+        "detail": "shape=(3730, 3292)"
+      }
+    ]
+  },
+  "format_passed": true,
+  "individual_checks": {
+    "template_single_band": {
+      "passed": true,
+      "detail": "count=1"
+    },
+    "single_band": {
+      "passed": true,
+      "detail": "count=1"
+    },
+    "float32": {
+      "passed": true,
+      "detail": "dtypes=('float32',)"
+    },
+    "epsg": {
+      "passed": true,
+      "detail": "crs=EPSG:32611"
+    },
+    "template_epsg": {
+      "passed": true,
+      "detail": "crs=EPSG:32611"
+    },
+    "shape_matches_template": {
+      "passed": true,
+      "detail": "output=(3730, 3292) template=(3730, 3292)"
+    },
+    "transform_matches_template": {
+      "passed": true,
+      "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+    },
+    "100m_north_up_grid": {
+      "passed": true,
+      "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+    },
+    "finite_and_in_range_inside_footprint": {
+      "passed": true,
+      "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+    },
+    "null_outside_template_footprint": {
+      "passed": true,
+      "detail": "outside_pixels=7111787; null/NaN/nodata required"
+    },
+    "whole_raster_finite_range_diagnostic_advisory": {
+      "passed": true,
+      "detail": "advisory only: whole-array diagnostic found 7111787 NaN/Inf cell(s); this is not a diagnosis of portal behavior; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+    },
+    "template_readable": {
+      "passed": true,
+      "detail": "shape=(3730, 3292)"
+    }
+  },
+  "uniqueness": {
+    "vs_lattice_dots": {
+      "candidate_dots": 6649,
+      "reference_dots": 206895,
+      "fraction_within_3px": 0.0,
+      "duplicate_stop": false
+    },
+    "surface_spearman_vs_lattice": -0.007330541952695577,
+    "unique_under_literal_rule": true
+  },
+  "submission_name": "gems30-unique-offlattice-structural-20261028-s8",
+  "note": "Unique off-lattice geothermal structural dots; holdout blocked; not slot-approved",
+  "note_chars": 81,
+  "verdict": "negative",
+  "download_ok": true,
+  "ok_to_submit": false,
+  "submission_approved": false,
+  "slot_selected": false,
+  "organizer_score": null,
+  "organizer_acceptance_confirmed": false,
+  "performance_status": "unscored; format validation is not a score",
+  "dot_stats": {
+    "uncovered_cells": 6649,
+    "dots_placed": 6649,
+    "dots_with_positive_structure": 208
+  },
+  "provable_stop_budget": 22164,
+  "dot_budget": 6649,
+  "source_layers": {
+    "gdr_qfaults_v2": "derived_gdr_qfaults_v2_100m_u8.tif",
+    "gdr_volcanics": "derived_gdr_volcanics_100m_u8.tif",
+    "gdr_paleo_springs": "derived_gdr_paleo_100m_u8.tif",
+    "gdr_2m_probes": "derived_gdr_2m_probes_100m_u8.tif",
+    "sgmc_faults": "derived_sgmc_faults_100m_u8.tif"
+  },
+  "template_proxy": {
+    "file": "docs/research/2026-10-28-offlattice/lattice-reference.tif",
+    "source": "https://github.com/buffedlizard55-lab/13GEMSDOE/blob/92ee6f074323f161eed837b80ec3ee5b662e26f5/docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+    "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+    "note": "identical grid metadata to the organizer sample_submission.tif (recorded: EPSG:32611, 3730x3292, transform (100, 0, 243350, 0, -100, 4508550), nodata NaN); the organizer template file itself is not locally available (DrivenData login required)"
+  }
+}
