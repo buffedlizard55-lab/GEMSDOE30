@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-28T00:16:49Z",
+  "generated_utc": "2026-10-28T11:45:35Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -869,6 +869,16 @@
       "report": "docs/research/2026-10-27-pool/review.md",
       "site_page": "pool1-executive-summary.html",
       "decision": "PARALLEL LANE, NOT THE LATEST_REVIEW POINTER: science confirmed, artifact duplicate-stopped, no TIFF published; lattice/CTD/FC coverage UNKNOWN (see postmerge-addendum.json)"
+    },
+    "latest_repository_audit": {
+      "date_utc": "2026-10-28",
+      "receipt": "docs/research/2026-10-28-priority-audit.json",
+      "run_card": "docs/research/2026-10-28-run-card.json",
+      "report": "docs/research/2026-10-28-review.md",
+      "site_page": "priority-readiness-audit.html",
+      "verifier": "scripts/audit_priority_readiness.py --check",
+      "scope": "Zero-experiment audit of frozen historical leaders; does not replace latest scientific review or authorize a lane or slot",
+      "decision": "NEGATIVE: all nine historical references exceed 99.90% overlap against the pinned lattice; no new TIFF or score estimate"
     }
   },
   "latest_scientific_review": {
@@ -930,7 +940,7 @@
             "matching_dots": 39984,
             "comparison": {
               "stage": "dots",
-              "spearman_full_footprint": -0.0002990201174810408,
+              "spearman_full_footprint": -0.0002990201174810405,
               "candidate_dots": 40000,
               "candidate_positive_support": 40000,
               "reference_dots": 206895,
@@ -954,7 +964,7 @@
             "matching_dots": 10844,
             "comparison": {
               "stage": "dots",
-              "spearman_full_footprint": -0.000179865315443018,
+              "spearman_full_footprint": -0.00017986531544301798,
               "candidate_dots": 10848,
               "candidate_positive_support": 10848,
               "reference_dots": 206895,
@@ -1032,7 +1042,7 @@
           "matching_dots": 37654,
           "comparison": {
             "stage": "dots",
-            "spearman_full_footprint": -0.00013483744101957168,
+            "spearman_full_footprint": -0.00013483744101948792,
             "candidate_dots": 37654,
             "candidate_positive_support": 37654,
             "reference_dots": 206895,
@@ -3044,7 +3054,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "429 tests collected in 2.00s",
+      "pytest_collect": "437 tests collected in 1.01s",
       "exit_code": 0
     },
     "score_gain_claimed": false

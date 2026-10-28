@@ -114,5 +114,15 @@
     "report": "docs/research/2026-10-27-pool/review.md",
     "site_page": "pool1-executive-summary.html",
     "decision": "PARALLEL LANE, NOT THE LATEST_REVIEW POINTER: science confirmed, artifact duplicate-stopped, no TIFF published; lattice/CTD/FC coverage UNKNOWN (see postmerge-addendum.json)"
+  },
+  "latest_repository_audit": {
+    "date_utc": "2026-10-28",
+    "receipt": "docs/research/2026-10-28-priority-audit.json",
+    "run_card": "docs/research/2026-10-28-run-card.json",
+    "report": "docs/research/2026-10-28-review.md",
+    "site_page": "priority-readiness-audit.html",
+    "verifier": "scripts/audit_priority_readiness.py --check",
+    "scope": "Zero-experiment audit of frozen historical leaders; does not replace latest scientific review or authorize a lane or slot",
+    "decision": "NEGATIVE: all nine historical references exceed 99.90% overlap against the pinned lattice; no new TIFF or score estimate"
   }
 }
