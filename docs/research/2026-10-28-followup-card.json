@@ -1,0 +1,17 @@
+{
+  "hypothesis": "No new hypothesis assigned or tested; historical off-lattice ranking is examined for invariance.",
+  "mechanism": "Archived method emits every lattice-uncovered footprint cell; geology and seed do not change final support.",
+  "named_non_fault_process": "Erosional terraces and lithological contacts can mimic fault-related lineaments.",
+  "holdout_dti": {"value": null, "ci95": null, "evaluator_version": null, "withheld_positives": null, "reason": "No new experiment; assigned lane and policy resolution absent."},
+  "registry": {"surface_correlation": null, "final_dots_overlap": null, "scope": "No new raster or comparison; historical archived checks do not establish complete-registry novelty."},
+  "raster_sha256": null,
+  "validator_output": null,
+  "submission_name": null,
+  "note": null,
+  "experiments_run": 0,
+  "slot_selected": false,
+  "ok_to_submit": false,
+  "verdict": "negative",
+  "data": "Restored and prepared hash-pinned owner mirrors locally; not organizer-authenticated and ignored by Git.",
+  "preflight": "verify_registry_preflight.py exit 0 verified negative; --require-promote exit 2."
+}

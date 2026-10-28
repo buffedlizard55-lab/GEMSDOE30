@@ -170,8 +170,13 @@ def test_postmerge_candidates_both_fail_lattice_and_renamed_duplicate_removed():
 
 
 @requires_mirrors
-def test_status_feed_verifies_pool1_and_preflight_without_error():
-    status = json.loads((ROOT / 'docs/status.json').read_text())
+def test_status_feed_verifies_pool1_and_preflight_without_error(tmp_path):
+    # The checked-in feed is a dated snapshot and may have been generated without
+    # local mirrors. Exercise a fresh feed, not stale environment-specific state.
+    output = tmp_path / 'status.json'
+    subprocess.run([sys.executable, 'scripts/build_status.py', '--skip-tests',
+                    '--output', str(output)], cwd=ROOT, check=True, timeout=300)
+    status = json.loads(output.read_text())
     by_lane = {r['lane']: r for r in status['additional_stopped_attempts']}
     assert by_lane['POOL-1']['verified_now'] is True and by_lane['POOL-1']['error'] is None
     assert by_lane['POOL-1']['ok_to_submit'] is False

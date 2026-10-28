@@ -2,6 +2,10 @@
 
 > **SESSION MISSION (read every session):** Place top of the DOE GEMS concealed-fault leaderboard by generating a **unique** single-band `float32` `[0,1]` GeoTIFF submission (EPSG:32611, 3730×3292, 100 m, `sample_submission.tif` grid, `NaN` outside the footprint) that is obvious to download and obvious whether it is OK to submit. Core values: **Maximize P(Win)** and **Own the Outcome**. Never copy a previous submission as your own; never submit a candidate that has not beaten the holdout best with a paired 95% CI lower bound > 0; protect the 3-per-week DrivenData slot. The full operating protocol is in the `#current-owner-prompt` section below — reread it before changing code. The current-session addendum requires 3–5 explicitly differentiated geological hypotheses, source/access checks, a same-protocol blocked holdout before slot consideration, repeated code/site review, and no score projections presented as results; see [the dated review](docs/research/2026-10-27-current-session-review.md). A prior duplicate-stop and lane/budget restriction overrides the aspiration to generate a TIFF whenever its gates fail.
 
+## Follow-up · 2026-10-28: **NO APPROVED SUBMISSION DOWNLOAD**
+
+Pinned owner-mirror inputs were restored and prepared locally, but are not organizer-authenticated and remain Git-ignored. The off-lattice artifact emits every available lattice hole, regardless of geological rank or seed; it lacks a valid holdout and complete registry clearance. Its generator is now disabled. No new TIFF or score was produced. [Audit and next steps](docs/research/2026-10-28-followup.md) · [JSON run card](docs/research/2026-10-28-followup-card.json).
+
 ## Latest repository audit · 2026-10-28: **NO APPROVED SUBMISSION DOWNLOAD**
 
 The current owner prompt below remains the operating brief, including the unique-TIFF requirement, three-experiment/two-hour cap, Core Values and separate slot selector. This session supplies no single method paragraph assigning a new lane. We must not bypass the existing duplicate stop to satisfy the download aspiration.

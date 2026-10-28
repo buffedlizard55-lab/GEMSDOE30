@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
 """
+ARCHIVED, DISABLED: off-lattice geothermal structural emission.
+
+The historical narrative below is preserved for provenance, not validated fact.
+All uncovered cells were emitted, so geological ranks and random seed did not
+change the prediction. The local registry is incomplete, the lane was not
+assigned, and the candidate was not holdout validated. Do not regenerate or
+submit it. See docs/research/2026-10-28-followup.md.
+
+Historical description:
 Build a UNIQUE GEMS submission GeoTIFF: off-lattice geothermal structural emission.
 
 Scientific rationale (PhD-level), distinct from every prior GEMSDOE lane:
@@ -271,7 +280,8 @@ def surface_correlation(dots: np.ndarray, valid: np.ndarray) -> float:
     return float(rho)
 
 
-def main() -> int:
+def _archived_main() -> int:
+    # Preserved for provenance, not an authorized generation path.
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--template", type=Path, default=LATTICE_PATH,
                         help="grid reference (pinned 13GEMSDOE lattice; identical grid metadata "
@@ -420,6 +430,17 @@ def main() -> int:
     print("  OK to DOWNLOAD: yes (format-valid research artifact).")
     print("=" * 70)
     return 0
+
+
+def main() -> int:
+    print(
+        "STOP: off-lattice artifact is not approved. Its placement exhausts the "
+        "lattice coverage holes, regardless of geological scores; complete registry, "
+        "leakage-safe holdout, assigned lane and selector approval are missing. "
+        "Do not regenerate or submit it. See docs/research/2026-10-28-followup.md.",
+        file=sys.stderr,
+    )
+    return 2
 
 
 if __name__ == "__main__":
