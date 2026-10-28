@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "run_id": "gems30-offlattice-safety-audit-20261028",
+  "hypothesis": "Audit only: the archived off-lattice emitter does not independently prioritize geological evidence.",
+  "mechanism": "Static review shows every witness-uncovered cell is selected; geological weights and seed cannot alter support. Disable generation rather than evade the stop.",
+  "named_non_fault_process": "Lattice sampling geometry, not a physical fault process, determines this support; shoreline and erosional scarps can also mimic geological edges.",
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": null,
+    "ci95": null,
+    "evaluator_version": null,
+    "withheld_positives": null,
+    "reason": "No new scientific experiment: lane assignment and registry-policy resolution are missing."
+  },
+  "registry": {
+    "surface": null,
+    "final_dots": null,
+    "reason": "No new raster. Reproduced nine-site archived audit and pinned preflight offline; not complete registry clearance.",
+    "evidence": "docs/research/2026-10-28-priority-audit.json"
+  },
+  "raster_sha256": null,
+  "validator_output": null,
+  "submission_name": null,
+  "note": null,
+  "verdict": "negative",
+  "experiments_run": 0,
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200,
+  "ok_to_submit": false,
+  "download_ok": false,
+  "slot_selected": false,
+  "limitations": [
+    "No new holdout or leaderboard estimate",
+    "No assigned method lane",
+    "Historical receipts unchanged; not promoted"
+  ],
+  "review": "docs/research/2026-10-28-offlattice-safety-review.md"
+}

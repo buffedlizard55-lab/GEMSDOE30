@@ -40,3 +40,9 @@ exhausted, no TIFF published. Never remove
 `docs/research/2026-10-27-pool/started.json` or rescue its quarantined raster.
 Use `scripts/verify_pool_run.py` (exit 0 verifies the negative; `--require-promote`
 exits 2). POOL-2 requires the same policy resolution as every other lane.
+
+Follow-up 2026-10-28: `build_offlattice_submission.py` is disabled (exit 2).
+Do not revive the coverage-hole placement strategy: it selects all holes
+regardless of geological weights and violates the no-evasion continuation.
+Read `docs/research/2026-10-28-offlattice-safety-review.md`; archived receipts
+are unchanged and do not establish approval. Tests: `test_offlattice_stop.py`.

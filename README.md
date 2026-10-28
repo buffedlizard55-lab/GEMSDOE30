@@ -2,6 +2,18 @@
 
 > **SESSION MISSION (read every session):** Place top of the DOE GEMS concealed-fault leaderboard by generating a **unique** single-band `float32` `[0,1]` GeoTIFF submission (EPSG:32611, 3730×3292, 100 m, `sample_submission.tif` grid, `NaN` outside the footprint) that is obvious to download and obvious whether it is OK to submit. Core values: **Maximize P(Win)** and **Own the Outcome**. Never copy a previous submission as your own; never submit a candidate that has not beaten the holdout best with a paired 95% CI lower bound > 0; protect the 3-per-week DrivenData slot. The full operating protocol is in the `#current-owner-prompt` section below — reread it before changing code. The current-session addendum requires 3–5 explicitly differentiated geological hypotheses, source/access checks, a same-protocol blocked holdout before slot consideration, repeated code/site review, and no score projections presented as results; see [the dated review](docs/research/2026-10-27-current-session-review.md). A prior duplicate-stop and lane/budget restriction overrides the aspiration to generate a TIFF whenever its gates fail.
 
+## Follow-up safety review · 2026-10-28: off-lattice generation disabled
+
+**[Review the stopped generation path](offlattice-safety-review.html).** The archived
+`build_offlattice_submission.py` selected every lattice coverage hole regardless
+of geological weights. It bypassed the existing no-evasion restriction and had
+no holdout result. It now exits 2 without writing files, fetching data or fitting
+a model. Historical evidence is unchanged. No new TIFF, score estimate or slot.
+See [three-pass review and full restoration commands](docs/research/2026-10-28-offlattice-safety-review.md)
+and [negative run card](docs/research/2026-10-28-offlattice-safety-run-card.json).
+The nine-site audit's `--restore-only` needs the template and lattice restored
+separately first; it only restores the nine historical files.
+
 ## Latest repository audit · 2026-10-28: **NO APPROVED SUBMISSION DOWNLOAD**
 
 The current owner prompt below remains the operating brief, including the unique-TIFF requirement, three-experiment/two-hour cap, Core Values and separate slot selector. This session supplies no single method paragraph assigning a new lane. We must not bypass the existing duplicate stop to satisfy the download aspiration.
