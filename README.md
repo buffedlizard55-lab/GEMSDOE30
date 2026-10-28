@@ -1,10 +1,11 @@
 # GEMSDOE30 — GEMS concealed-fault research
 
-> **SESSION MISSION (read every session):** Place top of the DOE GEMS concealed-fault leaderboard by generating a **unique** single-band `float32` `[0,1]` GeoTIFF submission (EPSG:32611, 3730×3292, 100 m, `sample_submission.tif` grid, `NaN` outside the footprint) that is obvious to download and obvious whether it is OK to submit. Core values: **Maximize P(Win)** and **Own the Outcome**. Never copy a previous submission as your own; never submit a candidate that has not beaten the holdout best with a paired 95% CI lower bound > 0; protect the 3-per-week DrivenData slot. The full operating protocol is in the `#current-owner-prompt` section below — reread it before changing code. The current-session addendum requires 3–5 explicitly differentiated geological hypotheses, source/access checks, a same-protocol blocked holdout before slot consideration, repeated code/site review, and no score projections presented as results; see [the dated review](docs/research/2026-10-27-current-session-review.md). A prior duplicate-stop and lane/budget restriction overrides the aspiration to generate a TIFF whenever its gates fail.
+> **SESSION MISSION (read every session):** Place top of the DOE GEMS concealed-fault leaderboard by generating a **unique** single-band `float32` `[0,1]` GeoTIFF submission (EPSG:32611, 3730×3292, 100 m, `sample_submission.tif` grid, `NaN` outside the footprint) that is obvious to download and obvious whether it is OK to submit. Core values: **Maximize P(Win)** and **Own the Outcome**. Never copy a previous submission as your own; never submit a candidate that has not beaten the holdout best with a paired 95% CI lower bound > 0; protect the 3-per-week DrivenData slot. The full operating protocol is in the `#current-owner-prompt` section below; reread it and the current-task addendum before changing code. The addendum requires 3–5 explicitly differentiated geological hypotheses, source/access checks, a same-protocol blocked holdout before slot consideration, repeated code/site review, and no score projections presented as results; see [the dated review](docs/research/2026-10-27-current-session-review.md). A prior duplicate-stop and lane/budget restriction overrides the aspiration to generate a TIFF whenever its gates fail.
 
 ## Current decision · 2026-10-27: **DUPLICATE-STOP · DO NOT SUBMIT**
 
 **This audit made no new model, TIFF, submission name, note, or weekly-slot selection.**
+**File to download for a new submission: NONE.** No historical or upstream research artifact is approved for download or submission; see the [current session review](docs/research/2026-10-27-current-session-review.md).
 The pinned [13GEMSDOE lattice](https://github.com/buffedlizard55-lab/13GEMSDOE/blob/92ee6f074323f161eed837b80ec3ee5b662e26f5/docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif)
 covers all but 6,649 of 5,167,373 valid footprint cells within 3 pixels. Any
 44,090-dot candidate must overlap it by at least **37,441/44,090 = 84.9195%**,
@@ -54,6 +55,7 @@ three feedback submissions per week and require one final selection for both rou
 ```bash
 python -m pip install -e '.[research,test]' -c requirements-tdx1.txt
 python scripts/restore_public_mirrors.py --ids sample_submission
+python scripts/restore_public_mirrors.py --ids labels             # required by deterministic page checks
 python scripts/restore_public_mirrors.py --pins docs/research/2026-10-27-registry-preflight/lattice-pin.json --ids registry_lattice
 python scripts/verify_registry_preflight.py       # exit 0 verifies a negative
 python scripts/verify_registry_preflight.py --require-promote  # exit 2
@@ -76,6 +78,10 @@ The [prior README narrative](README-archive-20261026.md) is archived verbatim wi
 a warning. The complete owner prompt is preserved verbatim below.
 
 
+## Current-task addendum · 2026-10-27
+
+Before implementation, rank **3–5 distinct, previously proposed-but-unrun mechanisms** with their geological layers/signatures, why they could find catalogue-missing structures, differences from implemented work, named non-fault mimics, qualitative expected HOLDOUT-DTI value, and cost. Label prior proposals accurately rather than calling them wholly novel. For every external input, name the free official source and verify exact product/coverage availability before calling it viable. The top candidate must pass leakage-safe spatially blocked holdout before any slot is considered. Never turn a projection or HOLDOUT-DTI proxy into a public score. Use shared `gemsdoe30.holdout` / `gemsdoe30.submission`, visible-only feature derivation, pixel-exact masks, and the full two-stage registry rule; respect the three-experiment/two-hour cap. The four-item slate in the [current session review](docs/research/2026-10-27-current-session-review.md) is research-only: no lane is assigned and no candidate is authorized.
+
 ## Parallel lane 2026-10-27 — POOL-1: **MECHANISM CONFIRMED · RASTER DUPLICATE-STOPPED · DO NOT SUBMIT**
 
 POOL-1 ran in parallel with the registry preflight above, under its own frozen
@@ -96,10 +102,12 @@ preflight's literal lattice bound every ≥22,164-dot candidate is stopped regar
   format 12/12 on the quarantined raster (ignored `runs/pool1/`, sha256 `1d9cab5d…`).
   Experiments 3/3. Verify: `.venv/bin/python scripts/verify_pool_run.py` (exit 0;
   `--require-promote` exit 2). Never perturb/rescue the stopped raster.
-- **Nine-site finding (re-verified pixel-exactly 2026-10-27):** the historical leaders
-  are one h19-5 emission family — GEMSDOE25 = GEMSDOE30 and GEMSDOE28 = GEMSDOE31
-  identical; H33-B2 (0.2778 owner-reported) = D2.8 minus exactly the ≤2 px
-  catalogue-halo dots. [Executive summary & table](pool1-executive-summary.html) ·
+- **Nine-site finding (frozen pixel audit):** several historical leaders share a
+  closely related emission family — GEMSDOE25 = GEMSDOE30 are value-identical;
+  the 40,199-dot G28 r1 intermediate is identical to GEMSDOE31, while the selected
+  37,660-dot G28 historical file is different. H33-B2 (0.2778, owner-reported)
+  is D2.8 minus the recorded ≤2 px catalogue-halo dots. These are raster-lineage
+  facts, not proof of why an owner-claimed score changed. [Executive summary & table](pool1-executive-summary.html) ·
   [Full review](docs/research/2026-10-27-pool/review.md) ·
   [Run card](docs/research/2026-10-27-pool/run-card.json).
 

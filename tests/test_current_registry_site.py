@@ -41,6 +41,9 @@ def test_current_overview_discloses_merged_tiffs_as_stopped_without_download_con
             assert f'href="docs/downloads/{name}"' not in page
             assert f'href="{name}"' not in page
     assert "NOT APPROVED TO DOWNLOAD OR SUBMIT" in pages["index.html"]
+    assert "File to download for a new submission: NONE." in pages["index.html"]
+    assert "Open follow-up review" in pages["index.html"]
+    assert "docs/research/2026-10-27-current-session-review.md" in pages["index.html"]
     assert "No verified HOLDOUT-DTI receipt located" in pages["index.html"]
     assert "60,988 withheld positives" in pages["index.html"]
     assert "whole-array finite-range diagnostic fails" in pages["index.html"]

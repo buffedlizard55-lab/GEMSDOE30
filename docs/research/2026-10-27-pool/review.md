@@ -1,7 +1,8 @@
 # POOL-1 review — pooled MSDB∪CSR∪LiDAR lane: mechanism **confirmed**, artifact **duplicate-stopped** (2026-10-27)
 
 > **Post-merge addendum (2026-10-27):** PR #55's registry-preflight proved the pinned 13GEMSDOE lattice stops every ≥22,164-dot candidate under a literal any-raster 70% rule (CSR-1 measured 99.9864% vs the lattice). POOL-1's frozen registry reported lattices/dense parents separately, and CTD-1/FC-1 (merged in parallel) postdate it — POOL-1 vs CTD-1/FC-1 = 0.55%/2.81% (no collision). Frozen receipts unchanged; see `postmerge-addendum.json`. POOL-2 (§7) additionally requires the owner's lattice-policy resolution.
-
+>
+> **Current-status correction / superseding review:** This document is an archived POOL-1 run report. Its prior §5 score-causation explanation, §6 “unique” scope, §7 POOL-2 continuation sketch, and §8 leaderboard freshness are superseded. H33-B2’s file lineage is verified but its claimed score cause is unknown; CSR-1 is stopped under the later literal lattice rule; there is no current public-score estimate, assigned lane, or slot approval. The current file/score/uniqueness answer and ranked unrun hypotheses are in [`2026-10-27-current-session-review.md`](../2026-10-27-current-session-review.md), with machine-readable receipt in [`current-session-run-card.json`](../2026-10-27-current-session-run-card.json). The POOL-1 holdout receipt remains historical method evidence only.
 
 ## 1. Decision (no ambiguity, no human inspection anywhere)
 
@@ -10,8 +11,8 @@
 | New TIFF to download from this run? | **NO — none was published.** The production raster breached the frozen duplicate-stop rule and was quarantined in ignored `runs/pool1/` (sha256 `1d9cab5d…`). It must not be renamed, re-encoded or perturbed into a "unique" file (AGENTS.md rule 2). |
 | OK TO SUBMIT anything new this week? | **NO.** `verdict=negative`, `download_ok=false`, `ok_to_submit=false`, `slot_selected=false`. Verify: `.venv/bin/python scripts/verify_pool_run.py` → exit 0; `--require-promote` → exit 2. |
 | Did the science work? | **YES — first lane in this repo to beat the standing best (`msdb_edge`) on the shared evaluator, confirmed on a second seed.** The mechanism is the deliverable; the raster is not. |
-| What is the single best next action? | Next session, under a fresh budget and a **new preregistration (POOL-2, §7)**: pooled features + a novelty-constrained emitter frozen *before* fitting. Do not rescue this raster. |
-| If a slot were spent today anyway (owner override, against advice)? | The only already-published, format-valid, still-unique file in this repo is CSR-1 (§6). It is **not** approved — it trails `msdb_edge` on holdout. |
+| What is the current next action? | **No run.** The latest follow-up has no assigned lane and the literal lattice policy still stops the prescribed budget. Any future lane requires explicit assignment, policy resolution, fresh preregistration, and complete gates; do not rescue this raster. |
+| Is any file safe under the current literal rule? | **No.** CSR-1 and POOL-1 are stopped; a local format pass or prior scoped novelty result is not an upload authorization. |
 
 ## 2. What was frozen before fitting
 
@@ -82,88 +83,50 @@ band, EPSG:32611, 3730×3292, exact transform, all 12,279,160 cells finite in [0
 portal "Predicted values must be in range [0, 1]" rejection. It is withheld solely for
 duplication. Experiments used: **3/3**, 1,396 s.
 
-## 5. PhD answer: why GEMSDOE32's H33-B2 (0.2778, owner-reported) tops the nine sites, and what beating it requires
+## 5. H33-B2 file lineage and limits on explaining the owner-reported value
 
-Re-verified pixel-exactly today on 2026-10-27 HEAD clones (`fleet-audit.json`):
+The frozen pixel audit (`fleet-audit.json`) establishes a file lineage: GEMSDOE25 D2.8 and GEMSDOE30 d28 are value-identical; an r1 intermediate is formed after 3,891 dots are removed; H33-B2 is formed after a further 2,545 are removed and contains 37,654 dots; GEMSDOE36 PINN contains H33-B2 plus 1,200 dots. The selected 37,660-dot GEMSDOE28 historical file is different from the G28 r1 intermediate identical to the GEMSDOE31 selection. The values 0.2600, 0.2708, 0.2778, and 0.2750 are owner-reported claims, not organizer-confirmed scores.
 
-`h19-5` (121,131 px, 0.1922) → D2.8 (44,090, 0.2600; GEMSDOE25 = GEMSDOE30 identical)
-→ r1 (40,199, 0.2708; GEMSDOE28 = GEMSDOE31 identical) → H33-B2 (37,654, 0.2778) →
-PINN (38,854, 0.2750). Each step **adds zero dots**: r1 deletes exactly the 3,891 dots
-at 1.0 px from the catalogue; H33-B2 deletes exactly the 2,545 dots at 1.41–2.0 px.
-Because the organizer masks known-fault pixels pixel-exactly with **no buffer**, 1–2 px
-halo dots are unmasked false positives paying 0.2 each, while a dot at 3 px still earns
-kernel credit at 1–2 px (triangular kernel, R=300 m). The entire 0.2600→0.2778 gain is
-denominator hygiene (0.2·FP ↓), not new geology; PINN's +1,200 dots reversed a little
-of it (0.2750). All four numbers are **owner-reported** — no organizer receipt binds any
-of them to a file in any repo we can inspect.
+Removing near-catalogue dots could plausibly reduce false-positive cost, but the hidden labels are unavailable. The audit cannot determine whether removed cells were true or false positives, prove constant true-positive credit, or show that pruning caused the owner-reported score differences. It is verified raster genealogy, not a causal score explanation or new geological discovery.
 
-Consequences: (i) the pruning ceiling is exhausted — further gains require **recall of
-hidden faults**, which carry 4× the FP weight (β=0.8 vs α=0.2); (ii) catalogue-recovery
-HOLDOUT-DTI and the public leaderboard measure different truths (withheld catalogue
-segments vs expert-mapped *new* faults, which forum clarifications suggest include new
-geometry of existing systems) — the h19-5 habitat is dense exactly where such new
-geometry lives, which a >2 px off-catalogue, dispersed emitter deliberately avoids.
-Our holdout therefore *cannot* certify ">0.2778"; anyone claiming a calibrated
-leaderboard estimate from it is overfitting a proxy (GEMSDOE31's cross-family audit:
-best LOO RMSE 0.090). Live leaderboard today (2026-10-27, read via the public page):
-**#1 = 0.4544** (xiaofanhu); the prompt's 0.4413 was the 2026-10-25 value and 0.3195 a
-2026-10-03 snapshot.
-
-What POOL-1 *does* establish: the strongest catalogue-recovery mechanism in this
-programme, by a confirmed +0.013…+0.017 HOLDOUT-DTI over the previous best, with the
-largest gains in the Walker Lane transtensional fold — i.e. genuinely better recovery
-of concealed, non-range-front fault segments, the population the Final Round's
-expanded labels will reward. Converting that into a submittable file is an emission
-problem, not a modelling problem (§7).
+POOL-1's two-seed, same-evaluator HOLDOUT-DTI improvement over `msdb_edge` is reported with its evaluator, withheld-positive count, and confidence intervals in §3. This supports only the preregistered catalogue-recovery proxy. It does not establish performance on expert-mapped new faults or predict a public leaderboard score. No defensible public-score estimate is available. The repository's 27 Oct leaderboard snapshot of 0.4544 conflicts with the user-supplied 0.3195 current value and an earlier repository snapshot; no live check was made here, so neither value is asserted current.
 
 ## 6. The nine sites in one table (full detail: `nine-site-executive-summary.md`)
 
-| Site | Historical leader (owner-reported) | Unique? (measured) | Latest lane status (2026-10-27 HEAD) | File to download | OK to submit? |
+| Site | Historical leader (owner-reported) | Within-nine novelty only (frozen snapshot; not global) | Archived site status (not current selector) | Historical research file | Current literal-rule decision |
 |---|---|---|---|---|---|
 | GEMSDOE24 | D1.5 0.2477 | No — h19-5 family; ⊂ GEMSDOE27 | No new submission authorized; lattice-feasibility stop | — | **NO** |
-| GEMSDOE25 | D2.8 0.2600 | No — **identical to GEMSDOE30 d28** | H73-BW blocked pre-fit; H73-PM negative | — | **NO** |
-| GEMSDOE27 | gap-closure 0.2449 | No — = D1.5 + 1,259 dots | H31-1 evidence-qualified, selector decision pending; H31-3/H32 negative | H31-1 (research) | **NO** (site's own selector step) |
-| GEMSDOE28 | r1 0.2708 | No — = GEMSDOE31, ⊂ D2.8 | S22C ctxHGB passes site gates (own frame HOLDOUT 0.12018); selector checklist required | S22C (research) | **NO** (checklist pending) |
-| GEMSDOE30 | d28 0.2600 (MSDB1-edge 0.1462) | Family file; CSR-1 unique (67.70% max today) | **POOL-1: confirmed mechanism, duplicate-stopped** | CSR-1 (research) | **NO** |
+| GEMSDOE25 | D2.8 0.2600 (owner-reported) | No — **identical to GEMSDOE30 d28** | H73-BW blocked pre-fit; H73-PM archived negative in its own site frame | — | **NO** |
+| GEMSDOE27 | gap-closure 0.2449 (owner-reported) | No — = D1.5 + 1,259 dots | H31-1 site-specific evidence-qualified result; selector decision pending; later site trials archived negative | H31-1 (research) | **NO** (site's own selector step) |
+| GEMSDOE28 | r1 intermediate 0.2708 (owner-reported) | r1 intermediate = GEMSDOE31; the selected 37,660-dot G28 historical file is different | S22C site-specific gates reported passed; selector checklist was still required; not a current selector | Historical research sources only | **NO** — lattice stop for the selected budget |
+| GEMSDOE30 | d28 0.2600 (owner-reported) | 67.70% applied only to 380 dotted rasters; later literal check stops CSR-1 at ≥84.9195% by bound and 99.9864% measured vs lattice | **POOL-1: confirmed same-protocol holdout improvement, duplicate-stopped raster** | Historical CSR-1 research file only | **NO** — literal duplicate stop; no slot |
 | GEMSDOE31 | solo-d28 0.2708 | No — identical to GEMSDOE28 r1 | No file approved; projections audited unreliable | — | **NO** |
-| GEMSDOE32 | **H33-B2 0.2778** | No — exact pruned subset of r1 | H47-1 LDGI repo-high holdout 0.12196 (own frame), verdict negative | — | **NO** |
+| GEMSDOE32 | **H33-B2 0.2778 (owner-reported)** | No — exact pruned subset of r1 | H47-1 LDGI archived site-frame result; verdict negative | — | **NO** |
 | GEMSDOE33 | H33D 0.2632 | Overlaps family, not a subset | FSML2-CC unique but negative | — | **NO** |
-| GEMSDOE36 | PINN 0.2750 | No — = H33-B2 + 1,200 dots | KPL-36 verdict promote on its site (own frame 0.1701) — **already submitted: 0.1647 owner-reported** | — (already spent) | **NO** (duplicate of a spent slot) |
+| GEMSDOE36 | PINN 0.2750 (owner-reported) | No — = H33-B2 + 1,200 dots | KPL-36 site banner and owner-ledger status conflict; neither is current selector approval or an organizer receipt | — | **NO** — pinned-lattice stop |
 
-Cross-site HOLDOUT numbers are **not comparable** (different evaluators/withheld sets:
-e.g. GEMSDOE28's frame scores dotted-b2 at 0.10519; GEMSDOE36 uses `gems-segment-pooled-v1`;
-ours is `component-holdout-v3-blockstats-20261025`). Only same-protocol paired deltas rank methods.
+Cross-site holdout results are **not comparable** because evaluators, withheld labels, and folds differ. They are omitted from current performance ranking unless the exact evaluator version, withheld-positive count, and 95% CI are available. Only same-protocol paired deltas rank methods.
 
-**Estimated leaderboard scores:** none are defensible as point estimates. The two
-observed same-family anchors are MSDB1-edge (our HOLDOUT 0.1705 → 0.1462 owner-reported)
-and KPL-36 (its HOLDOUT 0.1701 → 0.1647 owner-reported, different evaluator). A POOL-2
-successor at HOLDOUT ≈ 0.187 would, under those two anchors alone, scenario-project to
-roughly **0.16–0.19** — a projection with ≥ ±0.09 cross-family error, **not** a score,
-and still below the h19-5 family's habitat-driven 0.2778 (owner-reported) on the
-*public* split. Its value proposition is the Final Round's expanded-label rescoring,
-where verified newly-discovered concealed faults count.
+**Public-score estimate: none.** The archived cross-family calibration does not justify a point estimate for an unsubmitted file; HOLDOUT-DTI and organizer scoring target different reference labels. No projection or scenario range is published here as a score. All owner-ledger values remain unverified claims, and no live leaderboard state is asserted.
 
-## 7. Next lane (POOL-2) — to be preregistered fresh next session (not executed here; budget 3/3 spent)
+## 7. Archived POOL-2 sketch — NOT a current lane or authorization
 
-Frozen design sketch for the next session's preregistration (must be re-frozen before
-any fit): same 75-feature pooled model; emission = dispersed EDGE with two
-*pre-declared* novelty constraints — (a) spacing `dr²+dc²>12` (≥3.46 px) and
-(b) exclusion of pixels within 3 px of the three breaching GEMSDOE30 dot sets —
-with the holdout cost of (a)+(b) measured against `msdb_edge` *and* against an
-unconstrained pooled arm in the same folds. If the constrained emitter still beats
-`msdb_edge` with paired CI > 0 on two seeds and passes both novelty stages vs a
-refreshed registry, it becomes the first file in this repo that is simultaneously
-best-on-holdout and unique. If it fails, that negative is the deliverable. Alternative
-genuinely-distinct lanes if POOL-2 fails: KRA-1 Riedel alignment, MCD-1 clay-cap
-saddle (both frozen in the POOL-1 preregistration ranking).
+This historical design sketch is retained for provenance only. It is not the next
+session's assignment and must not be run under the current duplicate stop. Any
+future experiment requires an explicit assigned lane, a documented registry-policy
+resolution, available/audited inputs, and fresh preregistration before a fit. The
+old sketch proposed a pooled model with spacing and near-set exclusions, evaluated
+against matched controls. Those constraints do not override the pinned-lattice bound,
+which stops the prescribed 44,090-dot budget regardless. KRA-1 Riedel alignment and
+MCD-1 clay-cap saddle were also prior proposals, not current authorizations.
 
 ## 8. Irregularities flagged
 
 - IR-POOL-01: no externally assigned single-method lane paragraph in the prompt; lane self-assigned and frozen here (same standing gap as all prior lanes).
-- IR-POOL-02: prompt leaderboard figures stale (0.3195 = Oct 3; 0.4413 = Oct 25; live Oct 27 #1 = 0.4544).
-- IR-POOL-03: all nine historical "site bests" are one emission family; three pairs are byte/value-identical across sites (25=30, 28=31; 24⊂27).
+- IR-POOL-02: repository snapshot records 0.4544 on 27 Oct; user-supplied 0.3195 conflicts, and the repository records that value in an earlier snapshot. No live check was made in this follow-up; neither value is asserted current.
+- IR-POOL-03: several historical files share an emission family. D2.8/GEMSDOE25 and d28/GEMSDOE30 are value-identical; the G28 r1 intermediate is identical to the G31 selection, while the selected 37,660-dot G28 file is different; D1.5 is a subset of the G27 gap-closure file.
 - IR-POOL-04: GEMSDOE31 clone contains an aligned raster with 2,610,312 in-footprint NaNs (`gemsdoe31-csdu-stepover-8cf9dc27-nan.tif`) — would fail portal range checks; finite-subset audited.
-- IR-POOL-05: GEMSDOE36's site banner says "OK TO SUBMIT / verdict: promote" for KPL-36 while the owner's ledger already records a 0.1647 score for that file — treat as already submitted; do not respend.
+- IR-POOL-05: GEMSDOE36's site banner says "OK TO SUBMIT / verdict: promote" for KPL-36, while the owner ledger reports 0.1647 for that file. No organizer receipt was found for the claim; do not treat the banner or ledger as current selector approval.
 - IR-POOL-06: training data are owner mirrors, not organizer-authenticated; DrivenData/GitHub-Pages/Dropbox hosts are unreachable from this sandbox (only github.com/api.github.com/PyPI), so site review used git clones + the public leaderboard page.
 
 ## 9. Reproduce / verify (no human inspection)
