@@ -55,7 +55,7 @@ def read_single_band(path: Path) -> np.ndarray:
         return ds.read(1, masked=False)
 
 
-def main() -> int:
+def _archived_main() -> int:
     for p in (PREDICTION, LABELS, TEMPLATE):
         if not p.is_file():
             print(f"BLOCKED: required input missing: {p}", file=sys.stderr)
@@ -129,6 +129,16 @@ def main() -> int:
     print(f"delta vs zero control = {d['value']:+.6f}  CI [{d['ci95'][0]:+.6f}, {d['ci95'][1]:+.6f}]")
     print(f"report written to {OUT}")
     return 0
+
+
+def main() -> int:
+    print(
+        "BLOCKED: this archived script scored a pre-built full-grid raster against a zero control "
+        "using truth=catalogue (including guard segments) instead of truth=fold['hidden'] and a "
+        "count-matched baseline. Do not rerun or use it for selection.",
+        file=sys.stderr,
+    )
+    return 2
 
 
 if __name__ == "__main__":

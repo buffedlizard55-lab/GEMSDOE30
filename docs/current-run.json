@@ -63,7 +63,14 @@
       "novelty_registry": "docs/research/geothermal-corridor/novelty-dots.json",
       "novelty_downloads_audit": "docs/research/geothermal-corridor/novelty-downloads-audit.json",
       "verifier": "scripts/validate_submission.py docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif --template docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
-      "decision": "ARCHIVED record, not current approval: DOWNLOAD OK; NOT OK TO SUBMIT (unique Q-volcanics x paleo-springs x 2m-probe off-SGMC corridor, 40,000 dots >2px off SGMC; 12/12 format checks; max rho 0.018 and max 60.6% <= 70% 3px overlap vs all 23 downloads rasters; HOLDOUT-DTI not computable without organizer labels; verdict negative, no slot selected)"
+      "decision": "ARCHIVED record, not current approval: DUPLICATE-STOPPED ON 13GEMSDOE LATTICE (39,960/40,000 = 99.9000% within 3 px); NOT OK TO SUBMIT (unique Q-volcanics x paleo-springs x 2m-probe off-SGMC corridor, 40,000 dots >2px off SGMC; 12/12 format checks; 676 dots on labels.tif; verdict negative, no slot selected)"
+    },
+    {
+      "lane": "vent-structural",
+      "run_card": "docs/research/2026-10-27-vent-structural/run-card.json",
+      "submission_tif": "docs/downloads/GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif",
+      "verifier": "scripts/verify_registry_preflight.py",
+      "decision": "ARCHIVED record, not current approval: DUPLICATE-STOPPED ON 13GEMSDOE LATTICE (37,654/37,654 = 100.0000% within 3 px) AND PLACES 13,098/37,654 DOTS DIRECTLY ON CATALOGUE FAULTS; NOT OK TO SUBMIT (verdict negative, no slot selected)"
     },
     {
       "lane": "H-NEARSPLAY",

@@ -37,6 +37,15 @@ PARALLEL_CANDIDATES = (
      "sha256": "d6dadb9c6119767f0b4af2f2122e73529829b3c1b36cf1131165cb68b8da2612"},
 )
 PARALLEL_SOURCE_COMMIT = "99b9cc9693bd19c474f298a99618599ade6f3c60"
+POSTMERGE_ADDENDUM = REPORT / "postmerge-addendum.json"
+POSTMERGE_CANDIDATES = (
+    {"lane": "GC-1", "path": "docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif",
+     "sha256": "0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564",
+     "source_commit": "48d4b0f0c997e3f033d7c1e0cfc9f4533a974fe5"},
+    {"lane": "VS-1", "path": "docs/downloads/GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif",
+     "sha256": "e701076a93df45ae911b15519bcce66d88cca318686fa39df4117e921dd1876b",
+     "source_commit": "d3435433ca015a84ff2eaf41a1304a301dca0f47"},
+)
 
 
 def load(path: Path) -> dict:
@@ -260,9 +269,88 @@ def verify(template: Path = TEMPLATE, lattice: Path = LATTICE) -> dict:
     require(parallel_review.get("valid_leakage_safe_holdout") is False
             and parallel_review.get("source_commit") == PARALLEL_SOURCE_COMMIT,
             "parallel holdout cannot be presented as leakage-safe evidence")
+    postmerge = inspect_postmerge(template, lattice)
+    if POSTMERGE_ADDENDUM.is_file():
+        saved_postmerge = load(POSTMERGE_ADDENDUM)
+        expected = [
+            {k: v for k, v in row.items() if k in saved_row}
+            for row, saved_row in zip(postmerge, saved_postmerge.get("candidates", []))
+        ]
+        require(len(expected) == len(postmerge) and same_measurement(saved_postmerge["candidates"], postmerge)
+                or (not (ROOT / "data/raw/labels.tif").is_file()
+                    and same_measurement([{k: v for k, v in r.items() if k not in ("dots_on_catalogue_d0", "dots_within_2px_of_catalogue")}
+                                          for r in saved_postmerge["candidates"]], postmerge)),
+                "saved postmerge addendum does not match source bytes")
+        require(saved_postmerge.get("renamed_duplicate_verified_identical") is True,
+                "postmerge addendum must record byte-identity of renamed GC-1 duplicate")
     return {"research_verdict": "negative", "display_status": card["decision"],
             "download_ok": False, "ok_to_submit": False, "submission_approved": False,
-            "slot_selected": False, "measurement": measured}
+            "slot_selected": False, "measurement": measured, "postmerge_candidates": postmerge}
+
+
+def inspect_postmerge(template: Path = TEMPLATE, lattice: Path = LATTICE) -> list[dict]:
+    """Verify PR #58/#59 candidates against the pinned lattice without mutating frozen run-card.json."""
+    from scipy.ndimage import distance_transform_edt
+
+    template, lattice = Path(template), Path(lattice)
+    canonical_gc = ROOT / "docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif"
+    renamed_dup = ROOT / "docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z.tif"
+    require(renamed_dup.is_file() and sha(renamed_dup) == sha(canonical_gc),
+            "PR #58 GC-1 timestamp copy must match canonical GC-1 SHA-256")
+    labels_path = ROOT / "data/raw/labels.tif"
+    pins = load(ROOT / "docs/research/mirror-pins.json")
+    labels_pin = next(r for r in pins["files"] if r["id"] == "labels")
+    with rasterio.open(template) as tpl, rasterio.open(lattice) as ref:
+        grid = (tpl.shape, tpl.crs, tpl.transform)
+        footprint = valid_template_mask(tpl, np)
+        reference = ref.read(1)
+        uncovered = dot_budget_bound(reference, footprint, 44090)["uncovered_pixels"]
+        catalogue = None
+        d_catalogue = None
+        if labels_path.is_file():
+            require(sha(labels_path) == labels_pin["sha256"], "labels.tif SHA-256 mismatch")
+            with rasterio.open(labels_path) as lab_ds:
+                require((lab_ds.shape, lab_ds.crs, lab_ds.transform) == grid, "labels.tif grid mismatch")
+                catalogue = (lab_ds.read(1) > 0.5) & footprint
+            d_catalogue = distance_transform_edt(~catalogue)
+        rows = []
+        for entry in POSTMERGE_CANDIDATES:
+            path = ROOT / entry["path"]
+            require(sha(path) == entry["sha256"], f"{entry['lane']} historic SHA-256 mismatch")
+            with rasterio.open(path) as ds:
+                require(ds.count == 1 and (ds.shape, ds.crs, ds.transform) == grid,
+                        f"{entry['lane']} grid/band mismatch")
+                values = ds.read(1)
+            inside = values[footprint]
+            require(np.isfinite(inside).all() and np.all((inside == 0) | (inside == 1)),
+                    f"{entry['lane']} is not a finite binary-dot raster")
+            dot_count = int(np.count_nonzero(inside))
+            require(dot_count > 0, f"{entry['lane']} has no dots")
+            stats = compare(values, reference, footprint, stage="dots")
+            matched = int(round(stats["candidate_fraction_within_3px_of_reference"] * dot_count))
+            require(stats["dot_duplicate"] is True, f"{entry['lane']} duplicate not reproduced")
+            min_matches = max(0, dot_count - uncovered)
+            row = {
+                "lane": entry["lane"],
+                "path": entry["path"],
+                "raster_sha256": entry["sha256"],
+                "source_commit": entry["source_commit"],
+                "matching_dots": matched,
+                "comparison": stats,
+                "budget_bound_decision": "duplicate-stop" if 10 * min_matches > 7 * dot_count else "not-proven",
+                "minimum_overlapping_dots": min_matches,
+                "published_format_validator_passed": validate_submission_file(path, template).passed,
+                "whole_array_finite_range_diagnostic_passed": validate_submission_file(
+                    path, template, require_finite_all_cells=True).passed,
+                "produced_by_this_audit": False,
+                "ok_to_submit": False,
+            }
+            if catalogue is not None and d_catalogue is not None:
+                dots_mask = footprint & (np.nan_to_num(values, nan=0.0) > 0.5)
+                row["dots_on_catalogue_d0"] = int(np.count_nonzero(dots_mask & catalogue))
+                row["dots_within_2px_of_catalogue"] = int(np.count_nonzero(dots_mask & (d_catalogue <= 2.0)))
+            rows.append(row)
+    return rows
 
 
 def main() -> int:

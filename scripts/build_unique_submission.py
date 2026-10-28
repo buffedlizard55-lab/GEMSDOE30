@@ -178,7 +178,7 @@ def build_vent_structural_probability(
     return probs, valid, profile, transform, crs
 
 
-def main() -> int:
+def _archived_main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--template", type=Path, required=True, help="sample_submission.tif grid template")
     parser.add_argument("--external-dir", type=Path, default=Path("data/external"))
@@ -260,6 +260,17 @@ def main() -> int:
     print("  Requires: holdout gate (paired CI > 0 vs control), both novelty stages,")
     print("  fresh lane assignment, and separate selector approval before any slot.")
     return 0
+
+
+def main() -> int:
+    print(
+        "DUPLICATE-STOP: archived vent-structural offcat-d3 (VS-1) overlaps the pinned "
+        "13GEMSDOE lattice at 37,654/37,654 (100.0000%) and places 13,098/37,654 dots "
+        "directly on catalogue faults; do not regenerate, perturb or rename it. "
+        "See docs/research/2026-10-27-registry-preflight/run-card.json.",
+        file=sys.stderr,
+    )
+    return 2
 
 
 if __name__ == "__main__":

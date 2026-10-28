@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-28T00:07:13Z",
+  "generated_utc": "2026-10-28T00:13:25Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -818,7 +818,14 @@
         "novelty_registry": "docs/research/geothermal-corridor/novelty-dots.json",
         "novelty_downloads_audit": "docs/research/geothermal-corridor/novelty-downloads-audit.json",
         "verifier": "scripts/validate_submission.py docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif --template docs/downloads/gems30-PTA1-44090-20261025-9a3f7f9535a4.tif",
-        "decision": "ARCHIVED record, not current approval: DOWNLOAD OK; NOT OK TO SUBMIT (unique Q-volcanics x paleo-springs x 2m-probe off-SGMC corridor, 40,000 dots >2px off SGMC; 12/12 format checks; max rho 0.018 and max 60.6% <= 70% 3px overlap vs all 23 downloads rasters; HOLDOUT-DTI not computable without organizer labels; verdict negative, no slot selected)"
+        "decision": "ARCHIVED record, not current approval: DUPLICATE-STOPPED ON 13GEMSDOE LATTICE (39,960/40,000 = 99.9000% within 3 px); NOT OK TO SUBMIT (unique Q-volcanics x paleo-springs x 2m-probe off-SGMC corridor, 40,000 dots >2px off SGMC; 12/12 format checks; 676 dots on labels.tif; verdict negative, no slot selected)"
+      },
+      {
+        "lane": "vent-structural",
+        "run_card": "docs/research/2026-10-27-vent-structural/run-card.json",
+        "submission_tif": "docs/downloads/GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif",
+        "verifier": "scripts/verify_registry_preflight.py",
+        "decision": "ARCHIVED record, not current approval: DUPLICATE-STOPPED ON 13GEMSDOE LATTICE (37,654/37,654 = 100.0000% within 3 px) AND PLACES 13,098/37,654 DOTS DIRECTLY ON CATALOGUE FAULTS; NOT OK TO SUBMIT (verdict negative, no slot selected)"
       },
       {
         "lane": "H-NEARSPLAY",
@@ -923,7 +930,7 @@
             "matching_dots": 39984,
             "comparison": {
               "stage": "dots",
-              "spearman_full_footprint": -0.0002990201174810385,
+              "spearman_full_footprint": -0.0002990201174810405,
               "candidate_dots": 40000,
               "candidate_positive_support": 40000,
               "reference_dots": 206895,
@@ -947,7 +954,7 @@
             "matching_dots": 10844,
             "comparison": {
               "stage": "dots",
-              "spearman_full_footprint": -0.000179865315443018,
+              "spearman_full_footprint": -0.00017986531544301798,
               "candidate_dots": 10848,
               "candidate_positive_support": 10848,
               "reference_dots": 206895,
@@ -970,7 +977,7 @@
           "matching_dots": 44084,
           "comparison": {
             "stage": "dots",
-            "spearman_full_footprint": -0.00013208291292993258,
+            "spearman_full_footprint": -0.0001320829129299334,
             "candidate_dots": 44090,
             "candidate_positive_support": 44090,
             "reference_dots": 206895,
@@ -988,7 +995,63 @@
           ],
           "organizer_acceptance_confirmed": false
         }
-      }
+      },
+      "postmerge_candidates": [
+        {
+          "lane": "GC-1",
+          "path": "docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif",
+          "raster_sha256": "0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564",
+          "source_commit": "48d4b0f0c997e3f033d7c1e0cfc9f4533a974fe5",
+          "matching_dots": 39960,
+          "comparison": {
+            "stage": "dots",
+            "spearman_full_footprint": -0.00010754844987874165,
+            "candidate_dots": 40000,
+            "candidate_positive_support": 40000,
+            "reference_dots": 206895,
+            "candidate_fraction_within_3px_of_reference": 0.999,
+            "identical_inside_footprint": false,
+            "correlation_duplicate": false,
+            "dot_duplicate": true,
+            "undefined": false
+          },
+          "budget_bound_decision": "duplicate-stop",
+          "minimum_overlapping_dots": 33351,
+          "published_format_validator_passed": true,
+          "whole_array_finite_range_diagnostic_passed": false,
+          "produced_by_this_audit": false,
+          "ok_to_submit": false,
+          "dots_on_catalogue_d0": 676,
+          "dots_within_2px_of_catalogue": 3177
+        },
+        {
+          "lane": "VS-1",
+          "path": "docs/downloads/GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif",
+          "raster_sha256": "e701076a93df45ae911b15519bcce66d88cca318686fa39df4117e921dd1876b",
+          "source_commit": "d3435433ca015a84ff2eaf41a1304a301dca0f47",
+          "matching_dots": 37654,
+          "comparison": {
+            "stage": "dots",
+            "spearman_full_footprint": -0.00013483744101948792,
+            "candidate_dots": 37654,
+            "candidate_positive_support": 37654,
+            "reference_dots": 206895,
+            "candidate_fraction_within_3px_of_reference": 1.0,
+            "identical_inside_footprint": false,
+            "correlation_duplicate": false,
+            "dot_duplicate": true,
+            "undefined": false
+          },
+          "budget_bound_decision": "duplicate-stop",
+          "minimum_overlapping_dots": 31005,
+          "published_format_validator_passed": true,
+          "whole_array_finite_range_diagnostic_passed": false,
+          "produced_by_this_audit": false,
+          "ok_to_submit": false,
+          "dots_on_catalogue_d0": 13098,
+          "dots_within_2px_of_catalogue": 17084
+        }
+      ]
     },
     "history_preserved": true,
     "card": {
@@ -2981,8 +3044,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "424 tests collected in 3.16s",
-      "exit_code": 0
+      "skip": true
     },
     "score_gain_claimed": false
   }

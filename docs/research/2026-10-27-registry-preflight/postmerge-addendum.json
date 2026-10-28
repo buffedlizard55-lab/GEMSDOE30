@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "parent_run_card": "docs/research/2026-10-27-registry-preflight/run-card.json",
+  "renamed_duplicate_verified_identical": true,
+  "renamed_duplicate": {
+    "path": "docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z.tif",
+    "sha256": "0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564",
+    "canonical_path": "docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif",
+    "reason": "PR #58 re-ran build_geothermal_corridor_submission.py and wrote a byte-for-byte identical copy of GC-1 under a new timestamp. Disclosed as stopped in 2026-10-27-current-session-run-card.json; evaluate_candidate_holdout.py also used truth=catalogue (including guard components) against a zero control."
+  },
+  "candidates": [
+    {
+      "lane": "GC-1",
+      "path": "docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif",
+      "raster_sha256": "0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564",
+      "source_commit": "48d4b0f0c997e3f033d7c1e0cfc9f4533a974fe5",
+      "matching_dots": 39960,
+      "comparison": {
+        "stage": "dots",
+        "spearman_full_footprint": -0.00010754844987874165,
+        "candidate_dots": 40000,
+        "candidate_positive_support": 40000,
+        "reference_dots": 206895,
+        "candidate_fraction_within_3px_of_reference": 0.999,
+        "identical_inside_footprint": false,
+        "correlation_duplicate": false,
+        "dot_duplicate": true,
+        "undefined": false
+      },
+      "budget_bound_decision": "duplicate-stop",
+      "minimum_overlapping_dots": 33351,
+      "published_format_validator_passed": true,
+      "whole_array_finite_range_diagnostic_passed": false,
+      "produced_by_this_audit": false,
+      "ok_to_submit": false,
+      "dots_on_catalogue_d0": 676,
+      "dots_within_2px_of_catalogue": 3177
+    },
+    {
+      "lane": "VS-1",
+      "path": "docs/downloads/GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif",
+      "raster_sha256": "e701076a93df45ae911b15519bcce66d88cca318686fa39df4117e921dd1876b",
+      "source_commit": "d3435433ca015a84ff2eaf41a1304a301dca0f47",
+      "matching_dots": 37654,
+      "comparison": {
+        "stage": "dots",
+        "spearman_full_footprint": -0.00013483744101948792,
+        "candidate_dots": 37654,
+        "candidate_positive_support": 37654,
+        "reference_dots": 206895,
+        "candidate_fraction_within_3px_of_reference": 1.0,
+        "identical_inside_footprint": false,
+        "correlation_duplicate": false,
+        "dot_duplicate": true,
+        "undefined": false
+      },
+      "budget_bound_decision": "duplicate-stop",
+      "minimum_overlapping_dots": 31005,
+      "published_format_validator_passed": true,
+      "whole_array_finite_range_diagnostic_passed": false,
+      "produced_by_this_audit": false,
+      "ok_to_submit": false,
+      "dots_on_catalogue_d0": 13098,
+      "dots_within_2px_of_catalogue": 17084
+    }
+  ]
+}
