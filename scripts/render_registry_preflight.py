@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import html
+import hashlib
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,17 +33,89 @@ def hero() -> str:
 <div class="meta"><span>One-witness proof, not a complete registry</span><span>0 experiments run</span><span>No slot selected</span></div></div></section>'''
 
 
+def upstream_artifacts_section(session_card: dict) -> str:
+    """Disclose research TIFFs merged from upstream without presenting them as downloads."""
+    rows = []
+    candidates = session_card.get("upstream_merged_candidates", [])
+    if len(candidates) != 2:
+        raise ValueError("Current review must account for both upstream merged research TIFFs")
+    for item in candidates:
+        file = ROOT / item["path"]
+        sidecar_file = file.with_suffix(".json")
+        if not file.is_file() or hashlib.sha256(file.read_bytes()).hexdigest() != item["raster_sha256"]:
+            raise ValueError(f"Upstream candidate bytes do not match the review run card: {item['path']}")
+        sidecar = json.loads(sidecar_file.read_text())
+        if (sidecar.get("output_sha256") != item["raster_sha256"]
+                or sidecar.get("format_validation", {}).get("passed") is not True
+                or sidecar.get("whole_raster_range_diagnostic_passed") is not False):
+            raise ValueError(f"Upstream candidate format/range evidence changed: {item['path']}")
+        holdout = item.get("holdout_dti")
+        if holdout:
+            evaluation = json.loads((ROOT / "docs/research/candidate-holdout-evaluation.json").read_text())
+            candidate_result = evaluation.get("candidate", {})
+            if (evaluation.get("prediction_sha256") != item["raster_sha256"]
+                    or evaluation.get("evaluator_version") != holdout["evaluator_version"]
+                    or candidate_result.get("value") != holdout["value"]
+                    or candidate_result.get("ci95") != holdout["ci95"]
+                    or candidate_result.get("withheld_positives") != holdout["withheld_positives"]):
+                raise ValueError(f"Upstream HOLDOUT-DTI receipt does not bind to the reviewed TIFF: {item['path']}")
+        holdout_text = (
+            f"HOLDOUT-DTI {holdout['value']:.6f} (not organizer score); "
+            f"{holdout['withheld_positives']:,} withheld positives; spatial-block 95% CI "
+            f"[{holdout['ci95'][0]:.6f}, {holdout['ci95'][1]:.6f}]"
+            if holdout else "No verified HOLDOUT-DTI receipt located"
+        )
+        overlap = item["fraction_within_3px_of_13gems_lattice"]
+        rows.append(
+            f"<tr><th scope=\\\"row\\\"><code>{e(Path(item['path']).name)}</code></th>"
+            f"<td>{item['dots']:,}</td><td><strong>{100*overlap:.2f}%</strong> within 3 px; "
+            f"rank correlation {item['rank_correlation_vs_13gems_lattice']:.6f}</td>"
+            f"<td>{e(holdout_text)}</td><td>Unavailable; no leaderboard forecast</td>"
+            f"<td><strong>NO — duplicate-stopped; research only.</strong> File exists in the repository, "
+            f"but this page offers no download control.</td></tr>"
+        )
+    return f'''<section class="stop-notice" id="upstream-artifacts"><div class="release-heading"><span class="pill failed">2 upstream TIFFs · DUPLICATE-STOP</span><span class="pill caution">NOT APPROVED TO DOWNLOAD OR SUBMIT</span></div>
+<h2>Existing TIFFs are research artifacts, not approved entries.</h2>
+<p>Two files arrived from upstream PRs #58/#59. Both pass the published-format checks, but their final-dot overlap with the pinned lattice exceeds the strict 70% stop. The low rank correlations do not cancel this independent dot-overlap failure. Pre-placement surface arrays were not available here, so surface novelty remains unverified. No competition score estimate is justified.</p>
+<div class="table-wrap"><table><caption>Upstream research artifacts already present in this checkout; no download links</caption><thead><tr><th>File</th><th>Dots</th><th>3 px lattice audit</th><th>Catalogue holdout</th><th>Leaderboard estimate</th><th>Download / submit status</th></tr></thead><tbody>{''.join(rows)}</tbody></table></div>
+<p class="fine">Each sidecar's published-format validation passes. The separate whole-array finite-range diagnostic fails because outside-footprint cells are NaN; portal behavior is unverified. These receipts are not a claim that DrivenData accepted either file. Details: <a href="docs/research/2026-10-27-current-session-review.md#upstream-research-artifacts-now-present-in-this-checkout--do-not-submit">current review</a> · <a href="docs/research/2026-10-27-current-session-run-card.json">audit run card</a>.</p></section>'''
+
+
 def stop_card(card: dict) -> str:
     m = card["registry"]["measurement"]
     b, old = m["bound"], m["previous_candidate"]
     ctd, fc = m["parallel_candidates_merged_during_audit"]
-    return f'''<section class="stop-notice" aria-labelledby="stop-title"><div class="release-heading"><span class="pill failed">DUPLICATE-STOP</span><span class="pill caution">NOT APPROVED FOR SUBMISSION</span><span class="pill caution">No new TIFF</span></div>
+    return f'''<section class="stop-notice" aria-labelledby="stop-title"><div class="release-heading"><span class="pill failed">DUPLICATE-STOP</span><span class="pill caution">NOT APPROVED FOR SUBMISSION</span><span class="pill caution">No new TIFF in this review</span></div>
 <h2 id="stop-title">Do not submit. One published reference is enough to stop.</h2>
 <p>The pinned 13GEMSDOE lattice covers all but <strong>{b['uncovered_pixels']:,}</strong> valid cells within 3 pixels. Any {b['candidate_dot_budget']:,}-dot candidate must overlap by at least <strong>{b['minimum_overlapping_dots']:,}/{b['candidate_dot_budget']:,} ({100*b['minimum_fraction_within_radius']:.4f}%)</strong>, above the strict 70% rule. We measured <strong>{old['matching_dots']:,}/{b['candidate_dot_budget']:,} ({100*old['comparison']['candidate_fraction_within_3px_of_reference']:.4f}%)</strong> on the historical CSR-1 file.</p>
 <p>The older 357-reference screen omitted this lattice. CSR-1 also fails the published-format validator because it has zeros outside the footprint. Its whole-array finite/range diagnostic passed; that is <em>not</em> proof of organizer acceptance or a remedy for the reported portal error.</p>
-<p>Four parallel rasters merged on 26–27 Oct 2026 are also duplicate-stopped against the same witness: <strong>CTD-1 {ctd['matching_dots']:,}/{ctd['comparison']['candidate_dots']:,} ({100*ctd['comparison']['candidate_fraction_within_3px_of_reference']:.4f}%)</strong>, <strong>FC-1 {fc['matching_dots']:,}/{fc['comparison']['candidate_dots']:,} ({100*fc['comparison']['candidate_fraction_within_3px_of_reference']:.4f}%)</strong>, <strong>GC-1 39,960/40,000 (99.9000%)</strong>, and <strong>VS-1 37,654/37,654 (100.0000%)</strong> (which also places 13,098/37,654 dots directly on known catalogue pixels). Their format checks pass, but CTD-1/FC-1/GC-1 archived holdouts scored saved full-grid rasters without rebuilding per fold, and VS-1 ran no holdout. <a href="{REPORT}/review.md#parallel-work-merged-during-this-audit">Details</a> · <a href="{REPORT}/postmerge-addendum.json">Post-merge addendum</a>.</p>
+<p>Two files merged during this audit are also stopped: <strong>CTD-1 {ctd['matching_dots']:,}/{ctd['comparison']['candidate_dots']:,} ({100*ctd['comparison']['candidate_fraction_within_3px_of_reference']:.4f}%)</strong> and <strong>FC-1 {fc['matching_dots']:,}/{fc['comparison']['candidate_dots']:,} ({100*fc['comparison']['candidate_fraction_within_3px_of_reference']:.4f}%)</strong>. Their format checks pass, but their archived holdout used full-catalogue predictions before hiding faults and is not leakage-safe. <a href="{REPORT}/review.md#parallel-work-merged-during-this-audit">Details</a>.</p>
 <div class="actions"><a class="button" href="{REPORT}/run-card.json">Open current run card</a><a class="button secondary" href="{REPORT}/review.md">Read proof &amp; reproduction</a><a class="button secondary" href="{e(old['path'])}" download>Historical CSR-1 · research only</a></div>
 <p class="fine">Historical download only, not a new or approved candidate. SHA-256 <code>{e(old['raster_sha256'])}</code>. No submission identity or note was generated.</p></section>'''
+
+
+def pool1_summary(pool_card: dict, dot_receipt: dict, *, detail: bool) -> str:
+    """Render the independently verified POOL-1 negative without implying promotion."""
+    h = pool_card["holdout"]
+    d1 = h["candidate_minus"]["msdb_edge"]
+    h2 = h["confirmation_seed4219"]
+    d2 = h2["candidate_minus"]["msdb_edge"]
+    matches = {}
+    for row in dot_receipt["comparisons"]:
+        ref = row["reference"]
+        if "gems30-FFL1-fusion_edge" in ref:
+            matches["FFL1"] = row["candidate_fraction_within_3px_of_reference"]
+        elif "gems30-MSDB1-edge" in ref:
+            matches["MSDB1-edge"] = row["candidate_fraction_within_3px_of_reference"]
+        elif "gems30-CSR1-44090" in ref:
+            matches["CSR1"] = row["candidate_fraction_within_3px_of_reference"]
+    if set(matches) != {"FFL1", "MSDB1-edge", "CSR1"}:
+        raise ValueError("POOL-1 duplicate references are missing from the frozen dot receipt")
+    metrics = (f"{100*matches['FFL1']:.2f}% / {100*matches['MSDB1-edge']:.2f}% / "
+               f"{100*matches['CSR1']:.2f}%")
+    if detail:
+        return f'''<section class="section" id="pool1"><div class="section-heading"><h2>Parallel lane POOL-1: best holdout mechanism, stopped raster.</h2><p>HOLDOUT-DTI improved twice; duplication blocks publication.</p></div><p><strong>POOL-1</strong> scored HOLDOUT-DTI <strong>{h['value']:.6f}</strong> and <strong>{h2['arms']['pool_dispersed']['value']:.6f}</strong> vs same-protocol <code>msdb_edge</code> (paired differences {d1['value']:+.6f} [{d1['ci95'][0]:+.6f}, {d1['ci95'][1]:+.6f}] and {d2['value']:+.6f} [{d2['ci95'][0]:+.6f}, {d2['ci95'][1]:+.6f}]; <code>{e(h['evaluator_version'])}</code>, {h['withheld_positives']:,} withheld positives). Final dots were within 3 px of FFL1 / MSDB1-edge / CSR1 at <strong>{metrics}</strong>, exceeding the 70% gate. <strong>No TIFF was published; no slot is approved.</strong> See <a href="pool1-executive-summary.html">POOL-1 review</a> · <a href="docs/research/2026-10-27-pool/run-card.json">run card</a> · verifier <code>scripts/verify_pool_run.py</code>.</p></section>'''
+    return f'''<p class="fine"><strong>Parallel lane POOL-1:</strong> two-seed holdout improvement is not an upload approval. Its dots overlap FFL1 / MSDB1-edge / CSR1 at {metrics} within 3 px, above the 70% stop; no TIFF was published. See <a href="pool1-executive-summary.html">POOL-1 review</a>.</p>'''
 
 
 def evidence_strip(card: dict) -> str:
@@ -65,9 +139,10 @@ def table(fleet: dict, card: dict) -> str:
         rows.append(f'''<tr><th scope="row"><a href="{e(row['review_url'])}">{e(row['site'])}</a><br><small>{k:,} dots</small></th>
 <td><a href="{e(row['source_url'])}">{e(row['historical_file'])}</a><br><small>Historical file · {fmt}{alias}</small></td>
 <td><strong>{e(row['quoted_owner_claim'])}</strong><br><small>unverified owner claim; no receipt</small></td>
-<td><strong>STOP</strong><br><small>≥{100*lower:.2f}% lattice bound</small></td><td><strong>DO NOT RESUBMIT</strong><br><small>no new candidate or slot approved here</small></td></tr>''')
-    return '''<div class="table-wrap"><table><caption>Frozen nine-site historical selections · 26 Oct 2026, not live leadership or a complete registry</caption><thead><tr><th scope="col">Site</th><th scope="col">Owner-identified best / pinned source</th><th scope="col">Reported value</th><th scope="col">Uniqueness under literal rule</th><th scope="col">Submit status</th></tr></thead><tbody>''' + ''.join(rows) + '''</tbody></table></div>
-<p class="fine">Values are unverified owner reports, not HOLDOUT-DTI or ORGANIZER-CONFIRMED scores. No defensible leaderboard forecast. Each bound is mathematical, not an individually measured overlap; the earlier fleet audit verified each file's aligned footprint and dot count. Historical bytes are not new submissions. Remote pages may have changed; no fleet-wide selector has approved a slot.</p>'''
+<td><strong>Not available</strong><br><small>no validated new candidate; no forecast</small></td>
+<td><strong>STOP</strong><br><small>≥{100*lower:.2f}% lower-bound overlap vs lattice</small></td><td><strong>DO NOT DOWNLOAD FOR SUBMISSION</strong><br><small>historical bytes only; no new file or slot approved</small></td></tr>''')
+    return '''<div class="table-wrap"><table><caption>Frozen nine-site historical selections · 26 Oct 2026, not live leadership or a complete registry</caption><thead><tr><th scope="col">Site</th><th scope="col">Historical file / source</th><th scope="col">Reported value</th><th scope="col">New submission score estimate</th><th scope="col">Unique under literal rule?</th><th scope="col">Download / submit status</th></tr></thead><tbody>''' + ''.join(rows) + '''</tbody></table></div>
+<p class="fine">Values are unverified owner reports, not HOLDOUT-DTI or ORGANIZER-CONFIRMED scores. “Not available” is deliberate: the listed historical scores cannot validly estimate an untested candidate. The lattice bound proves the literal duplicate stop for every listed historical dot budget; it does not prove all other comparisons or provide a novelty clearance. No fleet-wide selector has approved a slot.</p>'''
 
 
 def h33(fleet: dict) -> str:
@@ -84,7 +159,7 @@ def research_section() -> str:
 <article><h3>2. Buried contact discordance</h3><p>Project geology-unit contacts beneath alluvium and compare with independent geophysical edges. Mimics: unfaulted unconformities. New geology data and moderate GIS work; exclude fault-derived tables.</p></article>
 <article><h3>3. Drainage deflection</h3><p>Find repeated channel offsets/knickpoint alignments coincident with an independent geophysical edge. Mimics: terraces, roads and lava dams. Requires DEM conditioning and catchments.</p></article>
 <article><h3>4. Alteration persistence</h3><p>Test GeoDAWN K/Th/U log-ratio residuals along coherent lines with a survey-block null. Mimics: soil, rock and flight-line seams. Cached radiometry; survey masks still needed.</p></article></div>
-<p><a class="text-link" href="{REPORT}/review.md#ranked-geological-hypotheses--proposals-not-runs">Full mechanisms, physical rationale, costs, and official sources ↗</a></p></section>'''
+<p><a class="text-link" href="{REPORT}/review.md#ranked-geological-hypotheses--proposals-not-runs">Prior mechanisms, physical rationale, costs, and official sources ↗</a> · <a class="text-link" href="docs/research/2026-10-27-current-session-review.md">Current four-candidate ranking, source-access blockers, and three-pass review ↗</a> · <a class="text-link" href="docs/hypotheses.html">Full hypothesis register ↗</a></p></section>'''
 
 
 def links_and_protocol() -> str:
@@ -111,28 +186,19 @@ def priority_page(row: dict, card: dict) -> str:
     return layout(site, body)
 
 
-def pool1_section() -> str:
-    return '''<section class="section" id="pool1"><div class="section-heading"><div><p class="eyebrow">Parallel lane POOL-1 · 27 Oct 2026</p><h2>Best holdout mechanism, duplicate-stopped raster.</h2></div><p>Same evaluator, two-seed confirmation — and no TIFF published.</p></div>
-<p><strong>POOL-1</strong> (pooled 75-feature MSDB-18 + CSR-27 + LiDAR-17 HGB, preregistered 2026-10-27) scored <code>HOLDOUT-DTI</code> <strong>0.186699</strong> [0.172547, 0.200797] (seed 4201) and <strong>0.187694</strong> [0.173154, 0.201655] (seed 4219) vs same-protocol <code>msdb_edge</code> (paired Δ <strong>+0.017231</strong> [+0.010515, +0.023980] and <strong>+0.013446</strong> [+0.006993, +0.019757]; evaluator <code>component-holdout-v3-blockstats-20261025</code>, 60,988 withheld positives; max single-feature symmetric AUC 0.6805 ≤ 0.90) — the first lane in this repository to beat the standing best with paired CIs excluding zero on both preregistered seeds. Its 44,090 production dots then breached the 70% duplicate-stop on its frozen 394-raster registry (<strong>88.74%</strong> within 3 px of FFL1; 75.81% of MSDB1-edge; 71.08% of CSR-1; and <strong>100.0000%</strong> vs the pinned 13GEMSDOE lattice), so <strong>no TIFF was published</strong> and no slot is approved. <a href="pool1-executive-summary.html">POOL-1 executive summary</a> · <a href="docs/research/2026-10-27-pool/run-card.json">POOL-1 run card</a> · <a href="docs/research/2026-10-27-pool/postmerge-addendum.json">post-merge addendum</a>.</p></section>'''
-
-
-def submission_howto_section() -> str:
-    return '''<section class="section" id="submission-guide"><p class="eyebrow">Submission guide &amp; range-error diagnosis</p><h2>There is no file to submit right now.</h2>
-<p>Do not upload the historical CSR-1 file, rename an old prediction (`CTD-1`, `FC-1`, `GC-1`, `VS-1`), or spend a weekly slot. CSR-1's published-format failure (zeros outside the template footprint instead of <code>NaN</code>) and its 99.9864% lattice overlap are independently sufficient blockers. A future submission requires passing all scientific, novelty, and format gates plus separate slot-selector approval below.</p>
-<div class="resource-grid">
-<article><h3>Why the portal returned <code>"Predicted values must be in range [0, 1]"</code></h3><p>The official problem description specifies single-band <code>float32</code> GeoTIFF probabilities in <code>[0, 1]</code> inside the data bounds and <code>null</code>/<code>NaN</code> outside (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem page</a>). A portal range error can occur if (1) sentinel nodata values such as <code>-9999.0</code> or unclipped float predictions outside <code>[0, 1]</code> remain in the band, (2) a candidate defines its footprint from a feature channel rather than <code>sample_submission.tif</code> (leaving <code>NaN</code> inside the organizer's 5,167,373 valid cells), or (3) the portal checks values before applying the template mask. The exact historical upload that triggered the error is not archived here, so its specific cause remains undiagnosed (<a href="docs/research/range-error-root-cause-2026-10-03.md">root-cause note</a>).</p></article>
-<article><h3>Automated local format gate (zero human inspection)</h3><p>Every candidate is checked automatically by <code>src/gemsdoe30/submission.py</code> (<code>python scripts/validate_submission.py &lt;file.tif&gt; --template data/raw/sample_submission.tif</code>): single-band <code>float32</code>, <code>EPSG:32611</code>, shape <code>3730×3292</code>, 100 m north-up geotransform, finite values in <code>[0, 1]</code> on all 5,167,373 valid footprint cells, and <code>NaN</code> on all 7,111,787 outside cells. Local format validation is a necessary precondition, never an organizer score or upload approval.</p></article>
-<article><h3>How to submit when a future run is promoted</h3><p>Only when <code>verdict == "promote"</code> and <code>ok_to_submit == true</code> in the current run card: (1) download the promoted <code>.tif</code> (or single-GeoTIFF <code>.zip</code>), (2) verify its SHA-256 against the sidecar receipt, (3) open the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData GEMS submission form</a>, choose the file under <em>File to submit</em>, paste the ≤140-character <em>Note</em> from the run card (e.g., lane ID, dot count, and seed), and record the returned organizer score with a submission-page receipt. Up to 3 feedback submissions are allowed per week; 1 final submission is selected for both evaluation rounds.</p></article>
-<article><h3>2026-10-27 external fleet check (21 named-prefix sites)</h3><p>In addition to the 92 numbered repositories (<code>GEMSDOE</code>..<code>GEMSDOE92</code>, all 92 reachable via GitHub API in <a href="docs/research/2026-10-27-pool/registry.json">POOL-1's registry</a>), the 21 named-prefix sites in the 2026-10-27 prompt (<code>KANLERGEMSDOE1..3</code>, <code>EUGGEMSDOE1..3</code>, <code>WBGGEMSDOE1..3</code>, <code>GINNYGEMSDOE1..3</code>, <code>GEMSDOEkarage1..3</code>, <code>ApartGEMSDOE1..3</code>, <code>GEMSDOESASS1..3</code>) were queried against <code>api.github.com/repos/buffedlizard55-lab/&lt;repo&gt;</code> on 2026-10-27 and all 21 returned <code>HTTP 404 Not Found</code> (not publicly created or inaccessible to the sandbox token). Their prompt annotations (15 <code>no tif</code>, 1 <code>duplicate stop</code>, 5 <code>Unique ready?</code>) remain unverified owner text logged in <a href="docs/score-ledger.csv"><code>docs/score-ledger.csv</code></a>.</p></article>
-</div></section>'''
-
-
-def render(card: dict, fleet: dict) -> dict[str, str]:
-    common = hero() + stop_card(card) + pool1_section() + evidence_strip(card)
-    overview = common + '''<section class="section"><div class="section-heading"><div><p class="eyebrow">Historical evidence / nine priority sites</p><h2>A fleet snapshot, not a leaderboard.</h2></div><p>Historic sources are linked.<br>No upload is authorized.</p></div>''' + table(fleet, card) + '</section>' + h33(fleet) + research_section() + links_and_protocol()
-    summary = common + submission_howto_section() + '''<section class="section"><div class="section-heading"><div><p class="eyebrow">Nine priority sites / master reference table</p><h2>Historical files, score classes, and submit status.</h2></div><p>Every priority site is duplicate-stopped under the literal lattice rule.</p></div>''' + table(fleet, card) + '</section>' + h33(fleet) + research_section() + links_and_protocol()
+def render(card: dict, fleet: dict, pool_card: dict | None = None,
+           pool_dots: dict | None = None, session_card: dict | None = None) -> dict[str, str]:
+    if pool_card is None:
+        pool_card = json.loads((ROOT / "docs/research/2026-10-27-pool/run-card.json").read_text())
+    if pool_dots is None:
+        pool_dots = json.loads((ROOT / "docs/research/2026-10-27-pool/novelty-dots.json").read_text())
+    if session_card is None:
+        session_card = json.loads((ROOT / "docs/research/2026-10-27-current-session-run-card.json").read_text())
+    common = hero() + stop_card(card) + upstream_artifacts_section(session_card) + evidence_strip(card)
+    overview = common + pool1_summary(pool_card, pool_dots, detail=True) + '''<section class="section"><div class="section-heading"><div><p class="eyebrow">Historical evidence / nine priority sites</p><h2>A fleet snapshot, not a leaderboard.</h2></div><p>Historic sources are linked.<br>No upload is authorized.</p></div>''' + table(fleet, card) + '</section>' + h33(fleet) + research_section() + links_and_protocol()
+    summary = pool1_summary(pool_card, pool_dots, detail=False) + common + '''<section class="section"><p class="eyebrow">Submission guide</p><h2>There is no approved file to submit.</h2><p>Two upstream research TIFFs are present, but both are explicitly duplicate-stopped and have no download controls on this page. Do not upload them, the historical CSR-1 file, or a renamed old prediction, and do not use a weekly slot. CSR-1’s published-format failure and duplicate stop are independently sufficient blockers. A future submission requires the protocol and separate selector approval below.</p></section>''' + links_and_protocol()
     research = common + research_section() + h33(fleet) + links_and_protocol()
-    priority = '''<section class="intro"><div><p class="eyebrow">Priority sites / frozen 26 Oct 2026</p><h1>Nine sites. One clear stop.</h1><p class="lead">Owner-reported historical scores, immutable source files and the literal lattice bound; not a live registry or submit selector.</p></div></section>''' + pool1_section() + table(fleet, card) + h33(fleet) + links_and_protocol()
+    priority = '''<section class="intro"><div><p class="eyebrow">Priority sites / frozen 26 Oct 2026</p><h1>Nine sites. One clear stop.</h1><p class="lead">Owner-reported historical scores, immutable source files and the literal lattice bound; not a live registry or submit selector.</p></div></section>''' + upstream_artifacts_section(session_card) + table(fleet, card) + h33(fleet) + links_and_protocol()
     pages = {'index.html': layout('Research overview', overview),
              'executive-summary.html': layout('Submission guide', summary),
              'csr-discontinuity-review.html': layout('Research review', research),

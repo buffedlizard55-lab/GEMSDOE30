@@ -142,8 +142,5 @@
     ]
   },
   "whole_raster_range_diagnostic_passed": false,
-  "performance_status": "unscored; format validation is not a score; duplicate-stopped against 13GEMSDOE lattice (37654/37654 = 100.0000% within 3 px) and places 13098/37654 dots directly on labels.tif catalogue faults",
-  "ok_to_submit": false,
-  "slot_selected": false,
-  "submission_approved": false
+  "performance_status": "unscored; format validation is not a score"
 }

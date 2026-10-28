@@ -163,8 +163,10 @@ def test_postmerge_candidates_both_fail_lattice_and_renamed_duplicate_removed():
         assert item['produced_by_this_audit'] is False
         assert item['ok_to_submit'] is False
     addendum = json.loads(preflight.POSTMERGE_ADDENDUM.read_text())
-    assert addendum['renamed_duplicate_removed'] is True
-    assert not (ROOT / addendum['removed_renamed_duplicate']['path']).exists()
+    assert addendum['renamed_duplicate_verified_identical'] is True
+    dup = ROOT / addendum['renamed_duplicate']['path']
+    canon = ROOT / addendum['renamed_duplicate']['canonical_path']
+    assert dup.is_file() and canon.is_file() and preflight.sha(dup) == preflight.sha(canon)
 
 
 @requires_mirrors

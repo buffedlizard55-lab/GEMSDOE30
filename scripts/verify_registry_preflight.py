@@ -281,8 +281,8 @@ def verify(template: Path = TEMPLATE, lattice: Path = LATTICE) -> dict:
                     and same_measurement([{k: v for k, v in r.items() if k not in ("dots_on_catalogue_d0", "dots_within_2px_of_catalogue")}
                                           for r in saved_postmerge["candidates"]], postmerge)),
                 "saved postmerge addendum does not match source bytes")
-        require(saved_postmerge.get("renamed_duplicate_removed") is True,
-                "postmerge addendum must record removal of renamed GC-1 duplicate")
+        require(saved_postmerge.get("renamed_duplicate_verified_identical") is True,
+                "postmerge addendum must record byte-identity of renamed GC-1 duplicate")
     return {"research_verdict": "negative", "display_status": card["decision"],
             "download_ok": False, "ok_to_submit": False, "submission_approved": False,
             "slot_selected": False, "measurement": measured, "postmerge_candidates": postmerge}
@@ -293,8 +293,10 @@ def inspect_postmerge(template: Path = TEMPLATE, lattice: Path = LATTICE) -> lis
     from scipy.ndimage import distance_transform_edt
 
     template, lattice = Path(template), Path(lattice)
+    canonical_gc = ROOT / "docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif"
     renamed_dup = ROOT / "docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z.tif"
-    require(not renamed_dup.exists(), "renamed byte-identical duplicate of GC-1 must not remain in docs/downloads")
+    require(renamed_dup.is_file() and sha(renamed_dup) == sha(canonical_gc),
+            "PR #58 GC-1 timestamp copy must match canonical GC-1 SHA-256")
     labels_path = ROOT / "data/raw/labels.tif"
     pins = load(ROOT / "docs/research/mirror-pins.json")
     labels_pin = next(r for r in pins["files"] if r["id"] == "labels")

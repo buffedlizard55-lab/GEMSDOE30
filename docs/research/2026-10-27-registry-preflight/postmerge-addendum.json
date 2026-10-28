@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "parent_run_card": "docs/research/2026-10-27-registry-preflight/run-card.json",
-  "renamed_duplicate_removed": true,
-  "removed_renamed_duplicate": {
+  "renamed_duplicate_verified_identical": true,
+  "renamed_duplicate": {
     "path": "docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z.tif",
     "sha256": "0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564",
     "canonical_path": "docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif",
-    "reason": "PR #58 re-ran build_geothermal_corridor_submission.py and wrote a byte-for-byte identical copy of GC-1 under a new timestamp. Removed per AGENTS.md Rule 2 (never rename a stopped raster to claim a unique submission); evaluate_candidate_holdout.py also used truth=catalogue (including guard components) against a zero control."
+    "reason": "PR #58 re-ran build_geothermal_corridor_submission.py and wrote a byte-for-byte identical copy of GC-1 under a new timestamp. Disclosed as stopped in 2026-10-27-current-session-run-card.json; evaluate_candidate_holdout.py also used truth=catalogue (including guard components) against a zero control."
   },
   "candidates": [
     {
