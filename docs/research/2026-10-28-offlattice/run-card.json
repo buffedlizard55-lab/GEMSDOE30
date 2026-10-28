@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "run_id": "gems30-offlattice-geothermal-structural-20261028-s7",
+  "created_utc": "2026-10-28T00:00:00+00:00",
+  "lane": "off-lattice geothermal structural emission (self-assigned; no externally assigned lane paragraph supplied for this session)",
+  "hypothesis": "Concealed geothermal feeder faults (step-overs, relay ramps, blind volcanic-hosted structures) are systematically missed by the catalogue-adjacent dot lane (h19-5/D2.8/H33 family) and lie in the pinned 13GEMSDOE lattice's 3 px coverage holes; placing one dot per lattice-uncovered valid cell, prioritized by public geothermal structural favorability, targets unmapped faults while provably avoiding every prior lane's dots.",
+  "mechanism": "Binary {0,1} dots at all 6,649 valid footprint cells that are >=300 m (3 px) from every dot of the pinned 13GEMSDOE lattice (sha256 b4570b40...), ranked by a weighted sum of public layers: USGS GDR Quaternary faults + SGMC faults (0.4), GDR Quaternary volcanics (0.3), GDR paleo springs + 2 m temperature probes (0.2). Weights sum to 1 so the structural score stays in [0, 1]. Binary emission on a fixed support follows the published DTI marginal algebra (alpha 0.2, beta 0.8, 300 m triangular kernel).",
+  "named_non_fault_process": "Erosional scarps, Lake Lahontan paleo-shoreline/terrace risers, lithologic contacts, and dike or flow-front edges can produce geophysical/topographic steps without fault offset.",
+  "experiments_run": 1,
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200,
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": null,
+    "ci95": null,
+    "evaluator_version": "component-holdout-v3-blockstats-20261025",
+    "protocol_version": "buffered-quadrant-whole-components-v1-20261025",
+    "withheld_positives": null,
+    "reason": "data/raw/ (training_features.tif, labels.tif, sample_submission.tif) is absent from this checkout and requires a DrivenData login; the catalogue-proxy holdout cannot be run here. No HOLDOUT-DTI number is reported and none is projected. Per the protocol this gate is BLOCKED, not passed.",
+    "leakage_canary": "not run (no features derived; no model fitted)"
+  },
+  "registry": {
+    "reference": "pinned 13GEMSDOE lattice 13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+    "reference_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+    "reference_source": "https://github.com/buffedlizard55-lab/13GEMSDOE/blob/92ee6f074323f161eed837b80ec3ee5b662e26f5/docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+    "surface": {
+      "decision": "measured",
+      "spearman_full_footprint_vs_lattice": -0.007330541952695577,
+      "gate": "rank correlation > 0.90 is duplicate-stop",
+      "result": "PASS"
+    },
+    "dots": {
+      "decision": "measured",
+      "candidate_dots": 6649,
+      "reference_dots": 206895,
+      "fraction_of_candidate_dots_within_3px_of_lattice_dots": 0.0,
+      "gate": "more than 0.70 of candidate dots within 3 px of one registry raster's dots is duplicate-stop",
+      "result": "PASS",
+      "max_vs_locally_available_downloads": {
+        "fraction_within_3px": 0.47345465483531357,
+        "raster": "gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e-zeros.tif",
+        "note": "locally available downloads are not the complete parallel-run registry"
+      }
+    },
+    "provable_stop_budget_note": "any candidate budget >= 22,164 dots is provably >= 70% within 3 px of the lattice; this candidate uses 6,649 dots, so the provable-stop bound does not apply and the measured overlap is 0.0%"
+  },
+  "raster_sha256": "572df94e8d3106a90dc7f85e2d81aa944d38dd59ac40df840e09d14f2ea6ccfb",
+  "prediction_array_sha256": "367020c52813c2e3882ca718beb28a8a3dafd67d558272db624cab4e2facb0d2",
+  "validator_output": {
+    "status": "passed",
+    "no_nan_inside_footprint": true,
+    "values_in_0_1": true,
+    "in_footprint_min": 0.0,
+    "in_footprint_max": 1.0,
+    "valid_footprint_pixels": 5167373,
+    "crs_match": true,
+    "crs": "EPSG:32611",
+    "shape_match": true,
+    "shape": [3730, 3292],
+    "transform_match": true,
+    "transform": [100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0],
+    "single_float32_band": true,
+    "null_nodata_outside_footprint": true,
+    "outside_pixels": 7111787,
+    "template_proxy_note": "validated against docs/research/2026-10-28-offlattice/lattice-reference.tif, which has identical grid metadata to the organizer sample_submission.tif (recorded: EPSG:32611, 3730x3292, transform (100, 0, 243350, 0, -100, 4508550), nodata NaN). The organizer template file itself is not locally available (DrivenData login required); portal acceptance is unverified.",
+    "format_validation_source": "docs/downloads/gems30-offlattice-geothermal-structural-20261028-s7.tif.json"
+  },
+  "submission_name": "gems30-offlattice-geothermal-structural-20261028-s7",
+  "note": "Unique off-lattice geothermal structural dots; research artifact; holdout gate blocked; not slot-approved",
+  "note_chars": 105,
+  "file": "docs/downloads/gems30-offlattice-geothermal-structural-20261028-s7.tif",
+  "file_sha256": "572df94e8d3106a90dc7f85e2d81aa944d38dd59ac40df840e09d14f2ea6ccfb",
+  "receipt": "docs/research/2026-10-28-offlattice/gems30-offlattice-geothermal-structural-20261028-s7.receipt.json",
+  "verdict": "negative",
+  "download_ok": true,
+  "ok_to_submit": false,
+  "submission_approved": false,
+  "slot_selected": false,
+  "organizer_score": null,
+  "organizer_acceptance_confirmed": false,
+  "performance_status": "unscored; format validation is not a score; no leaderboard forecast is made",
+  "blockers": [
+    "Holdout gate blocked: organizer rasters (training_features.tif, labels.tif, sample_submission.tif) require DrivenData login and are absent locally",
+    "No externally assigned lane paragraph was supplied for this session; lane is self-assigned",
+    "Complete parallel-run raster/surface registry is unavailable locally",
+    "Historical best rerun unavailable; no organizer-confirmed score receipts exist for any prior GEMSDOE file"
+  ],
+  "display_status": "DOWNLOAD OK (format-valid research artifact); NOT OK TO SUBMIT TO DRIVENDATA; no weekly slot selected or used"
+}
