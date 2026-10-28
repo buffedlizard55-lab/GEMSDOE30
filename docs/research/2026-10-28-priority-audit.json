@@ -1,0 +1,1028 @@
+{
+  "schema_version": 1,
+  "audit_version": "priority-readiness-v1-20261028",
+  "scope": "Exact bytes of nine frozen owner-identified historical leaders; not live leadership or a complete registry",
+  "fleet_manifest_sha256": "6ef13733975f9e05508039ee7c2d2eba1bca1fa71df837061cc4ba7ea1a39d4d",
+  "witness_pin_sha256": "0c391adba7a7f7e44921421a2e86bc8b5db96da2cc51c97de1dab8745433e505",
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "witness_raster_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+  "witness_source": "Public historical 13GEMSDOE research prediction; not an organizer-authenticated training layer or upload receipt.",
+  "witness_source_url": "https://github.com/buffedlizard55-lab/13GEMSDOE/blob/92ee6f074323f161eed837b80ec3ee5b662e26f5/docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+  "rows": [
+    {
+      "site": "GEMSDOE24",
+      "historical_file": "gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/07345ea0604953d7efb858d9cfbc21e20c7aca0b/docs/downloads/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+      "raster_sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+      "reported_historical_value": "0.2477",
+      "reported_value_evidence": "UNVERIFIED OWNER CLAIM; not ORGANIZER-CONFIRMED or HOLDOUT-DTI",
+      "new_submission_score_estimate": null,
+      "comparison": {
+        "stage": "dots",
+        "spearman_full_footprint": 0.00036756887587222965,
+        "candidate_dots": 60069,
+        "candidate_positive_support": 60069,
+        "reference_dots": 206895,
+        "candidate_fraction_within_3px_of_reference": 0.9992175664652316,
+        "identical_inside_footprint": false,
+        "correlation_duplicate": false,
+        "dot_duplicate": true,
+        "undefined": false
+      },
+      "matching_dots": 60022,
+      "bound": {
+        "reference_dots": 206895,
+        "footprint_pixels": 5167373,
+        "covered_within_radius_pixels": 5160724,
+        "uncovered_pixels": 6649,
+        "radius_px": 3.0,
+        "threshold": 0.7,
+        "candidate_dot_budget": 60069,
+        "minimum_overlapping_dots": 53420,
+        "minimum_fraction_within_radius": 0.889310626113303,
+        "first_provably_stopped_budget": 22164,
+        "decision": "duplicate-stop",
+        "scope": "one-reference lower bound; not a complete novelty or submission approval"
+      },
+      "validator_output": {
+        "passed": true,
+        "checks": [
+          {
+            "name": "template_single_band",
+            "passed": true,
+            "detail": "count=1"
+          },
+          {
+            "name": "single_band",
+            "passed": true,
+            "detail": "count=1"
+          },
+          {
+            "name": "float32",
+            "passed": true,
+            "detail": "dtypes=('float32',)"
+          },
+          {
+            "name": "epsg",
+            "passed": true,
+            "detail": "crs=EPSG:32611"
+          },
+          {
+            "name": "template_epsg",
+            "passed": true,
+            "detail": "crs=EPSG:32611"
+          },
+          {
+            "name": "shape_matches_template",
+            "passed": true,
+            "detail": "output=(3730, 3292) template=(3730, 3292)"
+          },
+          {
+            "name": "transform_matches_template",
+            "passed": true,
+            "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+          },
+          {
+            "name": "100m_north_up_grid",
+            "passed": true,
+            "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+          },
+          {
+            "name": "finite_and_in_range_inside_footprint",
+            "passed": true,
+            "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+          },
+          {
+            "name": "null_outside_template_footprint",
+            "passed": true,
+            "detail": "outside_pixels=7111787; null/NaN/nodata required"
+          },
+          {
+            "name": "whole_raster_finite_range_diagnostic_advisory",
+            "passed": true,
+            "detail": "advisory only: whole-array diagnostic found 7111787 NaN/Inf cell(s); this is not a diagnosis of portal behavior; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+          },
+          {
+            "name": "template_readable",
+            "passed": true,
+            "detail": "shape=(3730, 3292)"
+          }
+        ]
+      },
+      "finite_inside": true,
+      "inside_range": [
+        0.0,
+        1.0
+      ],
+      "preplacement_surface_checked": false,
+      "exact_value_alias_sites": [],
+      "unique_submission": false,
+      "download_for_submission": false,
+      "ok_to_submit": false
+    },
+    {
+      "site": "GEMSDOE25",
+      "historical_file": "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE25/blob/04333cc3fbf7486c56e0324fd07aee684be614dc/docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+      "raster_sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+      "reported_historical_value": "0.2600",
+      "reported_value_evidence": "UNVERIFIED OWNER CLAIM; not ORGANIZER-CONFIRMED or HOLDOUT-DTI",
+      "new_submission_score_estimate": null,
+      "comparison": {
+        "stage": "dots",
+        "spearman_full_footprint": 0.00011475772699996416,
+        "candidate_dots": 44090,
+        "candidate_positive_support": 44090,
+        "reference_dots": 206895,
+        "candidate_fraction_within_3px_of_reference": 0.9991608074393287,
+        "identical_inside_footprint": false,
+        "correlation_duplicate": false,
+        "dot_duplicate": true,
+        "undefined": false
+      },
+      "matching_dots": 44053,
+      "bound": {
+        "reference_dots": 206895,
+        "footprint_pixels": 5167373,
+        "covered_within_radius_pixels": 5160724,
+        "uncovered_pixels": 6649,
+        "radius_px": 3.0,
+        "threshold": 0.7,
+        "candidate_dot_budget": 44090,
+        "minimum_overlapping_dots": 37441,
+        "minimum_fraction_within_radius": 0.8491948287593558,
+        "first_provably_stopped_budget": 22164,
+        "decision": "duplicate-stop",
+        "scope": "one-reference lower bound; not a complete novelty or submission approval"
+      },
+      "validator_output": {
+        "passed": true,
+        "checks": [
+          {
+            "name": "template_single_band",
+            "passed": true,
+            "detail": "count=1"
+          },
+          {
+            "name": "single_band",
+            "passed": true,
+            "detail": "count=1"
+          },
+          {
+            "name": "float32",
+            "passed": true,
+            "detail": "dtypes=('float32',)"
+          },
+          {
+            "name": "epsg",
+            "passed": true,
+            "detail": "crs=EPSG:32611"
+          },
+          {
+            "name": "template_epsg",
+            "passed": true,
+            "detail": "crs=EPSG:32611"
+          },
+          {
+            "name": "shape_matches_template",
+            "passed": true,
+            "detail": "output=(3730, 3292) template=(3730, 3292)"
+          },
+          {
+            "name": "transform_matches_template",
+            "passed": true,
+            "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+          },
+          {
+            "name": "100m_north_up_grid",
+            "passed": true,
+            "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+          },
+          {
+            "name": "finite_and_in_range_inside_footprint",
+            "passed": true,
+            "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+          },
+          {
+            "name": "null_outside_template_footprint",
+            "passed": true,
+            "detail": "outside_pixels=7111787; null/NaN/nodata required"
+          },
+          {
+            "name": "whole_raster_finite_range_diagnostic_advisory",
+            "passed": true,
+            "detail": "advisory only: whole-array diagnostic found 7111787 NaN/Inf cell(s); this is not a diagnosis of portal behavior; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+          },
+          {
+            "name": "template_readable",
+            "passed": true,
+            "detail": "shape=(3730, 3292)"
+          }
+        ]
+      },
+      "finite_inside": true,
+      "inside_range": [
+        0.0,
+        1.0
+      ],
+      "preplacement_surface_checked": false,
+      "exact_value_alias_sites": [
+        "GEMSDOE30"
+      ],
+      "unique_submission": false,
+      "download_for_submission": false,
+      "ok_to_submit": false
+    },
+    {
+      "site": "GEMSDOE27",
+      "historical_file": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE27/blob/b8dd298e10884afffa05436673ac73aeaf850b8c/docs/downloads/gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+      "raster_sha256": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d",
+      "reported_historical_value": "0.2449",
+      "reported_value_evidence": "UNVERIFIED OWNER CLAIM; not ORGANIZER-CONFIRMED or HOLDOUT-DTI",
+      "new_submission_score_estimate": null,
+      "comparison": {
+        "stage": "dots",
+        "spearman_full_footprint": 0.00027805959284342083,
+        "candidate_dots": 61328,
+        "candidate_positive_support": 61328,
+        "reference_dots": 206895,
+        "candidate_fraction_within_3px_of_reference": 0.9992336290112184,
+        "identical_inside_footprint": false,
+        "correlation_duplicate": false,
+        "dot_duplicate": true,
+        "undefined": false
+      },
+      "matching_dots": 61281,
+      "bound": {
+        "reference_dots": 206895,
+        "footprint_pixels": 5167373,
+        "covered_within_radius_pixels": 5160724,
+        "uncovered_pixels": 6649,
+        "radius_px": 3.0,
+        "threshold": 0.7,
+        "candidate_dot_budget": 61328,
+        "minimum_overlapping_dots": 54679,
+        "minimum_fraction_within_radius": 0.891582963735977,
+        "first_provably_stopped_budget": 22164,
+        "decision": "duplicate-stop",
+        "scope": "one-reference lower bound; not a complete novelty or submission approval"
+      },
+      "validator_output": {
+        "passed": true,
+        "checks": [
+          {
+            "name": "template_single_band",
+            "passed": true,
+            "detail": "count=1"
+          },
+          {
+            "name": "single_band",
+            "passed": true,
+            "detail": "count=1"
+          },
+          {
+            "name": "float32",
+            "passed": true,
+            "detail": "dtypes=('float32',)"
+          },
+          {
+            "name": "epsg",
+            "passed": true,
+            "detail": "crs=EPSG:32611"
+          },
+          {
+            "name": "template_epsg",
+            "passed": true,
+            "detail": "crs=EPSG:32611"
+          },
+          {
+            "name": "shape_matches_template",
+            "passed": true,
+            "detail": "output=(3730, 3292) template=(3730, 3292)"
+          },
+          {
+            "name": "transform_matches_template",
+            "passed": true,
+            "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+          },
+          {
+            "name": "100m_north_up_grid",
+            "passed": true,
+            "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+          },
+          {
+            "name": "finite_and_in_range_inside_footprint",
+            "passed": true,
+            "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+          },
+          {
+            "name": "null_outside_template_footprint",
+            "passed": true,
+            "detail": "outside_pixels=7111787; null/NaN/nodata required"
+          },
+          {
+            "name": "whole_raster_finite_range_diagnostic_advisory",
+            "passed": true,
+            "detail": "advisory only: whole-array diagnostic found 7111787 NaN/Inf cell(s); this is not a diagnosis of portal behavior; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+          },
+          {
+            "name": "template_readable",
+            "passed": true,
+            "detail": "shape=(3730, 3292)"
+          }
+        ]
+      },
+      "finite_inside": true,
+      "inside_range": [
+        0.0,
+        1.0
+      ],
+      "preplacement_surface_checked": false,
+      "exact_value_alias_sites": [],
+      "unique_submission": false,
+      "download_for_submission": false,
+      "ok_to_submit": false
+    },
+    {
+      "site": "GEMSDOE28",
+      "historical_file": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE28/blob/ec1d501fd12c8dee9dc062726003639dec9382ff/docs/downloads/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+      "raster_sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641",
+      "reported_historical_value": "0.2710",
+      "reported_value_evidence": "UNVERIFIED OWNER CLAIM; not ORGANIZER-CONFIRMED or HOLDOUT-DTI",
+      "new_submission_score_estimate": null,
+      "comparison": {
+        "stage": "dots",
+        "spearman_full_footprint": 0.00011769603133491525,
+        "candidate_dots": 37660,
+        "candidate_positive_support": 37660,
+        "reference_dots": 206895,
+        "candidate_fraction_within_3px_of_reference": 0.9990971853425386,
+        "identical_inside_footprint": false,
+        "correlation_duplicate": false,
+        "dot_duplicate": true,
+        "undefined": false
+      },
+      "matching_dots": 37626,
+      "bound": {
+        "reference_dots": 206895,
+        "footprint_pixels": 5167373,
+        "covered_within_radius_pixels": 5160724,
+        "uncovered_pixels": 6649,
+        "radius_px": 3.0,
+        "threshold": 0.7,
+        "candidate_dot_budget": 37660,
+        "minimum_overlapping_dots": 31011,
+        "minimum_fraction_within_radius": 0.8234466277217206,
+        "first_provably_stopped_budget": 22164,
+        "decision": "duplicate-stop",
+        "scope": "one-reference lower bound; not a complete novelty or submission approval"
+      },
+      "validator_output": {
+        "passed": true,
+        "checks": [
+          {
+            "name": "template_single_band",
+            "passed": true,
+            "detail": "count=1"
+          },
+          {
+            "name": "single_band",
+            "passed": true,
+            "detail": "count=1"
+          },
+          {
+            "name": "float32",
+            "passed": true,
+            "detail": "dtypes=('float32',)"
+          },
+          {
+            "name": "epsg",
+            "passed": true,
+            "detail": "crs=EPSG:32611"
+          },
+          {
+            "name": "template_epsg",
+            "passed": true,
+            "detail": "crs=EPSG:32611"
+          },
+          {
+            "name": "shape_matches_template",
+            "passed": true,
+            "detail": "output=(3730, 3292) template=(3730, 3292)"
+          },
+          {
+            "name": "transform_matches_template",
+            "passed": true,
+            "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+          },
+          {
+            "name": "100m_north_up_grid",
+            "passed": true,
+            "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+          },
+          {
+            "name": "finite_and_in_range_inside_footprint",
+            "passed": true,
+            "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+          },
+          {
+            "name": "null_outside_template_footprint",
+            "passed": true,
+            "detail": "outside_pixels=7111787; null/NaN/nodata required"
+          },
+          {
+            "name": "whole_raster_finite_range_diagnostic_advisory",
+            "passed": true,
+            "detail": "advisory only: whole-array diagnostic found 7111787 NaN/Inf cell(s); this is not a diagnosis of portal behavior; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+          },
+          {
+            "name": "template_readable",
+            "passed": true,
+            "detail": "shape=(3730, 3292)"
+          }
+        ]
+      },
+      "finite_inside": true,
+      "inside_range": [
+        0.0,
+        1.0
+      ],
+      "preplacement_surface_checked": false,
+      "exact_value_alias_sites": [],
+      "unique_submission": false,
+      "download_for_submission": false,
+      "ok_to_submit": false
+    },
+    {
+      "site": "GEMSDOE30",
+      "historical_file": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE30/blob/3d5bec2af5f29291617f97c9e2dfe443be6f55c3/docs/downloads/gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+      "raster_sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd",
+      "reported_historical_value": "0.2600",
+      "reported_value_evidence": "UNVERIFIED OWNER CLAIM; not ORGANIZER-CONFIRMED or HOLDOUT-DTI",
+      "new_submission_score_estimate": null,
+      "comparison": {
+        "stage": "dots",
+        "spearman_full_footprint": 0.00011475772699996416,
+        "candidate_dots": 44090,
+        "candidate_positive_support": 44090,
+        "reference_dots": 206895,
+        "candidate_fraction_within_3px_of_reference": 0.9991608074393287,
+        "identical_inside_footprint": false,
+        "correlation_duplicate": false,
+        "dot_duplicate": true,
+        "undefined": false
+      },
+      "matching_dots": 44053,
+      "bound": {
+        "reference_dots": 206895,
+        "footprint_pixels": 5167373,
+        "covered_within_radius_pixels": 5160724,
+        "uncovered_pixels": 6649,
+        "radius_px": 3.0,
+        "threshold": 0.7,
+        "candidate_dot_budget": 44090,
+        "minimum_overlapping_dots": 37441,
+        "minimum_fraction_within_radius": 0.8491948287593558,
+        "first_provably_stopped_budget": 22164,
+        "decision": "duplicate-stop",
+        "scope": "one-reference lower bound; not a complete novelty or submission approval"
+      },
+      "validator_output": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "template_single_band",
+            "passed": true,
+            "detail": "count=1"
+          },
+          {
+            "name": "single_band",
+            "passed": true,
+            "detail": "count=1"
+          },
+          {
+            "name": "float32",
+            "passed": true,
+            "detail": "dtypes=('float32',)"
+          },
+          {
+            "name": "epsg",
+            "passed": true,
+            "detail": "crs=EPSG:32611"
+          },
+          {
+            "name": "template_epsg",
+            "passed": true,
+            "detail": "crs=EPSG:32611"
+          },
+          {
+            "name": "shape_matches_template",
+            "passed": true,
+            "detail": "output=(3730, 3292) template=(3730, 3292)"
+          },
+          {
+            "name": "transform_matches_template",
+            "passed": true,
+            "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+          },
+          {
+            "name": "100m_north_up_grid",
+            "passed": true,
+            "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+          },
+          {
+            "name": "finite_and_in_range_inside_footprint",
+            "passed": true,
+            "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+          },
+          {
+            "name": "null_outside_template_footprint",
+            "passed": false,
+            "detail": "outside_pixels=7111787; null/NaN/nodata required"
+          },
+          {
+            "name": "whole_raster_finite_range_diagnostic_advisory",
+            "passed": true,
+            "detail": "advisory only: all_pixels=12279160 finite and in [0, 1]; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+          },
+          {
+            "name": "template_readable",
+            "passed": true,
+            "detail": "shape=(3730, 3292)"
+          }
+        ]
+      },
+      "finite_inside": true,
+      "inside_range": [
+        0.0,
+        1.0
+      ],
+      "preplacement_surface_checked": false,
+      "exact_value_alias_sites": [
+        "GEMSDOE25"
+      ],
+      "unique_submission": false,
+      "download_for_submission": false,
+      "ok_to_submit": false
+    },
+    {
+      "site": "GEMSDOE31",
+      "historical_file": "gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-nan.tif",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE31/blob/cf13282fcd86290f1539f0a86446c8ba7205a79b/docs/downloads/gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-nan.tif",
+      "raster_sha256": "07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40",
+      "reported_historical_value": "0.2708",
+      "reported_value_evidence": "UNVERIFIED OWNER CLAIM; not ORGANIZER-CONFIRMED or HOLDOUT-DTI",
+      "new_submission_score_estimate": null,
+      "comparison": {
+        "stage": "dots",
+        "spearman_full_footprint": 2.790297864513337e-05,
+        "candidate_dots": 40199,
+        "candidate_positive_support": 40199,
+        "reference_dots": 206895,
+        "candidate_fraction_within_3px_of_reference": 0.9991790840568173,
+        "identical_inside_footprint": false,
+        "correlation_duplicate": false,
+        "dot_duplicate": true,
+        "undefined": false
+      },
+      "matching_dots": 40166,
+      "bound": {
+        "reference_dots": 206895,
+        "footprint_pixels": 5167373,
+        "covered_within_radius_pixels": 5160724,
+        "uncovered_pixels": 6649,
+        "radius_px": 3.0,
+        "threshold": 0.7,
+        "candidate_dot_budget": 40199,
+        "minimum_overlapping_dots": 33550,
+        "minimum_fraction_within_radius": 0.834597875569044,
+        "first_provably_stopped_budget": 22164,
+        "decision": "duplicate-stop",
+        "scope": "one-reference lower bound; not a complete novelty or submission approval"
+      },
+      "validator_output": {
+        "passed": true,
+        "checks": [
+          {
+            "name": "template_single_band",
+            "passed": true,
+            "detail": "count=1"
+          },
+          {
+            "name": "single_band",
+            "passed": true,
+            "detail": "count=1"
+          },
+          {
+            "name": "float32",
+            "passed": true,
+            "detail": "dtypes=('float32',)"
+          },
+          {
+            "name": "epsg",
+            "passed": true,
+            "detail": "crs=EPSG:32611"
+          },
+          {
+            "name": "template_epsg",
+            "passed": true,
+            "detail": "crs=EPSG:32611"
+          },
+          {
+            "name": "shape_matches_template",
+            "passed": true,
+            "detail": "output=(3730, 3292) template=(3730, 3292)"
+          },
+          {
+            "name": "transform_matches_template",
+            "passed": true,
+            "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+          },
+          {
+            "name": "100m_north_up_grid",
+            "passed": true,
+            "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+          },
+          {
+            "name": "finite_and_in_range_inside_footprint",
+            "passed": true,
+            "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+          },
+          {
+            "name": "null_outside_template_footprint",
+            "passed": true,
+            "detail": "outside_pixels=7111787; null/NaN/nodata required"
+          },
+          {
+            "name": "whole_raster_finite_range_diagnostic_advisory",
+            "passed": true,
+            "detail": "advisory only: whole-array diagnostic found 7111787 NaN/Inf cell(s); this is not a diagnosis of portal behavior; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+          },
+          {
+            "name": "template_readable",
+            "passed": true,
+            "detail": "shape=(3730, 3292)"
+          }
+        ]
+      },
+      "finite_inside": true,
+      "inside_range": [
+        0.0,
+        1.0
+      ],
+      "preplacement_surface_checked": false,
+      "exact_value_alias_sites": [],
+      "unique_submission": false,
+      "download_for_submission": false,
+      "ok_to_submit": false
+    },
+    {
+      "site": "GEMSDOE32",
+      "historical_file": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/012e17b2a115c3c0d5e7885bea625bf9657c99fc/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+      "raster_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "reported_historical_value": "0.2778",
+      "reported_value_evidence": "UNVERIFIED OWNER CLAIM; not ORGANIZER-CONFIRMED or HOLDOUT-DTI",
+      "new_submission_score_estimate": null,
+      "comparison": {
+        "stage": "dots",
+        "spearman_full_footprint": 6.246371257602207e-05,
+        "candidate_dots": 37654,
+        "candidate_positive_support": 37654,
+        "reference_dots": 206895,
+        "candidate_fraction_within_3px_of_reference": 0.9991501566898603,
+        "identical_inside_footprint": false,
+        "correlation_duplicate": false,
+        "dot_duplicate": true,
+        "undefined": false
+      },
+      "matching_dots": 37622,
+      "bound": {
+        "reference_dots": 206895,
+        "footprint_pixels": 5167373,
+        "covered_within_radius_pixels": 5160724,
+        "uncovered_pixels": 6649,
+        "radius_px": 3.0,
+        "threshold": 0.7,
+        "candidate_dot_budget": 37654,
+        "minimum_overlapping_dots": 31005,
+        "minimum_fraction_within_radius": 0.8234184947150369,
+        "first_provably_stopped_budget": 22164,
+        "decision": "duplicate-stop",
+        "scope": "one-reference lower bound; not a complete novelty or submission approval"
+      },
+      "validator_output": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "template_single_band",
+            "passed": true,
+            "detail": "count=1"
+          },
+          {
+            "name": "single_band",
+            "passed": true,
+            "detail": "count=1"
+          },
+          {
+            "name": "float32",
+            "passed": true,
+            "detail": "dtypes=('float32',)"
+          },
+          {
+            "name": "epsg",
+            "passed": true,
+            "detail": "crs=EPSG:32611"
+          },
+          {
+            "name": "template_epsg",
+            "passed": true,
+            "detail": "crs=EPSG:32611"
+          },
+          {
+            "name": "shape_matches_template",
+            "passed": true,
+            "detail": "output=(3730, 3292) template=(3730, 3292)"
+          },
+          {
+            "name": "transform_matches_template",
+            "passed": true,
+            "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+          },
+          {
+            "name": "100m_north_up_grid",
+            "passed": true,
+            "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+          },
+          {
+            "name": "finite_and_in_range_inside_footprint",
+            "passed": true,
+            "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+          },
+          {
+            "name": "null_outside_template_footprint",
+            "passed": false,
+            "detail": "outside_pixels=7111787; null/NaN/nodata required"
+          },
+          {
+            "name": "whole_raster_finite_range_diagnostic_advisory",
+            "passed": true,
+            "detail": "advisory only: all_pixels=12279160 finite and in [0, 1]; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+          },
+          {
+            "name": "template_readable",
+            "passed": true,
+            "detail": "shape=(3730, 3292)"
+          }
+        ]
+      },
+      "finite_inside": true,
+      "inside_range": [
+        0.0,
+        1.0
+      ],
+      "preplacement_surface_checked": false,
+      "exact_value_alias_sites": [],
+      "unique_submission": false,
+      "download_for_submission": false,
+      "ok_to_submit": false
+    },
+    {
+      "site": "GEMSDOE33",
+      "historical_file": "GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE33/blob/f52533110fe62cd03e77f1228e9e5ecac412c463/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+      "raster_sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+      "reported_historical_value": "0.2632",
+      "reported_value_evidence": "UNVERIFIED OWNER CLAIM; not ORGANIZER-CONFIRMED or HOLDOUT-DTI",
+      "new_submission_score_estimate": null,
+      "comparison": {
+        "stage": "dots",
+        "spearman_full_footprint": -0.0002226598077706186,
+        "candidate_dots": 41865,
+        "candidate_positive_support": 41865,
+        "reference_dots": 206895,
+        "candidate_fraction_within_3px_of_reference": 0.9991400931565747,
+        "identical_inside_footprint": false,
+        "correlation_duplicate": false,
+        "dot_duplicate": true,
+        "undefined": false
+      },
+      "matching_dots": 41829,
+      "bound": {
+        "reference_dots": 206895,
+        "footprint_pixels": 5167373,
+        "covered_within_radius_pixels": 5160724,
+        "uncovered_pixels": 6649,
+        "radius_px": 3.0,
+        "threshold": 0.7,
+        "candidate_dot_budget": 41865,
+        "minimum_overlapping_dots": 35216,
+        "minimum_fraction_within_radius": 0.8411799832795892,
+        "first_provably_stopped_budget": 22164,
+        "decision": "duplicate-stop",
+        "scope": "one-reference lower bound; not a complete novelty or submission approval"
+      },
+      "validator_output": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "template_single_band",
+            "passed": true,
+            "detail": "count=1"
+          },
+          {
+            "name": "single_band",
+            "passed": true,
+            "detail": "count=1"
+          },
+          {
+            "name": "float32",
+            "passed": true,
+            "detail": "dtypes=('float32',)"
+          },
+          {
+            "name": "epsg",
+            "passed": true,
+            "detail": "crs=EPSG:32611"
+          },
+          {
+            "name": "template_epsg",
+            "passed": true,
+            "detail": "crs=EPSG:32611"
+          },
+          {
+            "name": "shape_matches_template",
+            "passed": true,
+            "detail": "output=(3730, 3292) template=(3730, 3292)"
+          },
+          {
+            "name": "transform_matches_template",
+            "passed": true,
+            "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+          },
+          {
+            "name": "100m_north_up_grid",
+            "passed": true,
+            "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+          },
+          {
+            "name": "finite_and_in_range_inside_footprint",
+            "passed": true,
+            "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+          },
+          {
+            "name": "null_outside_template_footprint",
+            "passed": false,
+            "detail": "outside_pixels=7111787; null/NaN/nodata required"
+          },
+          {
+            "name": "whole_raster_finite_range_diagnostic_advisory",
+            "passed": true,
+            "detail": "advisory only: all_pixels=12279160 finite and in [0, 1]; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+          },
+          {
+            "name": "template_readable",
+            "passed": true,
+            "detail": "shape=(3730, 3292)"
+          }
+        ]
+      },
+      "finite_inside": true,
+      "inside_range": [
+        0.0,
+        1.0
+      ],
+      "preplacement_surface_checked": false,
+      "exact_value_alias_sites": [],
+      "unique_submission": false,
+      "download_for_submission": false,
+      "ok_to_submit": false
+    },
+    {
+      "site": "GEMSDOE36",
+      "historical_file": "gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif",
+      "source_url": "https://github.com/buffedlizard55-lab/GEMSDOE36/blob/c9ad59ec6f969ed931d089a03044c1567a633e84/docs/downloads/gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif",
+      "raster_sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a",
+      "reported_historical_value": "0.2750",
+      "reported_value_evidence": "UNVERIFIED OWNER CLAIM; not ORGANIZER-CONFIRMED or HOLDOUT-DTI",
+      "new_submission_score_estimate": null,
+      "comparison": {
+        "stage": "dots",
+        "spearman_full_footprint": -3.044543388012226e-05,
+        "candidate_dots": 38854,
+        "candidate_positive_support": 38854,
+        "reference_dots": 206895,
+        "candidate_fraction_within_3px_of_reference": 0.9991764039738509,
+        "identical_inside_footprint": false,
+        "correlation_duplicate": false,
+        "dot_duplicate": true,
+        "undefined": false
+      },
+      "matching_dots": 38822,
+      "bound": {
+        "reference_dots": 206895,
+        "footprint_pixels": 5167373,
+        "covered_within_radius_pixels": 5160724,
+        "uncovered_pixels": 6649,
+        "radius_px": 3.0,
+        "threshold": 0.7,
+        "candidate_dot_budget": 38854,
+        "minimum_overlapping_dots": 32205,
+        "minimum_fraction_within_radius": 0.828872188191692,
+        "first_provably_stopped_budget": 22164,
+        "decision": "duplicate-stop",
+        "scope": "one-reference lower bound; not a complete novelty or submission approval"
+      },
+      "validator_output": {
+        "passed": false,
+        "checks": [
+          {
+            "name": "template_single_band",
+            "passed": true,
+            "detail": "count=1"
+          },
+          {
+            "name": "single_band",
+            "passed": true,
+            "detail": "count=1"
+          },
+          {
+            "name": "float32",
+            "passed": true,
+            "detail": "dtypes=('float32',)"
+          },
+          {
+            "name": "epsg",
+            "passed": true,
+            "detail": "crs=EPSG:32611"
+          },
+          {
+            "name": "template_epsg",
+            "passed": true,
+            "detail": "crs=EPSG:32611"
+          },
+          {
+            "name": "shape_matches_template",
+            "passed": true,
+            "detail": "output=(3730, 3292) template=(3730, 3292)"
+          },
+          {
+            "name": "transform_matches_template",
+            "passed": true,
+            "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+          },
+          {
+            "name": "100m_north_up_grid",
+            "passed": true,
+            "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+          },
+          {
+            "name": "finite_and_in_range_inside_footprint",
+            "passed": true,
+            "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+          },
+          {
+            "name": "null_outside_template_footprint",
+            "passed": false,
+            "detail": "outside_pixels=7111787; null/NaN/nodata required"
+          },
+          {
+            "name": "whole_raster_finite_range_diagnostic_advisory",
+            "passed": true,
+            "detail": "advisory only: all_pixels=12279160 finite and in [0, 1]; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+          },
+          {
+            "name": "template_readable",
+            "passed": true,
+            "detail": "shape=(3730, 3292)"
+          }
+        ]
+      },
+      "finite_inside": true,
+      "inside_range": [
+        0.0,
+        1.0
+      ],
+      "preplacement_surface_checked": false,
+      "exact_value_alias_sites": [],
+      "unique_submission": false,
+      "download_for_submission": false,
+      "ok_to_submit": false
+    }
+  ],
+  "new_raster_generated": false,
+  "experiments_run": 0,
+  "holdout_dti": null,
+  "holdout_ci95": null,
+  "organizer_confirmed_score": null,
+  "preplacement_surface_checked": false,
+  "complete_registry_checked": false,
+  "remote_sites_modified": false,
+  "slot_selected": false,
+  "ok_to_submit": false,
+  "verdict": "negative",
+  "decision": "DO NOT DOWNLOAD FOR SUBMISSION; historical references only"
+}

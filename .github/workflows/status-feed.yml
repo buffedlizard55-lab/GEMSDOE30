@@ -79,6 +79,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: python scripts/ci_check.py python scripts/restore_public_mirrors.py --pins docs/research/2026-10-27-registry-preflight/lattice-pin.json --ids registry_lattice
 
+      - name: Restore nine pinned historical references without rewriting receipts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/ci_check.py python scripts/audit_priority_readiness.py --restore-only
+
+      - name: Check the nine-site byte audit offline
+        run: python scripts/ci_check.py python scripts/audit_priority_readiness.py --check
+
       - name: Verify current artifact, automatic decision and generated site
         run: |
           python scripts/ci_check.py python scripts/verify_current_run.py

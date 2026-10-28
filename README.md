@@ -2,7 +2,27 @@
 
 > **SESSION MISSION (read every session):** Place top of the DOE GEMS concealed-fault leaderboard by generating a **unique** single-band `float32` `[0,1]` GeoTIFF submission (EPSG:32611, 3730×3292, 100 m, `sample_submission.tif` grid, `NaN` outside the footprint) that is obvious to download and obvious whether it is OK to submit. Core values: **Maximize P(Win)** and **Own the Outcome**. Never copy a previous submission as your own; never submit a candidate that has not beaten the holdout best with a paired 95% CI lower bound > 0; protect the 3-per-week DrivenData slot. The full operating protocol is in the `#current-owner-prompt` section below — reread it before changing code. The current-session addendum requires 3–5 explicitly differentiated geological hypotheses, source/access checks, a same-protocol blocked holdout before slot consideration, repeated code/site review, and no score projections presented as results; see [the dated review](docs/research/2026-10-27-current-session-review.md). A prior duplicate-stop and lane/budget restriction overrides the aspiration to generate a TIFF whenever its gates fail.
 
-## Current decision · 2026-10-27: **DUPLICATE-STOP · DO NOT SUBMIT**
+## Latest repository audit · 2026-10-28: **NO APPROVED SUBMISSION DOWNLOAD**
+
+The current owner prompt below remains the operating brief, including the unique-TIFF requirement, three-experiment/two-hour cap, Core Values and separate slot selector. This session supplies no single method paragraph assigning a new lane. We must not bypass the existing duplicate stop to satisfy the download aspiration.
+
+**[Open the nine-site executive byte audit](priority-readiness-audit.html)** — it reopens the exact historical leaders from all nine requested sites and now measures actual final-dot overlap against the pinned lattice, instead of only reporting budget bounds. All nine exceed **99.90%** overlap and fail the literal uniqueness rule. Five pass the shared published-format validator; four fail its outside-footprint null convention. Format validity does not establish competitiveness or portal acceptance. There is no new model, TIFF, score estimate, submission name/note, or weekly-slot selection. The old historical scores, including H33-B2's owner-reported 0.2778, are **not organizer-confirmed receipts**.
+
+- [Machine audit with all hashes and validator checks](docs/research/2026-10-28-priority-audit.json)
+- [Review, four explicitly differentiated hypothesis proposals, three-pass verification and next actions](docs/research/2026-10-28-review.md)
+- [Current audit JSON run card](docs/research/2026-10-28-run-card.json)
+- [Freshly checked official reference-source excerpts and limits](docs/research/2026-10-28-official-source-check.json)
+
+After installing the research/test extras in a virtual environment and restoring the template/lattice using the commands below:
+
+```bash
+python scripts/audit_priority_readiness.py --restore-only  # pinned historical inputs; no receipts overwritten
+python scripts/audit_priority_readiness.py --check         # offline remeasurement; no approval or selector
+```
+
+CI and the GitHub-only status refresh run this audit automatically. The nine local per-site summary pages link to it; **other repositories and their deployed websites were not modified**. Source links are audit references, not recommended competition uploads. A negative result is a deliverable, not permission to generate a renamed or perturbed old raster.
+
+## Current scientific decision · 2026-10-27: **DUPLICATE-STOP · DO NOT SUBMIT**
 
 **This audit made no new model, TIFF, submission name, note, or weekly-slot selection.**
 The pinned [13GEMSDOE lattice](https://github.com/buffedlizard55-lab/13GEMSDOE/blob/92ee6f074323f161eed837b80ec3ee5b662e26f5/docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif)
