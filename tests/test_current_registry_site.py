@@ -25,6 +25,27 @@ def test_nine_site_table_separates_claims_from_new_score_estimates():
     assert "does not prove all other comparisons" in page
 
 
+def test_current_overview_discloses_merged_tiffs_as_stopped_without_download_controls():
+    pages = render(
+        _receipt("docs/research/2026-10-27-registry-preflight/run-card.json"),
+        _receipt("docs/research/2026-10-26-csr/fleet-audit.json"),
+    )
+    for name, overlap in (
+        ("GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z.tif", "99.90%"),
+        ("GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif", "100.00%"),
+    ):
+        for page_name in ("index.html", "executive-summary.html", "csr-discontinuity-review.html", "priority-executive-summary.html"):
+            page = pages[page_name]
+            assert name in page
+            assert overlap in page
+            assert f'href="docs/downloads/{name}"' not in page
+            assert f'href="{name}"' not in page
+    assert "NOT APPROVED TO DOWNLOAD OR SUBMIT" in pages["index.html"]
+    assert "No verified HOLDOUT-DTI receipt located" in pages["index.html"]
+    assert "60,988 withheld positives" in pages["index.html"]
+    assert "whole-array finite-range diagnostic fails" in pages["index.html"]
+
+
 def test_current_overview_discloses_pool_duplicate_stop_not_submission():
     pages = render(
         _receipt("docs/research/2026-10-27-registry-preflight/run-card.json"),
@@ -48,6 +69,15 @@ def test_status_feed_reports_pool1_as_verified_negative(tmp_path, monkeypatch):
     assert pool["ok_to_submit"] is False
     assert "duplicate-stop" in pool["decision"]
     assert status["promotion_gates"]["stopped_attempt_pool-1"]["decision"] == pool["decision"]
+    for filename in (
+        "GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z.tif",
+        "GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif",
+    ):
+        candidate = next(row for row in status["downloads"] if row["file"].endswith(filename))
+        assert candidate["site_linked"] is False
+        assert candidate["mentioned_on_site"] is True
+        assert candidate["submission_recommendation"] is False
+        assert candidate["organizer_acceptance_confirmed"] is False
 
 
 def test_site_builder_routes_through_current_receipt_verifiers(monkeypatch):

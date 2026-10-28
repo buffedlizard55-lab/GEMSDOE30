@@ -391,6 +391,8 @@ def build(template: Path) -> dict[Path, str | bytes]:
                  render_preflight(card, fleet, pool_card, pool_dots).items()}
         pages[ROOT / "docs/csr-discontinuity-review.html"] = redirect_html(
             "../csr-discontinuity-review.html", "Current registry and science review · GEMSDOE30")
+        pages[ROOT / "docs/executive-summary.html"] = redirect_html(
+            "../executive-summary.html", "Current submission guide · GEMSDOE30")
         pages[ROOT / "docs/priority-executive-summary.html"] = redirect_html(
             "../priority-executive-summary.html", "Nine-site executive summary · GEMSDOE30")
         pages[ROOT / "priority-site-review.html"] = redirect_html(

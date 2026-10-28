@@ -28,6 +28,41 @@
       "interpretation": "A one-witness lower bound proving a duplicate stop at the listed budgets; not a complete novelty clearance."
     }
   },
+  "upstream_merged_candidates": [
+    {
+      "source_run": "GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z",
+      "path": "docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z.tif",
+      "raster_sha256": "0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564",
+      "dots": 40000,
+      "preplacement_surface_comparison": null,
+      "rank_correlation_vs_13gems_lattice": -0.00010754844987874165,
+      "fraction_within_3px_of_13gems_lattice": 0.999,
+      "duplicate_stop": true,
+      "published_format_passed": true,
+      "whole_array_finite_range_diagnostic_passed": false,
+      "holdout_dti": {
+        "label": "HOLDOUT-DTI",
+        "value": 0.0733142301401448,
+        "ci95": [0.06381112059242904, 0.08280000241892184],
+        "evaluator_version": "component-holdout-v3-blockstats-20261025",
+        "withheld_positives": 60988,
+        "note": "Not an organizer score; not a paired comparison against the current same-protocol best."
+      }
+    },
+    {
+      "source_run": "GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z",
+      "path": "docs/downloads/GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif",
+      "raster_sha256": "e701076a93df45ae911b15519bcce66d88cca318686fa39df4117e921dd1876b",
+      "dots": 37654,
+      "preplacement_surface_comparison": null,
+      "rank_correlation_vs_13gems_lattice": -0.00013483744101948792,
+      "fraction_within_3px_of_13gems_lattice": 1.0,
+      "duplicate_stop": true,
+      "published_format_passed": true,
+      "whole_array_finite_range_diagnostic_passed": false,
+      "holdout_dti": null
+    }
+  ],
   "raster_sha256": null,
   "validator_output": {
     "new_candidate_exists": false,

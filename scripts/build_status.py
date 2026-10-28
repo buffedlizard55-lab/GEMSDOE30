@@ -22,7 +22,9 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import html
 import json
+import re
 import subprocess
 import sys
 import time
@@ -75,6 +77,14 @@ def main() -> int:
     for page in (ROOT / "index.html", ROOT / "executive-summary.html"):
         if page.is_file():
             site_html += page.read_text(encoding="utf-8", errors="replace")
+
+    def site_download_linked(filename: str) -> bool:
+        for pattern in ('href="([^"]+)"', "href='([^']+)'"):
+            for match in re.finditer(pattern, site_html, re.IGNORECASE):
+                href = html.unescape(match.group(1)).split("#", 1)[0].split("?", 1)[0]
+                if not href.startswith(("https://", "http://", "mailto:")) and Path(href).name == filename:
+                    return True
+        return False
 
     def _nested(manifest: dict, *keys: str):
         """Read a scalar from either the flat or the nested sidecar schema."""
@@ -138,7 +148,8 @@ def main() -> int:
             if isinstance(manifest.get("range_error_immunity"), dict)
             else None,
             "organizer_acceptance_confirmed": False,
-            "site_linked": (tif_name in site_html) or None,
+            "site_linked": site_download_linked(tif_name),
+            "mentioned_on_site": tif_name in site_html,
             # Sidecars are historical records, never a current slot selector.
             "historical_manifest_recommendation": manifest.get("submission_recommendation"),
             "submission_recommendation": False,

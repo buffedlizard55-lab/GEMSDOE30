@@ -18,6 +18,9 @@ Their published-format checks pass, but their archived holdout used predictions
 built from the full catalogue before hiding faults; it is not a leakage-safe
 comparison. Their original generation and scoring commands now fail closed.
 
+### Upstream research artifacts (PRs #58/#59; both gate-stopped)
+Two TIFFs arrived from upstream PRs #58/#59; this review generated neither. The geothermal-corridor artifact is `docs/downloads/GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z.tif` (SHA-256 `0ed2670200159cab23436a5033a90d7582accc63811756d3393441c6bbdac564`). It passes the published-format checks (EPSG:32611, 3730×3292, float32 [0,1] in-footprint, NaN outside), but **39,960/40,000 dots (99.9%)** fall within 3 px of the pinned lattice. Its catalogue-proxy **HOLDOUT-DTI 0.073314** [0.063811, 0.082800], 60,988 withheld positives, evaluator `component-holdout-v3-blockstats-20261025`, is not an organizer score or leaderboard forecast and is not comparable to the current same-protocol best. The vent-structural artifact (`docs/downloads/GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif`, SHA-256 `e701076a93df45ae911b15519bcce66d88cca318686fa39df4117e921dd1876b`) also passes published-format checks, but **37,654/37,654 dots (100%)** fall within 3 px of the lattice; no verified HOLDOUT-DTI receipt was found. Both fail the duplicate rule; the pre-placement surfaces are unavailable for this review. Their separate whole-array finite-range diagnostics fail because outside-footprint values are NaN. **Neither is approved to download or submit.** See the current review and run card for the hash-bound audit.
+
 The historical CSR-1 file is [available for research only](docs/downloads/gems30-CSR1-44090-20261026-502fb5948335-zeros.tif)
 (SHA-256 `0fbf3b4a47c2229b68de59e174617f3b47973613ff57950712d25b9166c1d900`).
 It also **fails the published-format validator** because the outside-footprint
@@ -38,6 +41,7 @@ Confirm with the organizer and plan for the earlier time. The rules allow up to
 three feedback submissions per week and require one final selection for both rounds.
 
 [Clean overview](index.html) · [Nine-site snapshot](priority-executive-summary.html) ·
+[Repository review (2026-10-27)](docs/repository-review-2026-10-27.md) ·
 [Science and four hypotheses](csr-discontinuity-review.html) ·
 [Submission guide](executive-summary.html) ·
 [**Current JSON run card**](docs/research/2026-10-27-registry-preflight/run-card.json) ·
