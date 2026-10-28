@@ -1,10 +1,11 @@
 # GEMSDOE30 — GEMS concealed-fault research
 
-> **SESSION MISSION (read every session):** Place top of the DOE GEMS concealed-fault leaderboard by generating a **unique** single-band `float32` `[0,1]` GeoTIFF submission (EPSG:32611, 3730×3292, 100 m, `sample_submission.tif` grid, `NaN` outside the footprint) that is obvious to download and obvious whether it is OK to submit. Core values: **Maximize P(Win)** and **Own the Outcome**. Never copy a previous submission as your own; never submit a candidate that has not beaten the holdout best with a paired 95% CI lower bound > 0; protect the 3-per-week DrivenData slot. The full operating protocol is in the `#current-owner-prompt` section below — reread it before changing code.
+> **SESSION MISSION (read every session):** Place top of the DOE GEMS concealed-fault leaderboard by generating a **unique** single-band `float32` `[0,1]` GeoTIFF submission (EPSG:32611, 3730×3292, 100 m, `sample_submission.tif` grid, `NaN` outside the footprint) that is obvious to download and obvious whether it is OK to submit. Core values: **Maximize P(Win)** and **Own the Outcome**. Never copy a previous submission as your own; never submit a candidate that has not beaten the holdout best with a paired 95% CI lower bound > 0; protect the 3-per-week DrivenData slot. The full operating protocol is in the `#current-owner-prompt` section below, together with the current-task addendum above — reread both before changing code.
 
 ## Current decision · 2026-10-27: **DUPLICATE-STOP · DO NOT SUBMIT**
 
 **This audit made no new model, TIFF, submission name, note, or weekly-slot selection.**
+**Current-task addendum:** no single experimental lane was assigned, and the latest follow-up confirms that no file is approved to download for submission and no defensible public-score estimate exists. See the [follow-up review](docs/research/2026-10-27-followup-review.md) and its [negative JSON run card](docs/research/2026-10-27-followup-run-card.json). The prospective shortlist is research-only; the top idea has not been fitted or holdout-tested.
 The pinned [13GEMSDOE lattice](https://github.com/buffedlizard55-lab/13GEMSDOE/blob/92ee6f074323f161eed837b80ec3ee5b662e26f5/docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif)
 covers all but 6,649 of 5,167,373 valid footprint cells within 3 pixels. Any
 44,090-dot candidate must overlap it by at least **37,441/44,090 = 84.9195%**,
@@ -40,6 +41,8 @@ three feedback submissions per week and require one final selection for both rou
 [Clean overview](index.html) · [Nine-site snapshot](priority-executive-summary.html) ·
 [Science and four hypotheses](csr-discontinuity-review.html) ·
 [Submission guide](executive-summary.html) ·
+[Follow-up review and ranked hypotheses](docs/research/2026-10-27-followup-review.md) ·
+[Follow-up negative JSON card](docs/research/2026-10-27-followup-run-card.json) ·
 [**Current JSON run card**](docs/research/2026-10-27-registry-preflight/run-card.json) ·
 [Full preflight proof and reproduction](docs/research/2026-10-27-registry-preflight/review.md) ·
 [GitHub-only status snapshot](docs/status.json) · [Historical research](research-history.html).
@@ -49,6 +52,7 @@ three feedback submissions per week and require one final selection for both rou
 ```bash
 python -m pip install -e '.[research,test]' -c requirements-tdx1.txt
 python scripts/restore_public_mirrors.py --ids sample_submission
+python scripts/restore_public_mirrors.py --ids labels             # required by deterministic page checks
 python scripts/restore_public_mirrors.py --pins docs/research/2026-10-27-registry-preflight/lattice-pin.json --ids registry_lattice
 python scripts/verify_registry_preflight.py       # exit 0 verifies a negative
 python scripts/verify_registry_preflight.py --require-promote  # exit 2
@@ -70,6 +74,9 @@ older claims and download permissions are superseded, not silently rewritten.
 The [prior README narrative](README-archive-20261026.md) is archived verbatim with
 a warning. The complete owner prompt is preserved verbatim below.
 
+## Current-task addendum · 2026-10-27
+
+Before implementation, rank **3–5 distinct, previously untried mechanisms** with their geological layers/signatures, why they could find catalogue-missing structures, differences from implemented work, named non-fault mimics, qualitative expected HOLDOUT-DTI value and implementation cost. Mark earlier proposals as prior proposals, not wholly new ideas. For any external input, name the free official source and verify its exact product/coverage is obtainable before calling the idea viable. The top-ranked candidate must pass the leakage-safe spatially blocked holdout before any slot is considered. Do not convert a projection or HOLDOUT-DTI proxy into a public score. Use the shared `gemsdoe30.holdout` / `gemsdoe30.submission` implementation, the prescribed visible-only feature derivation and pixel-exact masks, and the full two-stage registry rule; keep the three-experiment / two-hour cap. This follow-up is review-only and assigns no lane, so these ideas are not run authorizations.
 
 ## Parallel lane 2026-10-27 — POOL-1: **MECHANISM CONFIRMED · RASTER DUPLICATE-STOPPED · DO NOT SUBMIT**
 
@@ -91,10 +98,12 @@ preflight's literal lattice bound every ≥22,164-dot candidate is stopped regar
   format 12/12 on the quarantined raster (ignored `runs/pool1/`, sha256 `1d9cab5d…`).
   Experiments 3/3. Verify: `.venv/bin/python scripts/verify_pool_run.py` (exit 0;
   `--require-promote` exit 2). Never perturb/rescue the stopped raster.
-- **Nine-site finding (re-verified pixel-exactly 2026-10-27):** the historical leaders
-  are one h19-5 emission family — GEMSDOE25 = GEMSDOE30 and GEMSDOE28 = GEMSDOE31
-  identical; H33-B2 (0.2778 owner-reported) = D2.8 minus exactly the ≤2 px
-  catalogue-halo dots. [Executive summary & table](pool1-executive-summary.html) ·
+- **Nine-site finding (frozen pixel audit):** several historical leaders share a
+  closely related emission family — GEMSDOE25 = GEMSDOE30 are value-identical;
+  the 40,199-dot G28 r1 intermediate is identical to GEMSDOE31, while the selected
+  37,660-dot G28 historical file is different. H33-B2 (0.2778, owner-reported)
+  is D2.8 minus the recorded ≤2 px catalogue-halo dots. These are raster-lineage
+  facts, not proof of why an owner-claimed score changed. [Executive summary & table](pool1-executive-summary.html) ·
   [Full review](docs/research/2026-10-27-pool/review.md) ·
   [Run card](docs/research/2026-10-27-pool/run-card.json).
 
