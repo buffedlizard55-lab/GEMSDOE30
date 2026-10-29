@@ -90,3 +90,31 @@ def test_site_builder_routes_through_current_receipt_verifiers(monkeypatch):
     assert ROOT / "priority-executive-summary.html" in pages
     assert pages[ROOT / "index.html"].find("DUPLICATE-STOP") >= 0
     assert "DO NOT DOWNLOAD FOR SUBMISSION" in pages[ROOT / "priority-executive-summary.html"]
+
+
+def test_submission_guide_is_single_document_and_keeps_fail_closed_table():
+    from html.parser import HTMLParser
+
+    class Structure(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.ids = []
+            self.tags = []
+
+        def handle_starttag(self, tag, attrs):
+            self.tags.append(tag)
+            attrs = dict(attrs)
+            if 'id' in attrs:
+                self.ids.append(attrs['id'])
+
+    text = (ROOT / 'executive-summary.html').read_text()
+    page = Structure()
+    page.feed(text)
+    assert page.tags.count('html') == page.tags.count('main') == 1
+    assert len(page.ids) == len(set(page.ids))
+    assert 'submit' in page.ids
+    assert 'No approved download or reliable score estimate' in text
+    assert 'cause of “Predicted values must be in range [0, 1]” is not established' in text
+    for site in (24, 25, 27, 28, 30, 31, 32, 33, 36):
+        assert f'priority-GEMSDOE{site}.html' in text
+    assert 'scope=\\"row\\"' not in text
