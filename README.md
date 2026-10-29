@@ -8,7 +8,7 @@ The earlier manual guide drifted from the receipt-driven renderer, had duplicate
 
 ## Continuation · 2026-10-29: negative; no approved TIFF
 
-Read the [three-pass decision audit](docs/research/2026-10-29-continuation.md) and its [machine run card](docs/research/2026-10-29-continuation-card.json). The owner supplied conflicting unverified current-leader values (0.4413 and 0.3195). No new lane was assigned; the existing duplicate-stop and no-slot decision remain in force. The [nine-site executive table](priority-readiness-audit.html) lists historical files for review only, not for upload. **Do not download and submit any listed historical TIFF as a new candidate.**
+Read the [three-pass decision audit](docs/research/2026-10-29-continuation.md) and its [machine run card](docs/research/2026-10-29-continuation-card.json). This repository review separately reran the restored-template registry preflight, nine-site audit, site build check and full test suite; see [repository review](docs/repository-review-2026-10-29.md). The owner supplied conflicting unverified current-leader values (0.4413 and 0.3195). No new lane was assigned; the existing duplicate-stop and no-slot decision remain in force. The [nine-site executive table](priority-readiness-audit.html) lists historical files for review only, not for upload. **Do not download and submit any listed historical TIFF as a new candidate.**
 
 ## Follow-up safety review · 2026-10-28: off-lattice generation disabled
 
