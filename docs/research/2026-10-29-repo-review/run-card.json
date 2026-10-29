@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "date_utc": "2026-10-29",
+  "branch": "arena/bdb87c07-gemsdoe30",
+  "base_commit": "d855914332b29c0b36974d5462ba9fd5dca21136",
+  "hypothesis": "None tested. No geological lane was assigned in this session; the four existing unexecuted hypotheses are listed in docs/research/2026-10-28-review.md.",
+  "mechanism": "Not applicable: no new raster was generated.",
+  "named_nonfault_process": "Not applicable: no experiment was run. For the PR #76 artifact, the lattice-overlap signal is a placement-geometry effect, not evidence of geology.",
+  "holdout_dti": {"value": null, "ci95": null, "status": "NOT MEASURED: data/raw/training_features.tif absent; organizer features not authenticated"},
+  "organizer_confirmed_score": null,
+  "correlation_overlap_vs_registry": {
+    "pr76_tif_vs_pinned_lattice": {"fraction_within_3px": 0.998317, "dots": 29707, "spearman": 0.000190, "stop_triggered": true},
+    "pr76_tif_vs_local_downloads_max": {"fraction_within_3px": 0.617767, "file": "gemsdoe30-edge-hybrid-80k-02845bd4-20261003T234340Z-allfinite.tif", "stop_triggered": false, "compared": 32},
+    "lattice_only_lower_bound_stop_budget": 22164
+  },
+  "raster_sha256": {
+    "pr76_tif": "b319577b30e9d1d238abc00ee8fad5a389794962c6bc60db11c24a363fdcff73",
+    "sample_template": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "pinned_lattice": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2"
+  },
+  "validator_output": {
+    "verify_registry_preflight": "exit 0: VERIFIED NEGATIVE 37441/44090 minimum; --require-promote exit 2",
+    "build_research_site_check": "exit 0",
+    "pytest": "405 passed, 38 skipped, 0 failed",
+    "pr76_format_checks_recorded": "12/12 passed (format only; does not test uniqueness)",
+    "nan_in_footprint": "not measured in this session; prior JSON records finite [0,1] inside 5,167,373 footprint cells",
+    "crs_shape_transform": "EPSG:32611, (3730, 3292), 100 m north-up, matches template"
+  },
+  "submission_name": null,
+  "submission_note": null,
+  "verdict": "negative",
+  "download_and_submit_status": {
+    "pr76_concealed_unique_tif": "NO - duplicate of pinned lattice (99.83% within 3 px); PR body claim of 0.000 overlap is false (IR-30-088)",
+    "new_tif": "not generated"
+  },
+  "experiments_used": 0,
+  "experiments_cap": 3,
+  "slot_selected": false,
+  "irregularities": ["IR-30-088", "IR-30-089", "IR-30-008"],
+  "sources": [
+    "https://www.drivendata.org/competitions/306/competition-doe-gems/",
+    "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+    "https://github.com/drivendataorg/gems-prize-reference-solution",
+    "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+    "https://www.drivendata.org/termsofuse/"
+  ]
+}

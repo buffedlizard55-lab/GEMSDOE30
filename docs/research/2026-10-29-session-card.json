@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "session": "2026-10-29 review (branch arena/8357086d-gemsdoe30)",
+  "session": "2026-10-29 review (branch arena/8357086d-gemsdoe30; merged with main at PR #78 state)",
   "verdict": "negative",
   "verdict_reason": "No candidate has a holdout result, and the holdout cannot be run in this session: no lane was assigned and the organizer-authenticated feature stack is not present. No file is approved.",
   "new_raster_generated": false,
@@ -19,8 +19,9 @@
   "leakage_canary_auc": null,
   "duplicate_check": {
     "reference": "pinned 13GEMSDOE lattice (docs/research/2026-10-27-registry-preflight/lattice-pin.json)",
-    "result": "no candidate generated; the nine historical files are all at 99.91-99.92% dot overlap (see review section 1)",
-    "stop_rule": "duplicate stop if >70% of dots within 3 px of one registry raster; rank correlation >0.90 also stops"
+    "result": "no candidate generated. Nine historical files and the PR #78 TIFF all sit at 99.9% overlap, but random footprint dots also average 99.86%: the witness cannot discriminate (IR-30-097)",
+    "stop_rule": "literal rule: stop if >70% of dots within 3 px of one registry raster (>22,164 dots is always stopped against this lattice)",
+    "owner_decision_needed": true
   },
   "leaderboard_snapshot": {
     "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
@@ -75,29 +76,50 @@
     }
   ],
   "tests": {
-    "pytest": "443 passed, 5 skipped (optional torch/scipy)",
+    "pytest": "444 passed, 5 skipped (optional torch/scipy) on the merged tree",
     "new_tests": [
       "tests/test_leaderboard_snapshot.py (5)"
     ],
     "changed_tests": [
-      "tests/test_current_registry_site.py (skip when template absent, IR-30-093)"
+      "tests/test_current_registry_site.py (skip when template absent, IR-30-095)"
     ]
   },
   "irregularities": [
-    "IR-30-088",
-    "IR-30-089",
     "IR-30-090",
     "IR-30-091",
     "IR-30-092",
     "IR-30-093",
-    "IR-30-094"
+    "IR-30-094",
+    "IR-30-095",
+    "IR-30-096",
+    "IR-30-097",
+    "IR-30-098"
   ],
   "review": "docs/research/2026-10-29-session-review.md",
   "user_decisions_needed": [
+    "decide the uniqueness witness rule (IR-30-097; the IR-30-086 recommendation has not been applied)",
     "assign one lane or hypothesis to test (S29-A is cheapest)",
-    "authorise restoring the owner-mirror training feature stack for that lane",
+    "authorise restoring the owner-mirror training feature stack for that lane (not organizer-authenticated)",
     "confirm DrivenData submission history and weekly cap manually",
-    "decide whether to spend a probe slot on the NaN-outside vs reference-convention question",
-    "resolve the deadline discrepancy from the official key-dates section"
-  ]
+    "decide whether a probe slot may test the NaN-outside vs reference-convention question (IR-30-092, IR-30-093)",
+    "decide whether PR #78 file should move to a stopped-artifacts folder",
+    "resolve the deadline discrepancy from the official key-dates section (IR-TAD-02)"
+  ],
+  "pr78_tif_on_main": {
+    "path": "docs/downloads/GEMSDOE30-geothermal-unique-20261029T165045Z-3995629e.tif",
+    "sha256": "ac941748f450b94f2783cc612c5e26046104d22e07fb72049967c94bfb166a84",
+    "dots": 9652,
+    "format_validation": "pass (its validation.json)",
+    "own_novelty_duplicate_stop": "true vs GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif and -20261027T233111Z.tif (100% of dots within 3 px)",
+    "lattice_within_3px_remeasured": "9643/9652 = 99.91% (non-discriminating)",
+    "status": "NOT CLEARED; do not download or submit; not moved or altered (AGENTS.md)"
+  },
+  "site": {
+    "guide_regenerated": true,
+    "changed_files": [
+      "executive-summary.html"
+    ],
+    "build_research_site_check": "exit 0",
+    "reason": "hand-edited guide on main was stale and offered a download for the PR #78 file (IR-30-098)"
+  }
 }

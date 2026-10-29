@@ -1,0 +1,233 @@
+{
+  "GEMSDOE30-blind-thermal-corridor-h1-annulus-20261026T202136Z.tif": {
+    "other_dots": 18766,
+    "our_dots_within_3px": 5316,
+    "fraction_within_3px": 0.5508,
+    "spearman_rho": 0.0729,
+    "duplicate_stop": false
+  },
+  "GEMSDOE30-concealed-geothermal-unique-20261029.tif": {
+    "other_dots": 29707,
+    "our_dots_within_3px": 1168,
+    "fraction_within_3px": 0.121,
+    "spearman_rho": 0.0007,
+    "duplicate_stop": false
+  },
+  "GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.tif": {
+    "other_dots": 40000,
+    "our_dots_within_3px": 9652,
+    "fraction_within_3px": 1.0,
+    "spearman_rho": 0.0839,
+    "duplicate_stop": true
+  },
+  "GEMSDOE30-geothermal-corridor-offcat-d3-20261027T233111Z.tif": {
+    "other_dots": 40000,
+    "our_dots_within_3px": 9652,
+    "fraction_within_3px": 1.0,
+    "spearman_rho": 0.0839,
+    "duplicate_stop": true
+  },
+  "GEMSDOE30-nearslay-annulus-d3-offcat-20261025T235837Z-662af003-nan.tif": {
+    "other_dots": 40000,
+    "our_dots_within_3px": 1928,
+    "fraction_within_3px": 0.1998,
+    "spearman_rho": 0.0009,
+    "duplicate_stop": false
+  },
+  "GEMSDOE30-vent-structural-offcat-d3-20261027T000000Z.tif": {
+    "other_dots": 37654,
+    "our_dots_within_3px": 393,
+    "fraction_within_3px": 0.0407,
+    "spearman_rho": -0.0012,
+    "duplicate_stop": false
+  },
+  "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-nan.tif": {
+    "other_dots": 90358,
+    "our_dots_within_3px": 2527,
+    "fraction_within_3px": 0.2618,
+    "spearman_rho": 0.0012,
+    "duplicate_stop": false
+  },
+  "GEMSDOE30_oof-gbm-adaptive-r5_20261003T170425181215Z_aedb3d13-zeros.tif": {
+    "other_dots": 90358,
+    "our_dots_within_3px": 2527,
+    "fraction_within_3px": 0.2618,
+    "spearman_rho": 0.0012,
+    "duplicate_stop": false
+  },
+  "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif": {
+    "other_dots": 44090,
+    "our_dots_within_3px": 1506,
+    "fraction_within_3px": 0.156,
+    "spearman_rho": -0.0006,
+    "duplicate_stop": false
+  },
+  "gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif": {
+    "other_dots": 44090,
+    "our_dots_within_3px": 1506,
+    "fraction_within_3px": 0.156,
+    "spearman_rho": -0.0006,
+    "duplicate_stop": false
+  },
+  "gems30-CSR1-44090-20261026-502fb5948335-zeros.tif": {
+    "other_dots": 44090,
+    "our_dots_within_3px": 2547,
+    "fraction_within_3px": 0.2639,
+    "spearman_rho": 0.0015,
+    "duplicate_stop": false
+  },
+  "gems30-MSDB1-edge44090-20261025-e7856ec3f14a.tif": {
+    "other_dots": 44090,
+    "our_dots_within_3px": 2220,
+    "fraction_within_3px": 0.23,
+    "spearman_rho": 0.0012,
+    "duplicate_stop": false
+  },
+  "gems30-PTA1-44090-20261025-9a3f7f9535a4.tif": {
+    "other_dots": 44090,
+    "our_dots_within_3px": 1791,
+    "fraction_within_3px": 0.1856,
+    "spearman_rho": 0.0013,
+    "duplicate_stop": false
+  },
+  "gems30-TAD24-decensored-38000-20261025-ea3669f488ea-nan.tif": {
+    "other_dots": 38000,
+    "our_dots_within_3px": 3894,
+    "fraction_within_3px": 0.4034,
+    "spearman_rho": 0.008,
+    "duplicate_stop": false
+  },
+  "gems30-TAD24-decensored-38000-20261025-ea3669f488ea-zeros.tif": {
+    "other_dots": 38000,
+    "our_dots_within_3px": 3894,
+    "fraction_within_3px": 0.4034,
+    "spearman_rho": 0.008,
+    "duplicate_stop": false
+  },
+  "gems30-TDX1-44090-20261025-5fc508ea81ac.tif": {
+    "other_dots": 44090,
+    "our_dots_within_3px": 1833,
+    "fraction_within_3px": 0.1899,
+    "spearman_rho": 0.0005,
+    "duplicate_stop": false
+  },
+  "gems30-ctd1-concealed-stepper-20261027T172620Z-c39a9264.tif": {
+    "other_dots": 40000,
+    "our_dots_within_3px": 883,
+    "fraction_within_3px": 0.0915,
+    "spearman_rho": 0.0377,
+    "duplicate_stop": false
+  },
+  "gems30-fc1-concealed-flank-20261027T172846Z-f182c780.tif": {
+    "other_dots": 10848,
+    "our_dots_within_3px": 728,
+    "fraction_within_3px": 0.0754,
+    "spearman_rho": 0.0137,
+    "duplicate_stop": false
+  },
+  "gems30-offlattice-geothermal-structural-20261028-s7.tif": {
+    "other_dots": 6649,
+    "our_dots_within_3px": 43,
+    "fraction_within_3px": 0.0045,
+    "spearman_rho": -0.0004,
+    "duplicate_stop": false
+  },
+  "gems30-unique-offlattice-structural-20261028-s8.tif": {
+    "other_dots": 6649,
+    "our_dots_within_3px": 43,
+    "fraction_within_3px": 0.0045,
+    "spearman_rho": -0.0004,
+    "duplicate_stop": false
+  },
+  "gemsdoe30-d15-poisson200m-offcat-60069-20261003T233210Z-68d0e2e4.tif": {
+    "other_dots": 60069,
+    "our_dots_within_3px": 1584,
+    "fraction_within_3px": 0.1641,
+    "spearman_rho": -0.0007,
+    "duplicate_stop": false
+  },
+  "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca-nanoutside.tif": {
+    "other_dots": 44090,
+    "our_dots_within_3px": 1506,
+    "fraction_within_3px": 0.156,
+    "spearman_rho": -0.0006,
+    "duplicate_stop": false
+  },
+  "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif": {
+    "other_dots": 44090,
+    "our_dots_within_3px": 1506,
+    "fraction_within_3px": 0.156,
+    "spearman_rho": -0.0006,
+    "duplicate_stop": false
+  },
+  "gemsdoe30-edge-hybrid-80k-02845bd4-20261003T234340Z-allfinite.tif": {
+    "other_dots": 80000,
+    "our_dots_within_3px": 6220,
+    "fraction_within_3px": 0.6444,
+    "spearman_rho": 0.0091,
+    "duplicate_stop": false
+  },
+  "gemsdoe30-edge-hybrid-80k-02845bd4-nan.tif": {
+    "other_dots": 80000,
+    "our_dots_within_3px": 6220,
+    "fraction_within_3px": 0.6444,
+    "spearman_rho": 0.0091,
+    "duplicate_stop": false
+  },
+  "gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-nan.tif": {
+    "other_dots": 60000,
+    "our_dots_within_3px": 1675,
+    "fraction_within_3px": 0.1735,
+    "spearman_rho": 0.0008,
+    "duplicate_stop": false
+  },
+  "gemsdoe30-g30s19-habitat-edge-60000dots-20261025T210221Z-b527922d7f-zeros.tif": {
+    "other_dots": 60000,
+    "our_dots_within_3px": 1675,
+    "fraction_within_3px": 0.1735,
+    "spearman_rho": 0.0008,
+    "duplicate_stop": false
+  },
+  "gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-nan.tif": {
+    "other_dots": 60000,
+    "our_dots_within_3px": 1782,
+    "fraction_within_3px": 0.1846,
+    "spearman_rho": 0.0012,
+    "duplicate_stop": false
+  },
+  "gemsdoe30-g30s20-disc-60000dots-20261025T224159Z-24de17a6fa-zeros.tif": {
+    "other_dots": 60000,
+    "our_dots_within_3px": 1782,
+    "fraction_within_3px": 0.1846,
+    "spearman_rho": 0.0012,
+    "duplicate_stop": false
+  },
+  "gemsdoe30-h-cc1-dispersed3px-32058dots-nan.tif": {
+    "other_dots": 32058,
+    "our_dots_within_3px": 1713,
+    "fraction_within_3px": 0.1775,
+    "spearman_rho": 0.0038,
+    "duplicate_stop": false
+  },
+  "gemsdoe30-h3a-residual-ridge-gate-p400-7a88865b-nan.tif": {
+    "other_dots": 78256,
+    "our_dots_within_3px": 3408,
+    "fraction_within_3px": 0.3531,
+    "spearman_rho": 0.0019,
+    "duplicate_stop": false
+  },
+  "gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e-zeros.tif": {
+    "other_dots": 85526,
+    "our_dots_within_3px": 3022,
+    "fraction_within_3px": 0.3131,
+    "spearman_rho": -0.0001,
+    "duplicate_stop": false
+  },
+  "gemsdoe30-sgmc-hedge-d10-85k-20261003-ac08b41e.tif": {
+    "other_dots": 85526,
+    "our_dots_within_3px": 3022,
+    "fraction_within_3px": 0.3131,
+    "spearman_rho": -0.0001,
+    "duplicate_stop": false
+  }
+}
