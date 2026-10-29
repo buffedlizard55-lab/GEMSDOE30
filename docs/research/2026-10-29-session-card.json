@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "session": "2026-10-29 review (branch arena/8357086d-gemsdoe30)",
+  "verdict": "negative",
+  "verdict_reason": "No candidate has a holdout result, and the holdout cannot be run in this session: no lane was assigned and the organizer-authenticated feature stack is not present. No file is approved.",
+  "new_raster_generated": false,
+  "experiments_run": 0,
+  "experiment_cap": 3,
+  "time_budget_hours": 2,
+  "time_used_hours": "not measured precisely; experiments were not started",
+  "slot_selected": false,
+  "ok_to_submit": false,
+  "download_ok": false,
+  "organizer_confirmed_score": null,
+  "holdout_dti": null,
+  "holdout_ci95": null,
+  "evaluator_version": null,
+  "withheld_positives": null,
+  "leakage_canary_auc": null,
+  "duplicate_check": {
+    "reference": "pinned 13GEMSDOE lattice (docs/research/2026-10-27-registry-preflight/lattice-pin.json)",
+    "result": "no candidate generated; the nine historical files are all at 99.91-99.92% dot overlap (see review section 1)",
+    "stop_rule": "duplicate stop if >70% of dots within 3 px of one registry raster; rank correlation >0.90 also stops"
+  },
+  "leaderboard_snapshot": {
+    "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+    "retrieved": "2026-10-29 (UTC date)",
+    "top_score": 0.4544,
+    "score_0_3195_rank": 47,
+    "rank_50_cutoff": 0.3167,
+    "score_0_4413_present": false,
+    "receipt": "docs/research/2026-10-29-leaderboard-snapshot.json",
+    "label": "ORGANIZER-CONFIRMED for the public board only; no repository raster is linked to any row"
+  },
+  "metric_verification": {
+    "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "implementation": "src/gemsdoe30/metric.py",
+    "worked_example": {
+      "tp": 3.0,
+      "fp": 1.89,
+      "fn": 2.0,
+      "dti": 0.6027,
+      "published": 0.6
+    },
+    "result": "matches"
+  },
+  "hypotheses": [
+    {
+      "id": "S29-A",
+      "name": "scale-selective band-pass of detrended elevation and TMI",
+      "repo_status": "not implemented (0 keyword hits)",
+      "executed": false,
+      "decision": "candidate; no slot"
+    },
+    {
+      "id": "S29-B",
+      "name": "heat-flow and temperature-gradient discontinuities (H-34-04)",
+      "repo_status": "registered, never executed",
+      "executed": false,
+      "decision": "candidate; needs GitHub Actions fetch and leakage control"
+    },
+    {
+      "id": "S29-C",
+      "name": "Qfaults trace completion (H-32-04)",
+      "repo_status": "registered, conditional, blocked by IR-30-021",
+      "executed": false,
+      "decision": "blocked"
+    },
+    {
+      "id": "S29-D",
+      "name": "strain-tensor principal-axis orientation vs lineament strike",
+      "repo_status": "not implemented; tensor components not in staged stack",
+      "executed": false,
+      "decision": "blocked on data source"
+    }
+  ],
+  "tests": {
+    "pytest": "443 passed, 5 skipped (optional torch/scipy)",
+    "new_tests": [
+      "tests/test_leaderboard_snapshot.py (5)"
+    ],
+    "changed_tests": [
+      "tests/test_current_registry_site.py (skip when template absent, IR-30-093)"
+    ]
+  },
+  "irregularities": [
+    "IR-30-088",
+    "IR-30-089",
+    "IR-30-090",
+    "IR-30-091",
+    "IR-30-092",
+    "IR-30-093",
+    "IR-30-094"
+  ],
+  "review": "docs/research/2026-10-29-session-review.md",
+  "user_decisions_needed": [
+    "assign one lane or hypothesis to test (S29-A is cheapest)",
+    "authorise restoring the owner-mirror training feature stack for that lane",
+    "confirm DrivenData submission history and weekly cap manually",
+    "decide whether to spend a probe slot on the NaN-outside vs reference-convention question",
+    "resolve the deadline discrepancy from the official key-dates section"
+  ]
+}
