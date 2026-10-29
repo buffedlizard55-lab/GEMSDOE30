@@ -1,0 +1,15 @@
+{
+  "hypothesis": "No geological hypothesis was executed; the submission guide must reflect the current negative registry decision.",
+  "mechanism": "Regenerate the guide from the fail-closed preflight renderer, retain the historical nine-site evidence table, and test the document structure.",
+  "named_non_fault_process": "No geological process tested; erosional shorelines can mimic fault scarps in a future terrain study.",
+  "holdout_dti": {"value": null, "ci95": null, "evaluator_version": null, "withheld_positives": null, "reason": "No scientific run or new candidate."},
+  "registry": {"surface_correlation": null, "final_dot_overlap": null, "reason": "No new surface or dots. Historical stop independently reproduced; complete current registry not established."},
+  "raster_sha256": null,
+  "validator_output": {"no_nan_inside_footprint": null, "values_in_0_1": null, "crs_shape_transform_match": null, "reason": "No new raster to validate."},
+  "submission_name": null,
+  "note": null,
+  "verdict": "negative",
+  "experiments_run": 0,
+  "ok_to_submit": false,
+  "slot_selected": false
+}
