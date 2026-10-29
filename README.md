@@ -10,6 +10,10 @@ The earlier manual guide drifted from the receipt-driven renderer, had duplicate
 
 Read the [three-pass decision audit](docs/research/2026-10-29-continuation.md) and its [machine run card](docs/research/2026-10-29-continuation-card.json). This repository review separately reran the restored-template registry preflight, nine-site audit, site build check and full test suite; see [repository review](docs/repository-review-2026-10-29.md). The owner supplied conflicting unverified current-leader values (0.4413 and 0.3195). No new lane was assigned; the existing duplicate-stop and no-slot decision remain in force. The [nine-site executive table](priority-readiness-audit.html) lists historical files for review only, not for upload. **Do not download and submit any listed historical TIFF as a new candidate.**
 
+## Latest repository review · 2026-10-29
+
+The [three-pass repository review](docs/repository-review-2026-10-29.md) re-ran the pinned registry preflight, exact-byte nine-site audit, deterministic site check and full test suite (**438 passed, 5 optional Torch tests skipped**). The nine supplied historical values remain unverified claims; all nine selected rasters exceed 99.90% dot overlap with the pinned witness, four fail the outside-footprint validator, and **no defensible new score estimate or approved download exists**. No experiment or slot was used. The report explains the H33-B2 lineage hypothesis without asserting causality and lists the unresolved lane/data/leaderboard/portal blockers.
+
 ## Follow-up safety review · 2026-10-28: off-lattice generation disabled
 
 **[Review the stopped generation path](offlattice-safety-review.html).** The archived
