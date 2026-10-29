@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-29T14:26:24Z",
+  "generated_utc": "2026-10-29T14:33:54Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -93,6 +93,28 @@
       "submission_recommendation": false,
       "run_name": "GEMSDOE30-blind-thermal-corridor-h1-annulus",
       "note": "Blind thermal corridor off-cat: paleo-springs x 2m probes, SGMC 3-30px annulus, volcanics-excluded, 3px Poisson disk, 18766 dots",
+      "performance_status": "unscored; format validation is not a score"
+    },
+    {
+      "manifest": "GEMSDOE30-concealed-geothermal-unique-20261029.json",
+      "file": "docs/downloads/GEMSDOE30-concealed-geothermal-unique-20261029.tif",
+      "present": true,
+      "sha256": "b319577b30e9d1d238abc00ee8fad5a389794962c6bc60db11c24a363fdcff73",
+      "sha256_matches_manifest": true,
+      "outside_convention": "NaN outside; matches published GEMS format",
+      "published_format_compliant": true,
+      "whole_raster_range_diagnostic_passed": false,
+      "all_cells_finite_and_in_range": null,
+      "nan_cells_anywhere": null,
+      "range_error_immune": null,
+      "legacy_manifest_claim_range_error_immunity": null,
+      "organizer_acceptance_confirmed": false,
+      "site_linked": false,
+      "mentioned_on_site": false,
+      "historical_manifest_recommendation": null,
+      "submission_recommendation": false,
+      "run_name": "GEMSDOE30-concealed-geothermal-unique-20261029",
+      "note": "Concealed geothermal structural targeting via external indicators; off-lattice uniqueness; research artifact not holdout-validated",
       "performance_status": "unscored; format validation is not a score"
     },
     {
@@ -1632,7 +1654,7 @@
       {
         "name": "current_published_inventory_coverage",
         "status": "unknown",
-        "detail": "10 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
+        "detail": "11 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
       }
     ],
     "observed_registry": {
@@ -1666,6 +1688,7 @@
       "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
       "572df94e8d3106a90dc7f85e2d81aa944d38dd59ac40df840e09d14f2ea6ccfb",
       "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07",
+      "b319577b30e9d1d238abc00ee8fad5a389794962c6bc60db11c24a363fdcff73",
       "b7946faeb578e53e44a3dfa4bfb3ecd7c528ddf52373a0fd4f6fdf21347cc7a9",
       "d6dadb9c6119767f0b4af2f2122e73529829b3c1b36cf1131165cb68b8da2612",
       "e701076a93df45ae911b15519bcce66d88cca318686fa39df4117e921dd1876b"
@@ -1938,7 +1961,7 @@
         {
           "name": "current_published_inventory_coverage",
           "status": "unknown",
-          "detail": "10 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
+          "detail": "11 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
         }
       ],
       "observed_registry": {
@@ -1978,6 +2001,7 @@
         "3d569d47f5e62e6e62586ddf940140b113d826ab85a5dc4a1642cb8f882c26ac",
         "572df94e8d3106a90dc7f85e2d81aa944d38dd59ac40df840e09d14f2ea6ccfb",
         "7950607036e51faaf0258b4efeff29d75b8f12eb712aa592cd661822d3c85c07",
+        "b319577b30e9d1d238abc00ee8fad5a389794962c6bc60db11c24a363fdcff73",
         "b7946faeb578e53e44a3dfa4bfb3ecd7c528ddf52373a0fd4f6fdf21347cc7a9",
         "d6dadb9c6119767f0b4af2f2122e73529829b3c1b36cf1131165cb68b8da2612",
         "e701076a93df45ae911b15519bcce66d88cca318686fa39df4117e921dd1876b"
@@ -2133,7 +2157,7 @@
         {
           "name": "current_published_inventory_coverage",
           "status": "unknown",
-          "detail": "10 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
+          "detail": "11 new published raster byte identities lack both saved-surface and dot comparisons; archived subset is not current coverage"
         }
       ]
     }
@@ -3160,7 +3184,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "443 tests collected in 1.99s",
+      "pytest_collect": "443 tests collected in 2.16s",
       "exit_code": 0
     },
     "score_gain_claimed": false
