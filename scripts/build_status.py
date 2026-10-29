@@ -70,6 +70,8 @@ def main() -> int:
 
     research = ROOT / "docs" / "research"
     downloads = ROOT / "docs" / "downloads"
+    candidate_audit_path = research / "2026-10-29-candidate-audit.json"
+    candidate_audit = load_json(candidate_audit_path)
 
     # Which artifacts the site actually links, read from the pages themselves
     # rather than from a manifest field a builder may not set.
@@ -85,6 +87,69 @@ def main() -> int:
                 if not href.startswith(("https://", "http://", "mailto:")) and Path(href).name == filename:
                     return True
         return False
+
+    candidate_readiness = None
+    if isinstance(candidate_audit, dict):
+        candidate_meta = candidate_audit.get("candidate", {})
+        candidate_rel = candidate_meta.get("path") if isinstance(candidate_meta, dict) else None
+        candidate_path = None
+        if isinstance(candidate_rel, str):
+            resolved_candidate = (ROOT / candidate_rel).resolve()
+            if resolved_candidate.is_relative_to(ROOT):
+                candidate_path = resolved_candidate
+        candidate_present = bool(candidate_path and candidate_path.is_file())
+        candidate_sha = sha256_file(candidate_path) if candidate_present else None
+        hash_matches = bool(candidate_sha and candidate_sha == candidate_audit.get("raster_sha256")
+                            and candidate_sha == candidate_meta.get("sha256"))
+        audit_matches = False
+        audit_error = None
+        if hash_matches:
+            try:
+                if str(ROOT) not in sys.path:
+                    sys.path.insert(0, str(ROOT))
+                from scripts.audit_candidate_readiness import audit as recompute_candidate_audit
+                from scripts.verify_registry_preflight import same_measurement
+                audit_matches = same_measurement(candidate_audit, recompute_candidate_audit())
+            except Exception as exc:
+                audit_error = str(exc)
+        verified = bool(hash_matches and audit_matches and candidate_audit.get("verdict") == "negative")
+        registry = candidate_audit.get("registry", {})
+        final_dots = registry.get("final_dot_stage", {}) if isinstance(registry, dict) else {}
+        lattice = final_dots.get("pinned_lattice", {}) if isinstance(final_dots, dict) else {}
+        audit_sha = sha256_file(candidate_audit_path) if candidate_audit_path.is_file() else None
+        candidate_readiness = {
+            "audit": str(candidate_audit_path.relative_to(ROOT)),
+            "audit_sha256": audit_sha,
+            "audit_recomputed_now": bool(hash_matches and audit_error is None),
+            "audit_matches_recomputed_measurement": audit_matches,
+            "audit_recompute_error": audit_error,
+            "candidate_file": candidate_rel,
+            "candidate_present": candidate_present,
+            "candidate_sha256": candidate_sha,
+            "candidate_sha256_matches_audit": hash_matches,
+            "audit_verdict": "negative" if verified else "stale-or-unverified-audit",
+            "format_validated": candidate_audit.get("validator_output", {}).get("passed") is True if verified else None,
+            "final_dot_duplicate_stop": lattice.get("decision") == "duplicate-stop" if verified else None,
+            "final_dot_overlap_within_3px": lattice.get("fraction_within_3px") if verified else None,
+            "pinned_witness_sha256": lattice.get("sha256") if verified else None,
+            "complete_registry_clearance": final_dots.get("complete_parallel_registry_checked") if verified else None,
+            "preplacement_surface_decision": registry.get("surface_stage", {}).get("decision") if verified else None,
+            "holdout_dti": candidate_audit.get("holdout_dti") if verified else None,
+            "organizer_confirmed_score": candidate_audit.get("organizer_confirmed_score") if verified else None,
+            "score_estimate": candidate_audit.get("score_estimate") if verified else None,
+            "submission_recommendation": False,
+            "ok_to_download_for_submission": False,
+            "ok_to_submit": False,
+            "slot_selected": False,
+            "download_control_linked_on_overview_or_guide": (
+                site_download_linked(Path(candidate_rel).name) if isinstance(candidate_rel, str) else False
+            ),
+            "decision": (
+                "DUPLICATE-STOP; forensic research artifact only; no download or submission approval"
+                if verified
+                else "NOT CLEARED; audit missing, stale, or not recomputed"
+            ),
+        }
 
     def _nested(manifest: dict, *keys: str):
         """Read a scalar from either the flat or the nested sidecar schema."""
@@ -157,6 +222,16 @@ def main() -> int:
             "note": manifest.get("note") or manifest.get("drivendata_note"),
             "performance_status": manifest.get("performance_status", "unscored"),
         }
+        if (candidate_readiness and candidate_readiness.get("candidate_file")
+                == str(tif_path.resolve().relative_to(ROOT))):
+            entry["candidate_readiness_audit"] = candidate_readiness["audit"]
+            entry["candidate_readiness_audit_sha256"] = candidate_readiness["audit_sha256"]
+            entry["candidate_readiness_audit_matches_file"] = candidate_readiness["candidate_sha256_matches_audit"]
+            entry["candidate_readiness_decision"] = candidate_readiness["decision"]
+            entry["final_dot_duplicate_stop"] = candidate_readiness["final_dot_duplicate_stop"]
+            entry["submission_recommendation"] = False
+            entry["performance_status"] = "unscored; no HOLDOUT-DTI or organizer receipt; duplicate-stopped"
+            entry["note_claim_warning"] = "Historical sidecar uniqueness claim is contradicted by the hash-bound final-dot audit."
         download_entries.append(entry)
 
     # Gate results: pull the decision fields each experiment records.
@@ -474,7 +549,7 @@ def main() -> int:
                                  "reassessed_by_current_lane": False, "slot_selected_here": False,
                                  "comparison_warning": "Different protocol; not ranked against the current artifact or treated as organizer confirmation"})
     status = {
-        "schema_version": 3,
+        "schema_version": 4,
         "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
         "project": "GEMSDOE30",
@@ -489,6 +564,13 @@ def main() -> int:
             "extra_pins_files": [row["dest"] for row in extra_pins.get("files", [])],
         },
         "downloads": download_entries,
+        "candidate_readiness": candidate_readiness or {
+            "audit": str(candidate_audit_path.relative_to(ROOT)),
+            "decision": "NOT CLEARED; candidate audit receipt missing or unreadable",
+            "submission_recommendation": False,
+            "ok_to_download_for_submission": False,
+            "ok_to_submit": False,
+        },
         "submission_format": {
             "published_outside_convention": "null/NaN outside the data bounds; finite probabilities in [0, 1] inside",
             "official_problem_description": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",

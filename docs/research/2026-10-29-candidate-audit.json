@@ -1,0 +1,401 @@
+{
+  "schema_version": 1,
+  "run_id": "GEMSDOE30-candidate-byte-audit-20261029",
+  "audit_scope": "Forensic audit of an already-tracked research TIFF; no new experiment or prediction generated.",
+  "hypothesis": "No new hypothesis executed. The tracked geothermal candidate has no assigned lane and its final dots must stop if they duplicate a pinned registry raster.",
+  "mechanism": "Reopen the exact saved TIFF, validate its bytes against the pinned owner-mirror template, and measure final-dot overlap against the nine frozen priority-site leaders plus one duplicate-stop witness.",
+  "named_non_fault_process": "Erosional scarps, paleo-shoreline or terrace risers, lithologic contacts, and volcanic flow fronts can mimic structural/geothermal signatures; not tested in this byte audit.",
+  "holdout_dti": {
+    "label": "HOLDOUT-DTI",
+    "value": null,
+    "ci95": null,
+    "evaluator_version": null,
+    "withheld_positives": null,
+    "reason": "Not run: no authorized new lane; the complete training feature raster/cache is absent, and a duplicate-stop makes promotion ineligible."
+  },
+  "organizer_confirmed_score": {
+    "label": "ORGANIZER-CONFIRMED",
+    "value": null,
+    "receipt": null,
+    "reason": "No submission-page receipt is present in this repository."
+  },
+  "score_estimate": null,
+  "score_estimate_reason": "No defensible leaderboard estimate: the historical values are unverified owner claims and do not calibrate this unvalidated artifact.",
+  "candidate": {
+    "path": "docs/downloads/GEMSDOE30-concealed-geothermal-unique-20261029.tif",
+    "sha256": "b319577b30e9d1d238abc00ee8fad5a389794962c6bc60db11c24a363fdcff73",
+    "sidecar_path": "docs/downloads/GEMSDOE30-concealed-geothermal-unique-20261029.json",
+    "original_sidecar_sha256": "586567af41964a296e65d4342ef07b28545169409c05d398abfdb6dcfb8b6d4d",
+    "original_sidecar_note": "Concealed geothermal structural targeting via external indicators; off-lattice uniqueness; research artifact not holdout-validated",
+    "original_sidecar_note_chars": 130,
+    "original_note_uniqueness_claim_is_supported": false,
+    "submission_name": "GEMSDOE30-concealed-geothermal-unique-20261029",
+    "submission_note": "Concealed geothermal structural targeting via external indicators; off-lattice uniqueness; research artifact not holdout-validated"
+  },
+  "registry": {
+    "surface_stage": {
+      "decision": "blocked-unavailable",
+      "preplacement_surface_path": null,
+      "preplacement_surface_sha256": null,
+      "correlation_vs_registry": null,
+      "reason": "No separately saved continuous pre-placement surface or surface-stage receipt exists; final binary-raster correlation is not substituted."
+    },
+    "final_dot_stage": {
+      "decision_vs_nine_priority_files": "blocked-incomplete-evidence",
+      "priority_site_comparisons_complete_for_requested_nine": true,
+      "requested_nine_registry_complete": false,
+      "max_overlap_vs_requested_nine": {
+        "site": "GEMSDOE27",
+        "fraction": 0.29989564749049047,
+        "matching_dots": 8909,
+        "candidate_dots": 29707,
+        "interpretation": "final-dot audit metric, not a score"
+      },
+      "pinned_lattice": {
+        "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+        "source_url": "https://github.com/buffedlizard55-lab/13GEMSDOE/blob/92ee6f074323f161eed837b80ec3ee5b662e26f5/docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+        "provenance": "Public historical 13GEMSDOE research prediction; not an organizer-authenticated training layer or upload receipt.",
+        "decision": "duplicate-stop",
+        "spearman_on_final_binary_raster": 0.00019022727420978653,
+        "fraction_within_3px": 0.9983168950079105,
+        "matching_candidate_dots": 29657,
+        "candidate_dots": 29707,
+        "threshold_fraction_strictly_greater_than": 0.7,
+        "threshold_spearman_strictly_greater_than": 0.9,
+        "interpretation": "final-dot audit metric, not a score; dot overlap alone triggers duplicate-stop"
+      },
+      "all_reference_comparisons": [
+        {
+          "site": "GEMSDOE24",
+          "historical_file": "gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+          "historical_sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+          "reported_historical_value": "0.2477",
+          "reported_value_evidence": "UNVERIFIED OWNER CLAIM; not HOLDOUT-DTI or ORGANIZER-CONFIRMED",
+          "stage": "dots",
+          "spearman_full_footprint": 0.001687511344090929,
+          "candidate_dots": 29707,
+          "candidate_positive_support": 29707,
+          "reference_dots": 60069,
+          "candidate_fraction_within_3px_of_reference": 0.2930622412226075,
+          "identical_inside_footprint": false,
+          "correlation_duplicate": false,
+          "dot_duplicate": false,
+          "undefined": false,
+          "matching_candidate_dots": 8706,
+          "thresholds": {
+            "absolute_spearman_greater_than": 0.9,
+            "fraction_within_3px_greater_than": 0.7,
+            "measurement_scope": "final saved raster only; not the missing pre-placement surface"
+          }
+        },
+        {
+          "site": "GEMSDOE25",
+          "historical_file": "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+          "historical_sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+          "reported_historical_value": "0.2600",
+          "reported_value_evidence": "UNVERIFIED OWNER CLAIM; not HOLDOUT-DTI or ORGANIZER-CONFIRMED",
+          "stage": "dots",
+          "spearman_full_footprint": 0.0019071492160478765,
+          "candidate_dots": 29707,
+          "candidate_positive_support": 29707,
+          "reference_dots": 44090,
+          "candidate_fraction_within_3px_of_reference": 0.2802033190830444,
+          "identical_inside_footprint": false,
+          "correlation_duplicate": false,
+          "dot_duplicate": false,
+          "undefined": false,
+          "matching_candidate_dots": 8324,
+          "thresholds": {
+            "absolute_spearman_greater_than": 0.9,
+            "fraction_within_3px_greater_than": 0.7,
+            "measurement_scope": "final saved raster only; not the missing pre-placement surface"
+          }
+        },
+        {
+          "site": "GEMSDOE27",
+          "historical_file": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+          "historical_sha256": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d",
+          "reported_historical_value": "0.2449",
+          "reported_value_evidence": "UNVERIFIED OWNER CLAIM; not HOLDOUT-DTI or ORGANIZER-CONFIRMED",
+          "stage": "dots",
+          "spearman_full_footprint": 0.001617408701902254,
+          "candidate_dots": 29707,
+          "candidate_positive_support": 29707,
+          "reference_dots": 61328,
+          "candidate_fraction_within_3px_of_reference": 0.29989564749049047,
+          "identical_inside_footprint": false,
+          "correlation_duplicate": false,
+          "dot_duplicate": false,
+          "undefined": false,
+          "matching_candidate_dots": 8909,
+          "thresholds": {
+            "absolute_spearman_greater_than": 0.9,
+            "fraction_within_3px_greater_than": 0.7,
+            "measurement_scope": "final saved raster only; not the missing pre-placement surface"
+          }
+        },
+        {
+          "site": "GEMSDOE28",
+          "historical_file": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+          "historical_sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641",
+          "reported_historical_value": "0.2710",
+          "reported_value_evidence": "UNVERIFIED OWNER CLAIM; not HOLDOUT-DTI or ORGANIZER-CONFIRMED",
+          "stage": "dots",
+          "spearman_full_footprint": 0.0017001042449268432,
+          "candidate_dots": 29707,
+          "candidate_positive_support": 29707,
+          "reference_dots": 37660,
+          "candidate_fraction_within_3px_of_reference": 0.21281179519978458,
+          "identical_inside_footprint": false,
+          "correlation_duplicate": false,
+          "dot_duplicate": false,
+          "undefined": false,
+          "matching_candidate_dots": 6322,
+          "thresholds": {
+            "absolute_spearman_greater_than": 0.9,
+            "fraction_within_3px_greater_than": 0.7,
+            "measurement_scope": "final saved raster only; not the missing pre-placement surface"
+          }
+        },
+        {
+          "site": "GEMSDOE30",
+          "historical_file": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+          "historical_sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd",
+          "reported_historical_value": "0.2600",
+          "reported_value_evidence": "UNVERIFIED OWNER CLAIM; not HOLDOUT-DTI or ORGANIZER-CONFIRMED",
+          "stage": "dots",
+          "spearman_full_footprint": 0.0019071492160478765,
+          "candidate_dots": 29707,
+          "candidate_positive_support": 29707,
+          "reference_dots": 44090,
+          "candidate_fraction_within_3px_of_reference": 0.2802033190830444,
+          "identical_inside_footprint": false,
+          "correlation_duplicate": false,
+          "dot_duplicate": false,
+          "undefined": false,
+          "matching_candidate_dots": 8324,
+          "thresholds": {
+            "absolute_spearman_greater_than": 0.9,
+            "fraction_within_3px_greater_than": 0.7,
+            "measurement_scope": "final saved raster only; not the missing pre-placement surface"
+          }
+        },
+        {
+          "site": "GEMSDOE31",
+          "historical_file": "gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-nan.tif",
+          "historical_sha256": "07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40",
+          "reported_historical_value": "0.2708",
+          "reported_value_evidence": "UNVERIFIED OWNER CLAIM; not HOLDOUT-DTI or ORGANIZER-CONFIRMED",
+          "stage": "dots",
+          "spearman_full_footprint": 0.0011332740616569086,
+          "candidate_dots": 29707,
+          "candidate_positive_support": 29707,
+          "reference_dots": 40199,
+          "candidate_fraction_within_3px_of_reference": 0.2172551923789006,
+          "identical_inside_footprint": false,
+          "correlation_duplicate": false,
+          "dot_duplicate": false,
+          "undefined": false,
+          "matching_candidate_dots": 6454,
+          "thresholds": {
+            "absolute_spearman_greater_than": 0.9,
+            "fraction_within_3px_greater_than": 0.7,
+            "measurement_scope": "final saved raster only; not the missing pre-placement surface"
+          }
+        },
+        {
+          "site": "GEMSDOE32",
+          "historical_file": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+          "historical_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+          "reported_historical_value": "0.2778",
+          "reported_value_evidence": "UNVERIFIED OWNER CLAIM; not HOLDOUT-DTI or ORGANIZER-CONFIRMED",
+          "stage": "dots",
+          "spearman_full_footprint": 0.0006479256534440822,
+          "candidate_dots": 29707,
+          "candidate_positive_support": 29707,
+          "reference_dots": 37654,
+          "candidate_fraction_within_3px_of_reference": 0.1653482344228633,
+          "identical_inside_footprint": false,
+          "correlation_duplicate": false,
+          "dot_duplicate": false,
+          "undefined": false,
+          "matching_candidate_dots": 4912,
+          "thresholds": {
+            "absolute_spearman_greater_than": 0.9,
+            "fraction_within_3px_greater_than": 0.7,
+            "measurement_scope": "final saved raster only; not the missing pre-placement surface"
+          }
+        },
+        {
+          "site": "GEMSDOE33",
+          "historical_file": "GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+          "historical_sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+          "reported_historical_value": "0.2632",
+          "reported_value_evidence": "UNVERIFIED OWNER CLAIM; not HOLDOUT-DTI or ORGANIZER-CONFIRMED",
+          "stage": "dots",
+          "spearman_full_footprint": 0.0014368245403810335,
+          "candidate_dots": 29707,
+          "candidate_positive_support": 29707,
+          "reference_dots": 41865,
+          "candidate_fraction_within_3px_of_reference": 0.2433096576564446,
+          "identical_inside_footprint": false,
+          "correlation_duplicate": false,
+          "dot_duplicate": false,
+          "undefined": false,
+          "matching_candidate_dots": 7228,
+          "thresholds": {
+            "absolute_spearman_greater_than": 0.9,
+            "fraction_within_3px_greater_than": 0.7,
+            "measurement_scope": "final saved raster only; not the missing pre-placement surface"
+          }
+        },
+        {
+          "site": "GEMSDOE36",
+          "historical_file": "gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif",
+          "historical_sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a",
+          "reported_historical_value": "0.2750",
+          "reported_value_evidence": "UNVERIFIED OWNER CLAIM; not HOLDOUT-DTI or ORGANIZER-CONFIRMED",
+          "stage": "dots",
+          "spearman_full_footprint": 0.0005816548259967887,
+          "candidate_dots": 29707,
+          "candidate_positive_support": 29707,
+          "reference_dots": 38854,
+          "candidate_fraction_within_3px_of_reference": 0.16895007910593463,
+          "identical_inside_footprint": false,
+          "correlation_duplicate": false,
+          "dot_duplicate": false,
+          "undefined": false,
+          "matching_candidate_dots": 5019,
+          "thresholds": {
+            "absolute_spearman_greater_than": 0.9,
+            "fraction_within_3px_greater_than": 0.7,
+            "measurement_scope": "final saved raster only; not the missing pre-placement surface"
+          }
+        }
+      ],
+      "complete_parallel_registry_checked": false
+    },
+    "overall_decision": "duplicate-stop",
+    "overall_unique_submission": false,
+    "reason": "The candidate exceeds the strict 70% final-dot overlap threshold against the pinned 13GEMSDOE lattice, even though it is below that threshold against each of the nine frozen priority-site files."
+  },
+  "raster_sha256": "b319577b30e9d1d238abc00ee8fad5a389794962c6bc60db11c24a363fdcff73",
+  "validator_output": {
+    "passed": true,
+    "single_band_float32": true,
+    "no_nan_inside_footprint": true,
+    "values_in_0_1_inside_footprint": true,
+    "crs_shape_transform_match": true,
+    "grid": {
+      "shape": [
+        3730,
+        3292
+      ],
+      "crs": "EPSG:32611",
+      "transform_gdal": [
+        243350.0,
+        100.0,
+        0.0,
+        4508550.0,
+        0.0,
+        -100.0
+      ],
+      "resolution_m": [
+        100.0,
+        100.0
+      ],
+      "valid_pixels": 5167373
+    },
+    "outside_nan_pixels": 7111787,
+    "whole_raster_finite_range_diagnostic_passed": false,
+    "whole_raster_diagnostic_note": "Outside-footprint NaNs are required by the published null-outside convention; this advisory is not an organizer-validator diagnosis.",
+    "checks": [
+      {
+        "name": "template_single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "single_band",
+        "passed": true,
+        "detail": "count=1"
+      },
+      {
+        "name": "float32",
+        "passed": true,
+        "detail": "dtypes=('float32',)"
+      },
+      {
+        "name": "epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "template_epsg",
+        "passed": true,
+        "detail": "crs=EPSG:32611"
+      },
+      {
+        "name": "shape_matches_template",
+        "passed": true,
+        "detail": "output=(3730, 3292) template=(3730, 3292)"
+      },
+      {
+        "name": "transform_matches_template",
+        "passed": true,
+        "detail": "output=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00| template=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "100m_north_up_grid",
+        "passed": true,
+        "detail": "transform=| 100.00, 0.00, 243350.00|\n| 0.00,-100.00, 4508550.00|\n| 0.00, 0.00, 1.00|"
+      },
+      {
+        "name": "finite_and_in_range_inside_footprint",
+        "passed": true,
+        "detail": "valid_pixels=5167373 min=0.0 max=1.0"
+      },
+      {
+        "name": "null_outside_template_footprint",
+        "passed": true,
+        "detail": "outside_pixels=7111787; null/NaN/nodata required"
+      },
+      {
+        "name": "whole_raster_finite_range_diagnostic_advisory",
+        "passed": true,
+        "detail": "advisory only: whole-array diagnostic found 7111787 NaN/Inf cell(s); this is not a diagnosis of portal behavior; the public GEMS specification permits null/NaN outside the footprint, and private portal behavior is unverified"
+      },
+      {
+        "name": "template_readable",
+        "passed": true,
+        "detail": "shape=(3730, 3292)"
+      }
+    ]
+  },
+  "experiments_run_this_review": 0,
+  "experiment_cap": 3,
+  "time_cap_seconds": 7200,
+  "submission_name": "GEMSDOE30-concealed-geothermal-unique-20261029",
+  "submission_note": "Concealed geothermal structural targeting via external indicators; off-lattice uniqueness; research artifact not holdout-validated",
+  "submission_note_characters": 130,
+  "download_control": false,
+  "ok_to_download_for_submission": false,
+  "ok_to_submit": false,
+  "slot_selected": false,
+  "verdict": "negative",
+  "decision": "DUPLICATE-STOP: do not download or submit; the pre-placement surface is unavailable and no HOLDOUT-DTI or organizer score receipt exists.",
+  "irregularities": [
+    {
+      "id": "IR-CAND-001",
+      "finding": "The original sidecar note describes off-lattice uniqueness, but the exact raster has more than 99% of its dots within 3 px of the pinned lattice.",
+      "evidence": "The hash-bound final-dot comparison in registry.final_dot_stage.pinned_lattice.",
+      "status": "verified inconsistency; preserve original sidecar and do not reuse its claim."
+    },
+    {
+      "id": "IR-CAND-002",
+      "finding": "No saved independent pre-placement surface, leakage-safe holdout receipt, or organizer submission receipt is bound to this TIFF.",
+      "evidence": "No files in the tracked candidate's provenance bundle provide these receipts.",
+      "status": "unavailable; not inferred from absence of a score."
+    }
+  ]
+}

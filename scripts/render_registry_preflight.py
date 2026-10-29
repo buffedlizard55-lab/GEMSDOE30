@@ -22,15 +22,15 @@ def layout(title: str, body: str) -> str:
 <link rel="stylesheet" href="docs/assets/research.css"></head><body>
 <a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="nav-wrap">
 <a class="brand" href="index.html"><span class="brand-mark">G30</span> GEMS research</a>
-<nav aria-label="Primary"><a href="index.html">Overview</a><a href="priority-executive-summary.html">Nine sites</a><a href="priority-readiness-audit.html">28 Oct byte audit</a><a href="csr-discontinuity-review.html">Research</a><a href="executive-summary.html">Submission guide</a><a href="pool1-executive-summary.html">POOL-1</a></nav>
-</div></header><main id="main"><aside class="stop-notice" aria-label="Latest byte audit"><strong>28 Oct 2026: no approved submission download.</strong> <a href="priority-readiness-audit.html">Measured nine-site audit: exact files, format checks, uniqueness stops and unavailable score estimates</a>. No new TIFF or weekly slot. <a href="offlattice-safety-review.html">Follow-up: off-lattice generation disabled; no validated score</a>.</aside>{body}</main><footer><div><strong>GEMS30 · research, not a selector</strong><p>Static evidence snapshot · verified 27 Oct 2026 · parallel work may change.</p></div><div><a href="{REPORT}/run-card.json">Current run card</a><a href="docs/status.json">GitHub status snapshot</a><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Organizer leaderboard</a></div>
+<nav aria-label="Primary"><a href="index.html">Overview</a><a href="priority-executive-summary.html">Nine sites</a><a href="priority-readiness-audit.html">Nine-site byte audit</a><a href="csr-discontinuity-review.html">Research</a><a href="executive-summary.html">Submission guide</a><a href="pool1-executive-summary.html">POOL-1</a></nav>
+</div></header><main id="main"><aside class="stop-notice" aria-label="Latest submission decision"><strong>29 Oct 2026: no approved submission download.</strong> <a href="priority-readiness-audit.html">Measured nine-site audit: exact files, format checks, uniqueness stops and unavailable score estimates</a>. A tracked research TIFF is separately duplicate-stopped; no slot was selected. <a href="docs/research/2026-10-29-candidate-audit.json">Open its machine audit</a>.</aside>{body}</main><footer><div><strong>GEMS30 · research, not a selector</strong><p>Static evidence snapshot · verified 29 Oct 2026 · parallel work may change.</p></div><div><a href="{REPORT}/run-card.json">Current run card</a><a href="docs/status.json">GitHub status snapshot</a><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Organizer leaderboard</a></div>
 <p class="fine">No automated organizer-page monitoring. Hash-pinned public mirrors are not organizer-authenticated. No competition slot selected.</p></footer></body></html>'''
 
 
 def hero() -> str:
-    return '''<section class="intro"><div><p class="eyebrow">GEMS30 / current decision / 27 Oct 2026</p>
-<h1>Protect the next submission.</h1><p class="lead">A verified registry conflict stops the proposed run before a new model or TIFF is made. The older CSR-1 file must not be submitted.</p>
-<div class="meta"><span>One-witness proof, not a complete registry</span><span>0 experiments run</span><span>No slot selected</span></div></div></section>'''
+    return '''<section class="intro"><div><p class="eyebrow">GEMS30 / current decision / 29 Oct 2026</p>
+<h1>Protect the next submission.</h1><p class="lead">A byte-level audit has duplicate-stopped the existing 29 Oct research TIFF. No replacement model or TIFF was generated; the artifact is not approved for download or submission.</p>
+<div class="meta"><span>One-witness stop; complete registry unavailable</span><span>0 new experiments run</span><span>No slot selected</span></div></div></section>'''
 
 
 def upstream_artifacts_section(session_card: dict) -> str:
@@ -79,6 +79,55 @@ def upstream_artifacts_section(session_card: dict) -> str:
 <p>Two files arrived from upstream PRs #58/#59. Both pass the published-format checks, but their final-dot overlap with the pinned lattice exceeds the strict 70% stop. The low rank correlations do not cancel this independent dot-overlap failure. Pre-placement surface arrays were not available here, so surface novelty remains unverified. No competition score estimate is justified.</p>
 <div class="table-wrap"><table><caption>Upstream research artifacts already present in this checkout; no download links</caption><thead><tr><th>File</th><th>Dots</th><th>3 px lattice audit</th><th>Catalogue holdout</th><th>Leaderboard estimate</th><th>Download / submit status</th></tr></thead><tbody>{''.join(rows)}</tbody></table></div>
 <p class="fine">Each sidecar's published-format validation passes. The separate whole-array finite-range diagnostic fails because outside-footprint cells are NaN; portal behavior is unverified. These receipts are not a claim that DrivenData accepted either file. Details: <a href="docs/research/2026-10-27-current-session-review.md#upstream-research-artifacts-now-present-in-this-checkout--do-not-submit">current review</a> · <a href="docs/research/2026-10-27-current-session-run-card.json">audit run card</a>.</p></section>'''
+
+
+def candidate_readiness_section() -> str:
+    """Fail closed if the hash-bound 29 Oct candidate decision no longer matches."""
+    audit_path = ROOT / "docs/research/2026-10-29-candidate-audit.json"
+    if not audit_path.is_file():
+        raise ValueError("The 29 Oct candidate audit receipt is missing")
+    audit = json.loads(audit_path.read_text())
+    candidate = audit["candidate"]
+    candidate_path = ROOT / candidate["path"]
+    if not candidate_path.is_file():
+        raise ValueError("The archived candidate bytes are missing; cannot render a current audit")
+    digest = hashlib.sha256(candidate_path.read_bytes()).hexdigest()
+    from scripts.audit_candidate_readiness import audit as recompute_candidate_audit
+    from scripts.verify_registry_preflight import same_measurement
+    if not same_measurement(audit, recompute_candidate_audit()):
+        raise ValueError("The saved candidate audit does not match a fresh byte-level recomputation")
+    lattice = audit["registry"]["final_dot_stage"]["pinned_lattice"]
+    holdout = audit["holdout_dti"]
+    if (digest != audit["raster_sha256"]
+            or candidate.get("sha256") != digest
+            or audit.get("verdict") != "negative"
+            or audit.get("ok_to_download_for_submission") is not False
+            or audit.get("ok_to_submit") is not False
+            or audit.get("download_control") is not False
+            or audit["registry"].get("overall_decision") != "duplicate-stop"
+            or lattice.get("decision") != "duplicate-stop"
+            or lattice.get("fraction_within_3px", 0) <= 0.70
+            or audit["registry"]["final_dot_stage"].get("complete_parallel_registry_checked") is not False
+            or holdout.get("value") is not None
+            or holdout.get("ci95") is not None
+            or holdout.get("evaluator_version") is not None
+            or holdout.get("withheld_positives") is not None
+            or audit.get("score_estimate") is not None
+            or audit.get("organizer_confirmed_score", {}).get("value") is not None
+            or audit.get("organizer_confirmed_score", {}).get("receipt") is not None):
+        raise ValueError("The candidate audit no longer proves the published negative decision")
+    fraction = lattice["fraction_within_3px"]
+    matches, dots = lattice["matching_candidate_dots"], lattice["candidate_dots"]
+    site_max = audit["registry"]["final_dot_stage"]["max_overlap_vs_requested_nine"]
+    surface = audit["registry"]["surface_stage"]
+    surface_state = surface.get("decision", "blocked-unavailable")
+    return f'''<section class="stop-notice" id="existing-candidate" aria-labelledby="candidate-title"><div class="release-heading"><span class="pill passed">FORMAT VALID</span><span class="pill failed">DUPLICATE-STOP</span><span class="pill caution">NOT OK TO DOWNLOAD OR SUBMIT</span></div>
+<h2 id="candidate-title">The tracked 29 Oct TIFF is an audit artifact—not a submission.</h2>
+<p><code>{e(Path(candidate['path']).name)}</code> is format-valid on the pinned template, but <strong>{matches:,}/{dots:,} ({100*fraction:.4f}%)</strong> of its final dots are within 3 px of the pinned historical 13GEMSDOE lattice witness. That exceeds the strict 70% duplicate threshold. Its low full-raster Spearman correlation does not cancel the dot-overlap stop.</p>
+<p>Against the nine frozen priority files alone, the maximum is {100*site_max['fraction']:.2f}% ({e(site_max['site'])}); this selected subset is <strong>not a complete-registry clearance</strong>. Pre-placement surface audit is <strong>{e(surface_state)}</strong>; HOLDOUT-DTI is <strong>not run</strong> (no value, 95% CI, evaluator version or withheld-positive count), no score estimate is justified, and no organizer-confirmed receipt exists.</p>
+<p><strong>Irregularity:</strong> the original sidecar claims “off-lattice uniqueness,” contradicted by the hash-bound final-dot comparison. Preserve it as historical metadata; do not reuse that claim. The TIFF remains in the repository for forensic review only. This page intentionally has <strong>no TIFF download or submission control</strong>.</p>
+<div class="actions"><a class="button" href="docs/research/2026-10-29-candidate-audit.json">Open hash-bound candidate audit</a><a class="button secondary" href="docs/research/2026-10-29-repository-review.md">Read repository and method review</a></div>
+<p class="fine">SHA-256 <code>{e(digest)}</code> · audit run <code>{e(audit['run_id'])}</code> · no slot selected. A passing file-format check is not evidence of novelty, holdout performance, portal acceptance or organizer scoring.</p></section>'''
 
 
 def stop_card(card: dict) -> str:
@@ -159,7 +208,7 @@ def research_section() -> str:
 <article><h3>2. Buried contact discordance</h3><p>Project geology-unit contacts beneath alluvium and compare with independent geophysical edges. Mimics: unfaulted unconformities. New geology data and moderate GIS work; exclude fault-derived tables.</p></article>
 <article><h3>3. Drainage deflection</h3><p>Find repeated channel offsets/knickpoint alignments coincident with an independent geophysical edge. Mimics: terraces, roads and lava dams. Requires DEM conditioning and catchments.</p></article>
 <article><h3>4. Alteration persistence</h3><p>Test GeoDAWN K/Th/U log-ratio residuals along coherent lines with a survey-block null. Mimics: soil, rock and flight-line seams. Cached radiometry; survey masks still needed.</p></article></div>
-<p><a class="text-link" href="{REPORT}/review.md#ranked-geological-hypotheses--proposals-not-runs">Prior mechanisms, physical rationale, costs, and official sources ↗</a> · <a class="text-link" href="docs/research/2026-10-27-current-session-review.md">Current four-candidate ranking, source-access blockers, and three-pass review ↗</a> · <a class="text-link" href="docs/hypotheses.html">Full hypothesis register ↗</a></p></section>'''
+<p><a class="text-link" href="docs/research/2026-10-29-repository-review.md">Current H33-B2 review, four ranked geological hypotheses, source-availability blockers, and three-pass decision ↗</a> · <a class="text-link" href="{REPORT}/review.md#ranked-geological-hypotheses--proposals-not-runs">Prior mechanisms, physical rationale, costs, and official sources ↗</a> · <a class="text-link" href="docs/hypotheses.html">Full hypothesis register ↗</a></p></section>'''
 
 
 def links_and_protocol() -> str:
@@ -194,11 +243,11 @@ def render(card: dict, fleet: dict, pool_card: dict | None = None,
         pool_dots = json.loads((ROOT / "docs/research/2026-10-27-pool/novelty-dots.json").read_text())
     if session_card is None:
         session_card = json.loads((ROOT / "docs/research/2026-10-27-current-session-run-card.json").read_text())
-    common = hero() + stop_card(card) + upstream_artifacts_section(session_card) + evidence_strip(card)
+    common = hero() + stop_card(card) + candidate_readiness_section() + upstream_artifacts_section(session_card) + evidence_strip(card)
     overview = common + pool1_summary(pool_card, pool_dots, detail=True) + '''<section class="section"><div class="section-heading"><div><p class="eyebrow">Historical evidence / nine priority sites</p><h2>A fleet snapshot, not a leaderboard.</h2></div><p>Historic sources are linked.<br>No upload is authorized.</p></div>''' + table(fleet, card) + '</section>' + h33(fleet) + research_section() + links_and_protocol()
     summary = common + '''<section class="section"><p class="eyebrow">Nine-site executive summary</p><h2>No approved download or reliable score estimate.</h2><p>The following are historical references, not candidate uploads. Their values are owner-reported, not confirmed by organizer receipts.</p>''' + table(fleet, card) + '</section>' + h33(fleet) + pool1_summary(pool_card, pool_dots, detail=False) + '''<section class="section" id="submit"><p class="eyebrow">Future submission guide</p><h2>Only after all gates and a separate selector approve a candidate</h2><ol class="spaced"><li>Obtain the organizer template through the authorized <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">competition data page</a>.</li><li>Generate a new single-band GeoTIFF on the template grid using the shared writer; do not rename or perturb a stopped raster.</li><li>Run <code>python scripts/validate_submission.py FILE.tif --template data/raw/sample_submission.tif</code>. Passing local format checks alone does not prove portal acceptance, novelty, or scientific merit.</li><li>After leakage, paired holdout, and both registry novelty gates pass, obtain separate selector approval. Use the candidate's unique name and note of at most 140 characters.</li><li>On the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition site</a>, select the approved TIFF under File to submit, enter the note, and create the submission. Check the current rules and remaining weekly allowance first.</li></ol><p><strong>Previous portal error:</strong> the cause of “Predicted values must be in range [0, 1]” is not established. The local check requires finite values inside the footprint and null outside; do not infer that it reproduces the organizer's validator.</p><p><strong>Current decision: no approved file, name, note or slot.</strong></p></section>''' + links_and_protocol()
     research = common + research_section() + h33(fleet) + links_and_protocol()
-    priority = '''<section class="intro"><div><p class="eyebrow">Priority sites / frozen 26 Oct 2026</p><h1>Nine sites. One clear stop.</h1><p class="lead">Owner-reported historical scores, immutable source files and the literal lattice bound; not a live registry or submit selector.</p></div></section>''' + upstream_artifacts_section(session_card) + table(fleet, card) + h33(fleet) + links_and_protocol()
+    priority = '''<section class="intro"><div><p class="eyebrow">Priority sites / frozen 26 Oct 2026</p><h1>Nine sites. One clear stop.</h1><p class="lead">Owner-reported historical scores, immutable source files and the literal lattice bound; not a live registry or submit selector.</p></div></section>''' + candidate_readiness_section() + upstream_artifacts_section(session_card) + table(fleet, card) + h33(fleet) + links_and_protocol()
     pages = {'index.html': layout('Research overview', overview),
              'executive-summary.html': layout('Submission guide', summary),
              'csr-discontinuity-review.html': layout('Research review', research),

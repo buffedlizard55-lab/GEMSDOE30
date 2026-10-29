@@ -1,6 +1,6 @@
 {
-  "schema_version": 3,
-  "generated_utc": "2026-10-29T14:33:54Z",
+  "schema_version": 4,
+  "generated_utc": "2026-10-29T17:12:05Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -110,12 +110,18 @@
       "legacy_manifest_claim_range_error_immunity": null,
       "organizer_acceptance_confirmed": false,
       "site_linked": false,
-      "mentioned_on_site": false,
+      "mentioned_on_site": true,
       "historical_manifest_recommendation": null,
       "submission_recommendation": false,
       "run_name": "GEMSDOE30-concealed-geothermal-unique-20261029",
       "note": "Concealed geothermal structural targeting via external indicators; off-lattice uniqueness; research artifact not holdout-validated",
-      "performance_status": "unscored; format validation is not a score"
+      "performance_status": "unscored; no HOLDOUT-DTI or organizer receipt; duplicate-stopped",
+      "candidate_readiness_audit": "docs/research/2026-10-29-candidate-audit.json",
+      "candidate_readiness_audit_sha256": "41e10faddcbc54e715cefdd1d506c5a1058c82e363f0c355ba4a4c3037c3a93b",
+      "candidate_readiness_audit_matches_file": true,
+      "candidate_readiness_decision": "DUPLICATE-STOP; forensic research artifact only; no download or submission approval",
+      "final_dot_duplicate_stop": true,
+      "note_claim_warning": "Historical sidecar uniqueness claim is contradicted by the hash-bound final-dot audit."
     },
     {
       "manifest": "GEMSDOE30-geothermal-corridor-offcat-d3-20261026T160300Z.json",
@@ -844,6 +850,45 @@
       "performance_status": "unscored; local format validation is not a score"
     }
   ],
+  "candidate_readiness": {
+    "audit": "docs/research/2026-10-29-candidate-audit.json",
+    "audit_sha256": "41e10faddcbc54e715cefdd1d506c5a1058c82e363f0c355ba4a4c3037c3a93b",
+    "audit_recomputed_now": true,
+    "audit_matches_recomputed_measurement": true,
+    "audit_recompute_error": null,
+    "candidate_file": "docs/downloads/GEMSDOE30-concealed-geothermal-unique-20261029.tif",
+    "candidate_present": true,
+    "candidate_sha256": "b319577b30e9d1d238abc00ee8fad5a389794962c6bc60db11c24a363fdcff73",
+    "candidate_sha256_matches_audit": true,
+    "audit_verdict": "negative",
+    "format_validated": true,
+    "final_dot_duplicate_stop": true,
+    "final_dot_overlap_within_3px": 0.9983168950079105,
+    "pinned_witness_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+    "complete_registry_clearance": false,
+    "preplacement_surface_decision": "blocked-unavailable",
+    "holdout_dti": {
+      "label": "HOLDOUT-DTI",
+      "value": null,
+      "ci95": null,
+      "evaluator_version": null,
+      "withheld_positives": null,
+      "reason": "Not run: no authorized new lane; the complete training feature raster/cache is absent, and a duplicate-stop makes promotion ineligible."
+    },
+    "organizer_confirmed_score": {
+      "label": "ORGANIZER-CONFIRMED",
+      "value": null,
+      "receipt": null,
+      "reason": "No submission-page receipt is present in this repository."
+    },
+    "score_estimate": null,
+    "submission_recommendation": false,
+    "ok_to_download_for_submission": false,
+    "ok_to_submit": false,
+    "slot_selected": false,
+    "download_control_linked_on_overview_or_guide": false,
+    "decision": "DUPLICATE-STOP; forensic research artifact only; no download or submission approval"
+  },
   "submission_format": {
     "published_outside_convention": "null/NaN outside the data bounds; finite probabilities in [0, 1] inside",
     "official_problem_description": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
@@ -1064,7 +1109,7 @@
             "matching_dots": 39984,
             "comparison": {
               "stage": "dots",
-              "spearman_full_footprint": -0.0002990201174810408,
+              "spearman_full_footprint": -0.0002990201174810405,
               "candidate_dots": 40000,
               "candidate_positive_support": 40000,
               "reference_dots": 206895,
@@ -1088,7 +1133,7 @@
             "matching_dots": 10844,
             "comparison": {
               "stage": "dots",
-              "spearman_full_footprint": -0.000179865315443018,
+              "spearman_full_footprint": -0.00017986531544301798,
               "candidate_dots": 10848,
               "candidate_positive_support": 10848,
               "reference_dots": 206895,
@@ -1166,7 +1211,7 @@
           "matching_dots": 37654,
           "comparison": {
             "stage": "dots",
-            "spearman_full_footprint": -0.00013483744101957168,
+            "spearman_full_footprint": -0.00013483744101948792,
             "candidate_dots": 37654,
             "candidate_positive_support": 37654,
             "reference_dots": 206895,
@@ -3184,7 +3229,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "443 tests collected in 2.16s",
+      "pytest_collect": "451 tests collected in 0.90s",
       "exit_code": 0
     },
     "score_gain_claimed": false

@@ -104,6 +104,11 @@ def redirect_html(target_rel: str, title: str) -> str:
     )
 
 
+def current_historical_page_notice() -> str:
+    """Label the linked G30-TAD/H33 archive against the current byte-level stop."""
+    return '''<section class="stop-notice" id="current-archive-warning"><div class="release-heading"><span class="pill failed">ARCHIVED RESEARCH ONLY</span><span class="pill caution">NO CURRENT DOWNLOAD OR SUBMISSION APPROVAL</span></div><h2>Current decision: the tracked 29 Oct TIFF is duplicate-stopped.</h2><p>The candidate audit reopened the exact saved bytes: 29,657/29,707 final dots (99.8317%) fall within 3 px of the pinned lattice witness. It is format-valid, but <strong>not OK to download or submit</strong>; no score estimate is justified. Historical downloads and clearance claims below belong to their original receipts, not today's complete-registry decision. The H33-B2 0.2778 is an unverified owner claim; the older algebraic causal inversion on this page is not a proven recovery of hidden TP/FP. Read the <a href="docs/research/2026-10-29-repository-review.md">current H33-B2 and repository review</a>, <a href="executive-summary.html">current submission guide</a>, or <a href="README.md">README</a>.</p></section>'''
+
+
 def tad_banner(tad_card: dict, tad_ready: dict, *, allow_download_attr: bool = False) -> str:
     z_file = local_path(tad_card["published_tiff"])
     n_file = local_path(tad_card["companion_nan_tiff"])
@@ -397,6 +402,31 @@ def build(template: Path) -> dict[Path, str | bytes]:
             "../priority-executive-summary.html", "Nine-site executive summary · GEMSDOE30")
         pages[ROOT / "priority-site-review.html"] = redirect_html(
             "priority-executive-summary.html", "Current nine-site review · GEMSDOE30")
+        # The G30-TAD/H33 page remains useful as a historical methods record,
+        # but its old algebraic causal claims and download language must not
+        # outrank the current candidate audit. Keep the archive, prepend the
+        # current fail-closed decision, and preserve the historical bytes.
+        archived = ROOT / "geothermal-tilt-alteration-review.html"
+        if archived.is_file():
+            text = archived.read_text(encoding="utf-8")
+            notice = current_historical_page_notice()
+            if "id=\"current-archive-warning\"" not in text:
+                start = text.find('<section class="stop-notice">')
+                if start >= 0:
+                    end = text.find("</section>", start)
+                    if end >= 0 and "Historical archive" in text[start:end]:
+                        text = text[:start] + notice + text[end + len("</section>"):]
+                    else:
+                        marker = '<main id="main">'
+                        if marker not in text:
+                            raise ValueError("cannot place current decision notice on archived G30-TAD page")
+                        text = text.replace(marker, marker + notice, 1)
+                else:
+                    marker = '<main id="main">'
+                    if marker not in text:
+                        raise ValueError("cannot place current decision notice on archived G30-TAD page")
+                    text = text.replace(marker, marker + notice, 1)
+            pages[archived] = text
         return pages
     retained = verify(pointer, template)
     selection = json.loads(pointer.read_text())

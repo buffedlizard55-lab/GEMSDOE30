@@ -46,3 +46,14 @@ Do not revive the coverage-hole placement strategy: it selects all holes
 regardless of geological weights and violates the no-evasion continuation.
 Read `docs/research/2026-10-28-offlattice-safety-review.md`; archived receipts
 are unchanged and do not establish approval. Tests: `test_offlattice_stop.py`.
+
+Follow-up 2026-10-29: the already-tracked
+`docs/downloads/GEMSDOE30-concealed-geothermal-unique-20261029.tif` is format-
+valid but **DUPLICATE-STOP**: 29,657/29,707 final dots (99.8317%) lie within 3 px
+of the pinned lattice witness. It is audit-only; do not download, submit, rename,
+perturb, or regenerate it. Read `docs/research/2026-10-29-candidate-audit.json`
+and `docs/research/2026-10-29-repository-review.md`. The separate pre-placement
+surface, complete registry clearance, leakage-safe holdout, score estimate and
+organizer receipt are unavailable. `scripts/build_unique_geothermal_submission.py`
+is also fail-closed; tests: `test_unique_geothermal_stop.py`. No replacement,
+new fit/placement, or slot is authorized.

@@ -2,9 +2,18 @@
 
 > **SESSION MISSION (read every session):** Place top of the DOE GEMS concealed-fault leaderboard by generating a **unique** single-band `float32` `[0,1]` GeoTIFF submission (EPSG:32611, 3730×3292, 100 m, `sample_submission.tif` grid, `NaN` outside the footprint) that is obvious to download and obvious whether it is OK to submit. Core values: **Maximize P(Win)** and **Own the Outcome**. Never copy a previous submission as your own; never submit a candidate that has not beaten the holdout best with a paired 95% CI lower bound > 0; protect the 3-per-week DrivenData slot. The full operating protocol is in the `#current-owner-prompt` section below — reread it before changing code. The current-session addendum requires 3–5 explicitly differentiated geological hypotheses, source/access checks, a same-protocol blocked holdout before slot consideration, repeated code/site review, and no score projections presented as results; see [the dated review](docs/research/2026-10-27-current-session-review.md). A prior duplicate-stop and lane/budget restriction overrides the aspiration to generate a TIFF whenever its gates fail.
 
+## Candidate byte audit · 2026-10-29: **DUPLICATE-STOP — NOT OK TO DOWNLOAD OR SUBMIT**
+
+The already-tracked `docs/downloads/GEMSDOE30-concealed-geothermal-unique-20261029.tif` was reopened and audited without generating or changing a prediction. Its shared published-format validation **passes**, but **29,657/29,707 final dots (99.8317%)** are within 3 px of the pinned 13GEMSDOE lattice witness, above the strict 70% duplicate stop; the very low full-raster Spearman correlation does not override that independent stop. Against the nine selected historical leaders alone, overlap peaks at 29.99% (GEMSDOE27), which is not complete-registry clearance. There is no pre-placement surface audit, complete-registry clearance, leakage-safe `HOLDOUT-DTI`, score estimate, organizer-confirmed receipt, approved name/note, or selected slot. The sidecar's “off-lattice uniqueness” claim is contradicted by the bytes. **The TIFF remains only as a forensic artifact; no download control is provided.**
+
+- [Hash-bound byte audit, format receipt, all nine comparisons and explicit negative decision](docs/research/2026-10-29-candidate-audit.json)
+- [Three-pass repository/method review, H33-B2 explanation, four differentiated hypotheses, source-access checks and blockers](docs/research/2026-10-29-repository-review.md)
+- [Updated submission guide](executive-summary.html) · [regenerated overview](index.html)
+- The old [geothermal off-lattice generator](scripts/build_unique_geothermal_submission.py) is disabled and regression-tested ([test](tests/test_unique_geothermal_stop.py)); no candidate was recreated. Do not select or make a replacement without a separately assigned lane and applicable policy authorization.
+
 ## Continuation · 2026-10-29: submission guide repaired, no approved TIFF
 
-The earlier manual guide drifted from the receipt-driven renderer, had duplicate HTML IDs and made an unsupported claim about the portal range error. The [regenerated submission guide](executive-summary.html) now includes the nine-site table and conditional submission steps, and says **no file is approved**. The cause of the portal rejection remains unknown. No scientific experiment, candidate, estimate or slot was produced. See the [three-pass review](docs/research/2026-10-29-guide-review.md) and [negative run card](docs/research/2026-10-29-guide-run-card.json). The current owner request retains the three-experiment/two-hour cap, mandatory uniqueness stop and separate slot selector; the stored owner brief below remains the starting point.
+The earlier manual guide drifted from the receipt-driven renderer, had duplicate HTML IDs and made an unsupported claim about the portal range error. The [regenerated submission guide](executive-summary.html) now includes the nine-site table and conditional submission steps, and says **no file is approved**. The cause of the portal rejection remains unknown. That guide-only review generated no experiment or candidate and made no estimate or slot selection; a pre-existing TIFF was audited separately in the section above. See the [three-pass review](docs/research/2026-10-29-guide-review.md) and [negative run card](docs/research/2026-10-29-guide-run-card.json). The current owner request retains the three-experiment/two-hour cap, mandatory uniqueness stop and separate slot selector; the stored owner brief below remains the starting point.
 
 ## Continuation · 2026-10-29: negative; no approved TIFF
 
@@ -43,7 +52,7 @@ python scripts/audit_priority_readiness.py --check         # offline remeasureme
 
 CI and the GitHub-only status refresh run this audit automatically. The nine local per-site summary pages link to it; **other repositories and their deployed websites were not modified**. Source links are audit references, not recommended competition uploads. A negative result is a deliverable, not permission to generate a renamed or perturbed old raster.
 
-## Current scientific decision · 2026-10-27: **DUPLICATE-STOP · DO NOT SUBMIT**
+## Prior scientific preflight · 2026-10-27: **DUPLICATE-STOP · DO NOT SUBMIT**
 
 **This audit made no new model, TIFF, submission name, note, or weekly-slot selection.**
 The pinned [13GEMSDOE lattice](https://github.com/buffedlizard55-lab/13GEMSDOE/blob/92ee6f074323f161eed837b80ec3ee5b662e26f5/docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif)
