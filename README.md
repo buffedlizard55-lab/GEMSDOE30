@@ -6,6 +6,10 @@
 
 The earlier manual guide drifted from the receipt-driven renderer, had duplicate HTML IDs and made an unsupported claim about the portal range error. The [regenerated submission guide](executive-summary.html) now includes the nine-site table and conditional submission steps, and says **no file is approved**. The cause of the portal rejection remains unknown. No scientific experiment, candidate, estimate or slot was produced. See the [three-pass review](docs/research/2026-10-29-guide-review.md) and [negative run card](docs/research/2026-10-29-guide-run-card.json). The current owner request retains the three-experiment/two-hour cap, mandatory uniqueness stop and separate slot selector; the stored owner brief below remains the starting point.
 
+## Continuation · 2026-10-29: negative; no approved TIFF
+
+Read the [three-pass decision audit](docs/research/2026-10-29-continuation.md) and its [machine run card](docs/research/2026-10-29-continuation-card.json). The owner supplied conflicting unverified current-leader values (0.4413 and 0.3195). No new lane was assigned; the existing duplicate-stop and no-slot decision remain in force. The [nine-site executive table](priority-readiness-audit.html) lists historical files for review only, not for upload. **Do not download and submit any listed historical TIFF as a new candidate.**
+
 ## Follow-up safety review · 2026-10-28: off-lattice generation disabled
 
 **[Review the stopped generation path](offlattice-safety-review.html).** The archived
