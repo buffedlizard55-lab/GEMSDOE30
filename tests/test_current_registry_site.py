@@ -81,11 +81,17 @@ def test_status_feed_reports_pool1_as_verified_negative(tmp_path, monkeypatch):
 
 
 def test_site_builder_routes_through_current_receipt_verifiers(monkeypatch):
+    import pytest
+
+    template = ROOT / "data/raw/sample_submission.tif"
+    if not template.exists():
+        pytest.skip("restore the pinned sample_submission.tif (scripts/restore_public_mirrors.py --ids sample_submission) to run")
+
     def obsolete_path_must_not_run(*args, **kwargs):
         raise AssertionError("legacy PTA/TAD builder ran before current receipt routing")
 
     monkeypatch.setattr(build_research_site, "verify", obsolete_path_must_not_run)
-    pages = build_research_site.build(ROOT / "data/raw/sample_submission.tif")
+    pages = build_research_site.build(template)
     assert ROOT / "index.html" in pages
     assert ROOT / "priority-executive-summary.html" in pages
     assert pages[ROOT / "index.html"].find("DUPLICATE-STOP") >= 0
