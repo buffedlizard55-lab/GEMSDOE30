@@ -1,5 +1,9 @@
 # GEMSDOE30 — GEMS concealed-fault research
 
+## Latest repository review · 2026-10-30
+
+**Negative: no TIFF approved; no experiment or slot selected.** This review confirms the existing lane/duplicate stop and records that local verification could not run because system Python lacks NumPy and pytest (environment-precondition failure, not a passing test). No scores were estimated. See [the dated review and run card](docs/repository-review-2026-10-30.md) for scope, next steps and official source pointers.
+
 > **SESSION MISSION (read every session):** Place top of the DOE GEMS concealed-fault leaderboard by generating a **unique** single-band `float32` `[0,1]` GeoTIFF submission (EPSG:32611, 3730×3292, 100 m, `sample_submission.tif` grid, `NaN` outside the footprint) that is obvious to download and obvious whether it is OK to submit. Core values: **Maximize P(Win)** and **Own the Outcome**. Never copy a previous submission as your own; never submit a candidate that has not beaten the holdout best with a paired 95% CI lower bound > 0; protect the 3-per-week DrivenData slot. The full operating protocol is in the `#current-owner-prompt` section below — reread it before changing code. The current-session addendum requires 3–5 explicitly differentiated geological hypotheses, source/access checks, a same-protocol blocked holdout before slot consideration, repeated code/site review, and no score projections presented as results; see [the dated review](docs/research/2026-10-27-current-session-review.md). A prior duplicate-stop and lane/budget restriction overrides the aspiration to generate a TIFF whenever its gates fail.
 
 ## Session · 2026-10-30 review (arena/a759532a-gemsdoe30): **NEGATIVE · NO TIFF APPROVED**
