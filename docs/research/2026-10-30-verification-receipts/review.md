@@ -93,9 +93,9 @@ So random noise passes as a duplicate. The gate cannot separate a candidate from
 
 ## 6. Decisions needed from the owner (none is a credential)
 
-1. **Uniqueness rule (IR-30-100).** Replace the literal 70%/3 px test against dense witnesses with a chance-corrected statistic (for example, flag only if overlap exceeds a random-dot baseline at the same budget by a pre-registered margin), or drop the dense lattice from the registry. Until this is decided, no file can be shown unique.
+1. **Uniqueness rule (IR-30-111).** Replace the literal 70%/3 px test against dense witnesses with a chance-corrected statistic (for example, flag only if overlap exceeds a random-dot baseline at the same budget by a pre-registered margin), or drop the dense lattice from the registry. Until this is decided, no file can be shown unique.
 2. **Lane.** Assign one method paragraph for a 3-experiment, 2-hour holdout. None was supplied in this session's message. S29-A in [`docs/research/2026-10-29-session-review.md`](../2026-10-29-session-review.md) is the cheapest, as recorded there.
-3. **Portal probe (IR-30-104, IR-30-092/093).** Decide whether one weekly slot may test a float32 raster with NaN outside versus one with zeros outside. Consider the owner-reported scores of the four zero-outside files (0.2600, 0.2778, 0.2632, 0.2750). If those were portal uploads of these exact bytes, the portal accepted zeros. That is unverified and must be confirmed from your DrivenData submission history.
+3. **Portal probe (IR-30-115, IR-30-092/093).** Decide whether one weekly slot may test a float32 raster with NaN outside versus one with zeros outside. Consider the owner-reported scores of the four zero-outside files (0.2600, 0.2778, 0.2632, 0.2750). If those were portal uploads of these exact bytes, the portal accepted zeros. That is unverified and must be confirmed from your DrivenData submission history.
 4. **Deadline (IR-TAD-02).** Confirm the controlling cutoff on the competition website or with the organizer. The overview page and the rules PDF Appendix A.1 give different times (carried forward; not re-verified this session).
 5. **Your submission history and weekly cap.** The rules allow three submissions per week (§3.2). I cannot see your DrivenData account, so the remaining slots for this week are unknown.
 6. **Generative-AI narrative.** The rules require a statement of GenAI use in the submission narrative (§3.2). A draft exists at `docs/ai-disclosure-draft.md`. It needs your review.
@@ -104,11 +104,11 @@ So random noise passes as a duplicate. The gate cannot separate a candidate from
 
 ## 7. Irregularities for review
 
-New entries IR-30-099 to IR-30-107 are in [`docs/irregularities.md`](../../../docs/irregularities.md). The most important:
-- **IR-30-099** The board moved in one day. 0.3195 is now rank #50, not #47.
-- **IR-30-100** The lattice gate is non-discriminating (measured, 15/15 random trials).
-- **IR-30-103** The restored "sample_submission" mirror has exactly the labelled-fault cells (`sample==1` is identical to `labels==1`), although the organizer says the sample "predicts total fault absence". It is used only for its finite grid and footprint, never as a prediction.
-- **IR-30-104** The four highest-scoring owner-reported files all use zeros outside the footprint.
+New entries IR-30-110 to IR-30-118 are in [`docs/irregularities.md`](../../../docs/irregularities.md). The most important:
+- **IR-30-110** The board moved in one day. 0.3195 is now rank #50, not #47.
+- **IR-30-111** The lattice gate is non-discriminating (measured, 15/15 random trials).
+- **IR-30-114** The restored "sample_submission" mirror has exactly the labelled-fault cells (`sample==1` is identical to `labels==1`), although the organizer says the sample "predicts total fault absence". It is used only for its finite grid and footprint, never as a prediction.
+- **IR-30-115** The four highest-scoring owner-reported files all use zeros outside the footprint.
 
 ---
 
@@ -138,7 +138,7 @@ Not verified (limits):
 2. Owner assigns a lane (decision 2). Then pre-register a holdout for H-HALO against the S29-A plan, with buffers and frozen folds, before any experiment.
 3. Owner decides on one portal probe (decision 3). A probe is the only way to resolve the range error.
 4. Confirm the deadline and the weekly cap on the competition website (decisions 4 and 5).
-5. Keep leaderboard references dated. Any future rank must cite its receipt date (IR-30-099).
+5. Keep leaderboard references dated. Any future rank must cite its receipt date (IR-30-110).
 
 ---
 

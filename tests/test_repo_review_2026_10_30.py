@@ -1,7 +1,7 @@
 """Guards the 2026-10-30 repository-review receipts.
 
 Receipt-only checks always run. Checks that re-measure rasters skip unless the
-pinned inputs are restored (see docs/research/2026-10-30-repo-review/review.md).
+pinned inputs are restored (see docs/research/2026-10-30-verification-receipts/review.md).
 """
 
 import json
@@ -11,7 +11,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-REVIEW = ROOT / "docs/research/2026-10-30-repo-review"
+REVIEW = ROOT / "docs/research/2026-10-30-verification-receipts"
 sys.path.insert(0, str(ROOT / "scripts"))
 
 

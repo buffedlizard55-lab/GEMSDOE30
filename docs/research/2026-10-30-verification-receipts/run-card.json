@@ -15,15 +15,15 @@
   },
   "organizer_confirmed_scores": {
     "status": "NONE",
-    "note": "The only organizer-facing numbers checked are the public leaderboard values in docs/research/2026-10-30-repo-review/leaderboard-snapshot.json (top-50 public DW-Tversky, dated 2026-10-30). No repository raster is linked to a leaderboard row."
+    "note": "The only organizer-facing numbers checked are the public leaderboard values in docs/research/2026-10-30-verification-receipts/leaderboard-snapshot.json (top-50 public DW-Tversky, dated 2026-10-30). No repository raster is linked to a leaderboard row."
   },
   "correlation_and_overlap_vs_registry": {
     "lattice_random_control": {
-      "receipt": "docs/research/2026-10-30-repo-review/lattice-random-control.json",
+      "receipt": "docs/research/2026-10-30-verification-receipts/lattice-random-control.json",
       "result": "Random dots in the 5,167,373-cell footprint score 99.80% to 99.92% within 3 px of the pinned 13GEMSDOE lattice at budgets 9,652, 22,164 and 44,090 (15 of 15 trials flagged as duplicate by the literal 70% rule)."
     },
     "nine_site_pairwise": {
-      "receipt": "docs/research/2026-10-30-repo-review/nine-site-family.json",
+      "receipt": "docs/research/2026-10-30-verification-receipts/nine-site-family.json",
       "result": "GEMSDOE25 and GEMSDOE30 are identical inside the footprint. Every dot of GEMSDOE32 is also a dot of GEMSDOE25, GEMSDOE30, GEMSDOE31 and GEMSDOE36 (smaller set contained in the other)."
     }
   },

@@ -4,16 +4,16 @@
 
 ## Session · 2026-10-30 repository review (arena/2a368cf4-gemsdoe30): **NO APPROVED TIFF · NO FILE TO DOWNLOAD**
 
-**Start here: [executive summary and table](docs/research/2026-10-30-repo-review/review.md).**
+**Start here: [executive summary and table](docs/research/2026-10-30-verification-receipts/review.md).**
 
-- **Download:** none. Do not download or submit any of the nine requested sites' historical files. **Estimated score:** none can be written (owner-reported values only; no HOLDOUT-DTI, no organizer receipt). **Unique:** no. Measured: GEMSDOE25 and GEMSDOE30 are identical inside the footprint, and all dots of GEMSDOE32 (H33-B2, owner-reported 0.2778) are dots of GEMSDOE25, 30, 31 and 36 ([`nine-site-family.json`](docs/research/2026-10-30-repo-review/nine-site-family.json)).
+- **Download:** none. Do not download or submit any of the nine requested sites' historical files. **Estimated score:** none can be written (owner-reported values only; no HOLDOUT-DTI, no organizer receipt). **Unique:** no. Measured: GEMSDOE25 and GEMSDOE30 are identical inside the footprint, and all dots of GEMSDOE32 (H33-B2, owner-reported 0.2778) are dots of GEMSDOE25, 30, 31 and 36 ([`nine-site-family.json`](docs/research/2026-10-30-verification-receipts/nine-site-family.json)).
 - **Why H33-B2 differs from D2.8 (measured pixel structure):** it is GEMSDOE25 minus 6,436 dots, every one lying within 2 px of a labelled fault. Whether that causes the reported gain is **not measured** (hypothesis H-HALO).
-- **The uniqueness gate cannot discriminate.** Random dots in the footprint score 99.80–99.92% within 3 px of the pinned lattice and are all flagged as duplicates ([`lattice-random-control.json`](docs/research/2026-10-30-repo-review/lattice-random-control.json)). No new file was generated, because none could be shown unique under the owner's rule. Changing that rule is an owner decision.
-- **Leaderboard (official board, fetched 2026-10-30):** #1 is 0.4544; 0.4413 does not appear; **0.3195 is rank #50**, the cutoff, not the top ([receipt](docs/research/2026-10-30-repo-review/leaderboard-snapshot.json)).
-- **Organizer's own reference output** was read statically: it writes zeros plus test-patch predictions, no nodata, and `float64` where the rules require `float32` ([receipt](docs/research/2026-10-30-repo-review/reference-writer-check.json)). The portal's "[0, 1]" error is still undiagnosed.
+- **The uniqueness gate cannot discriminate.** Random dots in the footprint score 99.80–99.92% within 3 px of the pinned lattice and are all flagged as duplicates ([`lattice-random-control.json`](docs/research/2026-10-30-verification-receipts/lattice-random-control.json)). No new file was generated, because none could be shown unique under the owner's rule. Changing that rule is an owner decision.
+- **Leaderboard (official board, fetched 2026-10-30):** #1 is 0.4544; 0.4413 does not appear; **0.3195 is rank #50**, the cutoff, not the top ([receipt](docs/research/2026-10-30-verification-receipts/leaderboard-snapshot.json)).
+- **Organizer's own reference output** was read statically: it writes zeros plus test-patch predictions, no nodata, and `float64` where the rules require `float32` ([receipt](docs/research/2026-10-30-verification-receipts/reference-writer-check.json)). The portal's "[0, 1]" error is still undiagnosed.
 - **Verification:** `pytest` 457 passed, 5 optional skips (with pinned inputs restored); all CI verifiers exit 0; `verify_registry_preflight.py --require-promote` exits 2 as expected.
 - **Decisions needed (review §6):** (1) a chance-corrected uniqueness rule; (2) one assigned lane; (3) whether one weekly slot may run a portal encoding probe; (4) confirm the deadline on the competition website; (5) confirm your DrivenData history and weekly cap; (6) review the generative-AI narrative draft, which the rules require.
-- **Irregularities:** IR-30-099 to IR-30-107 in [`docs/irregularities.md`](docs/irregularities.md). Run card: [`run-card.json`](docs/research/2026-10-30-repo-review/run-card.json).
+- **Irregularities:** IR-30-110 to IR-30-118 in [`docs/irregularities.md`](docs/irregularities.md). Run card: [`run-card.json`](docs/research/2026-10-30-verification-receipts/run-card.json).
 
 ## Session · 2026-10-29 review (arena/8357086d-gemsdoe30): official leaderboard verified · **no approved TIFF**
 

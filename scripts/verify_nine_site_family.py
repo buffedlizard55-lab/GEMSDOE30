@@ -28,7 +28,7 @@ ROOT = Path(__file__).resolve().parents[1]
 HIST = ROOT / "data/raw/priority-readiness"
 TEMPLATE = ROOT / "data/raw/sample_submission.tif"
 LABELS = ROOT / "data/raw/labels.tif"
-OUT = ROOT / "docs/research/2026-10-30-repo-review/nine-site-family.json"
+OUT = ROOT / "docs/research/2026-10-30-verification-receipts/nine-site-family.json"
 SITES = ("GEMSDOE24", "GEMSDOE25", "GEMSDOE27", "GEMSDOE28", "GEMSDOE30",
          "GEMSDOE31", "GEMSDOE32", "GEMSDOE33", "GEMSDOE36")
 

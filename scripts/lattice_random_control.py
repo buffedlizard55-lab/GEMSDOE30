@@ -31,7 +31,7 @@ from gemsdoe30.novelty import compare  # noqa: E402  shared evaluator, not a pri
 
 TEMPLATE = ROOT / "data/raw/sample_submission.tif"
 LATTICE = ROOT / "data/raw/registry-extra/13gems-lattice-s5.tif"
-OUT = ROOT / "docs/research/2026-10-30-repo-review/lattice-random-control.json"
+OUT = ROOT / "docs/research/2026-10-30-verification-receipts/lattice-random-control.json"
 # 9,652 = dot count of the PR #78 raster (IR-30-098); 22,164 = the bound budget (README 2026-10-27); 44,090 = dot count of the GEMSDOE25/30 D2.8 family.
 BUDGETS = (9652, 22164, 44090)
 SEEDS = (0, 1, 2, 3, 4)
