@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "purpose": "Measured family relations among the nine requested historical GEMSDOE leaders (2026-10-30). Structural facts only; no score is estimated.",
+  "inputs": {
+    "template": {
+      "path": "data/raw/sample_submission.tif",
+      "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "footprint_cells": 5167373
+    },
+    "labels": {
+      "path": "data/raw/labels.tif",
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "label_one_cells": 60988
+    },
+    "provenance": "owner-supplied SHA-pinned mirrors; NOT organizer-authenticated"
+  },
+  "rasters": {
+    "GEMSDOE24": {
+      "file": "GEMSDOE24-68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310.tif",
+      "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+      "outside_footprint_finite_cells": 0,
+      "outside_footprint_nonzero_cells": 0,
+      "dots_in_footprint": 60069
+    },
+    "GEMSDOE25": {
+      "file": "GEMSDOE25-91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8.tif",
+      "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+      "outside_footprint_finite_cells": 0,
+      "outside_footprint_nonzero_cells": 0,
+      "dots_in_footprint": 44090
+    },
+    "GEMSDOE27": {
+      "file": "GEMSDOE27-33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d.tif",
+      "sha256": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d",
+      "outside_footprint_finite_cells": 0,
+      "outside_footprint_nonzero_cells": 0,
+      "dots_in_footprint": 61328
+    },
+    "GEMSDOE28": {
+      "file": "GEMSDOE28-5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641.tif",
+      "sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641",
+      "outside_footprint_finite_cells": 0,
+      "outside_footprint_nonzero_cells": 0,
+      "dots_in_footprint": 37660
+    },
+    "GEMSDOE30": {
+      "file": "GEMSDOE30-8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd.tif",
+      "sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd",
+      "outside_footprint_finite_cells": 7111787,
+      "outside_footprint_nonzero_cells": 0,
+      "dots_in_footprint": 44090
+    },
+    "GEMSDOE31": {
+      "file": "GEMSDOE31-07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40.tif",
+      "sha256": "07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40",
+      "outside_footprint_finite_cells": 0,
+      "outside_footprint_nonzero_cells": 0,
+      "dots_in_footprint": 40199
+    },
+    "GEMSDOE32": {
+      "file": "GEMSDOE32-c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "outside_footprint_finite_cells": 7111787,
+      "outside_footprint_nonzero_cells": 0,
+      "dots_in_footprint": 37654
+    },
+    "GEMSDOE33": {
+      "file": "GEMSDOE33-87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757.tif",
+      "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+      "outside_footprint_finite_cells": 7111787,
+      "outside_footprint_nonzero_cells": 0,
+      "dots_in_footprint": 41865
+    },
+    "GEMSDOE36": {
+      "file": "GEMSDOE36-e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a.tif",
+      "sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a",
+      "outside_footprint_finite_cells": 7111787,
+      "outside_footprint_nonzero_cells": 0,
+      "dots_in_footprint": 38854
+    }
+  },
+  "pairs_with_identity_or_containment": [
+    {
+      "a": "GEMSDOE24",
+      "b": "GEMSDOE27",
+      "identical_inside_footprint": false,
+      "shared_dots": 60069,
+      "dots_a": 60069,
+      "dots_b": 61328,
+      "smaller_set_contained_in_other": true
+    },
+    {
+      "a": "GEMSDOE25",
+      "b": "GEMSDOE30",
+      "identical_inside_footprint": true,
+      "shared_dots": 44090,
+      "dots_a": 44090,
+      "dots_b": 44090,
+      "smaller_set_contained_in_other": true
+    },
+    {
+      "a": "GEMSDOE25",
+      "b": "GEMSDOE31",
+      "identical_inside_footprint": false,
+      "shared_dots": 40199,
+      "dots_a": 44090,
+      "dots_b": 40199,
+      "smaller_set_contained_in_other": true
+    },
+    {
+      "a": "GEMSDOE25",
+      "b": "GEMSDOE32",
+      "identical_inside_footprint": false,
+      "shared_dots": 37654,
+      "dots_a": 44090,
+      "dots_b": 37654,
+      "smaller_set_contained_in_other": true
+    },
+    {
+      "a": "GEMSDOE30",
+      "b": "GEMSDOE31",
+      "identical_inside_footprint": false,
+      "shared_dots": 40199,
+      "dots_a": 44090,
+      "dots_b": 40199,
+      "smaller_set_contained_in_other": true
+    },
+    {
+      "a": "GEMSDOE30",
+      "b": "GEMSDOE32",
+      "identical_inside_footprint": false,
+      "shared_dots": 37654,
+      "dots_a": 44090,
+      "dots_b": 37654,
+      "smaller_set_contained_in_other": true
+    },
+    {
+      "a": "GEMSDOE31",
+      "b": "GEMSDOE32",
+      "identical_inside_footprint": false,
+      "shared_dots": 37654,
+      "dots_a": 40199,
+      "dots_b": 37654,
+      "smaller_set_contained_in_other": true
+    },
+    {
+      "a": "GEMSDOE32",
+      "b": "GEMSDOE36",
+      "identical_inside_footprint": false,
+      "shared_dots": 37654,
+      "dots_a": 37654,
+      "dots_b": 38854,
+      "smaller_set_contained_in_other": true
+    }
+  ],
+  "own_dot_sharing_by_site": {
+    "GEMSDOE24": {
+      "min_percent_of_own_dots_found_in_other_site": 42.34,
+      "min_site": "GEMSDOE28",
+      "max_percent_of_own_dots_found_in_other_site": 100.0,
+      "max_site": "GEMSDOE27"
+    },
+    "GEMSDOE25": {
+      "min_percent_of_own_dots_found_in_other_site": 63.17,
+      "min_site": "GEMSDOE28",
+      "max_percent_of_own_dots_found_in_other_site": 100.0,
+      "max_site": "GEMSDOE30"
+    },
+    "GEMSDOE27": {
+      "min_percent_of_own_dots_found_in_other_site": 41.47,
+      "min_site": "GEMSDOE28",
+      "max_percent_of_own_dots_found_in_other_site": 97.95,
+      "max_site": "GEMSDOE24"
+    },
+    "GEMSDOE28": {
+      "min_percent_of_own_dots_found_in_other_site": 67.54,
+      "min_site": "GEMSDOE24",
+      "max_percent_of_own_dots_found_in_other_site": 73.96,
+      "max_site": "GEMSDOE31"
+    },
+    "GEMSDOE30": {
+      "min_percent_of_own_dots_found_in_other_site": 63.17,
+      "min_site": "GEMSDOE28",
+      "max_percent_of_own_dots_found_in_other_site": 100.0,
+      "max_site": "GEMSDOE25"
+    },
+    "GEMSDOE31": {
+      "min_percent_of_own_dots_found_in_other_site": 67.31,
+      "min_site": "GEMSDOE24",
+      "max_percent_of_own_dots_found_in_other_site": 100.0,
+      "max_site": "GEMSDOE30"
+    },
+    "GEMSDOE32": {
+      "min_percent_of_own_dots_found_in_other_site": 67.77,
+      "min_site": "GEMSDOE24",
+      "max_percent_of_own_dots_found_in_other_site": 100.0,
+      "max_site": "GEMSDOE36"
+    },
+    "GEMSDOE33": {
+      "min_percent_of_own_dots_found_in_other_site": 65.94,
+      "min_site": "GEMSDOE28",
+      "max_percent_of_own_dots_found_in_other_site": 83.25,
+      "max_site": "GEMSDOE30"
+    },
+    "GEMSDOE36": {
+      "min_percent_of_own_dots_found_in_other_site": 65.68,
+      "min_site": "GEMSDOE24",
+      "max_percent_of_own_dots_found_in_other_site": 96.91,
+      "max_site": "GEMSDOE32"
+    }
+  },
+  "identical_pairs": [
+    [
+      "GEMSDOE25",
+      "GEMSDOE30"
+    ]
+  ],
+  "h33b2_vs_d28": {
+    "comparison": "GEMSDOE25 (D2.8, owner-reported 0.2600) minus GEMSDOE32 (H33-B2, owner-reported 0.2778)",
+    "dots_in_25_not_in_32": 6436,
+    "dots_in_32_not_in_25": 0,
+    "removed_dots_max_distance_to_labelled_fault_px": 2.0,
+    "removed_dots_share_within_2px_of_labelled_fault": 1.0,
+    "removed_dots_share_within_3px_of_labelled_fault": 1.0,
+    "note": "Euclidean pixel distance from the restored labels.tif label==1 cells (the mirror of the catalogue). Describes the raster pair; does not establish why the owner-reported scores differ."
+  },
+  "scores": "owner-reported only; not HOLDOUT-DTI and not ORGANIZER-CONFIRMED",
+  "ok_to_submit": false,
+  "slot_selected": false
+}
