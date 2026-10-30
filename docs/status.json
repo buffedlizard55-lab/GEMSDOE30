@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-30T23:13:56Z",
+  "generated_utc": "2026-10-30T23:21:03Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -1159,7 +1159,7 @@
             "matching_dots": 39984,
             "comparison": {
               "stage": "dots",
-              "spearman_full_footprint": -0.0002990201174810408,
+              "spearman_full_footprint": -0.0002990201174810385,
               "candidate_dots": 40000,
               "candidate_positive_support": 40000,
               "reference_dots": 206895,
@@ -1206,7 +1206,7 @@
           "matching_dots": 44084,
           "comparison": {
             "stage": "dots",
-            "spearman_full_footprint": -0.0001320829129299334,
+            "spearman_full_footprint": -0.00013208291292993258,
             "candidate_dots": 44090,
             "candidate_positive_support": 44090,
             "reference_dots": 206895,
@@ -1234,7 +1234,7 @@
           "matching_dots": 39960,
           "comparison": {
             "stage": "dots",
-            "spearman_full_footprint": -0.00010754844987874165,
+            "spearman_full_footprint": -0.00010754844987874086,
             "candidate_dots": 40000,
             "candidate_positive_support": 40000,
             "reference_dots": 206895,
@@ -1261,7 +1261,7 @@
           "matching_dots": 37654,
           "comparison": {
             "stage": "dots",
-            "spearman_full_footprint": -0.00013483744101957168,
+            "spearman_full_footprint": -0.00013483744101948746,
             "candidate_dots": 37654,
             "candidate_positive_support": 37654,
             "reference_dots": 206895,
@@ -3281,7 +3281,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "462 tests collected in 2.15s",
+      "pytest_collect": "463 tests collected in 1.52s",
       "exit_code": 0
     },
     "score_gain_claimed": false
