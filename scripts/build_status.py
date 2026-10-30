@@ -462,6 +462,15 @@ def main() -> int:
             "decision": (decision.get("display_status") or "NOT APPROVED FOR SUBMISSION")
                         if latest_review["verified_now"] else "blocked: newest review inspection unavailable"}
     promoted = [name for name, gate in gates.items() if gate.get("promoted")]
+    repository_audit = selection.get("latest_repository_audit") or {}
+    repository_audit_status = None
+    public_board_snapshot = None
+    if repository_audit:
+        repository_audit_status = {
+            **repository_audit,
+            "run_card_data": load_json(ROOT / repository_audit["run_card"]) if repository_audit.get("run_card") else None,
+        }
+        public_board_snapshot = load_json(ROOT / repository_audit["receipt"]) if repository_audit.get("receipt") else None
     peer_reports = []
     for name, filename in (("G30-S19 habitat + EDGE", "lane-g30s19-run-card.json"),
                            ("H-CC1 contact coincidence", "h-cc1-run-card.json"),
@@ -524,7 +533,9 @@ def main() -> int:
         },
         "current_run_pointer": selection,
         "latest_scientific_review": latest_review,
-        "current_readiness_scope": "Archived retained research artifact only; latest_scientific_review is the current zero-experiment duplicate-stop preflight. Neither field selects a slot.",
+        "latest_repository_audit": repository_audit_status,
+        "official_public_leaderboard_snapshot": public_board_snapshot,
+        "current_readiness_scope": "Archived retained research artifact only; latest_scientific_review is the current zero-experiment duplicate-stop preflight; latest_repository_audit is a separate evidence/report pointer. Neither field selects a slot.",
         "current_readiness": current_card,
         "current_artifact_inspection": current_inspection,
         "current_release_decision": current_release,

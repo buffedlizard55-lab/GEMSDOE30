@@ -1,6 +1,8 @@
 # Why GEMSDOE32 `h33-h33-2-b2-…-zeros` scored 0.2778, and what it would take to beat it
 
-**Status:** analysis, 2026-10-25.
+**Status:** analysis, 2026-10-25; retrospective evidence correction added 2026-10-30.
+
+> **2026-10-30 correction — do not read the projections below as measured hidden-label contributions.** The historical values are owner-reported and no submission-page receipt links them to these exact TIFFs. The arithmetic in §§3–5 is conditional projection, not a score, hidden-truth measurement, or causal identification of H33-B2's advantage. A fresh read of DrivenData staff reply [11516/4](https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4) confirms that the known-fault mask is pixel-exact, and that an unmasked prediction near a known trace but far from new-fault truth is fully penalized. The same reply also says new-fault truth may lie within 300 m of known traces and may be a correction or modification to an existing trace. Thus deleting H33-B2's catalogue-adjacent dots could reduce FP mass, but could also remove TP credit; the hidden labels and exact submission receipts needed to distinguish those effects are unavailable. The only established H33 mechanism is exact byte-mask pruning lineage. The separate 2026-10-30 public-board snapshot shows 0.4544 at rank 1 and 0.3195 at rank 50, placing the owner-reported 0.2778 below the visible top-50 cutoff; no row is attributed to this TIFF. See the [dated snapshot](../2026-10-30-leaderboard-snapshot.json) and [2026-10-30 review](../2026-10-30-session-review.md#h33-b2-what-its-reported-value-can-and-cannot-mean).
 
 **Scores are labelled by source:**
 - **Owner-reported (unverified):** every leaderboard number here, unless marked otherwise. No organizer receipt exists for any repository raster.
@@ -27,7 +29,7 @@ The organizer pools TP, FP and FN over all public-test pixels and computes one T
 
 DTI = T / (0.2T + 0.2F + 0.8G),
 
-where *k*(*d*) = max(1 − *d*/300 m, 0). Known-fault pixels are masked **pixel-exactly**. A prediction near a known fault but far from new-fault truth is **fully penalised** ([staff answer, forum t/11516](https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516)).
+where *k*(*d*) = max(1 − *d*/300 m, 0). Known-fault pixels are masked **pixel-exactly**. Staff says an unmasked prediction near a known trace but far from new-fault truth is **fully penalised** ([staff reply 11516/4](https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4)). That reply also says new-fault truth may lie within 300 m of known traces and can include corrections or modifications. The rule therefore does not reveal whether a particular H33-deleted pixel was FP-only or could have earned TP.
 
 For a binary dot, the TP credit is the *maximum* of *p*·*k* over nearby predictions, so credit never stacks. An isolated dot therefore collects at most about 3 TP per straight truth line, and integrates πR²/3 ≈ 9.42 px² of kernel. A dot raises the score only if its expected TP gain exceeds about 0.2s/(1 − 0.2s)·(1 − k̄) ≈ 0.059 at s ≈ 0.27. Below that rate, a dot costs more FP than it earns in TP.
 
@@ -75,16 +77,16 @@ Each nested pair isolates the implied hit rate of exactly the dots that changed:
 | H33 → PINN | −0.0028 | +1,200 (3–30 px) | **0.013** (below random) |
 | r1 → rung30 / hf-euler (re-thinning) | +0.0002 / −0.0001 | ±10–12 k | 0.055–0.057 (net) |
 
-**Answer: why and how H33 scored 0.2778.**
-- The h19-5 "multiline-corroborated" topographic and geophysical lineament support finds about 40 % of the expert-mapped new faults, at about 5.8× the efficiency of random placement.
-- Thinning it to isolated, roughly 300 m-spaced binary dots keeps most of that coverage while cutting FP mass about threefold (0.1922 → 0.2600).
-- H33 then deleted the 6,436 dots within 200 m of known faults. Those dots earned almost no TP but paid full FP, because staff confirmed near-known predictions are fully penalised. That added +0.0178.
-- H33 is the best of these files because it **wastes the fewest dots on the same signal**, not because it has new information.
+**Retrospective answer (2026-10-30): why the reported H33-B2 value might be higher is not identified.**
+- The original model's claim that h19-5 support found about 40% of hidden faults and was 5.8× more efficient than random placement is an **algebraic projection** from owner-reported scores, not a measured hidden-label result.
+- The proposed D2.8 thinning explanation (including the projected reduction in FP mass) is plausible but not attributable without organizer receipts and hidden labels.
+- H33-B2 removes 6,436 dots within 200 m of known faults, but the prior statement that these dots earned almost no TP and paid only FP cost is **not established**. Staff confirms penalties for unmasked predictions far from new truth, while also confirming that new truth can occur within 300 m of known traces and can correct existing traces. The deleted dots could remove either FP mass or TP credit.
+- The exact byte-mask pruning lineage is verified; the owner-reported 0.2778 and any causal score contribution are not. H33-B2 is the highest historical value in the nine-site owner-claim table, but it is not verified or attributable to a submission receipt.
 
-**Two contrarian implications the earlier sessions missed:**
-1. **Proximity to mapped faults is not where the hidden truth is.** Three changes each placed near-catalogue dots, and each earned about random or less on the leaderboard: the ≤200 m band, gap closure at 300 m–1 km, and the PINN's 300 m–3 km additions.
-   - Catalogue hide-and-recover proxies hide catalogue components *next to* visible ones, so they reward proximity by construction.
-   - G30-S19's "promoted" raster puts 76 % of its dots within 1 km of the catalogue and only 2.4 % beyond 3 km. Its proxy HOLDOUT-DTI of 0.2230 is therefore **not** leaderboard evidence (IR-30-079).
+**Cautions for interpreting earlier proximity analyses:**
+1. **Neither benefit nor harm from catalogue proximity is established for H33-B2.** The historical public-score differences for the ≤200 m band, 300 m–1 km gap closure, and PINN additions are owner-reported and lack submission-page receipts. The old catalogue hide-and-recover proxy hides components near visible ones, so it can reward proximity by construction; that does not establish hidden-test behavior. New-fault truth may also lie within 300 m of a known trace.
+   - G30-S19's `0.2230` proxy HOLDOUT-DTI is not leaderboard evidence (IR-30-079); it is a catalogue-recovery proxy with its own proximity bias.
+   - Any claims in the following numeric target table remain conditional projections, not measured competition scores or forecasts.
 2. **The lever is localisation quality per dot, not more pruning.** At H33's 37,654 dots and ρ = 0.244 %, the required hit rate is h = s(0.2n + 0.8ρ)/(n(1 − 0.1333s)):
 
 | Target (owner-reported leaderboard points) | Required hits per dot | Required coverage |

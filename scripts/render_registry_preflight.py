@@ -22,15 +22,15 @@ def layout(title: str, body: str) -> str:
 <link rel="stylesheet" href="docs/assets/research.css"></head><body>
 <a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="nav-wrap">
 <a class="brand" href="index.html"><span class="brand-mark">G30</span> GEMS research</a>
-<nav aria-label="Primary"><a href="index.html">Overview</a><a href="priority-executive-summary.html">Nine sites</a><a href="priority-readiness-audit.html">28 Oct byte audit</a><a href="csr-discontinuity-review.html">Research</a><a href="executive-summary.html">Submission guide</a><a href="pool1-executive-summary.html">POOL-1</a></nav>
-</div></header><main id="main"><aside class="stop-notice" aria-label="Latest byte audit"><strong>28 Oct 2026: no approved submission download.</strong> <a href="priority-readiness-audit.html">Measured nine-site audit: exact files, format checks, uniqueness stops and unavailable score estimates</a>. No new TIFF or weekly slot. <a href="offlattice-safety-review.html">Follow-up: off-lattice generation disabled; no validated score</a>.</aside>{body}</main><footer><div><strong>GEMS30 · research, not a selector</strong><p>Static evidence snapshot · verified 27 Oct 2026 · parallel work may change.</p></div><div><a href="{REPORT}/run-card.json">Current run card</a><a href="docs/status.json">GitHub status snapshot</a><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Organizer leaderboard</a></div>
-<p class="fine">No automated organizer-page monitoring. Hash-pinned public mirrors are not organizer-authenticated. No competition slot selected.</p></footer></body></html>'''
+<nav aria-label="Primary"><a href="index.html">Overview</a><a href="priority-executive-summary.html">Nine sites</a><a href="priority-executive-summary.html">30 Oct review</a><a href="csr-discontinuity-review.html">Research</a><a href="executive-summary.html">Submission guide</a><a href="pool1-executive-summary.html">POOL-1</a></nav>
+</div></header><main id="main"><aside class="stop-notice" aria-label="Latest repository review"><strong>30 Oct 2026 cumulative review: no historical or new file is approved for download or submission.</strong> No new TIFF, holdout score estimate or weekly slot. Current public board snapshot: rank 1 = <strong>0.4544</strong>; rank 50 = <strong>0.3195</strong>—not attributed to a repository file. A separate 15-trial random-dot control overlaps the lattice by 99.80–99.92% and is flagged 15/15 times, so this witness is non-discriminating; the literal governance stop remains unchanged. A separate partial canary flags catalogue-derived <code>derived_gdr_qfaults_v2_100m_u8.tif</code> at AUC <strong>0.984002 &gt; 0.90</strong>; exclude it. That is not a screen of <code>training_features.tif</code> or the current candidate features, and is not a score. <a href="docs/research/2026-10-30-session-review.md">Full three-pass review</a> · <a href="docs/research/2026-10-30-session-run-card.json">JSON run card</a> · <a href="docs/research/2026-10-30-leaderboard-snapshot.json">dated public-board receipt</a> · <a href="docs/research/2026-10-30-verification-receipts/lattice-random-control.json">random-control receipt</a> · <a href="docs/research/2026-10-30-verification-receipts/leakage-canary.json">partial canary receipt</a>. The latest scientific preflight remains the separate 27 Oct registry stop.</aside>{body}</main><footer><div><strong>GEMS30 · research, not a selector</strong><p>Repository evidence snapshot · refreshed 30 Oct 2026; scientific preflight remains dated 27 Oct 2026.</p></div><div><a href="docs/research/2026-10-30-session-run-card.json">Current repository-review card</a><a href="docs/status.json">GitHub status snapshot</a><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Organizer leaderboard</a></div>
+<p class="fine">A public-board snapshot is not a submission-page receipt. No automated organizer-page monitoring. Hash-pinned public mirrors are not organizer-authenticated. No competition slot selected.</p></footer></body></html>'''
 
 
 def hero() -> str:
-    return '''<section class="intro"><div><p class="eyebrow">GEMS30 / current decision / 27 Oct 2026</p>
-<h1>Protect the next submission.</h1><p class="lead">A verified registry conflict stops the proposed run before a new model or TIFF is made. The older CSR-1 file must not be submitted.</p>
-<div class="meta"><span>One-witness proof, not a complete registry</span><span>0 experiments run</span><span>No slot selected</span></div></div></section>'''
+    return '''<section class="intro"><div><p class="eyebrow">GEMS30 / cumulative repository review / 30 Oct 2026</p>
+<h1>Protect the next submission.</h1><p class="lead">The 27 Oct scientific preflight still stops the proposed lane; this 30 Oct repository review adds a dated public-board receipt, H33 evidence correction, nine-site mask-family analysis, a random-control calibration, and a separate partial leakage alarm. No candidate model or TIFF was made.</p>
+<div class="meta"><span>Governance stop ≠ geological duplication</span><span>0 experiments run</span><span>No slot selected</span></div></div></section>'''
 
 
 def upstream_artifacts_section(session_card: dict) -> str:
@@ -127,8 +127,29 @@ def evidence_strip(card: dict) -> str:
 <p class="fine">Evaluator <code>{e(h['evaluator_version'])}</code> · {c['withheld_positives']:,} withheld positives · archived mapped-catalogue proxy, not an organizer score. The observed fold-3 gain was exploratory, not a confirmed breakthrough. No new holdout was run.</p>'''
 
 
+def _family_relation_text(site: str, family: dict) -> str:
+    notes = []
+    for pair in family.get("pairs_with_identity_or_containment", []):
+        if site not in (pair["a"], pair["b"]):
+            continue
+        other = pair["b"] if site == pair["a"] else pair["a"]
+        if pair["identical_inside_footprint"]:
+            notes.append(f"same in-footprint mask as {other}")
+        elif pair["smaller_set_contained_in_other"]:
+            smaller = pair["a"] if pair["dots_a"] < pair["dots_b"] else pair["b"]
+            if site == smaller:
+                notes.append(f"all dots contained in {other}")
+            else:
+                notes.append(f"contains all dots of {other}")
+    if not notes:
+        return "No exact identity/containment pair in this nine-site comparison; broader uniqueness is unestablished."
+    return "; ".join(notes) + "; raster relation only, not geological identity."
+
+
 def table(fleet: dict, card: dict) -> str:
     uncovered = card['registry']['measurement']['bound']['uncovered_pixels']
+    family_path = ROOT / "docs/research/2026-10-30-verification-receipts/nine-site-family.json"
+    family = json.loads(family_path.read_text()) if family_path.is_file() else {}
     rows = []
     for row in fleet['rows']:
         k = row['dots']
@@ -136,30 +157,32 @@ def table(fleet: dict, card: dict) -> str:
         aliases = ', '.join(row['exact_value_alias_sites'])
         alias = f' · value alias: {e(aliases)}' if aliases else ''
         fmt = 'passed' if row['format_validation_passed'] else 'outside-null failed'
+        relation = _family_relation_text(row['site'], family)
         rows.append(f'''<tr><th scope="row"><a href="{e(row['review_url'])}">{e(row['site'])}</a><br><small>{k:,} dots</small></th>
 <td><a href="{e(row['source_url'])}">{e(row['historical_file'])}</a><br><small>Historical file · {fmt}{alias}</small></td>
 <td><strong>{e(row['quoted_owner_claim'])}</strong><br><small>unverified owner claim; no receipt</small></td>
 <td><strong>Not available</strong><br><small>no validated new candidate; no forecast</small></td>
-<td><strong>STOP</strong><br><small>≥{100*lower:.2f}% lower-bound overlap vs lattice</small></td><td><strong>DO NOT DOWNLOAD FOR SUBMISSION</strong><br><small>historical bytes only; no new file or slot approved</small></td></tr>''')
-    return '''<div class="table-wrap"><table><caption>Frozen nine-site historical selections · 26 Oct 2026, not live leadership or a complete registry</caption><thead><tr><th scope="col">Site</th><th scope="col">Historical file / source</th><th scope="col">Reported value</th><th scope="col">New submission score estimate</th><th scope="col">Unique under literal rule?</th><th scope="col">Download / submit status</th></tr></thead><tbody>''' + ''.join(rows) + '''</tbody></table></div>
-<p class="fine">Values are unverified owner reports, not HOLDOUT-DTI or ORGANIZER-CONFIRMED scores. “Not available” is deliberate: the listed historical scores cannot validly estimate an untested candidate. The lattice bound proves the literal duplicate stop for every listed historical dot budget; it does not prove all other comparisons or provide a novelty clearance. No fleet-wide selector has approved a slot.</p>'''
+<td><strong>Literal STOP</strong><br><small>≥{100*lower:.2f}% lattice lower bound; {e(relation)}</small></td><td><strong>DO NOT DOWNLOAD FOR SUBMISSION</strong><br><small>historical bytes only; no new file or slot approved</small></td></tr>''')
+    return '''<div class="table-wrap"><table><caption>Frozen nine-site historical selections · reviewed 30 Oct 2026; not live leaderboard attribution or a complete registry</caption><thead><tr><th scope="col">Site</th><th scope="col">Historical file / source</th><th scope="col">Reported value</th><th scope="col">New submission score estimate</th><th scope="col">Literal gate / family relation</th><th scope="col">Download / submit status</th></tr></thead><tbody>''' + ''.join(rows) + '''</tbody></table></div>
+<p class="fine">Values are unverified owner reports, not HOLDOUT-DTI or ORGANIZER-CONFIRMED scores. “Not available” is deliberate: the listed historical scores cannot validly estimate an untested candidate. The literal 70% gate is a governance stop; its lattice bound is non-discriminating (random-dot receipt) and does not prove copying or provide novelty clearance. Mask relations use owner-supplied, hash-pinned mirrors, not organizer-authenticated data. No fleet-wide selector has approved a slot.</p>'''
 
 
 def h33(fleet: dict) -> str:
     lin = fleet['lineage']
     return f'''<section class="section" id="h33"><p class="eyebrow">What the bytes establish</p><h2>H33-B2 is a lineage, not a proven causal gain.</h2>
-<p>The historical audit found value-identical G25/G30 rasters and a 40,199-dot G28 r1 intermediate identical to the selected G31 raster. H33-B2 is that intermediate with {lin['r1_to_h33_removed']:,} dots near mapped faults removed ({lin['h33_dots']:,} remain); the G36 reference contains H33-B2 plus {lin['pinn_additional_dots']:,} dots. The 37,660-dot G28 historical selection is a different file.</p>
-<p>The owner reports <strong>0.2778</strong> for H33-B2, but no organizer receipt or hidden truth is available. We cannot infer hidden true/false positives, prove that pruning caused an improvement, or forecast a future score. The prior CSR review's numerical causal inversion and TP formula are not reliable.</p>
-<a class="text-link" href="{CSR}/fleet-audit.json">Inspect frozen lineage evidence ↗</a></section>'''
+<p>The pinned historical masks show GEMSDOE25 D2.8 and GEMSDOE30 are identical in-footprint (44,090 positive cells); GEMSDOE31 is a subset with 40,199 cells, and H33-B2 is that subset with {lin['r1_to_h33_removed']:,} additional cells removed ({lin['h33_dots']:,} remain). The GEMSDOE36 reference contains H33-B2 plus {lin['pinn_additional_dots']:,} cells. These are exact mask relations, not score deltas.</p>
+<p>The owner reports <strong>0.2778</strong> for H33-B2, but no organizer submission-page receipt or hidden truth is available. Staff says known-fault masking is pixel-exact and that an unmasked prediction near a known trace but far from new truth is penalized; staff also says new-fault truth may lie within 300 m of known traces and can include corrections. Deleted cells may therefore lose TP credit as well as FP penalty. The 2026-10-30 correction to the prior numerical inversion is <a href="docs/research/2026-10-25-lsm/why-h33-scored-0.2778.md">recorded here</a>. No causal score contribution or future score is established.</p>
+<a class="text-link" href="{CSR}/fleet-audit.json">Inspect frozen lineage evidence ↗</a> · <a class="text-link" href="docs/research/2026-10-30-session-review.md#h33-b2-what-its-reported-value-can-and-cannot-mean">Current H33 interpretation ↗</a></section>'''
 
 
 def research_section() -> str:
-    return f'''<section class="section" id="hypotheses"><div class="section-heading"><div><p class="eyebrow">Next work / subject to explicit lane assignment</p><h2>Four distinct research mechanisms.</h2></div><p>Qualitative priorities only.<br>No score forecasts or new experiments.</p></div>
-<div class="resource-grid"><article><h3>1. Regime-gated experts</h3><p>Combine piedmont scarps with a cover-blind magnetic/gravity/MT expert; gate by a preregistered regime. Mimics: fan scarps, lava fronts and lithology. Cached layers; moderate modeling cost. Similar gating has been discussed in parallel work.</p></article>
-<article><h3>2. Buried contact discordance</h3><p>Project geology-unit contacts beneath alluvium and compare with independent geophysical edges. Mimics: unfaulted unconformities. New geology data and moderate GIS work; exclude fault-derived tables.</p></article>
-<article><h3>3. Drainage deflection</h3><p>Find repeated channel offsets/knickpoint alignments coincident with an independent geophysical edge. Mimics: terraces, roads and lava dams. Requires DEM conditioning and catchments.</p></article>
-<article><h3>4. Alteration persistence</h3><p>Test GeoDAWN K/Th/U log-ratio residuals along coherent lines with a survey-block null. Mimics: soil, rock and flight-line seams. Cached radiometry; survey masks still needed.</p></article></div>
-<p><a class="text-link" href="{REPORT}/review.md#ranked-geological-hypotheses--proposals-not-runs">Prior mechanisms, physical rationale, costs, and official sources ↗</a> · <a class="text-link" href="docs/research/2026-10-27-current-session-review.md">Current four-candidate ranking, source-access blockers, and three-pass review ↗</a> · <a class="text-link" href="docs/hypotheses.html">Full hypothesis register ↗</a></p></section>'''
+    return f'''<section class="section" id="hypotheses"><div class="section-heading"><div><p class="eyebrow">Next work / subject to explicit lane assignment</p><h2>Four ranked, untested geological hypotheses.</h2></div><p>Qualitative potential and cost only.<br>No score forecasts or new experiments.</p></div>
+<div class="resource-grid"><article><h3>1. Full-resolution 1 m scarp filters</h3><p>Test fixed oriented step-height matched filters and along-strike continuity on raw USGS 3DEP bare-earth DEMs. H-31-02b's reduced-stack arm failed its spatial/strike-perturbation gates; the full raw arm remains unexecuted. Mimics: stream and terrace edges, roads, landslides, mines and DEM seams. Full-ROI tile coverage is unverified.</p></article>
+<article><h3>2. 3-D thermal-gradient residual</h3><p>Test departures from conductive background in the USGS Great Basin temperature model (registered H-34-04, never executed). Advective flow may reveal covered faults. Mimics: conductive lithology changes, model smoothing and interpolation; a 200 MB ScienceBase archive is listed but not downloaded.</p></article>
+<article><h3>3. Drainage χ / ksn disequilibrium</h3><p>Measure basin-scale channel profiles and aligned knickpoint/offset clusters using NHD and 3DEP (H-31-03, registered but unrun). Mimics: lithology, capture, base-level changes, roads and dams. Full-ROI data coverage and access remain unverified.</p></article>
+<article><h3>4. K–Th–U alteration unmixing</h3><p>Test GeoDAWN radiometric ratios with independent lineament coherence (H-31-04, registered but unrun). Fault-controlled alteration may persist without a surface trace. Mimics: lithology, soil and flight-line seams; local owner-derived layers are absent.</p></article></div>
+<p class="fine">H-31-01's catalogue-proximity relay-connector experiment was already run and not promoted; it is excluded from this untried slate. See the dated review for its distinction, sources and controls.</p>
+<p><a class="text-link" href="docs/research/2026-10-30-session-review.md#4-pre-implementation-hypothesis-slate">Full ranked slate: layers, signatures, prior-work differences, controls, cost and official access ↗</a> · <a class="text-link" href="docs/hypotheses.html">Full hypothesis register ↗</a></p></section>'''
 
 
 def links_and_protocol() -> str:
@@ -167,7 +190,7 @@ def links_and_protocol() -> str:
 <div class="note-card"><h3>Authoritative links</h3><p><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Competition problem and format</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Competition and deadline</a> · <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Official rules</a></p>
 <p><a href="https://www.usgs.gov/3d-elevation-program">USGS 3DEP</a> · <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">GeoDAWN</a> · <a href="https://gdr.openei.org/submissions/1391">DOE INGENIOUS</a></p>
 <p><strong>Deadline discrepancy:</strong> the competition page listed <strong>3 Dec 2026, 23:59 UTC</strong>, but the official rules PDF Appendix A.1 says 5:00 p.m. ET on the deadline date (22:00 UTC on 3 Dec). Confirm with the organizer and plan for the earlier time. The PDF allows up to three feedback submissions per week; one selected submission is scored on both label sets. Licensed, shareable external data are permitted.</p>
-<p>Single float32 GeoTIFF, aligned to the organizer template, finite [0,1] in footprint and null outside. Mapped-fault pixels are masked in scoring. Portal rejection cause and upload acceptance are unknown.</p>
+<p>Single float32 GeoTIFF, aligned to the organizer template, finite [0,1] in footprint and null outside. Known-fault pixels are masked exactly; new-fault truth may lie within 300 m of known traces. Portal rejection cause and upload acceptance are unknown.</p>
 <p>Historical work: <a href="geothermal-chemistry-review.html">GDX-1</a> · <a href="geothermal-quadrature-review.html">QPC-1</a> · <a href="geothermal-tilt-alteration-review.html">G30-TAD</a>. Old status is not current approval.</p>
 <p>The <a href="docs/status.json">GitHub-only status feed</a> regenerates from repository artifacts; it is not a live parallel registry. <a href="https://www.drivendata.org/termsofuse/">DrivenData terms</a> restrict automated access and monitoring, so the organizer page is linked, not scraped.</p></div></section>'''
 
@@ -182,7 +205,7 @@ def priority_page(row: dict, card: dict) -> str:
 <section class="stop-notice"><div class="release-heading"><span class="pill failed">Literal rule: duplicate-stop</span><span class="pill caution">No approved submission</span></div><h2>Do not resubmit historical bytes.</h2><p>The {k:,}-dot historical reference has a ≥{100*lower:.2f}% lower-bound overlap with the pinned 13GEMSDOE lattice. This bound uses the aligned footprint and the historical dot count; it is not an individual overlap measurement. Below-bound budgets are not automatically unique.</p>
 <p>Owner-reported value <strong>{e(row['quoted_owner_claim'])}</strong> is unverified, not an organizer receipt or a HOLDOUT-DTI result. Latest parallel-site status is unknown from this frozen snapshot.</p>
 <div class="actions"><a class="button secondary" href="{e(row['source_url'])}">Pinned historical source · not for upload</a><a class="button secondary" href="{e(row['site_url'])}">Open {e(site)} live page</a><a class="button secondary" href="priority-executive-summary.html">All nine sites</a></div></section>
-<section class="section"><h2>Evidence and limitations.</h2><div class="table-wrap"><table><tbody><tr><th scope="row">Historical file</th><td><code>{e(row['historical_file'])}</code></td></tr><tr><th scope="row">SHA-256</th><td><code>{e(row['raster_sha256'])}</code></td></tr><tr><th scope="row">Pinned public snapshot</th><td><code>{e(row['public_snapshot_commit'])}</code></td></tr><tr><th scope="row">Historical format check</th><td>{e(check)}; local validation is not organizer acceptance.</td></tr><tr><th scope="row">Exact-value aliases</th><td>{e(aliases)}</td></tr><tr><th scope="row">New candidate / forecast</th><td>None validated or selected in this review.</td></tr></tbody></table></div><p><a href="{CSR}/fleet-audit.json">Nine-site frozen audit</a> · <a href="{REPORT}/review.md">Proof and source notes</a></p></section>'''
+<section class="section"><h2>Evidence and limitations.</h2><div class="table-wrap"><table><tbody><tr><th scope="row">Historical file</th><td><code>{e(row['historical_file'])}</code></td></tr><tr><th scope="row">SHA-256</th><td><code>{e(row['raster_sha256'])}</code></td></tr><tr><th scope="row">Pinned public snapshot</th><td><code>{e(row['public_snapshot_commit'])}</code></td></tr><tr><th scope="row">Historical format check</th><td>{e(check)}; local validation is not organizer acceptance.</td></tr><tr><th scope="row">Exact-value aliases</th><td>{e(aliases)}</td></tr><tr><th scope="row">New candidate / forecast</th><td>None validated or selected in this review.</td></tr></tbody></table></div><p><a href="{CSR}/fleet-audit.json">Nine-site frozen audit</a> · <a href="{REPORT}/review.md">Registry proof and source notes</a> · <a href="docs/research/2026-10-30-session-review.md">30 Oct cumulative review</a></p></section>'''
     return layout(site, body)
 
 

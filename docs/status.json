@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_utc": "2026-10-30T23:21:03Z",
+  "generated_utc": "2026-10-30T23:43:28Z",
   "generated_by": "scripts/build_status.py (regenerate after every experiment; no manual edits)",
   "project": "GEMSDOE30",
   "data_placement": {
@@ -955,7 +955,7 @@
     "schema_version": 1,
     "run_card": "docs/research/phase-tilt-asymmetry/run-card.json",
     "readiness": "docs/research/phase-tilt-asymmetry/readiness.json",
-    "purpose": "Archived top-level PTA-1 pointer retained for historical verifier compatibility; latest_review is the current zero-experiment registry preflight. No file or slot is approved.",
+    "purpose": "Archived top-level PTA-1 pointer retained for historical verifier compatibility; latest_review remains the current scientific preflight, while latest_repository_audit separately tracks the current repository/evidence review. No file or slot is approved.",
     "latest_attempt": "docs/research/texture-controls/run-card.json",
     "additional_stopped_attempts": [
       {
@@ -1077,14 +1077,14 @@
       "decision": "PARALLEL LANE, NOT THE LATEST_REVIEW POINTER: science confirmed, artifact duplicate-stopped, no TIFF published; lattice/CTD/FC coverage UNKNOWN (see postmerge-addendum.json)"
     },
     "latest_repository_audit": {
-      "date_utc": "2026-10-28",
-      "receipt": "docs/research/2026-10-28-priority-audit.json",
-      "run_card": "docs/research/2026-10-28-run-card.json",
-      "report": "docs/research/2026-10-28-review.md",
-      "site_page": "priority-readiness-audit.html",
-      "verifier": "scripts/audit_priority_readiness.py --check",
-      "scope": "Zero-experiment audit of frozen historical leaders; does not replace latest scientific review or authorize a lane or slot",
-      "decision": "NEGATIVE: all nine historical references exceed 99.90% overlap against the pinned lattice; no new TIFF or score estimate"
+      "date_utc": "2026-10-30",
+      "receipt": "docs/research/2026-10-30-leaderboard-snapshot.json",
+      "run_card": "docs/research/2026-10-30-session-run-card.json",
+      "report": "docs/research/2026-10-30-session-review.md",
+      "site_page": "priority-executive-summary.html",
+      "verifier": "scripts/verify_registry_preflight.py + scripts/audit_priority_readiness.py --check + scripts/build_research_site.py --check + pytest -q",
+      "scope": "Cumulative three-pass repository and evidence audit, including a dated public-board snapshot, nine-site mask-family analysis, H33 evidence correction, separately merged 15-trial lattice random control, partial Qfaults leakage alarm (AUC 0.984002), and generated-site/feed refresh. The canary is not a screen of training_features.tif or current geological candidate features. Does not replace latest_scientific_review or authorize a lane, TIFF, download, upload, or slot.",
+      "decision": "NEGATIVE: no new TIFF; no historical file approved for download/submission; no candidate HOLDOUT-DTI or score estimate; no weekly slot selected."
     },
     "latest_safety_review": {
       "run_card": "docs/research/2026-10-28-offlattice-safety-run-card.json",
@@ -1159,7 +1159,7 @@
             "matching_dots": 39984,
             "comparison": {
               "stage": "dots",
-              "spearman_full_footprint": -0.0002990201174810385,
+              "spearman_full_footprint": -0.0002990201174810405,
               "candidate_dots": 40000,
               "candidate_positive_support": 40000,
               "reference_dots": 206895,
@@ -1183,7 +1183,7 @@
             "matching_dots": 10844,
             "comparison": {
               "stage": "dots",
-              "spearman_full_footprint": -0.000179865315443018,
+              "spearman_full_footprint": -0.00017986531544301798,
               "candidate_dots": 10848,
               "candidate_positive_support": 10848,
               "reference_dots": 206895,
@@ -1206,7 +1206,7 @@
           "matching_dots": 44084,
           "comparison": {
             "stage": "dots",
-            "spearman_full_footprint": -0.00013208291292993258,
+            "spearman_full_footprint": -0.0001320829129299334,
             "candidate_dots": 44090,
             "candidate_positive_support": 44090,
             "reference_dots": 206895,
@@ -1234,7 +1234,7 @@
           "matching_dots": 39960,
           "comparison": {
             "stage": "dots",
-            "spearman_full_footprint": -0.00010754844987874086,
+            "spearman_full_footprint": -0.00010754844987874165,
             "candidate_dots": 40000,
             "candidate_positive_support": 40000,
             "reference_dots": 206895,
@@ -1261,7 +1261,7 @@
           "matching_dots": 37654,
           "comparison": {
             "stage": "dots",
-            "spearman_full_footprint": -0.00013483744101948746,
+            "spearman_full_footprint": -0.00013483744101948792,
             "candidate_dots": 37654,
             "candidate_positive_support": 37654,
             "reference_dots": 206895,
@@ -1489,7 +1489,665 @@
     "error": null,
     "ok_to_submit": false
   },
-  "current_readiness_scope": "Archived retained research artifact only; latest_scientific_review is the current zero-experiment duplicate-stop preflight. Neither field selects a slot.",
+  "latest_repository_audit": {
+    "date_utc": "2026-10-30",
+    "receipt": "docs/research/2026-10-30-leaderboard-snapshot.json",
+    "run_card": "docs/research/2026-10-30-session-run-card.json",
+    "report": "docs/research/2026-10-30-session-review.md",
+    "site_page": "priority-executive-summary.html",
+    "verifier": "scripts/verify_registry_preflight.py + scripts/audit_priority_readiness.py --check + scripts/build_research_site.py --check + pytest -q",
+    "scope": "Cumulative three-pass repository and evidence audit, including a dated public-board snapshot, nine-site mask-family analysis, H33 evidence correction, separately merged 15-trial lattice random control, partial Qfaults leakage alarm (AUC 0.984002), and generated-site/feed refresh. The canary is not a screen of training_features.tif or current geological candidate features. Does not replace latest_scientific_review or authorize a lane, TIFF, download, upload, or slot.",
+    "decision": "NEGATIVE: no new TIFF; no historical file approved for download/submission; no candidate HOLDOUT-DTI or score estimate; no weekly slot selected.",
+    "run_card_data": {
+      "schema_version": 1,
+      "run_id": "gemsdoe30-repository-review-20261030",
+      "session_date_utc": "2026-10-30",
+      "branch": "arena/0028128e-gemsdoe30",
+      "session_scope": "Evidence audit, official-source refresh, hypothesis ranking, README/site/status-feed updates, and regression checks. No scientific experiment was authorized or run. Post-merge, separately supplied main-branch random-control and partial leakage-canary receipts were integrated; neither constitutes a new candidate experiment.",
+      "verdict": "negative",
+      "decision": "NO NEW TIFF; NO FILE APPROVED TO DOWNLOAD OR SUBMIT; NO WEEKLY SLOT SELECTED",
+      "hypothesis": {
+        "rank_1_proposal": "Full-resolution USGS 3DEP 1 m DEM matched-filter scarp bank plus along-strike continuity (raw H-31-02 arm).",
+        "status": "Registered but unexecuted exact raw-DEM arm. No assigned lane; full-ROI coverage and authorized transfer are unverified. Do not implement until the shared inputs, lane and registry-policy conflict are resolved.",
+        "other_untried_candidates": [
+          "H-34-04 residuals from the USGS Great Basin 3-D temperature model; registered, never executed.",
+          "H-31-03 quantitative NHD/3DEP chi and normalized channel-steepness disequilibrium; qualitative drainage work registered, exact transform unrun.",
+          "H-31-04 GeoDAWN K-Th-U ratio-space alteration unmixing plus independent lineament coherence; registered, unrun."
+        ],
+        "explicit_exclusion": "H-31-01 catalogue-proximity relay-connector experiment was run 2026-10-03 and not promoted; it is not counted as an untried hypothesis. A potential-field graph variant would require a distinct preregistration."
+      },
+      "mechanism": "Fixed orientation/step-height filters on bare-earth 1 m DEMs can reveal short, discontinuous or subdued scarps missed by a 100 m raster or regional mapping; a preregistered continuity operator can bridge only physically compatible gaps. The raw-DEM arm is distinct from the reduced 12-channel H-31-02b experiment, which failed its spatial/strike-perturbation gates. This remains a hypothesis, not a result.",
+      "named_non_fault_process": "Terrace risers, stream channels, roads, landslides, mines, project boundaries and DEM seams can mimic low scarps or segment continuity; require matched geomorphic controls, survey/project masks and buffered spatial validation.",
+      "holdout_dti": {
+        "evidence_class": "HOLDOUT-DTI",
+        "status": "NOT RUN",
+        "value": null,
+        "ci95": null,
+        "evaluator_version": null,
+        "withheld_positives": null,
+        "reason": "No single assigned method paragraph/lane is present; the cached training_features raster is absent from this checkout. A candidate-level leakage-safe holdout therefore cannot be constructed here. No score estimate is permitted."
+      },
+      "organizer_confirmed_score": {
+        "evidence_class": "ORGANIZER-CONFIRMED from a submission-page receipt",
+        "value": null,
+        "receipt": null,
+        "status": "No submission-page receipt for any GEMSDOE24/25/27/28/30/31/32/33/36 file was available."
+      },
+      "reported_h33_b2": {
+        "value": 0.2778,
+        "evidence_class": "OWNER-REPORTED, UNVERIFIED; not HOLDOUT-DTI and not ORGANIZER-CONFIRMED",
+        "file": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+        "interpretation": "Exact subset lineage supports a pruning mechanism as a hypothesis, but the hidden positive/false-positive contributions of the deleted pixels are unavailable. Official staff clarifies that the known-fault mask is pixel-exact and new-fault labels can include corrections near known traces; pruning is therefore not causally established."
+      },
+      "public_leaderboard_snapshot": {
+        "evidence_class": "OFFICIAL-PUBLIC-LEADERBOARD-SNAPSHOT; not a submission-page receipt and not attributable to a repository TIFF",
+        "retrieved_utc_date": "2026-10-30",
+        "top_public_value": 0.4544,
+        "rank_50_public_value": 0.3195,
+        "receipt": "docs/research/2026-10-30-leaderboard-snapshot.json",
+        "owner_file_attribution": null
+      },
+      "new_submission_score_estimate": {
+        "value": null,
+        "evidence_class": "NO ESTIMATE",
+        "reason": "No candidate raster and no valid candidate HOLDOUT-DTI. A projection is not a score."
+      },
+      "experiment_budget": {
+        "experiments_run": 0,
+        "experiment_cap": 3,
+        "time_budget_hours": 2,
+        "scientific_experiment_started": false,
+        "weekly_submission_slot_selected": false
+      },
+      "registry_novelty": {
+        "surface_checked_before_placement": false,
+        "surface_spearman_limit": 0.9,
+        "surface_result": null,
+        "final_dots_checked_after_placement": false,
+        "dot_overlap_limit_fraction": 0.7,
+        "dot_overlap_radius_pixels": 3,
+        "final_dots_result": null,
+        "reason": "No candidate was generated. The literal governance stop remains, but the pinned 13GEMSDOE lattice witness is near-saturated and does not establish geological identity; an independent 15-trial random-dot control reports 99.80\u201399.92% overlap and 15/15 literal duplicate flags across three budgets (IR-30-111). See the dated receipt; the literal stop is unchanged."
+      },
+      "historical_registry_gate": {
+        "result": "Historical references are stopped by the literal one-witness threshold; scientific uniqueness is not established by this saturated witness.",
+        "reference": "docs/research/2026-10-27-registry-preflight/lattice-pin.json",
+        "independent_random_dot_control": {
+          "receipt": "docs/research/2026-10-30-verification-receipts/lattice-random-control.json",
+          "draws": 15,
+          "budgets": [
+            9652,
+            22164,
+            44090
+          ],
+          "fraction_within_3px_range": [
+            0.9980314960629921,
+            0.9992329904349395
+          ],
+          "literal_duplicate_flags": 15,
+          "interpretation": "The witness is non-discriminating at these budgets; this is not evidence of copying."
+        },
+        "interpretation": "Governance stop only; do not treat the near-saturated overlap as proof that prediction surfaces are scientifically identical."
+      },
+      "raster_sha256": null,
+      "validator_output": {
+        "status": "NOT RUN \u2014 no new raster exists",
+        "single_band_float32": null,
+        "no_nan_inside_footprint": null,
+        "values_inside_footprint_in_range_0_1": null,
+        "crs_shape_transform_match_template": null,
+        "organizer_acceptance_confirmed": false
+      },
+      "submission_name": null,
+      "submission_note": null,
+      "submission_note_max_characters": 140,
+      "download_ok": false,
+      "ok_to_submit": false,
+      "slot_selected": false,
+      "current_repository_review": "docs/research/2026-10-30-session-review.md",
+      "prompt_persisted_in": "README.md#session-prompt-2026-10-30",
+      "historical_best_by_site": [
+        {
+          "site": "GEMSDOE24",
+          "historical_file": "gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
+          "reported_value": 0.2477,
+          "evidence_class": "OWNER-REPORTED, UNVERIFIED"
+        },
+        {
+          "site": "GEMSDOE25",
+          "historical_file": "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+          "reported_value": 0.26,
+          "evidence_class": "OWNER-REPORTED, UNVERIFIED"
+        },
+        {
+          "site": "GEMSDOE27",
+          "historical_file": "gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif",
+          "reported_value": 0.2449,
+          "evidence_class": "OWNER-REPORTED, UNVERIFIED"
+        },
+        {
+          "site": "GEMSDOE28",
+          "historical_file": "gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+          "reported_value": 0.271,
+          "evidence_class": "OWNER-REPORTED, UNVERIFIED"
+        },
+        {
+          "site": "GEMSDOE30",
+          "historical_file": "gemsdoe30-d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca.tif",
+          "reported_value": 0.26,
+          "evidence_class": "OWNER-REPORTED, UNVERIFIED"
+        },
+        {
+          "site": "GEMSDOE31",
+          "historical_file": "gemsdoe31-h27-4-solo-d28-20261004-8acb75e1-nan.tif",
+          "reported_value": 0.2708,
+          "evidence_class": "OWNER-REPORTED, UNVERIFIED"
+        },
+        {
+          "site": "GEMSDOE32",
+          "historical_file": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+          "reported_value": 0.2778,
+          "evidence_class": "OWNER-REPORTED, UNVERIFIED"
+        },
+        {
+          "site": "GEMSDOE33",
+          "historical_file": "GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+          "reported_value": 0.2632,
+          "evidence_class": "OWNER-REPORTED, UNVERIFIED"
+        },
+        {
+          "site": "GEMSDOE36",
+          "historical_file": "gemsdoe36-anderson-geothermal-pinn-38854-20261004T230000Z-9b9ea4e6-zeros.tif",
+          "reported_value": 0.275,
+          "evidence_class": "OWNER-REPORTED, UNVERIFIED"
+        }
+      ],
+      "feature_level_leakage_canary": {
+        "auc_alarm_threshold": 0.9,
+        "status": "PARTIAL SEPARATE REPOSITORY CANARY \u2014 LEAKAGE ALARM; candidate feature stack not screened",
+        "candidate_features_tested": false,
+        "independent_repository_canary": {
+          "receipt": "docs/research/2026-10-30-verification-receipts/leakage-canary.json",
+          "features_tested_individually": 5,
+          "flagged_feature": "derived_gdr_qfaults_v2_100m_u8.tif",
+          "auc_sign_free": 0.984002,
+          "positive_labels": 60988,
+          "negative_labels": 5106385,
+          "leakage_alarm_triggered": true,
+          "interpretation": "Catalogue-derived feature; exclude from any catalogue-holdout claim. Not HOLDOUT-DTI, not a submission score, and not a screen of the absent training_features.tif or current geological candidates."
+        },
+        "reason": "No assigned lane and no candidate feature stack; training_features.tif is absent. Current candidate features have not been screened."
+      },
+      "holdout_protocol": {
+        "status": "NOT RUN",
+        "shared_tools_reused": false,
+        "whole_fault_segments_hidden_with_buffer": false,
+        "catalogue_features_derived_from_visible_faults_only": false,
+        "visible_fault_pixels_masked_exactly": false,
+        "pooled_metric": {
+          "name": "distance-weighted Tversky index",
+          "alpha": 0.2,
+          "beta": 0.8,
+          "kernel": "official 300 m triangular kernel"
+        },
+        "required_report_fields": [
+          "evaluator version",
+          "withheld positives",
+          "95% confidence interval"
+        ],
+        "reason": "Required training_features.tif is absent and no explicit method lane is assigned."
+      },
+      "format_gate": {
+        "status": "NOT RUN \u2014 no new TIFF",
+        "required": {
+          "bands": 1,
+          "dtype": "float32",
+          "crs": "EPSG:32611",
+          "width": 3730,
+          "height": 3292,
+          "resolution_m": 100,
+          "grid_source": "sample_submission.tif",
+          "inside_footprint": "finite [0,1]",
+          "outside_footprint": "NaN/null"
+        },
+        "organizer_acceptance_confirmed": false
+      },
+      "unique_tiff_generated": false,
+      "input_integrity": {
+        "owner_mirror_warning": "Hash pins confirm consistency with public owner mirrors; these are not organizer-authenticated competition files.",
+        "core_and_registry_inputs": [
+          {
+            "id": "training_features",
+            "path": "data/raw/training_features.tif",
+            "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+            "actual_sha256": null,
+            "present": false,
+            "matches_pin": null,
+            "organizer_authenticated": false
+          },
+          {
+            "id": "labels",
+            "path": "data/raw/labels.tif",
+            "expected_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+            "actual_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+            "present": true,
+            "matches_pin": true,
+            "organizer_authenticated": false
+          },
+          {
+            "id": "sample_submission",
+            "path": "data/raw/sample_submission.tif",
+            "expected_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+            "actual_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+            "present": true,
+            "matches_pin": true,
+            "organizer_authenticated": false
+          },
+          {
+            "id": "registry_lattice",
+            "path": "data/raw/registry-extra/13gems-lattice-s5.tif",
+            "expected_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+            "actual_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+            "present": true,
+            "matches_pin": true,
+            "organizer_authenticated": false
+          }
+        ],
+        "nine_historical_reference_files": {
+          "count": 9,
+          "all_sha256_match": true,
+          "receipt": "docs/research/2026-10-28-priority-audit.json",
+          "files": [
+            {
+              "site": "GEMSDOE24",
+              "path": "data/raw/priority-readiness/GEMSDOE24-68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310.tif",
+              "expected_sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+              "actual_sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+              "matches_pin": true
+            },
+            {
+              "site": "GEMSDOE25",
+              "path": "data/raw/priority-readiness/GEMSDOE25-91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8.tif",
+              "expected_sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+              "actual_sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+              "matches_pin": true
+            },
+            {
+              "site": "GEMSDOE27",
+              "path": "data/raw/priority-readiness/GEMSDOE27-33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d.tif",
+              "expected_sha256": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d",
+              "actual_sha256": "33003374335d84bf885f2d8f5e9dd4c57044c8ec58fa6a0d7fa581e8bc41c11d",
+              "matches_pin": true
+            },
+            {
+              "site": "GEMSDOE28",
+              "path": "data/raw/priority-readiness/GEMSDOE28-5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641.tif",
+              "expected_sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641",
+              "actual_sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641",
+              "matches_pin": true
+            },
+            {
+              "site": "GEMSDOE30",
+              "path": "data/raw/priority-readiness/GEMSDOE30-8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd.tif",
+              "expected_sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd",
+              "actual_sha256": "8cf893ead5667df21d3288a9968c35fd5385c425b029d82ee71d311715b129fd",
+              "matches_pin": true
+            },
+            {
+              "site": "GEMSDOE31",
+              "path": "data/raw/priority-readiness/GEMSDOE31-07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40.tif",
+              "expected_sha256": "07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40",
+              "actual_sha256": "07b6db440535404bb41ec8ddc797713e200d308e3da35937393efde5eb84bc40",
+              "matches_pin": true
+            },
+            {
+              "site": "GEMSDOE32",
+              "path": "data/raw/priority-readiness/GEMSDOE32-c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9.tif",
+              "expected_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+              "actual_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+              "matches_pin": true
+            },
+            {
+              "site": "GEMSDOE33",
+              "path": "data/raw/priority-readiness/GEMSDOE33-87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757.tif",
+              "expected_sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+              "actual_sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+              "matches_pin": true
+            },
+            {
+              "site": "GEMSDOE36",
+              "path": "data/raw/priority-readiness/GEMSDOE36-e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a.tif",
+              "expected_sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a",
+              "actual_sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a",
+              "matches_pin": true
+            }
+          ]
+        },
+        "training_features_available": false,
+        "required_training_features_expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5"
+      },
+      "historical_family_relations": {
+        "receipt": "docs/research/2026-10-30-verification-receipts/nine-site-family.json",
+        "provenance": "owner-supplied hash-pinned mirrors; not organizer-authenticated",
+        "identical_in_footprint": [
+          [
+            "GEMSDOE25",
+            "GEMSDOE30"
+          ]
+        ],
+        "containment_pairs": [
+          [
+            "GEMSDOE24",
+            "GEMSDOE27"
+          ],
+          [
+            "GEMSDOE31",
+            "GEMSDOE25"
+          ],
+          [
+            "GEMSDOE32",
+            "GEMSDOE25"
+          ],
+          [
+            "GEMSDOE32",
+            "GEMSDOE30"
+          ],
+          [
+            "GEMSDOE32",
+            "GEMSDOE31"
+          ],
+          [
+            "GEMSDOE32",
+            "GEMSDOE36"
+          ]
+        ],
+        "interpretation": "Mask relations only; do not infer geological identity or score causation."
+      },
+      "parallel_review_integration": {
+        "merged_base_commit": "f285b77",
+        "conflict_files_resolved": [
+          "docs/irregularities.md",
+          "docs/status.json"
+        ],
+        "cross_review_irregularity_id_collision": {
+          "status": "OPEN \u2014 assignments collide across parallel 2026-10-30 reviews",
+          "parallel_review": "docs/research/2026-10-30-repo-review.md",
+          "parallel_proposals": {
+            "IR-30-099": "duplicate/mislabelled files in docs/downloads/ (proposed in parallel report)",
+            "IR-30-100": "live GitHub Pages freshness (proposed in parallel report; not rechecked in this turn)"
+          },
+          "this_review_assignments": {
+            "leaderboard_drift": "IR-30-110",
+            "H33_B2_staff_scoring_correction": "IR-30-120"
+          },
+          "resolution": "Parallel report retained under its path; its proposed issues are not assigned central register IDs pending owner/register reconciliation. Do not cite 099/100 without the report path."
+        }
+      },
+      "merged_tree_verification": {
+        "registry_preflight": {
+          "command": ".venv/bin/python scripts/verify_registry_preflight.py",
+          "exit_code": 0,
+          "result": "VERIFIED NEGATIVE: 37441/44090 minimum; historic CSR-1 44084/44090 within 3 px; no submission"
+        },
+        "nine_site_priority_readiness": {
+          "command": ".venv/bin/python scripts/audit_priority_readiness.py --check",
+          "exit_code": 0,
+          "result": "Verified nine historical references; no new raster, forecast, or slot approval"
+        },
+        "generated_site": {
+          "command": ".venv/bin/python scripts/build_research_site.py --check",
+          "exit_code": 0,
+          "result": "Site receipts, download link, and deterministic generated pages verified"
+        },
+        "full_pytest": {
+          "command": ".venv/bin/python -m pytest -q",
+          "collected": 474,
+          "passed": 469,
+          "skipped": 5,
+          "warnings": 4,
+          "subtests_passed": 7,
+          "duration_seconds": 126.83
+        }
+      }
+    }
+  },
+  "official_public_leaderboard_snapshot": {
+    "schema_version": 1,
+    "purpose": "Dated evidence for the visible public leaderboard and the supplied claims 0.4413, 0.3195, and 0.2778. This is not a submission-page receipt and does not identify any repository TIFF or owner account.",
+    "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+    "retrieved_utc_date": "2026-10-30",
+    "retrieval_method": "fetch_page tool, chunks 0-2 of 3; exact fetch time is not exposed. Relative ages on the page are not converted to timestamps.",
+    "page_metric_label": "Best public DW-Tversky (in descending order)",
+    "visible_ranks": [
+      1,
+      50
+    ],
+    "score_evidence_class": "OFFICIAL-PUBLIC-LEADERBOARD-SNAPSHOT; not a submission-page receipt; no mapping to a repository file or GEMSDOE site",
+    "rows": [
+      {
+        "rank": 1,
+        "score": 0.4544
+      },
+      {
+        "rank": 2,
+        "score": 0.3925
+      },
+      {
+        "rank": 3,
+        "score": 0.3915
+      },
+      {
+        "rank": 4,
+        "score": 0.386
+      },
+      {
+        "rank": 5,
+        "score": 0.3642
+      },
+      {
+        "rank": 6,
+        "score": 0.3621
+      },
+      {
+        "rank": 7,
+        "score": 0.3544
+      },
+      {
+        "rank": 8,
+        "score": 0.3533
+      },
+      {
+        "rank": 9,
+        "score": 0.3522
+      },
+      {
+        "rank": 10,
+        "score": 0.352
+      },
+      {
+        "rank": 11,
+        "score": 0.35
+      },
+      {
+        "rank": 12,
+        "score": 0.348
+      },
+      {
+        "rank": 13,
+        "score": 0.3467
+      },
+      {
+        "rank": 14,
+        "score": 0.3447
+      },
+      {
+        "rank": 15,
+        "score": 0.344
+      },
+      {
+        "rank": 16,
+        "score": 0.3418
+      },
+      {
+        "rank": 17,
+        "score": 0.3417
+      },
+      {
+        "rank": 18,
+        "score": 0.3416
+      },
+      {
+        "rank": 19,
+        "score": 0.3407
+      },
+      {
+        "rank": 20,
+        "score": 0.3405
+      },
+      {
+        "rank": 21,
+        "score": 0.3401
+      },
+      {
+        "rank": 22,
+        "score": 0.3399
+      },
+      {
+        "rank": 23,
+        "score": 0.3396
+      },
+      {
+        "rank": 24,
+        "score": 0.3396
+      },
+      {
+        "rank": 25,
+        "score": 0.3389
+      },
+      {
+        "rank": 26,
+        "score": 0.3388
+      },
+      {
+        "rank": 27,
+        "score": 0.3364
+      },
+      {
+        "rank": 28,
+        "score": 0.3363
+      },
+      {
+        "rank": 29,
+        "score": 0.3354
+      },
+      {
+        "rank": 30,
+        "score": 0.3351
+      },
+      {
+        "rank": 31,
+        "score": 0.3349
+      },
+      {
+        "rank": 32,
+        "score": 0.3348
+      },
+      {
+        "rank": 33,
+        "score": 0.3344
+      },
+      {
+        "rank": 34,
+        "score": 0.3335
+      },
+      {
+        "rank": 35,
+        "score": 0.333
+      },
+      {
+        "rank": 36,
+        "score": 0.3328
+      },
+      {
+        "rank": 37,
+        "score": 0.3314
+      },
+      {
+        "rank": 38,
+        "score": 0.3313
+      },
+      {
+        "rank": 39,
+        "score": 0.3312
+      },
+      {
+        "rank": 40,
+        "score": 0.3311
+      },
+      {
+        "rank": 41,
+        "score": 0.3308
+      },
+      {
+        "rank": 42,
+        "score": 0.3295
+      },
+      {
+        "rank": 43,
+        "score": 0.328
+      },
+      {
+        "rank": 44,
+        "score": 0.3273
+      },
+      {
+        "rank": 45,
+        "score": 0.3262
+      },
+      {
+        "rank": 46,
+        "score": 0.3261
+      },
+      {
+        "rank": 47,
+        "score": 0.3244
+      },
+      {
+        "rank": 48,
+        "score": 0.3231
+      },
+      {
+        "rank": 49,
+        "score": 0.3217
+      },
+      {
+        "rank": 50,
+        "score": 0.3195
+      }
+    ],
+    "claim_checks": [
+      {
+        "claim": "0.4413 is the current public leaderboard high",
+        "result": "NOT SUPPORTED by this 2026-10-30 snapshot: the displayed top is 0.4544 and 0.4413 is absent from visible ranks 1-50."
+      },
+      {
+        "claim": "0.3195 is the highest score right now",
+        "result": "NOT SUPPORTED: 0.3195 is the displayed rank-50 cutoff in this snapshot, not the top. It was rank 47 in the separate 2026-10-29 snapshot."
+      },
+      {
+        "claim": "GEMSDOE32 H33-B2 scored 0.2778",
+        "result": "OWNER-REPORTED, UNVERIFIED for that repository file. The value is below the 2026-10-30 visible rank-50 cutoff; no organizer submission-page receipt links it to a team or file."
+      }
+    ],
+    "limitations": [
+      "The page exposes ranks 1-50 followed by a loading placeholder; ranks below 50 were not observed.",
+      "Public leaderboard values are not private-test or final-round scores.",
+      "Team identities are not mapped to GEMSDOE site names; no repository raster is attributed to a displayed row.",
+      "No submission-page receipt was available for any of the nine historical TIFFs."
+    ],
+    "slot_selected": false
+  },
+  "current_readiness_scope": "Archived retained research artifact only; latest_scientific_review is the current zero-experiment duplicate-stop preflight; latest_repository_audit is a separate evidence/report pointer. Neither field selects a slot.",
   "current_readiness": {
     "schema_version": 3,
     "experiment_spec": "pta1",
@@ -3281,7 +3939,7 @@
   "verification": {
     "tests": "see verification.tests_collected",
     "tests_collected": {
-      "pytest_collect": "463 tests collected in 1.52s",
+      "pytest_collect": "474 tests collected in 0.88s",
       "exit_code": 0
     },
     "score_gain_claimed": false

@@ -4,6 +4,8 @@
 
 Scope: review of the repository (including the other 2026-10-29 sessions now merged on `main`), the official competition pages, the official rules PDF, the DrivenData forum staff answers, and the USGS and IHFC catalogue pages. Every claim is labelled by evidence level.
 
+> **Dated addendum — 2026-10-30:** the newer public-board snapshot now places 0.3195 at rank 50 (rather than rank 47 in this 2026-10-29 snapshot); the historical snapshot below is retained unchanged. A fresh read of staff reply [11516/4](https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4) also confirms the pixel-exact mask and says new truth may fall within 300 m of known traces and may include corrections. The general penalty statement is staff-confirmed for an unmasked prediction far from new truth, but the claimed H33-B2 causal contribution remains unknown. See the [2026-10-30 session review](2026-10-30-session-review.md).
+
 **Three findings change the picture and need your decision first:**
 
 1. **The uniqueness witness cannot discriminate (IR-30-097).** The pinned 13GEMSDOE lattice covers 99.87% of the footprint within 3 px, so random dots average about 99.86% against it. The literal 70%/3 px rule therefore stops every candidate above 22,164 dots, whatever its content. The "99.9%" figures in the nine-site table measure coverage, not duplication, and the table's "unique? NO" column rests on that test alone.

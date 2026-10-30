@@ -12,6 +12,30 @@ def _receipt(path: str) -> dict:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
+def test_latest_repository_review_and_public_board_are_on_the_generated_site():
+    pages = render(
+        _receipt("docs/research/2026-10-27-registry-preflight/run-card.json"),
+        _receipt("docs/research/2026-10-26-csr/fleet-audit.json"),
+    )
+    page = pages["priority-executive-summary.html"]
+    assert "30 Oct 2026 cumulative review" in page
+    assert '<a href="priority-executive-summary.html">30 Oct review</a>' in page
+    assert "rank 1 = <strong>0.4544</strong>" in page
+    assert "rank 50 = <strong>0.3195</strong>" in page
+    assert "not attributed to a repository file" in page
+    assert "0.984002 &gt; 0.90" in page
+    assert "not a screen of" in page
+    assert "99.80–99.92%" in page
+    assert "2026-10-30-session-review.md" in page
+    assert "new-fault truth may lie within 300 m" in page
+    assert "may therefore lose TP credit as well as FP penalty" in page
+    assert "Four ranked, untested geological hypotheses" in pages["index.html"]
+    assert "Full-resolution 1 m scarp filters" in pages["index.html"]
+    assert "H-31-01's catalogue-proximity relay-connector experiment was already run and not promoted" in pages["index.html"]
+    assert "owner reports <strong>0.2778</strong> for H33-B2" in page
+    assert "28 Oct 2026: no approved submission download" not in page
+
+
 def test_nine_site_table_separates_claims_from_new_score_estimates():
     pages = render(
         _receipt("docs/research/2026-10-27-registry-preflight/run-card.json"),
@@ -22,7 +46,11 @@ def test_nine_site_table_separates_claims_from_new_score_estimates():
     assert page.count("no validated new candidate; no forecast") == 9
     assert "unverified owner claim; no receipt" in page
     assert "DO NOT DOWNLOAD FOR SUBMISSION" in page
-    assert "does not prove all other comparisons" in page
+    assert "Literal gate / family relation" in page
+    assert "same in-footprint mask as GEMSDOE30" in page
+    assert "all dots contained in GEMSDOE27" in page
+    assert "all dots contained in GEMSDOE25" in page
+    assert "does not prove copying" in page
 
 
 def test_current_overview_discloses_merged_tiffs_as_stopped_without_download_controls():
@@ -63,6 +91,15 @@ def test_status_feed_reports_pool1_as_verified_negative(tmp_path, monkeypatch):
     monkeypatch.setattr(sys, "argv", ["build_status.py", "--skip-tests", "--output", str(output)])
     assert build_status.main() == 0
     status = json.loads(output.read_text(encoding="utf-8"))
+    repo_audit = status["latest_repository_audit"]
+    assert repo_audit["date_utc"] == "2026-10-30"
+    assert repo_audit["decision"].startswith("NEGATIVE: no new TIFF")
+    assert repo_audit["run_card_data"]["slot_selected"] is False
+    board = status["official_public_leaderboard_snapshot"]
+    assert board["score_evidence_class"].startswith("OFFICIAL-PUBLIC-LEADERBOARD-SNAPSHOT")
+    assert board["rows"][0] == {"rank": 1, "score": 0.4544}
+    assert board["rows"][-1] == {"rank": 50, "score": 0.3195}
+    assert status["current_run_pointer"]["latest_review"]["lane"] == "registry-preflight-20261027"
     pool = next(row for row in status["additional_stopped_attempts"] if row["lane"] == "POOL-1")
     assert pool["verified_now"] is True
     assert pool["error"] is None
