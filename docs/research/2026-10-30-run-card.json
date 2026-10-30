@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "date_utc": "2026-10-30",
+  "session": "repository review only",
+  "branch": "arena/51f76c05-gemsdoe30",
+  "hypothesis": "No geological hypothesis was tested. S29-A (scale-selective band-pass of detrended elevation and TMI) remains the lowest-cost future candidate, conditional on an explicit lane and policy resolution.",
+  "mechanism": "No new candidate or feature surface was generated; no mechanism was tested.",
+  "named_non_fault_process": "Drainage, lithologic contacts, roads, remanent magnetic texture and survey seams can mimic terrain/magnetic band-pass structure; these require controls if S29-A is later authorized.",
+  "holdout_dti": {
+    "label": "HOLDOUT-DTI",
+    "value": null,
+    "ci95": null,
+    "evaluator_version": null,
+    "withheld_positives": null,
+    "status": "NOT MEASURED: no experiment launched; training_features.tif and labels.tif are absent. No score estimate is made."
+  },
+  "organizer_confirmed_score": null,
+  "unverified_historical_claim": {
+    "value": "0.2778",
+    "site": "GEMSDOE32 H33-B2",
+    "label": "OWNER-REPORTED, UNVERIFIED; no submission-page receipt in this repository",
+    "use": "Historical context only; not a HOLDOUT-DTI, ORGANIZER-CONFIRMED score, forecast, or current leaderboard claim."
+  },
+  "correlation_overlap_vs_registry": {
+    "new_candidate": null,
+    "new_candidate_status": "NOT GENERATED; no pre-placement surface or final dots to compare.",
+    "pinned_witness": {
+      "name": "13GEMSDOE lattice",
+      "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+      "footprint_coverage_within_3px": "5160724/5167373 = 99.87%; saturated/non-discriminating witness (IR-30-097)",
+      "literal_stop": "All nine audited historical final-dot rasters exceed 70% overlap; none passes the current literal rule. This does not establish exact identity or a complete-registry novelty result.",
+      "historical_final_dot_overlaps": {
+        "GEMSDOE24": "60022/60069 = 99.92%",
+        "GEMSDOE25": "44053/44090 = 99.92%",
+        "GEMSDOE27": "61281/61328 = 99.92%",
+        "GEMSDOE28": "37626/37660 = 99.91%",
+        "GEMSDOE30": "44053/44090 = 99.92%",
+        "GEMSDOE31": "40166/40199 = 99.92%",
+        "GEMSDOE32": "37622/37654 = 99.92%",
+        "GEMSDOE33": "41829/41865 = 99.91%",
+        "GEMSDOE36": "38822/38854 = 99.92%"
+      }
+    }
+  },
+  "raster_sha256": null,
+  "validator_output": {
+    "new_candidate": "NOT APPLICABLE: no output raster was generated.",
+    "format_validated_historical_files": {
+      "pass": ["GEMSDOE24", "GEMSDOE25", "GEMSDOE27", "GEMSDOE28", "GEMSDOE31"],
+      "fail": ["GEMSDOE30", "GEMSDOE32", "GEMSDOE33", "GEMSDOE36"],
+      "scope": "Shared published-format validator only; a pass does not establish uniqueness, portal acceptance, score, or submission approval."
+    },
+    "template": {
+      "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "crs": "EPSG:32611",
+      "shape": [3730, 3292],
+      "transform": [243350.0, 100.0, 0.0, 4508550.0, 0.0, -100.0]
+    },
+    "checks": {
+      "no_NaN_inside_footprint": "NOT APPLICABLE for a new candidate; no raster emitted.",
+      "values_in_0_1": "NOT APPLICABLE for a new candidate; no raster emitted.",
+      "CRS_shape_transform_match": "NOT APPLICABLE for a new candidate; no raster emitted. Historical audit used shared validator against the template."
+    }
+  },
+  "submission_name": null,
+  "submission_note": null,
+  "verdict": "negative",
+  "download_ok": false,
+  "ok_to_submit": false,
+  "slot_selected": false,
+  "experiments_run_in_this_review": 0,
+  "experiment_cap_per_prompt": 3,
+  "experiment_budget_note": "No experiment was started. This 0/3 review count does not reset or override previously exhausted lane budgets, the missing lane assignment, or owner policy blockers.",
+  "official_leaderboard": {
+    "most_recent_stored_receipt": "docs/research/2026-10-29-leaderboard-snapshot.json",
+    "retrieval_date": "2026-10-29",
+    "fresh_2026_10_30_check": false,
+    "current_top_claim": null,
+    "note": "The prior snapshot is dated and cannot be presented as a current 30 October score."
+  },
+  "checks": {
+    "registry_preflight": "VERIFIED NEGATIVE: 37441/44090 minimum; historic CSR-1 44084/44090 within 3 px; no submission. Exit 0.",
+    "registry_preflight_require_promote": "Expected exit 2 (negative; no promotion).",
+    "nine_site_audit": "Restored pinned historical files; offline hash-bound check passed; no evidence or prediction rewritten.",
+    "research_site_check": "Passed.",
+    "pytest": "412 passed, 37 skipped, 4 Rasterio deprecation warnings, 7 subtests passed after restoring the nine historical files.",
+    "git_diff_check": "Passed."
+  },
+  "sources": [
+    "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+    "https://github.com/drivendataorg/gems-prize-reference-solution",
+    "https://www.drivendata.org/termsofuse/",
+    "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+    "https://www.sciencebase.gov/catalog/item/671f9d3ed34ed0f827eaa16d"
+  ],
+  "review": "docs/research/2026-10-30-repo-review.md"
+}
