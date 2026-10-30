@@ -141,9 +141,9 @@
   },
   "latest_session_review": {
     "date_utc": "2026-10-30",
-    "report": "docs/research/2026-10-30-repo-review.md",
-    "run_card": "docs/research/2026-10-30-run-card.json",
-    "scope": "Repository/site/test review and historical nine-site byte-audit reproduction only; no new fit, holdout, TIFF or slot selection.",
-    "verdict": "NEGATIVE: no approved download or score estimate; the lane and novelty policy remain unresolved and holdout inputs are absent."
+    "report": "docs/repository-review-2026-10-30.md",
+    "run_card": "docs/repository-review-2026-10-30-card.json",
+    "scope": "Three-pass repository and nine-site submission readiness review; no new experiment, raster, score estimate or slot selection.",
+    "verdict": "NEGATIVE: no approved download; missing holdout inputs, no assigned lane and unresolved literal novelty stop."
   }
 }

@@ -1,0 +1,108 @@
+{
+  "hypothesis": "No new hypothesis was tested: no lane was assigned and no leakage-safe training/holdout stack was available. For H33-B2, the unverified proposed mechanism is that removing low-value/catalogue-adjacent dots reduces false-positive cost while retaining enough 300 m-kernel support; causality is not established.",
+  "mechanism": "Zero-experiment repository review; reopened nine SHA-pinned historical rasters, reproduced the registry preflight, site-build check, and tests; no prediction surface or raster was created.",
+  "named_non_fault_process": "Not evaluated for a new candidate. Known potential mimics in the pre-existing research include Lahontan shorelines/terraces, volcanic flow fronts, and lithologic contacts; none was tested here.",
+  "holdout_dti": null,
+  "holdout_ci95": null,
+  "evaluator_version": null,
+  "withheld_positives": null,
+  "concurrent_live_leaderboard_report": {
+    "reported_public_leader_score": 0.4544,
+    "label": "ORGANIZER-CONFIRMED public-board value as reported in the concurrent 2026-10-30 repository review; not independently refetched in this audit and not linked to any audited raster.",
+    "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+    "receipt": "docs/research/2026-10-30-repo-review.md"
+  },
+  "correlation_overlap_vs_registry": {
+    "new_candidate": "not applicable; none generated",
+    "nine_historical_rasters_vs_pinned_lattice": {
+      "GEMSDOE24": "60022/60069 = 99.92%",
+      "GEMSDOE25": "44053/44090 = 99.92%",
+      "GEMSDOE27": "61281/61328 = 99.92%",
+      "GEMSDOE28": "37626/37660 = 99.91%",
+      "GEMSDOE30": "44053/44090 = 99.92%",
+      "GEMSDOE31": "40166/40199 = 99.92%",
+      "GEMSDOE32": "37622/37654 = 99.92%",
+      "GEMSDOE33": "41829/41865 = 99.91%",
+      "GEMSDOE36": "38822/38854 = 99.92%"
+    },
+    "pr76_named_unique_artifact_vs_lattice": 0.9983168950079105,
+    "pr78_named_unique_artifact_vs_lattice": 0.9990675507666805,
+    "pr78_vs_prior_geothermal_corridor_dots": 1.0,
+    "surface_stage": "not checked for historical artifacts",
+    "new_candidate_preplacement_surface": null,
+    "new_candidate_final_dots": null,
+    "interpretation": "Literal rule stops all nine historical final-dot rasters. The pinned lattice is saturated/non-discriminating (99.87% footprint coverage); not proof of exact identity or complete registry clearance."
+  },
+  "raster_sha256": null,
+  "validator_output": {
+    "new_candidate": "NOT APPLICABLE: no output raster generated.",
+    "historical_local_format_audit": {
+      "pass": [
+        "GEMSDOE24",
+        "GEMSDOE25",
+        "GEMSDOE27",
+        "GEMSDOE28",
+        "GEMSDOE31"
+      ],
+      "fail": [
+        "GEMSDOE30",
+        "GEMSDOE32",
+        "GEMSDOE33",
+        "GEMSDOE36"
+      ],
+      "scope": "Format only; does not establish uniqueness, portal acceptance, score, or submission approval."
+    },
+    "new_candidate_no_nan_inside_footprint": "NOT APPLICABLE; no candidate.",
+    "new_candidate_values_in_0_1": "NOT APPLICABLE; no candidate.",
+    "new_candidate_crs_shape_transform_match": "NOT APPLICABLE; no candidate."
+  },
+  "submission_name": null,
+  "submission_note": null,
+  "verdict": "negative",
+  "ok_to_download_and_submit": false,
+  "experiments_run": 0,
+  "slot_selected": false,
+  "tests": "412 passed, 37 skipped, 4 warnings, 7 subtests passed",
+  "irregularities": [
+    "IR-30-088",
+    "IR-30-089",
+    "IR-30-097",
+    "IR-30-098"
+  ],
+  "schema_version": 1,
+  "date_utc": "2026-10-30",
+  "session": "Repository and submission-readiness review; no scientific experiment.",
+  "branch": "arena/51f76c05-gemsdoe30",
+  "new_candidate_raster_sha256": null,
+  "unverified_historical_claim": {
+    "site": "GEMSDOE32 H33-B2",
+    "value": "0.2778",
+    "label": "OWNER-REPORTED, UNVERIFIED; no submission-page receipt in this repository",
+    "use": "Historical context only; not HOLDOUT-DTI, ORGANIZER-CONFIRMED, a forecast, or a current leaderboard claim."
+  },
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "value": null,
+    "ci95": null,
+    "evaluator_version": null,
+    "withheld_positives": null,
+    "status": "NOT MEASURED: no experiment launched; training_features.tif and labels.tif are absent. No score estimate is made."
+  },
+  "template_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "lattice_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+  "download_ok": false,
+  "experiments_run_this_review": 0,
+  "experiment_cap_per_prompt": 3,
+  "experiment_budget_note": "A 0-experiment review does not reset prior exhausted lane budgets or resolve missing lane/policy assignment.",
+  "site_reproduction": {
+    "restore_public_template_and_lattice": "passed; SHA-pinned owner mirrors, not organizer-authenticated",
+    "restore_nine_historical_files": "passed; no evidence or prediction rewritten",
+    "registry_preflight": "negative reproduced, exit 0; --require-promote expected exit 2",
+    "nine_site_audit": "offline check passed",
+    "site_build": "passed",
+    "pytest": "412 passed, 37 skipped, 4 warnings, 7 subtests passed",
+    "git_diff_check": "passed"
+  },
+  "review": "docs/repository-review-2026-10-30.md",
+  "expanded_run_card_path": "docs/repository-review-2026-10-30-card.json"
+}
