@@ -121,7 +121,7 @@ Verified this session (exit codes observed):
 - `scripts/verify_current_run.py`, `verify_stopped_attempt.py`, `verify_geothermal_chemistry_run.py`, `verify_quadrature_phase_run.py`, `verify_csr_run.py`, `verify_registry_preflight.py`, `verify_lsm_run.py`, `verify_tad_run.py`: all exit 0.
 - `scripts/verify_registry_preflight.py --require-promote`: exit 2 (expected; the stop stands).
 - `scripts/build_research_site.py --check`: exit 0.
-- `python -m pytest -q` with pinned inputs restored: **457 passed, 5 skipped** (the skips are optional Torch tests).
+- `python -m pytest -q` with pinned inputs restored: **458 passed, 5 skipped** (the skips are optional Torch tests).
 - New: `scripts/lattice_random_control.py`, `scripts/verify_nine_site_family.py`, and the test file `tests/test_repo_review_2026_10_30.py`.
 
 Not verified (limits):
@@ -152,3 +152,17 @@ Not verified (limits):
 - Earlier nine-site audit: [`../../2026-10-28-priority-audit.json`](../2026-10-28-priority-audit.json) · [`../../../priority-readiness-audit.html`](../../../priority-readiness-audit.html)
 - Hypotheses register: [`../../hypotheses-2026-10-29.md`](../hypotheses-2026-10-29.md)
 - Owner protocol: [`README.md`](../../../README.md#current-owner-prompt) · [`AGENTS.md`](../../../AGENTS.md)
+
+## Leakage canary (partial, follow-up)
+
+Owner rule: a single feature alone with AUC above 0.90 against the labels means leakage. Run by [`scripts/leakage_canary.py`](../../../scripts/leakage_canary.py); receipt [`leakage-canary.json`](leakage-canary.json).
+
+| Layer (data/external, 100 m, on the labels grid) | Single-feature AUC | Flag |
+|---|---:|---|
+| `derived_gdr_qfaults_v2_100m_u8.tif` | **0.984002** | **LEAKAGE (>0.90)** |
+| `derived_sgmc_faults_100m_u8.tif` | 0.522802 | no |
+| `derived_gdr_2m_probes_100m_u8.tif` | 0.500101 | no |
+| `derived_gdr_paleo_100m_u8.tif` | 0.500134 | no |
+| `derived_gdr_volcanics_100m_u8.tif` | 0.499876 (sign-free 0.500124) | no |
+
+Limits: the model's `training_features.tif` is absent from this checkout, so the canary covers only these five derived layers, and labels come from the pinned mirror `labels.tif` (provenance unresolved, IR-30-114). It is a screen, not a score: no HOLDOUT-DTI, no organizer confirmation. Qfaults is flagged and is excluded from any holdout claim (IR-30-119).
