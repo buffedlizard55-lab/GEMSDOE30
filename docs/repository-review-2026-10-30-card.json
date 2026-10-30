@@ -6,6 +6,11 @@
   "holdout_ci95": null,
   "evaluator_version": null,
   "withheld_positives": null,
+  "concurrent_live_leaderboard_report": {
+    "reported_public_leader_score": 0.4544,
+    "source": "docs/research/2026-10-30-repo-review.md",
+    "verification_in_this_audit": "not independently refetched; not linked to any audited raster or submission receipt"
+  },
   "correlation_overlap_vs_registry": {
     "new_candidate": "not applicable; none generated",
     "nine_historical_rasters_vs_pinned_lattice": "each exceeds the literal >70% within-3-px dot stop; range 99.910% to 99.923%",

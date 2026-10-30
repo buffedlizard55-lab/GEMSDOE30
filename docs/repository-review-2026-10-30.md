@@ -82,7 +82,7 @@ The ordering is a *work-priority heuristic* (data availability and implementatio
 2. **Data blocker:** `training_features.tif` and `labels.tif` are absent. The locally restored sample template and owner mirrors are not organizer-authenticated; a fresh HOLDOUT-DTI cannot be defensibly computed from them.
 3. **Protocol blocker:** no single current method lane is assigned, and prior experiment caps/stop receipts in `AGENTS.md` remain in force. Do not quietly start a new experiment, change the lane, or re-encode a stopped output.
 4. **Novelty-policy blocker:** the pinned lattice covers nearly all valid pixels within 3 px, so its overlap stop is not discriminating. Do not bypass the literal current rule; resolve the witness/policy consistently in a selector/governance step before trying another dense submission. A smaller dot budget is not an automatic pass.
-5. **Score provenance:** H33-B2's 0.2778 and other historical figures remain owner-reported. The previously checked public leaderboard snapshot is dated 2026-10-29, not current to this review date; live rank and the owner's conflicting 0.3195/0.4413 claims remain unverified here.
+5. **Score provenance:** H33-B2's 0.2778 and other historical figures remain owner-reported. A separate concurrently merged 2026-10-30 review reports that the live public board's #1 is 0.4544 ([its report](research/2026-10-30-repo-review.md)); I did not independently refetch that page in this audit. The 2026-10-29 snapshot records 0.3195 at rank 47 and 0.4413 absent from the top 50. No leaderboard score is tied by an organizer receipt to any raster audited here.
 6. **Format nuance:** the four all-finite-zero-outside historical rasters fail the repository's null-outside-template check. This is not proof of the portal's exact range error. The sample-submission contract and the portal's precise nodata behavior should be resolved using an authorized organizer receipt and exact rejected file.
 7. **Registry scope:** the nine-site byte audit and local `docs/downloads/` comparisons do not constitute a complete, current parallel-run registry. Pre-placement surfaces for the nine historical sites were not preserved in the audit, so surface-stage uniqueness is unverified.
 8. **Next safe sequence:** restore organizer-authorized data with provenance; assign a single lane and freeze controls/folds; run each feature's leakage canary; spend no more than the specified experiment/time budget; require paired pooled HOLDOUT-DTI CI lower bound above zero against the frozen best; then screen the continuous surface and final dots against a complete registry; validate the exact written TIFF; finally let the separate weekly-slot selector decide. Only an organizer receipt may be called ORGANIZER-CONFIRMED.
@@ -111,6 +111,11 @@ Links are pointers for verification; the non-GitHub sources and live leaderboard
   "holdout_ci95": null,
   "evaluator_version": null,
   "withheld_positives": null,
+  "concurrent_live_leaderboard_report": {
+    "reported_public_leader_score": 0.4544,
+    "source": "docs/research/2026-10-30-repo-review.md",
+    "verification_in_this_audit": "not independently refetched; not linked to any audited raster or submission receipt"
+  },
   "correlation_overlap_vs_registry": {
     "new_candidate": "not applicable; none generated",
     "nine_historical_rasters_vs_pinned_lattice": "each exceeds the literal >70% within-3-px dot stop; range 99.910% to 99.923%",
