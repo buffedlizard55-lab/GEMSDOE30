@@ -138,5 +138,12 @@
     "report": "docs/research/2026-10-28-offlattice-safety-review.md",
     "site_page": "offlattice-safety-review.html",
     "decision": "NEGATIVE: off-lattice generator disabled; no new scientific lane or slot"
+  },
+  "latest_session_review": {
+    "date_utc": "2026-10-30",
+    "report": "docs/repository-review-2026-10-30.md",
+    "run_card": "docs/repository-review-2026-10-30-card.json",
+    "scope": "Three-pass repository and nine-site submission readiness review; no new experiment, raster, score estimate or slot selection.",
+    "verdict": "NEGATIVE: no approved download; missing holdout inputs, no assigned lane and unresolved literal novelty stop."
   }
 }
