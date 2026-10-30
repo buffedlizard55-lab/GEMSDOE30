@@ -4,7 +4,7 @@
 
 ## Session · 2026-10-30 repository review (arena/2a368cf4-gemsdoe30): **NO APPROVED TIFF · NO FILE TO DOWNLOAD**
 
-**Start here: [executive summary and table](docs/research/2026-10-30-verification-receipts/review.md).**
+**Start here: [executive summary and table](docs/research/2026-10-30-verification-receipts/review.md).** A parallel 2026-10-30 review merged to `main` ([PR #85](https://github.com/buffedlizard55-lab/GEMSDOE30/pull/85), [`docs/repository-review-2026-10-30.md`](docs/repository-review-2026-10-30.md)) reaches the same negative verdict; this session adds an independent live-board fetch (#1 0.4544, #50 0.3195), the random-dot control, and the nine-site containment analysis.
 
 - **Download:** none. Do not download or submit any of the nine requested sites' historical files. **Estimated score:** none can be written (owner-reported values only; no HOLDOUT-DTI, no organizer receipt). **Unique:** no. Measured: GEMSDOE25 and GEMSDOE30 are identical inside the footprint, and all dots of GEMSDOE32 (H33-B2, owner-reported 0.2778) are dots of GEMSDOE25, 30, 31 and 36 ([`nine-site-family.json`](docs/research/2026-10-30-verification-receipts/nine-site-family.json)).
 - **Why H33-B2 differs from D2.8 (measured pixel structure):** it is GEMSDOE25 minus 6,436 dots, every one lying within 2 px of a labelled fault. Whether that causes the reported gain is **not measured** (hypothesis H-HALO).
@@ -14,6 +14,9 @@
 - **Verification:** `pytest` 457 passed, 5 optional skips (with pinned inputs restored); all CI verifiers exit 0; `verify_registry_preflight.py --require-promote` exits 2 as expected.
 - **Decisions needed (review §6):** (1) a chance-corrected uniqueness rule; (2) one assigned lane; (3) whether one weekly slot may run a portal encoding probe; (4) confirm the deadline on the competition website; (5) confirm your DrivenData history and weekly cap; (6) review the generative-AI narrative draft, which the rules require.
 - **Irregularities:** IR-30-110 to IR-30-118 in [`docs/irregularities.md`](docs/irregularities.md). Run card: [`run-card.json`](docs/research/2026-10-30-verification-receipts/run-card.json).
+## Session · 2026-10-30 repository review · **NEGATIVE · NO TIFF APPROVED**
+
+The current three-pass review is [`docs/repository-review-2026-10-30.md`](docs/repository-review-2026-10-30.md). It re-ran the exact-byte nine-site audit, pinned registry preflight, two high-risk TIFF novelty checks, deterministic Pages build, and full test suite (**412 passed, 37 skipped, 4 warnings, 7 subtests passed**). The nine reported historical values remain owner-reported; H33-B2's 0.2778 mechanism is plausible but not causally verified. A separate concurrent 2026-10-30 report states the official public #1 is 0.4544; this audit did not independently refetch it, and no candidate raster is tied to that score. The nine audited files are not cleared as unique under the current rule; GEMSDOE25/30 are exact in-footprint aliases, and GEMSDOE30/32/33/36 fail the local null-outside-format check. The two 2026-10-29 files named “unique” are also duplicate-stopped. **No new raster, score estimate, or slot was produced. Do not download or submit any artifact as approved.** The dated review contains the run card, limitations, reproduction commands, and official source links.
 
 ## Session · 2026-10-29 review (arena/8357086d-gemsdoe30): official leaderboard verified · **no approved TIFF**
 
