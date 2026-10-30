@@ -144,3 +144,14 @@ def test_run_card_is_a_negative_with_no_slot_and_no_experiments():
     assert card["budget"]["experiments_used"] == 0
     assert card["holdout_dti_and_ci"]["status"] == "NOT MEASURED"
     assert card["organizer_confirmed_scores"]["status"] == "NONE"
+
+
+def test_leakage_canary_receipt_flags_qfaults_and_nothing_else():
+    receipt = json.loads((REVIEW / "leakage-canary.json").read_text())
+    assert receipt["rule"].startswith("single-feature AUC > 0.90")
+    assert receipt["score_class"].startswith("NOT a score")
+    flagged = [f["feature"] for f in receipt["features"] if f.get("leakage_flag")]
+    assert flagged == ["derived_gdr_qfaults_v2_100m_u8.tif"]
+    qf = next(f for f in receipt["features"] if f["feature"] == flagged[0])
+    assert abs(qf["auc"] - 0.984002) < 1e-6
+    assert receipt["any_leakage_flag"] is True
