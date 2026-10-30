@@ -2,7 +2,7 @@
   "schema_version": 1,
   "run_card": "docs/research/phase-tilt-asymmetry/run-card.json",
   "readiness": "docs/research/phase-tilt-asymmetry/readiness.json",
-  "purpose": "Archived top-level PTA-1 pointer retained for historical verifier compatibility; latest_review is the current zero-experiment registry preflight. No file or slot is approved.",
+  "purpose": "Archived top-level PTA-1 pointer retained for historical verifier compatibility; latest_review remains the current scientific preflight, while latest_repository_audit separately tracks the current repository/evidence review. No file or slot is approved.",
   "latest_attempt": "docs/research/texture-controls/run-card.json",
   "additional_stopped_attempts": [
     {
@@ -86,7 +86,7 @@
       "submission_tif": "docs/downloads/gems30-offlattice-geothermal-structural-20261028-s7.tif",
       "validation": "docs/downloads/gems30-offlattice-geothermal-structural-20261028-s7.tif.json",
       "verifier": "scripts/build_offlattice_submission.py",
-      "decision": "ARCHIVED record, not current approval: FORMAT-VALID RESEARCH ARTIFACT, NOT OK TO SUBMIT (verdict negative; 6,649 binary dots all >300 m from the pinned 13GEMSDOE lattice \u2014 0.0000 within 3 px <= gate 0.70; Spearman vs lattice surface -0.0073 <= gate 0.90; unique vs locally available downloads max 0.4735 <= 0.70; 12/12 GEMS format checks passed vs grid reference, values in [0,1], EPSG:32611, 3730x3292, 100 m north-up, NaN outside footprint; holdout gate BLOCKED \u2014 organizer rasters require DrivenData login; no HOLDOUT-DTI, no score forecast, no slot selected)"
+      "decision": "ARCHIVED record, not current approval: FORMAT-VALID RESEARCH ARTIFACT, NOT OK TO SUBMIT (verdict negative; 6,649 binary dots all >300 m from the pinned 13GEMSDOE lattice — 0.0000 within 3 px <= gate 0.70; Spearman vs lattice surface -0.0073 <= gate 0.90; unique vs locally available downloads max 0.4735 <= 0.70; 12/12 GEMS format checks passed vs grid reference, values in [0,1], EPSG:32611, 3730x3292, 100 m north-up, NaN outside footprint; holdout gate BLOCKED — organizer rasters require DrivenData login; no HOLDOUT-DTI, no score forecast, no slot selected)"
     }
   ],
   "previous_review": {
@@ -124,14 +124,14 @@
     "decision": "PARALLEL LANE, NOT THE LATEST_REVIEW POINTER: science confirmed, artifact duplicate-stopped, no TIFF published; lattice/CTD/FC coverage UNKNOWN (see postmerge-addendum.json)"
   },
   "latest_repository_audit": {
-    "date_utc": "2026-10-28",
-    "receipt": "docs/research/2026-10-28-priority-audit.json",
-    "run_card": "docs/research/2026-10-28-run-card.json",
-    "report": "docs/research/2026-10-28-review.md",
-    "site_page": "priority-readiness-audit.html",
-    "verifier": "scripts/audit_priority_readiness.py --check",
-    "scope": "Zero-experiment audit of frozen historical leaders; does not replace latest scientific review or authorize a lane or slot",
-    "decision": "NEGATIVE: all nine historical references exceed 99.90% overlap against the pinned lattice; no new TIFF or score estimate"
+    "date_utc": "2026-10-30",
+    "receipt": "docs/research/2026-10-30-leaderboard-snapshot.json",
+    "run_card": "docs/research/2026-10-30-session-run-card.json",
+    "report": "docs/research/2026-10-30-session-review.md",
+    "site_page": "priority-executive-summary.html",
+    "verifier": "scripts/verify_registry_preflight.py + scripts/audit_priority_readiness.py --check + scripts/build_research_site.py --check + pytest -q",
+    "scope": "Cumulative three-pass repository and evidence audit, including a dated public-board snapshot, nine-site historical table, H33 evidence correction, and generated-site/feed refresh. Does not replace latest_scientific_review or authorize a lane, TIFF, download, upload, or slot.",
+    "decision": "NEGATIVE: no new TIFF; no historical file approved for download/submission; no candidate HOLDOUT-DTI or score estimate; no weekly slot selected."
   },
   "latest_safety_review": {
     "run_card": "docs/research/2026-10-28-offlattice-safety-run-card.json",
