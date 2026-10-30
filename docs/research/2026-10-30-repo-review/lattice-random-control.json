@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "purpose": "Random-dot control for the pinned 13GEMSDOE lattice witness (IR-30-097). Measures chance-level overlap under the literal 70%/3 px rule.",
+  "evaluator": "gemsdoe30.novelty.compare (stage=dots, Euclidean <=3 px, shared repo code)",
+  "template": {
+    "path": "data/raw/sample_submission.tif",
+    "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+    "footprint_cells": 5167373,
+    "provenance": "owner-supplied mirror, integrity-pinned, NOT organizer-authenticated"
+  },
+  "witness": {
+    "path": "data/raw/registry-extra/13gems-lattice-s5.tif",
+    "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+    "positive_cells": 206895
+  },
+  "trials": [
+    {
+      "budget": 9652,
+      "seed": 0,
+      "fraction_within_3px": 0.9981351015333609,
+      "dot_duplicate_by_literal_rule": true
+    },
+    {
+      "budget": 9652,
+      "seed": 1,
+      "fraction_within_3px": 0.9980314960629921,
+      "dot_duplicate_by_literal_rule": true
+    },
+    {
+      "budget": 9652,
+      "seed": 2,
+      "fraction_within_3px": 0.9989639452963116,
+      "dot_duplicate_by_literal_rule": true
+    },
+    {
+      "budget": 9652,
+      "seed": 3,
+      "fraction_within_3px": 0.9990675507666805,
+      "dot_duplicate_by_literal_rule": true
+    },
+    {
+      "budget": 9652,
+      "seed": 4,
+      "fraction_within_3px": 0.9990675507666805,
+      "dot_duplicate_by_literal_rule": true
+    },
+    {
+      "budget": 22164,
+      "seed": 0,
+      "fraction_within_3px": 0.9983757444504602,
+      "dot_duplicate_by_literal_rule": true
+    },
+    {
+      "budget": 22164,
+      "seed": 1,
+      "fraction_within_3px": 0.9990073993863924,
+      "dot_duplicate_by_literal_rule": true
+    },
+    {
+      "budget": 22164,
+      "seed": 2,
+      "fraction_within_3px": 0.998150153401913,
+      "dot_duplicate_by_literal_rule": true
+    },
+    {
+      "budget": 22164,
+      "seed": 3,
+      "fraction_within_3px": 0.9984208626601696,
+      "dot_duplicate_by_literal_rule": true
+    },
+    {
+      "budget": 22164,
+      "seed": 4,
+      "fraction_within_3px": 0.9992329904349395,
+      "dot_duplicate_by_literal_rule": true
+    },
+    {
+      "budget": 44090,
+      "seed": 0,
+      "fraction_within_3px": 0.998435019278748,
+      "dot_duplicate_by_literal_rule": true
+    },
+    {
+      "budget": 44090,
+      "seed": 1,
+      "fraction_within_3px": 0.9985711045588569,
+      "dot_duplicate_by_literal_rule": true
+    },
+    {
+      "budget": 44090,
+      "seed": 2,
+      "fraction_within_3px": 0.9986164663188932,
+      "dot_duplicate_by_literal_rule": true
+    },
+    {
+      "budget": 44090,
+      "seed": 3,
+      "fraction_within_3px": 0.9987752324790202,
+      "dot_duplicate_by_literal_rule": true
+    },
+    {
+      "budget": 44090,
+      "seed": 4,
+      "fraction_within_3px": 0.9989566795191653,
+      "dot_duplicate_by_literal_rule": true
+    }
+  ],
+  "summary_by_budget": {
+    "9652": {
+      "min": 0.9980314960629921,
+      "max": 0.9990675507666805,
+      "mean": 0.9986531288852051,
+      "random_dots_flagged_duplicate": 5,
+      "trials": 5
+    },
+    "22164": {
+      "min": 0.998150153401913,
+      "max": 0.9992329904349395,
+      "mean": 0.998637430066775,
+      "random_dots_flagged_duplicate": 5,
+      "trials": 5
+    },
+    "44090": {
+      "min": 0.998435019278748,
+      "max": 0.9989566795191653,
+      "mean": 0.9986709004309366,
+      "random_dots_flagged_duplicate": 5,
+      "trials": 5
+    }
+  },
+  "interpretation": "If random dots already exceed 70% at a budget, the literal rule cannot separate a candidate from chance at that budget; the duplicate verdict is then non-discriminating, not evidence of copying.",
+  "ok_to_submit": false,
+  "slot_selected": false
+}

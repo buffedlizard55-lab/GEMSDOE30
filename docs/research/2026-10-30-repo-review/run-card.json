@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "session": "2026-10-30 repository review (branch arena/2a368cf4-gemsdoe30)",
+  "scope": "Repository review, official-source verification, uniqueness-gate audit and documentation. No new candidate raster, no holdout experiment, no slot selection.",
+  "hypothesis": "NONE TESTED THIS SESSION. Review-level hypothesis (unverified): the owner-reported 0.2778 (GEMSDOE32 H33-B2) differs from 0.2600 (GEMSDOE25 D2.8) only by removing catalogue-halo dots, and that removal is the mechanism of the gain.",
+  "mechanism": "Measured: H33-B2 = D2.8 minus 6,436 dots, every one of which lies within 2 px (Euclidean) of a labelled fault cell. Not measured: whether that removal changes the hidden-set score in the reported direction.",
+  "named_non_fault_process_that_could_mimic_it": "Catalogue digitisation offset: if the hidden new-fault labels sit beside, not on, the mapped traces, dots in the 1-2 px halo are scored as false positives and their removal can look like detection gain without any fault being found.",
+  "holdout_dti_and_ci": {
+    "status": "NOT MEASURED",
+    "value": null,
+    "ci95": null,
+    "withheld_positives": null,
+    "evaluator_version": null,
+    "note": "No HOLDOUT-DTI was produced in this session. Historical HOLDOUT-DTI values in README/docs are not re-measured here."
+  },
+  "organizer_confirmed_scores": {
+    "status": "NONE",
+    "note": "The only organizer-facing numbers checked are the public leaderboard values in docs/research/2026-10-30-repo-review/leaderboard-snapshot.json (top-50 public DW-Tversky, dated 2026-10-30). No repository raster is linked to a leaderboard row."
+  },
+  "correlation_and_overlap_vs_registry": {
+    "lattice_random_control": {
+      "receipt": "docs/research/2026-10-30-repo-review/lattice-random-control.json",
+      "result": "Random dots in the 5,167,373-cell footprint score 99.80% to 99.92% within 3 px of the pinned 13GEMSDOE lattice at budgets 9,652, 22,164 and 44,090 (15 of 15 trials flagged as duplicate by the literal 70% rule)."
+    },
+    "nine_site_pairwise": {
+      "receipt": "docs/research/2026-10-30-repo-review/nine-site-family.json",
+      "result": "GEMSDOE25 and GEMSDOE30 are identical inside the footprint. Every dot of GEMSDOE32 is also a dot of GEMSDOE25, GEMSDOE30, GEMSDOE31 and GEMSDOE36 (smaller set contained in the other)."
+    }
+  },
+  "raster_sha256": {
+    "new_rasters_written": [],
+    "historical_rasters_referenced": "see nine-site-family.json (SHA-256 per site)"
+  },
+  "validator_output": {
+    "new_raster": "not applicable (none written)",
+    "historical_nine_site_validator": "docs/research/2026-10-28-priority-audit.json (5 pass the published-format checks; GEMSDOE30, 32, 33, 36 fail the null-outside check because outside cells are zeros). Re-run by scripts/audit_priority_readiness.py --check: exit 0 in this session."
+  },
+  "submission_name": null,
+  "submission_note": null,
+  "verdict": "negative",
+  "verdict_reason": "No candidate has passed the uniqueness gate. The literal 70%/3 px rule flags random dots as duplicates, so no dense candidate can be cleared under it. Under the owner's governance (AGENTS.md; README) no slot may be selected without a lane, a holdout receipt and a rule decision.",
+  "ok_to_submit": false,
+  "slot_selected": false,
+  "experiments_run": 0,
+  "budget": {"experiments_cap": 3, "hours_cap": 2, "experiments_used": 0}
+}
