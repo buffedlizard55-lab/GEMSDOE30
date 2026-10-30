@@ -2,6 +2,12 @@
 
 > **SESSION MISSION (read every session):** Place top of the DOE GEMS concealed-fault leaderboard by generating a **unique** single-band `float32` `[0,1]` GeoTIFF submission (EPSG:32611, 3730×3292, 100 m, `sample_submission.tif` grid, `NaN` outside the footprint) that is obvious to download and obvious whether it is OK to submit. Core values: **Maximize P(Win)** and **Own the Outcome**. Never copy a previous submission as your own; never submit a candidate that has not beaten the holdout best with a paired 95% CI lower bound > 0; protect the 3-per-week DrivenData slot. The full operating protocol is in the `#current-owner-prompt` section below — reread it before changing code. The current-session addendum requires 3–5 explicitly differentiated geological hypotheses, source/access checks, a same-protocol blocked holdout before slot consideration, repeated code/site review, and no score projections presented as results; see [the dated review](docs/research/2026-10-27-current-session-review.md). A prior duplicate-stop and lane/budget restriction overrides the aspiration to generate a TIFF whenever its gates fail.
 
+## Session · 2026-10-30 review (arena/a759532a-gemsdoe30): **NEGATIVE · NO TIFF APPROVED**
+
+- Official #1 is **0.4544** (live, 2026-10-30). The owner's 0.4413 is not on the board; 0.3195 is rank #47 (29 Oct snapshot); 0.2778 is below rank 50.
+- All 40 local TIFFs pass the grid and [0,1] checks, but no file is unique or cleared. PR #76's file is 99.83% within 3 px of the lattice. Several local files are duplicates under different names.
+- Full review, executive table and proposed IR-30-099/100: [`docs/research/2026-10-30-repo-review.md`](docs/research/2026-10-30-repo-review.md). Tests: 411 passed, 38 skipped, 0 failed.
+
 ## Session · 2026-10-29 review (arena/8357086d-gemsdoe30): official leaderboard verified · **no approved TIFF**
 
 **Verdict: no file is approved for download or submission. This session generated no TIFF, ran 0 of 3 experiments and selected no weekly slot.** Other 2026-10-29 sessions merged to `main` (PR #76, PR #78) reach the same negative verdict; their findings are kept as recorded.
