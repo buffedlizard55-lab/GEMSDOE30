@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "purpose": "Verbatim check of the organizer's reference solution output convention, to test the portal rejection 'Predicted values must be in range [0, 1]' (IR-30-092, IR-30-093) against an official source.",
+  "method": "STATIC READING of the notebook JSON. The notebook was NOT executed (it needs GPU training and the competition data). Every quoted line below was located by string search in the notebook cells named.",
+  "source": {
+    "repository": "https://github.com/drivendataorg/gems-prize-reference-solution",
+    "commit": "aebe92f7c8a990f0e3443451b7a825d9afd6336b",
+    "archive_url": "https://codeload.github.com/drivendataorg/gems-prize-reference-solution/tar.gz/aebe92f7c8a990f0e3443451b7a825d9afd6336b",
+    "file": "unet-mc-cv-reference-solution.ipynb",
+    "file_sha256": "1a7622732ba00f67237058bc0efe79b45ba4e87c449fc9c1e5d6ea659de92ca0",
+    "file_bytes_note": "sha256 computed on the file extracted from the codeload archive on 2026-10-30; total cells 21"
+  },
+  "quoted_lines": [
+    {"cell": 16, "line": "y_out = np.zeros(y_patches.shape)", "meaning": "accumulator allocated with NumPy's default dtype (float64)"},
+    {"cell": 16, "line": "yp = F.sigmoid(outputs).squeeze()", "meaning": "prediction is a sigmoid, so it lies in (0, 1)"},
+    {"cell": 16, "line": "y_out[test_inds[ii][0], test_inds[ii][1], :, :] += test_preds[ii] / MC", "meaning": "predictions are written only to test patches, averaged over MC iterations"},
+    {"cell": 19, "line": "y_final = y_combined[: y_orig.shape[0], : y_orig.shape[1]]", "meaning": "output is cropped to the label grid; no footprint mask is applied"},
+    {"cell": 19, "line": "dtype=y_final.dtype,", "meaning": "the written dtype is inherited from the accumulator, i.e. float64 on this reading"},
+    {"cell": 19, "line": "new_dataset.write(y_final, 1)", "meaning": "a single band is written"},
+    {"cell": 19, "line": "transform=fault_dataset.transform", "meaning": "georeferencing is copied from the labels raster"}
+  ],
+  "findings": [
+    {"id": "R1", "finding": "No nodata value is set on the written GeoTIFF (cell 19 contains no 'nodata' string; the only nodata references are read-side, cells 5-6).", "status": "verified by string search"},
+    {"id": "R2", "finding": "The written raster is finite everywhere on the label grid, but it is NOT a full-grid sigmoid map. The accumulator starts as zeros (cell 16). Sigmoid predictions are added only for patches in each Monte Carlo test split (cell 16: 'test_inds'; cell 12: a random test_proportion=0.5 of the label-containing patches, MC=5 iterations). Every other cell stays 0.0. Values are finite and lie in [0, 1). No NaN, no footprint mask.", "status": "verified by reading of cells 12 and 16; NOT executed"},
+    {"id": "R2a", "finding": "Correction to IR-30-092 in docs/irregularities.md, which says the reference 'writes sigmoid outputs over the entire label grid'. Per R2 that wording is inaccurate: cells outside the test patches are 0.0, not sigmoid values.", "status": "verified by reading"},
+    {"id": "R3", "finding": "The reference therefore uses the all-finite convention, not NaN outside the footprint.", "status": "verified by reading"},
+    {"id": "R4", "finding": "The reference writes float64 (np.zeros default dtype, inherited by the writer). The organizer's written rules require float32 ('datatype of 32-bit float (float32)', https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/). Irregularity: the organizer's own example conflicts with its written requirement.", "status": "inferred from code reading; not executed"},
+    {"id": "R5", "finding": "The written rules say 'data outside the bounds is null or nan'. The reference output is not NaN outside the scoring footprint. The two conventions are both in the organizer's materials.", "status": "verified by reading of both sources"}
+  ],
+  "organizer_rules_quoted": {
+    "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/ (Submission format section; fetched 2026-10-30)",
+    "quotes": [
+      "Your submission has the same bounds as the training data, and data outside the bounds is null or nan.",
+      "Your submission contains a single layer with datatype of 32-bit float (float32) with values between 0 and 1 indicating the confidence or probability of fault presence, with higher values indicating higher probability."
+    ]
+  },
+  "what_this_does_not_establish": [
+    "It does not establish what the portal accepts. Portal behaviour is not public and no submission was made in this session.",
+    "It does not identify the file that produced the historical rejection.",
+    "It does not establish that the reference notebook's own output was scored by the platform."
+  ],
+  "implication_for_this_repo": "The organizer's own example writes finite values in [0,1] on the whole grid (zeros where no test prediction was written; no NaN, no nodata) and, on this reading, float64. The repo's published files are float32 and use NaN or zeros outside the footprint. Any future upload decision needs a single authorised portal probe (a slot decision for the owner, IR-30-092/093), not an inference from this reading.",
+  "ok_to_submit": false,
+  "slot_selected": false
+}

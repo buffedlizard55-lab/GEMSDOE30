@@ -33,12 +33,18 @@ def test_20261030_run_card_never_upgrades_owner_claims_or_fabricates_holdout():
                for row in card["historical_best_by_site"])
 
 
-def test_20261030_run_card_records_screening_and_leakage_gates_as_unrun():
+def test_20261030_run_card_distinguishes_partial_leakage_alarm_from_candidate_screen():
     card = json.loads(CARD_PATH.read_text(encoding="utf-8"))
     assert card["registry_novelty"]["surface_checked_before_placement"] is False
     assert card["registry_novelty"]["final_dots_checked_after_placement"] is False
-    assert card["feature_level_leakage_canary"]["auc_alarm_threshold"] == 0.90
-    assert card["feature_level_leakage_canary"]["status"] == "NOT RUN"
+    canary = card["feature_level_leakage_canary"]
+    assert canary["auc_alarm_threshold"] == 0.90
+    assert canary["candidate_features_tested"] is False
+    separate = canary["independent_repository_canary"]
+    assert separate["features_tested_individually"] == 5
+    assert separate["flagged_feature"] == "derived_gdr_qfaults_v2_100m_u8.tif"
+    assert separate["auc_sign_free"] == 0.984002 > canary["auc_alarm_threshold"]
+    assert separate["leakage_alarm_triggered"] is True
     assert card["format_gate"]["status"] == "NOT RUN — no new TIFF"
 
 
@@ -63,3 +69,17 @@ def test_20261030_prompt_is_persisted_in_readme():
     assert "A measured score must be labelled HOLDOUT-DTI" in text
     assert "AUC above 0.90 is a leakage alarm" in text
     assert "Do not select a weekly submission slot" in text
+
+
+def test_merged_tree_verification_and_parallel_id_collision_are_disclosed():
+    card = json.loads(CARD_PATH.read_text(encoding="utf-8"))
+    assert card["parallel_review_integration"]["merged_base_commit"] == "f285b77"
+    collision = card["parallel_review_integration"]["cross_review_irregularity_id_collision"]
+    assert collision["this_review_assignments"]["leaderboard_drift"] == "IR-30-110"
+    assert collision["this_review_assignments"]["H33_B2_staff_scoring_correction"] == "IR-30-120"
+    assert collision["status"].startswith("OPEN")
+    verification = card["merged_tree_verification"]
+    assert verification["registry_preflight"]["exit_code"] == 0
+    assert verification["generated_site"]["exit_code"] == 0
+    assert verification["full_pytest"]["passed"] + verification["full_pytest"]["skipped"] == verification["full_pytest"]["collected"]
+    assert card["slot_selected"] is False and card["ok_to_submit"] is False

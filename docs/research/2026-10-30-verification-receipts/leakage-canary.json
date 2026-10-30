@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "rule": "single-feature AUC > 0.90 (sign-free) means leakage",
+  "scope": "partial: derived geology layers in data/external only; training_features.tif absent from checkout",
+  "label_source": "data/raw/labels.tif (pinned mirror; provenance unresolved, IR-30-114)",
+  "evaluator": "none: single-feature AUC, no model, no holdout",
+  "score_class": "NOT a score (no HOLDOUT-DTI, not ORGANIZER-CONFIRMED)",
+  "any_leakage_flag": true,
+  "features": [
+    {
+      "feature": "derived_gdr_2m_probes_100m_u8.tif",
+      "dtype": "uint8",
+      "nodata": 255.0,
+      "n_positive": 60988,
+      "n_negative": 5106385,
+      "auc": 0.500101,
+      "auc_sign_free": 0.500101,
+      "leakage_flag": false
+    },
+    {
+      "feature": "derived_gdr_paleo_100m_u8.tif",
+      "dtype": "uint8",
+      "nodata": 255.0,
+      "n_positive": 60988,
+      "n_negative": 5106385,
+      "auc": 0.500134,
+      "auc_sign_free": 0.500134,
+      "leakage_flag": false
+    },
+    {
+      "feature": "derived_gdr_qfaults_v2_100m_u8.tif",
+      "dtype": "uint8",
+      "nodata": 255.0,
+      "n_positive": 60988,
+      "n_negative": 5106385,
+      "auc": 0.984002,
+      "auc_sign_free": 0.984002,
+      "leakage_flag": true
+    },
+    {
+      "feature": "derived_gdr_volcanics_100m_u8.tif",
+      "dtype": "uint8",
+      "nodata": 255.0,
+      "n_positive": 60988,
+      "n_negative": 5106385,
+      "auc": 0.499876,
+      "auc_sign_free": 0.500124,
+      "leakage_flag": false
+    },
+    {
+      "feature": "derived_sgmc_faults_100m_u8.tif",
+      "dtype": "uint8",
+      "nodata": 255.0,
+      "n_positive": 60988,
+      "n_negative": 5106385,
+      "auc": 0.522802,
+      "auc_sign_free": 0.522802,
+      "leakage_flag": false
+    }
+  ]
+}

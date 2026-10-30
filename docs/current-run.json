@@ -130,7 +130,7 @@
     "report": "docs/research/2026-10-30-session-review.md",
     "site_page": "priority-executive-summary.html",
     "verifier": "scripts/verify_registry_preflight.py + scripts/audit_priority_readiness.py --check + scripts/build_research_site.py --check + pytest -q",
-    "scope": "Cumulative three-pass repository and evidence audit, including a dated public-board snapshot, nine-site historical table, H33 evidence correction, and generated-site/feed refresh. Does not replace latest_scientific_review or authorize a lane, TIFF, download, upload, or slot.",
+    "scope": "Cumulative three-pass repository and evidence audit, including a dated public-board snapshot, nine-site mask-family analysis, H33 evidence correction, separately merged 15-trial lattice random control, partial Qfaults leakage alarm (AUC 0.984002), and generated-site/feed refresh. The canary is not a screen of training_features.tif or current geological candidate features. Does not replace latest_scientific_review or authorize a lane, TIFF, download, upload, or slot.",
     "decision": "NEGATIVE: no new TIFF; no historical file approved for download/submission; no candidate HOLDOUT-DTI or score estimate; no weekly slot selected."
   },
   "latest_safety_review": {
@@ -138,5 +138,12 @@
     "report": "docs/research/2026-10-28-offlattice-safety-review.md",
     "site_page": "offlattice-safety-review.html",
     "decision": "NEGATIVE: off-lattice generator disabled; no new scientific lane or slot"
+  },
+  "latest_session_review": {
+    "date_utc": "2026-10-30",
+    "report": "docs/repository-review-2026-10-30.md",
+    "run_card": "docs/repository-review-2026-10-30-card.json",
+    "scope": "Three-pass repository and nine-site submission readiness review; no new experiment, raster, score estimate or slot selection.",
+    "verdict": "NEGATIVE: no approved download; missing holdout inputs, no assigned lane and unresolved literal novelty stop."
   }
 }

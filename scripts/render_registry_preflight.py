@@ -23,13 +23,13 @@ def layout(title: str, body: str) -> str:
 <a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="nav-wrap">
 <a class="brand" href="index.html"><span class="brand-mark">G30</span> GEMS research</a>
 <nav aria-label="Primary"><a href="index.html">Overview</a><a href="priority-executive-summary.html">Nine sites</a><a href="priority-executive-summary.html">30 Oct review</a><a href="csr-discontinuity-review.html">Research</a><a href="executive-summary.html">Submission guide</a><a href="pool1-executive-summary.html">POOL-1</a></nav>
-</div></header><main id="main"><aside class="stop-notice" aria-label="Latest repository review"><strong>30 Oct 2026 cumulative review: no historical or new file is approved for download or submission.</strong> No new TIFF, holdout score estimate or weekly slot. Current public board snapshot: rank 1 = <strong>0.4544</strong>; rank 50 = <strong>0.3195</strong>—not attributed to a repository file. <a href="docs/research/2026-10-30-session-review.md">Full three-pass review</a> · <a href="docs/research/2026-10-30-session-run-card.json">JSON run card</a> · <a href="docs/research/2026-10-30-leaderboard-snapshot.json">dated public-board receipt</a>. The latest scientific preflight remains the separate 27 Oct registry stop.</aside>{body}</main><footer><div><strong>GEMS30 · research, not a selector</strong><p>Repository evidence snapshot · refreshed 30 Oct 2026; scientific preflight remains dated 27 Oct 2026.</p></div><div><a href="docs/research/2026-10-30-session-run-card.json">Current repository-review card</a><a href="docs/status.json">GitHub status snapshot</a><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Organizer leaderboard</a></div>
+</div></header><main id="main"><aside class="stop-notice" aria-label="Latest repository review"><strong>30 Oct 2026 cumulative review: no historical or new file is approved for download or submission.</strong> No new TIFF, holdout score estimate or weekly slot. Current public board snapshot: rank 1 = <strong>0.4544</strong>; rank 50 = <strong>0.3195</strong>—not attributed to a repository file. A separate 15-trial random-dot control overlaps the lattice by 99.80–99.92% and is flagged 15/15 times, so this witness is non-discriminating; the literal governance stop remains unchanged. A separate partial canary flags catalogue-derived <code>derived_gdr_qfaults_v2_100m_u8.tif</code> at AUC <strong>0.984002 &gt; 0.90</strong>; exclude it. That is not a screen of <code>training_features.tif</code> or the current candidate features, and is not a score. <a href="docs/research/2026-10-30-session-review.md">Full three-pass review</a> · <a href="docs/research/2026-10-30-session-run-card.json">JSON run card</a> · <a href="docs/research/2026-10-30-leaderboard-snapshot.json">dated public-board receipt</a> · <a href="docs/research/2026-10-30-verification-receipts/lattice-random-control.json">random-control receipt</a> · <a href="docs/research/2026-10-30-verification-receipts/leakage-canary.json">partial canary receipt</a>. The latest scientific preflight remains the separate 27 Oct registry stop.</aside>{body}</main><footer><div><strong>GEMS30 · research, not a selector</strong><p>Repository evidence snapshot · refreshed 30 Oct 2026; scientific preflight remains dated 27 Oct 2026.</p></div><div><a href="docs/research/2026-10-30-session-run-card.json">Current repository-review card</a><a href="docs/status.json">GitHub status snapshot</a><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Organizer leaderboard</a></div>
 <p class="fine">A public-board snapshot is not a submission-page receipt. No automated organizer-page monitoring. Hash-pinned public mirrors are not organizer-authenticated. No competition slot selected.</p></footer></body></html>'''
 
 
 def hero() -> str:
     return '''<section class="intro"><div><p class="eyebrow">GEMS30 / cumulative repository review / 30 Oct 2026</p>
-<h1>Protect the next submission.</h1><p class="lead">The 27 Oct scientific preflight still stops the proposed lane; this 30 Oct repository review adds a dated public-board receipt, H33 evidence correction, and updated nine-site decision. No model or TIFF was made.</p>
+<h1>Protect the next submission.</h1><p class="lead">The 27 Oct scientific preflight still stops the proposed lane; this 30 Oct repository review adds a dated public-board receipt, H33 evidence correction, nine-site mask-family analysis, a random-control calibration, and a separate partial leakage alarm. No candidate model or TIFF was made.</p>
 <div class="meta"><span>Governance stop ≠ geological duplication</span><span>0 experiments run</span><span>No slot selected</span></div></div></section>'''
 
 
@@ -127,8 +127,29 @@ def evidence_strip(card: dict) -> str:
 <p class="fine">Evaluator <code>{e(h['evaluator_version'])}</code> · {c['withheld_positives']:,} withheld positives · archived mapped-catalogue proxy, not an organizer score. The observed fold-3 gain was exploratory, not a confirmed breakthrough. No new holdout was run.</p>'''
 
 
+def _family_relation_text(site: str, family: dict) -> str:
+    notes = []
+    for pair in family.get("pairs_with_identity_or_containment", []):
+        if site not in (pair["a"], pair["b"]):
+            continue
+        other = pair["b"] if site == pair["a"] else pair["a"]
+        if pair["identical_inside_footprint"]:
+            notes.append(f"same in-footprint mask as {other}")
+        elif pair["smaller_set_contained_in_other"]:
+            smaller = pair["a"] if pair["dots_a"] < pair["dots_b"] else pair["b"]
+            if site == smaller:
+                notes.append(f"all dots contained in {other}")
+            else:
+                notes.append(f"contains all dots of {other}")
+    if not notes:
+        return "No exact identity/containment pair in this nine-site comparison; broader uniqueness is unestablished."
+    return "; ".join(notes) + "; raster relation only, not geological identity."
+
+
 def table(fleet: dict, card: dict) -> str:
     uncovered = card['registry']['measurement']['bound']['uncovered_pixels']
+    family_path = ROOT / "docs/research/2026-10-30-verification-receipts/nine-site-family.json"
+    family = json.loads(family_path.read_text()) if family_path.is_file() else {}
     rows = []
     for row in fleet['rows']:
         k = row['dots']
@@ -136,13 +157,14 @@ def table(fleet: dict, card: dict) -> str:
         aliases = ', '.join(row['exact_value_alias_sites'])
         alias = f' · value alias: {e(aliases)}' if aliases else ''
         fmt = 'passed' if row['format_validation_passed'] else 'outside-null failed'
+        relation = _family_relation_text(row['site'], family)
         rows.append(f'''<tr><th scope="row"><a href="{e(row['review_url'])}">{e(row['site'])}</a><br><small>{k:,} dots</small></th>
 <td><a href="{e(row['source_url'])}">{e(row['historical_file'])}</a><br><small>Historical file · {fmt}{alias}</small></td>
 <td><strong>{e(row['quoted_owner_claim'])}</strong><br><small>unverified owner claim; no receipt</small></td>
 <td><strong>Not available</strong><br><small>no validated new candidate; no forecast</small></td>
-<td><strong>STOP</strong><br><small>≥{100*lower:.2f}% lower-bound overlap vs lattice</small></td><td><strong>DO NOT DOWNLOAD FOR SUBMISSION</strong><br><small>historical bytes only; no new file or slot approved</small></td></tr>''')
-    return '''<div class="table-wrap"><table><caption>Frozen nine-site historical selections · reviewed 30 Oct 2026; not live leaderboard attribution or a complete registry</caption><thead><tr><th scope="col">Site</th><th scope="col">Historical file / source</th><th scope="col">Reported value</th><th scope="col">New submission score estimate</th><th scope="col">Unique under literal rule?</th><th scope="col">Download / submit status</th></tr></thead><tbody>''' + ''.join(rows) + '''</tbody></table></div>
-<p class="fine">Values are unverified owner reports, not HOLDOUT-DTI or ORGANIZER-CONFIRMED scores. “Not available” is deliberate: the listed historical scores cannot validly estimate an untested candidate. The lattice bound proves the literal duplicate stop for every listed historical dot budget; it does not prove all other comparisons or provide a novelty clearance. No fleet-wide selector has approved a slot.</p>'''
+<td><strong>Literal STOP</strong><br><small>≥{100*lower:.2f}% lattice lower bound; {e(relation)}</small></td><td><strong>DO NOT DOWNLOAD FOR SUBMISSION</strong><br><small>historical bytes only; no new file or slot approved</small></td></tr>''')
+    return '''<div class="table-wrap"><table><caption>Frozen nine-site historical selections · reviewed 30 Oct 2026; not live leaderboard attribution or a complete registry</caption><thead><tr><th scope="col">Site</th><th scope="col">Historical file / source</th><th scope="col">Reported value</th><th scope="col">New submission score estimate</th><th scope="col">Literal gate / family relation</th><th scope="col">Download / submit status</th></tr></thead><tbody>''' + ''.join(rows) + '''</tbody></table></div>
+<p class="fine">Values are unverified owner reports, not HOLDOUT-DTI or ORGANIZER-CONFIRMED scores. “Not available” is deliberate: the listed historical scores cannot validly estimate an untested candidate. The literal 70% gate is a governance stop; its lattice bound is non-discriminating (random-dot receipt) and does not prove copying or provide novelty clearance. Mask relations use owner-supplied, hash-pinned mirrors, not organizer-authenticated data. No fleet-wide selector has approved a slot.</p>'''
 
 
 def h33(fleet: dict) -> str:

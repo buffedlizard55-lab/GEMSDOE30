@@ -23,6 +23,9 @@ def test_latest_repository_review_and_public_board_are_on_the_generated_site():
     assert "rank 1 = <strong>0.4544</strong>" in page
     assert "rank 50 = <strong>0.3195</strong>" in page
     assert "not attributed to a repository file" in page
+    assert "0.984002 &gt; 0.90" in page
+    assert "not a screen of" in page
+    assert "99.80–99.92%" in page
     assert "2026-10-30-session-review.md" in page
     assert "new-fault truth may lie within 300 m" in page
     assert "may therefore lose TP credit as well as FP penalty" in page
@@ -43,7 +46,11 @@ def test_nine_site_table_separates_claims_from_new_score_estimates():
     assert page.count("no validated new candidate; no forecast") == 9
     assert "unverified owner claim; no receipt" in page
     assert "DO NOT DOWNLOAD FOR SUBMISSION" in page
-    assert "does not prove all other comparisons" in page
+    assert "Literal gate / family relation" in page
+    assert "same in-footprint mask as GEMSDOE30" in page
+    assert "all dots contained in GEMSDOE27" in page
+    assert "all dots contained in GEMSDOE25" in page
+    assert "does not prove copying" in page
 
 
 def test_current_overview_discloses_merged_tiffs_as_stopped_without_download_controls():
